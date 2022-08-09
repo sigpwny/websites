@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@define-mixin font-face $font-family, $font-file, $weight, $style: normal {
+  @font-face {
+    font-family: $(font-family);
+    src: url($(font-file) + '.eot');
+    src: url($(font-file) + '.eot?#iefix') format("embedded-opentype"),
+         url($(font-file) + '.woff') format("truetype"),
+         url($(font-file) + '.woff2') format("woff"),
+         url($(font-file) + '.ttf') format("woff2"),
+         url($(font-file) + '.svg#' + $(font-family)) format("svg");
+    font-weight: $(weight);
+    font-style: $(style);
+  }
+}
+@add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
+/* @define-mixin aspect-ratio $width, $height {
+  .aspect-ratio-$(width)-$(height) {
+    position: relative;
+  }
+  .aspect-ratio-$(width)-$(height):before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  .aspect-ratio-$(width)-$(height) > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .aspect-ratio-$(width)-$(height) > .content img {
+    object-fit: cover;
+  }
+}
+@add-mixin aspect-ratio 16, 9; */
+
+.aspect-ratio-16-9 {
+  position: relative;
+}
+.aspect-ratio-16-9:before {
+  display: block;
+  content: "";
+  width: 100%;
+  padding-top: 56.25%;
+}
+.aspect-ratio-16-9 > .content {
+  background-size: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.aspect-ratio-16-9 > .content img {
+  object-fit: cover;
+}
+
+html {
+  overflow-x: hidden;
+}
+body {
+  --color-primary: #33cc55;
+  --color-secondary: #137137;
+  --color-background: #000000;
+  --color-surface: #222222;
+  --color-text: #ffffff;
+
+  --font-size-small: 0.875rem;
+  --font-size-standard: 1rem;
+  --font-size-base: 1.125rem;
+
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-size: var(--font-size-base);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  height: 100%;
+  width: 100%;
+}
+h1, h2, h3 {
+  font-weight: bold;
+}
+.monospace-font {
+  font-family: "Consolas", "Monaco", "Lucida Console", monospace;
+}
+.font-size-small {
+  font-size: var(--font-size-small);
+}
+.font-size-standard {
+  font-size: var(--font-size-standard);
+}
+.grape {
+  --color-primary: #cc66ee;
+  --color-secondary: #7e3a94;
+}
+hr {
+  border-color: var(--color-text);
+}
+a,
+a:active {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+.panel {
+  background-color: var(--color-surface);
+  padding-top: 10px;
+  padding-bottom: 35px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 20px;
+  box-shadow: 0px 0px 0px 0px, 0px 6px 12px rgba(0, 0, 0, 0.2);
+  border-left: 8px solid var(--color-primary);
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.social-links p {
+  display: inline-block;
+  margin: 0;
+}
+.social-links svg {
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 0.5rem;
+  width: var(--font-size-base);
+  height: var(--font-size-base);
+}
+.social-links a,
+.social-links a:active {
+  fill: var(--color-primary);
+}
+.social-links a:hover {
+  fill: var(--color-secondary);
+}
+.use-color-text, a.use-color-text:hover {
+  color: var(--color-text);
+}
+.card {
+  background-color: var(--color-surface);
+  border-color: var(--color-surface);
+  border-radius: 0px;
+  border: 0;
+}
+.card-link {
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  transition: 0.1s;
+  position: relative;
+  box-shadow: none;
+  bottom: 0;
+  right: 0;
+  line-height: 1.2;
+}
+.card-link:hover {
+  box-shadow: 14px 14px var(--color-primary);
+  bottom: 7px;
+  right: 7px;
+}
+.card-line-clamp {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+.card-line-clamp .card-text {
+  font-size: 1.125rem;
+}
+/* fancy navbar toggle on mobile */
+.icon-bar {
+	width: 22px; 
+	height: 2px;
+	background-color: var(--color-text);
+	display: block;
+	transition: all 0.2s;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+.navbar-toggler {
+  border: none;
+  background: transparent !important;
+}
+.navbar-toggler .top-bar {
+  transform: rotate(45deg);
+  transform-origin: 10% 10%;
+}
+.navbar-toggler .middle-bar {
+  opacity: 0;
+}
+.navbar-toggler .bottom-bar {
+  transform: rotate(-45deg);
+  transform-origin: 10% 90%;
+}
+.navbar-toggler.collapsed .top-bar {
+  transform: rotate(0);
+}
+.navbar-toggler.collapsed .middle-bar {
+  opacity: 1;
+}
+.navbar-toggler.collapsed .bottom-bar {
+  transform: rotate(0);
+}
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+.nav-link-custom {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+/* Change null to * for debugging CSS */
+null {
+  background: #000 !important;
+  color: #0f0 !important;
+  outline: solid #f00 1px !important;
+}
