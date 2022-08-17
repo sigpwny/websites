@@ -1,4 +1,21 @@
 @tailwind base;
+
+h1 {
+  @apply text-4xl mb-2;
+}
+h2 {
+  @apply text-3xl mb-2;
+}
+h3 {
+  @apply text-2xl;
+}
+p {
+  @apply mb-2;
+}
+.container {
+  @apply md:px-8 px-4;
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -84,7 +101,7 @@ body {
 h1, h2, h3 {
   font-weight: bold;
 }
-.monospace-font {
+.font-monospace {
   font-family: "Consolas", "Monaco", "Lucida Console", monospace;
 }
 .font-size-small {
@@ -147,20 +164,16 @@ a:hover {
 .card {
   background-color: var(--color-surface);
   border-color: var(--color-surface);
-  border-radius: 0px;
-  border: 0;
-}
-.card-link {
-  -webkit-transition: 0.1s;
-  -moz-transition: 0.1s;
-  transition: 0.1s;
   position: relative;
   box-shadow: none;
   bottom: 0;
   right: 0;
   line-height: 1.2;
+  /* -webkit-transition: 0.1s;
+  -moz-transition: 0.1s; */
+  transition: 0.1s;
 }
-.card-link:hover {
+.card:hover {
   box-shadow: 14px 14px var(--color-primary);
   bottom: 7px;
   right: 7px;

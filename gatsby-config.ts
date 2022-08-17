@@ -41,9 +41,10 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-plugin-image",
+    "gatsby-plugin-postcss",
+    "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-transformer-remark",
-    "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
       resolve: 'gatsby-plugin-manifest',
@@ -51,16 +52,6 @@ const config: GatsbyConfig = {
         "icon": "src/images/logo/pwny8-dark.png"
       }
     },
-    {
-      resolve: 'gatsby-plugin-postcss',
-      options: {
-        postCssPlugins: [
-          require('postcss-mixins'),
-          require('postcss-nested'),
-          require('autoprefixer')
-        ],
-      },
-    }
   ]
 };
 

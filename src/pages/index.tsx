@@ -7,7 +7,7 @@ import MeetingCards from "../components/MeetingCards"
 export function Head() {
   return (
     <>
-      <title>Hello World</title>
+      <title>Home</title>
     </>
   )
 }
@@ -16,13 +16,11 @@ const IndexPage = () => (
   <Layout>
     <h1>Hello World</h1>
     <p>
-      This is a simple example of a Gatsby page.
+      This is the start of the new SIGPwny website.
       <br />
     </p>
-    <div className="row">
-      <h1>Meetings</h1>
-      <MeetingCards />
-    </div>
+    <h1>Meetings</h1>
+    <MeetingCards />
   </Layout>
 )
 

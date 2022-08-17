@@ -1,7 +1,6 @@
 ---
 date: "2022-08-21" # required
-week_number: 0 # required: current week number in the semester (0-indexed)
-title: "Example Topic" # required: title
+title: "Template Meeting" # required: title
 credit: "Author Name" # required: specify author name(s)
 archived: false # optional: set to true to hide this meeting from the home page
 

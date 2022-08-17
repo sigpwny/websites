@@ -1,8 +1,6 @@
 import React from "react"
 
 import Nav from "./Nav"
-import "../styles/bootstrap-5-0-2.min.css"
-import "../styles/main.css"
 
 interface LayoutProps {
   children: React.ReactNode

@@ -62,26 +62,26 @@ const MeetingCards = () => {
     }
   `)
   return (
-    <div className="row">
+    <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-8">
       {meetings.allMeetings.meetings.map((meeting: Meeting) => (
-        <div className="col-xl-3 col-lg-4 col-md-6 pb-4" key={meeting.fileAbsolutePath}>
-          <a href={`/${meeting.parent.sourceInstanceName}/${meeting.frontmatter.date}`} className="use-color-text">
-            <div className="card card-link h-100">
-              <div className="aspect-ratio-16-9">
-                <div className="content" style={{backgroundImage: `url('` + meeting.frontmatter.image.path.childImageSharp.gatsbyImageData.images.fallback?.src + `')`}}>
-                </div>
-              </div>
-              <div className="card-body">
-                <div className="card-line-clamp">
-                  <p className="monospace-font font-size-small m-0">
-                    {meeting.frontmatter.date}
-                  </p>
-                  <p className="card-text">{meeting.frontmatter.title}</p>
-                </div>
+        // <div key={meeting.fileAbsolutePath}>
+        <Link to={`/${meeting.parent.sourceInstanceName}/${meeting.frontmatter.date}`} className="use-color-text">
+          <div className="card h-100">
+            <div className="aspect-ratio-16-9">
+              <div className="content" style={{backgroundImage: `url('` + meeting.frontmatter.image.path.childImageSharp.gatsbyImageData.images.fallback?.src + `')`}}>
               </div>
             </div>
-          </a>
-        </div>
+            <div className="p-2">
+              <div className="card-line-clamp">
+                <p className="font-monospace font-size-small m-0">
+                  {/* display month number from meeting.frontmatter.date */}
+                  {parseInt(meeting.frontmatter.date.split("-")[1]) < 8 ? "FA" : "SP"}{meeting.frontmatter.date.split("-")[0]} Week {} &bull; {meeting.frontmatter.date}
+                </p>
+                <p className="card-text">{meeting.frontmatter.title}</p>
+              </div>
+            </div>
+          </div>
+        </Link>
       ))}
     </div>
   )
