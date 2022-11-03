@@ -63,6 +63,14 @@ const MeetingCards = () => {
   `)
   return (
     <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-8">
+      <div className="card h-100">
+        <div className="p-2">
+          <div className="card-line-clamp">
+            <p className="card-text">Upcoming Meetings</p>
+          </div>
+        </div>
+      </div>
+
       {meetings.allMeetings.meetings.map((meeting: Meeting) => (
         // <div key={meeting.fileAbsolutePath}>
         <Link to={`/${meeting.parent.sourceInstanceName}/${meeting.frontmatter.date}`} className="use-color-text">
