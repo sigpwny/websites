@@ -3,7 +3,7 @@ date: "2022-08-21" # required
 week_number: 0 # required: current week number in the semester (0-indexed)
 title: "Example Topic" # required: title
 credit: "Author Name" # required: specify author name(s)
-archived: false # optional: set to true to hide this meeting from the home page
+featured: true # optional: set to true to hide this meeting from the home page
 
 image:
   path: "./image.png" # required: image must be in the same folder as this markdown file

@@ -2,7 +2,7 @@
 date: "2022-08-21" # required
 title: "Template Meeting" # required: title
 credit: "Author Name" # required: specify author name(s)
-archived: false # optional: set to true to hide this meeting from the home page
+featured: true # optional: set to true to hide this meeting from the home page
 
 image:
   path: "./image.png" # required: image must be in the same folder as this markdown file

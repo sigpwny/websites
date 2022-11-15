@@ -34,7 +34,7 @@ const MeetingCards = () => {
   const meetings: MdxQuery = useStaticQuery(graphql`
     query {
       allMeetings: allMarkdownRemark(
-        filter: {fileAbsolutePath: {glob: "**/meetings/**"}, frontmatter: {archived: {eq: false}}}
+        filter: {fileAbsolutePath: {glob: "**/meetings/**"}, frontmatter: {featured: {eq: true}}}
         sort: {fields: frontmatter___date, order: DESC}
       ) {
         meetings: nodes {

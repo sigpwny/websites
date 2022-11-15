@@ -39,7 +39,7 @@ const EventCards = () => {
   const events: MdxQuery = useStaticQuery(graphql`
     query {
       allEvents: allMarkdownRemark(
-        filter: {fileAbsolutePath: {glob: "**/events/**"}, frontmatter: {archived: {eq: false}}}
+        filter: {fileAbsolutePath: {glob: "**/events/**"}, frontmatter: {featured: {eq: true}}}
         sort: {fields: frontmatter___date_start, order: DESC}
       ) {
         events: nodes {

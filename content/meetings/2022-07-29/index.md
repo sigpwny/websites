@@ -1,6 +1,6 @@
 ---
 date: "2022-07-29"
-archived: false
+featured: true
 title:  "UIUCTF 2022 Has Begun! This is an Extremely Long Title That Will Get Cut Off Eventually, At Least I Think"
 credit: "UIUCTF Team"
 slides: ""

@@ -1,7 +1,7 @@
 ---
 date: "2021-10-07"
 layout: meeting
-archived: true
+featured: false
 title:  "Week 7: PWN I (Binary Exploitation)"
 credit: "Ravi, Thomas, Chris"
 slides: "https://sigpwny.github.io/presentation-content/FA2021/07-pwn-I.pdf"
