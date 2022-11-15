@@ -156,6 +156,9 @@ a:hover {
 .use-color-text, a.use-color-text:hover {
   color: var(--color-text);
 }
+.use-color-primary, a.use-color-primary:hover {
+  color: var(--color-primary);
+}
 .btn-primary {
   background-color: var(--color-primary);
   color: var(--color-background);
@@ -237,6 +240,56 @@ a:hover {
   outline: none;
   box-shadow: none;
 }
+/* CSS Curly Brace: https://codepen.io/mexn/pen/AjqrZv */
+.curly-brace {
+  /* width: 100%; */
+  position: absolute;
+  left: 50%;
+  margin-left: -150px;
+  top: 150px;
+  color: var(--color-primary);
+}
+.brace {
+  border-bottom: 5px solid;
+  margin: 0 10%;
+  width: 30%;
+  height: 20px;
+  float: left;
+}
+.brace:before,
+.brace:after {
+  content: "";
+  width: 10%;
+  height: 50px;
+  position: absolute;
+  display: block;
+}
+.brace-left:before {
+  border-bottom: 5px solid;
+  border-bottom-left-radius: 20px;
+  margin-left: -10%;
+  margin-top: -30px;
+}
+.brace-left:after {
+  border-top: 5px solid;
+  border-top-right-radius: 20px;
+  margin-left: 30%;
+  margin-top: 20px;
+}
+.brace-right:before {
+  border-top: 5px solid;
+  border-top-left-radius: 20px;
+  margin-left: -10%;
+  margin-top: 20px;
+}
+.brace-right:after {
+  border-bottom: 5px solid;
+  border-bottom-right-radius: 20px;
+  margin-left: 30%;
+  margin-top: -30px;
+}
+/* End CSS Curly Brace */
+
 /* Change null to * for debugging CSS */
 null {
   background: #000 !important;

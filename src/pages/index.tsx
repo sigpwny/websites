@@ -28,28 +28,28 @@ const IndexPage = () => (
   <Layout>
     <section id="welcome" className="pb-8">
       <div className="flex flex-col">
-        <div className="lg:order-2 pb-6 lg:w-2/3 xl:w-1/2 mx-auto text-center">
+        <div className="lg:order-2 pb-6 lg:w-2/3 lg:p-0 xl:w-1/2 mx-auto text-center">
           <h1 className="lg:text-6xl">Hacking @ UIUC</h1>
           <p>{useStaticQuery(descriptionQuery).site.siteMetadata.description}</p>
           <Link className="btn-primary " to="/about/">Learn more</Link>
         </div>
-        <div className="lg:order-1 gap-8 pr-20 sm:columns-2 sm:p-0 md:pr-20 lg:columns-3 lg:gap-16 lg:p-0 xl:gap-24 2xl:gap-28 2xl:px-28">
+        <div className="lg:order-1 gap-8 pr-20 sm:columns-2 sm:p-0 md:pr-20 lg:columns-3 lg:gap-16 lg:p-0 lg:pb-2 xl:gap-24 2xl:gap-28 2xl:px-28">
           <div className="pt-6">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A1" />
+            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A1" placeholder="blurred" />
           </div>
           <div className="pt-0 hidden sm:block">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A2" />
+            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A2" placeholder="blurred" />
           </div>
           <div className="pt-12 hidden lg:block">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A3" />
+            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A3" placeholder="blurred" />
           </div>
         </div>
-        <div className="lg:order-3 gap-8 pl-20 sm:columns-2 sm:p-0 md:pl-20 lg:columns-3 lg:gap-16 lg:p-0 xl:gap-24 2xl:gap-28 2xl:px-28 pb-2">
+        <div className="lg:order-3 gap-8 pl-20 pb-2 sm:columns-2 sm:p-0 md:pl-20 lg:columns-3 lg:gap-16 lg:p-0 xl:gap-24 2xl:gap-28 2xl:px-28">
           <div className="pt-0 hidden lg:block">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder B1" />
+            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder B1" placeholder="blurred" />
           </div>
           <div className="pt-12 hidden sm:block">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder B2" />
+            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder B2" placeholder="blurred" />
           </div>
           <div className="pt-6">
             <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder B3" />

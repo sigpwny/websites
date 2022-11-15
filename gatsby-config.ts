@@ -36,6 +36,20 @@ const config: GatsbyConfig = {
         "path": "./content/meetings/"
       },
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "admins",
+        "path": "./content/profiles/admins/"
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "alumni",
+        "path": "./content/profiles/alumni/"
+      },
+    },
     
     "gatsby-plugin-image",
     "gatsby-plugin-postcss",
@@ -46,7 +60,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        "icon": "src/images/logo/pwny8-dark.png"
+        "icon": "./src/images/logo/pwny8-48x48.png"
       }
     },
   ]

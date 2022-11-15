@@ -119,6 +119,7 @@ function Nav() {
                       {item.name}
                     </Link>
                   ))}
+                  <hr />
                 </div>
               </Disclosure.Panel>
             </Transition>

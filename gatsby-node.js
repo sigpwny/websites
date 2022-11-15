@@ -1,6 +1,25 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
+// https://github.com/gatsbyjs/gatsby/issues/1634#issuecomment-388899348
+// Add a field to the GraphQL schema to filter by gatsby-source-filesystem name
+// exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
+//   const { createNodeField } = boundActionCreators
+//   if (_.get(node, 'internal.type') === `MarkdownRemark` || _.get(node, 'internal.type') === `Mdx`) {
+//     // Get the parent node
+//     const parent = getNode(_.get(node, 'parent'))
+
+//     // Create a field on this node for the "collection" of the parent
+//     // NOTE: This is necessary so we can filter `allMarkdownRemark` by
+//     // `collection` in our GraphQL query
+//     createNodeField({
+//       node,
+//       name: 'collection',
+//       value: _.get(parent, 'sourceInstanceName'),
+//     })
+//   }
+// }
+
 // create pages for each markdown file in content/meetings
 // exports.createPages = async ({ graphql, actions }) => {
 //   const { createPage } = actions
