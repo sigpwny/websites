@@ -4,3 +4,4 @@ public
 src/gatsby-types.d.ts
 .DS_store
 _site/
+.vscode/

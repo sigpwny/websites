@@ -5,9 +5,9 @@ bio: | # required
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
   tempor incididunt ut labore et dolore magna aliqua.
 image:
-  path: "./profile.png" # required, real face preferred
-  alt: "Handle's profile picture" # required
-handle: "Handle" # optional
+  path: "./profile.png" # required, headshot preferred
+  alt: "Name's profile picture" # required
+handle: "sigpwny" # optional
 role: "Test Dummy" # optional
 weight: 0 # required, larger value is closer to top, otherwise sort by name alphabetically
 links: # optional
@@ -16,5 +16,5 @@ links: # optional
   github: "https://github.com/sigpwny" # optional
   twitter: "https://twitter.com/" # optional
   linkedin: "https://www.linkedin.com/" # optional
-  # discord: "https://discord.com/" # optional
+  discord: "https://discord.com/" # optional
 ---

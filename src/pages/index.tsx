@@ -35,24 +35,24 @@ const IndexPage = () => (
         </div>
         <div className="lg:order-1 gap-8 pr-20 sm:columns-2 sm:p-0 md:pr-20 lg:columns-3 lg:gap-16 lg:p-0 lg:pb-2 xl:gap-24 2xl:gap-28 2xl:px-28">
           <div className="pt-6">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A1" placeholder="blurred" />
+            <StaticImage className="rounded-xl" src="../images/placeholder.png" alt="Placeholder A1" placeholder="blurred" />
           </div>
           <div className="pt-0 hidden sm:block">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A2" placeholder="blurred" />
+            <StaticImage className="rounded-xl" src="../images/placeholder.png" alt="Placeholder A2" placeholder="blurred" />
           </div>
           <div className="pt-12 hidden lg:block">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder A3" placeholder="blurred" />
+            <StaticImage className="rounded-xl" src="../images/placeholder.png" alt="Placeholder A3" placeholder="blurred" />
           </div>
         </div>
         <div className="lg:order-3 gap-8 pl-20 pb-2 sm:columns-2 sm:p-0 md:pl-20 lg:columns-3 lg:gap-16 lg:p-0 xl:gap-24 2xl:gap-28 2xl:px-28">
           <div className="pt-0 hidden lg:block">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder B1" placeholder="blurred" />
+            <StaticImage className="rounded-xl" src="../images/placeholder.png" alt="Placeholder B1" placeholder="blurred" />
           </div>
           <div className="pt-12 hidden sm:block">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder B2" placeholder="blurred" />
+            <StaticImage className="rounded-xl" src="../images/placeholder.png" alt="Placeholder B2" placeholder="blurred" />
           </div>
           <div className="pt-6">
-            <StaticImage className="rounded-lg" src="../images/placeholder.png" alt="Placeholder B3" />
+            <StaticImage className="rounded-xl" src="../images/placeholder.png" alt="Placeholder B3" />
           </div>
         </div>
       </div>

@@ -83,7 +83,7 @@ const EventCards = () => {
             </div>
             <div className="p-2">
               <div className="card-line-clamp">
-                <p className="font-monospace font-size-small m-0">
+                <p className="font-mono font-size-small m-0">
                 </p>
                 <p className="card-text">{pwnyevent.frontmatter.title}</p>
               </div>

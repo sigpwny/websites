@@ -34,7 +34,10 @@ const MeetingCards = () => {
   const meetings: MdxQuery = useStaticQuery(graphql`
     query {
       allMeetings: allMarkdownRemark(
-        filter: {fileAbsolutePath: {glob: "**/meetings/**"}, frontmatter: {featured: {eq: true}}}
+        filter: {
+          fileAbsolutePath: {glob: "**/meetings/**"},
+          frontmatter: {featured: {eq: true}}
+        }
         sort: {fields: frontmatter___date, order: DESC}
       ) {
         meetings: nodes {
@@ -81,7 +84,7 @@ const MeetingCards = () => {
             </div>
             <div className="p-2">
               <div className="card-line-clamp">
-                <p className="font-monospace font-size-small m-0">
+                <p className="font-mono font-size-small m-0">
                   {/* display month number from meeting.frontmatter.date */}
                   {parseInt(meeting.frontmatter.date.split("-")[1]) < 8 ? "FA" : "SP"}{meeting.frontmatter.date.split("-")[0]} Week {} &bull; {meeting.frontmatter.date}
                 </p>
