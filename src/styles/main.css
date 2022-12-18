@@ -79,6 +79,7 @@ p {
 
 html {
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 body {
   --color-primary: #33cc55;

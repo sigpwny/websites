@@ -2,7 +2,6 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
-import Layout from "../components/Layout"
 import MeetingCards from "../components/MeetingCards"
 
 export function Head() {
@@ -25,7 +24,7 @@ const descriptionQuery = graphql`
 `
 
 const IndexPage = () => (
-  <Layout>
+  <>
     <section id="welcome" className="pb-8">
       <div className="flex flex-col">
         <div className="lg:order-2 pb-6 lg:w-2/3 lg:p-0 xl:w-1/2 mx-auto text-center">
@@ -74,7 +73,7 @@ const IndexPage = () => (
         <p>TODO</p>
       </div>
     </section>
-  </Layout>
+  </>
 )
 
 export default IndexPage

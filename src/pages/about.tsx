@@ -2,8 +2,6 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { StaticImage, IGatsbyImageData } from "gatsby-plugin-image"
 
-import Layout from "../components/Layout"
-
 interface ProfileSmall {
   name: string
   image: {
@@ -169,7 +167,7 @@ const AboutPage = () => {
   `)
 
   return (
-    <Layout>
+    <>
       <section id="acronym" className="py-8">
         <div className="flex flex-col">
           <div className="flex flex-row justify-center pb-6">
@@ -247,7 +245,7 @@ const AboutPage = () => {
       <section id="alumni" className="pb-8">
         <h1>Alumni</h1>
       </section>
-    </Layout>
+    </>
   )
 }
 
