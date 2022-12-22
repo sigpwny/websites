@@ -15,6 +15,11 @@ const config: GatsbyConfig = {
     navCallToActionLinks: [
       { name: "Join", link: "/join/" },
     ],
+    socialLinks: [
+      { name: "Discord", link: "https://discord.gg/8qZ3Y4J" },
+      { name: "GitHub", link: "https://github.com/sigpwny" },
+      { name: "Twitter", link: "https://twitter.com/sigpwny" },
+    ],
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin

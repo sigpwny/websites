@@ -1,65 +1,29 @@
 import React from "react"
 import { Link, useStaticQuery, graphql, navigate } from "gatsby"
-import { IGatsbyImageData } from "gatsby-plugin-image"
 
-interface Frontmatter {
-  title: string
-  credit: string
-  date: string
-  image: {
-    path: {
-      childImageSharp: {
-        gatsbyImageData: IGatsbyImageData
-      }
-    }
-    alt: string
-  }
-}
-
-interface Meeting {
-  fileAbsolutePath: string
-  parent: {
-    sourceInstanceName: string
-  }
-  frontmatter: Frontmatter
-}
-
-interface MdxQuery {
-  allMeetings: {
-    meetings: Meeting[]
-  }
-}
+type Meeting = Queries.MeetingCardsQuery["allMeeting"]["meetings"][0]
 
 const MeetingCards = () => {
-  const meetings: MdxQuery = useStaticQuery(graphql`
-    query {
-      allMeetings: allMarkdownRemark(
-        filter: {
-          fileAbsolutePath: {glob: "**/meetings/**"},
-          frontmatter: {featured: {eq: true}}
-        }
-        sort: {fields: frontmatter___date, order: DESC}
+  const data: Queries.MeetingCardsQuery = useStaticQuery(graphql`
+    query MeetingCards {
+      allMeeting (
+        filter: {featured: {eq: true}}
+        sort: {fields: date, order: DESC}
       ) {
         meetings: nodes {
-          fileAbsolutePath
-          parent {
-            ... on File {
-              sourceInstanceName
-            }
-          }
-          frontmatter {
-            title
-            credit
-            date(formatString: "YYYY-MM-DD")
-            image {
-              path {
-                childImageSharp {
-                  gatsbyImageData(width: 500, quality: 100)
-                }
+          date(formatString: "YYYY-MM-DD")
+          week_number
+          title
+          credit
+          image {
+            path {
+              childImageSharp {
+                gatsbyImageData(width: 500, quality: 100)
               }
-              alt
             }
+            alt
           }
+          slug
         }
       }
     }
@@ -74,21 +38,20 @@ const MeetingCards = () => {
         </div>
       </div>
 
-      {meetings.allMeetings.meetings.map((meeting: Meeting) => (
-        // <div key={meeting.fileAbsolutePath}>
-        <Link to={`/${meeting.parent.sourceInstanceName}/${meeting.frontmatter.date}`} className="use-color-text">
+      {data.allMeeting.meetings.map((meeting: Meeting) => (
+        <Link to={meeting.slug} className="use-color-text">
           <div className="card h-100">
             <div className="aspect-ratio-16-9">
-              <div className="content" style={{backgroundImage: `url('` + meeting.frontmatter.image.path.childImageSharp.gatsbyImageData.images.fallback?.src + `')`}}>
+              <div className="content" style={{backgroundImage: `url('` + meeting.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src + `')`}}>
               </div>
             </div>
             <div className="p-2">
               <div className="card-line-clamp">
                 <p className="font-mono font-size-small m-0">
                   {/* display month number from meeting.frontmatter.date */}
-                  {parseInt(meeting.frontmatter.date.split("-")[1]) < 8 ? "FA" : "SP"}{meeting.frontmatter.date.split("-")[0]} Week {} &bull; {meeting.frontmatter.date}
+                  {parseInt(meeting.date.split("-")[1]) < 8 ? "FA" : "SP"}{meeting.date.split("-")[0]} Week {meeting.week_number} &bull; {meeting.date}
                 </p>
-                <p className="card-text">{meeting.frontmatter.title}</p>
+                <p className="card-text">{meeting.title}</p>
               </div>
             </div>
           </div>

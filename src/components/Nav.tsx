@@ -1,38 +1,55 @@
-import React, {useState} from "react"
+import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { Disclosure, Menu, Transition } from "@headlessui/react"
+import { Disclosure, Transition } from "@headlessui/react"
 
-import PwnySvg from "./PwnySvg"
+import { PwnySvg } from "./Icons"
 
-// create type for nav links
-type NavLink = {
+interface NavLink {
   name: string
   link: string
 }
 
-// graphql query to get nav links
-const navQuery = graphql`
-query {
-  site {
-    siteMetadata {
-      navLinks {
-        name
-        link
-      }
-      navCallToActionLinks {
-        name
-        link
+const Nav = () => {
+  const data: Queries.NavQuery = useStaticQuery(graphql`
+    query Nav {
+      site {
+        siteMetadata {
+          navLinks {
+            name
+            link
+          }
+          navCallToActionLinks {
+            name
+            link
+          }
+        }
       }
     }
-  }
-}
-`
-
-function Nav() {
-  // create navigation array based on query results
-  const navLinks: NavLink[] = useStaticQuery(navQuery).site.siteMetadata.navLinks
-  const navCallToActionLinks: NavLink[] = useStaticQuery(navQuery).site.siteMetadata.navCallToActionLinks
-
+  `)
+  const navLinksResult = data.site?.siteMetadata?.navLinks
+  const navCallToActionLinksResult = data.site?.siteMetadata?.navCallToActionLinks
+  // create non-nullable array of nav call to action links
+  const navLinks: NavLink[] = []
+  navLinksResult?.forEach((item) => {
+    if (item && item.name && item.link) {
+      const new_link: NavLink = {
+        name: item.name,
+        link: item.link,
+      }
+      navLinks.push(new_link)
+    }
+  })
+  // create non-nullable array of nav call to action links
+  const navCallToActionLinks: NavLink[] = []
+  navCallToActionLinksResult?.forEach((item) => {
+    if (item && item.name && item.link) {
+      const new_link: NavLink = {
+        name: item.name,
+        link: item.link,
+      }
+      navCallToActionLinks.push(new_link)
+    }
+  })
   return(
     <>
       <Disclosure as="nav" className="my-6">

@@ -11,6 +11,7 @@ module.exports = {
       background: "var(--color-background)",
       surface: "var(--color-surface)",
       text: "var(--color-text)",
+      transparent: "transparent",
     },
     container: {
       center: true,

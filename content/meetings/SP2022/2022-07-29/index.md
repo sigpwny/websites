@@ -1,5 +1,6 @@
 ---
 date: "2022-07-29"
+week_number: 16
 featured: true
 title:  "UIUCTF 2022 Has Begun! This is an Extremely Long Title That Will Get Cut Off Eventually, At Least I Think"
 credit: "UIUCTF Team"
@@ -8,6 +9,9 @@ image:
   path: "./image.png"
   alt: "The UIUCTF 2022 logo in its playful, colorful style"
 link-to-assets: ""
+assets: [
+]
+recording: ""
 goal: "Introduce everyone to the club, meetings, how to submit challenges/sign up for the CTF, "
 how-to-run: [
 	"Just go through the slides, take breaks when neccesary. This meeting will not be in the 15/45 format",

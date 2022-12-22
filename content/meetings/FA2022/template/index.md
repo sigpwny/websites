@@ -3,15 +3,18 @@ date: "2022-08-21" # required
 week_number: 0 # required: current week number in the semester (0-indexed)
 title: "Example Topic" # required: title
 credit: "Author Name" # required: specify author name(s)
-featured: true # optional: set to true to hide this meeting from the home page
+featured: true # optional: set to true to show this meeting on the home page
 
 image:
-  path: "./image.png" # required: image must be in the same folder as this markdown file
+  path: "./image.png" # required: display image used for the meeting
   alt: "Pwny logo, black and green" # required: provide a description of the image for accessibility purposes
 
-slides: "./template-meeting.pdf" # optional: PDF should be in the same folder and the name should be the title; replacing spaces with dashes (NOT underscores)
-assets: [] # optional: supplementary files, e.g: `assets: ["./file1.txt", "./file2.zip"]`
-recording: null # optional: set to a string containing an external link to the meeting recording
+slides: "./Template_Meeting.pdf" # optional: slides for presentation
+recording: "https://youtube.com/@sigpwny" # optional: link to video recording (if there are multiple videos, place them in a playlist and link that)
+assets: [ # optional: supplementary files
+	# "file1.txt",
+	# "file2.zip"
+]
 
 # add a main topic tag: "web", "pwn", "rev", "crypto", "forensics", "osint", "ai", "misc"
 # plus, add tags for specific topics, such as "xss" or "rsa" or "lockpicking"

@@ -1,13 +1,13 @@
 import React from "react"
 
-interface ReactProps {
-  children: React.ReactNode
+interface Props {
+  data: React.ReactNode
 }
 
-const Panel = ({ children }: ReactProps) => (
+const Panel = ({ data }: Props) => (
   <>
     <div className="panel">
-      {children}
+      {data}
     </div>
   </>
 )
