@@ -1,7 +1,7 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
-import { calculateSemester } from "./src/utils/utils"
+import { calculateSemester } from "./src/utils/util"
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
   const { createNode } = actions
@@ -27,9 +27,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
       if (semester != filePathSemester) {
         console.warn(`Semester "${semester}" does not match directory "${filePathSemester}}" for ${fileNode.absolutePath}`)
       }
-      // Create slug
       const slug = "/meetings/" + path.parse(fileNode.relativePath).dir + "/"
-      // Create node
       createNode({
         id: createNodeId(`Meeting-${node.id}`),
         parent: node.id,
@@ -55,6 +53,96 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
     // Event nodes
     } else if (fileNode.sourceInstanceName === "events") {
       // TODO
+    // Admin nodes
+    } else if (fileNode.sourceInstanceName === "admins") {
+      // Validate required fields
+      const requiredFields = ["name", "image", "role", "weight", "bio"]
+      for (const field of requiredFields) {
+        if (node.frontmatter[field] === undefined) {
+          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
+        }
+      }
+      if (node.frontmatter.image.path === undefined ||
+          node.frontmatter.image.alt === undefined) {
+        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
+      }
+      createNode({
+        id: createNodeId(`Admin-${node.id}`),
+        parent: node.id,
+        children: [],
+        internal: {
+          type: 'Admin',
+          content: JSON.stringify(node),
+          contentDigest: createContentDigest(node),
+        },
+        name: node.frontmatter.name,
+        bio: node.frontmatter.bio,
+        image: node.frontmatter.image,
+        handle: node.frontmatter.handle || null,
+        role: node.frontmatter.role,
+        weight: node.frontmatter.weight,
+        links: node.frontmatter.links || null,
+      })
+    // Alum nodes
+    } else if (fileNode.sourceInstanceName === "alumni") {
+      // Validate required fields
+      const requiredFields = ["name", "image", "role", "weight"]
+      for (const field of requiredFields) {
+        if (node.frontmatter[field] === undefined) {
+          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
+        }
+      }
+      if (node.frontmatter.image.path === undefined ||
+          node.frontmatter.image.alt === undefined) {
+        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
+      }
+      createNode({
+        id: createNodeId(`Alum-${node.id}`),
+        parent: node.id,
+        children: [],
+        internal: {
+          type: 'Alum',
+          content: JSON.stringify(node),
+          contentDigest: createContentDigest(node),
+        },
+        name: node.frontmatter.name,
+        image: node.frontmatter.image,
+        handle: node.frontmatter.handle || null,
+        role: node.frontmatter.role,
+        period: node.frontmatter.period || null,
+        work: node.frontmatter.work || null,
+        weight: node.frontmatter.weight,
+        links: node.frontmatter.links || null,
+      })
+    // Helper nodes
+    } else if (fileNode.sourceInstanceName === "helpers") {
+      // Validate required fields
+      const requiredFields = ["name", "image", "role", "weight"]
+      for (const field of requiredFields) {
+        if (node.frontmatter[field] === undefined) {
+          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
+        }
+      }
+      if (node.frontmatter.image.path === undefined ||
+          node.frontmatter.image.alt === undefined) {
+        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
+      }
+      createNode({
+        id: createNodeId(`Helper-${node.id}`),
+        parent: node.id,
+        children: [],
+        internal: {
+          type: 'Helper',
+          content: JSON.stringify(node),
+          contentDigest: createContentDigest(node),
+        },
+        name: node.frontmatter.name,
+        image: node.frontmatter.image,
+        handle: node.frontmatter.handle || null,
+        role: node.frontmatter.role,
+        weight: node.frontmatter.weight,
+        links: node.frontmatter.links || null,
+      })
     }
   }
 }
@@ -63,10 +151,6 @@ exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
 
   createTypes(`
-    type MarkdownRemark implements Node {
-      html: String!
-    }
-
     type Meeting implements Node @dontInfer {
       date: Date! @dateformat
       week_number: Int!
@@ -85,6 +169,46 @@ exports.createSchemaCustomization = ({ actions }) => {
     type ImageAlt @dontInfer {
       path: File! @fileByRelativePath
       alt: String!
+    }
+
+    type Links {
+      email: String
+      website: String
+      github: String
+      twitter: String
+      mastodon: String
+      linkedin: String
+      discord: String
+    }
+
+    type Admin implements Node {
+      name: String!
+      bio: String!
+      image: ImageAlt!
+      handle: String
+      role: String!
+      weight: Int!
+      links: Links
+    }
+
+    type Alum implements Node {
+      name: String!
+      image: ImageAlt!
+      handle: String
+      role: String!
+      period: String
+      work: String
+      weight: Int!
+      links: Links
+    }
+
+    type Helper implements Node {
+      name: String!
+      image: ImageAlt!
+      handle: String
+      role: String!
+      weight: Int!
+      links: Links
     }
   `)
 }
@@ -116,24 +240,6 @@ exports.createResolvers = ({ createResolvers }) => {
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-
-  // const result = await graphql(`
-  //   {
-  //     allMarkdownRemark(
-  //       sort: { fields: [frontmatter___date], order: ASC }
-  //     ) {
-  //       nodes {
-  //         id
-  //         parent {
-  //           ... on File {
-  //             sourceInstanceName
-  //             relativePath
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `)
 
   const result = await graphql(`
     {
@@ -171,88 +277,4 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     })
   }
-
-  // const nodes = result.data.allMarkdownRemark.nodes
-
-  // Define content types for each markdown file, based on gatsby-source-filesystem name
-  // const meetings = nodes.filter(node => node.parent.sourceInstanceName === "meetings")
-  // var meetings: any[] = []
-  // var events: any[] = []
-  // var redirects: any[] = []
-  // var admins: any[] = []
-  // var alumni: any[] = []
-
-  // // Sort nodes into content types
-  // nodes.forEach(node => {
-  //   switch (node.parent.sourceInstanceName) {
-  //     case "meetings":
-  //       meetings.push(node)
-  //       break
-  //     case "events":
-  //       events.push(node)
-  //       break
-  //     case "redirects":
-  //       redirects.push(node)
-  //       break
-  //     case "admins":
-  //       admins.push(node)
-  //       break
-  //     case "alumni":
-  //       alumni.push(node)
-  //       break
-  //     default:
-  //       console.warn("markdown file not in a recognized directory:" + node.parent.sourceInstanceName + ", " + node.parent.relativePath)
-  //       break
-  //   }
-  // })
-
-  // // Define templates
-  // const meeting_template = path.resolve(`./src/templates/MeetingTemplate.tsx`)
-  // const event_template = path.resolve(`./src/templates/EventTemplate.tsx`)
-  // const redirect_template = path.resolve(`./src/templates/RedirectTemplate.tsx`)
-
-  // // Create meeting pages
-  // if (meetings.length > 0) {
-  //   meetings.forEach((node, index) => {
-  //     const prev_id = index === 0 ? null : meetings[index - 1].id
-  //     const next_id = index === meetings.length - 1 ? null : meetings[index + 1].id
-  //     const slug = node.parent.sourceInstanceName + "/" + path.parse(node.parent.relativePath).dir
-  //     console.log(slug)
-  //     createPage({
-  //       path: slug,
-  //       component: meeting_template,
-  //       context: {
-  //         id: node.id,
-  //         prev_id,
-  //         next_id,
-  //       },
-  //     })
-  //   })
-  // }
-
-  // // Create event pages
-  // if (events.length > 0) {
-  //   events.forEach(node => {
-  //     createPage({
-  //       path: path.parse(node.parent.relativePath).dir,
-  //       component: event_template,
-  //       context: {
-  //         id: node.id
-  //       },
-  //     })
-  //   })
-  // }
-
-  // // Create redirect pages
-  // if (redirects.length > 0) {
-  //   redirects.forEach(node => {
-  //     createPage({
-  //       path: path.parse(node.parent.relativePath).dir,
-  //       component: redirect_template,
-  //       context: {
-  //         id: node.id
-  //       },
-  //     })
-  //   })
-  // }
 }

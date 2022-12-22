@@ -1,8 +1,7 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { Link, graphql } from "gatsby"
 import { StaticImage, IGatsbyImageData } from "gatsby-plugin-image"
 
-import { calculateSemester } from "../utils/utils"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0]
@@ -20,15 +19,14 @@ export function Head() {
 }
 
 const MeetingsPage = ({ data }: Props) => {
-  // const meetings: Queries.MeetingsPageQuery = useStaticQuery()
-  var meetingsBySemester: {[semester: string]: Meeting[]} = {}
-  data.allMeeting.meetings.forEach((meeting: Meeting) => {
-    var date: Date = new Date(meeting.date)
-    var semester: string = calculateSemester(date)
-    if (meetingsBySemester[semester] === undefined) {
-      meetingsBySemester[semester] = [meeting]
-    } else {
+  const meetings = data.allMeeting.meetings
+  const meetingsBySemester: {[semester: string]: Meeting[]} = {}
+  meetings.forEach((meeting: Meeting) => {
+    const semester = meeting.semester
+    if (meetingsBySemester[semester]) {
       meetingsBySemester[semester].push(meeting)
+    } else {
+      meetingsBySemester[semester] = [meeting]
     }
   })
   return (
@@ -58,7 +56,7 @@ const MeetingsPage = ({ data }: Props) => {
                           <td className="font-mono">{meeting.date}</td>
                           <td className="pr-2">
                             {meeting.slides && meeting.slides.publicURL && (
-                              <Link to={meeting.slides.publicURL} aria-label="PDF link" title="Download PDF" target="_blank" rel="noreferrer">
+                              <Link to={meeting.slides.publicURL} aria-label="Slides download link" title="Download slides" target="_blank" rel="noreferrer">
                                 <PdfSvg />
                               </Link>
                             )}
@@ -115,6 +113,7 @@ export const query = graphql`
           publicURL
         }
         recording
+        semester
         slug
       }
     }

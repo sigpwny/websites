@@ -126,11 +126,8 @@ a:hover {
 }
 .panel {
   background-color: var(--color-surface);
-  padding-top: 1rem;
-  padding-bottom: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  border-left: 8px solid var(--color-primary);
+  border-radius: 0.75rem;
+  padding: 1rem;
 }
 .social-links p {
   display: inline-block;
