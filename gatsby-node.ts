@@ -155,7 +155,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       date: Date! @dateformat
       week_number: Int!
       title: String!
-      credit: String!
+      credit: [String!]!
       featured: Boolean
       image: ImageAlt!
       slides: File @fileByRelativePath
@@ -242,8 +242,8 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const result = await graphql(`
-    {
-      allMeeting(sort: { fields: [date], order: ASC }) {
+    query GatsbyNode {
+      allMeeting(sort: {date: ASC}) {
         meetings: nodes {
           id
           slug

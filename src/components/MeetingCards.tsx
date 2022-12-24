@@ -1,20 +1,21 @@
 import React from "react"
 import { Link, useStaticQuery, graphql, navigate } from "gatsby"
 
+import { weekNumber } from "../utils/util"
+
 type Meeting = Queries.MeetingCardsQuery["allMeeting"]["meetings"][0]
 
 const MeetingCards = () => {
   const data: Queries.MeetingCardsQuery = useStaticQuery(graphql`
     query MeetingCards {
-      allMeeting (
+      allMeeting(
         filter: {featured: {eq: true}}
-        sort: {fields: date, order: DESC}
+        sort: {date: DESC}
       ) {
         meetings: nodes {
           date(formatString: "YYYY-MM-DD")
           week_number
           title
-          credit
           image {
             path {
               childImageSharp {
@@ -23,6 +24,7 @@ const MeetingCards = () => {
             }
             alt
           }
+          semester
           slug
         }
       }
@@ -49,7 +51,7 @@ const MeetingCards = () => {
               <div className="card-line-clamp">
                 <p className="font-mono font-size-small m-0">
                   {/* display month number from meeting.frontmatter.date */}
-                  {parseInt(meeting.date.split("-")[1]) < 8 ? "FA" : "SP"}{meeting.date.split("-")[0]} Week {meeting.week_number} &bull; {meeting.date}
+                  {meeting.semester} Week {weekNumber(meeting.week_number)} &bull; {meeting.date}
                 </p>
                 <p className="card-text">{meeting.title}</p>
               </div>

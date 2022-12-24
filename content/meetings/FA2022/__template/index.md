@@ -2,7 +2,7 @@
 date: "2022-08-21" # required
 week_number: 0 # required: current week number in the semester (0-indexed)
 title: "Example Topic" # required: title
-credit: "Author Name" # required: specify author name(s)
+credit: ["SIGPwny"] # required: specify author name(s)
 featured: true # optional: set to true to show this meeting on the home page
 
 image:

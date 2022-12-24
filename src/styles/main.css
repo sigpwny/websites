@@ -129,6 +129,10 @@ a:hover {
   border-radius: 0.75rem;
   padding: 1rem;
 }
+.panel-p-0 {
+  background-color: var(--color-surface);
+  border-radius: 0.75rem;
+}
 .social-links p {
   display: inline-block;
   margin: 0;
@@ -234,6 +238,28 @@ a:hover {
 .navbar-toggler-icon:focus {
   outline: none;
   box-shadow: none;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-secondary);
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+}
+.custom-scrollbar {
+  -ms-overflow-style: auto;
+  scrollbar-color: var(--color-primary) transparent;
+  scrollbar-width: thin;
 }
 /* CSS Curly Brace: https://codepen.io/mexn/pen/AjqrZv */
 .curly-brace {

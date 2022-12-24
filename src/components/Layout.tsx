@@ -7,9 +7,7 @@ interface Props {
   children: React.ReactNode
 }
 
-type LayoutType = "page" | "meeting" | "event"
-
-const Layout = ({ children }: Props, layoutType: LayoutType) => (
+const Layout = ({ children }: Props) => (
   <>
     <div className="flex flex-col min-h-screen">
       <Nav />

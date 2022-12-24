@@ -1,7 +1,8 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { StaticImage, IGatsbyImageData } from "gatsby-plugin-image"
+import { StaticImage } from "gatsby-plugin-image"
 
+import { weekNumber } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0]
@@ -32,57 +33,39 @@ const MeetingsPage = ({ data }: Props) => {
   return (
     <>
       <section id="meetings" className="pb-8">
-        <h1>Meetings</h1>
-        <div className="flex flex-col">
-          <table>
-            <thead></thead>
-            {Object.keys(meetingsBySemester).map((semester: string) => {
-              return (
-                <>
-                  <h2 className="m-0">{semester}</h2>
-                  <thead>
-                    <tr className="text-left">
-                      <th>Date</th>
-                      <th></th>
-                      <th></th>
-                      <th>Title</th>
-                      <th>Author</th>
-                    </tr>
-                  </thead>
-                  <tbody className="border-b-[1rem] border-transparent">
-                    {meetingsBySemester[semester].map((meeting: Meeting) => {
-                      return (
-                        <tr>
-                          <td className="font-mono">{meeting.date}</td>
-                          <td className="pr-2">
-                            {meeting.slides && meeting.slides.publicURL && (
-                              <Link to={meeting.slides.publicURL} aria-label="Slides download link" title="Download slides" target="_blank" rel="noreferrer">
-                                <PdfSvg />
-                              </Link>
-                            )}
-                          </td>
-                          <td className="pr-2">
-                            {meeting.recording && meeting.recording !== "" && (
-                              <a href={meeting.recording} aria-label="YouTube link" title="Watch on YouTube" target="_blank" rel="noreferrer">
-                                <YouTubeSvg />
-                              </a>
-                            )}
-                          </td>
-                          <td>
-                            <Link to={`${meeting.slug}`}>
-                              {meeting.title}
-                            </Link>
-                          </td>
-                          <td>{meeting.credit}</td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                  <span className="h-4 py-4"></span>
-                </>
-              )
-            })}
-          </table>
+        {/* <h1>Meetings</h1> */}
+        <div className="flex flex-col panel mx-auto xl:w-2/3 lg:w-4/5">
+          {Object.keys(meetingsBySemester).map((semester: string) => {
+            return (
+              <>
+                <p className="font-bold text-2xl m-0">{semester}</p>
+                <div className="flex flex-col pb-2">
+                  {meetingsBySemester[semester].map((meeting: Meeting) => {
+                    return (
+                      <div className="flex flex-row gap-x-4">
+                        <div className="flex flex-col min-w-max">
+                          <span className="font-mono">{meeting.date}</span>
+                        </div>
+                        <div className="flex flex-col w-3/5">
+                          <Link to={`${meeting.slug}`} className="truncate">
+                            <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
+                          </Link>
+                        </div>
+                        <div className="flex flex-col min-w-max md:flex hidden">
+                          {meeting.credit.length > 0 ? (
+                            // print each credit, separated by a comma
+                            meeting.credit.map((credit: string, index: number) => (
+                              <>{credit}{index < meeting.credit.length - 1 ? ", " : ""}</>
+                            ))
+                          ) : "SIGPwny" }
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </>
+            )
+          })}
         </div>
       </section>
     </>
@@ -93,9 +76,7 @@ export default MeetingsPage
 
 export const query = graphql`
   query MeetingsPage {
-    allMeeting(
-      sort: {fields: date, order: DESC}
-    ) {
+    allMeeting(sort: {date: DESC}) {
       meetings: nodes {
         date(formatString: "YYYY-MM-DD")
         week_number

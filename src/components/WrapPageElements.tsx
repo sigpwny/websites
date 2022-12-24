@@ -1,5 +1,5 @@
 import React from "react"
-// import { AnimatePresence } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
 import Layout from "./Layout"
 
 interface Props {
@@ -7,10 +7,11 @@ interface Props {
 }
 
 const wrapPageElement = ({element}: Props) => (
-    <Layout>
-        {/* <AnimatePresence initial={true} exitBeforeEnter>{children}</AnimatePresence> */}
-        {element}
-    </Layout>
+  <Layout>
+    <AnimatePresence initial={true} mode="wait">
+      {element}
+    </AnimatePresence>
+  </Layout>
 )
 
 export default wrapPageElement

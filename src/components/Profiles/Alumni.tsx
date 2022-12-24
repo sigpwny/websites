@@ -6,12 +6,7 @@ type Alum = Queries.AlumProfilesQuery["allAlum"]["alumni"][0]
 const AlumProfiles = () => {
   const data: Queries.AlumProfilesQuery = useStaticQuery(graphql`
     query AlumProfiles {
-      allAlum (
-        sort: {
-          fields: [weight, name],
-          order: [ASC, ASC]
-        }
-      ) {
+      allAlum(sort: [{weight: ASC}, {name: ASC}]) {
         alumni: nodes {
           name
           image {
@@ -42,7 +37,7 @@ const AlumProfiles = () => {
   `)
   return (
     <>
-      {data.allAlum.alumni.length > 0 && (
+      {data.allAlum.alumni.length > 0 ? (
         <section id="alumni" className="pb-8">
           <h1>Alumni & Elders</h1>
           <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -54,9 +49,17 @@ const AlumProfiles = () => {
                       <img className="rounded-full" src={alum.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src} />
                     </div>
                     <div className="basis-2/3 self-center">
-                      {alum.role && <p className="font-mono font-bold text-primary uppercase m-0">{alum.role}</p>}
+                    {alum.role ? (
+                        <p className="font-mono font-bold text-primary uppercase m-0">
+                          {alum.role}
+                        </p>
+                      ) : null}
                       <p className="text-3xl font-bold m-0">{alum.name}</p>
-                      {alum.handle && <p className="font-mono">@{alum.handle}</p>}
+                      {alum.handle ? (
+                        <p className="font-mono">
+                          @{alum.handle}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -64,7 +67,7 @@ const AlumProfiles = () => {
             ))}
           </div>
         </section>
-      )}
+      ) : null}
     </>
   )
 }

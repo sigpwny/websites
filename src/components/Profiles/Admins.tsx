@@ -6,12 +6,7 @@ type Admin = Queries.AdminProfilesQuery["allAdmin"]["admins"][0]
 const AdminProfiles = () => {
   const data: Queries.AdminProfilesQuery = useStaticQuery(graphql`
     query AdminProfiles {
-      allAdmin (
-        sort: {
-          fields: [weight, name],
-          order: [ASC, ASC]
-        }
-      ) {
+      allAdmin(sort: [{weight: ASC}, {name: ASC}]) {
         admins: nodes {
           name
           bio
@@ -41,7 +36,7 @@ const AdminProfiles = () => {
   `)
   return (
     <>
-      {data.allAdmin.admins.length > 0 && (
+      {data.allAdmin.admins.length > 0 ? (
         <section id="admins" className="pb-8">
           <h1>Admin Team</h1>
           <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -53,9 +48,17 @@ const AdminProfiles = () => {
                       <img className="rounded-full" src={admin.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src} />
                     </div>
                     <div className="basis-2/3 self-center">
-                      {admin.role && <p className="font-mono font-bold text-primary uppercase m-0">{admin.role}</p>}
+                      {admin.role ? (
+                        <p className="font-mono font-bold text-primary uppercase m-0">
+                          {admin.role}
+                        </p>
+                      ) : null}
                       <p className="text-3xl font-bold m-0">{admin.name}</p>
-                      {admin.handle && <p className="font-mono">@{admin.handle}</p>}
+                      {admin.handle ? (
+                        <p className="font-mono">
+                          @{admin.handle}
+                        </p>
+                      ) : null}
                       <p>{admin.bio}</p>
                     </div>
                   </div>
@@ -64,7 +67,7 @@ const AdminProfiles = () => {
             ))}
           </div>
         </section>
-      )}
+      ) : null}
     </>
   )
 }
