@@ -180,7 +180,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
   } else if (node.internal.type === "Mdx") {
     const fileNode = getNode(node.parent)
     // PageMarkdown nodes
-    if (fileNode.sourceInstanceName === "pages_md") {
+    if (fileNode.sourceInstanceName === "pages") {
       // Validate required fields
       const requiredFields = ["title"]
       for (const field of requiredFields) {
@@ -420,18 +420,13 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
         }
       }
-      allMdx {
+      allPageMarkdown {
         pages_md: nodes {
           id
-          fields {
-            slug
-          }
-          internal {
-            contentFilePath
-          }
+          slug
           parent {
-            ... on File {
-              relativePath
+            internal {
+              contentFilePath
             }
           }
         }
@@ -480,26 +475,12 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   }
 
-  // const pages_md = result.data.allPageMarkdown.pages_md
-  // if (pages_md.length > 0) {
-  //   pages_md.forEach((page_md) => {
-  //     createPage({
-  //       path: page_md.slug,
-  //       component: `${template_page_md}?__contentFilePath=${page_md.internal.contentFilePath}`,
-  //       context: {
-  //         id: page_md.id,
-  //       },
-  //       trailingSlash: true,
-  //     })
-  //   })
-  // }
-
-  const pages_md = result.data.allMdx.pages_md
+  const pages_md = result.data.allPageMarkdown.pages_md
   if (pages_md.length > 0) {
     pages_md.forEach((page_md) => {
       createPage({
-        path: page_md.fields.slug,
-        component: `${template_page_md}?__contentFilePath=${page_md.internal.contentFilePath}`,
+        path: page_md.slug,
+        component: `${template_page_md}?__contentFilePath=${page_md.parent.internal.contentFilePath}`,
         context: {
           id: page_md.id,
         },

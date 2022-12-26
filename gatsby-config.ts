@@ -37,13 +37,6 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        "name": "pages_md",
-        "path": "./src/pages_md/"
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
         "name": "meetings",
         "path": "./content/meetings/"
       },
