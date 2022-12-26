@@ -6,7 +6,7 @@ import { weekNumber } from "../utils/util"
 type Meeting = Queries.MeetingCardsQuery["allMeeting"]["meetings"][0]
 
 const MeetingCards = () => {
-  const data: Queries.MeetingCardsQuery = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     query MeetingCards {
       allMeeting(
         filter: {featured: {eq: true}}
@@ -50,7 +50,6 @@ const MeetingCards = () => {
             <div className="p-2">
               <div className="card-line-clamp">
                 <p className="font-mono font-size-small m-0">
-                  {/* display month number from meeting.frontmatter.date */}
                   {meeting.semester} Week {weekNumber(meeting.week_number)} &bull; {meeting.date}
                 </p>
                 <p className="card-text">{meeting.title}</p>

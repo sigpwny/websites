@@ -9,7 +9,7 @@ const config: GatsbyConfig = {
       { name: "SIGPwny", link: "/" },
       { name: "About", link: "/about/" },
       { name: "Meetings", link: "/meetings/" },
-      { name: "CTFs", link: "/events/" },
+      { name: "Events", link: "/events/" },
       { name: "Sponsors", link: "/sponsors/" },
     ],
     navCallToActionLinks: [
@@ -37,8 +37,22 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        "name": "pages_md",
+        "path": "./src/pages_md/"
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         "name": "meetings",
         "path": "./content/meetings/"
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "events",
+        "path": "./content/events/"
       },
     },
     {
@@ -55,8 +69,15 @@ const config: GatsbyConfig = {
         "path": "./content/profiles/alumni/"
       },
     },
-    
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "helpers",
+        "path": "./content/profiles/helpers/"
+      },
+    },
     "gatsby-plugin-image",
+    "gatsby-plugin-mdx",
     "gatsby-plugin-postcss",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",

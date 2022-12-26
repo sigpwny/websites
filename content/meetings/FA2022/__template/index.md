@@ -4,11 +4,10 @@ week_number: 0 # required: current week number in the semester (0-indexed)
 title: "Example Topic" # required: title
 credit: ["SIGPwny"] # required: specify author name(s)
 featured: true # optional: set to true to show this meeting on the home page
-
+location: "Siebel CS 1404 + Zoom" # optional
 image:
   path: "./image.png" # required: display image used for the meeting
   alt: "Pwny logo, black and green" # required: provide a description of the image for accessibility purposes
-
 slides: "./Template_Meeting.pdf" # optional: slides for presentation
 recording: "https://youtube.com/@sigpwny" # optional: link to video recording (if there are multiple videos, place them in a playlist and link that)
 assets: [ # optional: supplementary files
