@@ -5,6 +5,7 @@ const config: GatsbyConfig = {
     title: `SIGPwny`,
     siteUrl: `https://sigpwny.com`, // no trailing slash
     description: `SIGPwny is a student-run organization at the University of Illinois at Urbana-Champaign focused on information security and privacy.`,
+    image: `https://sigpwny.com/pwny8-dark-512x512.png`,
     navLinks: [
       { name: "SIGPwny", link: "/" },
       { name: "About", link: "/about/" },
@@ -37,36 +38,49 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        "name": "pages_md",
+        "path": "./src/pages_md/",
+        "ignore": [`**/.*`],
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         "name": "meetings",
-        "path": "./content/meetings/"
+        "path": "./content/meetings/",
+        "ignore": [`**/.*`],
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "events",
-        "path": "./content/events/"
+        "path": "./content/events/",
+        "ignore": [`**/.*`],
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "admins",
-        "path": "./content/profiles/admins/"
+        "path": "./content/profiles/admins/",
+        "ignore": [`**/.*`],
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "alumni",
-        "path": "./content/profiles/alumni/"
+        "path": "./content/profiles/alumni/",
+        "ignore": [`**/.*`],
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "helpers",
-        "path": "./content/profiles/helpers/"
+        "path": "./content/profiles/helpers/",
+        "ignore": [`**/.*`],
       },
     },
     "gatsby-plugin-image",
@@ -79,7 +93,34 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        "icon": "./src/images/logo/pwny8-48x48.png"
+        "icon": `./src/images/logo/pwny8-48x48.png`,
+        "icons": [
+          {
+            "src": "./src/images/logo/pwny8-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+          },
+          {
+            "src": "./src/images/logo/pwny8-dark-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+          },
+          {
+            "src": "./src/images/logo/pwny8-dark-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+          },
+          {
+            "src": "./src/images/logo/pwny8-dark-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+          },
+          {
+            "src": "./src/images/logo/pwny8-dark-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+          },
+        ],
       }
     },
   ]

@@ -1,54 +1,49 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal TypeScript starter
-</h1>
+# sigpwny.com
 
-## 🚀 Quick start
+The new SIGPwny website, built with Gatsby.
 
-1.  **Create a Gatsby site.**
+## Installing and Building
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+Download all node packages:
+```
+npm ci
+```
 
-    ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby
-    ```
+Install `gatsby-cli`:
+```
+npm install -g gatsby-cli
+```
 
-2.  **Start developing.**
+Start a development server:
+```
+gatsby develop
+```
 
-    Navigate into your new site’s directory and start it up.
+Build for production:
+```
+gatsby build
+```
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+Serve production:
+```
+gatsby serve
+```
 
-3.  **Open the code and start customizing!**
+## Content Types
 
-    Your site is now running at http://localhost:8000!
+There are 7 content types defined:
 
-    Edit `src/pages/index.tsx` to see your site update in real-time!
+- Meeting
+- Events
+- Profiles (does not count as a content type)
+  - Admins
+  - Alumni
+  - Helpers
+- Redirects
+- Markdown Pages
 
-4.  **Learn more**
+The majority of these content types are defined in the frontmatter of Markdown files, with the exception of Redirects, which are defined with JSON files. These content types are stored in the `content` directory, with the exception of Markdown Pages, which are stored in `src/pages_md`.
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+## Updating Dependencies
 
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+This site only depends on official Gatsby plugins, so unless a plugin is deprecated, the latest versions of Gatsby and its plugins are pretty much guaranteed to work with each other. Ensure that breaking changes are addressed when dealing with major semver updates. Do not commit dependency updates without first verifying that the site built successfully and still operates normally.

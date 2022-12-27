@@ -41,13 +41,13 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
         week_number: node.frontmatter.week_number,
         title: node.frontmatter.title,
         credit: node.frontmatter.credit,
-        featured: node.frontmatter.featured || false,
-        location: node.frontmatter.location || null,
+        featured: node.frontmatter.featured,
+        location: node.frontmatter.location,
         image: node.frontmatter.image,
-        slides: node.frontmatter.slides || null,
-        recording: node.frontmatter.recording || null,
-        assets: node.frontmatter.assets || null,
-        tags: node.frontmatter.tags || null,
+        slides: node.frontmatter.slides,
+        recording: node.frontmatter.recording,
+        assets: node.frontmatter.assets,
+        tags: node.frontmatter.tags,
         semester,
         slug,
       })
@@ -78,11 +78,11 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
         series: node.frontmatter.series.toLowerCase(),
         description: node.frontmatter.description,
         time_start: node.frontmatter.time_start,
-        time_close: node.frontmatter.time_close || null,
+        time_close: node.frontmatter.time_close,
         image: node.frontmatter.image,
-        links: node.frontmatter.links || null,
-        rating_weight: node.frontmatter.rating_weight || null,
-        stats: node.frontmatter.stats || null,
+        links: node.frontmatter.links,
+        rating_weight: node.frontmatter.rating_weight,
+        stats: node.frontmatter.stats,
         slug,
       })
     // Admin nodes
@@ -110,10 +110,10 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
         name: node.frontmatter.name,
         bio: node.frontmatter.bio,
         image: node.frontmatter.image,
-        handle: node.frontmatter.handle || null,
+        handle: node.frontmatter.handle,
         role: node.frontmatter.role,
         weight: node.frontmatter.weight,
-        links: node.frontmatter.links || null,
+        links: node.frontmatter.links,
       })
     // Alum nodes
     } else if (fileNode.sourceInstanceName === "alumni") {
@@ -139,12 +139,12 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
         },
         name: node.frontmatter.name,
         image: node.frontmatter.image,
-        handle: node.frontmatter.handle || null,
+        handle: node.frontmatter.handle,
         role: node.frontmatter.role,
-        period: node.frontmatter.period || null,
-        work: node.frontmatter.work || null,
+        period: node.frontmatter.period,
+        work: node.frontmatter.work,
         weight: node.frontmatter.weight,
-        links: node.frontmatter.links || null,
+        links: node.frontmatter.links,
       })
     // Helper nodes
     } else if (fileNode.sourceInstanceName === "helpers") {
@@ -170,17 +170,17 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
         },
         name: node.frontmatter.name,
         image: node.frontmatter.image,
-        handle: node.frontmatter.handle || null,
+        handle: node.frontmatter.handle,
         role: node.frontmatter.role,
         weight: node.frontmatter.weight,
-        links: node.frontmatter.links || null,
+        links: node.frontmatter.links,
       })
     }
   // Mdx support
   } else if (node.internal.type === "Mdx") {
     const fileNode = getNode(node.parent)
     // PageMarkdown nodes
-    if (fileNode.sourceInstanceName === "pages") {
+    if (fileNode.sourceInstanceName === "pages_md") {
       // Validate required fields
       const requiredFields = ["title"]
       for (const field of requiredFields) {
@@ -199,7 +199,6 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
           slug = "/" + path.join(parsedPath.dir, parsedPath.name)
         }
       }
-      console.log(slug)
       createNodeField({
         node,
         name: "slug",
@@ -216,6 +215,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
         },
         contentFilePath: node.internal.contentFilePath,
         title: node.frontmatter.title,
+        no_background: node.frontmatter.no_background,
         slug,
       })
     }
@@ -277,7 +277,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
 //       contentDigest: createContentDigest(node),
 //     },
 //     ...fields.reduce((obj, field) => {
-//       obj[field] = node.frontmatter[field] || null
+//       obj[field] = node.frontmatter[field]
 //       return obj
 //     }, {}),
 //     semester,
@@ -306,7 +306,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type Stats {
-      participation: Int
+      participants: Int
       teams: Int
       solves: Int
     }
@@ -344,6 +344,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type PageMarkdown implements Node @dontInfer {
       contentFilePath: String!
       title: String!
+      no_background: Boolean
       slug: String!
     }
 
@@ -424,11 +425,7 @@ exports.createPages = async ({ graphql, actions }) => {
         pages_md: nodes {
           id
           slug
-          parent {
-            internal {
-              contentFilePath
-            }
-          }
+          contentFilePath
         }
       }
     }
@@ -480,7 +477,7 @@ exports.createPages = async ({ graphql, actions }) => {
     pages_md.forEach((page_md) => {
       createPage({
         path: page_md.slug,
-        component: `${template_page_md}?__contentFilePath=${page_md.parent.internal.contentFilePath}`,
+        component: `${template_page_md}?__contentFilePath=${page_md.contentFilePath}`,
         context: {
           id: page_md.id,
         },

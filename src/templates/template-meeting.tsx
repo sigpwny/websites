@@ -56,7 +56,7 @@ const MeetingTemplate = ({ data }: Props) => {
               const url = getYouTubeEmbedUrl(curr.recording)
               return url ? (
                 <iframe
-                  className="w-full max-w-2xl aspect-video mx-auto mb-4"
+                  className="bg-background w-full max-w-2xl aspect-video mx-auto mb-4"
                   allow="encrypted-media; fullscreen; picture-in-picture"
                   allowFullScreen={true}
                   src={url}
