@@ -42,14 +42,14 @@ const EventCards = ({ includeSeries, excludeSeries }: Props) => {
   if (includeSeries) {
     includeSeries = includeSeries.map((series) => series.toLowerCase())
     for (const event_ of events) {
-      if (includeSeries.includes(event_.series)) {
+      if (includeSeries.includes(event_.series.toLowerCase())) {
         filteredEvents.push(event_)
       }
     }
   } else if (excludeSeries) {
     excludeSeries = excludeSeries.map((series) => series.toLowerCase())
     for (const event_ of events) {
-      if (!excludeSeries.includes(event_.series)) {
+      if (!excludeSeries.includes(event_.series.toLowerCase())) {
         filteredEvents.push(event_)
       }
     }

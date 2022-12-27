@@ -3,287 +3,115 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 
 import { calculateSemester } from "./src/utils/util"
 
+const contentTypes = {
+  // MarkdownRemark
+  "meetings": {
+    typename: "Meeting",
+    requiredFields: ["date", "week_number", "title", "credit", "image"],
+    fields: ["date", "week_number", "title", "credit", "featured", "location", "image", "slides", "recording", "assets", "tags", "semester", "slug"]
+  },
+  "events": {
+    typename: "Event",
+    requiredFields: ["title", "series", "description", "time_start", "image"],
+    fields: ["title", "series", "description", "time_start", "time_close", "location", "image", "links", "rating_weight", "stats", "slug"]
+  },
+  "admins": {
+    typename: "Admin",
+    requiredFields: ["name", "image", "role", "weight", "bio"],
+    fields: ["name", "bio", "image", "handle", "role", "weight", "links"]
+  },
+  "alumni": {
+    typename: "Alum",
+    requiredFields: ["name", "image", "role", "weight"],
+    fields: ["name", "image", "handle", "role", "period", "work", "weight", "links"]
+  },
+  "helpers": {
+    typename: "Helper",
+    requiredFields: ["name", "image", "role", "weight"],
+    fields: ["name", "image", "handle", "role", "weight", "links"]
+  },
+  // Mdx
+  "pages_md": {
+    typename: "PageMarkdown",
+    requiredFields: ["title"],
+    fields: ["title", "no_background", "slug"]
+  },
+}
+
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
-  const { createNode, createNodeField } = actions
-  // Transform MarkdownRemark nodes into nodes corresponding to content types
-  if (node.internal.type === "MarkdownRemark") {
+  const { createNode } = actions
+  if (node.internal.type === "MarkdownRemark" || node.internal.type === "Mdx") {
+
     const fileNode = getNode(node.parent)
-    // Meeting nodes
-    if (fileNode.sourceInstanceName === "meetings") {
-      // Validate required fields
-      const requiredFields = ["date", "week_number", "title", "credit", "image"]
-      for (const field of requiredFields) {
-        if (node.frontmatter[field] === undefined) {
-          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
-        }
+    const sourceInstanceName = fileNode.sourceInstanceName
+    const contentType = Object.keys(contentTypes).find(source => source === sourceInstanceName)
+    if (!contentType) return
+
+    const { typename, requiredFields, fields } = contentTypes[contentType]
+    for (const field of requiredFields) {
+      if (node.frontmatter[field] === null ||
+          node.frontmatter[field] === undefined ||
+          node.frontmatter[field] === "") {
+        throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
       }
-      if (node.frontmatter.image.path === undefined ||
-          node.frontmatter.image.alt === undefined) {
-        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
-      }
-      // Validate calculated semester matches directory name
-      const semester = calculateSemester(new Date(node.frontmatter.date))
-      const filePathSemester = fileNode.relativePath.split("/")[0]
-      if (semester != filePathSemester) {
-        console.warn(`Semester "${semester}" does not match directory "${filePathSemester}}" for ${fileNode.absolutePath}`)
-      }
-      const slug = "/meetings/" + path.parse(fileNode.relativePath).dir + "/"
-      createNode({
-        id: createNodeId(`Meeting-${node.id}`),
-        parent: node.id,
-        children: [],
-        internal: {
-          type: 'Meeting',
-          content: JSON.stringify(node),
-          contentDigest: createContentDigest(node),
-        },
-        date: node.frontmatter.date,
-        week_number: node.frontmatter.week_number,
-        title: node.frontmatter.title,
-        credit: node.frontmatter.credit,
-        featured: node.frontmatter.featured,
-        location: node.frontmatter.location,
-        image: node.frontmatter.image,
-        slides: node.frontmatter.slides,
-        recording: node.frontmatter.recording,
-        assets: node.frontmatter.assets,
-        tags: node.frontmatter.tags,
-        semester,
-        slug,
-      })
-    // Event nodes
-    } else if (fileNode.sourceInstanceName === "events") {
-      // Validate required fields
-      const requiredFields = ["title", "series", "description", "time_start", "image"]
-      for (const field of requiredFields) {
-        if (node.frontmatter[field] === undefined) {
-          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
-        }
-      }
-      if (node.frontmatter.image.path === undefined ||
-          node.frontmatter.image.alt === undefined) {
-        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
-      }
-      const slug = "/events/" + path.parse(fileNode.relativePath).dir + "/"
-      createNode({
-        id: createNodeId(`Event-${node.id}`),
-        parent: node.id,
-        children: [],
-        internal: {
-          type: 'Event',
-          content: JSON.stringify(node),
-          contentDigest: createContentDigest(node),
-        },
-        title: node.frontmatter.title,
-        series: node.frontmatter.series.toLowerCase(),
-        description: node.frontmatter.description,
-        time_start: node.frontmatter.time_start,
-        time_close: node.frontmatter.time_close,
-        image: node.frontmatter.image,
-        links: node.frontmatter.links,
-        rating_weight: node.frontmatter.rating_weight,
-        stats: node.frontmatter.stats,
-        slug,
-      })
-    // Admin nodes
-    } else if (fileNode.sourceInstanceName === "admins") {
-      // Validate required fields
-      const requiredFields = ["name", "image", "role", "weight", "bio"]
-      for (const field of requiredFields) {
-        if (node.frontmatter[field] === undefined) {
-          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
-        }
-      }
-      if (node.frontmatter.image.path === undefined ||
-          node.frontmatter.image.alt === undefined) {
-        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
-      }
-      createNode({
-        id: createNodeId(`Admin-${node.id}`),
-        parent: node.id,
-        children: [],
-        internal: {
-          type: 'Admin',
-          content: JSON.stringify(node),
-          contentDigest: createContentDigest(node),
-        },
-        name: node.frontmatter.name,
-        bio: node.frontmatter.bio,
-        image: node.frontmatter.image,
-        handle: node.frontmatter.handle,
-        role: node.frontmatter.role,
-        weight: node.frontmatter.weight,
-        links: node.frontmatter.links,
-      })
-    // Alum nodes
-    } else if (fileNode.sourceInstanceName === "alumni") {
-      // Validate required fields
-      const requiredFields = ["name", "image", "role", "weight"]
-      for (const field of requiredFields) {
-        if (node.frontmatter[field] === undefined) {
-          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
-        }
-      }
-      if (node.frontmatter.image.path === undefined ||
-          node.frontmatter.image.alt === undefined) {
-        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
-      }
-      createNode({
-        id: createNodeId(`Alum-${node.id}`),
-        parent: node.id,
-        children: [],
-        internal: {
-          type: 'Alum',
-          content: JSON.stringify(node),
-          contentDigest: createContentDigest(node),
-        },
-        name: node.frontmatter.name,
-        image: node.frontmatter.image,
-        handle: node.frontmatter.handle,
-        role: node.frontmatter.role,
-        period: node.frontmatter.period,
-        work: node.frontmatter.work,
-        weight: node.frontmatter.weight,
-        links: node.frontmatter.links,
-      })
-    // Helper nodes
-    } else if (fileNode.sourceInstanceName === "helpers") {
-      // Validate required fields
-      const requiredFields = ["name", "image", "role", "weight"]
-      for (const field of requiredFields) {
-        if (node.frontmatter[field] === undefined) {
-          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
-        }
-      }
-      if (node.frontmatter.image.path === undefined ||
-          node.frontmatter.image.alt === undefined) {
-        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
-      }
-      createNode({
-        id: createNodeId(`Helper-${node.id}`),
-        parent: node.id,
-        children: [],
-        internal: {
-          type: 'Helper',
-          content: JSON.stringify(node),
-          contentDigest: createContentDigest(node),
-        },
-        name: node.frontmatter.name,
-        image: node.frontmatter.image,
-        handle: node.frontmatter.handle,
-        role: node.frontmatter.role,
-        weight: node.frontmatter.weight,
-        links: node.frontmatter.links,
-      })
     }
-  // Mdx support
-  } else if (node.internal.type === "Mdx") {
-    const fileNode = getNode(node.parent)
-    // PageMarkdown nodes
-    if (fileNode.sourceInstanceName === "pages_md") {
-      // Validate required fields
-      const requiredFields = ["title"]
-      for (const field of requiredFields) {
-        if (node.frontmatter[field] === undefined) {
-          throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
-        }
+
+    if ("image" in requiredFields) {
+      if (node.frontmatter.image.path === null ||
+          node.frontmatter.image.path === undefined ||
+          node.frontmatter.image.path === "" ||
+          node.frontmatter.image.alt === null ||
+          node.frontmatter.image.alt === undefined ||
+          node.frontmatter.image.alt === "") {
+        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
       }
-      let slug
-      if (node.frontmatter.slug) {
-        slug = node.frontmatter.slug
-      } else {
-        const parsedPath = path.parse(fileNode.relativePath)
-        if (parsedPath.name === "index") {
-          slug = "/" + parsedPath.dir + "/"
+    }
+
+    let slug, semester
+    if (node.internal.type === "MarkdownRemark") {
+      if (typename === "Meeting") {
+        semester = calculateSemester(new Date(node.frontmatter.date))
+        const filePathSemester = fileNode.relativePath.split("/")[0]
+        if (semester != filePathSemester) {
+          console.warn(`Semester "${semester}" does not match directory "${filePathSemester}}" for ${fileNode.absolutePath}`)
+        }
+        slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`
+      } else if (typename === "Event") {
+        slug = `/events/${path.parse(fileNode.relativePath).dir}/`
+      }
+    } else if (node.internal.type === "Mdx") {
+      if (typename === "PageMarkdown") {
+        if (node.frontmatter.slug) {
+          slug = node.frontmatter.slug
         } else {
-          slug = "/" + path.join(parsedPath.dir, parsedPath.name)
+          const parsedPath = path.parse(fileNode.relativePath)
+          if (parsedPath.name === "index") {
+            slug = "/" + parsedPath.dir + "/"
+          } else {
+            slug = "/" + path.join(parsedPath.dir, parsedPath.name)
+          }
         }
       }
-      createNodeField({
-        node,
-        name: "slug",
-        value: slug,
-      })
-      createNode({
-        id: createNodeId(`PageMarkdown-${node.id}`),
-        parent: node.id,
-        children: [],
-        internal: {
-          type: 'PageMarkdown',
-          content: JSON.stringify(node),
-          contentDigest: createContentDigest(node),
-        },
-        contentFilePath: node.internal.contentFilePath,
-        title: node.frontmatter.title,
-        no_background: node.frontmatter.no_background,
-        slug,
-      })
     }
+
+    createNode({
+      id: createNodeId(`${typename}-${node.id}`),
+      parent: node.id,
+      children: [],
+      internal: {
+        type: typename,
+        content: JSON.stringify(node),
+        contentDigest: createContentDigest(node),
+      },
+      ...fields.reduce((obj, field) => {
+        obj[field] = node.frontmatter[field]
+        return obj
+      }, {}),
+      semester,
+      slug,
+    })
   }
 }
-// Possible code golf:
-// const contentTypes = {
-//   Meeting: {
-//     requiredFields: ["date", "week_number", "title", "credit", "image"],
-//     fields: ["date", "week_number", "title", "credit", "featured", "location", "image", "slides", "recording", "assets", "tags", "semester", "slug"]
-//   },
-//   Event: {
-//     requiredFields: ["title", "series", "description", "time_start", "image"],
-//     fields: ["title", "series", "description", "time_start", "time_close", "image", "links", "rating_weight", "stats", "slug"]
-//   },
-//   // Add more content types here
-// }
-
-// exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
-//   const { createNode } = actions
-//   if (node.internal.type !== "MarkdownRemark") return
-
-//   const fileNode = getNode(node.parent)
-//   const sourceInstanceName = fileNode.sourceInstanceName
-//   const contentType = Object.keys(contentTypes).find(type => type.toLowerCase() === sourceInstanceName)
-//   if (!contentType) return
-
-//   const { requiredFields, fields } = contentTypes[contentType]
-//   requiredFields.forEach(field => {
-//     if (node.frontmatter[field] === undefined) {
-//       throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
-//     }
-//   })
-
-//   if (node.frontmatter.image.path === undefined || node.frontmatter.image.alt === undefined) {
-//     throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
-//   }
-
-//   let slug, semester
-//   if (contentType === "Meeting") {
-//     semester = calculateSemester(new Date(node.frontmatter.date))
-//     const filePathSemester = fileNode.relativePath.split("/")[0]
-//     if (semester != filePathSemester) {
-//       console.warn(`Semester "${semester}" does not match directory "${filePathSemester}}" for ${fileNode.absolutePath}`)
-//     }
-//     slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`
-//   } else if (contentType === "Event") {
-//     slug = `/events/${path.parse(fileNode.relativePath).dir}/`
-//   }
-//   // Add more content types here
-
-//   createNode({
-//     id: createNodeId(`${contentType}-${node.id}`),
-//     parent: node.id,
-//     children: [],
-//     internal: {
-//       type: contentType,
-//       content: JSON.stringify(node),
-//       contentDigest: createContentDigest(node),
-//     },
-//     ...fields.reduce((obj, field) => {
-//       obj[field] = node.frontmatter[field]
-//       return obj
-//     }, {}),
-//     semester,
-//     slug,
-//   })
-// }
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
@@ -342,7 +170,6 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type PageMarkdown implements Node @dontInfer {
-      contentFilePath: String!
       title: String!
       no_background: Boolean
       slug: String!
@@ -425,7 +252,13 @@ exports.createPages = async ({ graphql, actions }) => {
         pages_md: nodes {
           id
           slug
-          contentFilePath
+          parent {
+            ... on Mdx {
+              internal {
+                contentFilePath
+              }
+            }
+          }
         }
       }
     }
@@ -477,7 +310,7 @@ exports.createPages = async ({ graphql, actions }) => {
     pages_md.forEach((page_md) => {
       createPage({
         path: page_md.slug,
-        component: `${template_page_md}?__contentFilePath=${page_md.contentFilePath}`,
+        component: `${template_page_md}?__contentFilePath=${page_md.parent.internal.contentFilePath}`,
         context: {
           id: page_md.id,
         },
