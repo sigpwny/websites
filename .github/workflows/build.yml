@@ -7,6 +7,12 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          # Uses node version defined in engines
+          node-version-file: 'package.json'
+
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
