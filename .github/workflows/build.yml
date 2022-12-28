@@ -58,8 +58,9 @@ jobs:
       - if: github.event_name == 'push'
         name: Commit build artifacts to CI branch
         run: |
+          git show-ref
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
           git add --force "${{ env.CI_BUILD_DIR }}"
           git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-          git push --force origin ${{ env.CI_BRANCH }}
+          git push --force origin HEAD:${{ env.CI_BRANCH }}
