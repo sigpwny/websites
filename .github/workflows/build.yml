@@ -16,7 +16,7 @@ jobs:
       CI_COMMIT_AUTHOR_NAME: ${{ github.event.repository.name }} CI
       CI_COMMIT_AUTHOR_EMAIL: sigpwny-uiuc@users.noreply.github.com
     steps:
-      - name: Check out repository code
+      - name: Check out main repository code
         uses: actions/checkout@v3
 
       - name: Setup node
@@ -56,9 +56,8 @@ jobs:
       - if: github.event_name == 'push'
         name: Commit build artifacts to CI branch
         run: |
-          git checkout -b "${{ env.CI_BRANCH }}"
-          git add "${{ env.CI_BUILD_DIR }}"
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
+          git add "${{ env.CI_BUILD_DIR }}"
           git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-          git push
+          git push --force origin ${{ env.CI_BRANCH }}
