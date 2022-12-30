@@ -7,7 +7,7 @@ const contentTypes = {
   // MarkdownRemark
   "meetings": {
     typename: "Meeting",
-    requiredFields: ["date", "week_number", "title", "credit", "image"],
+    requiredFields: ["date", "week_number", "title", "credit"],
     fields: ["date", "week_number", "title", "credit", "featured", "location", "image", "slides", "recording", "assets", "tags", "semester", "slug"]
   },
   "events": {
@@ -146,7 +146,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       credit: [String!]!
       featured: Boolean
       location: String
-      image: ImageAlt!
+      image: ImageAlt
       slides: File @fileByRelativePath
       recording: String
       assets: [File] @fileByRelativePath
