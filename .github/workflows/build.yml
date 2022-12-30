@@ -1,11 +1,25 @@
 name: Build site
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CI_BRANCH: build
+      CI_BUILD_DIR: public
+      CI_COMMIT_MESSAGE: CI build artifacts for commit ${{ github.sha }}
+      CI_COMMIT_AUTHOR_NAME: ${{ github.event.repository.name }} CI
+      CI_COMMIT_AUTHOR_EMAIL: sigpwny-uiuc@users.noreply.github.com
     steps:
-      - name: Check out repository code
+      - name: Check out main repository code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -40,3 +54,13 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - if: github.event_name == 'push'
+        name: Commit build artifacts to CI branch
+        run: |
+          git show-ref
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
+          git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
+          git add --force "${{ env.CI_BUILD_DIR }}"
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push --force origin HEAD:${{ env.CI_BRANCH }}
