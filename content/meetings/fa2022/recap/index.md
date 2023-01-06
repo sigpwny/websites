@@ -1,13 +1,9 @@
 ---
-# Required fields
-date: 2022-12-15
+date: "2022-12-15"
 week_number: 16
 title: "Semester Recap"
 credit: ["SIGPwny"]
-
-# Optional fields
 featured: true
-location:
 image:
   path: "./image.png"
   alt: "Operational Security beginning slide"
