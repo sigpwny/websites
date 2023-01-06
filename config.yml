@@ -14,7 +14,7 @@ collections:
     label: "Meetings"
     label_singular: "Meeting"
     folder: "content/meetings"
-    identifier_field: "date"
+    identifier_field: "title"
     create: true
     media_folder: ""
     public_folder: ""
