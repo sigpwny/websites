@@ -14,8 +14,7 @@ collections:
     label: "Meetings"
     label_singular: "Meeting"
     folder: "content/meetings"
-    # path: "{{date}}/index"
-    identifier_field: "{{date}} - Week {{week_number}}: {{title}}"
+    identifier_field: "date"
     create: true
     media_folder: ""
     public_folder: ""
@@ -35,6 +34,25 @@ collections:
       - {label: "Additional assets", name: "assets", widget: "list", field: {label: File, name: file, widget: "file", choose_url: false}, hint: "Zip or compress files together when possible.", required: false}
       - {label: "Tags", name: "tags", widget: "list", hint: 'Separate tags with commas. Add a main topic tag: "web", "pwn", "rev", "crypto", "forensics", "jail", "osint", "misc". Plus, add tags for specific topics, such as "xss", "rsa", or "lockpicking". Try to re-use tags from past meetings.', max: 5, required: false}
       - {label: "Body", name: "body", widget: "markdown", mode: "raw", required: false}
+    sortable_fields: ["date", "title"]
     # adding a meta object with a path property allows editing the path of entries
     # moving an existing entry will move the entire sub tree of the entry to the new location
     meta: { path: { widget: string, label: "Path", index_file: "index", hint: 'Examples: "sp2023/2023-01-01" or "fa2023/2023-08-01". All characters must be lowercase.', pattern: ['^(fa|sp)[0-9]{4}/[0-9]{4}-[0-9]{2}-[0-9]{2}$', "Refer to example path"] } }
+  - name: "admins"
+    label: "Admins"
+    label_singular: "Admin"
+    folder: "content/profiles/admins"
+    identifier_field: "name"
+    create: true
+    media_folder: ""
+    public_folder: ""
+    nested:
+      depth: 100
+    fields:
+      - {label: "Name", name: "name", hint: "Use real name if possible.", widget: "string"}
+      - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"]}
+      - {label: "Profile Image", name: "image", widget: "object", fields: [{label: "Image Upload", name: "path", widget: "image", hint: "Profile image should be 1:1 aspect ratio with a minimum width of 128px.", choose_url: false}, {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes."}]}
+      - {label: "Role", name: "role", hint: 'Examples: "Admin", "Helper", "President"', widget: "string"}
+      - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number"}
+      - {label: "Handle", name: "handle", hint: "Do not prepend with `@`.", required: false}
+      - {label: "Links", name: "links", hint: "All links should be in link format, not just usernames.", widget: "object", fields: [{label: "Email", name: "email", widget: "string", required: false}, {label: "Website", name: "website", widget: "string", required: false}, {label: "GitHub", name: "github", widget: "string", required: false}, {label: "Twitter", name: "twitter", widget: "string", required: false}, {label: "Mastodon", name: "mastodon", widget: "string", required: false}, {label: "LinkedIn", name: "linkedin", widget: "string", required: false}, {label: "Discord", name: "discord", widget: "string", required: false}], required: false}
