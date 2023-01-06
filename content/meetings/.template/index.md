@@ -14,17 +14,17 @@ image:
 slides: "./Template_Meeting.pdf"
 recording: "https://youtube.com/@sigpwny"
 assets: [ # Supplementary files
-	# "./file1.txt",
-	# "./file2.zip"
+  # "./file1.txt",
+  # "./file2.zip"
 ]
 # Add a main topic tag: "web", "pwn", "rev", "crypto", "forensics", "jail", "osint", "misc"
 # Plus, add tags for specific topics, such as "xss", "rsa", or "lockpicking"
 # Try to re-use tags from past meetings and limit the total number of tags to 5
 # All tags will be lowercased
 tags: [
-	"misc",
-	"template",
-	"DEMO" # will render as "demo"
+  "misc",
+  "template",
+  "DEMO" # will render as "demo"
 ]
 ---
 

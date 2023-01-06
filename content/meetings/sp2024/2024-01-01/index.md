@@ -3,7 +3,7 @@
 date: "2024-01-01"
 week_number: 99
 featured: true
-title:  "Leave This Meeting for Testing Purposes!! This is an Extremely Long Title That Will Get Cut Off Eventually, At Least I Think"
+title: "Leave This Meeting for Testing Purposes!! This is an Extremely Long Title That Will Get Cut Off Eventually, At Least I Think"
 credit: ["Minh"]
 
 # Optional fields
@@ -11,8 +11,8 @@ image:
   path: "./image.png"
   alt: "Sample image"
 tags: [
-	"misc",
-	"testing"
+  "misc",
+  "testing"
 ]
 ---
 
