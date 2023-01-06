@@ -7,6 +7,7 @@ credit: ["SIGPwny"]
 
 # Optional fields
 featured: true
+location:
 image:
   path: "./image.png"
   alt: "Operational Security beginning slide"
