@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, useStaticQuery, graphql, navigate } from "gatsby"
 
-import { weekNumber } from "../utils/util"
+import { weekNumber, convertDate } from "../utils/util"
 
 type Meeting = Queries.MeetingCardsQuery["allMeeting"]["meetings"][0]
 
@@ -10,12 +10,13 @@ const MeetingCards = () => {
     query MeetingCards {
       allMeeting(
         filter: {featured: {eq: true}}
-        sort: {date: DESC}
+        sort: {time_start: DESC}
       ) {
         meetings: nodes {
-          date(formatString: "YYYY-MM-DD")
-          week_number
           title
+          time_start
+          time_close
+          week_number
           image {
             path {
               childImageSharp {
@@ -26,6 +27,11 @@ const MeetingCards = () => {
           }
           semester
           slug
+        }
+      }
+      site {
+        siteMetadata {
+          timezone
         }
       }
     }
@@ -50,7 +56,7 @@ const MeetingCards = () => {
             <div className="p-2">
               <div className="card-line-clamp">
                 <p className="font-mono font-size-small m-0">
-                  {meeting.semester} Week {weekNumber(meeting.week_number)} &bull; {meeting.date}
+                  {meeting.semester} Week {weekNumber(meeting.week_number)} &bull; {convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone)}
                 </p>
                 <p className="card-text">{meeting.title}</p>
               </div>

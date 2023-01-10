@@ -21,6 +21,7 @@ const config: GatsbyConfig = {
       { name: "GitHub", link: "https://github.com/sigpwny" },
       { name: "Twitter", link: "https://twitter.com/sigpwny" },
     ],
+    timezone: "America/Chicago",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin

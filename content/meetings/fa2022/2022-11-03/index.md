@@ -8,7 +8,6 @@ credit:
   - Nora
 featured: true
 slides: Week_10_Opsec.pdf
-date: 2022-11-03
 location: Siebel CS 1404 + Zoom
 image:
   path: image.png
