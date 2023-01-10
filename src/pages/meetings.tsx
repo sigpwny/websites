@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
-import { weekNumber } from "../utils/util"
+import { weekNumber, convertDate } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0]
@@ -44,7 +44,7 @@ const MeetingsPage = ({ data }: Props) => {
                     return (
                       <div className="flex flex-row gap-x-4">
                         <div className="flex flex-col min-w-max">
-                          <span className="font-mono">{meeting.date}</span>
+                          <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone)}</span>
                         </div>
                         <div className="flex flex-col w-3/5">
                           <Link to={`${meeting.slug}`} className="truncate">
@@ -76,11 +76,11 @@ export default MeetingsPage
 
 export const query = graphql`
   query MeetingsPage {
-    allMeeting(sort: {date: DESC}) {
+    allMeeting(sort: {time_start: DESC}) {
       meetings: nodes {
-        date(formatString: "YYYY-MM-DD")
-        week_number
         title
+        time_start
+        week_number
         credit
         image {
           path {
@@ -96,6 +96,11 @@ export const query = graphql`
         recording
         semester
         slug
+      }
+    }
+    site {
+      siteMetadata {
+        timezone
       }
     }
   }

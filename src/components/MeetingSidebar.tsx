@@ -8,7 +8,7 @@ type Meeting = Queries.MeetingSidebarQuery["allMeeting"]["meetings"][0]
 const MeetingSidebar = () => {
   const data = useStaticQuery(graphql`
     query MeetingSidebar {
-      allMeeting(sort: {date: DESC}) {
+      allMeeting(sort: {time_start: DESC}) {
         meetings: nodes {
           week_number
           title

@@ -22,7 +22,7 @@ const IndexPage = ({ data }: Props) => (
       <div className="flex flex-col">
         <div className="lg:order-2 pb-6 lg:w-2/3 lg:p-0 xl:w-1/2 mx-auto text-center">
           <h1 className="lg:text-6xl">Hacking @ UIUC</h1>
-          <p>{data.site?.siteMetadata?.description}</p>
+          <p>{data.site?.siteMetadata.description}</p>
           <Link className="btn-primary" to="/about/">Learn more</Link>
         </div>
         <div className="lg:order-1 gap-8 pr-20 sm:columns-2 sm:p-0 md:pr-20 lg:columns-3 lg:gap-16 lg:p-0 lg:pb-2 xl:gap-24 2xl:gap-28 2xl:px-28">

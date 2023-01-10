@@ -26,8 +26,8 @@ const Nav = () => {
       }
     }
   `)
-  const navLinksResult = data.site?.siteMetadata?.navLinks
-  const navCallToActionLinksResult = data.site?.siteMetadata?.navCallToActionLinks
+  const navLinksResult = data.site?.siteMetadata.navLinks
+  const navCallToActionLinksResult = data.site?.siteMetadata.navCallToActionLinks
   // create non-nullable array of nav call to action links
   const navLinks: NavLink[] = []
   navLinksResult?.forEach((item) => {

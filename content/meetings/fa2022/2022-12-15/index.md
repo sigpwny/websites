@@ -1,12 +1,11 @@
 ---
 title: Semester Recap
-time_close: ""
-featured: true
-date: 2022-12-15
 time_start: 2022-12-16T00:00:13.485Z
+time_close: ""
 week_number: 16
 credit:
   - SIGPwny
+featured: true
 image:
   path: ./image.png
   alt: Operational Security beginning slide

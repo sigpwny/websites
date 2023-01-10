@@ -7,8 +7,8 @@ const contentTypes = {
   // MarkdownRemark
   "meetings": {
     typename: "Meeting",
-    requiredFields: ["date", "week_number", "title", "credit"],
-    fields: ["date", "week_number", "title", "credit", "featured", "location", "image", "slides", "recording", "assets", "tags", "semester", "slug"]
+    requiredFields: ["title", "time_start", "week_number", "credit"],
+    fields: ["title", "time_start", "time_close", "week_number", "credit", "featured", "location", "image", "slides", "recording", "assets", "tags", "semester", "slug"]
   },
   "events": {
     typename: "Event",
@@ -70,10 +70,10 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
     let slug, semester
     if (node.internal.type === "MarkdownRemark") {
       if (typename === "Meeting") {
-        semester = calculateSemester(new Date(node.frontmatter.date))
+        semester = calculateSemester(node.frontmatter.time_start)
         const filePathSemester = fileNode.relativePath.split("/")[0]
-        if (semester != filePathSemester) {
-          console.warn(`Semester "${semester}" does not match directory "${filePathSemester}}" for ${fileNode.absolutePath}`)
+        if (semester.toLowerCase() != filePathSemester.toLowerCase()) {
+          console.warn(`Semester "${semester}" does not match directory "${filePathSemester}" for ${fileNode.absolutePath}`)
         }
         slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`
       } else if (typename === "Event") {
@@ -117,6 +117,26 @@ exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
 
   createTypes(`
+    type Site implements Node {
+      siteMetadata: SiteMetadata!
+    }
+
+    type SiteMetadata {
+      title: String!
+      siteUrl: String!
+      description: String!
+      image: String!
+      navLinks: [NavLink]
+      navCallToActionLinks: [NavLink]
+      socialLinks: [NavLink]
+      timezone: String!
+    }
+    
+    type NavLink {
+      name: String!
+      link: String!
+    }
+
     type ImageAlt @dontInfer {
       path: File! @fileByRelativePath
       alt: String!
@@ -140,9 +160,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type Meeting implements Node @dontInfer {
-      date: Date! @dateformat
-      week_number: Int!
       title: String!
+      time_start: Date! @dateformat
+      time_close: Date @dateformat
+      week_number: Int!
       credit: [String!]!
       featured: Boolean
       location: String
@@ -221,9 +242,11 @@ exports.createResolvers = ({ createResolvers }) => {
             title: source.siteMetadata.title || "SIGPwny",
             siteUrl: source.siteMetadata.siteUrl || "https://sigpwny.com",
             description: source.siteMetadata.description || "",
+            image: source.siteMetadata.image || "",
             navLinks: source.siteMetadata.navLinks || [],
             navCallToActionLinks: source.siteMetadata.navCallToActionLinks || [],
             socialLinks: source.siteMetadata.socialLinks || [],
+            timezone: source.siteMetadata.timezone || "America/Chicago",
           }
         },
       },
@@ -236,7 +259,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(`
     query GatsbyNode {
-      allMeeting(sort: {date: ASC}) {
+      allMeeting(sort: {time_start: ASC}) {
         meetings: nodes {
           id
           slug
