@@ -1,19 +1,19 @@
 ---
-# Required fields
-date: "2024-01-01"
-week_number: 99
+time_close: 2024-01-01T22:05:35.331Z
 featured: true
-title: "Leave This Meeting for Testing Purposes!! This is an Extremely Long Title That Will Get Cut Off Eventually, At Least I Think"
-credit: ["Minh"]
-
-# Optional fields
+date: 2024-01-01
+title: Leave This Meeting for Testing Purposes!! This is an Extremely Long Title
+  That Will Get Cut Off Eventually, At Least I Think
+time_start: 2024-01-01T22:05:35.327Z
+week_number: 20
+credit:
+  - Minh
 image:
-  path: "./image.png"
-  alt: "Sample image"
-tags: [
-  "misc",
-  "testing"
-]
+  path: ./image.png
+  alt: Sample image
+tags:
+  - misc
+  - testing
 ---
 
 # Heading 1
