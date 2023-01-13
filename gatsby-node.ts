@@ -256,7 +256,7 @@ exports.createResolvers = ({ createResolvers }) => {
 }
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
   const result = await graphql(`
     query GatsbyNode {
       allMeeting(sort: {time_start: ASC}) {
@@ -284,6 +284,21 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allExternalJson {
+        redirects: nodes {
+          id
+          src
+          dst
+        }
+      }
+      allInternalJson {
+        redirects: nodes {
+          id
+          src
+          dst
+          code
+        }
+      }
     }
   `)
 
@@ -294,7 +309,35 @@ exports.createPages = async ({ graphql, actions }) => {
   const template_meeting = path.resolve(`./src/templates/template-meeting.tsx`)
   const template_event = path.resolve(`./src/templates/template-event.tsx`)
   const template_page_md = path.resolve(`./src/templates/template-page_md.tsx`)
-  const template_redirect = path.resolve(`./src/templates/template-redirect.tsx`)
+  const template_redirect_external = path.resolve(`./src/templates/template-redirect-external.tsx`)
+
+  // Generate external redirects
+  const redirects_external = result.data.allExternalJson.redirects
+  if (redirects_external.length > 0) {
+    redirects_external.forEach((redirect) => {
+      createPage({
+        path: redirect.src,
+        component: template_redirect_external,
+        context: {
+          id: redirect.id,
+        },
+        trailingSlash: true,
+      })
+    })
+  }
+
+  // Generate internal redirects
+  const redirects_internal = result.data.allInternalJson.redirects
+  if (redirects_internal.length > 0) {
+    redirects_internal.forEach((redirect) => {
+      // Generate server side redirects for internal routes
+      createRedirect({
+        fromPath: redirect.src,
+        toPath: redirect.dst,
+        statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
+      })
+    })
+  }
 
   const meetings = result.data.allMeeting.meetings
   if (meetings.length > 0) {
