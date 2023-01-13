@@ -1,0 +1,81 @@
+[
+  {
+    "src": "/fallctf",
+    "dst": "/events/",
+    "code": 302
+  },
+  {
+    "src": "/merch",
+    "dst": "/",
+    "code": 302
+  },
+  {
+    "src": "/rev_setup",
+    "dst": "/meetings/fa2022/2022-09-18/",
+    "code": 302
+  },
+  {
+    "src": "uiuctf",
+    "dst": "/events/",
+    "code": 302
+  },
+  {
+    "src": "/corporate",
+    "dst": "/sponsors/"
+  },
+  {
+    "src": "/fall",
+    "dst": "/events/",
+    "code": 302
+  },
+  {
+    "src": "/hackathon",
+    "dst": "/events/",
+    "code": 302
+  },
+  {
+    "src": "/meeting",
+    "dst": "/meetings/"
+  },
+  {
+    "src": "/newcomer",
+    "dst": "/join/"
+  },
+  {
+    "src": "/newcomers",
+    "dst": "/join/"
+  },
+  {
+    "src": "/presentation",
+    "dst": "/meetings/"
+  },
+  {
+    "src": "/presentation-content/*",
+    "dst": "/meetings/:splat",
+    "type": "splat"
+  },
+  {
+    "src": "/sponsor",
+    "dst": "/sponsors/"
+  },
+  {
+    "src": "/tutorial",
+    "dst": "/join/"
+  },
+  {
+    "src": "/writeups/uiuctf2020",
+    "dst": "/events/uiuctf/2020/"
+  },
+  {
+    "src": "/writeups/uiuctf2021",
+    "dst": "/events/uiuctf/2021/"
+  },
+  {
+    "src": "/writeups/uiuctf2021_all",
+    "dst": "/events/uiuctf/2021/"
+  },
+  {
+    "src": "/year",
+    "dst": "/sponsors/"
+  }
+]
