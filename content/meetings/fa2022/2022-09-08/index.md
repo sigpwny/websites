@@ -2,7 +2,7 @@
 title: Web Hacking I
 time_start: 2022-09-08T23:00:00.000Z
 time_close: ""
-week_number: 15
+week_number: 2
 credit:
   - Emma
   - Michael
