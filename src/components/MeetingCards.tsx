@@ -1,7 +1,9 @@
 import React from "react"
 import { Link, useStaticQuery, graphql, navigate } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 
 import { weekNumber, convertDate } from "../utils/util"
+
 
 type Meeting = Queries.MeetingCardsQuery["allMeeting"]["meetings"][0]
 
@@ -50,8 +52,12 @@ const MeetingCards = () => {
         <Link to={meeting.slug} className="use-color-text">
           <div className="card h-100">
             <div className="aspect-ratio-16-9">
-              <div className="content" style={{backgroundImage: `url('` + meeting.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src + `')`}}>
-              </div>
+              {meeting.image && meeting.image.path ? (
+                <div className="content" style={{backgroundImage: `url('` + meeting.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src + `')`}}>
+                </div>
+              ) : (
+                <StaticImage className="content" src="../images/placeholder.png" alt="Placeholder image" />
+              )}
             </div>
             <div className="p-2">
               <div className="card-line-clamp">
