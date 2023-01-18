@@ -2,9 +2,13 @@
 
 The new SIGPwny website, built with Gatsby.
 
+## Content Types
+
+This site defines multiple content types that allow for customization, flexibility, and ease of use. For more information, see the [content README](./content/README.md).
+
 ## Installing and Building
 
-Download all node packages:
+Clean install all node packages:
 ```
 npm ci
 ```
@@ -14,13 +18,9 @@ Install `gatsby-cli`:
 npm install -g gatsby-cli
 ```
 
-Build for production:
+Build production and serve:
 ```
 gatsby build
-```
-
-Serve production:
-```
 gatsby serve
 ```
 
@@ -28,25 +28,6 @@ Start a development server:
 ```
 gatsby develop
 ```
-
-## Content Types
-
-There are 7 content types defined. Italicized types are not explicitly defined.
-
-- Meeting
-- Event
-- Markdown Page
-- *Profile*
-  - Admin
-  - Alum
-  - Helper
-- *Redirect*
-  - External
-  - Internal
-
-The majority of these content types are defined in the frontmatter of Markdown files, with the exception of Redirects, which are defined with JSON files. These content types are stored in the `content` directory, with the exception of Markdown Pages, which are stored in `src/pages_md`.
-
-For more information, see the [content README](./content/README.md).
 
 ## Updating Dependencies
 

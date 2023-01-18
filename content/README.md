@@ -1,7 +1,23 @@
 # Content Types
 
+There are 8 content types defined. Italicized types are not explicitly defined.
+
+- Meeting
+- Event
+- Publication
+- Markdown Page
+- *Profile*
+  - Admin
+  - Alum
+  - Helper
+- *Redirect*
+  - External
+  - Internal
+
+The majority of these content types are defined in the frontmatter of Markdown files, with the exception of Redirects, which are defined with JSON files. These content types are stored in the `content` directory, with the exception of Markdown Pages, which are stored in `src/pages_md`.
+
 > **Note**
-> Current SIGPwny helpers can manage content through [Netlify CMS](https://cms.sigpwny.com/). Access can be managed by SIGPwny admins on [Netlify]](https://app.netlify.com/sites/cms-sigpwny-com/identity).
+> Current SIGPwny helpers can manage content through [Netlify CMS](https://cms.sigpwny.com/). Access to the CMS can be managed by SIGPwny admins on [Netlify](https://app.netlify.com/sites/cms-sigpwny-com/identity).
 
 ## Meeting
 
@@ -45,6 +61,14 @@ Put a few sentences here describing your topic! This can be treated as an abstra
 ## Event
 
 Stored in `content/events`.
+
+```markdown
+WIP
+```
+
+## Publication
+
+Stored in `content/publications`.
 
 ```markdown
 WIP
