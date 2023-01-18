@@ -2,11 +2,28 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import MeetingSidebar from "../components/MeetingSidebar"
+import Seo from "../components/Seo"
 import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 interface Props {
   data: Queries.MeetingTemplateQuery
+}
+
+export const Head = ({ data }: Props) => {
+  const { curr } = data
+  if (!curr) {
+    throw new Error(`invalid argument: "curr" meeting is null`)
+  }
+  return (
+    <Seo
+      title={curr.title}
+      description={"Meeting: " + curr.semester + " Week " + weekNumber(curr.week_number) + " - " + curr.title}
+      image={curr.image && curr.image.path ? (
+        curr.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
+      ) : undefined}
+    />
+  )
 }
 
 const MeetingTemplate = ({ data }: Props) => {
@@ -98,6 +115,18 @@ export const query = graphql`
       week_number
       credit
       recording
+      image {
+        path {
+          childImageSharp {
+            gatsbyImageData(
+              width: 500,
+              quality: 100,
+              placeholder: NONE,
+            )
+          }
+        }
+        alt
+      }
       semester
       slides {
         base

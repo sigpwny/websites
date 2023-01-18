@@ -2,8 +2,26 @@ import React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 
+import Seo from "../components/Seo"
+
 interface Props {
   data: Queries.EventTemplateQuery
+}
+
+export const Head = ({ data }: Props) => {
+  const { event_ } = data
+  if (!event_) {
+    throw new Error(`invalid argument: "event_" is null`)
+  }
+  return (
+    <Seo
+      title={event_.title}
+      description={event_.description}
+      image={event_.image && event_.image.path ? (
+        event_.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
+      ) : undefined}
+    />
+  )
 }
 
 const EventTemplate = ({ data }: Props) => {
