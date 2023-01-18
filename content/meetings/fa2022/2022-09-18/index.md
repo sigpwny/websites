@@ -7,7 +7,7 @@ credit:
   - Minh
   - Pete
 featured: true
-slides: week_03_rev_pwn_setup.pptx
+slides: week_03_rev_pwn_setup.pdf
 recording: https://youtu.be/n8W7ROpvx58
 tags:
   - setup
