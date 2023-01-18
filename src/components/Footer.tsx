@@ -1,20 +1,18 @@
 import React from "react"
-import { DiscordSvg, GithubSvg, PwnySvg, YouTubeSvg, TwitterSvg } from "./Icons"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-// SiteSiteMetadataSocialLinks
+import { DiscordSvg, GitHubSvg, TwitterSvg, YouTubeSvg, PwnyBanner } from "./Icons"
 
 const Footer = () => {
   const icons : Map<string, JSX.Element> = new Map([
+    ["Discord", <DiscordSvg />],
+    ["GitHub", <GitHubSvg />],
     ["Twitter", <TwitterSvg />],
-    ["Youtube", <YouTubeSvg />],
-    ["GitHub", <GithubSvg />],
-    ["Discord", <DiscordSvg />]
+    ["YouTube", <YouTubeSvg />]
   ])
 
-  // Stopping here as I have some concerns with this design pattern :/
-  const data : Queries.SiteSiteMetadataSocialLinks[] = useStaticQuery(graphql`
-    query Nav {
+  const data : Queries.FooterQuery = useStaticQuery(graphql`
+    query Footer {
       site {
         siteMetadata {
           navLinks {
@@ -29,33 +27,56 @@ const Footer = () => {
       }
     }
   `)
-
+  
   return (
-  <footer>
-    <div className="container flex flex-col-reverse md:flex-row">
-      <div className="flex flex-col">
-        <div>
-          <PwnySvg height="10em" /> 
+    <footer>
+      <div className="container my-8">
+        <hr />
+        <div className="flex flex-col md:flex-row mt-8">
+          <div className="flex flex-row basis-1/2 max-w-md mb-8">
+            <div className="flex flex-col basis-1/2">
+              <p className="font-bold m-0">Sitemap</p>
+              {data.site?.siteMetadata?.navLinks?.map((item) => {
+                if (item && item.name && item.link) {
+                  return (
+                    <p className="inline align-middle m-0">
+                      <Link to={item.link} key={item.name}>
+                        {item.link === "/" ? "Home" : item.name}
+                      </Link>
+                    </p>
+                  )
+                }
+              })}
+            </div>
+            <div className="flex flex-col basis-1/2">
+              <p className="font-bold m-0">Connect</p>
+              {data.site?.siteMetadata?.socialLinks?.map((item) => {
+                if (item && item.name && item.link) {
+                  return (
+                    <span className="m-0">
+                      <a href={item.link} key={item.name} className="w-full">
+                        {icons.has(item.name) ? icons.get(item.name) : null}
+                        <p className="inline align-middle m-0 ml-2">
+                          {item.name}
+                        </p>
+                      </a>
+                    </span>
+                  )
+                }
+              })}
+            </div>
+          </div>
+          <div className="flex flex-col basis-1/2 justify-center md:order-first">
+            <span className="w-4/5 mb-4">
+              <PwnyBanner />
+            </span>
+          </div>
         </div>
-        <div>
-          <p className="text-xs">
-            Copyright (c) SIGPwny. ACM@UIUC is a 501(c)(3) non-profit organization.
-          </p>
-        </div>
+        <p>
+          &copy; {new Date().getFullYear()} SIGPwny. ACM@UIUC is a 501(c)(3) non-profit organization.
+        </p>
       </div>
-      <div className="flex flex-col md:flex-row">
-        <div>
-          <h1>Sitemap</h1>
-          <Link to={""} className="truncate" activeClassName="font-bold">
-                
-          </Link>
-        </div>
-        <div>
-          <h1>Connect</h1>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
   )
 }
 
