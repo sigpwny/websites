@@ -3,6 +3,7 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 import MeetingCards from "../components/MeetingCards"
+import Seo from "../components/Seo"
 
 interface Props {
   data: Queries.IndexPageQuery
@@ -10,9 +11,9 @@ interface Props {
 
 export function Head() {
   return (
-    <>
-      <title>Home</title>
-    </>
+    <Seo
+      title="Home"
+    />
   )
 }
 

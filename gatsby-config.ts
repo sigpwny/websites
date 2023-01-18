@@ -5,7 +5,7 @@ const config: GatsbyConfig = {
     title: `SIGPwny`,
     siteUrl: `https://beta.sigpwny.com`, // no trailing slash
     description: `SIGPwny is a student-run organization at the University of Illinois at Urbana-Champaign focused on information security and privacy.`,
-    image: `https://sigpwny.com/pwny8-dark-512x512.png`,
+    image: `https://beta.sigpwny.com/pwny8-dark-512x512.png`,
     navLinks: [
       { name: "SIGPwny", link: "/" },
       { name: "About", link: "/about/" },

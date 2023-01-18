@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
+import Seo from "../components/Seo"
 import { weekNumber, convertDate } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
@@ -13,9 +14,10 @@ interface Props {
 
 export function Head() {
   return (
-    <>
-      <title>Meetings</title>
-    </>
+    <Seo
+      title="Meetings"
+      description="Index page of all SIGPwny meetings"
+    />
   )
 }
 

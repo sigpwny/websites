@@ -23,7 +23,7 @@ const Seo = (props: Props) => {
     }
   `)
   const site_name = query.site.siteMetadata.title
-  const title = props.title ? props.title + " | " + site_name : site_name
+  const title = props.title ? props.title : site_name
   const description = props.description || query.site.siteMetadata.description
   const twitter_card_type = props.image ? "summary_large_image" : "summary"
   const image = props.image ? query.site.siteMetadata.siteUrl + props.image : query.site.siteMetadata.image

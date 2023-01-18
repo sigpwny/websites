@@ -18,7 +18,9 @@ export const Head = ({ data }: Props) => {
   return (
     <Seo
       title={curr.title}
-      description={"Meeting: " + curr.semester + " Week " + weekNumber(curr.week_number) + " - " + curr.title}
+      description={curr.semester + " Week " + weekNumber(curr.week_number) + " • " + curr.title + 
+        " (Meeting on " + convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone) + ")"
+      }
       image={curr.image && curr.image.path ? (
         curr.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
       ) : undefined}

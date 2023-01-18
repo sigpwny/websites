@@ -2,15 +2,17 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import { StaticImage, IGatsbyImageData } from "gatsby-plugin-image"
 
+import Seo from "../components/Seo"
 import AdminProfiles from "../components/Profiles/Admins"
 import AlumProfiles from "../components/Profiles/Alumni"
 import HelperProfiles from "../components/Profiles/Helpers"
 
 export function Head() {
   return (
-    <>
-      <title>About</title>
-    </>
+    <Seo
+      title="About"
+      description="Learn about who SIGPwny is and our mission"
+    />
   )
 }
 
