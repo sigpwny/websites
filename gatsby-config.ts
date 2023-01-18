@@ -17,9 +17,10 @@ const config: GatsbyConfig = {
       { name: "Join", link: "/join/" },
     ],
     socialLinks: [
-      { name: "Discord", link: "https://discord.gg/8qZ3Y4J" },
+      { name: "Discord", link: "https://discord.gg/cWcZ6a9" },
       { name: "GitHub", link: "https://github.com/sigpwny" },
       { name: "Twitter", link: "https://twitter.com/sigpwny" },
+      { name: "YouTube", link: "https://www.youtube.com/@sigpwny" },
     ],
     timezone: "America/Chicago",
   },
