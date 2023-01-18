@@ -7,7 +7,7 @@ credit:
   - Emma
   - Michael
 featured: true
-slides: week_02_web_hacking_i.pptx
+slides: week_02_web_hacking_i.pdf
 recording: https://youtu.be/FI-GDQIxbcM
 tags:
   - web
