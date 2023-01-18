@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import MeetingSidebar from "../components/MeetingSidebar"
 import Seo from "../components/Seo"
-import { weekNumber, convertDate, getYouTubeEmbedUrl, getYouTubeVideoId } from "../utils/util"
+import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 interface Props {
@@ -25,7 +25,7 @@ export const Head = ({ data }: Props) => {
         curr.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
       ) : undefined}
       video={curr.recording ? (
-        "https://www.youtube.com/v/" + getYouTubeVideoId(curr.recording)
+        getYouTubeEmbedUrl(curr.recording)
       ) : undefined}
       type="article"
     />

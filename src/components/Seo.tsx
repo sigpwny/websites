@@ -46,6 +46,9 @@ const Seo = (props: Props) => {
       <meta property="og:type" content={type} />
       <meta property="twitter:card" content={twitter_card_type} />
       <meta property="twitter:image" content={image} />
+      {props.video ? (
+        <meta property="twitter:player" content={props.video} />
+      ) : null}
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta name="robots" content={robots} />
