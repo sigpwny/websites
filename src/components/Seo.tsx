@@ -5,6 +5,8 @@ interface Props {
   title?: string
   description?: string
   image?: string
+  video?: string
+  type?: string
   color?: string
   disable_robots?: boolean
 }
@@ -27,6 +29,7 @@ const Seo = (props: Props) => {
   const description = props.description || query.site.siteMetadata.description
   const twitter_card_type = props.image ? "summary_large_image" : "summary"
   const image = props.image ? query.site.siteMetadata.siteUrl + props.image : query.site.siteMetadata.image
+  const type = props.type || "website"
   const color = props.color || "#33cc55"
   const robots = props.disable_robots ? "noindex, nofollow" : "index, follow"
   return (
@@ -37,7 +40,10 @@ const Seo = (props: Props) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-      <meta property="og:type" content="website" />
+      {props.video ? (
+        <meta property="og:video" content={props.video} />
+      ) : null}
+      <meta property="og:type" content={type} />
       <meta property="twitter:card" content={twitter_card_type} />
       <meta property="twitter:image" content={image} />
       <meta property="twitter:title" content={title} />

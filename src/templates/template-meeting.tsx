@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import MeetingSidebar from "../components/MeetingSidebar"
 import Seo from "../components/Seo"
-import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util"
+import { weekNumber, convertDate, getYouTubeEmbedUrl, getYouTubeVideoId } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 interface Props {
@@ -18,12 +18,16 @@ export const Head = ({ data }: Props) => {
   return (
     <Seo
       title={curr.title}
-      description={curr.semester + " Week " + weekNumber(curr.week_number) + " • " + curr.title + 
-        " (Meeting on " + convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone) + ")"
+      description={curr.semester + " Week " + weekNumber(curr.week_number) +
+        " • " + convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)
       }
       image={curr.image && curr.image.path ? (
         curr.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
       ) : undefined}
+      video={curr.recording ? (
+        "https://www.youtube.com/v/" + getYouTubeVideoId(curr.recording)
+      ) : undefined}
+      type="article"
     />
   )
 }

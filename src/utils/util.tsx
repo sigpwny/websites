@@ -47,3 +47,13 @@ export function getYouTubeEmbedUrl(url: string): string {
   }
   return ""
 }
+
+export function getYouTubeVideoId(url: string): string {
+  const regex_video = /^.*(youtu.be\/|youtube(-nocookie)?.com\/(v\/|.*u\/\w\/|embed\/|.*v=))([\w-]{11}).*/
+  const match_video = url.match(regex_video)
+
+  if (match_video && match_video[4].length === 11) {
+    return match_video[4]
+  }
+  return ""
+}
