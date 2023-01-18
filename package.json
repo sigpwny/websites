@@ -18,11 +18,13 @@
   "dependencies": {
     "@headlessui/react": "^1.7.7",
     "@mdx-js/react": "^2.2.1",
+    "dayjs": "^1.11.7",
     "framer-motion": "^8.0.2",
     "gatsby": "^5.3.3",
     "gatsby-plugin-image": "^3.3.2",
     "gatsby-plugin-manifest": "^5.3.1",
     "gatsby-plugin-mdx": "^5.3.1",
+    "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-postcss": "^6.3.0",
     "gatsby-plugin-sharp": "^5.3.2",
     "gatsby-plugin-sitemap": "^6.3.1",

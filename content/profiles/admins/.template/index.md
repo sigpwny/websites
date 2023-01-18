@@ -1,5 +1,4 @@
 ---
-# Big profile entry with bio (reserved for admins)
 name: "First Last" # required
 bio: | # required
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 

@@ -1,0 +1,34 @@
+[
+  {
+    "src": "/auth",
+    "dst": "https://shib.sigpwny.com/signup/485104508175646751"
+  },
+  {
+    "src": "/branding",
+    "dst": "https://docs.google.com/document/d/1SioiiGVKlwm0sn56YOr_ESFkqx1HeAv7JfERbel_AoM/edit"
+  },
+  {
+    "src": "/ctf",
+    "dst": "https://ctf.sigpwny.com/"
+  },
+  {
+    "src": "/discord",
+    "dst": "https://discord.gg/cWcZ6a9"
+  },
+  {
+    "src": "/drive",
+    "dst": "https://drive.google.com/drive/u/0/folders/0B_xHmzNKe4EEb083emxTM3ItYVE"
+  },
+  {
+    "src": "/old",
+    "dst": "https://sigpwny.github.io/"
+  },
+  {
+    "src": "/older",
+    "dst": "https://sigpwny.github.io/pony-site/"
+  },
+  {
+    "src": "/oldest",
+    "dst": "https://sigpwny.github.io/pony-site/old/"
+  }
+]

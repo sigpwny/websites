@@ -22,6 +22,7 @@ const config: GatsbyConfig = {
       { name: "Twitter", link: "https://twitter.com/sigpwny" },
       { name: "YouTube", link: "https://www.youtube.com/@sigpwny" },
     ],
+    timezone: "America/Chicago",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -29,7 +30,7 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "pages",
         "path": "./src/pages/"
@@ -37,7 +38,7 @@ const config: GatsbyConfig = {
       __key: "pages"
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "pages_md",
         "path": "./src/pages_md/",
@@ -45,7 +46,7 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "meetings",
         "path": "./content/meetings/",
@@ -53,7 +54,7 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "events",
         "path": "./content/events/",
@@ -61,7 +62,7 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "admins",
         "path": "./content/profiles/admins/",
@@ -69,7 +70,7 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "alumni",
         "path": "./content/profiles/alumni/",
@@ -77,24 +78,34 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         "name": "helpers",
         "path": "./content/profiles/helpers/",
         "ignore": [`**/.*`],
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        "name": "redirects",
+        "path": "./content/redirects/",
+        "ignore": [`**/.*`],
+      },
+    },
     "gatsby-plugin-image",
     "gatsby-plugin-mdx",
+    "gatsby-plugin-netlify",
     "gatsby-plugin-postcss",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
+    "gatsby-transformer-json",
     "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        "icon": `./src/images/logo/pwny8-48x48.png`,
+        "icon": "./src/images/logo/pwny8-48x48.png",
         "icons": [
           {
             "src": "./src/images/logo/pwny8-32x32.png",

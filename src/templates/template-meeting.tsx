@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import MeetingSidebar from "../components/MeetingSidebar"
-import { weekNumber, getYouTubeEmbedUrl } from "../utils/util"
+import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 interface Props {
@@ -23,7 +23,9 @@ const MeetingTemplate = ({ data }: Props) => {
           <MeetingSidebar />
         </aside>
         <div className="panel w-100 grow">
-          <p className="font-mono m-0">{curr.semester} Week {weekNumber(curr.week_number)} &bull; {curr.date}</p>
+          <p className="font-mono m-0">
+            {curr.semester} Week {weekNumber(curr.week_number)} &bull; {convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)}
+          </p>
           <h1 className="mb-1">{curr.title}</h1>
           <p>
             Presented by:&nbsp;
@@ -90,9 +92,10 @@ export const query = graphql`
           html
         }
       }
-      date(formatString: "MMMM DD, YYYY")
-      week_number
       title
+      time_start
+      time_close
+      week_number
       credit
       recording
       semester
@@ -108,6 +111,11 @@ export const query = graphql`
     next: meeting(id: { eq: $next_id }) {
       title
       slug
+    }
+    site {
+      siteMetadata {
+        timezone
+      }
     }
   }
 `
