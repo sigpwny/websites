@@ -8,7 +8,7 @@ credit:
   - Julius
   - Danny
 featured: true
-slides: week_05_osint_i.pptx
+slides: week_05_osint_i.pdf
 recording: https://youtu.be/zPiLs8GU-v4
 tags:
   - osint
