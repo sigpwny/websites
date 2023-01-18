@@ -246,6 +246,7 @@ exports.createResolvers = ({ createResolvers }) => {
             navLinks: source.siteMetadata.navLinks || [],
             navCallToActionLinks: source.siteMetadata.navCallToActionLinks || [],
             socialLinks: source.siteMetadata.socialLinks || [],
+            twitterUsername: source.siteMetadata.twitterUsername || "@sigpwny",
             timezone: source.siteMetadata.timezone || "America/Chicago",
           }
         },

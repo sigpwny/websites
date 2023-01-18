@@ -20,6 +20,7 @@ const Seo = (props: Props) => {
           description
           image
           siteUrl
+          twitterUsername
         }
       }
     }
@@ -45,6 +46,7 @@ const Seo = (props: Props) => {
       ) : null}
       <meta property="og:type" content={type} />
       <meta property="twitter:card" content={twitter_card_type} />
+      <meta property="twitter:site" content={query.site.siteMetadata.twitterUsername} />
       <meta property="twitter:image" content={image} />
       {props.video ? (
         <meta property="twitter:player" content={props.video} />

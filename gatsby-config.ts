@@ -22,6 +22,7 @@ const config: GatsbyConfig = {
       { name: "Twitter", link: "https://twitter.com/sigpwny" },
       { name: "YouTube", link: "https://www.youtube.com/@sigpwny" },
     ],
+    twitterUsername: "@sigpwny",
     timezone: "America/Chicago",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
