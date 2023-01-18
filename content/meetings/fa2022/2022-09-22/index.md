@@ -7,7 +7,7 @@ credit:
   - Richard
   - Pete
 featured: true
-slides: week_04_reverse_engineering_i.pptx
+slides: week_04_reverse_engineering_i.pdf
 recording: https://youtu.be/vKuui7iCOB0
 tags:
   - rev
