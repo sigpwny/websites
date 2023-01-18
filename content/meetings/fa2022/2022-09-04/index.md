@@ -7,8 +7,9 @@ credit:
   - Nathan
   - Anusha
 featured: true
-slides: week_01_setup.pptx
+slides: week_01_setup.pdf
 recording: https://youtu.be/1iqKFMRkN88
 tags:
+  - misc
   - setup
 ---
