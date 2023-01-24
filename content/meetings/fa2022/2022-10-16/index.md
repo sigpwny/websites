@@ -1,6 +1,6 @@
 ---
 title: Crypto II
-time_start: 2022-10-16T05:00:00.000Z
+time_start: 2022-10-16T19:00:00.000Z
 time_close: ""
 week_number: 7
 credit:
