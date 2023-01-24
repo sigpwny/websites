@@ -1,6 +1,6 @@
 ---
 title: Assembly
-time_start: 2022-10-02T23:00:00.000Z
+time_start: 2022-10-02T19:00:00.000Z
 time_close: ""
 week_number: 5
 credit:
