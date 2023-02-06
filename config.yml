@@ -25,7 +25,7 @@ collections:
       - {label: "Title", name: "title", hint: 'Example: "PWN II"', widget: "string"}
       - {label: "Meeting Start", name: "time_start", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Ensure date matches date in path."}
       - {label: "Meeting End", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", required: false}
-      - {label: "Week Number", name: "week_number", hint: "Current week number in the semester, 0-indexed. Be careful not to scroll on the input box since it may change the value.", widget: "number", value_type: "int", min: 0, max: 20, step: 1}
+      - {label: "Week Number", name: "week_number", hint: "Current week number in the semester, 0-indexed. Be careful not to scroll on the input box since it may change the value.", widget: "number", value_type: "int", min: 0, max: 52, step: 1}
       - {label: "Credit", name: "credit", widget: "list", hint: "Separate names with commas. To add whitespace, surround the name with double quotes."}
       - {label: "Featured", name: "featured", widget: "boolean", default: true, hint: "The meeting will be shown on the home page if set to true.", required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'Example: "Siebel CS 1404 + Zoom"', required: false}
