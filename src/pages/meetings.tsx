@@ -45,15 +45,15 @@ const MeetingsPage = ({ data }: Props) => {
                   {meetingsBySemester[semester].map((meeting: Meeting) => {
                     return (
                       <div className="flex flex-row gap-x-4">
-                        <div className="flex flex-col min-w-max">
+                        <div className="hidden sm:flex sm:flex-col min-w-max ">
                           <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone)}</span>
                         </div>
-                        <div className="flex flex-col w-3/5">
+                        <div className="flex flex-col md:w-3/5 truncate">
                           <Link to={`${meeting.slug}`} className="truncate">
                             <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
                           </Link>
                         </div>
-                        <div className="flex flex-col min-w-max md:flex hidden">
+                        <div className="hidden md:flex md:flex-col min-w-[1/5] truncate">
                           {meeting.credit.length > 0 ? (
                             // print each credit, separated by a comma
                             meeting.credit.map((credit: string, index: number) => (
@@ -87,7 +87,7 @@ export const query = graphql`
         image {
           path {
             childImageSharp {
-              gatsbyImageData(width: 500, quality: 100)
+              gatsbyImageData(width: 600, quality: 100)
             }
           }
           alt
