@@ -65,7 +65,8 @@ const Seo = (props: Props) => {
       <meta property="twitter:description" content={description} />
       <meta name="robots" content={robots} />
       <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" media="(prefers-color-scheme: light)" content={color} />
+      <meta name="theme-color" content={color} />
+      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
       <link rel="preload" href="/fonts/helveticaneue.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
     </>
