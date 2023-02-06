@@ -183,21 +183,10 @@ a:hover {
   line-height: 1.2;
   transition: 0.1s;
 }
-.card:hover {
+.card-hover:hover .card {
   box-shadow: 14px 14px var(--color-primary);
   bottom: 7px;
   right: 7px;
-}
-.card-line-clamp {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-}
-.card-line-clamp .card-text {
-  font-size: 1.125rem;
 }
 /* fancy navbar toggle on mobile */
 .icon-bar {
@@ -260,6 +249,13 @@ a:hover {
   -ms-overflow-style: auto;
   scrollbar-color: var(--color-primary) transparent;
   scrollbar-width: thin;
+}
+/*
+Fix for Safari not rendering border-radius on overflow: hidden
+https://stackoverflow.com/questions/49066011/overflow-hidden-with-border-radius-not-working-on-safari
+*/
+.gatsby-image-wrapper {
+  z-index: 0;
 }
 /* CSS Curly Brace: https://codepen.io/mexn/pen/AjqrZv */
 .curly-brace {

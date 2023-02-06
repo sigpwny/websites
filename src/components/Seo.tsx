@@ -42,20 +42,31 @@ const Seo = (props: Props) => {
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       {props.video ? (
-        <meta property="og:video" content={props.video} />
+        <>
+          <meta property="og:video" content={props.video} />
+          <meta property="og:video:type" content="text/html" />
+          <meta property="og:video:url" content={props.video} />
+          <meta property="og:video:width" content="1280" />
+          <meta property="og:video:height" content="720" />
+        </>
       ) : null}
       <meta property="og:type" content={type} />
       <meta property="twitter:card" content={twitter_card_type} />
       <meta property="twitter:site" content={query.site.siteMetadata.twitterUsername} />
       <meta property="twitter:image" content={image} />
       {props.video ? (
-        <meta property="twitter:player" content={props.video} />
+        <>
+          <meta property="twitter:player" content={props.video} />
+          <meta property="twitter:player:width" content="1280" />
+          <meta property="twitter:player:height" content="720" />
+        </>
       ) : null}
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta name="robots" content={robots} />
       <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content={color} />
+      <meta name="theme-color" media="(prefers-color-scheme: light)" content={color} />
+      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
       <link rel="preload" href="/fonts/helveticaneue.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
     </>
   )

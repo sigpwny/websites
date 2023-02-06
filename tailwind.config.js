@@ -20,8 +20,20 @@ module.exports = {
     },
     extend: {},
     fontFamily: {
-      mono: ["Consolas", "Monaco", "Lucida Console", "monospace"],
+      mono: [
+        "Consolas",
+        "Monaco",
+        "Lucida Console",
+        "ui-monospace",
+        "SF Mono",
+        "SFMono-Regular",
+        "Menlo",
+        "DejaVu Sans Mono",
+        "monospace"
+      ],
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+  ],
 }

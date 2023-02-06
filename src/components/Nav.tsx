@@ -68,6 +68,7 @@ const Nav = () => {
                     </span>
                   </Disclosure.Button>
                 </div>
+                {/* Desktop navbar */}
                 <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex-shrink-0 flex items-center">
                     <Link to="/">
@@ -105,6 +106,7 @@ const Nav = () => {
                 </div>
               </div>
             </div>
+            {/* Mobile navbar */}
             <Transition
               enter="transition duration-100 ease"
               enterFrom="transform scale-95 opacity-0"
@@ -116,25 +118,25 @@ const Nav = () => {
               <Disclosure.Panel className="md:hidden">
                 <div className="container">
                   {navLinks.map((item) => (
-                    <Link
+                    <Disclosure.Button as={Link}
                       key={item.name}
                       to={item.link}
                       className="font-bold text-2xl leading-normal block"
                       activeClassName="nav-active"
                     >
                       {item.name}
-                    </Link>
+                    </Disclosure.Button>
                   ))}
                   <hr />
                   {navCallToActionLinks.map((item) => (
-                    <Link
+                    <Disclosure.Button as={Link}
                       key={item.name}
                       to={item.link}
                       className="font-bold text-2xl leading-normal block"
                       activeClassName="nav-active"
                     >
                       {item.name}
-                    </Link>
+                    </Disclosure.Button>
                   ))}
                   <hr />
                 </div>

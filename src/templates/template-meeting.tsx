@@ -58,7 +58,7 @@ const MeetingTemplate = ({ data }: Props) => {
               ))
             ) : "SIGPwny" }
           </p>
-          <div className="flex flex-row gap-x-2 mb-4">
+          <div className="grid sm:flex sm:flex-row gap-2 mb-4">
             {curr.slides && curr.slides.publicURL ? (
               <Link className="btn-primary" to={curr.slides.publicURL}>
                 <PdfSvg />
@@ -68,7 +68,7 @@ const MeetingTemplate = ({ data }: Props) => {
               </Link>
             ) : null}
             {curr.recording ? (
-              <a className="btn-primary align-middle" href={curr.recording}>
+              <a className="btn-primary xs:grow sm:grow-0" href={curr.recording}>
                 <YouTubeSvg />
                 <p className="inline align-middle m-0 ml-2">
                   Watch video
@@ -125,7 +125,7 @@ export const query = graphql`
         path {
           childImageSharp {
             gatsbyImageData(
-              width: 500,
+              width: 600,
               quality: 100,
               placeholder: NONE,
             )
