@@ -175,6 +175,7 @@ a:hover {
   background-color: var(--color-surface);
   border-color: var(--color-surface);
   border-radius: 0.75rem;
+  isolation: isolate;
   overflow: hidden;
   position: relative;
   box-shadow: none;
