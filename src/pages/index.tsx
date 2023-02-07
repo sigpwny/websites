@@ -12,6 +12,7 @@ interface Props {
 
 type Meeting = Queries.IndexPageQuery["allMeeting"]["meetings"][0]
 type Event = Queries.IndexPageQuery["allEvent"]["events"][0]
+type Publication = Queries.IndexPageQuery["allPublication"]["publications"][0]
 
 export function Head() {
   return (
@@ -26,13 +27,19 @@ const IndexPage = ({ data }: Props) => {
     heading: meeting.semester + " Week " + weekNumber(meeting.week_number) + " • " + convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone),
     title: meeting.title,
     image: meeting.image as Image,
-    link: meeting.slug
+    link: meeting.slug!
   }))
   const event_cards = data.allEvent.events.map((event: Event) => ({
     heading: convertDate(event.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone),
     title: event.title,
     image: event.image as Image,
-    link: event.slug
+    link: event.slug!
+  }))
+  const publication_cards = data.allPublication.publications.map((publication: Publication) => ({
+    heading: publication.publication_type.toUpperCase() + " • " + publication.publisher,
+    title: publication.title,
+    image: publication.image as Image,
+    link: publication.slug!
   }))
   return (
     <>
@@ -81,7 +88,7 @@ const IndexPage = ({ data }: Props) => {
           <h1 className="m-0">Publications</h1>
           <Link to="/publications/" className="my-0 sm:self-end">View all &#10132;</Link>
         </div>
-        <CardRow cards={meeting_cards} />
+        <CardRow cards={publication_cards} />
       </section>
 
       <section id="events" className="pb-8">
@@ -135,6 +142,27 @@ export const query = graphql`
         title
         time_start
         time_close
+        image {
+          path {
+            childImageSharp {
+              gatsbyImageData(width: 600, quality: 100)
+            }
+          }
+          alt
+        }
+        slug
+      }
+    }
+    allPublication(
+      sort: {time_start: DESC}
+      limit: 10
+    ) {
+      publications: nodes {
+        title
+        credit
+        publication_type
+        publisher
+        time_start
         image {
           path {
             childImageSharp {

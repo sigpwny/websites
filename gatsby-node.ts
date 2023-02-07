@@ -4,7 +4,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 import { calculateSemester } from "./src/utils/util"
 
 const contentTypes = {
-  // MarkdownRemark
+  // Mdx
   "meetings": {
     typename: "Meeting",
     requiredFields: ["title", "time_start", "week_number", "credit"],
@@ -30,7 +30,11 @@ const contentTypes = {
     requiredFields: ["name", "image", "role", "weight"],
     fields: ["name", "image", "handle", "role", "weight", "links"]
   },
-  // Mdx
+  "publications": {
+    typename: "Publication",
+    requiredFields: ["title", "credit", "publication_type", "time_start", "image"],
+    fields: ["title", "credit", "publication_type", "publisher", "time_start", "description", "image", "primary_link", "other_links", "tags", "slug"]
+  },
   "pages_md": {
     typename: "PageMarkdown",
     requiredFields: ["title"],
@@ -40,7 +44,7 @@ const contentTypes = {
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
   const { createNode } = actions
-  if (node.internal.type === "MarkdownRemark" || node.internal.type === "Mdx") {
+  if (node.internal.type === "Mdx") {
 
     const fileNode = getNode(node.parent)
     const sourceInstanceName = fileNode.sourceInstanceName
@@ -68,28 +72,36 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
     }
 
     let slug, semester
-    if (node.internal.type === "MarkdownRemark") {
-      if (typename === "Meeting") {
-        semester = calculateSemester(node.frontmatter.time_start)
-        const filePathSemester = fileNode.relativePath.split("/")[0]
-        if (semester.toLowerCase() != filePathSemester.toLowerCase()) {
-          console.warn(`Semester "${semester}" does not match directory "${filePathSemester}" for ${fileNode.absolutePath}`)
-        }
-        slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`
-      } else if (typename === "Event") {
-        slug = `/events/${path.parse(fileNode.relativePath).dir}/`
+    if (typename === "Meeting") {
+      semester = calculateSemester(node.frontmatter.time_start)
+      const filePathSemester = fileNode.relativePath.split("/")[0]
+      if (semester.toLowerCase() != filePathSemester.toLowerCase()) {
+        console.warn(`Semester "${semester}" does not match directory "${filePathSemester}" for ${fileNode.absolutePath}`)
       }
-    } else if (node.internal.type === "Mdx") {
-      if (typename === "PageMarkdown") {
-        if (node.frontmatter.slug) {
-          slug = node.frontmatter.slug
+      slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`
+    } else if (typename === "Event") {
+      slug = `/events/${path.parse(fileNode.relativePath).dir}/`
+    /* Custom slug field handling */
+    } else if (typename === "Publication") {
+      if (node.frontmatter.slug) {
+        slug = node.frontmatter.slug
+      } else {
+        const parsedPath = path.parse(fileNode.relativePath)
+        if (parsedPath.name === "index") {
+          slug = `/publications/${parsedPath.dir}/`
         } else {
-          const parsedPath = path.parse(fileNode.relativePath)
-          if (parsedPath.name === "index") {
-            slug = "/" + parsedPath.dir + "/"
-          } else {
-            slug = "/" + path.join(parsedPath.dir, parsedPath.name)
-          }
+          slug = `/publications/${path.join(parsedPath.dir, parsedPath.name)}`
+        }
+      }
+    } else if (typename === "PageMarkdown") {
+      if (node.frontmatter.slug) {
+        slug = node.frontmatter.slug
+      } else {
+        const parsedPath = path.parse(fileNode.relativePath)
+        if (parsedPath.name === "index") {
+          slug = `/${parsedPath.dir}/`
+        } else {
+          slug = `/${path.join(parsedPath.dir, parsedPath.name)}`
         }
       }
     }
@@ -172,8 +184,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       recording: String
       assets: [File] @fileByRelativePath
       tags: [String]
-      semester: String!
-      slug: String!
+      semester: String
+      slug: String
     }
 
     type Event implements Node @dontInfer {
@@ -187,13 +199,27 @@ exports.createSchemaCustomization = ({ actions }) => {
       links: Links
       rating_weight: Float
       stats: Stats
-      slug: String!
+      slug: String
+    }
+
+    type Publication implements Node @dontInfer {
+      title: String!
+      credit: [String!]!
+      publication_type: String!
+      publisher: String
+      time_start: Date! @dateformat
+      description: String
+      image: ImageAlt!
+      primary_link: String
+      other_links: [String]
+      tags: [String]
+      slug: String
     }
 
     type PageMarkdown implements Node @dontInfer {
       title: String!
       no_background: Boolean
-      slug: String!
+      slug: String
     }
 
     type Admin implements Node {
@@ -264,12 +290,39 @@ exports.createPages = async ({ graphql, actions }) => {
         meetings: nodes {
           id
           slug
+          parent {
+            ... on Mdx {
+              internal {
+                contentFilePath
+              }
+            }
+          }
         }
       }
       allEvent(sort: {time_start: ASC}) {
         events: nodes {
           id
           slug
+          parent {
+            ... on Mdx {
+              internal {
+                contentFilePath
+              }
+            }
+          }
+        }
+      }
+      allPublication(sort: {time_start: ASC}) {
+        publications: nodes {
+          id
+          slug
+          parent {
+            ... on Mdx {
+              internal {
+                contentFilePath
+              }
+            }
+          }
         }
       }
       allPageMarkdown {
@@ -309,6 +362,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const template_meeting = path.resolve(`./src/templates/template-meeting.tsx`)
   const template_event = path.resolve(`./src/templates/template-event.tsx`)
+  const template_publication = path.resolve(`./src/templates/template-publication.tsx`)
   const template_page_md = path.resolve(`./src/templates/template-page_md.tsx`)
   const template_redirect_external = path.resolve(`./src/templates/template-redirect-external.tsx`)
 
@@ -347,7 +401,7 @@ exports.createPages = async ({ graphql, actions }) => {
       const next_id = index === 0 ? null : meetings[index - 1].id
       createPage({
         path: meeting.slug,
-        component: template_meeting,
+        component: `${template_meeting}?__contentFilePath=${meeting.parent.internal.contentFilePath}`,
         context: {
           id: meeting.id,
           prev_id,
@@ -363,9 +417,23 @@ exports.createPages = async ({ graphql, actions }) => {
     events.forEach((event_) => {
       createPage({
         path: event_.slug,
-        component: template_event,
+        component: `${template_event}?__contentFilePath=${event_.parent.internal.contentFilePath}`,
         context: {
           id: event_.id,
+        },
+        trailingSlash: true,
+      })
+    })
+  }
+
+  const publications = result.data.allPublication.publications
+  if (publications.length > 0) {
+    publications.forEach((publication) => {
+      createPage({
+        path: publication.slug,
+        component: `${template_publication}?__contentFilePath=${publication.parent.internal.contentFilePath}`,
+        context: {
+          id: publication.id,
         },
         trailingSlash: true,
       })

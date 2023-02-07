@@ -65,6 +65,14 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        "name": "publications",
+        "path": "./content/publications/",
+        "ignore": [`**/.*`],
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         "name": "admins",
         "path": "./content/profiles/admins/",
         "ignore": [`**/.*`],
@@ -95,14 +103,18 @@ const config: GatsbyConfig = {
       },
     },
     "gatsby-plugin-image",
-    "gatsby-plugin-mdx",
     "gatsby-plugin-netlify",
     "gatsby-plugin-postcss",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-transformer-json",
-    "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        extensions: [".md", ".mdx"],
+      },
+    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {

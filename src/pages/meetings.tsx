@@ -1,6 +1,5 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 
 import Seo from "../components/Seo"
 import { weekNumber, convertDate } from "../utils/util"
@@ -16,7 +15,7 @@ export function Head() {
   return (
     <Seo
       title="Meetings"
-      description="Index page of all SIGPwny meetings"
+      description="Index of all SIGPwny meetings"
     />
   )
 }
@@ -25,7 +24,7 @@ const MeetingsPage = ({ data }: Props) => {
   const meetings = data.allMeeting.meetings
   const meetingsBySemester: {[semester: string]: Meeting[]} = {}
   meetings.forEach((meeting: Meeting) => {
-    const semester = meeting.semester
+    const semester = meeting.semester!
     if (meetingsBySemester[semester]) {
       meetingsBySemester[semester].push(meeting)
     } else {

@@ -1,11 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
+import { MDXProvider } from "@mdx-js/react"
 
 import Seo from "../components/Seo"
 
 interface Props {
   data: Queries.EventTemplateQuery
+  children: React.ReactNode
 }
 
 export const Head = ({ data }: Props) => {
@@ -24,11 +26,10 @@ export const Head = ({ data }: Props) => {
   )
 }
 
-const EventTemplate = ({ data }: Props) => {
+const EventTemplate = ({ data, children }: Props) => {
   if (!data.event_) {
     throw new Error(`invalid argument: "event_" is null`)
   }
-  const html_data = (data.event_.parent as { html: string }).html
   return (
     <div className="panel">
       <GatsbyImage
@@ -37,12 +38,9 @@ const EventTemplate = ({ data }: Props) => {
       />
       <h1>{data.event_.title}</h1>
       <p>{data.event_.description}</p>
-      {data.event_.parent ? (
-        <div
-          className="page-content"
-          dangerouslySetInnerHTML={{ __html: html_data }}
-        />
-      ) : null}
+      <MDXProvider>
+        {children}
+      </MDXProvider>
     </div>
   )
 }
@@ -52,11 +50,6 @@ export default EventTemplate
 export const query = graphql`
   query EventTemplate($id: String!) {
     event_: event(id: { eq: $id }) {
-      parent {
-        ... on MarkdownRemark {
-          html
-        }
-      }
       title
       description
       time_start

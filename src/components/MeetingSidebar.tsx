@@ -21,7 +21,7 @@ const MeetingSidebar = () => {
   const meetings = data.allMeeting.meetings
   const meetingsBySemester: {[semester: string]: Meeting[]} = {}
   meetings.forEach((meeting: Meeting) => {
-    const semester = meeting.semester
+    const semester = meeting.semester!
     if (meetingsBySemester[semester]) {
       meetingsBySemester[semester].push(meeting)
     } else {
