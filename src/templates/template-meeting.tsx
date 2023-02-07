@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { MDXProvider } from "@mdx-js/react"
 
 import MeetingSidebar from "../components/MeetingSidebar"
 import Seo from "../components/Seo"
@@ -8,6 +9,7 @@ import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 interface Props {
   data: Queries.MeetingTemplateQuery
+  children: React.ReactNode
 }
 
 export const Head = ({ data }: Props) => {
@@ -32,13 +34,11 @@ export const Head = ({ data }: Props) => {
   )
 }
 
-const MeetingTemplate = ({ data }: Props) => {
+const MeetingTemplate = ({ data, children }: Props) => {
   const { curr, prev, next } = data
   if (!curr) {
     throw new Error(`invalid argument: "curr" meeting is null`)
   }
-  // cursed typescript hack
-  const html_data = (curr.parent as { html: string }).html
   return (
     <>
       <div className="flex flex-row gap-x-4">
@@ -89,12 +89,9 @@ const MeetingTemplate = ({ data }: Props) => {
               ) : null
             })()
           ) : null}
-          {curr.parent ? (
-            <div
-              className="page-content"
-              dangerouslySetInnerHTML={{ __html: html_data }}
-            />
-          ) : null}
+          <MDXProvider>
+            {children}
+          </MDXProvider>
         </div>
       </div>
     </>
@@ -110,11 +107,6 @@ export const query = graphql`
     $next_id: String
   ) {
     curr: meeting(id: { eq: $id }) {
-      parent {
-        ... on MarkdownRemark {
-          html
-        }
-      }
       title
       time_start
       time_close

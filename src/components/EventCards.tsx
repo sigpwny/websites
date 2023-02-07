@@ -60,7 +60,7 @@ const EventCards = ({ includeSeries, excludeSeries }: Props) => {
     <>
       <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-8">
         {filteredEvents.map((event_: Event) => (
-          <Link to={event_.slug} className="use-color-text">
+          <Link to={event_.slug!} className="use-color-text">
             <div className="card h-100">
               <div className="aspect-video flex align-middle">
                 <div className="m-auto p-4">
