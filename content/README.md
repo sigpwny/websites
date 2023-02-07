@@ -3,16 +3,16 @@
 There are 8 content types defined. Italicized types are not explicitly defined.
 
 - [Meeting](#meeting)
-- Event
-- Publication
-- Markdown Page
-- *Profile*
-  - Admin
-  - Alum
-  - Helper
-- *Redirect*
-  - External
-  - Internal
+- [Event](#event)
+- [Publication](#publication)
+- [Markdown Page](#markdown-page)
+- [*Profile*](#profile)
+  - [Admin](#admin)
+  - [Alum](#alum)
+  - [Helper](#helper)
+- [*Redirect*](#redirect)
+  - [External](#external)
+  - [Internal](#internal)
 
 The majority of these content types are defined in the frontmatter of Markdown files, with the exception of Redirects, which are defined with JSON files. These content types are stored in the `content` directory, with the exception of Markdown Pages, which are stored in `src/pages_md`.
 
