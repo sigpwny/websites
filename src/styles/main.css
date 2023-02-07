@@ -33,49 +33,6 @@ p {
   }
 }
 @add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
-/* @define-mixin aspect-ratio $width, $height {
-  .aspect-ratio-$(width)-$(height) {
-    position: relative;
-  }
-  .aspect-ratio-$(width)-$(height):before {
-    display: block;
-    content: "";
-    width: 100%;
-    padding-top: ($height / $width) * 100%;
-  }
-  .aspect-ratio-$(width)-$(height) > .content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  .aspect-ratio-$(width)-$(height) > .content img {
-    object-fit: cover;
-  }
-}
-@add-mixin aspect-ratio 16, 9; */
-
-.aspect-ratio-16-9 {
-  position: relative;
-}
-.aspect-ratio-16-9:before {
-  display: block;
-  content: "";
-  width: 100%;
-  padding-top: 56.25%;
-}
-.aspect-ratio-16-9 > .content {
-  background-size: 100% !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.aspect-ratio-16-9 > .content img {
-  object-fit: cover;
-}
 
 html {
   overflow-x: hidden;
