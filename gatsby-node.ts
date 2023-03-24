@@ -387,7 +387,12 @@ exports.createPages = async ({ graphql, actions }) => {
     redirects_internal.forEach((redirect) => {
       // Generate server side redirects for internal routes
       createRedirect({
-        fromPath: redirect.src,
+        fromPath: redirect.src.endsWith("/") ? redirect.src.slice(0, -1) : redirect.src,
+        toPath: redirect.dst,
+        statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
+      })
+      createRedirect({
+        fromPath: redirect.src.endsWith("/") ? redirect.src : redirect.src + "/",
         toPath: redirect.dst,
         statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
       })
