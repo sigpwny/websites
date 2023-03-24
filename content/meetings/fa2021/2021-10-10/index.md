@@ -13,5 +13,6 @@ tags:
 - VM Obfuscation
 time_close: ''
 time_start: '2021-10-10T19:00:00.000000Z'
-title: 'Week 6: Reverse Engineering 2'
+title: reverse engineering 2
+week_number: 6
 ---

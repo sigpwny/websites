@@ -14,5 +14,6 @@ tags:
   depressing them from all they need to keep track of
 time_close: ''
 time_start: '2021-09-30T23:00:00.000000Z'
-title: 'Week 05: Operational Security'
+title: operational security
+week_number: 5
 ---

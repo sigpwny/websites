@@ -11,5 +11,6 @@ tags:
 - Safe Cracking
 time_close: ''
 time_start: '2021-10-21T19:00:00.000000Z'
-title: 'Week 8: Physical Security (Lockpicking)'
+title: physical security (lockpicking)
+week_number: 8
 ---
