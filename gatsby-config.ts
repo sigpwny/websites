@@ -105,7 +105,6 @@ const config: GatsbyConfig = {
     "gatsby-plugin-image",
     "gatsby-plugin-netlify",
     "gatsby-plugin-postcss",
-    "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-transformer-json",
     "gatsby-transformer-sharp",
@@ -147,6 +146,15 @@ const config: GatsbyConfig = {
           },
         ],
       }
+    },
+    {
+      resolve: "gatsby-plugin-sharp",
+      options: {
+        defaults: {
+          quality: 100,
+          breakpoints: [360, 480, 720, 1280, 1920],
+        },
+      },
     },
   ]
 };
