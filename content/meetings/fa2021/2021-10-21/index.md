@@ -3,6 +3,7 @@ credit:
 - Thomas
 featured: false
 recording: ''
+slides: physical_security_(lockpicking).pdf
 tags:
 - Physical Security
 - cameras

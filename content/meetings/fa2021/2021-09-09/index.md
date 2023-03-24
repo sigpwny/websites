@@ -4,6 +4,7 @@ credit:
 - Kevin H.
 featured: false
 recording: ''
+slides: web_hacking_1_meeting.pdf
 tags:
 - Client-Server Relationships
 - Web Hacking

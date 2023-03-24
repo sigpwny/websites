@@ -3,6 +3,7 @@ credit:
 - Thomas Quig
 featured: false
 recording: ''
+slides: law_and_policy.pdf
 tags:
 - The CFAA
 - Standard Ethical Models of Computer Security

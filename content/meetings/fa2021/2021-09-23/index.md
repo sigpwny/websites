@@ -7,6 +7,7 @@ credit:
 - Pranav
 featured: false
 recording: ''
+slides: crypto_i_meeting.pdf
 tags:
 - Crypto Fundamentals
 - Encoding

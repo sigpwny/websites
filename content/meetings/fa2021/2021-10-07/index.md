@@ -3,6 +3,7 @@ credit:
 - Nathan Farlow
 featured: false
 recording: ''
+slides: reverse_engineering_1.pdf
 tags:
 - Reverse Engineering is the process of understanding a program's functionality and
   behavior

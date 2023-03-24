@@ -7,6 +7,7 @@ credit:
 - Pranav
 featured: false
 recording: ''
+slides: crypto_ii_meeting.pdf
 tags:
 - ECC
 - RSA Technicals

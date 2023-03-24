@@ -3,6 +3,7 @@ credit:
 - Thomas Quig
 featured: false
 recording: ''
+slides: osint_i.pdf
 tags:
 - file formats
 - network protocols

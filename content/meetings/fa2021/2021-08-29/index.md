@@ -3,6 +3,7 @@ credit:
 - Thomas Quig
 featured: false
 recording: ''
+slides: sigpwny_setting_up_meeting.pdf
 tags:
 - Terminal
 - WSL

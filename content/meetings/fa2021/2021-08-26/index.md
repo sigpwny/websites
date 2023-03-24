@@ -3,6 +3,7 @@ credit:
 - Thomas Quig
 featured: false
 recording: ''
+slides: sigpwny_info_session.pdf
 tags:
 - Introductions
 - SIGPwny as a group

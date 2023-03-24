@@ -4,6 +4,7 @@ credit:
 - Josh Park
 featured: false
 recording: ''
+slides: operational_security.pdf
 tags:
 - Threat modeling is the process of identifying and ranking threats in order to dedicate
   time and effort accordingly

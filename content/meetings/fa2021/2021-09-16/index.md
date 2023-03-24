@@ -4,6 +4,7 @@ credit:
 - Kevin H.
 featured: false
 recording: ''
+slides: web_hacking_ii_meeting.pdf
 tags:
 - Server based attasks
 - SQL Injection

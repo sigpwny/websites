@@ -3,6 +3,7 @@ credit:
 - Kevin
 featured: false
 recording: ''
+slides: pwn_ii_(binary_exploitation).pdf
 tags:
 - Mondern BinEXP mitigations
 - PIE
