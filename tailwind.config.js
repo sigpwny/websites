@@ -7,18 +7,19 @@ module.exports = {
     "./content/**/*.{md,mdx}",
   ],
   theme: {
-    colors: {
-      primary: "var(--color-primary)",
-      secondary: "var(--color-secondary)",
-      background: "var(--color-background)",
-      surface: "var(--color-surface)",
-      text: "var(--color-text)",
-      transparent: "transparent",
-    },
     container: {
       center: true,
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        background: "var(--color-background)",
+        surface: "var(--color-surface)",
+        text: "var(--color-text)",
+        transparent: "transparent",
+      },
+    },
     fontFamily: {
       mono: [
         "Consolas",
