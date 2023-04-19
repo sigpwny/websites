@@ -22,11 +22,13 @@ const PageMarkdownTemplate = ({ data, children }: Props) => {
     <>
       {data.pageMarkdown && data.pageMarkdown?.no_background ? (
         <MDXProvider>
-          {children}
+          <div className="markdown-root">
+            {children}
+          </div>
         </MDXProvider>
       ) : (
         <MDXProvider>
-          <div className="panel">
+          <div className="markdown-root panel">
             {children}
           </div>
         </MDXProvider>
