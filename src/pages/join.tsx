@@ -1,15 +1,15 @@
 import React from "react"
+import { Link, graphql } from "gatsby"
 
 import Seo from "../components/Seo"
 import CardRow from "../components/CardRow"
 import { convertDate, weekNumber } from "../utils/util"
-import { graphql } from "gatsby"
 
 interface Props {
-  data: Queries.IndexPageQuery
+  data: Queries.JoinPageQuery
 }
 
-type Meeting = Queries.IndexPageQuery["allMeeting"]["meetings"][0]
+type Meeting = Queries.JoinPageQuery["allMeeting"]["meetings"][0]
 
 export function Head() {
   return (
@@ -27,50 +27,83 @@ const JoinPage = ({ data }: Props) => {
     image: meeting.image as Image,
     link: meeting.slug!
   }))
+  const socials = data.site?.siteMetadata?.socialLinks
+  const discord_link = socials?.find((social) => social?.name === "Discord")?.link || "https://sigpwny.com/discord"
   return (
-    <div className="px-10 lg:px-40">
-      <section id="join-title" className="flex flex-row space-x-8 py-8 pb-8">
-        <div className="flex flex-col flex-grow basis-1/2">
+    <div className="2xl:px-40">
+      <section id="join-title" className="grid gap-x-8 lg:grid-cols-2 py-8">
+        <div className="flex flex-col flex-grow pb-4 basis-1/2">
           <h1>Welcome to SIGPwny!</h1>
-          <p className="text-3xl font-light tracking-wide mb-0">Come learn cybersecurity with 2000+ students, alum, and professionals on our Discord server.</p>
-          <a href="https://discord.gg/cWcZ6a9" target="_blank" rel="noopener noreferrer"
+          <p className="text-3xl mb-0">
+            Come learn cybersecurity with 2000+ students, alum, and
+            professionals on our Discord server.
+          </p>
+          <a href={discord_link} target="_blank" rel="noopener noreferrer"
             className="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary"
           >
             Join Discord
           </a>
-          <ul className="list-decimal ml-0 pl-5">
-            <li>By joining, you agree to our club <a href="#" target="_blank" rel="noopener noreferrer">rules</a>.</li>
-            <li>If you are a UIUC student, authenticate <a href="https://sigpwny.com/auth" target="_blank" rel="noopener noreferrer">here</a> to receive the @uiuc role and access club channels.</li>
+          <ul className="list-decimal pl-6 pt-2">
+            <li>
+              By joining, you agree to our club <a href="#" target="_blank" rel="noopener noreferrer">rules</a>.
+            </li>
+            <li>
+              If you are affiliated with UIUC, authenticate <a href="https://sigpwny.com/auth" target="_blank" rel="noopener noreferrer">here</a> to
+              receive the @uiuc role and access club channels.
+            </li>
           </ul>
         </div>
-        <div className="basis-1/2 bg-neutral-800"></div>
+        <div className="panel basis-1/2"></div>
       </section>
 
-      <section id="join-involve" className="mt-8 pb-8">
+      <section id="join-involve" className="py-8">
         <h1>How to Get Involved</h1>
-        <div className="flex flex-row flex-wrap content-between gap-4 mt-4">
-          <div className="flex-grow-0 flex-shrink-0 basis-[32%] min-h-[200px] p-4 rounded-lg bg-neutral-800">
-            Attend meetings (more text/graphic here)
+        <div className="grid gap-8 lg:grid-cols-3 pt-4 text-center">
+          <div className="panel">
+            <h2>Learn</h2>
+            <p>
+              Attending our weekly meetings is the easiest way to learn
+              security and meet others! Watch past meetings and find
+              upcoming meetings <Link to="/meetings/">here</Link>.
+            </p>
           </div>
-          <div className="flex-grow-0 flex-shrink-0 basis-[32%] min-h-[200px] p-4 rounded-lg bg-neutral-800">
-            Compete in team CTFs (more text/graphic here)
+          <div className="panel">
+            <h2>Compete</h2>
+            <p>
+              We play in cybersecurity competitions known as CTFs (capture the
+              flag). Collaborating as a team lets us learn from each other and
+              have fun!
+            </p>
           </div>
-          <div className="flex-grow-0 flex-shrink-0 basis-[32%] min-h-[200px] p-4 rounded-lg bg-neutral-800">
-            Do security research (more text/graphic here)
+          <div className="panel">
+            <h2>Research</h2>
+            <p>
+              We have connections with professors and graduate students at <a href="https://spri.engr.illinois.edu/" target="_blank" rel="noopener noreferrer">SPR@I</a>.
+              We also support individual projects run by our members.
+            </p>
           </div>
         </div>
-        <p className="mt-4 mb-0">SIGPwny is open to all - there are no member applications, mandatory meetings, or even required prerequisite knowledge.</p>
+        <p className="pt-4">
+          SIGPwny is open to all - there are no member applications, mandatory
+          meetings, or even prerequisite knowledge needed.
+        </p>
       </section>
 
-      <section id="join-beginner" className="mt-8 pb-8">
+      <section id="join-beginner" className="py-8">
         <h1>Beginner Topics</h1>
-        <p className="mt-4 mb-4">Learn the fundamental skills to quickly get into hacking and more advanced topics!</p>
+        <p>
+          Learn the fundamental skills to quickly get into hacking and more
+          advanced topics!
+        </p>
         <CardRow cards={meeting_cards} />
       </section>
 
-      <section id="join-leadership" className="mt-8 pb-8">
+      <section id="join-leadership" className="py-8">
         <h1>Leadership Opportunities</h1>
-        <p className="mt-4 mb-0">TODO: talk about helper applications, our teams (marketing, infra, etc.), and meeting presenting</p>
+        <p className="mt-4 mb-0">
+          TODO: talk about helper applications, our teams (marketing, infra,
+          etc.), and meeting presenting
+        </p>
       </section>
     </div>
   )
@@ -84,12 +117,16 @@ export const query = graphql`
       siteMetadata {
         description
         timezone
+        socialLinks {
+          name
+          link
+        }
       }
     }
     allMeeting(
       filter: {featured: {eq: true}}
       sort: {time_start: DESC}
-      limit: 4
+      limit: 5
     ) {
       meetings: nodes {
         title

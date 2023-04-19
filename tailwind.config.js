@@ -10,16 +10,6 @@ module.exports = {
     container: {
       center: true,
     },
-    extend: {
-      colors: {
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        background: "var(--color-background)",
-        surface: "var(--color-surface)",
-        text: "var(--color-text)",
-        transparent: "transparent",
-      },
-    },
     fontFamily: {
       mono: [
         "Consolas",
@@ -32,6 +22,16 @@ module.exports = {
         "DejaVu Sans Mono",
         "monospace"
       ],
+    },
+    extend: {
+      colors: {
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        background: "var(--color-background)",
+        surface: "var(--color-surface)",
+        text: "var(--color-text)",
+        transparent: "transparent",
+      },
     },
   },
   plugins: [

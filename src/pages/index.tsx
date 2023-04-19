@@ -48,7 +48,7 @@ const IndexPage = ({ data }: Props) => {
           <div className="lg:order-2 pb-6 lg:w-2/3 lg:p-0 xl:w-1/2 mx-auto text-center">
             <h1 className="lg:text-6xl">Hacking @ UIUC</h1>
             <p>{data.site?.siteMetadata.description}</p>
-            <Link className="btn-primary" to="/about/">Learn more</Link>
+            <Link to="/about/" className="btn-primary">Learn more</Link>
           </div>
           <div className="flex lg:order-1 gap-8 pr-20 sm:columns-2 sm:p-0 md:pr-20 lg:columns-3 lg:gap-12 lg:p-0 lg:pb-2 xl:gap-16 2xl:gap-16 2xl:px-28">
             <div className="pt-6 w-full">
