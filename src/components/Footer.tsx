@@ -1,12 +1,13 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import { DiscordSvg, GitHubSvg, TwitterSvg, YouTubeSvg, PwnyBanner } from "./Icons"
+import { DiscordSvg, GitHubSvg, InstagramSvg, TwitterSvg, YouTubeSvg, PwnyBanner } from "./Icons"
 
 const Footer = () => {
   const icons : Map<string, JSX.Element> = new Map([
     ["Discord", <DiscordSvg />],
     ["GitHub", <GitHubSvg />],
+    ["Instagram", <InstagramSvg />],
     ["Twitter", <TwitterSvg />],
     ["YouTube", <YouTubeSvg />]
   ])
@@ -54,7 +55,10 @@ const Footer = () => {
                 if (item && item.name && item.link) {
                   return (
                     <span className="m-0">
-                      <a href={item.link} key={item.name} className="w-full">
+                      <a
+                        href={item.link} key={item.name} className="w-full"
+                        target="_blank" rel="noopener noreferrer"
+                      >
                         {icons.has(item.name) ? icons.get(item.name) : null}
                         <p className="inline align-middle m-0 ml-2">
                           {item.name}
