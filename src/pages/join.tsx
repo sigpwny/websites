@@ -15,7 +15,7 @@ export function Head() {
   return (
     <Seo
       title="Join"
-      description="Join SIGPwny"
+      description="Join SIGPwny, the hacking club at UIUC!"
     />
   )
 }
@@ -45,7 +45,7 @@ const JoinPage = ({ data }: Props) => {
           </a>
           <ul className="list-decimal pl-6 pt-2">
             <li>
-              By joining, you agree to our club <a href="#" target="_blank" rel="noopener noreferrer">rules</a>.
+              By joining, you agree to our club <Link to="/rules/">rules</Link>.
             </li>
             <li>
               If you are affiliated with UIUC, authenticate <a href="https://sigpwny.com/auth" target="_blank" rel="noopener noreferrer">here</a> to
