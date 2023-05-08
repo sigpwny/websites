@@ -8,5 +8,4 @@ interface CardProps {
   title: string
   image: Image
   link?: string
-  no_hover?: boolean
 }
