@@ -42,7 +42,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
   return (
     <>
       <div className="flex flex-row gap-x-4">
-        <aside className="xl:w-96 lg:w-80 lg:block hidden sticky">
+        <aside className="xl:w-96 lg:w-80 lg:block hidden">
           <MeetingSidebar />
         </aside>
         <div className="panel w-100 grow">
