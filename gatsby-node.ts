@@ -12,8 +12,8 @@ const contentTypes = {
   },
   "events": {
     typename: "Event",
-    requiredFields: ["title", "series", "description", "time_start", "image"],
-    fields: ["title", "series", "description", "time_start", "time_close", "location", "image", "links", "rating_weight", "stats", "slug"]
+    requiredFields: ["title", "series", "description", "time_start"],
+    fields: ["title", "series", "description", "time_start", "time_close", "location", "image", "overlay_image", "links", "rating_weight", "stats", "slug"]
   },
   "admins": {
     typename: "Admin",
@@ -165,10 +165,9 @@ exports.createSchemaCustomization = ({ actions }) => {
       ctftime: String
     }
 
-    type Stats {
-      participants: Int
-      teams: Int
-      solves: Int
+    type Stat {
+      name: String!
+      value: String!
     }
 
     type Meeting implements Node @dontInfer {
@@ -195,10 +194,11 @@ exports.createSchemaCustomization = ({ actions }) => {
       time_start: Date! @dateformat
       time_close: Date @dateformat
       location: String
-      image: ImageAlt!
+      image: ImageAlt
+      overlay_image: ImageAlt
       links: Links
       rating_weight: Float
-      stats: Stats
+      stats: [Stat]
       slug: String
     }
 
