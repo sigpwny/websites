@@ -31,10 +31,13 @@ This is normal text. *This is italicized*. **This is bold**. __This is underline
 
 > This is quote text
 
-Here is some `code` text.
+Here is some `code` text. This is some `python3>print('hi')` text.
 
-```
-This is a code block
+
+```js
+if (highlighted == true) {
+    console.log("Awesome") // ?
+}
 ```
 
 Here is a list:
