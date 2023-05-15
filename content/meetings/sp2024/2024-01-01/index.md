@@ -31,7 +31,7 @@ This is normal text. *This is italicized*. **This is bold**. __This is underline
 
 > This is quote text
 
-Here is some `code` text. This is some `python3>print('hi')` text.
+Here is some `code` text. This is some syntax highlighted `python>print('hi')` text.
 
 
 ```js
