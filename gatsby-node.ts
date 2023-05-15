@@ -1,107 +1,169 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require(`path`);
+const { createFilePath } = require(`gatsby-source-filesystem`);
 
-import { calculateSemester } from "./src/utils/util"
+import { calculateSemester } from "./src/utils/util";
 
 const contentTypes = {
   // Mdx
-  "meetings": {
+  meetings: {
     typename: "Meeting",
     requiredFields: ["title", "time_start", "week_number", "credit"],
-    fields: ["title", "time_start", "time_close", "week_number", "credit", "featured", "location", "image", "slides", "recording", "assets", "tags", "semester", "slug"]
+    fields: [
+      "title",
+      "time_start",
+      "time_close",
+      "week_number",
+      "credit",
+      "featured",
+      "location",
+      "image",
+      "slides",
+      "recording",
+      "assets",
+      "tags",
+      "semester",
+      "slug",
+    ],
   },
-  "events": {
+  events: {
     typename: "Event",
     requiredFields: ["title", "series", "description", "time_start"],
-    fields: ["title", "series", "description", "time_start", "time_close", "location", "image", "overlay_image", "links", "rating_weight", "stats", "slug"]
+    fields: [
+      "title",
+      "series",
+      "description",
+      "time_start",
+      "time_close",
+      "location",
+      "image",
+      "overlay_image",
+      "links",
+      "rating_weight",
+      "stats",
+      "slug",
+    ],
   },
-  "admins": {
+  admins: {
     typename: "Admin",
     requiredFields: ["name", "image", "role", "weight", "bio"],
-    fields: ["name", "bio", "image", "handle", "role", "weight", "links"]
+    fields: ["name", "bio", "image", "handle", "role", "weight", "links"],
   },
-  "alumni": {
+  alumni: {
     typename: "Alum",
     requiredFields: ["name", "image", "role", "weight"],
-    fields: ["name", "image", "handle", "role", "period", "work", "weight", "links"]
+    fields: ["name", "image", "handle", "role", "period", "work", "weight", "links"],
   },
-  "helpers": {
+  helpers: {
     typename: "Helper",
     requiredFields: ["name", "image", "role", "weight"],
-    fields: ["name", "image", "handle", "role", "weight", "links"]
+    fields: ["name", "image", "handle", "role", "weight", "links"],
   },
-  "publications": {
+  publications: {
     typename: "Publication",
     requiredFields: ["title", "credit", "publication_type", "time_start", "image"],
-    fields: ["title", "credit", "publication_type", "publisher", "time_start", "description", "image", "primary_link", "other_links", "tags", "slug"]
+    fields: [
+      "title",
+      "credit",
+      "publication_type",
+      "publisher",
+      "time_start",
+      "description",
+      "image",
+      "primary_link",
+      "other_links",
+      "tags",
+      "slug",
+    ],
   },
-  "pages_md": {
+  pages_md: {
     typename: "PageMarkdown",
     requiredFields: ["title"],
-    fields: ["title", "no_background", "slug"]
+    fields: ["title", "no_background", "slug"],
   },
-}
+};
+
+// https://github.com/react-pdf-viewer/react-pdf-viewer/issues/497#issuecomment-812905172
+// https://github.com/wojtekmaj/react-pdf/issues/874#issuecomment-1539023628
+exports.onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions }) => {
+  if (stage === "build-html" || stage === "develop-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /canvas/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+};
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
-  const { createNode } = actions
+  const { createNode } = actions;
   if (node.internal.type === "Mdx") {
+    const fileNode = getNode(node.parent);
+    const sourceInstanceName = fileNode.sourceInstanceName;
+    const contentType = Object.keys(contentTypes).find((source) => source === sourceInstanceName);
+    if (!contentType) return;
 
-    const fileNode = getNode(node.parent)
-    const sourceInstanceName = fileNode.sourceInstanceName
-    const contentType = Object.keys(contentTypes).find(source => source === sourceInstanceName)
-    if (!contentType) return
-
-    const { typename, requiredFields, fields } = contentTypes[contentType]
+    const { typename, requiredFields, fields } = contentTypes[contentType];
     for (const field of requiredFields) {
-      if (node.frontmatter[field] === null ||
-          node.frontmatter[field] === undefined ||
-          node.frontmatter[field] === "") {
-        throw new Error(`"${field}" is required for ${fileNode.absolutePath}`)
+      if (
+        node.frontmatter[field] === null ||
+        node.frontmatter[field] === undefined ||
+        node.frontmatter[field] === ""
+      ) {
+        throw new Error(`"${field}" is required for ${fileNode.absolutePath}`);
       }
     }
 
     if ("image" in requiredFields) {
-      if (node.frontmatter.image.path === null ||
-          node.frontmatter.image.path === undefined ||
-          node.frontmatter.image.path === "" ||
-          node.frontmatter.image.alt === null ||
-          node.frontmatter.image.alt === undefined ||
-          node.frontmatter.image.alt === "") {
-        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`)
+      if (
+        node.frontmatter.image.path === null ||
+        node.frontmatter.image.path === undefined ||
+        node.frontmatter.image.path === "" ||
+        node.frontmatter.image.alt === null ||
+        node.frontmatter.image.alt === undefined ||
+        node.frontmatter.image.alt === ""
+      ) {
+        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`);
       }
     }
 
-    let slug, semester
+    let slug, semester;
     if (typename === "Meeting") {
-      semester = calculateSemester(node.frontmatter.time_start)
-      const filePathSemester = fileNode.relativePath.split("/")[0]
+      semester = calculateSemester(node.frontmatter.time_start);
+      const filePathSemester = fileNode.relativePath.split("/")[0];
       if (semester.toLowerCase() != filePathSemester.toLowerCase()) {
-        console.warn(`Semester "${semester}" does not match directory "${filePathSemester}" for ${fileNode.absolutePath}`)
+        console.warn(
+          `Semester "${semester}" does not match directory "${filePathSemester}" for ${fileNode.absolutePath}`,
+        );
       }
-      slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`
+      slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`;
     } else if (typename === "Event") {
-      slug = `/events/${path.parse(fileNode.relativePath).dir}/`
-    /* Custom slug field handling */
+      slug = `/events/${path.parse(fileNode.relativePath).dir}/`;
+      /* Custom slug field handling */
     } else if (typename === "Publication") {
       if (node.frontmatter.slug) {
-        slug = node.frontmatter.slug
+        slug = node.frontmatter.slug;
       } else {
-        const parsedPath = path.parse(fileNode.relativePath)
+        const parsedPath = path.parse(fileNode.relativePath);
         if (parsedPath.name === "index") {
-          slug = `/publications/${parsedPath.dir}/`
+          slug = `/publications/${parsedPath.dir}/`;
         } else {
-          slug = `/publications/${path.join(parsedPath.dir, parsedPath.name)}`
+          slug = `/publications/${path.join(parsedPath.dir, parsedPath.name)}`;
         }
       }
     } else if (typename === "PageMarkdown") {
       if (node.frontmatter.slug) {
-        slug = node.frontmatter.slug
+        slug = node.frontmatter.slug;
       } else {
-        const parsedPath = path.parse(fileNode.relativePath)
+        const parsedPath = path.parse(fileNode.relativePath);
         if (parsedPath.name === "index") {
-          slug = `/${parsedPath.dir}/`
+          slug = `/${parsedPath.dir}/`;
         } else {
-          slug = `/${path.join(parsedPath.dir, parsedPath.name)}`
+          slug = `/${path.join(parsedPath.dir, parsedPath.name)}`;
         }
       }
     }
@@ -116,17 +178,17 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
         contentDigest: createContentDigest(node),
       },
       ...fields.reduce((obj, field) => {
-        obj[field] = node.frontmatter[field]
-        return obj
+        obj[field] = node.frontmatter[field];
+        return obj;
       }, {}),
       semester,
       slug,
-    })
+    });
   }
-}
+};
 
 exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
+  const { createTypes } = actions;
 
   createTypes(`
     type Site implements Node {
@@ -251,8 +313,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       weight: Int!
       links: Links
     }
-  `)
-}
+  `);
+};
 
 exports.createResolvers = ({ createResolvers }) => {
   const resolvers = {
@@ -274,19 +336,19 @@ exports.createResolvers = ({ createResolvers }) => {
             socialLinks: source.siteMetadata.socialLinks || [],
             twitterUsername: source.siteMetadata.twitterUsername || "@sigpwny",
             timezone: source.siteMetadata.timezone || "America/Chicago",
-          }
+          };
         },
       },
     },
-  }
-  createResolvers(resolvers)
-}
+  };
+  createResolvers(resolvers);
+};
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage, createRedirect } = actions
+  const { createPage, createRedirect } = actions;
   const result = await graphql(`
     query GatsbyNode {
-      allMeeting(sort: {time_start: ASC}) {
+      allMeeting(sort: { time_start: ASC }) {
         meetings: nodes {
           id
           slug
@@ -302,7 +364,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allEvent(sort: {time_start: ASC}) {
+      allEvent(sort: { time_start: ASC }) {
         events: nodes {
           id
           slug
@@ -315,7 +377,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allPublication(sort: {time_start: ASC}) {
+      allPublication(sort: { time_start: ASC }) {
         publications: nodes {
           id
           slug
@@ -357,20 +419,20 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `)
+  `);
 
   if (result.errors) {
-    throw result.errors
+    throw result.errors;
   }
 
-  const template_meeting = path.resolve(`./src/templates/template-meeting.tsx`)
-  const template_event = path.resolve(`./src/templates/template-event.tsx`)
-  const template_publication = path.resolve(`./src/templates/template-publication.tsx`)
-  const template_page_md = path.resolve(`./src/templates/template-page_md.tsx`)
-  const template_redirect_external = path.resolve(`./src/templates/template-redirect-external.tsx`)
+  const template_meeting = path.resolve(`./src/templates/template-meeting.tsx`);
+  const template_event = path.resolve(`./src/templates/template-event.tsx`);
+  const template_publication = path.resolve(`./src/templates/template-publication.tsx`);
+  const template_page_md = path.resolve(`./src/templates/template-page_md.tsx`);
+  const template_redirect_external = path.resolve(`./src/templates/template-redirect-external.tsx`);
 
   // Generate external redirects
-  const redirects_external = result.data.allExternalJson.redirects
+  const redirects_external = result.data.allExternalJson.redirects;
   if (redirects_external.length > 0) {
     redirects_external.forEach((redirect) => {
       createPage({
@@ -380,12 +442,12 @@ exports.createPages = async ({ graphql, actions }) => {
           id: redirect.id,
         },
         trailingSlash: true,
-      })
-    })
+      });
+    });
   }
 
   // Generate internal redirects
-  const redirects_internal = result.data.allInternalJson.redirects
+  const redirects_internal = result.data.allInternalJson.redirects;
   if (redirects_internal.length > 0) {
     redirects_internal.forEach((redirect) => {
       // Generate server side redirects for internal routes
@@ -393,20 +455,20 @@ exports.createPages = async ({ graphql, actions }) => {
         fromPath: redirect.src.endsWith("/") ? redirect.src.slice(0, -1) : redirect.src,
         toPath: redirect.dst,
         statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
-      })
+      });
       createRedirect({
         fromPath: redirect.src.endsWith("/") ? redirect.src : redirect.src + "/",
         toPath: redirect.dst,
         statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
-      })
-    })
+      });
+    });
   }
 
-  const meetings = result.data.allMeeting.meetings
+  const meetings = result.data.allMeeting.meetings;
   if (meetings.length > 0) {
     meetings.forEach((meeting, index) => {
-      const prev_id = index === meetings.length - 1 ? null : meetings[index + 1].id
-      const next_id = index === 0 ? null : meetings[index - 1].id
+      const prev_id = index === meetings.length - 1 ? null : meetings[index + 1].id;
+      const next_id = index === 0 ? null : meetings[index - 1].id;
       createPage({
         path: meeting.slug,
         component: `${template_meeting}?__contentFilePath=${meeting.parent.internal.contentFilePath}`,
@@ -423,17 +485,17 @@ exports.createPages = async ({ graphql, actions }) => {
           fromPath: `${meeting.slug}slides`,
           toPath: meeting.slides.publicURL,
           statusCode: 301,
-        })
+        });
         createRedirect({
           fromPath: `${meeting.slug}slides/`,
           toPath: meeting.slides.publicURL,
           statusCode: 301,
-        })
+        });
       }
-    })
+    });
   }
 
-  const events = result.data.allEvent.events
+  const events = result.data.allEvent.events;
   if (events.length > 0) {
     events.forEach((event_) => {
       createPage({
@@ -443,11 +505,11 @@ exports.createPages = async ({ graphql, actions }) => {
           id: event_.id,
         },
         trailingSlash: true,
-      })
-    })
+      });
+    });
   }
 
-  const publications = result.data.allPublication.publications
+  const publications = result.data.allPublication.publications;
   if (publications.length > 0) {
     publications.forEach((publication) => {
       createPage({
@@ -457,11 +519,11 @@ exports.createPages = async ({ graphql, actions }) => {
           id: publication.id,
         },
         trailingSlash: true,
-      })
-    })
+      });
+    });
   }
 
-  const pages_md = result.data.allPageMarkdown.pages_md
+  const pages_md = result.data.allPageMarkdown.pages_md;
   if (pages_md.length > 0) {
     pages_md.forEach((page_md) => {
       createPage({
@@ -471,7 +533,7 @@ exports.createPages = async ({ graphql, actions }) => {
           id: page_md.id,
         },
         trailingSlash: true,
-      })
-    })
+      });
+    });
   }
-}
+};

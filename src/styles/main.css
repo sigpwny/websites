@@ -34,6 +34,25 @@ p {
 }
 @add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
 
+/* Hide text layer of PDF */
+.react-pdf__Page__textContent  {
+  color: transparent;
+  opacity: 0.5;
+}
+.react-pdf__Page__textContent ::selection {
+  background: #0000ff;
+}
+
+.react-pdf__Page {
+  background-color: transparent !important;
+}
+
+/* Correctly scale */
+.react-pdf__Page__canvas, .react-pdf__Page__textContent, .react-pdf__Page__annotations {
+  max-width: 100%;
+  height: auto !important;
+}
+
 html {
   overflow-x: hidden;
   overflow-y: scroll;
