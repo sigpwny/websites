@@ -33,6 +33,7 @@ const IndexPage = ({ data }: Props) => {
     heading: convertDate(event.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone),
     title: event.title,
     image: event.image as Image,
+    overlay_image: event.overlay_image as Image,
     link: event.slug!
   }))
   const publication_cards = data.allPublication.publications.map((publication: Publication) => ({
@@ -143,6 +144,14 @@ export const query = graphql`
         time_start
         time_close
         image {
+          path {
+            childImageSharp {
+              gatsbyImageData(width: 600, quality: 100)
+            }
+          }
+          alt
+        }
+        overlay_image {
           path {
             childImageSharp {
               gatsbyImageData(width: 600, quality: 100)

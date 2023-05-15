@@ -34,7 +34,6 @@ p {
 }
 @add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
 
-
 /* Hide text layer of PDF */
 .react-pdf__Page__textContent  {
   color: transparent;
@@ -52,17 +51,6 @@ p {
 .react-pdf__Page__canvas, .react-pdf__Page__textContent, .react-pdf__Page__annotations {
   max-width: 100%;
   height: auto !important;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 
 html {
@@ -220,6 +208,15 @@ a:hover {
   -ms-overflow-style: auto;
   scrollbar-color: var(--color-primary) transparent;
   scrollbar-width: thin;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 /*
 Fix for Safari not rendering border-radius on overflow: hidden
