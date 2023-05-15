@@ -95,18 +95,20 @@ const MeetingTemplate = ({ data, children }: Props) => {
           )}
           {curr.slides?.publicURL && !curr.recording && (
             <div className="flex flex-col items-center">
-              <Document className="flex flex-col" file={curr.slides.publicURL} onLoadError={console.error} onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
+              <Document className="flex flex-col" file={curr.slides.publicURL} 
+              onLoadError={console.error} 
+              onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
                 <Page className="m-1" pageNumber={pageNumber} />
               </Document>
               <div>
-                  <button className="text-white mx-2"
+                  <button className={pageNumber <= 1 ? "text-gray-500 mx-2" : "text-white mx-2"}
                   disabled={pageNumber <= 1}
                   onClick={() => setPageNumber(pageNumber - 1)}
                   >
                   <LeftSvg />
                   </button>
                 {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-                <button className="text-white mx-2"
+                <button className={pageNumber >= numPages ? "text-gray-500 mx-2" : "text-white mx-2"}
                   disabled={pageNumber >= numPages}
                   onClick={() => setPageNumber(pageNumber + 1)}
                   >

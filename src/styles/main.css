@@ -44,6 +44,16 @@ p {
   background: #0000ff;
 }
 
+.react-pdf__Page {
+  background-color: transparent !important;
+}
+
+/* Correctly scale */
+.react-pdf__Page__canvas, .react-pdf__Page__textContent, .react-pdf__Page__annotations {
+  max-width: 100%;
+  height: auto !important;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
