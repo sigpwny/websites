@@ -11,5 +11,5 @@ tags:
 time_close: ''
 time_start: 2019-09-12T02:15:00.000000Z
 title: 2019 Natas With Joseph
-week_number: 0
+week_number: 6
 ---

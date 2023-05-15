@@ -13,5 +13,5 @@ tags:
 time_close: ''
 time_start: 2018-12-07T02:15:00.000000Z
 title: Intro to Networking
-week_number: 0
+week_number: 7
 ---

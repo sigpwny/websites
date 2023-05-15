@@ -15,5 +15,5 @@ tags:
 time_close: ''
 time_start: 2018-11-19T17:00:00.000000Z
 title: Intro to OpSec
-week_number: 0
+week_number: 6
 ---
