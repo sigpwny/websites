@@ -34,6 +34,18 @@ p {
 }
 @add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
 
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 html {
   overflow-x: hidden;
   overflow-y: scroll;

@@ -11,7 +11,7 @@ tags:
 - Netcat aka nc - An incredibly useful command tool for connecting to CTF challenges.
 - Wireshark - A GUI tool for analyzing network traffic on a packet level.
 time_close: ''
-time_start: '2018-12-07T02:15:00.000000Z'
+time_start: 2018-12-07T02:15:00.000000Z
 title: Intro to Networking
 week_number: 0
 ---

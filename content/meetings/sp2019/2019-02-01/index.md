@@ -9,7 +9,7 @@ tags:
 - SIGPwny as a group
 - CTFs
 time_close: ''
-time_start: '2019-02-01T02:15:00.000000Z'
+time_start: 2019-02-01T02:15:00.000000Z
 title: 2019 First Meeting
 week_number: 0
 ---

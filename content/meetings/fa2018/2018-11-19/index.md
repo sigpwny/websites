@@ -13,7 +13,7 @@ tags:
 - Many experience "security fatigue" as learn more about security, overwhelming or
   depressing them from all they need to keep track of
 time_close: ''
-time_start: '2018-11-19T17:00:00.000000Z'
+time_start: 2018-11-19T17:00:00.000000Z
 title: Intro to OpSec
 week_number: 0
 ---

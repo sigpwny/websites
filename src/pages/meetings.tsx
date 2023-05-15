@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Seo from "../components/Seo"
-import { weekNumber, convertDate } from "../utils/util"
+import { weekNumber, convertDate, formatSemester } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0]
@@ -21,44 +21,51 @@ export function Head() {
 }
 
 const MeetingsPage = ({ data }: Props) => {
-  const meetings = data.allMeeting.meetings
-  const meetingsBySemester: {[semester: string]: Meeting[]} = {}
-  meetings.forEach((meeting: Meeting) => {
-    const semester = meeting.semester!
-    if (meetingsBySemester[semester]) {
-      meetingsBySemester[semester].push(meeting)
-    } else {
-      meetingsBySemester[semester] = [meeting]
-    }
+  const meetingsBySemester = data.allMeeting.meetings
+  .reduce(
+    (acc, meeting) => {
+      const semester = meeting.semester
+      if (!semester) return acc
+      if (acc[semester]) {
+        acc[semester].push(meeting)
+      } else {
+        acc[semester] = [meeting]
+      }
+      return acc
+    }, {} as {[semester: string]: Meeting[]
   })
   return (
     <>
       <section id="meetings" className="pb-8">
         {/* <h1>Meetings</h1> */}
         <div className="flex flex-col panel mx-auto xl:w-2/3 lg:w-4/5">
-          {Object.keys(meetingsBySemester).map((semester: string) => {
+          {Object.entries(meetingsBySemester).map(([semester, meetings]) => {
             return (
               <>
-                <p className="font-bold text-2xl m-0">{semester}</p>
+                <p className="font-bold text-2xl m-0">{formatSemester(semester)}</p>
                 <div className="flex flex-col pb-2">
-                  {meetingsBySemester[semester].map((meeting: Meeting) => {
+                  {meetings.map((meeting: Meeting) => {
                     return (
                       <div className="flex flex-row gap-x-4">
                         <div className="hidden sm:flex sm:flex-col min-w-max ">
                           <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone)}</span>
                         </div>
-                        <div className="flex flex-col md:w-3/5 truncate">
+                        <div className="flex flex-row w-full md:w-3/5 truncate justify-between">
                           <Link to={`${meeting.slug}`} className="truncate">
                             <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
                           </Link>
+                          <div className="flex flex-row">
+                            {meeting.recording &&
+                            <a className="mx-2" href={meeting.recording}>
+                              <YouTubeSvg />
+                            </a>}
+                            {meeting.slides?.publicURL && <Link className="mx-2" to={meeting.slides.publicURL}>
+                              <PdfSvg />
+                            </Link>}
+                          </div>
                         </div>
-                        <div className="hidden md:flex md:flex-col min-w-[1/5] truncate">
-                          {meeting.credit.length > 0 ? (
-                            // print each credit, separated by a comma
-                            meeting.credit.map((credit: string, index: number) => (
-                              <>{credit}{index < meeting.credit.length - 1 ? ", " : ""}</>
-                            ))
-                          ) : "SIGPwny" }
+                        <div className="hidden md:flex md:flex-col md:w-1/5 overflow-x-auto whitespace-nowrap no-scrollbar">
+                          {meeting.credit.length > 0 ? meeting.credit.join(', ') : "SIGPwny" }
                         </div>
                       </div>
                     )
