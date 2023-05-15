@@ -35,6 +35,15 @@ p {
 @add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
 
 
+/* Hide text layer of PDF */
+.react-pdf__Page__textContent  {
+  color: transparent;
+  opacity: 0.5;
+}
+.react-pdf__Page__textContent ::selection {
+  background: #0000ff;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
     display: none;

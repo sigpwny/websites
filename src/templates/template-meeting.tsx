@@ -1,11 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
-
+import { Document, Page } from 'react-pdf'
 import MeetingSidebar from "../components/MeetingSidebar"
 import Seo from "../components/Seo"
 import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util"
-import { PdfSvg, YouTubeSvg } from "../components/Icons"
+import { LeftSvg, PdfSvg, RightSvg, YouTubeSvg } from "../components/Icons"
 
 interface Props {
   data: Queries.MeetingTemplateQuery
@@ -39,13 +39,17 @@ const MeetingTemplate = ({ data, children }: Props) => {
   if (!curr) {
     throw new Error(`invalid argument: "curr" meeting is null`)
   }
+
+  const [numPages, setNumPages] = useState(1)
+  const [pageNumber, setPageNumber] = useState(1)
+
   return (
     <>
       <div className="flex flex-row gap-x-4">
         <aside className="xl:w-96 lg:w-80 lg:block hidden">
           <MeetingSidebar />
         </aside>
-        <div className="panel w-100 grow">
+        <div className="panel w-full grow">
           <p className="font-mono m-0">
             {curr.semester} Week {weekNumber(curr.week_number)} &bull; {convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)}
           </p>
@@ -76,7 +80,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
               </a>
             ) : null}
           </div>
-          {curr.recording ? (
+          {curr.recording && (
             (() => {
               const url = getYouTubeEmbedUrl(curr.recording)
               return url ? (
@@ -88,7 +92,29 @@ const MeetingTemplate = ({ data, children }: Props) => {
                 />
               ) : null
             })()
-          ) : null}
+          )}
+          {curr.slides?.publicURL && !curr.recording && (
+            <div className="flex flex-col items-center">
+              <Document className="flex flex-col" file={curr.slides.publicURL} onLoadError={console.error} onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
+                <Page className="m-1" pageNumber={pageNumber} />
+              </Document>
+              <div>
+                  <button className="text-white mx-2"
+                  disabled={pageNumber <= 1}
+                  onClick={() => setPageNumber(pageNumber - 1)}
+                  >
+                  <LeftSvg />
+                  </button>
+                {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+                <button className="text-white mx-2"
+                  disabled={pageNumber >= numPages}
+                  onClick={() => setPageNumber(pageNumber + 1)}
+                  >
+                  <RightSvg />
+                </button>
+              </div>
+            </div>
+          )}
           <MDXProvider>
             {children}
           </MDXProvider>
