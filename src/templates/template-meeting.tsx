@@ -59,6 +59,14 @@ const MeetingTemplate = ({ data, children }: Props) => {
             ) : "SIGPwny" }
           </p>
           <div className="grid sm:flex sm:flex-row gap-2 mb-4">
+            {curr.recording ? (
+              <a className="btn-primary" href={curr.recording}>
+                <YouTubeSvg />
+                <p className="inline align-middle m-0 ml-2">
+                  Watch video
+                </p>
+              </a>
+            ) : null}
             {curr.slides && curr.slides.publicURL ? (
               <Link className="btn-primary" to={curr.slides.publicURL}>
                 <PdfSvg />
@@ -66,14 +74,6 @@ const MeetingTemplate = ({ data, children }: Props) => {
                   Download slides
                 </p>
               </Link>
-            ) : null}
-            {curr.recording ? (
-              <a className="btn-primary xs:grow sm:grow-0" href={curr.recording}>
-                <YouTubeSvg />
-                <p className="inline align-middle m-0 ml-2">
-                  Watch video
-                </p>
-              </a>
             ) : null}
           </div>
           {curr.recording ? (
