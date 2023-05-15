@@ -163,7 +163,7 @@ export const query = graphql`
       }
     }
     allPublication(
-      sort: {time_start: DESC}
+      sort: {date: DESC}
       limit: 10
     ) {
       publications: nodes {
@@ -171,7 +171,7 @@ export const query = graphql`
         credit
         publication_type
         publisher
-        time_start
+        date
         image {
           path {
             childImageSharp {

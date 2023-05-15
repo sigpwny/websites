@@ -1,91 +1,91 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
-import { calculateSemester } from "./src/utils/util";
+import { calculateSemester } from './src/utils/util';
 
 const contentTypes = {
   // Mdx
   meetings: {
-    typename: "Meeting",
-    requiredFields: ["title", "time_start", "week_number", "credit"],
+    typename: 'Meeting',
+    requiredFields: ['title', 'time_start', 'week_number', 'credit'],
     fields: [
-      "title",
-      "time_start",
-      "time_close",
-      "week_number",
-      "credit",
-      "featured",
-      "location",
-      "image",
-      "slides",
-      "recording",
-      "assets",
-      "tags",
-      "semester",
-      "slug",
+      'title',
+      'time_start',
+      'time_close',
+      'week_number',
+      'credit',
+      'featured',
+      'location',
+      'image',
+      'slides',
+      'recording',
+      'assets',
+      'tags',
+      'semester',
+      'slug',
     ],
   },
   events: {
-    typename: "Event",
-    requiredFields: ["title", "series", "description", "time_start"],
+    typename: 'Event',
+    requiredFields: ['title', 'series', 'description', 'time_start'],
     fields: [
-      "title",
-      "series",
-      "description",
-      "time_start",
-      "time_close",
-      "location",
-      "image",
-      "overlay_image",
-      "links",
-      "rating_weight",
-      "stats",
-      "slug",
+      'title',
+      'series',
+      'description',
+      'time_start',
+      'time_close',
+      'location',
+      'image',
+      'overlay_image',
+      'links',
+      'rating_weight',
+      'stats',
+      'slug',
     ],
   },
   admins: {
-    typename: "Admin",
-    requiredFields: ["name", "image", "role", "weight", "bio"],
-    fields: ["name", "bio", "image", "handle", "role", "weight", "links"],
+    typename: 'Admin',
+    requiredFields: ['name', 'image', 'role', 'weight', 'bio'],
+    fields: ['name', 'bio', 'image', 'handle', 'role', 'weight', 'links'],
   },
   alumni: {
-    typename: "Alum",
-    requiredFields: ["name", "image", "role", "weight"],
-    fields: ["name", "image", "handle", "role", "period", "work", "weight", "links"],
+    typename: 'Alum',
+    requiredFields: ['name', 'image', 'role', 'weight'],
+    fields: ['name', 'image', 'handle', 'role', 'period', 'work', 'weight', 'links'],
   },
   helpers: {
-    typename: "Helper",
-    requiredFields: ["name", "image", "role", "weight"],
-    fields: ["name", "image", "handle", "role", "weight", "links"],
+    typename: 'Helper',
+    requiredFields: ['name', 'image', 'role', 'weight'],
+    fields: ['name', 'image', 'handle', 'role', 'weight', 'links'],
   },
   publications: {
-    typename: "Publication",
-    requiredFields: ["title", "credit", "publication_type", "time_start", "image"],
+    typename: 'Publication',
+    requiredFields: ['title', 'credit', 'publication_type', 'date', 'image'],
     fields: [
-      "title",
-      "credit",
-      "publication_type",
-      "publisher",
-      "time_start",
-      "description",
-      "image",
-      "primary_link",
-      "other_links",
-      "tags",
-      "slug",
+      'title',
+      'credit',
+      'publication_type',
+      'publisher',
+      'date',
+      'description',
+      'image',
+      'primary_link',
+      'other_links',
+      'tags',
+      'slug',
     ],
   },
   pages_md: {
-    typename: "PageMarkdown",
-    requiredFields: ["title"],
-    fields: ["title", "no_background", "slug"],
+    typename: 'PageMarkdown',
+    requiredFields: ['title'],
+    fields: ['title', 'no_background', 'slug'],
   },
 };
 
 // https://github.com/react-pdf-viewer/react-pdf-viewer/issues/497#issuecomment-812905172
 // https://github.com/wojtekmaj/react-pdf/issues/874#issuecomment-1539023628
 exports.onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions }) => {
-  if (stage === "build-html" || stage === "develop-html") {
+  if (stage === 'build-html' || stage === 'develop-html') {
     actions.setWebpackConfig({
       module: {
         rules: [
@@ -101,7 +101,7 @@ exports.onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions }) =>
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
   const { createNode } = actions;
-  if (node.internal.type === "Mdx") {
+  if (node.internal.type === 'Mdx') {
     const fileNode = getNode(node.parent);
     const sourceInstanceName = fileNode.sourceInstanceName;
     const contentType = Object.keys(contentTypes).find((source) => source === sourceInstanceName);
@@ -112,55 +112,55 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
       if (
         node.frontmatter[field] === null ||
         node.frontmatter[field] === undefined ||
-        node.frontmatter[field] === ""
+        node.frontmatter[field] === ''
       ) {
         throw new Error(`"${field}" is required for ${fileNode.absolutePath}`);
       }
     }
 
-    if ("image" in requiredFields) {
+    if ('image' in requiredFields) {
       if (
         node.frontmatter.image.path === null ||
         node.frontmatter.image.path === undefined ||
-        node.frontmatter.image.path === "" ||
+        node.frontmatter.image.path === '' ||
         node.frontmatter.image.alt === null ||
         node.frontmatter.image.alt === undefined ||
-        node.frontmatter.image.alt === ""
+        node.frontmatter.image.alt === ''
       ) {
         throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`);
       }
     }
 
     let slug, semester;
-    if (typename === "Meeting") {
+    if (typename === 'Meeting') {
       semester = calculateSemester(node.frontmatter.time_start);
-      const filePathSemester = fileNode.relativePath.split("/")[0];
+      const filePathSemester = fileNode.relativePath.split('/')[0];
       if (semester.toLowerCase() != filePathSemester.toLowerCase()) {
         console.warn(
           `Semester "${semester}" does not match directory "${filePathSemester}" for ${fileNode.absolutePath}`,
         );
       }
       slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`;
-    } else if (typename === "Event") {
+    } else if (typename === 'Event') {
       slug = `/events/${path.parse(fileNode.relativePath).dir}/`;
       /* Custom slug field handling */
-    } else if (typename === "Publication") {
+    } else if (typename === 'Publication') {
       if (node.frontmatter.slug) {
         slug = node.frontmatter.slug;
       } else {
         const parsedPath = path.parse(fileNode.relativePath);
-        if (parsedPath.name === "index") {
+        if (parsedPath.name === 'index') {
           slug = `/publications/${parsedPath.dir}/`;
         } else {
           slug = `/publications/${path.join(parsedPath.dir, parsedPath.name)}`;
         }
       }
-    } else if (typename === "PageMarkdown") {
+    } else if (typename === 'PageMarkdown') {
       if (node.frontmatter.slug) {
         slug = node.frontmatter.slug;
       } else {
         const parsedPath = path.parse(fileNode.relativePath);
-        if (parsedPath.name === "index") {
+        if (parsedPath.name === 'index') {
           slug = `/${parsedPath.dir}/`;
         } else {
           slug = `/${path.join(parsedPath.dir, parsedPath.name)}`;
@@ -269,7 +269,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       credit: [String!]!
       publication_type: String!
       publisher: String
-      time_start: Date! @dateformat
+      date: Date! @dateformat
       description: String
       image: ImageAlt!
       primary_link: String
@@ -327,15 +327,15 @@ exports.createResolvers = ({ createResolvers }) => {
           // and the info object contains information about the field being queried.
           // You can return any data that you want to be included in the siteMetadata field.
           return {
-            title: source.siteMetadata.title || "SIGPwny",
-            siteUrl: source.siteMetadata.siteUrl || "https://sigpwny.com",
-            description: source.siteMetadata.description || "",
-            image: source.siteMetadata.image || "",
+            title: source.siteMetadata.title || 'SIGPwny',
+            siteUrl: source.siteMetadata.siteUrl || 'https://sigpwny.com',
+            description: source.siteMetadata.description || '',
+            image: source.siteMetadata.image || '',
             navLinks: source.siteMetadata.navLinks || [],
             navCallToActionLinks: source.siteMetadata.navCallToActionLinks || [],
             socialLinks: source.siteMetadata.socialLinks || [],
-            twitterUsername: source.siteMetadata.twitterUsername || "@sigpwny",
-            timezone: source.siteMetadata.timezone || "America/Chicago",
+            twitterUsername: source.siteMetadata.twitterUsername || '@sigpwny',
+            timezone: source.siteMetadata.timezone || 'America/Chicago',
           };
         },
       },
@@ -377,7 +377,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allPublication(sort: { time_start: ASC }) {
+      allPublication(sort: { date: ASC }) {
         publications: nodes {
           id
           slug
@@ -452,12 +452,12 @@ exports.createPages = async ({ graphql, actions }) => {
     redirects_internal.forEach((redirect) => {
       // Generate server side redirects for internal routes
       createRedirect({
-        fromPath: redirect.src.endsWith("/") ? redirect.src.slice(0, -1) : redirect.src,
+        fromPath: redirect.src.endsWith('/') ? redirect.src.slice(0, -1) : redirect.src,
         toPath: redirect.dst,
         statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
       });
       createRedirect({
-        fromPath: redirect.src.endsWith("/") ? redirect.src : redirect.src + "/",
+        fromPath: redirect.src.endsWith('/') ? redirect.src : redirect.src + '/',
         toPath: redirect.dst,
         statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
       });
@@ -478,7 +478,7 @@ exports.createPages = async ({ graphql, actions }) => {
           next_id,
         },
         trailingSlash: true,
-      })
+      });
       // Generate /slides and /slides/ redirect for each meeting
       if (meeting.slides && meeting.slides.publicURL) {
         createRedirect({

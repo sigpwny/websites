@@ -55,7 +55,7 @@ export const query = graphql`
       credit
       publication_type
       publisher
-      time_start
+      date
       description
       image {
         path {
