@@ -40,7 +40,9 @@ const PublicationTemplate = ({ data, children }: Props) => {
       <h1>{publication.title}</h1>
       <p>{publication.description}</p>
       <MDXProvider>
-        {children}
+        <div className="md-root">
+          {children}
+        </div>
       </MDXProvider>
     </div>
   )

@@ -39,7 +39,9 @@ const EventTemplate = ({ data, children }: Props) => {
       <h1>{data.event_.title}</h1>
       <p>{data.event_.description}</p>
       <MDXProvider>
-        {children}
+        <div className="md-root">
+          {children}
+        </div>
       </MDXProvider>
     </div>
   )
