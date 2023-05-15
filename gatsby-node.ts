@@ -297,6 +297,9 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
+          slides {
+            publicURL
+          }
         }
       }
       allEvent(sort: {time_start: ASC}) {
@@ -414,6 +417,19 @@ exports.createPages = async ({ graphql, actions }) => {
         },
         trailingSlash: true,
       })
+      // Generate /slides and /slides/ redirect for each meeting
+      if (meeting.slides && meeting.slides.publicURL) {
+        createRedirect({
+          fromPath: `${meeting.slug}slides`,
+          toPath: meeting.slides.publicURL,
+          statusCode: 301,
+        })
+        createRedirect({
+          fromPath: `${meeting.slug}slides/`,
+          toPath: meeting.slides.publicURL,
+          statusCode: 301,
+        })
+      }
     })
   }
 
