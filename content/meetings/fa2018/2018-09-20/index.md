@@ -1,6 +1,6 @@
 ---
 credit:
-- Shaoyie
+- Shao Yie Soh
 featured: false
 recording: ''
 slides: shells.pdf
