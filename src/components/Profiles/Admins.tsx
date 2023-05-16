@@ -6,7 +6,7 @@ type Admin = Queries.AdminProfilesQuery["allAdmin"]["admins"][0]
 const AdminProfiles = () => {
   const data: Queries.AdminProfilesQuery = useStaticQuery(graphql`
     query AdminProfiles {
-      allAdmin(sort: [{weight: ASC}, {name: ASC}]) {
+      allAdmin(sort: [{weight: DESC}, {name: ASC}]) {
         admins: nodes {
           name
           bio

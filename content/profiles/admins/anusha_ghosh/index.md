@@ -5,7 +5,7 @@ image:
   path: hzpaoez7_400x400.jpg
   alt: Sunflower
 role: President
-weight: 1
+weight: 10
 handle: ""
 links:
   twitter: 0xh3110ca
