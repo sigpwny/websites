@@ -107,7 +107,7 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string", hint: ''}
       - {label: "Credit", name: "credit", widget: "list", hint: ''}
-      - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news", "other"], hint: ''}
+      - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news", "CVE"], hint: ''}
       - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", hint: ''}
       - {label: "Thumbnail Image", name: "image", widget: "object", fields: [
         {label: "Image Upload", name: "path", widget: "image", hint: "", choose_url: false},
