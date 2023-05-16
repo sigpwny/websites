@@ -1,7 +1,7 @@
 ---
 title: "ECE Newsroom: Linux Kernel Contributions"
 credit:
-  - Yifei-Zhu
+  - '"Yifei Zhu"'
 publication_type: news
 date: 2022-06-01
 image:
