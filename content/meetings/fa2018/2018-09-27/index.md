@@ -1,6 +1,6 @@
 ---
 credit:
-- Josh Park
+- Matt Dyas
 featured: false
 recording: ''
 slides: intro_to_pwn.pdf
@@ -12,9 +12,9 @@ tags:
 - gdb
 - pwntools
 time_close: ''
-time_start: 2018-11-06T18:00:00.000000Z
-title: Intro to Pwn
-week_number: 10
+time_start: 2018-09-27T18:00:00.000000Z
+title: Intro to PWN
+week_number: 4
 ---
 ## Meeting Summary
 - Types of vulnerabilities in binaries (buffer overflow)

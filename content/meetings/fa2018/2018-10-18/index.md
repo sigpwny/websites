@@ -1,6 +1,6 @@
 ---
 credit:
-- Perditor
+- Sebastian Chlopecki
 featured: false
 recording: ''
 slides: intro_to_web.pdf
@@ -8,7 +8,7 @@ tags:
 - web
 - intro
 time_close: ''
-time_start: 2018-10-19T18:00:00.000000Z
+time_start: 2018-10-18T18:00:00.000000Z
 title: Intro To Web
 week_number: 7
 ---
