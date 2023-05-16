@@ -1,6 +1,6 @@
 ---
 name: Hassam Uddin
-bio: "Hey I'm Hassam! I'm a Sophomore in CS interested in all things
+bio: "Hey I'm Hassam! I'm a sophomore in CS interested in all things
   cryptography, theory, math, and compilers. "
 image:
   path: hassam-cropped-1-.jpg
