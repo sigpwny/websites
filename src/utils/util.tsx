@@ -19,6 +19,17 @@ export function calculateSemester(input_date: string): string {
   return "Unknown"
 }
 
+export function formatSemester(semester: string): string {
+  const season = semester.slice(0, 2)
+  const year = semester.slice(2, 6)
+  if (season === "SP") {
+    return `Spring ${year}`
+  } else if (season === "FA") {
+    return `Fall ${year}`
+  }
+  return semester
+}
+
 export function convertDate(input_date: string, format: string, local_tz: string): string {
   dayjs.extend(utc)
   dayjs.extend(timezone)

@@ -33,10 +33,13 @@ We are only using CommonMark, which does not support ~~strikethrough text~~ or _
 
 > This is quote text
 
-Here is some `code` text.
+Here is some `code` text. This is some syntax highlighted `python>print('hi')` text.
 
-```
-This is a code block
+
+```js
+if (highlighted == true) {
+    console.log("Awesome") // ?
+}
 ```
 
 Here is an unordered list:

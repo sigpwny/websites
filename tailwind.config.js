@@ -7,18 +7,20 @@ module.exports = {
     "./content/**/*.{md,mdx}",
   ],
   theme: {
-    colors: {
-      primary: "var(--color-primary)",
-      secondary: "var(--color-secondary)",
-      background: "var(--color-background)",
-      surface: "var(--color-surface)",
-      text: "var(--color-text)",
-      transparent: "transparent",
+    extend: {
+      // https://stackoverflow.com/a/64200199/8761914
+      colors: {
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        background: "var(--color-background)",
+        surface: "var(--color-surface)",
+        text: "var(--color-text)",
+        transparent: "transparent",
+      },
     },
     container: {
       center: true,
     },
-    extend: {},
     fontFamily: {
       mono: [
         "Consolas",
@@ -29,11 +31,9 @@ module.exports = {
         "SFMono-Regular",
         "Menlo",
         "DejaVu Sans Mono",
-        "monospace"
+        "monospace",
       ],
     },
   },
-  plugins: [
-    require("@tailwindcss/line-clamp"),
-  ],
-}
+  plugins: [require("@tailwindcss/line-clamp")],
+};

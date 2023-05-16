@@ -33,6 +33,7 @@ const IndexPage = ({ data }: Props) => {
     heading: convertDate(event.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone),
     title: event.title,
     image: event.image as Image,
+    overlay_image: event.overlay_image as Image,
     link: event.slug!
   }))
   const publication_cards = data.allPublication.publications.map((publication: Publication) => ({
@@ -150,11 +151,19 @@ export const query = graphql`
           }
           alt
         }
+        overlay_image {
+          path {
+            childImageSharp {
+              gatsbyImageData(width: 600, quality: 100)
+            }
+          }
+          alt
+        }
         slug
       }
     }
     allPublication(
-      sort: {time_start: DESC}
+      sort: {date: DESC}
       limit: 10
     ) {
       publications: nodes {
@@ -162,7 +171,7 @@ export const query = graphql`
         credit
         publication_type
         publisher
-        time_start
+        date
         image {
           path {
             childImageSharp {
