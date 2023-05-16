@@ -50,11 +50,6 @@
     "dst": "/meetings/"
   },
   {
-    "src": "/presentation-content/*",
-    "dst": "/meetings/:splat",
-    "type": "splat"
-  },
-  {
     "src": "/sponsor",
     "dst": "/sponsors/"
   },
