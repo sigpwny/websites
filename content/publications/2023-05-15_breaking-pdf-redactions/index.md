@@ -1,7 +1,7 @@
 ---
 title: Breaking PDF Redactions
 credit:
-  - Maxwell-Bland
+  - '"Maxwell Bland"'
 publication_type: news
 date: 2022-11-25
 image:
