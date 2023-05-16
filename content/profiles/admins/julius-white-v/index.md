@@ -6,7 +6,7 @@ image:
   path: headshot_outside.jpg
   alt: Coolest Picture of Julius Taken EVER!!
 role: "Admin "
-weight: 6
+weight: 12
 links:
   email: jwhit33@illinois.edu
   github: https://github.com/jcw515awsm
