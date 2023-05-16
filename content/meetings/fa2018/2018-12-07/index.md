@@ -5,13 +5,21 @@ featured: false
 recording: ''
 slides: intro_to_networking.pdf
 tags:
-- 'TCP Handshake - A TCP connection is started through a three-way handshake of packets:
-  SYN SYNACK ACK.'
-- TCP vs UDP - TCP is reliable and ordered. UDP is less reliable but faster.
-- Netcat aka nc - An incredibly useful command tool for connecting to CTF challenges.
-- Wireshark - A GUI tool for analyzing network traffic on a packet level.
+- networking
+- intro
+- tcp
+- udp
+- ip
+- netcat
+- scapy
+- wireshark
 time_close: ''
-time_start: 2018-12-07T02:15:00.000000Z
+time_start: 2018-12-07T18:00:00.000000Z
 title: Intro to Networking
-week_number: 7
+week_number: 14
 ---
+## Meeting Summary
+- TCP Handshake - A TCP connection is started through a three-way handshake of packets: SYN, SYN-ACK, ACK.
+- TCP vs UDP - TCP is reliable and ordered. UDP is less reliable but faster.
+- Netcat (aka `nc`) - An incredibly useful command tool for connecting to CTF challenges.
+- Wireshark - A GUI tool for analyzing network traffic on a packet level.
