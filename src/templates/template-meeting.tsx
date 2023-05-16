@@ -118,7 +118,9 @@ const MeetingTemplate = ({ data, children }: Props) => {
             </div>
           )}
           <MDXProvider>
-            {children}
+            <div className="md-root w-full max-w-prose mx-auto">
+              {children}
+            </div>
           </MDXProvider>
         </div>
       </div>

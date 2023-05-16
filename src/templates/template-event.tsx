@@ -122,7 +122,9 @@ const EventTemplate = ({ data, children }: Props) => {
             )}
             <section id="content" className="panel">
               <MDXProvider>
-                {children}
+                <div className="md-root">
+                  {children}
+                </div>
               </MDXProvider>
             </section>
           </div>

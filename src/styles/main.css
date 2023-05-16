@@ -1,58 +1,6 @@
 @tailwind base;
 
-h1 {
-  @apply text-4xl mb-2;
-}
-h2 {
-  @apply text-3xl mb-2;
-}
-h3 {
-  @apply text-2xl;
-}
-p {
-  @apply mb-2;
-}
-.container {
-  @apply md:px-8 px-4;
-}
-
-@tailwind components;
-@tailwind utilities;
-
-@define-mixin font-face $font-family, $font-file, $weight, $style: normal {
-  @font-face {
-    font-family: $(font-family);
-    src: url($(font-file) + '.eot');
-    src: url($(font-file) + '.eot?#iefix') format("embedded-opentype"),
-         url($(font-file) + '.woff') format("truetype"),
-         url($(font-file) + '.woff2') format("woff"),
-         url($(font-file) + '.ttf') format("woff2"),
-         url($(font-file) + '.svg#' + $(font-family)) format("svg");
-    font-weight: $(weight);
-    font-style: $(style);
-  }
-}
-@add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
-
-/* Hide text layer of PDF */
-.react-pdf__Page__textContent  {
-  color: transparent;
-  opacity: 0.5;
-}
-.react-pdf__Page__textContent ::selection {
-  background: #0000ff;
-}
-
-.react-pdf__Page {
-  background-color: transparent !important;
-}
-
-/* Correctly scale */
-.react-pdf__Page__canvas, .react-pdf__Page__textContent, .react-pdf__Page__annotations {
-  max-width: 100%;
-  height: auto !important;
-}
-
+/* Element overrides */
 html {
   overflow-x: hidden;
   overflow-y: scroll;
@@ -78,15 +26,17 @@ body {
 h1, h2, h3 {
   font-weight: bold;
 }
-.font-size-small {
-  font-size: var(--font-size-small);
+h1 {
+  @apply text-4xl mb-2;
 }
-.font-size-standard {
-  font-size: var(--font-size-standard);
+h2 {
+  @apply text-3xl mb-2;
 }
-.grape {
-  --color-primary: #cc66ee;
-  --color-secondary: #7e3a94;
+h3 {
+  @apply text-2xl;
+}
+p {
+  @apply mb-2;
 }
 hr {
   border-color: var(--color-text);
@@ -99,6 +49,38 @@ a:active {
 a:hover {
   color: var(--color-secondary);
   text-decoration: none;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@define-mixin font-face $font-family, $font-file, $weight, $style: normal {
+  @font-face {
+    font-family: $(font-family);
+    src: url($(font-file) + '.eot');
+    src: url($(font-file) + '.eot?#iefix') format("embedded-opentype"),
+         url($(font-file) + '.woff') format("truetype"),
+         url($(font-file) + '.woff2') format("woff"),
+         url($(font-file) + '.ttf') format("woff2"),
+         url($(font-file) + '.svg#' + $(font-family)) format("svg");
+    font-weight: $(weight);
+    font-style: $(style);
+  }
+}
+@add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
+
+.container {
+  @apply md:px-8 px-4;
+}
+.font-size-small {
+  font-size: var(--font-size-small);
+}
+.font-size-standard {
+  font-size: var(--font-size-standard);
+}
+.grape {
+  --color-primary: #cc66ee;
+  --color-secondary: #7e3a94;
 }
 .panel {
   background-color: var(--color-surface);
@@ -274,6 +256,22 @@ https://stackoverflow.com/questions/49066011/overflow-hidden-with-border-radius-
   margin-top: -30px;
 }
 /* End CSS Curly Brace */
+/* Hide text layer of PDF */
+.react-pdf__Page__textContent  {
+  color: transparent;
+  opacity: 0.5;
+}
+.react-pdf__Page__textContent ::selection {
+  background: #0000ff;
+}
+.react-pdf__Page {
+  background-color: transparent !important;
+}
+/* Correctly scale */
+.react-pdf__Page__canvas, .react-pdf__Page__textContent, .react-pdf__Page__annotations {
+  max-width: 100%;
+  height: auto !important;
+}
 
 /* Change null to * for debugging CSS */
 null {
