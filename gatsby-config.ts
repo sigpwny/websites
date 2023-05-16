@@ -13,9 +13,7 @@ const config: GatsbyConfig = {
       { name: "Events", link: "/events/" },
       { name: "Sponsors", link: "/sponsors/" },
     ],
-    navCallToActionLinks: [
-      { name: "Join", link: "/join/" },
-    ],
+    navCallToActionLinks: [{ name: "Join", link: "/join/" }],
     socialLinks: [
       { name: "Discord", link: "https://discord.gg/cWcZ6a9" },
       { name: "GitHub", link: "https://github.com/sigpwny" },
@@ -34,73 +32,73 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        "name": "pages",
-        "path": "./src/pages/"
+        name: "pages",
+        path: "./src/pages/",
       },
-      __key: "pages"
+      __key: "pages",
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        "name": "pages_md",
-        "path": "./src/pages_md/",
-        "ignore": [`**/.*`],
-      },
-    },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        "name": "meetings",
-        "path": "./content/meetings/",
-        "ignore": [`**/.*`],
+        name: "pages_md",
+        path: "./src/pages_md/",
+        ignore: [`**/.*`],
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        "name": "events",
-        "path": "./content/events/",
-        "ignore": [`**/.*`],
+        name: "meetings",
+        path: "./content/meetings/",
+        ignore: [`**/.*`],
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        "name": "publications",
-        "path": "./content/publications/",
-        "ignore": [`**/.*`],
+        name: "events",
+        path: "./content/events/",
+        ignore: [`**/.*`],
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        "name": "admins",
-        "path": "./content/profiles/admins/",
-        "ignore": [`**/.*`],
+        name: "publications",
+        path: "./content/publications/",
+        ignore: [`**/.*`],
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        "name": "alumni",
-        "path": "./content/profiles/alumni/",
-        "ignore": [`**/.*`],
+        name: "admins",
+        path: "./content/profiles/admins/",
+        ignore: [`**/.*`],
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        "name": "helpers",
-        "path": "./content/profiles/helpers/",
-        "ignore": [`**/.*`],
+        name: "alumni",
+        path: "./content/profiles/alumni/",
+        ignore: [`**/.*`],
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        "name": "redirects",
-        "path": "./content/redirects/",
-        "ignore": [`**/.*`],
+        name: "helpers",
+        path: "./content/profiles/helpers/",
+        ignore: [`**/.*`],
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "redirects",
+        path: "./content/redirects/",
+        ignore: [`**/.*`],
       },
     },
     "gatsby-plugin-image",
@@ -110,43 +108,54 @@ const config: GatsbyConfig = {
     "gatsby-transformer-json",
     "gatsby-transformer-sharp",
     {
-      resolve: "gatsby-plugin-mdx",
+      resolve: "gatsby-plugin-mdx", // https://github.com/gatsbyjs/gatsby/issues/37292
       options: {
         extensions: [".md", ".mdx"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: ">",
+              aliases: {},
+              showLineNumbers: false,
+            },
+          },
+        ],
       },
     },
     {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: "gatsby-plugin-manifest",
       options: {
-        "icon": "./src/images/logo/pwny8-48x48.png",
-        "icons": [
+        icon: "./src/images/logo/pwny8-48x48.png",
+        icons: [
           {
-            "src": "./src/images/logo/pwny8-32x32.png",
-            "sizes": "32x32",
-            "type": "image/png"
+            src: "./src/images/logo/pwny8-32x32.png",
+            sizes: "32x32",
+            type: "image/png",
           },
           {
-            "src": "./src/images/logo/pwny8-dark-128x128.png",
-            "sizes": "128x128",
-            "type": "image/png"
+            src: "./src/images/logo/pwny8-dark-128x128.png",
+            sizes: "128x128",
+            type: "image/png",
           },
           {
-            "src": "./src/images/logo/pwny8-dark-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
+            src: "./src/images/logo/pwny8-dark-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
           },
           {
-            "src": "./src/images/logo/pwny8-dark-256x256.png",
-            "sizes": "256x256",
-            "type": "image/png"
+            src: "./src/images/logo/pwny8-dark-256x256.png",
+            sizes: "256x256",
+            type: "image/png",
           },
           {
-            "src": "./src/images/logo/pwny8-dark-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
+            src: "./src/images/logo/pwny8-dark-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
           },
         ],
-      }
+      },
     },
     {
       resolve: "gatsby-plugin-sharp",
@@ -157,7 +166,7 @@ const config: GatsbyConfig = {
         },
       },
     },
-  ]
+  ],
 };
 
 export default config;

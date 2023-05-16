@@ -3,7 +3,7 @@ title: "The Big Rick: How I Rickrolled My High School District and Got Away With
 credit: ["Minh Duong"] # required
 publication_type: "talk" # required: "blog", "talk", "paper", "news"
 publisher: "DEF CON 30" # optional: name of publisher or conference
-time_start: 2022-08-13 00:00 # required: prefer time of actual event, not when posted
+date: 2022-08-13 # required: prefer time of actual event, not when posted
 description: | # optional: can be treated as an abstract
   Learn about IoT hacking, botnets, and ethical disclosure!
 image: # required

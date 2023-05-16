@@ -7,6 +7,16 @@ module.exports = {
     "./content/**/*.{md,mdx}",
   ],
   theme: {
+    extend: {
+      colors: {
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        background: "var(--color-background)",
+        surface: "var(--color-surface)",
+        text: "var(--color-text)",
+        transparent: "transparent",
+      },
+    },
     container: {
       center: true,
     },
@@ -20,21 +30,9 @@ module.exports = {
         "SFMono-Regular",
         "Menlo",
         "DejaVu Sans Mono",
-        "monospace"
+        "monospace",
       ],
     },
-    extend: {
-      colors: {
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        background: "var(--color-background)",
-        surface: "var(--color-surface)",
-        text: "var(--color-text)",
-        transparent: "transparent",
-      },
-    },
   },
-  plugins: [
-    require("@tailwindcss/line-clamp"),
-  ],
-}
+  plugins: [require("@tailwindcss/line-clamp")],
+};

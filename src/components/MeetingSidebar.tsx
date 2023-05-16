@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 
-import { weekNumber } from "../utils/util"
+import { weekNumber, formatSemester } from "../utils/util"
 
 type Meeting = Queries.MeetingSidebarQuery["allMeeting"]["meetings"][0]
 
@@ -33,7 +33,7 @@ const MeetingSidebar = () => {
       <div className="px-4 flex flex-col h-[75vh] overflow-y-auto custom-scrollbar">
         {Object.keys(meetingsBySemester).map((semester: string) => (
           <>
-            <p className="font-bold text-2xl m-0">{semester}</p>
+            <p className="font-bold text-2xl m-0">{formatSemester(semester)}</p>
             <div className="flex flex-col pb-2">
             {meetingsBySemester[semester].map((meeting: Meeting) => (
               <Link

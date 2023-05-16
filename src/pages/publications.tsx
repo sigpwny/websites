@@ -47,13 +47,13 @@ export default PublicationsPage
 
 export const query = graphql`
   query PublicationsPage {
-    allPublication(sort: {time_start: DESC}) {
+    allPublication(sort: {date: DESC}) {
       publications: nodes {
         title
         credit
         publication_type
         publisher
-        time_start
+        date
         image {
           path {
             childImageSharp {
