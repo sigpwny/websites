@@ -9,7 +9,7 @@ tags:
 - intro
 time_close: ''
 time_start: 2018-10-18T18:00:00.000000Z
-title: Intro To Web
+title: Intro to Web
 week_number: 7
 ---
 ## Meeting Summary
