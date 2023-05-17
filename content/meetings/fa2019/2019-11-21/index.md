@@ -1,8 +1,8 @@
 ---
 credit:
-- kuilin
+- SIGPwny
 featured: false
-location: ECEB 3013
+location: Siebel CS 1111
 recording: ''
 slides: discord.pdf
 tags:
@@ -11,7 +11,7 @@ tags:
 - osint
 - discord
 time_close: ''
-time_start: 2019-04-18T19:00:00.000000-05:00
+time_start: 2019-11-21T18:00:00.000000-06:00
 title: Discord Hacking
-week_number: 13
+week_number: 12
 ---

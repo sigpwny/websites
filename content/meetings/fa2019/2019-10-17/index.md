@@ -1,19 +1,19 @@
 ---
 credit:
-- Joshua Park
-- Ian Klatzco
+- Thomas Quig
 featured: false
+location: Siebel CS 1111
 recording: ''
-slides: intro_to_opsec.pdf
+slides: opsec.pdf
 tags:
 - osint
 - misc
 - opsec
 - intro
 time_close: ''
-time_start: 2018-11-15T18:00:00.000000Z
+time_start: 2019-10-17T18:00:00.000000-05:00
 title: Intro to OpSec
-week_number: 11
+week_number: 7
 ---
 ## Meeting Summary
 - *Threat modeling* is the process of identifying and ranking threats in order to dedicate time and effort accordingly
