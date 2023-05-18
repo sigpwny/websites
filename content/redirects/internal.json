@@ -58,6 +58,10 @@
     "dst": "/join/"
   },
   {
+    "src": "/writeups",
+    "dst": "/events/"
+  },
+  {
     "src": "/writeups/uiuctf2020",
     "dst": "/events/uiuctf/2020/"
   },
