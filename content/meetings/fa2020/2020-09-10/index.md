@@ -1,0 +1,16 @@
+---
+credit:
+- SIGPwny
+featured: false
+location: Zoom
+recording: ''
+slides: ''
+tags:
+- welcome
+- intro
+time_close: ''
+time_start: 2020-09-10T18:00:00.000000-05:00
+title: Introduction
+week_number: 2
+---
+There were no slides for this meeting - it was an informal Zoom gathering and welcoming!
