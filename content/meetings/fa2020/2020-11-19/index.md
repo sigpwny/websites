@@ -3,7 +3,7 @@ credit:
 - Thomas Quig
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/PgQ5sr2gOfw'
 slides: wireless.pdf
 tags:
 - networking
