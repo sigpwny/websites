@@ -32,6 +32,10 @@
     "dst": "https://sigpwny.github.io/pony-site/"
   },
   {
+    "src": "/pony-site",
+    "dst": "https://sigpwny.github.io/pony-site/"
+  },
+  {
     "src": "/oldest",
     "dst": "https://sigpwny.github.io/pony-site/old/"
   }
