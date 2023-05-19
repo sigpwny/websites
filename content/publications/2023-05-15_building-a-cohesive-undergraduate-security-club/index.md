@@ -4,6 +4,7 @@ credit:
   - Ian Klatzco
 publication_type: talk
 date: 2019-04-11
+date_: 2019-04-11
 image:
   path: unknown.png
   alt: blog screenshot
