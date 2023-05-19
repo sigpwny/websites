@@ -20,7 +20,7 @@ collections:
     public_folder: ""
     nested:
       depth: 100
-      summary: "{{date}} - Week {{week_number}}: {{title}}"
+      summary: "{{date_}} - Week {{week_number}}: {{title}}"
     fields:
       - {label: "Title", name: "title", hint: 'Example: "PWN II"', widget: "string"}
       - {label: "Meeting Start", name: "time_start", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Ensure date matches date in path."}
@@ -109,12 +109,13 @@ collections:
       - {label: "Credit", name: "credit", widget: "list", hint: ''}
       - {label: "Publisher", name: "publisher", widget: "string", hint: '', required: false}
       - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news", "CVE"], hint: ''}
-      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", hint: ''}
+      - {label: "Date", name: "date_", widget: "datetime", format: "YYYY-MM-DD", hint: ''}
       - {label: "Thumbnail Image", name: "image", widget: "object", fields: [
         {label: "Image Upload", name: "path", widget: "image", hint: "", choose_url: false},
          {label: "Alt text", name: "alt", widget: "string", hint: ""}]}
       - {label: "Primary Link", name: "primary_link", widget: "string", hint: ''}
       - {label: "Other Links", name: "other_links", widget: "list", hint: '', required: false}
       - {label: "Tags", name: "tags", widget: "list", hint: '', required: false}
-    slug: '{{year}}-{{month}}-{{day}}_{{slug}}'
+    slug: '{{date_}}_{{slug}}'
+    preview_path_date_field: "date_"
     path: '{{slug}}/index'
