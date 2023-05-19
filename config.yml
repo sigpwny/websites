@@ -110,6 +110,7 @@ collections:
       - {label: "Publisher", name: "publisher", widget: "string", hint: '', required: false}
       - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news", "other"], hint: ''}
       - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", hint: ''}
+      - {label: "Description", name: "description", widget: "string", hint: '', required: false}
       - {label: "Thumbnail Image", name: "image", widget: "object", fields: [
         {label: "Image Upload", name: "path", widget: "image", hint: "", choose_url: false},
          {label: "Alt text", name: "alt", widget: "string", hint: ""}]}
