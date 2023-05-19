@@ -1,5 +1,8 @@
 # [cms.sigpwny.com](https://cms.sigpwny.com/)
 
-This is a completely optional subsystem to easily manage [sigpwny/content](https://github.com/sigpwny/content). It is deployed on Netlify and uses Netlify CMS.
+> **Warning**  
+> Do not delete this branch unless you intend to permanently disable the CMS.
 
-GitHub OAuth is enabled by Netlify's OAuth manager, and only GitHub users with push access to [sigpwny/content](https://github.com/sigpwny/content) can update content.
+This is a completely optional subsystem to easily manage content types on the SIGPwny website. It is deployed on Netlify and uses Netlify CMS.
+
+In order to add a new user, the user must first attempt to create an account or sign in via GitHub. Once this is done, an admin can manually approve access to the CMS by granting the appropriate roles on [Netlify Identity](https://app.netlify.com/sites/cms-sigpwny-com/integrations/identity/netlify).
