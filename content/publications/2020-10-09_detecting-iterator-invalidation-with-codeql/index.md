@@ -4,7 +4,6 @@ credit:
   - Kevin Higgs
 publication_type: blog
 date: 2020-10-09
-date_: 2020-10-09
 image:
   path: unknown.png
   alt: blog screenshot
