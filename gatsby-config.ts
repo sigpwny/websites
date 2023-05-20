@@ -47,6 +47,14 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        name: 'images',
+        path: './src/images/',
+        ignore: [`**/.*`],
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         name: 'meetings',
         path: './content/meetings/',
         ignore: [`**/.*`],
@@ -107,23 +115,6 @@ const config: GatsbyConfig = {
     'gatsby-transformer-json',
     'gatsby-transformer-sharp',
     {
-      resolve: 'gatsby-plugin-mdx', // https://github.com/gatsbyjs/gatsby/issues/37292
-      options: {
-        extensions: ['.md', '.mdx'],
-        gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              classPrefix: 'language-',
-              inlineCodeMarker: '>',
-              aliases: {},
-              showLineNumbers: false,
-            },
-          },
-        ],
-      },
-    },
-    {
       resolve: 'gatsby-plugin-manifest',
       options: {
         icon: './src/images/logo/pwny8-48x48.png',
@@ -163,6 +154,30 @@ const config: GatsbyConfig = {
           quality: 100,
           breakpoints: [360, 480, 720, 1280, 1920],
         },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx', // https://github.com/gatsbyjs/gatsby/issues/37292
+      options: {
+        extensions: ['.md', '.mdx'],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: 'language-',
+              inlineCodeMarker: '>',
+              aliases: {},
+              showLineNumbers: false,
+            },
+          },
+          {
+            resolve: `gatsby-remark-images`, // must be after gatsby-plugin-sharp
+            options: {
+              quality: 50,
+              backgroundColor: 'none', // bruh
+            },
+          },
+        ],
       },
     },
   ],
