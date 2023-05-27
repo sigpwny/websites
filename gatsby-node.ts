@@ -1,86 +1,22 @@
-const path = require(`path`);
-const { createFilePath } = require(`gatsby-source-filesystem`);
+import path from 'path';
+import { createFilePath } from 'gatsby-source-filesystem';
+import { calculateSemester } from './src/utils/util'
 
-import { calculateSemester } from './src/utils/util';
+interface Field {
+  name: string;
+  required?: boolean;
+  fields?: Field[];
+}
 
-const contentTypes = {
-  // Mdx
-  meetings: {
-    typename: 'Meeting',
-    requiredFields: ['title', 'time_start', 'week_number', 'credit'],
-    fields: [
-      'title',
-      'time_start',
-      'time_close',
-      'week_number',
-      'credit',
-      'featured',
-      'location',
-      'image',
-      'slides',
-      'recording',
-      'assets',
-      'tags',
-      'semester',
-      'slug',
-    ],
-  },
-  events: {
-    typename: 'Event',
-    requiredFields: ['title', 'series', 'description', 'time_start'],
-    fields: [
-      'title',
-      'series',
-      'description',
-      'time_start',
-      'time_close',
-      'location',
-      'image',
-      'overlay_image',
-      'links',
-      'rating_weight',
-      'stats',
-      'slug',
-    ],
-  },
-  admins: {
-    typename: 'Admin',
-    requiredFields: ['name', 'image', 'role', 'weight', 'bio'],
-    fields: ['name', 'bio', 'image', 'handle', 'role', 'weight', 'links'],
-  },
-  alumni: {
-    typename: 'Alum',
-    requiredFields: ['name', 'image', 'role', 'weight'],
-    fields: ['name', 'image', 'handle', 'role', 'period', 'work', 'weight', 'links'],
-  },
-  helpers: {
-    typename: 'Helper',
-    requiredFields: ['name', 'image', 'role', 'weight'],
-    fields: ['name', 'image', 'handle', 'role', 'weight', 'links'],
-  },
-  publications: {
-    typename: 'Publication',
-    requiredFields: ['title', 'credit', 'publication_type', 'date', 'image'],
-    fields: [
-      'title',
-      'credit',
-      'publication_type',
-      'publisher',
-      'date',
-      'description',
-      'image',
-      'primary_link',
-      'other_links',
-      'tags',
-      'slug',
-    ],
-  },
-  pages_md: {
-    typename: 'PageMarkdown',
-    requiredFields: ['title'],
-    fields: ['title', 'no_background', 'slug'],
-  },
-};
+interface ContentNode {
+  type: string;
+  gatsbySourceInstanceName: string;
+  fields?: Field[];
+  computedFields?: {
+    name: string;
+    resolve: (node: any, file_node: any) => any;
+  }[];
+}
 
 // https://github.com/react-pdf-viewer/react-pdf-viewer/issues/497#issuecomment-812905172
 // https://github.com/wojtekmaj/react-pdf/issues/874#issuecomment-1539023628
@@ -99,91 +35,234 @@ exports.onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions }) =>
   }
 };
 
+function createSlug(base_dir: string, file_node: any, slug?: string) {
+  if (!slug) {
+    const parsed_path = path.parse(file_node.relativePath);
+    if (parsed_path.name === "index")
+      slug = `${base_dir}${parsed_path.dir}/`
+    else
+      slug = `${base_dir}${path.join(parsed_path.dir, parsed_path.name)}`
+  }
+  console.log(slug)
+  return slug
+}
+
+const content_node_types: ContentNode[] = [
+  {
+    type: "Meeting",
+    gatsbySourceInstanceName: "meetings",
+    fields: [
+      { name: "title", required: true },
+      { name: "time_start", required: true },
+      { name: "time_close" },
+      { name: "week_number", required: true },
+      { name: "credit", required: true },
+      { name: "featured" },
+      { name: "location" },
+      { name: "image", required: false,
+        fields: [
+          { name: "path", required: true },
+          { name: "alt", required: true },
+        ]
+      },
+      { name: "slides" },
+      { name: "recording" },
+      { name: "assets" },
+      { name: "tags" },
+    ],
+    computedFields: [
+      {
+        name: "semester", resolve: (node, file_node) => {
+          const semester = calculateSemester(node.frontmatter.time_start)
+          const semester_from_path = file_node.relativePath.split('/')[0];
+          if (semester.toLowerCase() != semester_from_path.toLowerCase()) {
+            console.warn(
+              `Calculated semester "${semester}" does not match directory "${semester_from_path}" for ${file_node.absolutePath}`,
+            );
+          }
+          return semester
+        }
+      },
+      { name: "slug", resolve: (node, file_node) => createSlug("/meetings/", file_node) },
+    ]
+  },
+  {
+    type: "Event",
+    gatsbySourceInstanceName: "events",
+    fields: [
+      { name: "title", required: true },
+      { name: "series", required: true },
+      { name: "description", required: true },
+      { name: "time_start", required: true },
+      { name: "time_close" },
+      { name: "location" },
+      { name: "image", required: false,
+        fields: [
+          { name: "path", required: true },
+          { name: "alt", required: true },
+        ]
+      },
+      { name: "overlay_image", required: false,
+        fields: [
+          { name: "path", required: true },
+          { name: "alt", required: true },
+        ]
+      },
+      { name: "links" },
+      { name: "rating_weight" },
+      { name: "stats" },
+    ],
+    computedFields: [
+      { name: "slug", resolve: (node, file_node) => createSlug("/events/", file_node) },
+    ]
+  },
+  {
+    type: "Publication",
+    gatsbySourceInstanceName: "publications",
+    fields: [
+      { name: "title", required: true },
+      { name: "credit", required: true },
+      { name: "publication_type", required: true },
+      { name: "publisher" },
+      { name: "date", required: true },
+      { name: "description" },
+      { name: "image", required: true,
+        fields: [
+          { name: "path", required: true },
+          { name: "alt", required: true },
+        ]
+      },
+      { name: "primary_link" },
+      { name: "other_links" },
+      { name: "tags" },
+    ],
+    computedFields: [
+      { name: "slug", resolve: (node, file_node) => createSlug("/publications/", file_node, node.frontmatter.slug) },
+    ]
+  },
+  {
+    type: "PageMarkdown",
+    gatsbySourceInstanceName: "pages_md",
+    fields: [
+      { name: "title", required: true },
+      { name: "no_background" },
+    ],
+    computedFields: [
+      { name: "slug", resolve: (node, file_node) => createSlug("/", file_node, node.frontmatter.slug) },
+    ]
+  },
+  {
+    type: "Admin",
+    gatsbySourceInstanceName: "admins",
+    fields: [
+      { name: "name", required: true },
+      { name: "bio" },
+      { name: "image", required: true,
+        fields: [
+          { name: "path", required: true },
+          { name: "alt", required: true },
+        ]
+      },
+      { name: "handle" },
+      { name: "role", required: true },
+      { name: "weight", required: true },
+      { name: "links" },
+    ]
+  },
+  {
+    type: "Alum",
+    gatsbySourceInstanceName: "alumni",
+    fields: [
+      { name: "name", required: true },
+      { name: "image", required: true,
+        fields: [
+          { name: "path", required: true },
+          { name: "alt", required: true },
+        ]
+      },
+      { name: "handle" },
+      { name: "role", required: true },
+      { name: "period" },
+      { name: "work" },
+      { name: "weight", required: true },
+      { name: "links" },
+    ]
+  },
+  {
+    type: "Helper",
+    gatsbySourceInstanceName: "helpers",
+    fields: [
+      { name: "name", required: true },
+      { name: "image", required: true,
+        fields: [
+          { name: "path", required: true },
+          { name: "alt", required: true },
+        ]
+      },
+      { name: "handle" },
+      { name: "role", required: true },
+      { name: "weight", required: true },
+      { name: "links" },
+    ]
+  }
+]
+
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
-  const { createNode } = actions;
+  const { createNode, createParentChildLink } = actions;
   if (node.internal.type === 'Mdx') {
-    const fileNode = getNode(node.parent);
-    const sourceInstanceName = fileNode.sourceInstanceName;
-    const contentType = Object.keys(contentTypes).find((source) => source === sourceInstanceName);
-    if (!contentType) return;
+    // Parent child relations:
+    // file_node (File) -> node (Mdx) -> content_node (type from content_node_types)
+    const file_node = getNode(node.parent);
+    const sourceInstanceName = file_node.sourceInstanceName;
 
-    const { typename, requiredFields, fields } = contentTypes[contentType];
-    for (const field of requiredFields) {
-      if (
-        node.frontmatter[field] === null ||
-        node.frontmatter[field] === undefined ||
-        node.frontmatter[field] === ''
-      ) {
-        throw new Error(`"${field}" is required for ${fileNode.absolutePath}`);
-      }
-    }
-
-    if ('image' in requiredFields) {
-      if (
-        node.frontmatter.image.path === null ||
-        node.frontmatter.image.path === undefined ||
-        node.frontmatter.image.path === '' ||
-        node.frontmatter.image.alt === null ||
-        node.frontmatter.image.alt === undefined ||
-        node.frontmatter.image.alt === ''
-      ) {
-        throw new Error(`"image.path" and "image.alt" are required for ${fileNode.absolutePath}`);
-      }
-    }
-
-    let slug, semester;
-    if (typename === 'Meeting') {
-      semester = calculateSemester(node.frontmatter.time_start);
-      const filePathSemester = fileNode.relativePath.split('/')[0];
-      if (semester.toLowerCase() != filePathSemester.toLowerCase()) {
-        console.warn(
-          `Semester "${semester}" does not match directory "${filePathSemester}" for ${fileNode.absolutePath}`,
-        );
-      }
-      slug = `/meetings/${path.parse(fileNode.relativePath).dir}/`;
-    } else if (typename === 'Event') {
-      slug = `/events/${path.parse(fileNode.relativePath).dir}/`;
-      /* Custom slug field handling */
-    } else if (typename === 'Publication') {
-      if (node.frontmatter.slug) {
-        slug = node.frontmatter.slug;
-      } else {
-        const parsedPath = path.parse(fileNode.relativePath);
-        if (parsedPath.name === 'index') {
-          slug = `/publications/${parsedPath.dir}/`;
-        } else {
-          slug = `/publications/${path.join(parsedPath.dir, parsedPath.name)}`;
+    // Get the content node type based on the source instance name
+    const content_node_type = content_node_types.find((node) => node.gatsbySourceInstanceName === sourceInstanceName);
+    if (!content_node_type) return;
+    const { type, fields, computedFields } = content_node_type;
+  
+    // Recursively check for required fields
+    const checkRequiredFields = (fields: Field[], node: any, prev_field_name: string) => {
+      for (const field of fields) {
+        if (field.required) {
+          if (
+            node[field.name] === null ||
+            node[field.name] === undefined ||
+            node[field.name] === ''
+          ) {
+            throw new Error(`"${prev_field_name}${field.name}" is required for ${file_node.absolutePath}`);
+          }
         }
+        if (field.fields && node[field.name])
+          checkRequiredFields(field.fields, node[field.name], prev_field_name + field.name + ".");
       }
-    } else if (typename === 'PageMarkdown') {
-      if (node.frontmatter.slug) {
-        slug = node.frontmatter.slug;
-      } else {
-        const parsedPath = path.parse(fileNode.relativePath);
-        if (parsedPath.name === 'index') {
-          slug = `/${parsedPath.dir}/`;
-        } else {
-          slug = `/${path.join(parsedPath.dir, parsedPath.name)}`;
-        }
-      }
-    }
+    };
 
-    createNode({
-      id: createNodeId(`${typename}-${node.id}`),
+    // Check MDX frontmatter
+    if (fields) checkRequiredFields(fields, node.frontmatter, "");
+
+    // Create content node
+    const content_node = {
+      id: createNodeId(`${type}-${node.id}`),
       parent: node.id,
       children: [],
       internal: {
-        type: typename,
+        type,
         content: JSON.stringify(node),
         contentDigest: createContentDigest(node),
       },
-      ...fields.reduce((obj, field) => {
-        obj[field] = node.frontmatter[field];
-        return obj;
+      // Add fields defined in content node
+      ...fields && fields.reduce((acc, field) => {
+        acc[field.name] = node.frontmatter[field.name];
+        return acc;
       }, {}),
-      semester,
-      slug,
-    });
+      // Add fields that need to be resolved/computed
+      ...computedFields && computedFields.reduce((acc, field) => {
+        acc[field.name] = field.resolve(node, file_node);
+        return acc;
+      }, {}),
+    }
+    createNode(content_node);
+    createParentChildLink({ parent: node, child: content_node });
   }
 };
 
