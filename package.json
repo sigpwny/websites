@@ -8,6 +8,7 @@
     "gatsby"
   ],
   "scripts": {
+    "dev": "gatsby develop",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
@@ -29,6 +30,7 @@
     "gatsby-plugin-postcss": "^6.3.0",
     "gatsby-plugin-sharp": "^5.10.0",
     "gatsby-plugin-sitemap": "^6.3.1",
+    "gatsby-remark-copy-linked-files": "^6.10.0",
     "gatsby-remark-images": "^7.10.0",
     "gatsby-remark-prismjs": "^7.9.0",
     "gatsby-source-filesystem": "^5.10.0",

@@ -1,4 +1,6 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Element overrides */
 html {
@@ -51,9 +53,6 @@ a:hover {
   text-decoration: none;
 }
 
-@tailwind components;
-@tailwind utilities;
-
 @define-mixin font-face $font-family, $font-file, $weight, $style: normal {
   @font-face {
     font-family: $(font-family);
@@ -71,6 +70,9 @@ a:hover {
 
 .container {
   @apply md:px-8 px-4;
+}
+.page-width {
+  @apply xl:w-2/3 lg:w-4/5;
 }
 .font-size-small {
   font-size: var(--font-size-small);

@@ -171,10 +171,17 @@ const config: GatsbyConfig = {
             },
           },
           {
-            resolve: `gatsby-remark-images`, // must be after gatsby-plugin-sharp
+            resolve: `gatsby-remark-images`,
             options: {
-              quality: 50,
-              backgroundColor: 'none', // bruh
+              backgroundColor: 'none',
+              maxWidth: 900,
+              quality: 100,
+            },
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+            options: {
+              destinationDir: 'static',
             },
           },
         ],
