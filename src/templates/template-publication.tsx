@@ -13,13 +13,13 @@ interface Props {
 export const Head = ({ data }: Props) => {
   const { publication } = data
   if (!publication) {
-    throw new Error(`invalid argument: "publication" is null`)
+    throw new Error(`invalid argument: "publication" is undefined`)
   }
   return (
     <Seo
       title={publication.title}
       description={publication.description ? publication.description : undefined}
-      image={publication.image && publication.image.path ? (
+      image={publication.image?.path ? (
         publication.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
       ) : undefined}
     />
@@ -29,7 +29,7 @@ export const Head = ({ data }: Props) => {
 const PublicationTemplate = ({ data, children }: Props) => {
   const { publication } = data
   if (!publication) {
-    throw new Error(`invalid argument: "publication" is null`)
+    throw new Error(`invalid argument: "publication" is undefined`)
   }
   return (
     <div className="panel">
@@ -40,7 +40,9 @@ const PublicationTemplate = ({ data, children }: Props) => {
       <h1>{publication.title}</h1>
       <p>{publication.description}</p>
       <MDXProvider>
-        {children}
+        <div className="md-root">
+          {children}
+        </div>
       </MDXProvider>
     </div>
   )

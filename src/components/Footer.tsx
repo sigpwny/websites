@@ -38,7 +38,7 @@ const Footer = () => {
             <div className="flex flex-col basis-1/2">
               <p className="font-bold m-0">Sitemap</p>
               {data.site?.siteMetadata?.navLinks?.map((item) => {
-                if (item && item.name && item.link) {
+                if (item?.name && item?.link) {
                   return (
                     <p className="inline align-middle m-0">
                       <Link to={item.link} key={item.name}>
@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="flex flex-col basis-1/2">
               <p className="font-bold m-0">Connect</p>
               {data.site?.siteMetadata?.socialLinks?.map((item) => {
-                if (item && item.name && item.link) {
+                if (item?.name && item?.link) {
                   return (
                     <span className="m-0">
                       <a

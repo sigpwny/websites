@@ -6,7 +6,7 @@ image:
   path: headshot.jpg
   alt: My profile image
 role: Admin
-weight: 47
+weight: 0
 handle: richyliu
 links:
   website: https://rliu.dev/

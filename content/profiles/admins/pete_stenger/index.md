@@ -1,6 +1,6 @@
 ---
 name: Pete Stenger
-bio: Hi! I'm a junior studying CS. I maintain the discord bot, as well as the
+bio: Hi! I'm a junior studying CS. I maintain the Discord bot, as well as the
   CTF infrastructure.
 image:
   path: headshot.png

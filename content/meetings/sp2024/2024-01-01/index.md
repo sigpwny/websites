@@ -27,7 +27,9 @@ tags:
 
 ###### Heading 6
 
-This is normal text. *This is italicized*. **This is bold**. __This is underlined__. *__**This is all of them**__*. ~~Strikethrough text~~.
+This is normal text. *This is italicized*. **This is bold**. ***This is all of them***.
+
+We are only using CommonMark, which does not support ~~strikethrough text~~ or __underlined text__. It's a work in progress.
 
 > This is quote text
 
@@ -40,16 +42,71 @@ if (highlighted == true) {
 }
 ```
 
-Here is a list:
+![An image!](./image.png)
+
+Here is an unordered list:
 - Item A
 	- Subitem 1
 		- How much
 		- lower
-			- can we go?
+		- can we go?
 	- Subitem 2
 - Item B
 	- Subitem 3
 	- Subitem 4
+
+Here is an ordered list:
+1. Item A
+	1. Subitem 1
+		1. How much
+		2. lower
+		3. can we go?
+	2. Subitem 2
+2. Item B
+	1. Subitem 3
+	2. Subitem 4
+
+You **must** use numbers for ordered lists to work:
+```md
+Here is an ordered list:
+1. Item A
+	1. Subitem 1
+		1. How much
+		2. lower
+		3. can we go?
+	2. Subitem 2
+2. Item B
+	1. Subitem 3
+	2. Subitem 4
+```
+
+Dramatic...
+***
+thematic break!
+
+Tables also aren't supported in CommonMark, but we can use HTML:
+
+<table>
+<thead>
+<tr>
+<th>Column 1</th>
+<th>Column 2</th>
+<th>Column 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Row 1, Column 1</td>
+<td>Row 1, Column 2</td>
+<td>Row 1, Column 3</td>
+</tr>
+<tr>
+<td>Row 2, Column 1</td>
+<td>Row 2, Column 2</td>
+<td>Row 2, Column 3</td>
+</tr>
+</tbody>
+</table>
 
 # Heading 1
 
