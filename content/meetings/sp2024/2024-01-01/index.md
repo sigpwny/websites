@@ -42,6 +42,8 @@ if (highlighted == true) {
 }
 ```
 
+![An image!](./image.png)
+
 Here is an unordered list:
 - Item A
 	- Subitem 1
