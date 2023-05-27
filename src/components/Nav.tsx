@@ -31,7 +31,7 @@ const Nav = () => {
   // create non-nullable array of nav call to action links
   const navLinks: NavLink[] = []
   navLinksResult?.forEach((item) => {
-    if (item && item.name && item.link) {
+    if (item?.name && item?.link) {
       const new_link: NavLink = {
         name: item.name,
         link: item.link,
@@ -42,7 +42,7 @@ const Nav = () => {
   // create non-nullable array of nav call to action links
   const navCallToActionLinks: NavLink[] = []
   navCallToActionLinksResult?.forEach((item) => {
-    if (item && item.name && item.link) {
+    if (item?.name && item?.link) {
       const new_link: NavLink = {
         name: item.name,
         link: item.link,

@@ -15,7 +15,7 @@ interface Props {
 export const Head = ({ data }: Props) => {
   const { curr } = data
   if (!curr) {
-    throw new Error(`invalid argument: "curr" meeting is null`)
+    throw new Error(`invalid argument: "curr" meeting is undefined`)
   }
   return (
     <Seo
@@ -23,7 +23,7 @@ export const Head = ({ data }: Props) => {
       description={curr.semester + " Week " + weekNumber(curr.week_number) +
         " • " + convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)
       }
-      image={curr.image && curr.image.path ? (
+      image={curr.image?.path ? (
         curr.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
       ) : undefined}
       video={curr.recording ? (
@@ -37,7 +37,7 @@ export const Head = ({ data }: Props) => {
 const MeetingTemplate = ({ data, children }: Props) => {
   const { curr, prev, next } = data
   if (!curr) {
-    throw new Error(`invalid argument: "curr" meeting is null`)
+    throw new Error(`invalid argument: "curr" meeting is undefined`)
   }
 
   const [numPages, setNumPages] = useState(1)
@@ -71,7 +71,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
                 </p>
               </a>
             ) : null}
-            {curr.slides && curr.slides.publicURL ? (
+            {curr.slides?.publicURL ? (
               <Link className="btn-primary" to={curr.slides.publicURL}>
                 <PdfSvg />
                 <p className="inline align-middle m-0 ml-2">

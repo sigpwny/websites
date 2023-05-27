@@ -7,7 +7,7 @@ interface Props {
 
 export const Head = ({ data }: Props) => {
   if (!data.redirect || !data.redirect.dst) {
-    throw new Error(`invalid argument: "redirect" is null`)
+    throw new Error(`invalid argument: "redirect" is undefined`)
   }
   return (
     <>
@@ -20,7 +20,7 @@ export const Head = ({ data }: Props) => {
 
 const RedirectExternalTemplate = ({ data }: Props) => {
   if (!data.redirect || !data.redirect.dst) {
-    throw new Error(`invalid argument: "redirect" is null`)
+    throw new Error(`invalid argument: "redirect" is undefined`)
   }
   return (
     <div className="panel">
