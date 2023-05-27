@@ -10,30 +10,34 @@ interface Props {
 }
 
 export const Head = ({ data }: Props) => {
+  const { pageMarkdown } = data
+  if (!pageMarkdown) {
+    throw new Error(`invalid argument: "pageMarkdown" is undefined`)
+  }
   return (
     <Seo
-      title={data.pageMarkdown?.title}
+      title={pageMarkdown.title}
+      description={pageMarkdown.description}
     />
   )
 }
 
 const PageMarkdownTemplate = ({ data, children }: Props) => {
+  const { pageMarkdown } = data
+  if (!pageMarkdown) {
+    throw new Error(`invalid argument: "pageMarkdown" is undefined`)
+  }
   return (
-    <>
-      {data.pageMarkdown && data.pageMarkdown?.no_background ? (
-        <MDXProvider>
-          <div className="md-root">
-            {children}
-          </div>
-        </MDXProvider>
-      ) : (
-        <MDXProvider>
-          <div className="md-root panel">
-            {children}
-          </div>
-        </MDXProvider>
-      )}
-    </>
+    <MDXProvider>
+      <div
+        className={"md-root mx-auto" +
+          (pageMarkdown.options?.full_width ? "" : " page-width") +
+          (pageMarkdown.options?.no_background ? "" : " panel")
+        }
+      >
+        {children}
+      </div>
+    </MDXProvider>
   )
 }
 export default PageMarkdownTemplate
@@ -42,7 +46,11 @@ export const query = graphql`
   query PageMarkdownTemplate($id: String!) {
     pageMarkdown(id: { eq: $id }) {
       title
-      no_background
+      description
+      options {
+        full_width
+        no_background
+      }
     }
   }
 `

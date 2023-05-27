@@ -43,7 +43,6 @@ function createSlug(base_dir: string, file_node: any, slug?: string) {
     else
       slug = `${base_dir}${path.join(parsed_path.dir, parsed_path.name)}`
   }
-  console.log(slug)
   return slug
 }
 
@@ -145,7 +144,13 @@ const content_node_types: ContentNode[] = [
     gatsbySourceInstanceName: "pages_md",
     fields: [
       { name: "title", required: true },
-      { name: "no_background" },
+      { name: "description"},
+      { name: "options",
+        fields: [
+          { name: "full_width" },
+          { name: "no_background" },
+        ]
+      },
     ],
     computedFields: [
       { name: "slug", resolve: (node, file_node) => createSlug("/", file_node, node.frontmatter.slug) },
@@ -357,9 +362,15 @@ exports.createSchemaCustomization = ({ actions }) => {
       slug: String
     }
 
+    type PageMarkdownOptions @dontInfer {
+      full_width: Boolean
+      no_background: Boolean
+    }
+
     type PageMarkdown implements Node @dontInfer {
       title: String!
-      no_background: Boolean
+      description: String
+      options: PageMarkdownOptions
       slug: String
     }
 
@@ -559,7 +570,7 @@ exports.createPages = async ({ graphql, actions }) => {
         trailingSlash: true,
       });
       // Generate /slides and /slides/ redirect for each meeting
-      if (meeting.slides && meeting.slides.publicURL) {
+      if (meeting.slides?.publicURL) {
         createRedirect({
           fromPath: `${meeting.slug}slides`,
           toPath: meeting.slides.publicURL,

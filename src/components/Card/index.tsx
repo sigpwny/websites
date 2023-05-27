@@ -10,14 +10,14 @@ const Card = ({ heading, title, image, overlay_image, link }: CardProps) => {
       <div className="aspect-video grid">
         {(image || overlay_image) ? (
           <>
-            {image && image.path && getImage(image.path) && (
+            {image?.path && getImage(image.path) && (
               <GatsbyImage
                 image={getImage(image.path) as IGatsbyImageData}
                 alt={image.alt}
                 className="row-span-full col-span-full"
               />
             )}
-            {overlay_image && overlay_image.path && getImage(overlay_image.path) && (
+            {overlay_image?.path && getImage(overlay_image.path) && (
               <div className="row-span-full col-span-full overflow-hidden p-4 grid items-center">
                 {/* I spent a while to figure out that the combination of:
                     - parent div: overflow-hidden

@@ -15,13 +15,13 @@ interface Props {
 export const Head = ({ data }: Props) => {
   const { event_ } = data
   if (!event_) {
-    throw new Error(`invalid argument: "event_" is null`)
+    throw new Error(`invalid argument: "event_" is undefined`)
   }
   return (
     <Seo
       title={event_.title}
       description={event_.description}
-      image={event_.image && event_.image.path ? (
+      image={event_.image?.path ? (
         event_.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
       ) : undefined}
     />
@@ -30,7 +30,7 @@ export const Head = ({ data }: Props) => {
 
 const EventTemplate = ({ data, children }: Props) => {
   if (!data.event_) {
-    throw new Error(`invalid argument: "event_" is null`)
+    throw new Error(`invalid argument: "event_" is undefined`)
   }
   return (
     <>
