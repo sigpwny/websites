@@ -10,6 +10,6 @@ featured: true
 slides: week_01_setup.pdf
 recording: https://youtu.be/1iqKFMRkN88
 tags:
-  - misc
+  - welcome
   - setup
 ---

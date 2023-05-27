@@ -21,7 +21,20 @@ export function Head() {
 }
 
 const JoinPage = ({ data }: Props) => {
-  const meeting_cards = data.allMeeting.meetings.map((meeting: Meeting) => ({
+  const { meetings } = data.allMeeting
+  const beginner_tags = ["welcome", "intro", "setup", "beginner"]
+  // Find the most recent fall semester that has a beginner tag
+  const start_semester = meetings.find((meeting) => {
+    return meeting.semester?.toUpperCase().includes("FA") && meeting.tags?.some((tag) => beginner_tags.includes(tag as string))
+  })?.semester
+  // Filter meetings that match the start semester and have a beginner tag
+  const filtered_meetings = meetings.filter((meeting) => {
+    return meeting.semester?.toUpperCase() === start_semester && meeting.tags?.some((tag) => beginner_tags.includes(tag as string))
+  })
+  // Reverse the order of the meetings to be in chronological order
+  const get_started_meetings = filtered_meetings.reverse()
+
+  const meeting_cards = get_started_meetings.map((meeting: Meeting) => ({
     heading: meeting.semester + " Week " + weekNumber(meeting.week_number) + " • " + convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone),
     title: meeting.title,
     image: meeting.image as Image,
@@ -126,7 +139,6 @@ export const query = graphql`
     allMeeting(
       filter: {featured: {eq: true}}
       sort: {time_start: DESC}
-      limit: 5
     ) {
       meetings: nodes {
         title
@@ -143,6 +155,7 @@ export const query = graphql`
         }
         semester
         slug
+        tags
       }
     }
   }
