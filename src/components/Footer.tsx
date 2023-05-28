@@ -40,11 +40,11 @@ const Footer = () => {
               {data.site?.siteMetadata?.navLinks?.map((item) => {
                 if (item?.name && item?.link) {
                   return (
-                    <p className="inline align-middle m-0">
-                      <Link to={item.link} key={item.name}>
+                    <Link to={item.link} key={item.name}>
+                      <p className="inline align-middle m-0">
                         {item.link === "/" ? "Home" : item.name}
-                      </Link>
-                    </p>
+                      </p>
+                    </Link>
                   )
                 }
               })}
