@@ -32,7 +32,7 @@ const MeetingSidebar = () => {
     <div className="panel-p-0 sticky top-4 overflow-hidden rounded-xl py-4">
       <div className="px-4 flex flex-col h-[75vh] overflow-y-auto custom-scrollbar">
         {Object.keys(meetingsBySemester).map((semester: string) => (
-          <>
+          <div key={semester}>
             <p className="font-bold text-2xl m-0">{formatSemester(semester)}</p>
             <div className="flex flex-col pb-2">
             {meetingsBySemester[semester].map((meeting: Meeting) => (
@@ -46,7 +46,7 @@ const MeetingSidebar = () => {
               </Link>
             ))}
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>

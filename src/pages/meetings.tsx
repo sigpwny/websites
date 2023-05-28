@@ -40,41 +40,48 @@ const MeetingsPage = ({ data }: Props) => {
         <div className="flex flex-col mx-auto page-width">
           <h1>Meetings</h1>
           <div className="panel">
-            {Object.entries(meetingsBySemester).map(([semester, meetings]) => {
-              return (
-                <>
-                  <p className="font-bold text-2xl m-0">{formatSemester(semester)}</p>
-                  <div className="flex flex-col pb-2">
-                    {meetings.map((meeting: Meeting) => {
-                      return (
-                        <div className="flex flex-row gap-x-4">
-                          <div className="hidden sm:flex sm:flex-col min-w-max ">
-                            <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone)}</span>
-                          </div>
-                          <div className="flex flex-row w-full md:w-3/5 truncate justify-between">
-                            <Link to={`${meeting.slug}`} className="truncate">
-                              <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
-                            </Link>
-                            <div className="flex flex-row">
-                              {meeting.recording &&
-                              <a className="mx-2" href={meeting.recording}>
-                                <YouTubeSvg />
-                              </a>}
-                              {meeting.slides?.publicURL && <Link className="mx-2" to={meeting.slides.publicURL}>
-                                <PdfSvg />
-                              </Link>}
-                            </div>
-                          </div>
-                          <div className="hidden md:flex md:flex-col md:w-1/5 overflow-x-auto whitespace-nowrap no-scrollbar">
-                            {meeting.credit.length > 0 ? meeting.credit.join(', ') : "SIGPwny" }
-                          </div>
+            {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
+              <div key={semester}>
+                <p className="font-bold text-2xl m-0">{formatSemester(semester)}</p>
+                <div className="flex flex-col pb-2">
+                  {meetings.map((meeting: Meeting) => (
+                    <div key={meeting.slug} className="flex flex-row gap-x-4">
+                      <div className="hidden sm:flex sm:flex-col min-w-max ">
+                        <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone)}</span>
+                      </div>
+                      <div className="flex flex-row w-full md:w-3/5 truncate justify-between">
+                        <Link to={`${meeting.slug}`} className="truncate">
+                          <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
+                        </Link>
+                        <div className="flex flex-row">
+                          {meeting.recording && (
+                            <a
+                              href={meeting.recording}
+                              title={meeting.title + " recording"}
+                              className="mx-2"
+                            >
+                              <YouTubeSvg />
+                            </a>
+                          )}
+                          {meeting.slides?.publicURL && (
+                            <a
+                              href={meeting.slides.publicURL}
+                              title={meeting.title + " slides"}
+                              className="mx-2"
+                            >
+                              <PdfSvg />
+                            </a>
+                          )}
                         </div>
-                      )
-                    })}
-                  </div>
-                </>
-              )
-            })}
+                      </div>
+                      <div className="hidden md:flex md:flex-col md:w-1/5 overflow-x-auto whitespace-nowrap no-scrollbar">
+                        {meeting.credit.length > 0 ? meeting.credit.join(', ') : "SIGPwny" }
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

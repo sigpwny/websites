@@ -56,16 +56,13 @@ const MeetingTemplate = ({ data, children }: Props) => {
           <h1 className="mb-1">{curr.title}</h1>
           <p>
             Presented by:&nbsp;
-            {curr.credit.length > 0 ? (
-              curr.credit.map((credit: string, index: number) => (
-                <>{credit}{index < curr.credit.length - 1 ? ", " : ""}</>
-              ))
-            ) : "SIGPwny" }
+            {curr.credit.length > 0 ? curr.credit.join(', ') : "SIGPwny" }
           </p>
           <div className="grid sm:flex sm:flex-row gap-2 mb-4">
             {curr.recording ? (
               <a
-                className="btn-primary" href={curr.recording}
+                href={curr.recording}
+                className="btn-primary"
                 target="_blank" rel="noopener noreferrer"
               >
                 <YouTubeSvg />
@@ -75,12 +72,15 @@ const MeetingTemplate = ({ data, children }: Props) => {
               </a>
             ) : null}
             {curr.slides?.publicURL ? (
-              <Link to={curr.slides.publicURL} className="btn-primary">
+              <a
+                href={curr.slides.publicURL}
+                className="btn-primary"
+              >
                 <PdfSvg />
                 <p className="inline align-middle m-0 ml-2">
                   Download slides
                 </p>
-              </Link>
+              </a>
             ) : null}
           </div>
           {curr.recording && (
@@ -88,6 +88,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
               const url = getYouTubeEmbedUrl(curr.recording)
               return url ? (
                 <iframe
+                  title={curr.title + " video"}
                   className="bg-background w-full max-w-2xl aspect-video mx-auto mb-4"
                   allow="encrypted-media; fullscreen; picture-in-picture"
                   allowFullScreen={true}
@@ -98,23 +99,29 @@ const MeetingTemplate = ({ data, children }: Props) => {
           )}
           {curr.slides?.publicURL && !curr.recording && (
             <div className="flex flex-col items-center">
-              <Document className="flex flex-col" file={curr.slides.publicURL} 
-              onLoadError={console.error} 
-              onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
+              <Document
+                className="flex flex-col" file={curr.slides.publicURL} 
+                onLoadError={console.error} 
+                onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+              >
                 <Page className="m-1" pageNumber={pageNumber} />
               </Document>
               <div>
-                  <button className={pageNumber <= 1 ? "text-gray-500 mx-2" : "text-white mx-2"}
+                <button
+                  title="Previous slide"
+                  className={pageNumber <= 1 ? "text-gray-500 mx-2" : "text-white mx-2"}
                   disabled={pageNumber <= 1}
                   onClick={() => setPageNumber(pageNumber - 1)}
-                  >
+                >
                   <LeftSvg />
-                  </button>
+                </button>
                 {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-                <button className={pageNumber >= numPages ? "text-gray-500 mx-2" : "text-white mx-2"}
+                <button
+                  title="Next slide"
+                  className={pageNumber >= numPages ? "text-gray-500 mx-2" : "text-white mx-2"}
                   disabled={pageNumber >= numPages}
                   onClick={() => setPageNumber(pageNumber + 1)}
-                  >
+                >
                   <RightSvg />
                 </button>
               </div>
