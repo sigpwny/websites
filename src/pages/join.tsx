@@ -49,7 +49,7 @@ const JoinPage = ({ data }: Props) => {
           <h1>Welcome to SIGPwny!</h1>
           <p className="text-3xl mb-0">
             Come learn cybersecurity with 2000+ students, alum, and
-            professionals on our Discord server.
+            professionals in our Discord server.
           </p>
           <a href={discord_link} target="_blank" rel="noopener noreferrer"
             className="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary"
@@ -61,7 +61,7 @@ const JoinPage = ({ data }: Props) => {
               By joining, you agree to our club <Link to="/rules/">rules</Link>.
             </li>
             <li>
-              If you are affiliated with UIUC, authenticate <a href="https://sigpwny.com/auth" target="_blank" rel="noopener noreferrer">here</a> to
+              If you are affiliated with UIUC, make sure to <a href="https://sigpwny.com/auth" target="_blank" rel="noopener noreferrer">authenticate</a> to
               receive the @uiuc role and access club channels.
             </li>
           </ul>
@@ -108,7 +108,7 @@ const JoinPage = ({ data }: Props) => {
           Learn the fundamental skills to quickly get into hacking and more
           advanced topics!
         </p>
-        <CardRow cards={meeting_cards} />
+        <CardRow cards={meeting_cards} maxFour={true} />
       </section>
 
       <section id="join-leadership" className="py-8">
