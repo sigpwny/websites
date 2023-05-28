@@ -2,8 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Seo from "../components/Seo"
-import CardRow from "../components/CardRow"
-import { createCard } from "../components/Card"
+import { CardRow, createCard } from "../components/Card"
 import { convertDate, weekNumber } from "../utils/util"
 
 interface Props {

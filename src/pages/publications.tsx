@@ -2,8 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 
-import { createCard } from "../components/Card"
-import CardGrid from "../components/CardGrid"
+import { CardGrid, createCard } from "../components/Card"
 import Seo from "../components/Seo"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 

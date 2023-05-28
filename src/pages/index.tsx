@@ -3,8 +3,7 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 import Seo from "../components/Seo"
-import CardRow from "../components/CardRow"
-import { createCard } from "../components/Card"
+import { CardRow, createCard } from "../components/Card"
 
 interface Props {
   data: Queries.IndexPageQuery
