@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Seo from "../components/Seo"
-import CardList from "../components/CardGrid"
+import { CardGrid } from "../components/Card"
 
 type Event = Queries.EventsPageQuery["allEvent"]["events"][0]
 
@@ -52,7 +52,7 @@ const EventsPage = ({ data }: Props) => {
         <p>
           UIUCTF is SIGPwny's premier global CTF competition.
         </p>
-        <CardList cards={cards_uiuctf} />
+        <CardGrid cards={cards_uiuctf} />
       </section>
       <section id="fallctf" className="pb-8">
         <h1>Fall CTF</h1>
@@ -60,7 +60,7 @@ const EventsPage = ({ data }: Props) => {
           Fall CTF is a beginner-friendly CTF competition for UIUC students, 
           designed to introduce students to cybersecurity topics.
         </p>
-        <CardList cards={cards_fallctf} />
+        <CardGrid cards={cards_fallctf} />
       </section>
     </>
   )

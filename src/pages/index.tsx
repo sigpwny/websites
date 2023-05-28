@@ -3,8 +3,7 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 import Seo from "../components/Seo"
-import CardRow from "../components/CardRow"
-import { weekNumber, convertDate } from "../utils/util"
+import { CardRow, createCard } from "../components/Card"
 
 interface Props {
   data: Queries.IndexPageQuery
@@ -23,25 +22,15 @@ export function Head() {
 }
 
 const IndexPage = ({ data }: Props) => {
-  const meeting_cards = data.allMeeting.meetings.map((meeting: Meeting) => ({
-    heading: meeting.semester + " Week " + weekNumber(meeting.week_number) + " • " + convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone),
-    title: meeting.title,
-    image: meeting.image as Image,
-    link: meeting.slug!
-  }))
-  const event_cards = data.allEvent.events.map((event: Event) => ({
-    heading: convertDate(event.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone),
-    title: event.title,
-    image: event.image as Image,
-    overlay_image: event.overlay_image as Image,
-    link: event.slug!
-  }))
-  const publication_cards = data.allPublication.publications.map((publication: Publication) => ({
-    heading: publication.publication_type.toUpperCase() + " • " + publication.publisher,
-    title: publication.title,
-    image: publication.image as Image,
-    link: publication.slug!
-  }))
+  const meeting_cards = data.allMeeting.meetings.map((meeting: Meeting) => (
+    createCard({meeting, timezone: data.site?.siteMetadata.timezone} as CardMeetingProps)
+  ))
+  const event_cards = data.allEvent.events.map((event: Event) => (
+    createCard({event, timezone: data.site?.siteMetadata.timezone} as CardEventProps)
+  ))
+  const publication_cards = data.allPublication.publications.map((p: Publication) => (
+    createCard({publication: p} as CardPublicationProps)
+  ))
   return (
     <>
       <section id="welcome" className="pb-8">
