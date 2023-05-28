@@ -17,6 +17,7 @@ const config: GatsbyConfig = {
     socialLinks: [
       { name: 'Discord', link: 'https://discord.gg/cWcZ6a9' },
       { name: 'GitHub', link: 'https://github.com/sigpwny' },
+      { name: 'Instagram', link: 'https://www.instagram.com/sigpwny/'},
       { name: 'Twitter', link: 'https://twitter.com/sigpwny' },
       { name: 'YouTube', link: 'https://www.youtube.com/@sigpwny' },
     ],

@@ -1,12 +1,13 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import { DiscordSvg, GitHubSvg, TwitterSvg, YouTubeSvg, PwnyBanner } from "./Icons"
+import { DiscordSvg, GitHubSvg, InstagramSvg, TwitterSvg, YouTubeSvg, PwnyBanner } from "./Icons"
 
 const Footer = () => {
   const icons : Map<string, JSX.Element> = new Map([
     ["Discord", <DiscordSvg />],
     ["GitHub", <GitHubSvg />],
+    ["Instagram", <InstagramSvg />],
     ["Twitter", <TwitterSvg />],
     ["YouTube", <YouTubeSvg />]
   ])
@@ -39,11 +40,13 @@ const Footer = () => {
               {data.site?.siteMetadata?.navLinks?.map((item) => {
                 if (item?.name && item?.link) {
                   return (
-                    <p className="inline align-middle m-0">
-                      <Link to={item.link} key={item.name}>
-                        {item.link === "/" ? "Home" : item.name}
+                    <span key={item.name} className="m-0">
+                      <Link to={item.link}>
+                        <p className="inline align-middle m-0">
+                          {item.link === "/" ? "Home" : item.name}
+                        </p>
                       </Link>
-                    </p>
+                    </span>
                   )
                 }
               })}
@@ -53,8 +56,11 @@ const Footer = () => {
               {data.site?.siteMetadata?.socialLinks?.map((item) => {
                 if (item?.name && item?.link) {
                   return (
-                    <span className="m-0">
-                      <a href={item.link} key={item.name} className="w-full">
+                    <span key={item.name} className="m-0">
+                      <a
+                        href={item.link} className="w-full"
+                        target="_blank" rel="noopener noreferrer"
+                      >
                         {icons.has(item.name) ? icons.get(item.name) : null}
                         <p className="inline align-middle m-0 ml-2">
                           {item.name}

@@ -11,4 +11,5 @@ slides: week_04_reverse_engineering_i.pdf
 recording: https://youtu.be/vKuui7iCOB0
 tags:
   - rev
+  - intro
 ---

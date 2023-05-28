@@ -12,4 +12,5 @@ slides: week_05_osint_i.pdf
 recording: https://youtu.be/zPiLs8GU-v4
 tags:
   - osint
+  - intro
 ---

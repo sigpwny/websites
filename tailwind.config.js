@@ -9,7 +9,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // https://stackoverflow.com/a/64200199/8761914
       colors: {
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
