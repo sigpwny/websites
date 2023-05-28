@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import Seo from "../components/Seo"
 import CardRow from "../components/CardRow"
+import { createCard } from "../components/Card"
 import { convertDate, weekNumber } from "../utils/util"
 
 interface Props {
@@ -34,12 +35,9 @@ const JoinPage = ({ data }: Props) => {
   // Reverse the order of the meetings to be in chronological order
   const get_started_meetings = filtered_meetings.reverse()
 
-  const meeting_cards = get_started_meetings.map((meeting: Meeting) => ({
-    heading: meeting.semester + " Week " + weekNumber(meeting.week_number) + " • " + convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone),
-    title: meeting.title,
-    image: meeting.image as Image,
-    link: meeting.slug!
-  }))
+  const meeting_cards = get_started_meetings.map((meeting: Meeting) => (
+    createCard({meeting, timezone: data.site?.siteMetadata.timezone} as CardMeetingProps)
+  ))
   const socials = data.site?.siteMetadata?.socialLinks
   const discord_link = socials?.find((social) => social?.name === "Discord")?.link || "https://sigpwny.com/discord"
   return (

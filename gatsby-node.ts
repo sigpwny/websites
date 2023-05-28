@@ -330,7 +330,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       assets: [File] @fileByRelativePath
       tags: [String]
       semester: String
-      slug: String
+      slug: String!
     }
 
     type Event implements Node @dontInfer {
@@ -345,7 +345,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       links: Links
       rating_weight: Float
       stats: [Stat]
-      slug: String
+      slug: String!
     }
 
     type Publication implements Node @dontInfer {
@@ -359,7 +359,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       primary_link: String
       other_links: [String]
       tags: [String]
-      slug: String
+      slug: String!
     }
 
     type PageMarkdownOptions @dontInfer {

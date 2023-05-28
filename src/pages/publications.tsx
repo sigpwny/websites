@@ -2,9 +2,9 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 
-import Card from "../components/Card"
+import { createCard } from "../components/Card"
+import CardGrid from "../components/CardGrid"
 import Seo from "../components/Seo"
-// import { weekNumber, convertDate } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
 
 type Publication = Queries.PublicationsPageQuery["allPublication"]["publications"][0]
@@ -24,22 +24,14 @@ export function Head() {
 
 const PublicationsPage = ({ data }: Props) => {
   const publications = data.allPublication.publications
+  const publication_cards = publications.map((p: Publication) =>
+    createCard({ publication: p } as CardPublicationProps)
+  )
   return (
-    <>
-      <section id="publications" className="pb-8">
-        <h1>Publications</h1>
-        <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-8">
-          {publications.map((publication: Publication) => (
-            <Card
-              heading={publication.publication_type.toUpperCase() + " • " + publication.publisher}
-              title={publication.title}
-              image={publication.image as Image}
-              link={publication.slug!}
-            />
-          ))}
-        </div>
-      </section>
-    </>
+    <section id="publications" className="pb-8">
+      <h1>Publications</h1>
+      <CardGrid cards={publication_cards} />
+    </section>
   )
 }
 
