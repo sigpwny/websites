@@ -134,9 +134,6 @@ collections:
       - {label: "Event Start", name: "time_start", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm"}
       - {label: "Event End", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'e.g. Online', required: false}
-      - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news", "other"], hint: ''}
-      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", hint: ''}
-      - {label: "Description", name: "description", widget: "string", hint: '', required: false}
       - {label: "Overlay Image", name: "overlay_image", widget: "object", fields: [
           {label: "Image Upload", name: "path", widget: "image", hint: "", choose_url: false},
           {label: "Alt text", name: "alt", widget: "string", hint: ""}
