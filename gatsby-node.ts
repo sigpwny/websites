@@ -1,6 +1,6 @@
-import path from 'path';
-import { createFilePath } from 'gatsby-source-filesystem';
-import { calculateSemester } from './src/utils/util'
+import path from "path";
+import { createFilePath } from "gatsby-source-filesystem";
+import { calculateSemester } from "./src/utils/util";
 
 interface Field {
   name: string;
@@ -20,8 +20,14 @@ interface ContentNode {
 
 // https://github.com/react-pdf-viewer/react-pdf-viewer/issues/497#issuecomment-812905172
 // https://github.com/wojtekmaj/react-pdf/issues/874#issuecomment-1539023628
-exports.onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions }) => {
-  if (stage === 'build-html' || stage === 'develop-html') {
+exports.onCreateWebpackConfig = ({
+  stage,
+  rules,
+  loaders,
+  plugins,
+  actions,
+}) => {
+  if (stage === "build-html" || stage === "develop-html") {
     actions.setWebpackConfig({
       module: {
         rules: [
@@ -38,12 +44,10 @@ exports.onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions }) =>
 function createSlug(base_dir: string, file_node: any, slug?: string) {
   if (!slug) {
     const parsed_path = path.parse(file_node.relativePath);
-    if (parsed_path.name === "index")
-      slug = `${base_dir}${parsed_path.dir}/`
-    else
-      slug = `${base_dir}${path.join(parsed_path.dir, parsed_path.name)}`
+    if (parsed_path.name === "index") slug = `${base_dir}${parsed_path.dir}/`;
+    else slug = `${base_dir}${path.join(parsed_path.dir, parsed_path.name)}`;
   }
-  return slug
+  return slug;
 }
 
 const content_node_types: ContentNode[] = [
@@ -58,11 +62,13 @@ const content_node_types: ContentNode[] = [
       { name: "credit", required: true },
       { name: "featured" },
       { name: "location" },
-      { name: "image", required: false,
+      {
+        name: "image",
+        required: false,
         fields: [
           { name: "path", required: true },
           { name: "alt", required: true },
-        ]
+        ],
       },
       { name: "slides" },
       { name: "recording" },
@@ -71,19 +77,23 @@ const content_node_types: ContentNode[] = [
     ],
     computedFields: [
       {
-        name: "semester", resolve: (node, file_node) => {
-          const semester = calculateSemester(node.frontmatter.time_start)
-          const semester_from_path = file_node.relativePath.split('/')[0];
+        name: "semester",
+        resolve: (node, file_node) => {
+          const semester = calculateSemester(node.frontmatter.time_start);
+          const semester_from_path = file_node.relativePath.split("/")[0];
           if (semester.toLowerCase() != semester_from_path.toLowerCase()) {
             console.warn(
-              `Calculated semester "${semester}" does not match directory "${semester_from_path}" for ${file_node.absolutePath}`,
+              `Calculated semester "${semester}" does not match directory "${semester_from_path}" for ${file_node.absolutePath}`
             );
           }
-          return semester
-        }
+          return semester;
+        },
       },
-      { name: "slug", resolve: (node, file_node) => createSlug("/meetings/", file_node) },
-    ]
+      {
+        name: "slug",
+        resolve: (node, file_node) => createSlug("/meetings/", file_node),
+      },
+    ],
   },
   {
     type: "Event",
@@ -95,25 +105,31 @@ const content_node_types: ContentNode[] = [
       { name: "time_start", required: true },
       { name: "time_close" },
       { name: "location" },
-      { name: "image", required: false,
+      {
+        name: "image",
+        required: false,
         fields: [
           { name: "path", required: true },
           { name: "alt", required: true },
-        ]
+        ],
       },
-      { name: "overlay_image", required: false,
+      {
+        name: "overlay_image",
+        required: false,
         fields: [
           { name: "path", required: true },
           { name: "alt", required: true },
-        ]
+        ],
       },
       { name: "links" },
-      { name: "rating_weight" },
       { name: "stats" },
     ],
     computedFields: [
-      { name: "slug", resolve: (node, file_node) => createSlug("/events/", file_node) },
-    ]
+      {
+        name: "slug",
+        resolve: (node, file_node) => createSlug("/events/", file_node),
+      },
+    ],
   },
   {
     type: "Publication",
@@ -125,36 +141,44 @@ const content_node_types: ContentNode[] = [
       { name: "publisher" },
       { name: "date", required: true },
       { name: "description" },
-      { name: "image", required: true,
+      {
+        name: "image",
+        required: true,
         fields: [
           { name: "path", required: true },
           { name: "alt", required: true },
-        ]
+        ],
       },
       { name: "primary_link" },
       { name: "other_links" },
       { name: "tags" },
     ],
     computedFields: [
-      { name: "slug", resolve: (node, file_node) => createSlug("/publications/", file_node, node.frontmatter.slug) },
-    ]
+      {
+        name: "slug",
+        resolve: (node, file_node) =>
+          createSlug("/publications/", file_node, node.frontmatter.slug),
+      },
+    ],
   },
   {
     type: "PageMarkdown",
     gatsbySourceInstanceName: "pages_md",
     fields: [
       { name: "title", required: true },
-      { name: "description"},
-      { name: "options",
-        fields: [
-          { name: "full_width" },
-          { name: "no_background" },
-        ]
+      { name: "description" },
+      {
+        name: "options",
+        fields: [{ name: "full_width" }, { name: "no_background" }],
       },
     ],
     computedFields: [
-      { name: "slug", resolve: (node, file_node) => createSlug("/", file_node, node.frontmatter.slug) },
-    ]
+      {
+        name: "slug",
+        resolve: (node, file_node) =>
+          createSlug("/", file_node, node.frontmatter.slug),
+      },
+    ],
   },
   {
     type: "Admin",
@@ -162,28 +186,32 @@ const content_node_types: ContentNode[] = [
     fields: [
       { name: "name", required: true },
       { name: "bio" },
-      { name: "image", required: true,
+      {
+        name: "image",
+        required: true,
         fields: [
           { name: "path", required: true },
           { name: "alt", required: true },
-        ]
+        ],
       },
       { name: "handle" },
       { name: "role", required: true },
       { name: "weight", required: true },
       { name: "links" },
-    ]
+    ],
   },
   {
     type: "Alum",
     gatsbySourceInstanceName: "alumni",
     fields: [
       { name: "name", required: true },
-      { name: "image", required: true,
+      {
+        name: "image",
+        required: true,
         fields: [
           { name: "path", required: true },
           { name: "alt", required: true },
-        ]
+        ],
       },
       { name: "handle" },
       { name: "role", required: true },
@@ -191,54 +219,74 @@ const content_node_types: ContentNode[] = [
       { name: "work" },
       { name: "weight", required: true },
       { name: "links" },
-    ]
+    ],
   },
   {
     type: "Helper",
     gatsbySourceInstanceName: "helpers",
     fields: [
       { name: "name", required: true },
-      { name: "image", required: true,
+      {
+        name: "image",
+        required: true,
         fields: [
           { name: "path", required: true },
           { name: "alt", required: true },
-        ]
+        ],
       },
       { name: "handle" },
       { name: "role", required: true },
       { name: "weight", required: true },
       { name: "links" },
-    ]
-  }
-]
+    ],
+  },
+];
 
-exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
+exports.onCreateNode = ({
+  node,
+  actions,
+  getNode,
+  createNodeId,
+  createContentDigest,
+}) => {
   const { createNode, createParentChildLink } = actions;
-  if (node.internal.type === 'Mdx') {
+  if (node.internal.type === "Mdx") {
     // Parent child relations:
     // file_node (File) -> node (Mdx) -> content_node (type from content_node_types)
     const file_node = getNode(node.parent);
     const sourceInstanceName = file_node.sourceInstanceName;
 
     // Get the content node type based on the source instance name
-    const content_node_type = content_node_types.find((node) => node.gatsbySourceInstanceName === sourceInstanceName);
+    const content_node_type = content_node_types.find(
+      (node) => node.gatsbySourceInstanceName === sourceInstanceName
+    );
     if (!content_node_type) return;
     const { type, fields, computedFields } = content_node_type;
-  
+
     // Recursively check for required fields
-    const checkRequiredFields = (fields: Field[], node: any, prev_field_name: string) => {
+    const checkRequiredFields = (
+      fields: Field[],
+      node: any,
+      prev_field_name: string
+    ) => {
       for (const field of fields) {
         if (field.required) {
           if (
             node[field.name] === null ||
             node[field.name] === undefined ||
-            node[field.name] === ''
+            node[field.name] === ""
           ) {
-            throw new Error(`"${prev_field_name}${field.name}" is required for ${file_node.absolutePath}`);
+            throw new Error(
+              `"${prev_field_name}${field.name}" is required for ${file_node.absolutePath}`
+            );
           }
         }
         if (field.fields && node[field.name])
-          checkRequiredFields(field.fields, node[field.name], prev_field_name + field.name + ".");
+          checkRequiredFields(
+            field.fields,
+            node[field.name],
+            prev_field_name + field.name + "."
+          );
       }
     };
 
@@ -256,16 +304,18 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
         contentDigest: createContentDigest(node),
       },
       // Add fields defined in content node
-      ...fields && fields.reduce((acc, field) => {
-        acc[field.name] = node.frontmatter[field.name];
-        return acc;
-      }, {}),
+      ...(fields &&
+        fields.reduce((acc, field) => {
+          acc[field.name] = node.frontmatter[field.name];
+          return acc;
+        }, {})),
       // Add fields that need to be resolved/computed
-      ...computedFields && computedFields.reduce((acc, field) => {
-        acc[field.name] = field.resolve(node, file_node);
-        return acc;
-      }, {}),
-    }
+      ...(computedFields &&
+        computedFields.reduce((acc, field) => {
+          acc[field.name] = field.resolve(node, file_node);
+          return acc;
+        }, {})),
+    };
     createNode(content_node);
     createParentChildLink({ parent: node, child: content_node });
   }
@@ -316,6 +366,11 @@ exports.createSchemaCustomization = ({ actions }) => {
       value: String!
     }
 
+    type EventLink {
+      kind: String!
+      link: String!
+    }
+
     type Meeting implements Node @dontInfer {
       title: String!
       time_start: Date! @dateformat
@@ -342,8 +397,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       location: String
       image: ImageAlt
       overlay_image: ImageAlt
-      links: Links
-      rating_weight: Float
+      links: [EventLink]
       stats: [Stat]
       slug: String!
     }
@@ -417,15 +471,16 @@ exports.createResolvers = ({ createResolvers }) => {
           // and the info object contains information about the field being queried.
           // You can return any data that you want to be included in the siteMetadata field.
           return {
-            title: source.siteMetadata.title || 'SIGPwny',
-            siteUrl: source.siteMetadata.siteUrl || 'https://sigpwny.com',
-            description: source.siteMetadata.description || '',
-            image: source.siteMetadata.image || '',
+            title: source.siteMetadata.title || "SIGPwny",
+            siteUrl: source.siteMetadata.siteUrl || "https://sigpwny.com",
+            description: source.siteMetadata.description || "",
+            image: source.siteMetadata.image || "",
             navLinks: source.siteMetadata.navLinks || [],
-            navCallToActionLinks: source.siteMetadata.navCallToActionLinks || [],
+            navCallToActionLinks:
+              source.siteMetadata.navCallToActionLinks || [],
             socialLinks: source.siteMetadata.socialLinks || [],
-            twitterUsername: source.siteMetadata.twitterUsername || '@sigpwny',
-            timezone: source.siteMetadata.timezone || 'America/Chicago',
+            twitterUsername: source.siteMetadata.twitterUsername || "@sigpwny",
+            timezone: source.siteMetadata.timezone || "America/Chicago",
           };
         },
       },
@@ -517,9 +572,13 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const template_meeting = path.resolve(`./src/templates/template-meeting.tsx`);
   const template_event = path.resolve(`./src/templates/template-event.tsx`);
-  const template_publication = path.resolve(`./src/templates/template-publication.tsx`);
+  const template_publication = path.resolve(
+    `./src/templates/template-publication.tsx`
+  );
   const template_page_md = path.resolve(`./src/templates/template-page_md.tsx`);
-  const template_redirect_external = path.resolve(`./src/templates/template-redirect-external.tsx`);
+  const template_redirect_external = path.resolve(
+    `./src/templates/template-redirect-external.tsx`
+  );
 
   // Generate external redirects
   const redirects_external = result.data.allExternalJson.redirects;
@@ -542,12 +601,16 @@ exports.createPages = async ({ graphql, actions }) => {
     redirects_internal.forEach((redirect) => {
       // Generate server side redirects for internal routes
       createRedirect({
-        fromPath: redirect.src.endsWith('/') ? redirect.src.slice(0, -1) : redirect.src,
+        fromPath: redirect.src.endsWith("/")
+          ? redirect.src.slice(0, -1)
+          : redirect.src,
         toPath: redirect.dst,
         statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
       });
       createRedirect({
-        fromPath: redirect.src.endsWith('/') ? redirect.src : redirect.src + '/',
+        fromPath: redirect.src.endsWith("/")
+          ? redirect.src
+          : redirect.src + "/",
         toPath: redirect.dst,
         statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
       });
@@ -557,7 +620,8 @@ exports.createPages = async ({ graphql, actions }) => {
   const meetings = result.data.allMeeting.meetings;
   if (meetings.length > 0) {
     meetings.forEach((meeting, index) => {
-      const prev_id = index === meetings.length - 1 ? null : meetings[index + 1].id;
+      const prev_id =
+        index === meetings.length - 1 ? null : meetings[index + 1].id;
       const next_id = index === 0 ? null : meetings[index - 1].id;
       createPage({
         path: meeting.slug,

@@ -28,70 +28,73 @@ export const Head = ({ data }: Props) => {
   )
 }
 
+const getLinkName = (kind: string) => {
+  if (kind === 'ctftime') return 'CTFtime'
+  if (kind === 'website') return 'Event Site'
+  return kind
+}
+
 const EventTemplate = ({ data, children }: Props) => {
   if (!data.event_) {
     throw new Error(`invalid argument: "event_" is undefined`)
   }
+
+  const event = data.event_
+
   return (
     <>
       <div className="flex lg:flex-row flex-col gap-4">
         <aside className="xl:w-96 lg:w-80">
           <div className="sticky top-4">
             <Card
-              // heading={data.event_.time_start}
-              // title={data.event_.title}
-              image={data.event_.image as Image}
-              overlay_image={data.event_.overlay_image as Image}
+              // heading={event.time_start}
+              // title={event.title}
+              image={event.image as Image}
+              overlay_image={event.overlay_image as Image}
             />
             <div className="panel mt-4">
-              <h1>{data.event_.title}</h1>
-              {(data.event_.start_date || data.event_.close_date) && (
+              <h1>{event.title}</h1>
+              {(event.start_date || event.close_date) && (
                 <div className="flex flex-row mb-2">
-                  {data.event_.start_date && (
+                  {event.start_date && (
                     <div className="flex-1 flex-col">
                       <p className="m-0 font-bold">Time Start</p>
-                      <p className="m-0 text-xl">{data.event_.start_date}</p>
-                      <p className="m-0">{data.event_.start_hour}</p>
+                      <p className="m-0 text-xl">{event.start_date}</p>
+                      <p className="m-0">{event.start_hour}</p>
                     </div>
                   )}
-                  {data.event_.close_date && (
+                  {event.close_date && (
                     <div className="flex-1 flex-col">
                       <p className="m-0 font-bold">Time End</p>
-                      <p className="m-0 text-xl">{data.event_.close_date}</p>
-                      <p className="m-0">{data.event_.close_hour}</p>
+                      <p className="m-0 text-xl">{event.close_date}</p>
+                      <p className="m-0">{event.close_hour}</p>
                     </div>
                   )}
                 </div>
               )}
-              {data.event_.location && (
+              {event.location && (
                 <div className="mb-2">
                   <LocationSvg />
                   <p className="inline align-middle m-0 ml-2">
-                    {data.event_.location}
+                    {event.location}
                   </p>
                 </div>
               )}
-              {data.event_.links && (
+              {event.links && (
                 <ul>
-                  {data.event_.links.website && (
-                    <li>
-                      <a
-                        href={data.event_.links.website}
-                        target="_blank" rel="noopener noreferrer"
-                      >
-                        Event Site
-                      </a>
-                    </li>
-                  )}
-                  {data.event_.links.ctftime && (
-                    <li>
-                      <a
-                        href={data.event_.links.ctftime}
-                        target="_blank" rel="noopener noreferrer"
-                      >
-                        CTFtime
-                      </a>
-                    </li>
+                  {event.links.map(
+                    (link) => {
+                      return (
+                        <li key={link.link}>
+                          <a
+                            href={link.link}
+                            target="_blank" rel="noopener noreferrer"
+                          >
+                            {getLinkName(link.link)}
+                          </a>
+                        </li>
+                      )
+                    }
                   )}
                 </ul>
               )}
@@ -171,10 +174,9 @@ export const query = graphql`
         alt
       }
       links {
-        website
-        ctftime
+        link
+        kind
       }
-      rating_weight
       stats {
         name
         value
