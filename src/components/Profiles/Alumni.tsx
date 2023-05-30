@@ -1,9 +1,11 @@
-import React from "react"
+import React,{ useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 type Alum = Queries.AlumProfilesQuery["allAlum"]["alumni"][0]
 
 const AlumProfiles = () => {
+  const [isHidden, setIsHidden] = useState(true)
+
   const data: Queries.AlumProfilesQuery = useStaticQuery(graphql`
     query AlumProfiles {
       allAlum(sort: [{weight: ASC}, {name: ASC}]) {
@@ -39,9 +41,14 @@ const AlumProfiles = () => {
     <>
       {data.allAlum.alumni.length > 0 ? (
         <section id="alumni" className="pb-8">
-          <h1>Alumni & Elders</h1>
+          <div className="flex flex-row justify-between justify-center">
+            <h1>Alumni</h1>
+            <div>
+              <button className={`border-2 rounded-lg px-2 ${isHidden ? 'bg-white text-black' : 'border-white'}`} onClick={() => setIsHidden(!isHidden)}>{isHidden ? 'Show' : 'Hide'}</button>
+            </div>
+          </div>
           <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-2 gap-8">
-            {data.allAlum.alumni.map((alum: Alum) => (
+            {!isHidden && data.allAlum.alumni.map((alum: Alum) => (
               <div className="card h-100">
                 <div className="p-2">
                   <div className="flex flex-row justify-center m-2 gap-4">
@@ -54,7 +61,7 @@ const AlumProfiles = () => {
                           {alum.role}
                         </p>
                       ) : null}
-                      <p className="text-3xl font-bold m-0">{alum.name}</p>
+                      <p className="text-2xl font-bold m-0">{alum.name}</p>
                       {alum.handle ? (
                         <p className="font-mono">
                           @{alum.handle}
