@@ -146,7 +146,7 @@ collections:
         {label: "Name", name: "name", widget: "string"},
         {label: "Value", name: "value", widget: "string"}
       ], hint: 'E.g. Participants, Teams, Solves, Rating Weight', required: false}
-    meta: { path: { widget: string, label: "Path", index_file: "index", hint: 'Examples: "uiuctf/2022' } }
+    meta: { path: { widget: string, label: "Path", index_file: "index", hint: 'Examples: "uiuctf/2022"' } }
     nested:
       depth: 100
       summary: "{{time_start}} {{title}}"
