@@ -13,9 +13,10 @@ overlay_image: # optional
   path: "./logo.png"
   alt: "UIUCTF 2022 logo"
 links: # optional
-  website: "https://2022.uiuc.tf/"
-  ctftime: "https://ctftime.org/event/1600"
-rating_weight: 34.64 # optional
+  - kind: "website"
+    link: "https://2022.uiuc.tf/"
+  - kind: "ctftime"
+    link: "https://ctftime.org/event/1600"
 stats: # optional
   # - name: ""
   #   value: ""
@@ -25,6 +26,8 @@ stats: # optional
     value: "1000"
   - name: "Solves"
     value: "1000000"
+  - name: "Rating Weight"
+    value: "34.64"
 ---
 
 TODO: Prize winners/leaderboard here
