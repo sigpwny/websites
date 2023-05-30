@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 type Helper = Queries.HelperProfilesQuery["allHelper"]["helpers"][0]
 
 const HelperProfiles = () => {
+  const [isHidden, setIsHidden] = useState(true)
   const data: Queries.HelperProfilesQuery = useStaticQuery(graphql`
     query HelperProfiles {
       allHelper(sort: [{weight: ASC}, {name: ASC}]) {
@@ -37,9 +38,14 @@ const HelperProfiles = () => {
     <>
       {data.allHelper.helpers.length > 0 ? (
         <section id="helpers" className="pb-8">
-          <h1>Helper Team</h1>
+          <div className="flex flex-row justify-between justify-center">
+            <h1>Helpers</h1>
+            <div>
+              <button className={`border-2 rounded-lg px-2 ${isHidden ? 'bg-white text-black' : 'border-white'}`} onClick={() => setIsHidden(!isHidden)}>{isHidden ? 'Show' : 'Hide'}</button>
+            </div>
+          </div>
           <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-2 gap-8">
-            {data.allHelper.helpers.map((helper: Helper) => (
+            {!isHidden && data.allHelper.helpers.map((helper: Helper) => (
               <div className="card h-100">
                 <div className="p-2">
                   <div className="flex flex-row justify-center m-2 gap-4">
@@ -52,7 +58,7 @@ const HelperProfiles = () => {
                           {helper.role}
                         </p>
                       ) : null}
-                      <p className="text-3xl font-bold m-0">{helper.name}</p>
+                      <p className="text-2xl font-bold m-0">{helper.name}</p>
                       {helper.handle ? (
                         <p className="font-mono">
                           @{helper.handle}
