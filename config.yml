@@ -20,7 +20,7 @@ collections:
     public_folder: ""
     nested:
       depth: 100
-      summary: "{{date_}} - Week {{week_number}}: {{title}}"
+      summary: "{{time_start}} - Week {{week_number}}: {{title}}"
     fields:
       - {label: "Title", name: "title", hint: 'Example: "PWN II"', widget: "string"}
       - {label: "Meeting Start", name: "time_start", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Ensure date matches date in path."}
@@ -119,3 +119,37 @@ collections:
       - {label: "Tags", name: "tags", widget: "list", hint: '', required: false}
     slug: '{{fields.date}}_{{slug}}'
     path: '{{slug}}/index'
+
+  - name: "events"
+    label: "Events"
+    label_singular: "Event"
+    folder: "content/events"
+    create: true
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - {label: "Title", name: "title", widget: "string", hint: 'UIUCTF 2022'}
+      - {label: "Series", name: "series", widget: "select", options: ["uiuctf", "fallctf"], hint: ''}
+      - {label: "Description", name: "description", widget: "string", hint: ''}
+      - {label: "Event Start", name: "time_start", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm"}
+      - {label: "Event End", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", required: false}
+      - {label: "Location", name: "location", widget: "string", hint: 'e.g. Online', required: false}
+      - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news", "other"], hint: ''}
+      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", hint: ''}
+      - {label: "Description", name: "description", widget: "string", hint: '', required: false}
+      - {label: "Overlay Image", name: "overlay_image", widget: "object", fields: [
+          {label: "Image Upload", name: "path", widget: "image", hint: "", choose_url: false},
+          {label: "Alt text", name: "alt", widget: "string", hint: ""}
+        ]}
+      - {label: "Links", name: "links", widget: "list", fields: [
+          {label: "Link", name: "link", widget: "string", hint: ''},
+          {label: "Kind", name: "kind", widget: "select", options: ["website", "ctftime", "other"], hint: ''}
+        ], required: false}
+      - {label: "Stats", name: "stats", widget: "list", fields: [
+        {label: "Name", name: "name", widget: "string"},
+        {label: "Value", name: "value", widget: "string"}
+      ], hint: 'E.g. Participants, Teams, Solves, Rating Weight', required: false}
+    meta: { path: { widget: string, label: "Path", index_file: "index", hint: 'Examples: "uiuctf/2022' } }
+    nested:
+      depth: 100
+      summary: "{{time_start}} {{title}}"
