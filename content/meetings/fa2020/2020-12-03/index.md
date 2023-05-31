@@ -11,6 +11,6 @@ tags:
 - sqli
 time_close: ''
 time_start: 2020-12-03T18:00:00.000000-06:00
-title: Web Hacking: XSS and SQL Injection
+title: Web Hacking - XSS and SQL Injection
 week_number: 14
 ---
