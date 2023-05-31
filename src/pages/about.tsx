@@ -113,7 +113,7 @@ const events : Array<Event> = [
 const AboutPage = () => {
   return (
     <div className="flex flex-col md:flex-row justify-between">
-      <div className="flex flex-col md:grow">
+      <div className="flex flex-col md:w-2/3 lg:w-3/4">
         <section id="acronym" className="py-8">
           <div className="flex flex-col">
             <div className="flex flex-row justify-center pb-6">
@@ -139,11 +139,27 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
+        <section id="philospohy" className="py-8">
+          <div className="card grid grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+            <div className="col-span-2 lg:col-span-2">
+              <h1>Club Philosophy</h1>
+              <p className="font-bold text-2xl">Hands-on learning</p>
+              <p className="pb-4">We believe that the best way to learn is by doing. That's why we have a 15 minute presentation followed by 45 minutes of hands-on hacking.</p>
+              <p className="font-bold text-2xl">Beginner-focused</p>
+              <p className="pb-4">Cybersecurity should be accessible to all. Our meetings are designed so that you can attend them <b>with no prior knowledge</b>.</p>
+              <p className="font-bold text-2xl">Community</p>
+              <p className="pb-4">We strive to build a community focused on teaching and inclusion by inviting beginners to run meetings, running social events, and playing CTFs together as a club.</p>
+            </div>
+            <div className="col-span-2 lg:col-span-1 p-4">
+              <StaticImage className="rounded-xl pointer-events-none" src="../images/about/meeting-format-chart.png" alt="A pie chart showing the 15/45 meeting time breakdown." placeholder="blurred" />
+            </div>
+          </div>
+        </section>
         <AdminProfiles />
         <HelperProfiles />
         <AlumProfiles />
       </div>
-      <div className="flex ml-4 md:max-w-[20%]">
+      <div className="flex ml-4 md:w-1/3 lg:w-1/4">
         <Timeline events={events} />
       </div>
 
