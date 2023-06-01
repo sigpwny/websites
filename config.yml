@@ -30,8 +30,8 @@ collections:
       - {label: "Featured", name: "featured", widget: "boolean", default: true, hint: "The meeting will be shown on the home page if set to true.", required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'Example: "Siebel CS 1404 + Zoom"', required: false}
       - {label: "Cover Image", name: "image", widget: "object", required: false, fields: [
-          {label: "Image Upload", name: "path", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false},
-          {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes."}
+          {label: "Image Upload", name: "path", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
+          {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
       - {label: "Slides", name: "slides", widget: "file", choose_url: false, hint: "Please upload PDFs instead of PPTX files. If downloading from Google Slides, ensure that skipped slides are not present.", required: false}
       - {label: "Recording URL", name: "recording", widget: "string", required: false}
@@ -61,8 +61,8 @@ collections:
       - {label: "End Time", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: 'Make sure to use UTC time!', required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'Examples: "Online" or "CIF 3039"', required: false}
       - {label: "Background Image", name: "image", widget: "object", required: false, fields: [
-          {label: "Image Upload", name: "path", widget: "image", hint: "This is used as a background for the event logo. Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false},
-          {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes."}
+          {label: "Image Upload", name: "path", widget: "image", hint: "This is used as a background for the event logo. Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
+          {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
       - {label: "Overlay Image", name: "overlay_image", widget: "object", fields: [
           {label: "Image Upload", name: "path", widget: "image", hint: "This is used as the event logo.", choose_url: false},
