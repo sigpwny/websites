@@ -7,11 +7,11 @@ time_start: 2021-07-30T22:00:00.000Z
 time_close: 2021-08-01T22:00:00.000Z
 location: Online
 image:
-  path: logo2.png
-  alt: Neon sign saying "SIGPWNY PRESENTS UIUCTF"
+  path: ""
+  alt: ""
 overlay_image:
   path: logo2.png
-  alt: Neon sign saying "SIGPWNY PRESENTS UIUCTF"
+  alt: Neon sign saying "SIGPwny Presents UIUCTF 2021"
 links:
   - name: website
     link: https://2021.uiuc.tf/
