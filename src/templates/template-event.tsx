@@ -20,9 +20,7 @@ export const Head = ({ data }: Props) => {
     <Seo
       title={event_.title}
       description={event_.description}
-      image={event_.image?.path ? (
-        event_.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
-      ) : undefined}
+      image={event_.background_image?.path?.childImageSharp?.gatsbyImageData.images.fallback?.src}
     />
   )
 }
@@ -46,7 +44,7 @@ const EventTemplate = ({ data, children }: Props) => {
         <aside className="xl:w-96 lg:w-80">
           <div className="sticky top-4">
             <Card
-              image={event.image as Image}
+              image={event.background_image as Image}
               overlay_image={event.overlay_image as Image}
             />
             <div className="panel mt-4">
@@ -85,7 +83,7 @@ const EventTemplate = ({ data, children }: Props) => {
                         href={link?.link}
                         target="_blank" rel="noopener noreferrer"
                       >
-                        {getLinkName(link?.name)}
+                        {getLinkName(link?.name || '')}
                       </a>
                     </li>
                   ))}
@@ -143,7 +141,7 @@ export const query = graphql`
       close_date: time_close(formatString: "MMM DD, YYYY")
       close_hour: time_close(formatString: "HH:mm z")
       location
-      image {
+      overlay_image {
         path {
           childImageSharp {
             gatsbyImageData(
@@ -155,7 +153,7 @@ export const query = graphql`
         }
         alt
       }
-      overlay_image {
+      background_image {
         path {
           childImageSharp {
             gatsbyImageData(

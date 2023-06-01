@@ -6,9 +6,6 @@ description: UIUCTF 2020 was the first UIUCTF of the new SIGPwny club model, and
 time_start: 2020-07-17T23:00:00.000Z
 time_close: 2020-07-20T01:00:00.000Z
 location: Online
-image:
-  path: uiuctf-logo.png
-  alt: Board saying SIGPWNY presents UIUCTF
 overlay_image:
   path: uiuctf-logo.png
   alt: Board saying SIGPWNY presents UIUCTF

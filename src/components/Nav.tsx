@@ -11,12 +11,20 @@ interface NavLink {
 
 const Nav = () => {
   const [counter, setCounter] = useState(0)
-  const [colorOverride, setColorOverride] = useState<string | null>(null)
-  const colors = ["#ed7a31", "#cc66ee", "#41aaff", "#ffc000", "#33cc55"]
+  const colors = [
+    {primary: "#33cc55", secondary: "#137137"},
+    {primary: "#cc66ee", secondary: "#553366"},
+    {primary: "#ed7a31", secondary: "#773311"},
+    {primary: "#41aaff", secondary: "#234789"},
+    {primary: "#ffc000", secondary: "#876500"},
+  ]
 
   useEffect(() => {
-    if (counter % 3 == 0 && counter !== 0) {
-      setColorOverride(colors[Math.floor(Math.random() * colors.length)])
+    if (counter % 4 == 0 && counter !== 0) {
+      const index = Math.floor(counter / 4) % colors.length
+      const nextColor = colors[index]
+      document.body.style.setProperty("--color-primary", nextColor.primary)
+      document.body.style.setProperty("--color-secondary", nextColor.secondary)
     }
   }, [counter])
 
@@ -66,7 +74,7 @@ const Nav = () => {
         {({ open }) => (
           <>
             <div className="container">
-              <div className="relative flex items-center justify-between h-16 rose-400">
+              <div className="relative flex items-center justify-between h-16">
                 <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                   {/* Mobile hamburger menu button*/}
                   <Disclosure.Button className="navbar-toggler">
@@ -92,8 +100,7 @@ const Nav = () => {
                           <Link
                             key={item.name}
                             to={item.link}
-                            className={`font-bold text-xl lg:text-2xl my-auto leading-normal`}
-                            style={colorOverride ? { color: colorOverride } : {}}
+                            className="font-bold text-xl lg:text-2xl my-auto leading-normal"
                             activeClassName="nav-active"
                           >
                             {item.name}
@@ -106,7 +113,6 @@ const Nav = () => {
                             key={item.name}
                             to={item.link}
                             className="font-bold text-xl lg:text-2xl my-auto leading-normal btn-primary"
-                            style={colorOverride ? { backgroundColor: colorOverride } : {}}
                             activeClassName="nav-active"
                           >
                             {item.name}
