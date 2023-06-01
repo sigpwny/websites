@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import { Disclosure, Transition } from "@headlessui/react"
 
@@ -10,6 +10,16 @@ interface NavLink {
 }
 
 const Nav = () => {
+  const [counter, setCounter] = useState(0)
+  const [colorOverride, setColorOverride] = useState<string | null>(null)
+  const colors = ["#ed7a31", "#cc66ee", "#41aaff", "#ffc000", "#33cc55"]
+
+  useEffect(() => {
+    if (counter % 3 == 0 && counter !== 0) {
+      setColorOverride(colors[Math.floor(Math.random() * colors.length)])
+    }
+  }, [counter])
+
   const data: Queries.NavQuery = useStaticQuery(graphql`
     query Nav {
       site {
@@ -56,7 +66,7 @@ const Nav = () => {
         {({ open }) => (
           <>
             <div className="container">
-              <div className="relative flex items-center justify-between h-16">
+              <div className="relative flex items-center justify-between h-16 rose-400">
                 <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                   {/* Mobile hamburger menu button*/}
                   <Disclosure.Button className="navbar-toggler">
@@ -71,7 +81,7 @@ const Nav = () => {
                 {/* Desktop navbar */}
                 <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <Link to="/">
+                    <Link to="/" className="hover:rotate-[5deg]" onClick={() => setCounter(counter+1)}>
                       <PwnySvg height="48px" />
                     </Link>
                   </div>
@@ -82,7 +92,8 @@ const Nav = () => {
                           <Link
                             key={item.name}
                             to={item.link}
-                            className="font-bold text-xl lg:text-2xl my-auto leading-normal"
+                            className={`font-bold text-xl lg:text-2xl my-auto leading-normal`}
+                            style={colorOverride ? { color: colorOverride } : {}}
                             activeClassName="nav-active"
                           >
                             {item.name}
@@ -95,6 +106,7 @@ const Nav = () => {
                             key={item.name}
                             to={item.link}
                             className="font-bold text-xl lg:text-2xl my-auto leading-normal btn-primary"
+                            style={colorOverride ? { backgroundColor: colorOverride } : {}}
                             activeClassName="nav-active"
                           >
                             {item.name}
@@ -121,7 +133,7 @@ const Nav = () => {
                     <Disclosure.Button as={Link}
                       key={item.name}
                       to={item.link}
-                      className="font-bold text-2xl leading-normal block"
+                      className="font-bold text-2xl leading-normal block my-1"
                       activeClassName="nav-active"
                     >
                       {item.name}
@@ -132,7 +144,7 @@ const Nav = () => {
                     <Disclosure.Button as={Link}
                       key={item.name}
                       to={item.link}
-                      className="font-bold text-2xl leading-normal block"
+                      className="font-bold text-2xl leading-normal block my-1"
                       activeClassName="nav-active"
                     >
                       {item.name}
