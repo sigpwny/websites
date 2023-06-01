@@ -22,13 +22,8 @@ const HelperProfiles = () => {
           role
           weight
           links {
-            email
-            website
-            github
-            twitter
-            mastodon
-            linkedin
-            discord
+            name
+            link
           }
         }
       }

@@ -25,13 +25,8 @@ const AlumProfiles = () => {
           work
           weight
           links {
-            email
-            website
-            github
-            twitter
-            mastodon
-            linkedin
-            discord
+            name
+            link
           }
         }
       }

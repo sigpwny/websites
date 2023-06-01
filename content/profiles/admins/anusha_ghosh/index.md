@@ -8,5 +8,5 @@ role: President
 weight: 10
 handle: ""
 links:
-  twitter: 0xh3110ca
+  - {name: "twitter", link: "https://twitter.com/0xh3110ca"}
 ---

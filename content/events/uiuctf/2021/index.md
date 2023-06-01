@@ -10,10 +10,10 @@ overlay_image:
   path: logo2.png
   alt: Neon sign saying "SIGPWNY PRESENTS UIUCTF"
 links:
-  - kind: website
+  - name: website
     link: https://2021.uiuc.tf/
-  - link: https://ctftime.org/event/1372
-    kind: ctftime
+  - name: ctftime
+    link: https://ctftime.org/event/1372
 stats:
   - name: Participants
     value: "658"

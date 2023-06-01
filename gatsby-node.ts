@@ -329,20 +329,20 @@ exports.createSchemaCustomization = ({ actions }) => {
       siteMetadata: SiteMetadata!
     }
 
+    type Link {
+      name: String!
+      link: String!
+    }
+
     type SiteMetadata {
       title: String!
       siteUrl: String!
       description: String!
       image: String!
-      navLinks: [NavLink]
-      navCallToActionLinks: [NavLink]
-      socialLinks: [NavLink]
+      navLinks: [Link]
+      navCallToActionLinks: [Link]
+      socialLinks: [Link]
       timezone: String!
-    }
-    
-    type NavLink {
-      name: String!
-      link: String!
     }
 
     type ImageAlt @dontInfer {
@@ -350,25 +350,9 @@ exports.createSchemaCustomization = ({ actions }) => {
       alt: String!
     }
 
-    type Links {
-      email: String
-      website: String
-      github: String
-      twitter: String
-      mastodon: String
-      linkedin: String
-      discord: String
-      ctftime: String
-    }
-
     type Stat {
       name: String!
       value: String!
-    }
-
-    type EventLink {
-      kind: String!
-      link: String!
     }
 
     type Meeting implements Node @dontInfer {
@@ -397,7 +381,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       location: String
       image: ImageAlt
       overlay_image: ImageAlt
-      links: [EventLink]
+      links: [Link]
       stats: [Stat]
       slug: String!
     }
@@ -428,17 +412,17 @@ exports.createSchemaCustomization = ({ actions }) => {
       slug: String
     }
 
-    type Admin implements Node {
+    type Admin implements Node @dontInfer {
       name: String!
       bio: String!
       image: ImageAlt!
       handle: String
       role: String!
       weight: Int!
-      links: Links
+      links: [Link]
     }
 
-    type Alum implements Node {
+    type Alum implements Node @dontInfer {
       name: String!
       image: ImageAlt!
       handle: String
@@ -446,16 +430,16 @@ exports.createSchemaCustomization = ({ actions }) => {
       period: String
       work: String
       weight: Int!
-      links: Links
+      links: [Link]
     }
 
-    type Helper implements Node {
+    type Helper implements Node @dontInfer {
       name: String!
       image: ImageAlt!
       handle: String
       role: String!
       weight: Int!
-      links: Links
+      links: [Link]
     }
   `);
 };

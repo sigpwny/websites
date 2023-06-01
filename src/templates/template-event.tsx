@@ -28,10 +28,10 @@ export const Head = ({ data }: Props) => {
   )
 }
 
-const getLinkName = (kind: string) => {
-  if (kind === 'ctftime') return 'CTFtime'
-  if (kind === 'website') return 'Event Site'
-  return kind
+const getLinkName = (name: string) => {
+  if (name === 'ctftime') return 'CTFtime'
+  if (name === 'website') return 'Event Site'
+  return name
 }
 
 const EventTemplate = ({ data, children }: Props) => {
@@ -47,8 +47,6 @@ const EventTemplate = ({ data, children }: Props) => {
         <aside className="xl:w-96 lg:w-80">
           <div className="sticky top-4">
             <Card
-              // heading={event.time_start}
-              // title={event.title}
               image={event.image as Image}
               overlay_image={event.overlay_image as Image}
             />
@@ -82,20 +80,16 @@ const EventTemplate = ({ data, children }: Props) => {
               )}
               {event.links && (
                 <ul>
-                  {event.links.map(
-                    (link) => {
-                      return (
-                        <li key={link.link}>
-                          <a
-                            href={link.link}
-                            target="_blank" rel="noopener noreferrer"
-                          >
-                            {getLinkName(link.link)}
-                          </a>
-                        </li>
-                      )
-                    }
-                  )}
+                  {event.links.map((link, index) => (
+                    <li key={index}>
+                      <a
+                        href={link.link}
+                        target="_blank" rel="noopener noreferrer"
+                      >
+                        {getLinkName(link.name)}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               )}
             </div>
@@ -174,8 +168,8 @@ export const query = graphql`
         alt
       }
       links {
+        name
         link
-        kind
       }
       stats {
         name

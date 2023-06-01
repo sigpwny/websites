@@ -10,8 +10,8 @@ overlay_image:
   path: 2023-05-29_22-18.png
   alt: screenshot of the CTFd that says Fall CTF 2022.
 links:
-  - link: https://fallctf.sigpwny.com/
-    kind: website
+  - name: website
+    link: https://fallctf.sigpwny.com/
 stats:
   - name: Participants
     value: "128"

@@ -5,12 +5,11 @@ bio: Hello! I am a Junior in Computer Science and Economics. I like
 image:
   path: headshot_outside.jpg
   alt: Coolest Picture of Julius Taken EVER!!
-role: "Admin "
+role: "Admin"
 weight: 0
 links:
-  email: jwhit33@illinois.edu
-  github: https://github.com/jcw515awsm
-  twitter: ""
-  linkedin: https://www.linkedin.com/in/julius-white-v-18146a21b/
-  discord: jcw515awsm#6405
+  - {name: "email", link: "jwhit33@illinois.edu"}
+  - {name: "github", link: "https://github.com/jcw515awsm"}
+  - {name: "linkedin", link: "https://www.linkedin.com/in/julius-white-v-18146a21b/"}
+  - {name: "discord", link: "jcw515awsm#6405"}
 ---

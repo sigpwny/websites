@@ -10,10 +10,10 @@ overlay_image:
   path: uiuctf-logo.png
   alt: Board saying SIGPWNY presents UIUCTF
 links:
-  - link: https://2020.uiuc.tf/
-    kind: website
-  - link: https://ctftime.org/event/1075
-    kind: ctftime
+  - name: website
+    link: https://2020.uiuc.tf/
+  - name: ctftime
+    link: https://ctftime.org/event/1075
 stats:
   - name: Rating Weight
     value: "23.76"

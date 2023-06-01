@@ -9,9 +9,8 @@ role: Admin
 weight: 0
 handle: lukewarmdaisies
 links:
-  email: lukewarmdaisies@gmail.com
-  website: emmahartman.dev
-  discord: lukewarmdaisies#1750
-  linkedin: ""
-  github: https://github.com/eihart123
+  - {name: "email", link: "lukewarmdaisies@gmail.com"}
+  - {name: "website", link: "https://emmahartman.dev"}
+  - {name: "discord", link: "lukewarmdaisies#1750"}
+  - {name: "github", link: "https://github.com/eihart123"}
 ---

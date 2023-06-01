@@ -9,10 +9,10 @@ role: Admin
 weight: 0
 handle: Spamakin🎷
 links:
-  website: anakin-dey.com
-  discord: Spamakin🎷#6722
-  twitter: https://twitter.com/SpamakinsArt
-  github: https://github.com/Spamakin
-  mastodon: https://mathstodon.xyz/@spamakin
-  email: ""
+  - {name: "website", link: "https://anakin-dey.com"}
+  - {name: "discord", link: "Spamakin🎷#6722"}
+  - {name: "twitter", link: "https://twitter.com/SpamakinsArt"}
+  - {name: "github", link: "https://github.com/Spamakin"}
+  - {name: "mastodon", link: "https://mathstodon.xyz/@spamakin"}
+  - {name: "email", link: ""}
 ---
