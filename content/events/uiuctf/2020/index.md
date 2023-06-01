@@ -20,7 +20,7 @@ stats:
   - name: Participants
     value: "390"
 ---
-#﻿ Writeups
+## Writeups
 
 For UIUCTF 2020 we paid out $1,600 in writeup prizes. We were inspired by GoogleCTF's writeup prizes. We prioritize concise technical communication and writeups that are fun to read and learn from, including those written from/for the perspective of beginners. Here are the writeups that won.
 
