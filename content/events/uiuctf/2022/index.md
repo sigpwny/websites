@@ -10,9 +10,9 @@ overlay_image:
   path: ./logo.png
   alt: UIUCTF 2022 logo
 links:
-  - kind: website
+  - name: website
     link: https://2022.uiuc.tf/
-  - kind: ctftime
+  - name: ctftime
     link: https://ctftime.org/event/1600
 stats:
   - name: Participants

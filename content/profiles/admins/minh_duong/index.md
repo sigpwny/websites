@@ -11,10 +11,10 @@ handle: "WhiteHoodHacker" # optional
 role: "Admin" # optional
 weight: 0 # required, larger value is closer to top, otherwise sort by name alphabetically
 links: # optional
-  email: "hello@whitehoodhacker.net" # optional, will be formatted with mailto:
-  website: "https://whitehoodhacker.net/" # optional
-  github: "https://github.com/WhiteHoodHacker" # optional
-  twitter: "https://twitter.com/WhiteHoodHacker" # optional
-  linkedin: "https://www.linkedin.com/in/whitehoodhacker/" # optional
-  discord: "https://discord.com/" # optional
+  - {name: "email", link: "hello@whitehoodhacker.net"} # optional, will be formatted with mailto:
+  - {name: "website", link: "https://whitehoodhacker.net/"} # optional
+  - {name: "github", link: "https://github.com/WhiteHoodHacker"} # optional
+  - {name: "twitter", link: "https://twitter.com/WhiteHoodHacker"} # optional
+  - {name: "linkedin", link: "https://www.linkedin.com/in/whitehoodhacker/"} # optional
+  - {name: "discord", link: "https://discord.com/"} # optional
 ---

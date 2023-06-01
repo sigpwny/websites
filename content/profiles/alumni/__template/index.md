@@ -10,11 +10,18 @@ period: "Class of 2020" # optional
 work: "Fintech Bro" # optional
 weight: 0 # required, larger value is closer to front, otherwise sort by name alphabetically
 links: # optional
-  email: "hello@sigpwny.com" # optional, will be formatted with mailto:
-  website: "https://sigpwny.com/" # optional
-  github: "https://github.com/sigpwny" # optional
-  twitter: "https://twitter.com/" # optional
-  mastodon: "" # optional
-  linkedin: "https://www.linkedin.com/" # optional
-  discord: "https://discord.com/" # optional
+  - name: "email" # optional, will be formatted with mailto:
+    link: "hello@sigpwny.com"
+  - name: "website" # optional
+    link: "https://sigpwny.com/"
+  - name: "github" # optional
+    link: "https://github.com/sigpwny"
+  - name: "twitter" # optional
+    link: "https://twitter.com/"
+  - name: "mastodon" # optional
+    link: ""
+  - name: "linkedin" # optional
+    link: "https://www.linkedin.com/"
+  - name: "discord" # optional
+    link: "https://discord.com/"
 ---

@@ -9,10 +9,10 @@ role: Admin
 weight: 0
 handle: spicypete
 links:
-  email: pete@stenger.io
-  website: stenger.io
-  github: https://github.com/reteps
-  twitter: https://twitter.com/_spicypete
-  linkedin: https://www.linkedin.com/in/pete-stenger/
-  discord: spicypete#2287
+  - {name: "email", link: "pete@stenger.io"}
+  - {name: "website", link: "https://stenger.io"}
+  - {name: "github", link: "https://github.com/reteps"}
+  - {name: "twitter", link: "https://twitter.com/_spicypete"}
+  - {name: "linkedin", link: "https://www.linkedin.com/in/pete-stenger/"}
+  - {name: "discord", link: "spicypete#2287"}
 ---
