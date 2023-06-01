@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { MDXProvider } from "@mdx-js/react"
 
 import Seo from "../components/Seo"
@@ -85,12 +84,12 @@ const EventTemplate = ({ data, children }: Props) => {
                   {event.links.map(
                     (link) => {
                       return (
-                        <li key={link.link}>
+                        <li key={link?.link}>
                           <a
-                            href={link.link}
+                            href={link?.link}
                             target="_blank" rel="noopener noreferrer"
                           >
-                            {getLinkName(link.link)}
+                            {getLinkName(link?.kind || '')}
                           </a>
                         </li>
                       )
@@ -123,6 +122,7 @@ const EventTemplate = ({ data, children }: Props) => {
                 </div>
               </section>
             )}
+
             <section id="content" className="panel">
               <MDXProvider>
                 <div className="md-root">
