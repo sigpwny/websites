@@ -117,7 +117,10 @@ collections:
       - {label: "Role", name: "role", hint: 'Examples: "Admin", "Helper", "President"', widget: "string"}
       - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number"}
       - {label: "Handle", name: "handle", hint: "Do not prepend with `@`.", required: false}
-      - {label: "Links", name: "links", hint: "All links should be in link format, not just usernames.", widget: "object", fields: [{label: "Email", name: "email", widget: "string", required: false}, {label: "Website", name: "website", widget: "string", required: false}, {label: "GitHub", name: "github", widget: "string", required: false}, {label: "Twitter", name: "twitter", widget: "string", required: false}, {label: "Mastodon", name: "mastodon", widget: "string", required: false}, {label: "LinkedIn", name: "linkedin", widget: "string", required: false}, {label: "Discord", name: "discord", widget: "string", required: false}], required: false}
+      - {label: "Links", name: "links", widget: "list", required: false, fields: [
+          {label: "Name", name: "name", widget: "select", options: ["email", "website", "github", "twitter", "mastodon", "linkedin", "discord"], hint: ''},
+          {label: "Link", name: "link", widget: "string", hint: ''}
+        ]}
     sortable_fields: ["weight", "name", "handle"]
     slug: '{{name}}'
     path: '{{slug}}/index' # https://answers.netlify.com/t/nested-collections-dynamic-path-slug/24352/2
@@ -136,7 +139,10 @@ collections:
       - {label: "Role", name: "role", hint: 'Examples: "Admin", "Helper", "President"', widget: "string"}
       - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number"}
       - {label: "Handle", name: "handle", hint: "Do not prepend with `@`.", required: false}
-      - {label: "Links", name: "links", hint: "All links should be in link format, not just usernames.", widget: "object", fields: [{label: "Email", name: "email", widget: "string", required: false}, {label: "Website", name: "website", widget: "string", required: false}, {label: "GitHub", name: "github", widget: "string", required: false}, {label: "Twitter", name: "twitter", widget: "string", required: false}, {label: "Mastodon", name: "mastodon", widget: "string", required: false}, {label: "LinkedIn", name: "linkedin", widget: "string", required: false}, {label: "Discord", name: "discord", widget: "string", required: false}], required: false}
+      - {label: "Links", name: "links", widget: "list", required: false, fields: [
+          {label: "Name", name: "name", widget: "select", options: ["email", "website", "github", "twitter", "mastodon", "linkedin", "discord"], hint: ''},
+          {label: "Link", name: "link", widget: "string", hint: ''}
+        ]}
     sortable_fields: ["weight", "name", "handle"]
     slug: '{{name}}'
     path: '{{slug}}/index'
@@ -155,7 +161,10 @@ collections:
       - {label: "Role", name: "role", hint: 'Examples: "Admin", "Helper", "President"', widget: "string"}
       - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number"}
       - {label: "Handle", name: "handle", hint: "Do not prepend with `@`.", required: false}
-      - {label: "Links", name: "links", hint: "All links should be in link format, not just usernames.", widget: "object", fields: [{label: "Email", name: "email", widget: "string", required: false}, {label: "Website", name: "website", widget: "string", required: false}, {label: "GitHub", name: "github", widget: "string", required: false}, {label: "Twitter", name: "twitter", widget: "string", required: false}, {label: "Mastodon", name: "mastodon", widget: "string", required: false}, {label: "LinkedIn", name: "linkedin", widget: "string", required: false}, {label: "Discord", name: "discord", widget: "string", required: false}], required: false}
+      - {label: "Links", name: "links", widget: "list", required: false, fields: [
+          {label: "Name", name: "name", widget: "select", options: ["email", "website", "github", "twitter", "mastodon", "linkedin", "discord"], hint: ''},
+          {label: "Link", name: "link", widget: "string", hint: ''}
+        ]}
     sortable_fields: ["weight", "name", "handle"]
     slug: '{{name}}'
     path: '{{slug}}/index'
