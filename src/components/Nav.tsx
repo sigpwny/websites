@@ -89,9 +89,9 @@ const Nav = () => {
                 {/* Desktop navbar */}
                 <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <Link to="/" className="hover:rotate-[5deg]" onClick={() => setCounter(counter+1)}>
+                    <button title="Pwny" className="hover:rotate-[5deg]" onClick={() => setCounter(counter+1)}>
                       <PwnySvg height="48px" />
-                    </Link>
+                    </button>
                   </div>
                   <div className="hidden md:block md:ml-6 my-auto">
                     <div className="flex">
