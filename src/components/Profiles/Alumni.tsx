@@ -1,10 +1,18 @@
-import React,{ useState } from "react"
+import React,{ useEffect, useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
+import { useMediaQuery } from 'react-responsive'
 
 type Alum = Queries.AlumProfilesQuery["allAlum"]["alumni"][0]
 
 const AlumProfiles = () => {
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [isHidden, setIsHidden] = useState(true)
+  useEffect(() => {
+    setIsHidden(isMobile)
+  }, [isMobile])
+  const toggleHidden = () => {
+    setIsHidden(!isHidden)
+  }
 
   const data: Queries.AlumProfilesQuery = useStaticQuery(graphql`
     query AlumProfiles {
@@ -39,7 +47,7 @@ const AlumProfiles = () => {
           <div className="flex flex-row justify-between justify-center">
             <h1>Alumni</h1>
             <div>
-              <button className={`border-2 rounded-lg px-2 ${isHidden ? 'bg-white text-black' : 'border-white'}`} onClick={() => setIsHidden(!isHidden)}>{isHidden ? 'Show' : 'Hide'}</button>
+              <button className={`border-2 rounded-lg px-2 ${isHidden ? 'bg-white text-black' : 'border-white'}`} onClick={toggleHidden}>{isHidden ? 'Show' : 'Hide'}</button>
             </div>
           </div>
           <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-2 gap-8">
