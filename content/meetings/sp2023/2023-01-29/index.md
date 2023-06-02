@@ -8,7 +8,7 @@ credit:
   - Minh
   - Richard
 featured: true
-slides: Week XXX.pdf
+slides: Week 01_ Setup Meeting.pdf
 recording: https://www.youtube.com/watch?v=jNvyrUlmlm8
 tags:
   - welcome
