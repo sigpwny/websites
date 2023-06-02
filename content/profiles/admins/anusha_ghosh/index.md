@@ -2,7 +2,7 @@
 name: Anusha Ghosh
 bio: ai nerd. here for a good time.
 image:
-  path: hzpaoez7_400x400.jpg
+  path: 42b61497-cd22-4236-9fcc-9417fe2ec9e3-4.jpg
   alt: Sunflower
 role: President
 weight: 10
