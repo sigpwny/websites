@@ -6,7 +6,8 @@ image:
   alt: Sunflower
 role: President
 weight: 10
-handle: ""
+handle: helloca
 links:
-  - {name: "twitter", link: "https://twitter.com/0xh3110ca"}
+  - name: twitter
+    link: https://twitter.com/0xh3110ca
 ---
