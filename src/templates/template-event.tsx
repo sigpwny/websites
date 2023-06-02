@@ -39,15 +39,15 @@ const EventTemplate = ({ data, children }: Props) => {
   const event = data.event_
 
   return (
-    <>
-      <div className="flex lg:flex-row flex-col gap-4">
-        <aside className="xl:w-96 lg:w-80">
-          <div className="sticky top-4">
+    <div className="flex lg:flex-row flex-col gap-4">
+      <aside className="flex shrink-0 xl:w-96 lg:w-80">
+        <div className="block">
+          <div className="flex flex-col gap-4 sticky top-4">
             <Card
               image={event.background_image as Image}
               overlay_image={event.overlay_image as Image}
             />
-            <div className="panel mt-4">
+            <div className="panel">
               <h1>{event.title}</h1>
               {(event.start_date || event.close_date) && (
                 <div className="flex flex-row mb-2">
@@ -91,41 +91,41 @@ const EventTemplate = ({ data, children }: Props) => {
               )}
             </div>
           </div>
-        </aside>
+        </div>
+      </aside>
 
-        <div className="w-100 grow">
-          <div className="grid gap-4">
-            {data.event_.description && (
-              <section id="description" className="panel">
-                <h2>Event Description</h2>
-                <p>{data.event_.description}</p>
-              </section>
-            )}
-            {data.event_.stats && (
-              <section id="stats" className="panel">
-                <h2>Event Statistics</h2>
-                <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2">
-                  {data.event_.stats.map((stat, i) => (
-                    <div key={i} className="mb-2">
-                      <p className="m-0 font-bold">{stat?.name}</p>
-                      <p className="m-0 font-mono text-4xl">{stat?.value}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            <section id="content" className="panel">
-              <MDXProvider>
-                <div className="md-root">
-                  {children}
-                </div>
-              </MDXProvider>
+      <div className="flex-1">
+        <div className="grid gap-4">
+          {data.event_.description && (
+            <section id="description" className="panel">
+              <h2>Event Description</h2>
+              <p>{data.event_.description}</p>
             </section>
-          </div>
+          )}
+          {data.event_.stats && (
+            <section id="stats" className="panel">
+              <h2>Event Statistics</h2>
+              <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2">
+                {data.event_.stats.map((stat, i) => (
+                  <div key={i} className="mb-2">
+                    <p className="m-0 font-bold">{stat?.name}</p>
+                    <p className="m-0 font-mono text-4xl">{stat?.value}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <section id="content" className="panel">
+            <MDXProvider>
+              <div className="md-root">
+                {children}
+              </div>
+            </MDXProvider>
+          </section>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
