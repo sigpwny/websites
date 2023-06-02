@@ -1,12 +1,15 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { motion } from "framer-motion"
 import { StaticImage, IGatsbyImageData } from "gatsby-plugin-image"
 
-import Seo from "../components/Seo"
-import AdminProfiles from "../components/Profiles/Admins"
-import AlumProfiles from "../components/Profiles/Alumni"
-import HelperProfiles from "../components/Profiles/Helpers"
-import Timeline, { type Event } from "../components/Timeline"
+import Seo from "../../components/Seo"
+import AdminProfiles from "../../components/Profiles/Admins"
+import AlumProfiles from "../../components/Profiles/Alumni"
+import HelperProfiles from "../../components/Profiles/Helpers"
+import Timeline, { type Event } from "../../components/Timeline"
+
+import "./about.css"
 
 export function Head() {
   return (
@@ -113,11 +116,11 @@ const events : Array<Event> = [
 const AboutPage = () => {
   return (
     <div className="flex flex-col md:flex-row justify-between">
-      <div className="flex flex-col md:w-2/3 lg:w-3/4">
+      <div className="flex flex-col gap-8">
         <section id="acronym" className="py-8">
           <div className="flex flex-col">
             <div className="flex flex-row justify-center pb-6">
-              <div className="flex flex-col">
+              <div className="flex flex-col slide-in-from-right">
                 <p className="use-color-primary font-bold text-right text-5xl sm:text-6xl md:text-7xl lg:text-8xl">SIG</p>
                 <p className="text-center">&#8595;</p>
                 <p className="font-bold text-center">Special <br />Interest <br />Group</p>
@@ -127,7 +130,7 @@ const AboutPage = () => {
                 <p className="text-center">&#8595;</p>
                 <p className="font-bold text-center">To hack <br />or "own" <br />(slang)</p>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col slide-in-from-left">
                 <p className="use-color-primary font-bold text-left text-5xl sm:text-6xl md:text-7xl lg:text-8xl">y</p>
                 <p className="text-center">&#8595;</p>
                 <p className="font-bold text-center">For <br />cool <br />logo</p>
@@ -139,29 +142,75 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
-        <section id="philospohy" className="py-8">
+        <section id="what-we-do">
+          <div className="text-center">
+            <div className="panel mx-auto max-w-prose">
+              <p className="font-bold text-4xl">
+                What do we do?
+              </p>
+              <p className="m-0">
+                As the cybersecurity club at the University of Illinois Urbana-Champaign, our mission is to 
+                teach students cybersecurity through meetings, competitions, and research.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section id="beginner-friendly">
+          <div className="text-center">
+            <div className="panel mx-auto max-w-prose">
+              <p className="font-bold text-4xl">
+                We're beginner-friendly
+              </p>
+              <p className="m-0">
+                We believe cybersecurity should be accessible to all, so we teach everything from the ground up. Our 
+                meetings are designed to be approached by <em>anyone</em>, regardless of skill, major, or experience.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section id="philosophy">
+          <div className="text-center">
+            <div className="panel mx-auto max-w-prose">
+              <p className="font-bold text-4xl">
+                Our teaching philosophy
+              </p>
+              <p className="m-0">
+                We believe that the best way to learn is by doing &ndash; so we're not going to lecture you for an hour. 
+                Our meetings are typically 15 minutes of presentation followed by 45 minutes of hands-on hacking.
+              </p>
+              <StaticImage className="rounded-xl pointer-events-none w-1/3" src="./meeting-format-chart.png" alt="A pie chart showing the 15/45 meeting time breakdown." placeholder="blurred" />
+            </div>
+          </div>
+        </section>
+        {/* <section id="club-philosophy">
           <div className="card grid grid-cols-2 lg:grid-cols-3 gap-4 p-4">
             <div className="col-span-2 lg:col-span-2">
-              <h1>Club Philosophy</h1>
-              <p className="font-bold text-2xl">Hands-on learning</p>
-              <p className="pb-4">We believe that the best way to learn is by doing. That's why we have a 15 minute presentation followed by 45 minutes of hands-on hacking.</p>
-              <p className="font-bold text-2xl">Beginner-focused</p>
-              <p className="pb-4">Cybersecurity should be accessible to all. Our meetings are designed so that you can attend them <b>with no prior knowledge</b>.</p>
               <p className="font-bold text-2xl">Community</p>
               <p className="pb-4">We strive to build a community focused on teaching and inclusion by inviting beginners to run meetings, running social events, and playing CTFs together as a club.</p>
             </div>
             <div className="col-span-2 lg:col-span-1 p-4">
-              <StaticImage className="rounded-xl pointer-events-none" src="../images/about/meeting-format-chart.png" alt="A pie chart showing the 15/45 meeting time breakdown." placeholder="blurred" />
             </div>
           </div>
+        </section> */}
+
+        <section id="who-we-are">
+          <div className="text-center">
+            <div className="panel mx-auto max-w-prose">
+              <p className="font-bold text-4xl">Who we are</p>
+              <p className="m-0">
+                SIGPwny is completely student-run and would not be able to support everyone without the contributions 
+                from our admin team, helpers, and alumni.
+              </p>
+            </div>
+          </div>
+          <AdminProfiles />
+          <HelperProfiles />
+          <AlumProfiles />
         </section>
-        <AdminProfiles />
-        <HelperProfiles />
-        <AlumProfiles />
       </div>
-      <div className="flex ml-4 md:w-1/3 lg:w-1/4">
+      {/* <div className="flex ml-4 md:w-1/3 lg:w-1/4">
         <Timeline events={events} />
-      </div>
+      </div> */}
 
     </div>
   )
