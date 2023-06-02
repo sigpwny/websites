@@ -28,6 +28,10 @@ const Nav = () => {
     }
   }, [counter])
 
+  const incrementCounter = () => {
+    setCounter(counter+1)
+  }
+
   const data: Queries.NavQuery = useStaticQuery(graphql`
     query Nav {
       site {
@@ -89,7 +93,7 @@ const Nav = () => {
                 {/* Desktop navbar */}
                 <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <button title="Pwny" className="hover:rotate-[5deg]" onClick={() => setCounter(counter+1)}>
+                    <button title="Pwny" className="hover:rotate-[5deg]" onClick={incrementCounter}>
                       <PwnySvg height="48px" />
                     </button>
                   </div>
