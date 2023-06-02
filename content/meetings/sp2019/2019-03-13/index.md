@@ -1,0 +1,16 @@
+---
+credit:
+- Ben Lim
+featured: false
+location: ECEB 3013
+recording: ''
+slides: dynamorio.pdf
+tags:
+- pwn
+- rev
+- dynamorio
+time_close: ''
+time_start: 2019-03-13T19:00:00.000000-05:00
+title: DynamoRIO
+week_number: 8
+---

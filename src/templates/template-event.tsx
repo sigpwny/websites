@@ -1,6 +1,5 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { MDXProvider } from "@mdx-js/react"
 
 import Seo from "../components/Seo"
@@ -21,17 +20,15 @@ export const Head = ({ data }: Props) => {
     <Seo
       title={event_.title}
       description={event_.description}
-      image={event_.image?.path ? (
-        event_.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
-      ) : undefined}
+      image={event_.background_image?.path?.childImageSharp?.gatsbyImageData.images.fallback?.src}
     />
   )
 }
 
-const getLinkName = (kind: string) => {
-  if (kind === 'ctftime') return 'CTFtime'
-  if (kind === 'website') return 'Event Site'
-  return kind
+const getLinkName = (name: string) => {
+  if (name === 'ctftime') return 'CTFtime'
+  if (name === 'website') return 'Event Site'
+  return name
 }
 
 const EventTemplate = ({ data, children }: Props) => {
@@ -42,17 +39,15 @@ const EventTemplate = ({ data, children }: Props) => {
   const event = data.event_
 
   return (
-    <>
-      <div className="flex lg:flex-row flex-col gap-4">
-        <aside className="xl:w-96 lg:w-80">
-          <div className="sticky top-4">
+    <div className="flex lg:flex-row flex-col gap-4">
+      <aside className="flex shrink-0 xl:w-96 lg:w-80">
+        <div className="block">
+          <div className="flex flex-col gap-4 sticky top-4">
             <Card
-              // heading={event.time_start}
-              // title={event.title}
-              image={event.image as Image}
+              image={event.background_image as Image}
               overlay_image={event.overlay_image as Image}
             />
-            <div className="panel mt-4">
+            <div className="panel">
               <h1>{event.title}</h1>
               {(event.start_date || event.close_date) && (
                 <div className="flex flex-row mb-2">
@@ -82,58 +77,55 @@ const EventTemplate = ({ data, children }: Props) => {
               )}
               {event.links && (
                 <ul>
-                  {event.links.map(
-                    (link) => {
-                      return (
-                        <li key={link.link}>
-                          <a
-                            href={link.link}
-                            target="_blank" rel="noopener noreferrer"
-                          >
-                            {getLinkName(link.link)}
-                          </a>
-                        </li>
-                      )
-                    }
-                  )}
+                  {event.links.map((link, index) => (
+                    <li key={index}>
+                      <a
+                        href={link?.link}
+                        target="_blank" rel="noopener noreferrer"
+                      >
+                        {getLinkName(link?.name || '')}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               )}
             </div>
           </div>
-        </aside>
+        </div>
+      </aside>
 
-        <div className="w-100 grow">
-          <div className="grid gap-4">
-            {data.event_.description && (
-              <section id="description" className="panel">
-                <h2>Event Description</h2>
-                <p>{data.event_.description}</p>
-              </section>
-            )}
-            {data.event_.stats && (
-              <section id="stats" className="panel">
-                <h2>Event Statistics</h2>
-                <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2">
-                  {data.event_.stats.map((stat, i) => (
-                    <div key={i} className="mb-2">
-                      <p className="m-0 font-bold">{stat?.name}</p>
-                      <p className="m-0 font-mono text-4xl">{stat?.value}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-            <section id="content" className="panel">
-              <MDXProvider>
-                <div className="md-root">
-                  {children}
-                </div>
-              </MDXProvider>
+      <div className="flex-1">
+        <div className="grid gap-4">
+          {data.event_.description && (
+            <section id="description" className="panel">
+              <h2>Event Description</h2>
+              <p>{data.event_.description}</p>
             </section>
-          </div>
+          )}
+          {data.event_.stats && (
+            <section id="stats" className="panel">
+              <h2>Event Statistics</h2>
+              <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2">
+                {data.event_.stats.map((stat, i) => (
+                  <div key={i} className="mb-2">
+                    <p className="m-0 font-bold">{stat?.name}</p>
+                    <p className="m-0 font-mono text-4xl">{stat?.value}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <section id="content" className="panel">
+            <MDXProvider>
+              <div className="md-root">
+                {children}
+              </div>
+            </MDXProvider>
+          </section>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -149,18 +141,6 @@ export const query = graphql`
       close_date: time_close(formatString: "MMM DD, YYYY")
       close_hour: time_close(formatString: "HH:mm z")
       location
-      image {
-        path {
-          childImageSharp {
-            gatsbyImageData(
-              width: 1024,
-              quality: 100,
-              placeholder: NONE,
-            )
-          }
-        }
-        alt
-      }
       overlay_image {
         path {
           childImageSharp {
@@ -173,9 +153,21 @@ export const query = graphql`
         }
         alt
       }
+      background_image {
+        path {
+          childImageSharp {
+            gatsbyImageData(
+              width: 1024,
+              quality: 100,
+              placeholder: NONE,
+            )
+          }
+        }
+        alt
+      }
       links {
+        name
         link
-        kind
       }
       stats {
         name

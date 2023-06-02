@@ -132,7 +132,7 @@ export const query = graphql`
         title
         time_start
         time_close
-        image {
+        overlay_image {
           path {
             childImageSharp {
               gatsbyImageData(width: 600, quality: 100)
@@ -140,7 +140,7 @@ export const query = graphql`
           }
           alt
         }
-        overlay_image {
+        background_image {
           path {
             childImageSharp {
               gatsbyImageData(width: 600, quality: 100)

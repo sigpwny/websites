@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import { Disclosure, Transition } from "@headlessui/react"
 
@@ -10,6 +10,24 @@ interface NavLink {
 }
 
 const Nav = () => {
+  const [counter, setCounter] = useState(0)
+  const colors = [
+    {primary: "#33cc55", secondary: "#137137"},
+    {primary: "#cc66ee", secondary: "#553366"},
+    {primary: "#ed7a31", secondary: "#773311"},
+    {primary: "#41aaff", secondary: "#234789"},
+    {primary: "#ffc000", secondary: "#876500"},
+  ]
+
+  useEffect(() => {
+    if (counter % 4 == 0 && counter !== 0) {
+      const index = Math.floor(counter / 4) % colors.length
+      const nextColor = colors[index]
+      document.body.style.setProperty("--color-primary", nextColor.primary)
+      document.body.style.setProperty("--color-secondary", nextColor.secondary)
+    }
+  }, [counter])
+
   const data: Queries.NavQuery = useStaticQuery(graphql`
     query Nav {
       site {
@@ -71,9 +89,9 @@ const Nav = () => {
                 {/* Desktop navbar */}
                 <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <Link to="/">
+                    <button title="Pwny" className="hover:rotate-[5deg]" onClick={() => setCounter(counter+1)}>
                       <PwnySvg height="48px" />
-                    </Link>
+                    </button>
                   </div>
                   <div className="hidden md:block md:ml-6 my-auto">
                     <div className="flex">
@@ -121,7 +139,7 @@ const Nav = () => {
                     <Disclosure.Button as={Link}
                       key={item.name}
                       to={item.link}
-                      className="font-bold text-2xl leading-normal block"
+                      className="font-bold text-2xl leading-normal block my-1"
                       activeClassName="nav-active"
                     >
                       {item.name}
@@ -132,7 +150,7 @@ const Nav = () => {
                     <Disclosure.Button as={Link}
                       key={item.name}
                       to={item.link}
-                      className="font-bold text-2xl leading-normal block"
+                      className="font-bold text-2xl leading-normal block my-1"
                       activeClassName="nav-active"
                     >
                       {item.name}

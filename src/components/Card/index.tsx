@@ -21,7 +21,7 @@ export function createCard(
     return ({
       heading: convertDate(event.time_start, "YYYY-MM-DD", timezone),
       title: event.title,
-      image: event.image as Image,
+      image: event.background_image as Image,
       overlay_image: event.overlay_image as Image,
       link: event.slug
     })
