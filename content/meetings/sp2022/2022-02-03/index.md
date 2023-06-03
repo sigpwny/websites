@@ -7,6 +7,6 @@ credit:
   - Nathan
 featured: true
 recording: https://youtu.be/wfnd-dhSDr4
-location: Siebel CS 1404
+location: Zoom
 slides: 02-format-strings.pdf
 ---

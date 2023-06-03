@@ -6,6 +6,6 @@ week_number: 4
 credit:
   - Pete
 featured: true
-location: Siebel CS 1404 + Zoom
+location: Zoom
 slides: ./04-python-jails.pdf
 ---

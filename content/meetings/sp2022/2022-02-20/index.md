@@ -10,3 +10,5 @@ recording: https://youtu.be/Y6nZIjeb5Yo
 location: Siebel CS 1404 + Zoom
 slides: ./04-iot.pdf
 ---
+
+Discussed [this paper](https://www.usenix.org/system/files/sec19-zhou.pdf).

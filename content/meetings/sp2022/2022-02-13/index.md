@@ -7,6 +7,6 @@ credit:
   - Husnain
 featured: true
 recording: https://youtu.be/EqSzXBlHM2E
-location: Siebel CS 1404 + Zoom
+location: Siebel CS 2405 + Zoom
 slides: ./03-rsa-factoring.pdf
 ---

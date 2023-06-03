@@ -6,7 +6,7 @@ week_number: 1
 credit:
   - Nathan
 featured: true
-location: Siebel CS 1404
+location: Siebel CS 1404 + Zoom
 recording: https://youtu.be/Zfu2pHYduh4
 slides: 01-rop.pdf
 ---

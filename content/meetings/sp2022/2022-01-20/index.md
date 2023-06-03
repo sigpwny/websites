@@ -6,6 +6,6 @@ week_number: 0
 credit:
   - Nathan
 featured: true
-location: Siebel CS 1404
+location: Siebel CS 1404 + Zoom
 slides: 00-welcomeback.pdf
 ---

@@ -7,6 +7,6 @@ credit:
   - Nebu
 featured: true
 recording: https://youtu.be/deGvahtfR8M
-location: Siebel CS 1404 + Zoom
+location: CIF 3025 + Zoom
 slides: ./05-intro-crypto-math.pdf
 ---
