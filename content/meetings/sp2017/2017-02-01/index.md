@@ -3,7 +3,7 @@ credit:
 - SIGPwny
 featured: false
 recording: ''
-slides: intro_to_ctf.pdf
+slides: intro_to_ctf_1.pdf
 tags:
 - welcome 
 - intro

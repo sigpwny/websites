@@ -11,6 +11,6 @@ tags:
 - Opportunities
 time_close: ''
 time_start: 2021-08-26T23:00:00.000000Z
-title: sigpwny info session
+title: SIGPwny Info Session
 week_number: 0
 ---

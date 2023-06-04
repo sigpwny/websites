@@ -14,6 +14,6 @@ tags:
 - Opportunities
 time_close: ''
 time_start: 2021-09-02T23:00:00.000000Z
-title: sigpwny tutorial meeting
+title: Tutorial Meeting
 week_number: 1
 ---
