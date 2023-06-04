@@ -72,7 +72,7 @@ collections:
           {label: "Name", name: "name", widget: "select", options: ["website", "ctftime"], hint: ''},
           {label: "Link", name: "link", widget: "string", hint: ''}
         ]}
-      - {label: "Stats", name: "stats", widget: "list", hint: 'Example: Participants, Teams, Solves, Rating Weight', required: false, fields: [
+      - {label: "Stats", name: "stats", widget: "list", hint: 'Examples: Participants, Teams, Solves, Rating Weight', required: false, fields: [
           {label: "Name", name: "name", widget: "string"},
           {label: "Value", name: "value", widget: "string"}
         ]}
@@ -112,15 +112,17 @@ collections:
     public_folder: ""
     fields:
       - {label: "Name", name: "name", hint: "Use real name if possible.", widget: "string"}
-      - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"]}
-      - {label: "Profile Image", name: "image", widget: "object", fields: [{label: "Image Upload", name: "path", widget: "image", hint: "Profile image should be 1:1 aspect ratio with a minimum width of 128px.", choose_url: false}, {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes."}]}
-      - {label: "Role", name: "role", hint: 'Examples: "Admin", "Helper", "President"', widget: "string"}
-      - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number"}
-      - {label: "Handle", name: "handle", hint: "Do not prepend with `@`.", required: false}
+      - {label: "Profile Image", name: "profile_image", widget: "image", hint: "Profile image should be 1:1 aspect ratio with a minimum width of 128px.", choose_url: false}
+      - {label: "Handle", name: "handle", hint: "Do not prepend with `@` since it is done automatically.", required: false}
+      - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"], required: false}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
-          {label: "Name", name: "name", widget: "select", options: ["email", "website", "github", "twitter", "mastodon", "linkedin", "discord"], hint: ''},
+          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less (they'll wrap to a new line if there's too many).', options: [
+            "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
+          ]},
           {label: "Link", name: "link", widget: "string", hint: ''}
         ]}
+      - {label: "Role", name: "role", hint: 'Examples: "Admin", "President"', widget: "string", required: false}
+      - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number", required: false}
     sortable_fields: ["weight", "name", "handle"]
     slug: '{{name}}'
     path: '{{slug}}/index' # https://answers.netlify.com/t/nested-collections-dynamic-path-slug/24352/2
@@ -134,15 +136,17 @@ collections:
     public_folder: ""
     fields:
       - {label: "Name", name: "name", hint: "Use real name if possible.", widget: "string"}
-      - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"]}
-      - {label: "Profile Image", name: "image", widget: "object", fields: [{label: "Image Upload", name: "path", widget: "image", hint: "Profile image should be 1:1 aspect ratio with a minimum width of 128px.", choose_url: false}, {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes."}]}
-      - {label: "Role", name: "role", hint: 'Examples: "Admin", "Helper", "President"', widget: "string"}
-      - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number"}
-      - {label: "Handle", name: "handle", hint: "Do not prepend with `@`.", required: false}
+      - {label: "Profile Image", name: "profile_image", widget: "image", hint: "Profile image should be 1:1 aspect ratio with a minimum width of 128px.", choose_url: false}
+      - {label: "Handle", name: "handle", hint: "Do not prepend with `@` since it is done automatically.", required: false}
+      - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"], required: false}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
-          {label: "Name", name: "name", widget: "select", options: ["email", "website", "github", "twitter", "mastodon", "linkedin", "discord"], hint: ''},
+          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less (they'll wrap to a new line if there's too many).', options: [
+            "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
+          ]},
           {label: "Link", name: "link", widget: "string", hint: ''}
         ]}
+      - {label: "Role", name: "role", hint: 'Examples: "Admin", "President"', widget: "string", required: false}
+      - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number", required: false}
     sortable_fields: ["weight", "name", "handle"]
     slug: '{{name}}'
     path: '{{slug}}/index'
@@ -156,15 +160,19 @@ collections:
     public_folder: ""
     fields:
       - {label: "Name", name: "name", hint: "Use real name if possible.", widget: "string"}
-      - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"]}
-      - {label: "Profile Image", name: "image", widget: "object", fields: [{label: "Image Upload", name: "path", widget: "image", hint: "Profile image should be 1:1 aspect ratio with a minimum width of 128px.", choose_url: false}, {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes."}]}
-      - {label: "Role", name: "role", hint: 'Examples: "Admin", "Helper", "President"', widget: "string"}
-      - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number"}
-      - {label: "Handle", name: "handle", hint: "Do not prepend with `@`.", required: false}
+      - {label: "Profile Image", name: "profile_image", widget: "image", hint: "Profile image should be 1:1 aspect ratio with a minimum width of 128px.", choose_url: false}
+      - {label: "Handle", name: "handle", hint: "Do not prepend with `@` since it is done automatically.", required: false}
+      - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"], required: false}
+      - {label: "Period", name: "period", widget: "string", hint: 'Example: "Class of 2020"', required: false}
+      - {label: "Work", name: "work", widget: "string", hint: 'Your current work or shenanigans. Examples: "Frontend Dev @ Microsoft" or "Weary Traveler"', required: false}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
-          {label: "Name", name: "name", widget: "select", options: ["email", "website", "github", "twitter", "mastodon", "linkedin", "discord"], hint: ''},
+          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less (they'll wrap to a new line if there's too many).', options: [
+            "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
+          ]},
           {label: "Link", name: "link", widget: "string", hint: ''}
         ]}
+      - {label: "Role", name: "role", hint: 'Examples: "Admin", "President"', widget: "string", required: false}
+      - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number", required: false}
     sortable_fields: ["weight", "name", "handle"]
     slug: '{{name}}'
     path: '{{slug}}/index'
