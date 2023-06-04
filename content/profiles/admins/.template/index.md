@@ -8,6 +8,8 @@ bio: | # optional
 role: "" # optional: e.g. "President", defaults to "Admin"
 weight: 0 # optional: larger weight is sorted to the top, otherwise sorted by name alphabetically
 links: # optional: remember, practice good opsec! sort these by how you want them to appear. try to limit to 6 or less (they'll wrap to a new line if there's too many)
+  - name: "bluesky"
+    link: "https://bsky.app/"
   - name: "ctftime"
     link: "https://ctftime.org/user/"
   - name: "discord"

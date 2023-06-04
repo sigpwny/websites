@@ -2,9 +2,7 @@
 name: Hassam Uddin
 bio: "Hey I'm Hassam! I'm a sophomore in CS interested in all things
   cryptography, theory, math, and compilers. "
-image:
-  path: hassam-cropped-1-.jpg
-  alt: Hassam Profile Pic
+profile_image: hassam-cropped-1-.jpg
 role: Admin
 weight: 0
 handle: Heasummn

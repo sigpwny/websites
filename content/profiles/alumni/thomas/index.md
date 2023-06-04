@@ -1,8 +1,6 @@
 ---
 name: "Thomas" # required
-image:
-  path: "./profile.jpg"
-  alt: "thomas's profile picture"
+profile_image: "./profile.jpg"
 handle: "Thomas_Quig"
 role: "Ex-President"
 period: "Class of 2022"

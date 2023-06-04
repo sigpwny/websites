@@ -4,9 +4,7 @@ name: "Minh Duong" # required
 bio: | # required
   Hi, I'm a junior in CS! I like web and hardware hacking. I keep our 
   meetings and website running :D
-image:
-  path: "./profile.jpg" # required, real face preferred
-  alt: "Minh's profile picture" # required
+profile_image: "./profile.jpg" # required, real face preferred
 handle: "WhiteHoodHacker" # optional
 role: "Admin" # optional
 weight: 0 # required, larger value is closer to top, otherwise sort by name alphabetically

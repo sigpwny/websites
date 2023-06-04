@@ -2,9 +2,7 @@
 name: Louis Asanaka
 bio: Hey! I'm a junior in CS, interested in web / game hacking and operating
   systems!
-image:
-  path: 25756888.jpg
-  alt: Peace
+profile_image: 25756888.jpg
 role: Helper
 weight: 0
 links:

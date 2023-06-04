@@ -1,9 +1,7 @@
 ---
 name: Ankur
 bio: " "
-image:
-  path: avatar.jpeg
-  alt: ankur's profile picture
+profile_image: avatar.jpeg
 role: Ex-Officer
 weight: 0
 handle: arxenix

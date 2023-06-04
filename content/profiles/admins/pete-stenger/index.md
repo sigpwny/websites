@@ -2,9 +2,7 @@
 name: Pete Stenger
 bio: Hi! I'm in my third year in CS. You can find me rock climbing or playing
   TOTK. Ask me about Python, Ghidra, and automation.
-image:
-  path: headshot.png
-  alt: Pete Stenger Profile Pic
+profile_image: headshot.png
 role: President
 weight: 11
 handle: spicypete
