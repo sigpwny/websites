@@ -16,5 +16,7 @@ links: # optional
   - {name: "github", link: "https://github.com/WhiteHoodHacker"} # optional
   - {name: "twitter", link: "https://twitter.com/WhiteHoodHacker"} # optional
   - {name: "linkedin", link: "https://www.linkedin.com/in/whitehoodhacker/"} # optional
-  - {name: "discord", link: "https://discord.com/"} # optional
+  - {name: "discord", link: "https://discord.com/users/387289660675588098"} # optional
+  - {name: "bluesky", link: "https://bsky.app/profile/minh.bsky.social"} # optional
+  - {name: "reddit", link: "https://www.reddit.com/user/WhiteHoodHacker"} # optional
 ---

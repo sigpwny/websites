@@ -185,40 +185,20 @@ const content_node_types: ContentNode[] = [
     gatsbySourceInstanceName: "admins",
     fields: [
       { name: "name", required: true },
-      { name: "bio" },
-      {
-        name: "image",
-        required: true,
-        fields: [
-          { name: "path", required: true },
-          { name: "alt", required: true },
-        ],
-      },
+      { name: "profile_image", required: true },
       { name: "handle" },
-      { name: "role", required: true },
-      { name: "weight", required: true },
+      { name: "bio" },
       { name: "links" },
     ],
-  },
-  {
-    type: "Alum",
-    gatsbySourceInstanceName: "alumni",
-    fields: [
-      { name: "name", required: true },
+    computedFields: [
       {
-        name: "image",
-        required: true,
-        fields: [
-          { name: "path", required: true },
-          { name: "alt", required: true },
-        ],
+        name: "role",
+        resolve: (node, file_node) => node.frontmatter.role ?? "Admin"
       },
-      { name: "handle" },
-      { name: "role", required: true },
-      { name: "period" },
-      { name: "work" },
-      { name: "weight", required: true },
-      { name: "links" },
+      {
+        name: "weight",
+        resolve: (node, file_node) => node.frontmatter.weight ?? 0
+      },
     ],
   },
   {
@@ -226,18 +206,43 @@ const content_node_types: ContentNode[] = [
     gatsbySourceInstanceName: "helpers",
     fields: [
       { name: "name", required: true },
-      {
-        name: "image",
-        required: true,
-        fields: [
-          { name: "path", required: true },
-          { name: "alt", required: true },
-        ],
-      },
+      { name: "profile_image", required: true },
       { name: "handle" },
-      { name: "role", required: true },
-      { name: "weight", required: true },
+      { name: "bio" },
       { name: "links" },
+    ],
+    computedFields: [
+      {
+        name: "role",
+        resolve: (node, file_node) => node.frontmatter.role ?? "Helper"
+      },
+      {
+        name: "weight",
+        resolve: (node, file_node) => node.frontmatter.weight ?? 0
+      },
+    ],
+  },
+  {
+    type: "Alum",
+    gatsbySourceInstanceName: "alumni",
+    fields: [
+      { name: "name", required: true },
+      { name: "profile_image", required: true },
+      { name: "handle" },
+      { name: "period" },
+      { name: "work" },
+      { name: "bio" },
+      { name: "links" },
+    ],
+    computedFields: [
+      {
+        name: "role",
+        resolve: (node, file_node) => node.frontmatter.role ?? "Alum"
+      },
+      {
+        name: "weight",
+        resolve: (node, file_node) => node.frontmatter.weight ?? 0
+      },
     ],
   },
 ];
@@ -419,32 +424,34 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type Admin implements Node @dontInfer {
       name: String!
-      bio: String!
-      image: ImageAlt!
+      profile_image: File! @fileByRelativePath
       handle: String
+      bio: String
+      links: [Link]
       role: String!
       weight: Int!
-      links: [Link]
-    }
-
-    type Alum implements Node @dontInfer {
-      name: String!
-      image: ImageAlt!
-      handle: String
-      role: String!
-      period: String
-      work: String
-      weight: Int!
-      links: [Link]
     }
 
     type Helper implements Node @dontInfer {
       name: String!
-      image: ImageAlt!
+      profile_image: File! @fileByRelativePath
       handle: String
+      bio: String
+      links: [Link]
       role: String!
       weight: Int!
+    }
+
+    type Alum implements Node @dontInfer {
+      name: String!
+      profile_image: File! @fileByRelativePath
+      handle: String
+      period: String
+      work: String
+      bio: String
       links: [Link]
+      role: String!
+      weight: Int!
     }
   `);
 };

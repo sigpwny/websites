@@ -5,7 +5,7 @@ handle: "Handle" # optional
 bio: | # optional
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
   tempor incididunt ut labore et dolore magna aliqua.
-role: "" # optional: e.g. "President", defaults to "Admin"
+role: "" # optional: e.g. "Project Lead", defaults to "Helper"
 weight: 0 # optional: larger weight is sorted to the top, otherwise sorted by name alphabetically
 links: # optional: remember, practice good opsec! sort these by how you want them to appear. try to limit to 6 or less (they'll wrap to a new line if there's too many)
   - name: "ctftime"
