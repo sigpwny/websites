@@ -10,6 +10,8 @@ tags:
 - Command line
 time_close: ''
 time_start: 2021-08-29T19:00:00.000000Z
-title: sigpwny setting up meeting
+title: Setting Up
 week_number: 0
 ---
+
+Additional slide deck on terminal commands [here](./important_terminal_commands.pdf).

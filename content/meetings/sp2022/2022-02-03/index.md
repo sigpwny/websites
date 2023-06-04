@@ -6,6 +6,7 @@ week_number: 2
 credit:
   - Nathan
 featured: true
-location: Siebel CS 1404
+recording: https://youtu.be/wfnd-dhSDr4
+location: Zoom
 slides: 02-format-strings.pdf
 ---

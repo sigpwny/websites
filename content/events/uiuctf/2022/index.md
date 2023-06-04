@@ -3,8 +3,8 @@ title: UIUCTF 2022
 series: uiuctf
 description: UIUCTF 2022 was organized by a team of 21 led by Nathan. The theme
   was a digital art exhibition!
-time_start: 2022-07-30 00:00
-time_close: 2022-08-01 00:00
+time_start: 2022-07-30T00:00:00Z
+time_close: 2022-08-01T00:00:00Z
 location: Online
 overlay_image:
   path: ./logo.png

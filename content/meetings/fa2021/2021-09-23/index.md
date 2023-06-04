@@ -19,5 +19,5 @@ tags:
 time_close: ''
 time_start: 2021-09-23T23:00:00.000000Z
 title: crypto i meeting
-week_number: 4
+week_number: 3
 ---
