@@ -1,15 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import { motion } from "framer-motion"
-import { StaticImage, IGatsbyImageData } from "gatsby-plugin-image"
+import { StaticImage } from "gatsby-plugin-image"
 
 import Seo from "../../components/Seo"
-import AdminProfiles from "../../components/Profiles/Admins"
-import AlumProfiles from "../../components/Profiles/Alumni"
-import HelperProfiles from "../../components/Profiles/Helpers"
+import ProfileCardGrid from "../../components/Profile"
+import SIGPwnyMorphology from "../../components/SIGPwnyMorphology"
 import Timeline, { type Event } from "../../components/Timeline"
 
-import "./about.css"
+// import "./about.css"
 
 export function Head() {
   return (
@@ -113,29 +112,43 @@ const events : Array<Event> = [
     }
   },
 ]
-const AboutPage = () => {
+const AboutPage = ({ data }: any) => {
+  const [isFocused, setIsFocused] = useState(false)
+
+  const button_page_transition_duration = 0.2
+  const fm_variants = {
+    sentence: {
+      hidden: {
+        opacity: 1,
+      },
+      visible: {
+        opacity: 1,
+        transition: {
+          delay: 0.5,
+          delayChildren: button_page_transition_duration + 0.2,
+          staggerChildren: 0.05,
+        },
+      },
+    },
+    letter: {
+      hidden: {
+        y: "100%",
+      },
+      visible: {
+        y: 0,
+        transition: {
+          ease: "easeOut",
+        }
+      },
+    }
+  }
+
   return (
     <div className="flex flex-col md:flex-row justify-between">
       <div className="flex flex-col gap-8">
         <section id="acronym" className="py-8">
           <div className="flex flex-col">
-            <div className="flex flex-row justify-center pb-6">
-              <div className="flex flex-col slide-in-from-right">
-                <p className="use-color-primary font-bold text-right text-5xl sm:text-6xl md:text-7xl lg:text-8xl">SIG</p>
-                <p className="text-center">&#8595;</p>
-                <p className="font-bold text-center">Special <br />Interest <br />Group</p>
-              </div>
-              <div className="flex flex-col">
-                <p className="use-color-primary font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl">&nbsp;&bull;&nbsp;Pwn&nbsp;&bull;&nbsp;</p>
-                <p className="text-center">&#8595;</p>
-                <p className="font-bold text-center">To hack <br />or "own" <br />(slang)</p>
-              </div>
-              <div className="flex flex-col slide-in-from-left">
-                <p className="use-color-primary font-bold text-left text-5xl sm:text-6xl md:text-7xl lg:text-8xl">y</p>
-                <p className="text-center">&#8595;</p>
-                <p className="font-bold text-center">For <br />cool <br />logo</p>
-              </div>
-            </div>
+            <SIGPwnyMorphology />
             <div className="flex flex-row justify-center">
               <p>sig-<b>poh</b>-nee</p>
               <p>&nbsp;<small>[audio]</small></p>
@@ -163,7 +176,7 @@ const AboutPage = () => {
               </p>
               <p className="m-0">
                 We believe cybersecurity should be accessible to all, so we teach everything from the ground up. Our 
-                meetings are designed to be approached by <em>anyone</em>, regardless of skill, major, or experience.
+                club content is designed to be approached by <em>anyone</em>, regardless of skill, major, or experience.
               </p>
             </div>
           </div>
@@ -194,7 +207,7 @@ const AboutPage = () => {
         </section> */}
 
         <section id="who-we-are">
-          <div className="text-center">
+          <div className="text-center pb-8">
             <div className="panel mx-auto max-w-prose">
               <p className="font-bold text-4xl">Who we are</p>
               <p className="m-0">
@@ -203,9 +216,18 @@ const AboutPage = () => {
               </p>
             </div>
           </div>
-          <AdminProfiles />
-          <HelperProfiles />
-          <AlumProfiles />
+          <section id="admins" className="pb-8">
+            <h1>Admin Team</h1>
+            <ProfileCardGrid profiles={data.allAdmin.admins} />
+          </section>
+          <section id="helpers" className="pb-8">
+            <h1>Helper Team</h1>
+            <ProfileCardGrid profiles={data.allHelper.helpers} />
+          </section>
+          <section id="alumni" className="pb-8">
+            <h1>Alumni</h1>
+            <ProfileCardGrid profiles={data.allAlum.alumni} />
+          </section>
         </section>
       </div>
       {/* <div className="flex ml-4 md:w-1/3 lg:w-1/4">
@@ -217,3 +239,64 @@ const AboutPage = () => {
 }
 
 export default AboutPage
+
+export const query = graphql`
+  query AboutPage {
+    allAdmin(sort: [{weight: DESC}, {name: ASC}]) {
+      admins: nodes {
+        name
+        profile_image {
+          childImageSharp {
+            gatsbyImageData(width: 300, quality: 100, aspectRatio: 1)
+          }
+        }
+        handle
+        bio
+        links {
+          name
+          link
+        }
+        role
+        weight
+      }
+    }
+    allHelper(sort: [{weight: DESC}, {name: ASC}]) {
+      helpers: nodes {
+        name
+        profile_image {
+          childImageSharp {
+            gatsbyImageData(width: 300, quality: 100, aspectRatio: 1)
+          }
+        }
+        handle
+        bio
+        links {
+          name
+          link
+        }
+        role
+        weight
+      }
+    }
+    allAlum(sort: [{weight: DESC}, {name: ASC}]) {
+      alumni: nodes {
+        name
+        profile_image {
+          childImageSharp {
+            gatsbyImageData(width: 300, quality: 100, aspectRatio: 1)
+          }
+        }
+        handle
+        period
+        work
+        bio
+        links {
+          name
+          link
+        }
+        role
+        weight
+      }
+    }
+  }
+`
