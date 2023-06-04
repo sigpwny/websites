@@ -116,7 +116,7 @@ collections:
       - {label: "Handle", name: "handle", hint: "Do not prepend with `@` since it is done automatically.", required: false}
       - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"], required: false}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
-          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less (they'll wrap to a new line if there's too many).', options: [
+          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less.', options: [
             "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
           ]},
           {label: "Link", name: "link", widget: "string", hint: ''}
@@ -140,7 +140,7 @@ collections:
       - {label: "Handle", name: "handle", hint: "Do not prepend with `@` since it is done automatically.", required: false}
       - {label: "Bio", name: "bio", hint: "Limit to 128 characters.", widget: "string", pattern: ['^.{0,128}', "128 character limit exceeded"], required: false}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
-          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less (they'll wrap to a new line if there's too many).', options: [
+          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less.', options: [
             "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
           ]},
           {label: "Link", name: "link", widget: "string", hint: ''}
@@ -166,7 +166,7 @@ collections:
       - {label: "Period", name: "period", widget: "string", hint: 'Example: "Class of 2020"', required: false}
       - {label: "Work", name: "work", widget: "string", hint: 'Your current work or shenanigans. Examples: "Frontend Dev @ Microsoft" or "Weary Traveler"', required: false}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
-          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less (they'll wrap to a new line if there's too many).', options: [
+          {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less.', options: [
             "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
           ]},
           {label: "Link", name: "link", widget: "string", hint: ''}
