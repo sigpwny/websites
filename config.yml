@@ -145,7 +145,7 @@ collections:
           ]},
           {label: "Link", name: "link", widget: "string", hint: ''}
         ]}
-      - {label: "Role", name: "role", hint: 'Examples: "Admin", "President"', widget: "string", required: false}
+      - {label: "Role", name: "role", hint: 'Examples: "Helper", "Project Lead"', widget: "string", required: false}
       - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number", required: false}
     sortable_fields: ["weight", "name", "handle"]
     slug: '{{name}}'
@@ -171,7 +171,7 @@ collections:
           ]},
           {label: "Link", name: "link", widget: "string", hint: ''}
         ]}
-      - {label: "Role", name: "role", hint: 'Examples: "Admin", "President"', widget: "string", required: false}
+      - {label: "Role", name: "role", hint: 'Examples: "Alum", "Ex-President"', widget: "string", required: false}
       - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number", required: false}
     sortable_fields: ["weight", "name", "handle"]
     slug: '{{name}}'
