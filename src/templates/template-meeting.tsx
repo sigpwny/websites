@@ -109,7 +109,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
               <div>
                 <button
                   title="Previous slide"
-                  className={pageNumber <= 1 ? "text-gray-500 mx-2" : "text-white mx-2"}
+                  className={"mx-2 " + (pageNumber <= 1 ? "text-secondary" : "text-primary hover:text-secondary")}
                   disabled={pageNumber <= 1}
                   onClick={() => setPageNumber(pageNumber - 1)}
                 >
@@ -118,7 +118,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
                 {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
                 <button
                   title="Next slide"
-                  className={pageNumber >= numPages ? "text-gray-500 mx-2" : "text-white mx-2"}
+                  className={"mx-2 " + (pageNumber >= numPages ? "text-secondary" : "text-primary hover:text-secondary")}
                   disabled={pageNumber >= numPages}
                   onClick={() => setPageNumber(pageNumber + 1)}
                 >
