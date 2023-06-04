@@ -30,11 +30,9 @@ const ProfileCardGrid = ({ profiles }: any) => {
                 </motion.div>
               ) : null}
               <div className="self-center w-full">
-                {(profile.role || profile.period) ? (
+                {profile.role ? (
                   <motion.p layout className="font-mono font-bold text-primary uppercase m-0">
                     {profile.role}
-                    {(profile.role && profile.period) ? " • " : null}
-                    {profile.period}
                   </motion.p>
                 ) : null}
                 {profile.name ? (
@@ -45,6 +43,11 @@ const ProfileCardGrid = ({ profiles }: any) => {
                 {profile.handle ? (
                   <p className={`font-mono mb-1 ${isExpanded ? "" : "max-md:hidden"}`}>
                     @{profile.handle}
+                  </p>
+                ) : null}
+                {profile.period ? (
+                  <p className={`italic mb-1 ${isExpanded ? "" : "max-md:hidden"}`}>
+                    {profile.period}
                   </p>
                 ) : null}
                 {profile.work ? (
