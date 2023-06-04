@@ -1,8 +1,6 @@
 ---
 name: "Ravi" # required
-image:
-  path: "./profile.jpg"
-  alt: "ravi's profile picture"
+profile_image: "./profile.jpg"
 handle: "0xjprx"
 role: "Ex-President"
 period: "Class of 2020"

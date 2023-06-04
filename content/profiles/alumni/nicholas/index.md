@@ -1,8 +1,6 @@
 ---
 name: "Nicholas" # required
-image:
-  path: "./profile.jpg"
-  alt: "nicholas's profile picture"
+profile_image: "./profile.jpg"
 handle: "NicholasHusin"
 role: "Ex-Officer"
 period: "Class of 2020"

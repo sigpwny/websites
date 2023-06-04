@@ -4,6 +4,7 @@ import { StaticImage } from "gatsby-plugin-image"
 
 import Seo from "../components/Seo"
 import { CardRow, createCard } from "../components/Card"
+import { RightSvg } from "../components/Icons"
 
 interface Props {
   data: Queries.IndexPageQuery
@@ -68,7 +69,10 @@ const IndexPage = ({ data }: Props) => {
       <section id="meetings" className="pb-8">
         <div className="flex flex-col sm:flex-row justify-between mb-4">
           <h1 className="m-0">Meetings</h1>
-          <Link to="/meetings/" className="my-0 sm:self-end">View all &#10132;</Link>
+          <Link to="/meetings/" className="my-0 sm:self-end">
+            <p className="inline align-middle m-0 mr-2">View all</p>
+            <RightSvg />
+          </Link>
         </div>
         <CardRow cards={meeting_cards} />
       </section>
@@ -76,7 +80,10 @@ const IndexPage = ({ data }: Props) => {
       <section id="publications" className="pb-8">
         <div className="flex flex-col sm:flex-row justify-between mb-4">
           <h1 className="m-0">Publications</h1>
-          <Link to="/publications/" className="my-0 sm:self-end">View all &#10132;</Link>
+          <Link to="/publications/" className="my-0 sm:self-end">
+            <p className="inline align-middle m-0 mr-2">View all</p>
+            <RightSvg />
+          </Link>
         </div>
         <CardRow cards={publication_cards} />
       </section>
@@ -84,7 +91,10 @@ const IndexPage = ({ data }: Props) => {
       <section id="events" className="pb-8">
         <div className="flex flex-col sm:flex-row justify-between mb-4">
           <h1 className="m-0">Events</h1>
-          <Link to="/events/" className="my-0 sm:self-end">View all &#10132;</Link>
+          <Link to="/events/" className="my-0 sm:self-end">
+            <p className="inline align-middle m-0 mr-2">View all</p>
+            <RightSvg />
+          </Link>
         </div>
         <CardRow cards={event_cards} />
       </section>

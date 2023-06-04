@@ -1,8 +1,6 @@
 ---
 name: "kuilin" # required
-image:
-  path: "./profile.png"
-  alt: "kuilin's profile picture"
+profile_image: "./profile.png"
 handle: "thekuilin"
 role: "Ex-Infra Admin"
 period: "Class of 2021"

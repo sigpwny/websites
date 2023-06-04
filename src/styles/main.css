@@ -112,12 +112,6 @@ a:hover {
 .social-links a:hover {
   fill: var(--color-secondary);
 }
-.use-color-text, a.use-color-text:hover {
-  color: var(--color-text);
-}
-.use-color-primary, a.use-color-primary:hover {
-  color: var(--color-primary);
-}
 .btn-primary {
   background-color: var(--color-primary);
   color: var(--color-background);
