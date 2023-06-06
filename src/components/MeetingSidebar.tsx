@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 
 import { weekNumber, formatSemester } from "../utils/util"
@@ -28,6 +28,25 @@ const MeetingSidebar = () => {
       meetingsBySemester[semester] = [meeting]
     }
   })
+  const activeRef = React.useRef<HTMLAnchorElement>(null)
+  const isActive = ({ isCurrent }: {isCurrent: boolean}) => {
+    console.log('Checking isActive', isCurrent)
+    return isCurrent ? {
+      ref: activeRef,
+      className: "truncate font-bold"
+    } : {
+      className: "truncate"
+    }
+  }
+
+  const scrollToActive = () => {
+    if (activeRef.current) {
+      activeRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
+    }
+  }
+  
+  useEffect(scrollToActive, [])
+
   return (
     <div className="panel-p-0 sticky top-4 overflow-hidden rounded-xl py-4">
       <div className="px-4 flex flex-col h-[75vh] overflow-y-auto custom-scrollbar">
@@ -39,8 +58,7 @@ const MeetingSidebar = () => {
               <Link
                 key={meeting.slug}
                 to={`${meeting.slug}`}
-                className="truncate"
-                activeClassName="font-bold"
+                getProps={isActive}
               >
                 <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
               </Link>
