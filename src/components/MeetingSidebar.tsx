@@ -30,7 +30,6 @@ const MeetingSidebar = () => {
   })
   const activeRef = React.useRef<HTMLAnchorElement>(null)
   const isActive = ({ isCurrent }: {isCurrent: boolean}) => {
-    console.log('Checking isActive', isCurrent)
     return isCurrent ? {
       ref: activeRef,
       className: "truncate font-bold"
