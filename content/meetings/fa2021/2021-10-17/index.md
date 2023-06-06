@@ -13,6 +13,6 @@ tags:
 - RELRO
 time_close: ''
 time_start: 2021-10-17T14:00:00-06:00
-title: pwn ii (binary exploitation)
+title: PWN II (binary exploitation)
 week_number: 7
 ---

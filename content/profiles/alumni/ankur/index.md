@@ -3,6 +3,7 @@ name: Ankur
 bio: " "
 profile_image: avatar.jpeg
 role: Ex-Officer
+period: "Class of 2020"
 weight: 0
 handle: arxenix
 links:
