@@ -12,7 +12,7 @@ links:
   - name: writeup
     link: https://dillonkorman.com/running-sigpwnys-first-recruiting-ctf/
   - name: opening slides
-  - link: https://docs.google.com/presentation/d/1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4/edit?usp=sharing
+    link: https://docs.google.com/presentation/d/1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4/edit?usp=sharing
 stats: []
 ---
 
