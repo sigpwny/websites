@@ -9,6 +9,6 @@ overlay_image:
   path: 2023-05-29_22-25.png
   alt: screenshot of the opening slides
 links:
-  - name: other
+  - name: opening slides
     link: https://drive.google.com/open?id=1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4
 ---
