@@ -10,4 +10,4 @@ overlay_image:
   alt: SIGPwny award ceremony.
 links: []
 ---
-P﻿resentations can be found [here](https://www.youtube.com/playlist?list=PL0Q-_Oy-AsjenjYYuu8n2Xq4a22aFv4-i).
+Presentations can be found [here](https://www.youtube.com/playlist?list=PL0Q-_Oy-AsjenjYYuu8n2Xq4a22aFv4-i).

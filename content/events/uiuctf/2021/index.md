@@ -6,9 +6,6 @@ description: UIUCTF 2021 was organized by a team of 30 led by Thomas. The theme
 time_start: 2021-07-30T22:00:00.000Z
 time_close: 2021-08-01T22:00:00.000Z
 location: Online
-image:
-  path: ""
-  alt: ""
 overlay_image:
   path: logo2.png
   alt: Neon sign saying "SIGPwny Presents UIUCTF 2021"
