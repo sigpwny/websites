@@ -1,5 +1,5 @@
 ---
-name: Juniper Peng
+name: Jupiter Peng
 profile_image: sakunyan_by_karamoneeze_edit.jpg
 bio: Just a programmer
 links:
