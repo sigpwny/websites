@@ -1,13 +1,17 @@
 ---
 credit:
-- Minh
+- Minh Duong
 featured: false
-recording: ''
+location: CIF 4025 + Zoom
+recording: 'https://youtu.be/A7IzgqcKDuw'
 slides: thebigrick.pdf
 tags:
-- Demo
+- misc
+- iot
+- botnet
+- rickroll
 time_close: ''
-time_start: 2021-10-24T14:00:00-06:00
+time_start: 2021-10-24T14:00:00.000000-05:00
 title: The Big Rick
 week_number: 8
 ---

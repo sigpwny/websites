@@ -1,14 +1,23 @@
 ---
 credit:
-- Nathan
-- Thomas
+- Nathan Farlow
+- Thomas Quig
 featured: false
-recording: ''
+location: Siebel CS 2405 + Zoom
+recording: 'https://youtu.be/GnSjustHiKo'
 slides: forensics.pdf
 tags:
-- Forensics
+- forensics
+- intro
+- tools
+- metadata
+- steganography
+- memory dumps
+- foremost
+- wireshark
+- exiftool
 time_close: ''
-time_start: 2021-10-28T18:00:00-06:00
+time_start: 2021-10-28T18:00:00.000000-05:00
 title: Forensics
 week_number: 9
 ---

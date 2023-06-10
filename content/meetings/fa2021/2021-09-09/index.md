@@ -1,18 +1,19 @@
 ---
 credit:
 - Nathan Farlow
-- Kevin H.
+- Kevin Higgs
 featured: false
-recording: ''
+location: Siebel CS 1103 + Zoom
+recording: 'https://youtu.be/5Qx012vujX0'
 slides: web_hacking_1_meeting.pdf
 tags:
-- Client-Server Relationships
-- Web Hacking
-- Chrome Devtools
-- Web Fundamentals
-- Http, CSS, JS
+- web
+- intro
+- javascript
+- cookies
+- devtools
 time_close: ''
-time_start: 2021-09-09T23:00:00.000000Z
+time_start: 2021-09-09T18:00:00.000000-05:00
 title: Web Hacking I
 week_number: 2
 ---

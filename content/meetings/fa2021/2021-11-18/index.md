@@ -1,12 +1,17 @@
 ---
 credit:
-- Thomas
+- Thomas Quig
 featured: false
-recording: ''
+location: Zoom
+recording: 'https://youtu.be/iSaYLJF8cQU'
 slides: recursive.pdf
-tags: []
+tags:
+- misc
+- involvement
 time_close: ''
-time_start: 2021-11-18T18:00:00-06:00
-title: The Recursive Meeting
+time_start: 2021-11-18T18:00:00.000000-06:00
+title: Recursive Meeting
 week_number: 12
 ---
+## Meetimg Summary
+- The "recursive meeting" is a meeting about how to run meetings with SIGPwny!

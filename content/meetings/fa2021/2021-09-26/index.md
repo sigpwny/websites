@@ -1,20 +1,24 @@
 ---
 credit:
-- Husnain R
-- Anakin
+- Husnain Raza
+- Anakin Dey
+- Heassam Uddin
+- Pranav Goel
 - Nebu
-- Heassam
-- Pranav
 featured: false
-recording: ''
+location: CIF 4025 + Zoom
+recording: 'https://youtu.be/J6Q68hRBS8U'
 slides: crypto_ii_meeting.pdf
 tags:
-- ECC
-- RSA Technicals
-- Attacks on crypto Schemes
-- AES Modes
+- crypto
+- aes-cbc
+- aes-ecb
+- rsa
+- discrete logs
+- ecc
+- ecdh
 time_close: ''
-time_start: 2021-09-26T19:00:00.000000Z
+time_start: 2021-09-26T14:00:00.000000-05:00
 title: Crypto I
 week_number: 4
 ---

@@ -1,18 +1,22 @@
 ---
 credit:
-- Kevin
+- Kevin Higgs
 featured: false
-recording: ''
+location: CIF 3025 + Zoom
+recording: 'https://youtu.be/zevWQTy-POE'
 slides: pwn_ii_(binary_exploitation).pdf
 tags:
-- Mondern BinEXP mitigations
+- pwn
+- stack exploitation
+- x86_64
 - PIE
 - ASLR
-- NX
+- DEP/NX
 - GOT/PLT
 - RELRO
+- stack canary
 time_close: ''
-time_start: 2021-10-17T14:00:00-06:00
-title: PWN II (binary exploitation)
+time_start: 2021-10-17T14:00:00.000000-05:00
+title: PWN II
 week_number: 7
 ---

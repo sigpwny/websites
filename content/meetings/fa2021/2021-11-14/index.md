@@ -1,13 +1,25 @@
 ---
 credit:
-- Thomas
+- Thomas Quig
 featured: false
-recording: ''
+location: Zoom
+recording: 'https://youtu.be/TYanTrchRqQ'
 slides: wireless_security.pdf
 tags:
-- Wireless Security
+- networking
+- wireless
+- packet sniffing
+- tcpdump
+- wireshark
+- aircrack-ng
 time_close: ''
-time_start: 2021-11-14T14:00:00-06:00
+time_start: 2021-11-14T14:00:00.000000-06:00
 title: Wireless Security
 week_number: 11
 ---
+## Meeting Summary
+- Wardriving
+- Rogue access points
+- Evil twin
+- Wireless security standards: WEP, WPA, WPA2, WPA3
+- DoS and DDoS attacks

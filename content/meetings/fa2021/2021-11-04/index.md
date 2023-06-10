@@ -1,13 +1,19 @@
 ---
 credit:
-- Thomas
+- Thomas Quig
 featured: false
-recording: ''
+location: Siebel CS 2405 + Zoom
+recording: 'https://youtu.be/kWES2haaZGw'
 slides: osint_1.pdf
 tags:
-- OSINT
+- osint
+- human intelligence
+- social media
+- sherlock
+- maltego
 time_close: ''
-time_start: 2021-11-04T18:00:00-06:00
+time_start: 2021-11-04T18:00:00.000000-05:00
 title: OSINT I
 week_number: 10
 ---
+List of recycled OSINT challenges are located [here](https://docs.google.com/spreadsheets/d/1tSsq820ttudD3sMReaXuZI9pQ_MuhV1oR-rWB0T1aMU/edit?usp=sharing).

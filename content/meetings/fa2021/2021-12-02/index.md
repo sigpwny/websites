@@ -1,12 +1,15 @@
 ---
 credit:
-- Nathan
+- Nathan Farlow
 featured: false
-recording: ''
+location: Siebel CS 2405 + Zoom
+recording: 'https://youtu.be/eqaxuqBhtMI'
 slides: ./javare.pdf
 tags:
-- Java
-- Reverse Engineering
+- rev
+- java
+- bytecodeviewer
+- deobfuscator
 time_close: ''
 time_start: 2021-12-02T18:00:00.000000-06:00
 title: Java Reversing

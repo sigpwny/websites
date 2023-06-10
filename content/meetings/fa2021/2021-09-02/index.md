@@ -2,18 +2,18 @@
 credit:
 - Thomas Quig
 featured: false
-recording: ''
+location: Zoom
+recording: 'https://youtu.be/uwYNdxmAn8w'
 slides: sigpwny_tutorial_meeting.pdf
 tags:
-- Terminal
-- WSL
-- Command line
-- Introductions
-- SIGPwny as a group
-- CTFs
-- Opportunities
+- welcome
+- intro
+- setup
+- terminal
+- wsl
+- categories
 time_close: ''
-time_start: 2021-09-02T23:00:00.000000Z
-title: Tutorial Meeting
+time_start: 2021-09-02T18:00:00.000000-05:00
+title: Tutorial
 week_number: 1
 ---
