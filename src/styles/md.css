@@ -42,3 +42,6 @@
 .md-root table tr:nth-child(2n+1) {
   background-color: var(--color-surface);
 }
+.md-root .gatsby-resp-image-wrapper {
+  @apply mb-2;
+}
