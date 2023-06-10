@@ -6,7 +6,7 @@ credit: # required
   - Richard
   - Juniper
 featured: true # optional
-location: TSB 103 + Zoom # optional
+location: Transportation Building 103 + Zoom # optional
 slides: ./Week 06_ Fuzzing.pdf # optional
 assets: [] # optional
 recording: "" # optional

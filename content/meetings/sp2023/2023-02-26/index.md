@@ -6,7 +6,7 @@ credit: # required
   - Author 1
   - Author 2
 featured: true # optional
-location: TSB 103 + Zoom # optional
+location: Transportation Building 103 + Zoom # optional
 slides: ./Week 05_DSi Hacking.pdf # optional
 assets: [] # optional
 recording: https://www.youtube.com/watch?v=wlpW2KYciGU # optional

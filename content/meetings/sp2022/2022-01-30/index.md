@@ -7,6 +7,6 @@ credit:
   - Nathan
 featured: true
 recording: ""
-location: Siebel 1304 + Zoom
+location: Siebel CS 1304 + Zoom
 slides: ./uiuctf_planning_1.pdf
 ---

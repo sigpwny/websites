@@ -13,5 +13,5 @@ time_start: 2021-11-18T18:00:00.000000-06:00
 title: Recursive Meeting
 week_number: 12
 ---
-## Meetimg Summary
+## Meeting Summary
 - The "recursive meeting" is a meeting about how to run meetings with SIGPwny!

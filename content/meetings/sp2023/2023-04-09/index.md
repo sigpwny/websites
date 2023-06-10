@@ -5,7 +5,7 @@ week_number: 11 # required
 credit: # required
   - Ethan
 featured: true # optional
-location: Siebel 1304 + Zoom # optional
+location: Siebel CS 1304 + Zoom # optional
 slides: ./sigpwny.pdf # optional
 assets: [] # optional
 recording: "" # optional

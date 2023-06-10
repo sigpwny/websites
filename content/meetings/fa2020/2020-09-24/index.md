@@ -4,7 +4,7 @@ credit:
 featured: false
 location: Zoom
 recording: 'https://youtu.be/xTWkHn-lysc'
-slides: cli_tools.pdf
+slides: shell.pdf
 tags:
 - shell
 - gdb

@@ -7,6 +7,6 @@ credit:
   - Richard
 featured: true
 recording: "" 
-location: Siebel 2405
+location: Siebel CS 2405
 slides: ./13-dynamic-instrumentation.pdf
 ---

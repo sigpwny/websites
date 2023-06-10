@@ -7,6 +7,6 @@ credit:
   - Anusha
 featured: true
 recording: "" 
-location: Siebel 1404 + Zoom
+location: Siebel CS 1404 + Zoom
 slides: ./13-ai-security.pdf
 ---

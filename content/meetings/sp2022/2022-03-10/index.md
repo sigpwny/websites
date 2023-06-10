@@ -7,6 +7,6 @@ credit:
   - SIGPwny
 featured: true
 recording: ""
-location: Siebel 1404
+location: Siebel CS 1404
 slides: ./07social.pdf
 ---
