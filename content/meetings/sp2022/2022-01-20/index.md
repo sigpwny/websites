@@ -1,11 +1,15 @@
 ---
-title: Welcome back meeting
+title: Welcome Back!
 time_start: 2022-01-20T18:00:00.000000-06:00
 time_close: ""
 week_number: 0
 credit:
-  - Nathan
-featured: true
-location: Siebel CS 1404 + Zoom
+  - Nathan Farlow
+featured: false
+location: Zoom
 slides: 00-welcomeback.pdf
+recording: https://youtu.be/gYNIUVzjXHU
+tags:
+- welcome
+- intro
 ---
