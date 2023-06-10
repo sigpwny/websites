@@ -3,7 +3,7 @@ credit:
 - Husnain Raza
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/pFeY4iV7PAk'
 slides: password_cracking.pdf
 tags:
 - crypto

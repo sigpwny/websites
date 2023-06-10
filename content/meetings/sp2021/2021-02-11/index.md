@@ -4,7 +4,7 @@ credit:
 - Ian Klatzco
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/jjWlqow_tGk'
 slides: web_path_traversal_ssrf.pdf
 tags:
 - web

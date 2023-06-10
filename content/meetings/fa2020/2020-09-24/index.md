@@ -3,7 +3,7 @@ credit:
 - Thomas Quig
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/xTWkHn-lysc'
 slides: cli_tools.pdf
 tags:
 - shell

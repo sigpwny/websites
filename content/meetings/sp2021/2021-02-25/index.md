@@ -4,7 +4,7 @@ credit:
 - Husnain Raza
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/aLMeLPPXKV8'
 slides: sandbox.pdf
 tags:
 - jail

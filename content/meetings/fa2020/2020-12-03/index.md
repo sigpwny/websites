@@ -3,7 +3,7 @@ credit:
 - Noelle Crawford
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/NPSDF3VAR4M'
 slides: web.pdf
 tags:
 - web

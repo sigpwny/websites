@@ -3,7 +3,7 @@ credit:
 - Thomas Quig
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/htFCXFXB5po'
 slides: recursive.pdf
 tags:
 - misc

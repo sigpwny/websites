@@ -3,7 +3,7 @@ credit:
 - Thomas Quig
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/XSB8nbcf_w0'
 slides: opsec.pdf
 tags:
 - osint

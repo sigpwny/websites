@@ -3,7 +3,7 @@ credit:
 - Justin Zhu
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/yu2D5aNHQe4'
 slides: dynamic_linking.pdf
 tags:
 - pwn

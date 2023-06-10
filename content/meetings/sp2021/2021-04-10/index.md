@@ -13,6 +13,6 @@ tags:
 - sqli
 time_close: ''
 time_start: 2021-04-10T18:00:00.000000-06:00
-title: HackIllinois, Literally (Workshop)
+title: HackIllinois... Literally! (Workshop)
 week_number: 10
 ---
