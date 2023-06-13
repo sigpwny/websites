@@ -5,7 +5,7 @@ time_close: ""
 week_number: 9
 credit:
   - Nathan Farlow
-featured: true
+featured: false
 recording: 
 location: Siebel CS 2405 + Zoom
 slides: ./uiuctf_planning.pdf
