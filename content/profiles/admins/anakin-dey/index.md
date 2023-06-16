@@ -8,7 +8,7 @@ weight: 0
 handle: Spamakin🎷
 links:
   - {name: "website", link: "https://anakin-dey.com"}
-  - {name: "discord", link: "Spamakin🎷#6722"}
+  - {name: "discord", link: "https://discord.com/users/191656769267695617"}
   - {name: "twitter", link: "https://twitter.com/SpamakinsArt"}
   - {name: "github", link: "https://github.com/Spamakin"}
   - {name: "mastodon", link: "https://mathstodon.xyz/@spamakin"}

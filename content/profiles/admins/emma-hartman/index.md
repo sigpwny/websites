@@ -9,6 +9,6 @@ handle: lukewarmdaisies
 links:
   - {name: "email", link: "lukewarmdaisies@gmail.com"}
   - {name: "website", link: "https://emmahartman.dev"}
-  - {name: "discord", link: "lukewarmdaisies#1750"}
+  - {name: "discord", link: "https://discord.com/users/297854667310891009"}
   - {name: "github", link: "https://github.com/eihart123"}
 ---
