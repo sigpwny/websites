@@ -18,5 +18,5 @@ links:
   - name: linkedin
     link: https://www.linkedin.com/in/pete-stenger/
   - name: discord
-    link: spicypete#2287
+    link: https://discord.com/users/191210435746201600
 ---
