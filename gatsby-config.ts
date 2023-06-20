@@ -4,9 +4,9 @@ import remarkGfm from "remark-gfm";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `SIGPwny`,
-    siteUrl: `https://beta.sigpwny.com`, // no trailing slash
+    siteUrl: `https://sigpwny.com`, // no trailing slash
     description: `SIGPwny is a student-run organization at the University of Illinois Urbana-Champaign focused on information security and privacy.`,
-    image: `https://beta.sigpwny.com/pwny8-dark-512x512.png`,
+    image: `https://sigpwny.com/pwny8-dark-512x512.png`,
     navLinks: [
       { name: "SIGPwny", link: "/" },
       { name: "About", link: "/about/" },
