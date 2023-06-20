@@ -15,6 +15,10 @@
     "code": 302
   },
   {
+    "src": "/event",
+    "dst": "/events/",
+  },
+  {
     "src": "/uiuctf",
     "dst": "/events/",
     "code": 302
