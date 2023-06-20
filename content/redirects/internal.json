@@ -29,6 +29,11 @@
     "code": 302
   },
   {
+    "src": "/event",
+    "dst": "/events/",
+    "code": 302
+  },
+  {
     "src": "/hackathon",
     "dst": "/events/",
     "code": 302
