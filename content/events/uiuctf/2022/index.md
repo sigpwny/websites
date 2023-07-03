@@ -26,11 +26,11 @@ stats:
 
 ![Battelle Logo](battelle.png)
 
-!﻿[Trail of Bits Logo](trailofbits.png)
+![Trail of Bits Logo](trailofbits.png)
 
-!﻿[RedLattice Logo](redlattice.png)
+![RedLattice Logo](redlattice.png)
 
-!﻿[Google Cloud Logo](googlecloud.png)
+![Google Cloud Logo](googlecloud.png)
 
 ## Writeups
 
