@@ -26,6 +26,12 @@ stats:
 
 ![Battelle Logo](battelle.png)
 
+!﻿[Trail of Bits Logo)(trailofbits.png)
+
+!﻿[RedLattice Logo)(redlattice.png)
+
+!﻿[Google Cloud Logo)(googlecloud.png)
+
 ## Writeups
 
 For UIUCTF 2022 we paid out $1,300 in writeup prizes. We prioritize concise technical communication and writeups that are fun to read and learn from, including those written from/for the perspective of beginners. Here are all writeups that won.
