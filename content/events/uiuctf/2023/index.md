@@ -19,15 +19,7 @@ stats:
   - name: Rating Weight
     value: "50.75"
 ---
-## Sponsors
 
-![Battelle](battelle.svg)
+## Writeups
 
-![Zellic](zellic2.png)
-
-![David An](davidan.png)
-
-![Trail of Bits](trailofbits.png)
-
-![Google Cloud](googlecloud.png)
-
+In progress, check back later.
