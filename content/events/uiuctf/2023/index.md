@@ -21,12 +21,13 @@ stats:
 ---
 ## Sponsors
 
-!﻿[Battelle](battelle.svg)
+![Battelle](battelle.svg)
 
-!﻿[Zellic](zellic2.png)
+![Zellic](zellic2.png)
 
-!﻿[David An](davidan.png)
+![David An](davidan.png)
 
-!﻿[Google Cloud](googlecloud.png)
+![Trail of Bits](trailofbits.png)
 
-!﻿[Trail of Bits](trailofbits.png)
+![Google Cloud](googlecloud.png)
+
