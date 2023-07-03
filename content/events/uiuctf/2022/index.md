@@ -15,22 +15,22 @@ links:
   - name: ctftime
     link: https://ctftime.org/event/1600
 stats:
-  - name: Participants
-    value: "1400"
   - name: Teams
-    value: "800"
+    value: 395
+  - name: Participants
+    value: 1400+
   - name: Rating Weight
-    value: "34.64"
+    value: 34.64
 ---
 ## Sponsors
 
 ![Battelle Logo](battelle.png)
 
-!﻿[Trail of Bits Logo)(trailofbits.png)
+!﻿[Trail of Bits Logo](trailofbits.png)
 
-!﻿[RedLattice Logo)(redlattice.png)
+!﻿[RedLattice Logo](redlattice.png)
 
-!﻿[Google Cloud Logo)(googlecloud.png)
+!﻿[Google Cloud Logo](googlecloud.png)
 
 ## Writeups
 
