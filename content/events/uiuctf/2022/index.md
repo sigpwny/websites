@@ -16,11 +16,11 @@ links:
     link: https://ctftime.org/event/1600
 stats:
   - name: Teams
-    value: 395
+    value: "395"
   - name: Participants
-    value: 1400+
+    value: "1400+"
   - name: Rating Weight
-    value: 34.64
+    value: "34.64"
 ---
 ## Writeups
 

@@ -1,15 +1,22 @@
 ---
 title: Reverse Engineering I
-time_start: 2022-09-22T23:00:00.000Z
+time_start: 2022-09-22T18:00:00-05:00
 time_close: ""
 week_number: 4
 credit:
-  - Richard
-  - Pete
+  - Richard Liu
+  - Pete Stenger
 featured: true
+location: MSEB 100 + Zoom
 slides: week_04_reverse_engineering_i.pdf
 recording: https://youtu.be/vKuui7iCOB0
 tags:
   - rev
   - intro
+  - disassembly
+  - static analysis
+  - dynamic analysis
+  - ghidra
+  - gdb
+  - pwndbg
 ---

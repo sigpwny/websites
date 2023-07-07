@@ -1,13 +1,17 @@
 ---
-title: CSAW CTF How-to
-time_start: 2022-09-09T18:00:00-06:00
+title: How to CTF (CSAW CTF Qualifications 2022)
+time_start: 2022-09-09T19:00:00-05:00
 time_close: ""
 week_number: 2
 credit:
-  - Thomas
+  - Thomas Quig
 featured: true
+location: Siebel CS 2405
 slides: week_02_csaw.pdf
 recording: ""
 tags:
-  - CSAW
+  - welcome
+  - ctf
+  - intro
+  - csaw
 ---

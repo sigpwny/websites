@@ -7,6 +7,7 @@ recording: 'https://youtu.be/kWES2haaZGw'
 slides: osint_1.pdf
 tags:
 - osint
+- intro
 - human intelligence
 - social media
 - sherlock

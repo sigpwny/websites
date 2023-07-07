@@ -1,13 +1,21 @@
 ---
 title: PWN I
-time_start: 2022-10-06T23:00:00.000Z
+time_start: 2022-10-06T18:00:00-05:00
 time_close: ""
 week_number: 6
 credit:
-  - Kevin
+  - Kevin Higgs
 featured: true
+location: MSEB 100 + Zoom
 slides: week_06_pwn_i.pdf
-recording: https://www.youtube.com/watch?v=mt4zL7Pzvbs
+recording: https://youtu.be/mt4zL7Pzvbs
 tags:
   - pwn
+  - intro
+  - x86_64
+  - buffer overflow
+  - endianness
+  - objdump
+  - gdb
+  - pwntools
 ---
