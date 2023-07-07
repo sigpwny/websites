@@ -16,9 +16,9 @@ links:
     link: https://ctftime.org/event/1372
 stats:
   - name: Teams
-    value: 658
+    value: "658"
   - name: Rating Weight
-    value: 23.76
+    value: "23.76"
 ---
 ## Writeups
 

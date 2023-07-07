@@ -3,7 +3,7 @@ credit:
 - SIGPwny
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/Tchsuer9JK0'
 slides: pwn.pdf
 tags:
 - pwn

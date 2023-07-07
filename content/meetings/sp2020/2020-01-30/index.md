@@ -14,7 +14,7 @@ tags:
 - legendary
 time_close: ''
 time_start: 2020-01-30T18:00:00.000000-06:00
-title: Intro Meeting (feat. Purdue) [LEGENDARY]
+title: Introduction (feat. Purdue) [LEGENDARY]
 week_number: 1
 ---
 Note: The video recording is from ACM Open House Spring 2020 as a demo by SIGPwny, recorded 2020-01-23 in Siebel CS 2405.

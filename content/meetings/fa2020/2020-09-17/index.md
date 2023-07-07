@@ -4,7 +4,7 @@ credit:
 - Joseph Ravichandran
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/hFbiZy9B2NM'
 slides: tutorial.pdf
 tags:
 - welcome
@@ -16,6 +16,6 @@ tags:
 - in-depth
 time_close: ''
 time_start: 2020-09-17T18:00:00.000000-05:00
-title: Tutorial Meeting (Setup)
+title: Tutorial
 week_number: 3
 ---

@@ -1,16 +1,20 @@
 ---
 title: OSINT I
-time_start: 2022-09-29T05:00:00.000Z
+time_start: 2022-09-29T18:00:00-05:00
 time_close: ""
 week_number: 5
 credit:
-  - Thomas
-  - Julius
-  - Danny
+  - Thomas Quig
+  - Julius White
+  - Danny Poje
 featured: true
+location: Ceramics Building 218 + Zoom
 slides: week_05_osint_i.pdf
 recording: https://youtu.be/zPiLs8GU-v4
 tags:
   - osint
   - intro
+  - human intelligence
+  - social media
+  - sherlock
 ---

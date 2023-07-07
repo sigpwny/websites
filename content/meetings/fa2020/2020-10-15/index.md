@@ -6,7 +6,7 @@ credit:
 - Thomas Quig
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/0Z5dAAmsBow'
 slides: pwn.pdf
 tags:
 - pwn

@@ -1,14 +1,15 @@
 ---
-title: SIGPwny Info Meeting
-time_start: 2022-08-25T18:00:00-06:00
+title: Introduction
+time_start: 2022-08-25T18:00:00-05:00
 time_close: ""
-week_number: 1
+week_number: 0
 credit:
   - SIGPwny
 featured: true
+location: Siebel CS 1404 + Zoom
 slides: week_00_info.pdf
-recording: ""
+recording: "https://youtu.be/sTjlqI7qkPA"
 tags:
-  - info
   - welcome
+  - intro
 ---

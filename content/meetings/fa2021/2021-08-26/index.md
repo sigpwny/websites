@@ -2,15 +2,20 @@
 credit:
 - Thomas Quig
 featured: false
-recording: ''
+location: Siebel CS 1105/1109 + Zoom
+recording: 'https://youtu.be/ZvEirrjN8g0'
 slides: sigpwny_info_session.pdf
 tags:
-- Introductions
-- SIGPwny as a group
-- CTFs
-- Opportunities
+- welcome
+- intro
 time_close: ''
-time_start: 2021-08-26T23:00:00.000000Z
-title: SIGPwny Info Session
+time_start: 2021-08-26T18:00:00.000000-05:00
+title: Introduction
 week_number: 0
 ---
+
+## Pictures
+
+![A packed room of students interested in SIGPwny](./intro1.jpg)
+![Another angle of the packed room of students interested in SIGPwny from the back, showing the presenters](./intro2.jpg)
+![Social dinner at Murphy's after the meeting](./murphys.jpg)

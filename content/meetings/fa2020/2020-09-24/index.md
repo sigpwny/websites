@@ -3,8 +3,8 @@ credit:
 - Thomas Quig
 featured: false
 location: Zoom
-recording: ''
-slides: cli_tools.pdf
+recording: 'https://youtu.be/xTWkHn-lysc'
+slides: shell.pdf
 tags:
 - shell
 - gdb

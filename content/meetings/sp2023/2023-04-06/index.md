@@ -1,14 +1,21 @@
 ---
 title: Password Cracking
-time_start: 2023-04-06T19:00:00.000Z
+time_start: 2023-04-06T18:00:00.000-05:00
 time_close: ""
 week_number: 11
 credit:
-  - Minh
-  - Emma
+ - Minh Duong
+ - Emma Hartman
 featured: true
+location: Siebel CS 1404 + Zoom
 slides: Week 11_ Password Cracking.pdf
-recording: ""
+recording: "https://youtu.be/cbEh_kER8M0"
 tags:
-  - hashcat
+ - crypto
+ - password cracking
+ - hashing
+ - wordlists
+ - salting
+ - rainbow tables
+ - hashcat
 ---

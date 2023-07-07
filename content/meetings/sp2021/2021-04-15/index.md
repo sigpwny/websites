@@ -4,7 +4,7 @@ credit:
 - Thomas Quig
 featured: false
 location: Discord
-recording: ''
+recording: 'https://youtu.be/fa3ojgR5-lw'
 slides: docker.pdf
 tags:
 - misc

@@ -3,7 +3,7 @@ credit:
 - Nathan Farlow
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/vmWw6fDhfPI'
 slides: rev_tools.pdf
 tags:
 - rev

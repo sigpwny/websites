@@ -1,0 +1,30 @@
+---
+title: RATs with ICCSP, Spray Paint Social
+time_start: 2022-04-10T14:00:00.000000-05:00
+time_close: ""
+week_number: 11
+credit:
+- Hamilton
+- Samir
+- Grant
+featured: false
+recording: https://youtu.be/dlDIu-mS9RQ
+location: Siebel CS 2405 + Zoom
+tags:
+- misc
+- careers
+- social
+- remote access trojan
+---
+## Meeting Summary
+Learn about remote access trojans with ICSSP and how you can receive free tuition through government scholarships and work!
+
+## Spray Paint Social
+After this meeting, we hosted a spray paint social!
+
+### Pictures
+![Nathan stands on top of a shipping container](./nathan.jpg)
+![The SIGPwny banner logo spray painted on a wall](./banner.jpg)
+![An aerial shot of SIGPwny members spray painting art](./containers.jpg)
+![A side shot of Grace walking past SIGPwny art](./grace.jpg)
+![A group picture of everyone at the spray paint social](./group.jpg)

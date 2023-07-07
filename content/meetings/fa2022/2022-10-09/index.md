@@ -1,13 +1,19 @@
 ---
 title: Ethics and Law
-time_start: 2022-10-09T19:00:00.000Z
+time_start: 2022-10-09T14:00:00-05:00
 time_close: ""
 week_number: 6
 credit:
-  - Thomas
+  - Thomas Quig
 featured: true
+location: CIF 3025 + Zoom
 slides: week_06_ethics_and_law.pdf
 recording: https://www.youtube.com/watch?v=6WIJnT4t3D0
 tags:
+  - misc
   - ethics
+  - moral frameworks
+  - responsible disclosure
+  - bug bounties
+  - cfaa
 ---

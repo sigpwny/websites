@@ -1,14 +1,15 @@
 ---
 title: AI Hacking I
-time_start: 2023-03-23T19:00:00.000Z
+time_start: 2023-03-23T18:00:00.000-05:00
 time_close: ""
 week_number: 9
 credit:
-  - Anusha Ghosh
+ - Anusha Ghosh
 featured: true
+location: Siebel CS 1404 + Zoom
 slides: Week 09_ AI Hacking I.pdf
-recording: ""
+recording: "https://youtu.be/wi6GigFDog8"
 tags:
-  - misc
-  - AI
+ - misc
+ - ai
 ---

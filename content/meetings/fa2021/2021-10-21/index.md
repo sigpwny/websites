@@ -1,17 +1,24 @@
 ---
 credit:
-- Thomas
+- Thomas Quig
 featured: false
-recording: ''
+location: Siebel CS 2405 + Zoom
+recording: 'https://youtu.be/9mjmD63Pz-k'
 slides: physical_security_(lockpicking).pdf
 tags:
-- Physical Security
+- misc
+- physical security
+- lockpicking
 - cameras
 - cctv
-- Lockpicking
-- Safe Cracking
+- safe cracking
 time_close: ''
-time_start: 2021-10-21T19:00:00.000000Z
-title: physical security (lockpicking)
+time_start: 2021-10-21T18:00:00.000000-05:00
+title: Physical Security (Lockpicking)
 week_number: 8
 ---
+## Meeting Summary
+- We cracked the case :D
+
+![SIGPwny members celebrate the cracking of the case](./safe1.jpg)
+![Sam stands victorious after cracking the safe with two very expired bottles of soylent found within the safe](./safe2.jpg)

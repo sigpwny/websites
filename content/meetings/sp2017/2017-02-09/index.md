@@ -12,7 +12,7 @@ tags:
 - hexadecimal
 - base64
 time_close: ''
-time_start: 2017-02-22T18:00:00.000000Z
+time_start: 2017-02-09T18:00:00.000000Z
 title: Number Bases (Binary, Hexadecimal, Base64)
 week_number: 3
 ---

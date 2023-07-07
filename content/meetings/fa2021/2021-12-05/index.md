@@ -1,14 +1,22 @@
 ---
 credit:
-- Pete
+- Pete Stenger
 featured: false
-recording: ''
+location: Siebel CS 3025 + Zoom
+recording: 'https://youtu.be/FGbriG8RXeU'
 slides: ./mobile.pdf
 tags:
-- Mobile
-- App
+- misc
+- mobile
+- rev
+- kotlin
+- java
+- certificate pinning
+- api sniffing
+- frida
+- apktool
 time_close: ''
-time_start: 2021-12-05T14:00:00.000000-06:00
+time_start: 2021-12-05T15:00:00.000000-06:00
 title: Mobile Application Hacking
 week_number: 14
 ---

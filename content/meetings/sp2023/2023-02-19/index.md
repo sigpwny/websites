@@ -1,13 +1,18 @@
 ---
 title: "PWN IV: Heap"
-time_start: 2023-02-19T19:00:00.000Z
+time_start: 2023-02-19T14:00:00.000-06:00
 time_close: ""
 week_number: 4
 credit:
-  - Kevin
+  - Kevin Higgs
 featured: true
+location: Transportation Building 103 + Zoom
 slides: Week 04_ PWN IV.pdf
 recording: https://www.youtube.com/watch?v=5tp_hsdaezc
 tags:
-  - Heap
+  - pwn
+  - heap exploitation
+  - malloc
+  - use after free
+  - double free
 ---

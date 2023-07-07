@@ -1,14 +1,17 @@
 ---
-title: Lockpicking
-time_start: 2022-10-27T23:00:00.000Z
+title: Physical Security and Lockpicking
+time_start: 2022-10-27T18:00:00-05:00
 time_close: ""
 week_number: 9
 credit:
-  - Thomas
-  - Sam
+  - Thomas Quig
+  - Sam Ruggiero
 featured: true
+location: Siebel CS 1404 + Zoom
 slides: week_09_lockpicking.pdf
-recording: https://youtu.be/bLxpM68Wx-0
 tags:
+  - misc
+  - physical security
   - lockpicking
+  - access control
 ---

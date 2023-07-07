@@ -21,7 +21,6 @@ export function Head() {
 
 const EventsPage = ({ data }: Props) => {
   const events = data.allEvent.events
-  console.log(events)
   const events_uiuctf = events.filter(
     (event_: Event) => event_.series.toLowerCase() === "uiuctf"
   )

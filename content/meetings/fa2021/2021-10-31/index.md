@@ -1,14 +1,18 @@
 ---
 credit:
-- Thomas
+- Thomas Quig
 featured: false
-recording: ''
+location: CIF 4025 + Zoom
+recording: 'https://youtu.be/tHD2gFliR6E'
 slides: spooky.pdf
 tags:
-- Social
-- Intro
+- misc
+- social
+- halloween
 time_close: ''
-time_start: 2021-10-31T14:00:00-06:00
+time_start: 2021-10-31T14:00:00.000000-05:00
 title: SIGPwny Spooky Summary
 week_number: 9
 ---
+## Meeting Summary
+- It was Halloween, so we just had a (spooky) summary meeting!

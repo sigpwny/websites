@@ -3,7 +3,7 @@ credit:
 - Sam Ruggerio
 featured: false
 location: Zoom
-recording: ''
+recording: 'https://youtu.be/ur1uZMt8EKc'
 slides: crypto.pdf
 tags:
 - crypto

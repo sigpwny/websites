@@ -5,8 +5,12 @@ time_close: ""
 week_number: 7
 credit:
   - SIGPwny
-featured: true
+featured: false
 recording: ""
-location: Siebel 1404
+location: Siebel CS 1404
 slides: ./07social.pdf
+tags:
+- misc
+- social
 ---
+No content this meeting - just a fun dinner social at Green St. and the Illini Union!
