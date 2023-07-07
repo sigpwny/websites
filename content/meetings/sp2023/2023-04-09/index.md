@@ -1,5 +1,5 @@
 ---
-title: UEFI Rev
+title: UEFI Reverse Engineering
 time_start: 2023-04-09T14:00:00.000-05:00
 week_number: 11
 credit:

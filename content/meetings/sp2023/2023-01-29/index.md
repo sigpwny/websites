@@ -1,16 +1,22 @@
 ---
 title: Setup
-time_start: 2023-01-29T19:00:00.000Z
+time_start: 2023-01-29T14:00:00.000-06:00
 time_close: ""
 week_number: 1
 credit:
-  - Pete
-  - Minh
-  - Richard
+  - Pete Stenger
+  - Minh Duong
+  - Richard Liu
 featured: true
+location: Transportation Building 103 + Zoom
 slides: Week 01_ Setup Meeting.pdf
-recording: https://www.youtube.com/watch?v=jNvyrUlmlm8
+recording: https://youtu.be/XA_8s8A5svI
 tags:
   - welcome
   - setup
+  - terminal
+  - wsl
+  - ghidra
+  - pwntools
+  - utm
 ---

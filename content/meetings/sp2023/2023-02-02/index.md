@@ -1,15 +1,18 @@
 ---
 title: Web Hacking III
-time_start: 2023-02-02T19:00:00.000Z
+time_start: 2023-02-02T18:00:00.000-06:00
 time_close: ""
 week_number: 2
 credit:
-  - Daniel
-  - Louis
+  - Daniel Wang
+  - Louis Asanaka
 featured: true
+location: Siebel CS 2405 + Zoom
 slides: Week 02_ Web Hacking III.pdf
-recording: https://www.youtube.com/watch?v=XA_8s8A5svI
+recording: https://youtu.be/jNvyrUlmlm8
 tags:
-  - template injection
-  - SSRF
+  - web
+  - command injection
+  - ssti
+  - ssrf
 ---

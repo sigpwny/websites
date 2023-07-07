@@ -1,5 +1,5 @@
 ---
-title: SPR@I - "Machine Learning Threats"
+title: 'SPR@I: "Machine Learning Threats"'
 time_start: 2022-12-04T14:00:00-06:00
 time_close: ""
 week_number: 14

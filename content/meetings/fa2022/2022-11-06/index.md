@@ -1,5 +1,5 @@
 ---
-title: 'SPR@I - "Preventing Large-Scale Cloud Attacks"'
+title: 'SPR@I: "Preventing Large-Scale Cloud Attacks"'
 time_start: 2022-11-06T14:00:00-06:00
 week_number: 10
 credit:

@@ -1,5 +1,5 @@
 ---
-title: SPR@I - "Glyph Positions Break PDF Text Redaction"
+title: 'SPR@I: "Glyph Positions Break PDF Text Redaction"'
 time_start: 2022-11-13T14:00:00-06:00
 week_number: 11
 credit:

@@ -1,5 +1,5 @@
 ---
-title: Crypto Math II - Lattice Attacks
+title: "Crypto Math II: Lattice Attacks"
 time_start: 2022-04-17T14:00:00.000000-05:00
 time_close: ""
 week_number: 12

@@ -1,19 +1,20 @@
 ---
-title: macOS Privilege Escalation # required
-time_start: 2023-02-05T14:00:00.000-06:00 # required
-week_number: 2 # required
-credit: # required
-  - Rohit
-featured: true # optional
-location: Transportation Building 103 # optional
-slides: ./macOS Priv Esc.pdf # optional
+title: Bypassing macOS Privacy Controls for Fun and Profit
+time_start: 2023-02-05T14:00:00.000-06:00
+week_number: 2
+credit:
+  - Rohit Chatterjee
+featured: true
+location: Transportation Building 103 + Zoom
+slides: ./macOS Priv Esc.pdf
 assets:
-- ./tcc-bypass.zip
-recording: "" # optional
-tags: # optional
+  - ./tcc-bypass.zip
+tags:
+  - misc
+  - research
   - apple
+  - privesc
   - exploit
-  - DEMO
+  - demo
 ---
-
-Rohit presents his macOS Privilege escalation exploit! You can check out more about [CVE-2022-32862](https://nvd.nist.gov/vuln/detail/CVE-2022-32862).
+Rohit presents his macOS privilege escalation exploit! Read more about CVE-2022-32862 [here](https://nvd.nist.gov/vuln/detail/CVE-2022-32862).

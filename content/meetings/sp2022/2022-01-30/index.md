@@ -1,5 +1,5 @@
 ---
-title: UIUCTF Planning I
+title: UIUCTF 2022 Planning I
 time_start: 2022-01-30T14:00:00.000000-06:00
 time_close: ""
 week_number: 1

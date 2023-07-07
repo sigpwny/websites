@@ -1,5 +1,5 @@
 ---
-title: 'SPR@I - "All Eyes On Me"'
+title: 'SPR@I: "All Eyes On Me"'
 time_start: 2022-10-23T14:00:00-05:00
 time_close: ""
 week_number: 8
