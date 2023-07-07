@@ -15,10 +15,10 @@ links:
   - name: ctftime
     link: https://ctftime.org/event/1075
 stats:
+  - name: Teams
+    value: "390"
   - name: Rating Weight
     value: "23.76"
-  - name: Participants
-    value: "390"
 ---
 ## Writeups
 

@@ -1,16 +1,16 @@
 ---
 name: Anakin Dey
+profile_image: pfp.png
+handle: spamakin
 bio: Hello! I'm a senior in math and my main interest in cybersecurity is
   crypto! No, not that crypto, the other one.
-profile_image: pfp.png
+links:
+  - name: website
+    link: https://anakin-dey.com
+  - name: twitter
+    link: https://twitter.com/SpamakinsArt
+  - name: github
+    link: https://github.com/Spamakin
 role: Admin
 weight: 0
-handle: Spamakin🎷
-links:
-  - {name: "website", link: "https://anakin-dey.com"}
-  - {name: "discord", link: "Spamakin🎷#6722"}
-  - {name: "twitter", link: "https://twitter.com/SpamakinsArt"}
-  - {name: "github", link: "https://github.com/Spamakin"}
-  - {name: "mastodon", link: "https://mathstodon.xyz/@spamakin"}
-  - {name: "email", link: ""}
 ---

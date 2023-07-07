@@ -11,7 +11,7 @@ links:
   - name: linkedin
     link: https://www.linkedin.com/in/julius-white-v-18146a21b/
   - name: discord
-    link: jcw515awsm#6405
+    link: https://discord.com/users/758036817344856066
 role: Admin
 weight: 0
 ---
