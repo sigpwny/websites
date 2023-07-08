@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Configure git
-        run:
+        run: |
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
           git show-ref
@@ -53,7 +53,7 @@ jobs:
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
         name: Install node modules (on cache miss)
         continue-on-error: true
-        run:
+        run: |
           npm list
           npm install -g gatsby-cli
           npm ci
