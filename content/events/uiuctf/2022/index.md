@@ -6,6 +6,9 @@ description: UIUCTF 2022 was organized by a team of 21 led by Nathan. The theme
 time_start: 2022-07-30T00:00:00.000Z
 time_close: 2022-08-01T00:00:00.000Z
 location: Online
+background_image:
+  path: spotlights.png
+  alt: A dark wall covered with spotlights on the corners and edges
 overlay_image:
   path: ./logo.png
   alt: UIUCTF 2022 logo

@@ -3,9 +3,12 @@ title: UIUCTF 2020
 series: uiuctf
 description: UIUCTF 2020 was the first UIUCTF of the new SIGPwny club model, and
   was organized by a team of 13 led by Thomas.  The theme was Animal Crossing.
-time_start: 2020-07-17T23:00:00.000Z
-time_close: 2020-07-20T01:00:00.000Z
+time_start: 2020-07-18T00:00:00.000Z
+time_close: 2020-07-20T02:00:00.000Z
 location: Online
+background_image:
+  path: acnh.jpg
+  alt: Animal Crossing New Horizons beach background
 overlay_image:
   path: uiuctf-logo.png
   alt: Board saying SIGPWNY presents UIUCTF
@@ -20,6 +23,9 @@ stats:
   - name: Rating Weight
     value: "23.76"
 ---
+## Information
+[Teaser trailer](https://youtu.be/1Rwc6tdyD18)
+
 ## Writeups
 
 For UIUCTF 2020 we paid out $1,600 in writeup prizes. We were inspired by GoogleCTF's writeup prizes. We prioritize concise technical communication and writeups that are fun to read and learn from, including those written from/for the perspective of beginners. Here are the writeups that won.

@@ -41,7 +41,7 @@ export function createCard(
 const Card = ({ heading, title, image, overlay_image, link }: CardProps) => {
   const card_component = (
     <div className="card grow text-text">
-      <div className="aspect-video grid">
+      <div className="aspect-video grid pointer-events-none">
         {(image || overlay_image) ? (
           <>
             {image?.path && getImage(image.path) && (

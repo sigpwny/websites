@@ -107,7 +107,7 @@ const content_node_types: ContentNode[] = [
       { name: "location" },
       {
         name: "overlay_image",
-        required: true,
+        required: false,
         fields: [
           { name: "path", required: true },
           { name: "alt", required: true },
@@ -117,8 +117,8 @@ const content_node_types: ContentNode[] = [
         name: "background_image",
         required: false,
         fields: [
-          { name: "path", required: false },
-          { name: "alt", required: false },
+          { name: "path", required: true },
+          { name: "alt", required: true },
         ],
       },
       { name: "links" },
@@ -355,11 +355,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       alt: String!
     }
 
-    type ImageAltOpt @dontInfer {
-      path: File @fileByRelativePath
-      alt: String
-    }
-
     type Stat {
       name: String!
       value: String!
@@ -390,7 +385,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       time_close: Date @dateformat
       location: String
       overlay_image: ImageAlt
-      background_image: ImageAltOpt
+      background_image: ImageAlt
       links: [Link]
       stats: [Stat]
       slug: String!

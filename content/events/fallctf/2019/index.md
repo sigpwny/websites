@@ -1,17 +1,17 @@
 ---
-title: Fall CTF 2019
+title: HACKathon 2019
 series: fallctf
 description: SIGPwny's first recruiting CTF
-time_start: 2010-09-08T13:00:00.000-06:00
-time_close: 2021-09-08T18:00:00.000-06:00
+time_start: 2019-09-08T13:00:00.000-05:00
+time_close: 2019-09-08T18:00:00.000-05:00
 location: Siebel CS 1404
-overlay_image:
-  path: room.webp
-  alt: A picture of the Fall CTF 2019 room
+background_image:
+  path: hackathon-2019-cover.png
+  alt: HACKathon 2019 cover
 links:
-  - name: writeup
+  - name: Writeup
     link: https://dillonkorman.com/running-sigpwnys-first-recruiting-ctf/
-  - name: opening slides
+  - name: Opening Slides
     link: https://docs.google.com/presentation/d/1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4/edit?usp=sharing
 stats: []
 ---

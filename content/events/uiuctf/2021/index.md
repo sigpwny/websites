@@ -3,12 +3,18 @@ title: UIUCTF 2021
 series: uiuctf
 description: UIUCTF 2021 was organized by a team of 30 led by Thomas. The theme
   did not have a name, but the vibe was Futuristic Art Deco / Roaring 20s.
-time_start: 2021-07-30T22:00:00.000Z
-time_close: 2021-08-01T22:00:00.000Z
+time_start: 2021-07-31T00:00:00.000Z
+time_close: 2021-08-02T00:00:00.000Z
 location: Online
+# background_image:
+#   path: uiuctf-2021-cover-cropped.png
+#   alt: UIUCTF 2021 logo
+background_image:
+  path: 0d1a28.png
+  alt: Solid color background
 overlay_image:
-  path: logo2.png
-  alt: Neon sign saying "SIGPwny Presents UIUCTF 2021"
+  path: uiuctf-2021-logo-simple.png
+  alt: Neon sign saying "UIUCTF 2021"
 links:
   - name: website
     link: https://2021.uiuc.tf/
