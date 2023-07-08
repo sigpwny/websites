@@ -10,6 +10,9 @@ credit:
 featured: true
 location: Siebel CS 1404 + Zoom
 slides: Week 14_ Recon.pdf
+image:
+  path: kernel_panic_cat.jpg
+  alt: Kernel Panic Cat
 tags:
   - osint
   - metadata

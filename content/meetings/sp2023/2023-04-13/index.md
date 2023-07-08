@@ -10,6 +10,9 @@ featured: true
 location: Siebel CS 1404 + Zoom
 slides: Week 12_ Esolangs.pdf
 recording: "https://youtu.be/luSH1EH0Pww"
+image:
+  path: hexagony.png
+  alt: Screenshot of hexagony.net debugger for SIGPwny's Hexagony challenge
 tags:
  - rev
  - esolang

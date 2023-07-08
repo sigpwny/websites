@@ -8,6 +8,9 @@ featured: true
 location: Siebel CS 1304 + Zoom
 slides: ./Week 11_ UEFI Rev.pdf
 recording: "https://youtu.be/Udnapaweo2I"
+image:
+  path: ec_flashing.png
+  alt: Ethan identifies the parallel programming header on a motherboard
 tags:
  - rev
  - uefi
