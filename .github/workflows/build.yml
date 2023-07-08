@@ -52,6 +52,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore previous build artifacts
+        run: git merge --squash ${{ env.CI_BRANCH }}
+
       - name: Build
         run: npm run build
 
