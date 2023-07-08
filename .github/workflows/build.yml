@@ -45,6 +45,7 @@ jobs:
           path: |
             ~/.npm
             node_modules
+            .cache
             ${{ env.CI_BUILD_DIR }}
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
