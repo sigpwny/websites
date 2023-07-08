@@ -9,6 +9,9 @@ featured: true
 location: Siebel CS 1404 + Zoom
 slides: Week 13_ Block Ciphers.pdf
 recording: "https://youtu.be/_306cGxLeTw"
+image:
+  path: thumbnail.png
+  alt: Sagnik presenting on AES-CBC encryption
 tags:
   - crypto
   - aes

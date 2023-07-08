@@ -9,6 +9,9 @@ credit:
 featured: true
 location: Siebel CS 1404 + Zoom
 slides: Week 14_ Java Rev.pdf
+image:
+  path: java.jpg
+  alt: Comically large 3D text stating "Java" in a maze
 tags:
   - rev
   - java

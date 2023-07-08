@@ -5,7 +5,7 @@ time_close: ""
 week_number: 13
 credit:
   - Emma Hartman
-featured: true
+featured: false
 location: Siebel CS 1302 + Discord
 tags:
   - misc
