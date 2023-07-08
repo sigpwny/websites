@@ -25,6 +25,10 @@ stats:
   - name: Rating Weight
     value: "34.64"
 ---
+## Information
+[Trailer](https://youtu.be/Wl8TsiUgzmk)  
+[Closing ceremony](https://youtu.be/OYjxHoWDhxE)
+
 ## Writeups
 
 For UIUCTF 2022 we paid out $1,300 in writeup prizes. We prioritize concise technical communication and writeups that are fun to read and learn from, including those written from/for the perspective of beginners. Here are all writeups that won.
