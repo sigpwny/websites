@@ -74,11 +74,7 @@ export const query = graphql`
         overlay_image {
           path {
             childImageSharp {
-              gatsbyImageData(
-                width: 600,
-                quality: 100,
-                placeholder: NONE,
-              )
+              gatsbyImageData(width: 600)
             }
           }
           alt
@@ -86,11 +82,7 @@ export const query = graphql`
         background_image {
           path {
             childImageSharp {
-              gatsbyImageData(
-                width: 600,
-                quality: 100,
-                placeholder: NONE,
-              )
+              gatsbyImageData(width: 600, placeholder: BLURRED)
             }
           }
           alt

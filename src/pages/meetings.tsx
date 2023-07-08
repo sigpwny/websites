@@ -102,7 +102,7 @@ export const query = graphql`
         image {
           path {
             childImageSharp {
-              gatsbyImageData(width: 600, quality: 100)
+              gatsbyImageData(width: 600, placeholder: BLURRED)
             }
           }
           alt

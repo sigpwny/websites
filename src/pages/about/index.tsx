@@ -247,7 +247,7 @@ export const query = graphql`
         name
         profile_image {
           childImageSharp {
-            gatsbyImageData(width: 300, quality: 100, aspectRatio: 1)
+            gatsbyImageData(width: 300, placeholder: BLURRED, aspectRatio: 1)
           }
         }
         handle
@@ -265,7 +265,7 @@ export const query = graphql`
         name
         profile_image {
           childImageSharp {
-            gatsbyImageData(width: 300, quality: 100, aspectRatio: 1)
+            gatsbyImageData(width: 300, placeholder: BLURRED, aspectRatio: 1)
           }
         }
         handle
@@ -283,7 +283,7 @@ export const query = graphql`
         name
         profile_image {
           childImageSharp {
-            gatsbyImageData(width: 300, quality: 100, aspectRatio: 1)
+            gatsbyImageData(width: 300, placeholder: BLURRED, aspectRatio: 1)
           }
         }
         handle

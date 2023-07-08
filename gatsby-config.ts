@@ -154,6 +154,7 @@ const config: GatsbyConfig = {
       options: {
         defaults: {
           quality: 100,
+          placeholder: "none",
           breakpoints: [360, 480, 720, 1280, 1920],
         },
       },
