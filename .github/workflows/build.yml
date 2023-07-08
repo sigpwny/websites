@@ -6,6 +6,9 @@ on:
   pull_request:
     branches:
       - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,20 +24,29 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Configure git
+        run: |
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
+          git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
+          git show-ref
+
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           # Uses node version defined in engines
           node-version-file: 'package.json'
 
-      - name: Cache node modules
+      - name: Restore cached node modules and build artifacts
         id: cache-npm
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+          path: |
+            ~/.npm
+            node_modules
+            .cache
+            ${{ env.CI_BUILD_DIR }}
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -42,15 +54,17 @@ jobs:
             ${{ runner.os }}-
 
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: List the state of node modules
+        name: (On cache miss) List the state of node modules
         continue-on-error: true
         run: npm list
 
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: (On cache miss) Install node modules
+        continue-on-error: true
+        run: npm ci
+
       - name: Install gatsby-cli
         run: npm install -g gatsby-cli
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Build
         run: npm run build
@@ -58,9 +72,6 @@ jobs:
       - if: github.event_name == 'push'
         name: Commit build artifacts to CI branch
         run: |
-          git show-ref
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
-          git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
           git add --force "${{ env.CI_BUILD_DIR }}"
           git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push --force origin HEAD:${{ env.CI_BRANCH }}
