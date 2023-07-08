@@ -27,16 +27,13 @@ jobs:
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
           git show-ref
 
-      - name: Restore previous build artifacts
-        run: git merge --squash origin/${{ env.CI_BRANCH }}
-
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           # Uses node version defined in engines
           node-version-file: 'package.json'
 
-      - name: Restore cached node modules
+      - name: Restore cached node modules and build artifacts
         id: cache-npm
         uses: actions/cache@v3
         env:
@@ -45,6 +42,7 @@ jobs:
           path: |
             ~/.npm
             node_modules
+            ${{ env.CI_BUILD_DIR }}
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
