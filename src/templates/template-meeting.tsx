@@ -45,15 +45,19 @@ const MeetingTemplate = ({ data, children }: Props) => {
 
   return (
     <>
-      <div className="panel w-full grow">
-        <p className="font-mono m-0">
-          {curr.semester} Week {weekNumber(curr.week_number)} &bull; {convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)}
-        </p>
-        <h1 className="mb-1">{curr.title}</h1>
-        <p>
-          Presented by:&nbsp;
-          {curr.credit.length > 0 ? curr.credit.join(', ') : "SIGPwny" }
-        </p>
+      <article className="panel w-full grow" itemScope itemType="http://schema.org/Article">
+        <header>
+          <p className="font-mono m-0">
+            {curr.semester} Week {weekNumber(curr.week_number)} &bull; <time>{convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)}</time>
+          </p>
+          <h1 className="mb-1" itemProp="headline">{curr.title}</h1>
+          <p>
+            Presented by:&nbsp;
+            <span rel="author" itemProp="author">
+              {curr.credit.length > 0 ? curr.credit.join(', ') : "SIGPwny" }
+            </span>
+          </p>
+        </header>
         <div className="grid sm:flex sm:flex-row gap-2 mb-4">
           {curr.recording ? (
             <a
@@ -89,6 +93,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
                 allow="encrypted-media; fullscreen; picture-in-picture"
                 allowFullScreen={true}
                 src={url}
+                itemProp="video"
               />
             ) : null
           })()
@@ -124,11 +129,11 @@ const MeetingTemplate = ({ data, children }: Props) => {
           </div>
         )}
         <MDXProvider>
-          <div className="md-root w-full max-w-prose mx-auto">
+          <section className="md-root w-full max-w-prose mx-auto" itemProp="articleBody">
             {children}
-          </div>
+          </section>
         </MDXProvider>
-      </div>
+      </article>
     </>
   )
 }
