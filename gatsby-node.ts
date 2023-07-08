@@ -621,6 +621,7 @@ exports.createPages = async ({ graphql, actions }) => {
           id: meeting.id,
           prev_id,
           next_id,
+          layout: "meeting",
         },
         trailingSlash: true,
       });

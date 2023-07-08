@@ -45,94 +45,89 @@ const MeetingTemplate = ({ data, children }: Props) => {
 
   return (
     <>
-      <div className="flex flex-row gap-x-4">
-        <aside className="xl:w-96 lg:w-80 lg:block hidden">
-          <MeetingSidebar />
-        </aside>
-        <div className="panel w-full grow">
-          <p className="font-mono m-0">
-            {curr.semester} Week {weekNumber(curr.week_number)} &bull; {convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)}
-          </p>
-          <h1 className="mb-1">{curr.title}</h1>
-          <p>
-            Presented by:&nbsp;
-            {curr.credit.length > 0 ? curr.credit.join(', ') : "SIGPwny" }
-          </p>
-          <div className="grid sm:flex sm:flex-row gap-2 mb-4">
-            {curr.recording ? (
-              <a
-                href={curr.recording}
-                className="btn-primary"
-                target="_blank" rel="noopener noreferrer"
-              >
-                <YouTubeSvg />
-                <p className="inline align-middle m-0 ml-2">
-                  Watch video
-                </p>
-              </a>
-            ) : null}
-            {curr.slides?.publicURL ? (
-              <a
-                href={curr.slides.publicURL}
-                className="btn-primary"
-              >
-                <PdfSvg />
-                <p className="inline align-middle m-0 ml-2">
-                  Download slides
-                </p>
-              </a>
-            ) : null}
-          </div>
-          {curr.recording && (
-            (() => {
-              const url = getYouTubeEmbedUrl(curr.recording)
-              return url ? (
-                <iframe
-                  title={curr.title + " video"}
-                  className="bg-background w-full max-w-2xl aspect-video mx-auto mb-4"
-                  allow="encrypted-media; fullscreen; picture-in-picture"
-                  allowFullScreen={true}
-                  src={url}
-                />
-              ) : null
-            })()
-          )}
-          {curr.slides?.publicURL && !curr.recording && (
-            <div className="flex flex-col items-center">
-              <Document
-                className="flex flex-col" file={curr.slides.publicURL} 
-                onLoadError={console.error} 
-                onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-              >
-                <Page className="m-1" pageNumber={pageNumber} />
-              </Document>
-              <div>
-                <button
-                  title="Previous slide"
-                  className={"mx-2 " + (pageNumber <= 1 ? "text-secondary" : "text-primary hover:text-secondary")}
-                  disabled={pageNumber <= 1}
-                  onClick={() => setPageNumber(pageNumber - 1)}
-                >
-                  <LeftSvg />
-                </button>
-                {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-                <button
-                  title="Next slide"
-                  className={"mx-2 " + (pageNumber >= numPages ? "text-secondary" : "text-primary hover:text-secondary")}
-                  disabled={pageNumber >= numPages}
-                  onClick={() => setPageNumber(pageNumber + 1)}
-                >
-                  <RightSvg />
-                </button>
-              </div>
-            </div>
-          )}
-          <MDXProvider>
-            <div className="md-root w-full max-w-prose mx-auto">
-              {children}
-            </div>
-          </MDXProvider>
+      <div className="panel w-full grow">
+        <p className="font-mono m-0">
+          {curr.semester} Week {weekNumber(curr.week_number)} &bull; {convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)}
+        </p>
+        <h1 className="mb-1">{curr.title}</h1>
+        <p>
+          Presented by:&nbsp;
+          {curr.credit.length > 0 ? curr.credit.join(', ') : "SIGPwny" }
+        </p>
+        <div className="grid sm:flex sm:flex-row gap-2 mb-4">
+          {curr.recording ? (
+            <a
+              href={curr.recording}
+              className="btn-primary"
+              target="_blank" rel="noopener noreferrer"
+            >
+              <YouTubeSvg />
+              <p className="inline align-middle m-0 ml-2">
+                Watch video
+              </p>
+            </a>
+          ) : null}
+          {curr.slides?.publicURL ? (
+            <a
+              href={curr.slides.publicURL}
+              className="btn-primary"
+            >
+              <PdfSvg />
+              <p className="inline align-middle m-0 ml-2">
+                Download slides
+              </p>
+            </a>
+          ) : null}
         </div>
+        {curr.recording && (
+          (() => {
+            const url = getYouTubeEmbedUrl(curr.recording)
+            return url ? (
+              <iframe
+                title={curr.title + " video"}
+                className="bg-background w-full max-w-2xl aspect-video mx-auto mb-4"
+                allow="encrypted-media; fullscreen; picture-in-picture"
+                allowFullScreen={true}
+                src={url}
+              />
+            ) : null
+          })()
+        )}
+        {curr.slides?.publicURL && !curr.recording && (
+          <div className="flex flex-col items-center">
+            <Document
+              className="flex flex-col" file={curr.slides.publicURL} 
+              onLoadError={console.error} 
+              onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+            >
+              <Page className="m-1" pageNumber={pageNumber} />
+            </Document>
+            <div>
+              <button
+                title="Previous slide"
+                className={"mx-2 " + (pageNumber <= 1 ? "text-secondary" : "text-primary hover:text-secondary")}
+                disabled={pageNumber <= 1}
+                onClick={() => setPageNumber(pageNumber - 1)}
+              >
+                <LeftSvg />
+              </button>
+              {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+              <button
+                title="Next slide"
+                className={"mx-2 " + (pageNumber >= numPages ? "text-secondary" : "text-primary hover:text-secondary")}
+                disabled={pageNumber >= numPages}
+                onClick={() => setPageNumber(pageNumber + 1)}
+              >
+                <RightSvg />
+              </button>
+            </div>
+          </div>
+        )}
+        <MDXProvider>
+          <div className="md-root w-full max-w-prose mx-auto">
+            {children}
+          </div>
+        </MDXProvider>
       </div>
     </>
   )
