@@ -21,13 +21,22 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Configure git
+        run:
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
+          git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
+          git show-ref
+
+      - name: Restore previous build artifacts
+        run: git merge --squash origin/${{ env.CI_BRANCH }}
+
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           # Uses node version defined in engines
           node-version-file: 'package.json'
 
-      - name: Cache node modules
+      - name: Restore cached node modules
         id: cache-npm
         uses: actions/cache@v3
         env:
@@ -42,18 +51,12 @@ jobs:
             ${{ runner.os }}-
 
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: List the state of node modules
+        name: Install node modules (on cache miss)
         continue-on-error: true
-        run: npm list
-
-      - name: Install gatsby-cli
-        run: npm install -g gatsby-cli
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Restore previous build artifacts
-        run: git merge --squash origin/${{ env.CI_BRANCH }}
+        run:
+          npm list
+          npm install -g gatsby-cli
+          npm ci
 
       - name: Build
         run: npm run build
@@ -61,9 +64,6 @@ jobs:
       - if: github.event_name == 'push'
         name: Commit build artifacts to CI branch
         run: |
-          git show-ref
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
-          git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
           git add --force "${{ env.CI_BUILD_DIR }}"
           git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push --force origin HEAD:${{ env.CI_BRANCH }}
