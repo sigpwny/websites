@@ -52,11 +52,14 @@ jobs:
             ${{ runner.os }}-
 
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Install node modules (on cache miss)
+        name: (On cache miss) List the state of node modules
         continue-on-error: true
-        run: |
-          npm list
-          npm ci
+        run: npm list
+
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: (On cache miss) Install node modules
+        continue-on-error: true
+        run: npm ci
 
       - name: Install gatsby-cli
         run: npm install -g gatsby-cli
