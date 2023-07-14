@@ -61,11 +61,11 @@ const ProfileCardGrid = ({ profiles }: any) => {
                       const social = getSocialIcon(link.name)
                       if (!social) return null
                       if (link.link === "") return null
-                      if (link.name === "email") link.link = `mailto:${link.link}`
+                      const url = link.name === "email" ? `mailto:${link.link}` : link.link
                       return (
                         <a
                           key={index}
-                          href={link.link}
+                          href={url}
                           title={social.display}
                           className="mr-2"
                           target="_blank" rel="noopener noreferrer"
