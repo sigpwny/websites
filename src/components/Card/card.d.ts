@@ -22,4 +22,5 @@ interface CardEventProps {
 
 interface CardPublicationProps {
   publication: Queries.Publication
+  timezone: string
 }

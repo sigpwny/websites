@@ -1,7 +1,7 @@
 import dayjs from "dayjs"
 import utc from "dayjs/plugin/utc"
 import timezone from "dayjs/plugin/timezone"
-import { graphql, useStaticQuery } from "gatsby"
+import advanced from "dayjs/plugin/advancedFormat"
 
 export function weekNumber(week_number: number): string {
   return (week_number).toLocaleString(undefined, {minimumIntegerDigits: 2})
@@ -33,10 +33,11 @@ export function formatSemester(semester: string): string {
   return semester
 }
 
-export function convertDate(input_date: string, format: string, local_tz: string): string {
+export function convertDate(input_date: string, format: string, input_tz: string): string {
   dayjs.extend(utc)
   dayjs.extend(timezone)
-  const date = local_tz ? dayjs(input_date).tz(local_tz) : dayjs(input_date)
+  dayjs.extend(advanced)
+  const date = input_tz ? dayjs(input_date).tz(input_tz) : dayjs(input_date)
   if (format) {
     return date.format(format)
   }

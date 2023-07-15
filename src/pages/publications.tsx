@@ -45,6 +45,7 @@ export const query = graphql`
         publication_type
         publisher
         date
+        timezone
         image {
           path {
             childImageSharp {
@@ -54,11 +55,6 @@ export const query = graphql`
           alt
         }
         slug
-      }
-    }
-    site {
-      siteMetadata {
-        timezone
       }
     }
   }
