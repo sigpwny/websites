@@ -5,6 +5,7 @@ import { MDXProvider } from "@mdx-js/react"
 import Seo from "../components/Seo"
 import Card from "../components/Card"
 import { LocationSvg } from "../components/Icons"
+import { convertDate } from "../utils/util"
 
 interface Props {
   data: Queries.EventTemplateQuery
@@ -49,20 +50,28 @@ const EventTemplate = ({ data, children }: Props) => {
             />
             <div className="panel">
               <h1>{event.title}</h1>
-              {(event.start_date || event.close_date) && (
+              {(event.time_start || event.time_close) && (
                 <div className="flex flex-row mb-2">
-                  {event.start_date && (
+                  {event.time_start && (
                     <div className="flex-1 flex-col">
                       <p className="m-0 font-bold">Time Start</p>
-                      <p className="m-0 text-xl">{event.start_date}</p>
-                      <p className="m-0">{event.start_hour}</p>
+                      <p className="m-0 text-xl">
+                        {convertDate(event.time_start, "MMM DD, YYYY", event.timezone)}
+                      </p>
+                      <p className="m-0">
+                        {convertDate(event.time_start, "h:mm A z", event.timezone)}
+                      </p>
                     </div>
                   )}
-                  {event.close_date && (
+                  {event.time_close && (
                     <div className="flex-1 flex-col">
                       <p className="m-0 font-bold">Time End</p>
-                      <p className="m-0 text-xl">{event.close_date}</p>
-                      <p className="m-0">{event.close_hour}</p>
+                      <p className="m-0 text-xl">
+                        {convertDate(event.time_close, "MMM DD, YYYY", event.timezone)}
+                      </p>
+                      <p className="m-0">
+                        {convertDate(event.time_close, "h:mm A z", event.timezone)}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -136,10 +145,9 @@ export const query = graphql`
     event_: event(id: { eq: $id }) {
       title
       description
-      start_date: time_start(formatString: "MMM DD, YYYY")
-      start_hour: time_start(formatString: "HH:mm z")
-      close_date: time_close(formatString: "MMM DD, YYYY")
-      close_hour: time_close(formatString: "HH:mm z")
+      time_start
+      time_close
+      timezone
       location
       overlay_image {
         path {

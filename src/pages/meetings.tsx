@@ -47,7 +47,7 @@ const MeetingsPage = ({ data }: Props) => {
                   {meetings.map((meeting: Meeting) => (
                     <div key={meeting.slug} className="flex flex-row gap-x-4">
                       <div className="hidden sm:flex sm:flex-col min-w-max ">
-                        <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", data.site!.siteMetadata.timezone)}</span>
+                        <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}</span>
                       </div>
                       <div className="flex flex-row w-full md:w-3/5 truncate justify-between">
                         <Link to={`${meeting.slug}`} className="truncate">
@@ -97,6 +97,7 @@ export const query = graphql`
       meetings: nodes {
         title
         time_start
+        timezone
         week_number
         credit
         image {
@@ -113,11 +114,6 @@ export const query = graphql`
         recording
         semester
         slug
-      }
-    }
-    site {
-      siteMetadata {
-        timezone
       }
     }
   }

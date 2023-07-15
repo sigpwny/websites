@@ -1,6 +1,7 @@
 import path from "path";
 import { createFilePath } from "gatsby-source-filesystem";
 import { calculateSemester } from "./src/utils/util";
+import config from "./gatsby-config"
 
 interface Field {
   name: string;
@@ -93,6 +94,10 @@ const content_node_types: ContentNode[] = [
         name: "slug",
         resolve: (node, file_node) => createSlug("/meetings/", file_node),
       },
+      {
+        name: "timezone",
+        resolve: (node, file_node) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
+      },
     ],
   },
   {
@@ -129,6 +134,10 @@ const content_node_types: ContentNode[] = [
         name: "slug",
         resolve: (node, file_node) => createSlug("/events/", file_node),
       },
+      {
+        name: "timezone",
+        resolve: (node, file_node) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
+      },
     ],
   },
   {
@@ -158,6 +167,10 @@ const content_node_types: ContentNode[] = [
         name: "slug",
         resolve: (node, file_node) =>
           createSlug("/publications/", file_node, node.frontmatter.slug),
+      },
+      {
+        name: "timezone",
+        resolve: (node, file_node) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
       },
     ],
   },
@@ -375,6 +388,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       tags: [String]
       semester: String
       slug: String!
+      timezone: String!
     }
 
     type Event implements Node @dontInfer {
@@ -389,6 +403,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       links: [Link]
       stats: [Stat]
       slug: String!
+      timezone: String!
     }
 
     type Publication implements Node @dontInfer {
@@ -403,6 +418,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       other_links: [String]
       tags: [String]
       slug: String!
+      timezone: String!
     }
 
     type PageMarkdownOptions @dontInfer {

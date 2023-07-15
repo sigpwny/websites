@@ -21,7 +21,7 @@ export const Head = ({ data }: Props) => {
     <Seo
       title={curr.title}
       description={curr.semester + " Week " + weekNumber(curr.week_number) +
-        " • " + convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)
+        " • " + convertDate(curr.time_start, "MMMM DD, YYYY", curr.timezone)
       }
       image={curr.image?.path ? (
         curr.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
@@ -48,7 +48,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
       <article className="panel w-full grow" itemScope itemType="http://schema.org/Article">
         <header>
           <p className="font-mono m-0">
-            {curr.semester} Week {weekNumber(curr.week_number)} &bull; <time>{convertDate(curr.time_start, "MMMM DD, YYYY", data.site!.siteMetadata.timezone)}</time>
+            {curr.semester} Week {weekNumber(curr.week_number)} &bull; <time>{convertDate(curr.time_start, "MMMM DD, YYYY", curr.timezone)}</time>
           </p>
           <h1 className="mb-1" itemProp="headline">{curr.title}</h1>
           <p>
@@ -150,6 +150,7 @@ export const query = graphql`
       title
       time_start
       time_close
+      timezone
       week_number
       credit
       recording
@@ -174,11 +175,6 @@ export const query = graphql`
     next: meeting(id: { eq: $next_id }) {
       title
       slug
-    }
-    site {
-      siteMetadata {
-        timezone
-      }
     }
   }
 `

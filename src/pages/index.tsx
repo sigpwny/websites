@@ -24,13 +24,13 @@ export function Head() {
 
 const IndexPage = ({ data }: Props) => {
   const meeting_cards = data.allMeeting.meetings.map((meeting: Meeting) => (
-    createCard({meeting, timezone: data.site?.siteMetadata.timezone} as CardMeetingProps)
+    createCard({meeting, timezone: meeting.timezone} as CardMeetingProps)
   ))
   const event_cards = data.allEvent.events.map((event: Event) => (
-    createCard({event, timezone: data.site?.siteMetadata.timezone} as CardEventProps)
+    createCard({event, timezone: event.timezone} as CardEventProps)
   ))
   const publication_cards = data.allPublication.publications.map((p: Publication) => (
-    createCard({publication: p} as CardPublicationProps)
+    createCard({publication: p, timezone: p.timezone} as CardPublicationProps)
   ))
   return (
     <>
@@ -121,6 +121,7 @@ export const query = graphql`
         title
         time_start
         time_close
+        timezone
         week_number
         image {
           path {
@@ -142,6 +143,7 @@ export const query = graphql`
         title
         time_start
         time_close
+        timezone
         overlay_image {
           path {
             childImageSharp {
@@ -171,6 +173,7 @@ export const query = graphql`
         publication_type
         publisher
         date
+        timezone
         image {
           path {
             childImageSharp {

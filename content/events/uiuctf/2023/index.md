@@ -4,6 +4,7 @@ series: uiuctf
 description: UIUCTF 2023 was led by Pete alongside a team of 17. The theme was Windows 95.
 time_start: 2023-07-01T00:15:00.000Z
 time_close: 2023-07-03T00:15:00.000Z
+timezone: Etc/UTC
 location: Online
 background_image:
   path: windows-95-clouds.jpg

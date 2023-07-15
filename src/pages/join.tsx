@@ -35,7 +35,7 @@ const JoinPage = ({ data }: Props) => {
   const get_started_meetings = filtered_meetings.reverse()
 
   const meeting_cards = get_started_meetings.map((meeting: Meeting) => (
-    createCard({meeting, timezone: data.site?.siteMetadata.timezone} as CardMeetingProps)
+    createCard({meeting, timezone: meeting.timezone} as CardMeetingProps)
   ))
   const socials = data.site?.siteMetadata?.socialLinks
   const discord_link = socials?.find((social) => social?.name === "Discord")?.link || "https://sigpwny.com/discord"
@@ -141,6 +141,7 @@ export const query = graphql`
         title
         time_start
         time_close
+        timezone
         week_number
         image {
           path {
