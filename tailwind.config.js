@@ -12,8 +12,9 @@ module.exports = {
       colors: {
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
-        background: "var(--color-background)",
-        surface: "var(--color-surface)",
+        surface0: "var(--color-surface0)",
+        surface1: "var(--color-surface1)",
+        surface2: "var(--color-surface2)",
         text: "var(--color-text)",
         transparent: "transparent",
       },

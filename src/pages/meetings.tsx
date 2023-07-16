@@ -20,6 +20,42 @@ export function Head() {
   )
 }
 
+const MeetingRow = ({ meeting }: { meeting: Meeting }) => (
+  <li key={meeting.slug} className="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface2">
+    <div className="hidden sm:flex sm:flex-col min-w-max ">
+      <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}</span>
+    </div>
+    <div className="flex flex-row w-full md:w-3/5 truncate justify-between">
+      <Link to={`${meeting.slug}`} className="truncate">
+        <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
+      </Link>
+      <div className="flex flex-row">
+        {meeting.recording && (
+          <a
+            href={meeting.recording}
+            title={"Watch video"}
+            className="mx-2"
+          >
+            <YouTubeSvg />
+          </a>
+        )}
+        {meeting.slides?.publicURL && (
+          <a
+            href={meeting.slides.publicURL}
+            title={"Download slides"}
+            className="mx-2"
+          >
+            <PdfSvg />
+          </a>
+        )}
+      </div>
+    </div>
+    <div className="hidden md:flex md:flex-col md:w-1/5 overflow-x-auto whitespace-nowrap no-scrollbar">
+      {meeting.credit.length > 0 ? meeting.credit.join(', ') : "SIGPwny" }
+    </div>
+  </li>
+)
+
 const MeetingsPage = ({ data }: Props) => {
   const meetingsBySemester = data.allMeeting.meetings
   .reduce(
@@ -35,57 +71,23 @@ const MeetingsPage = ({ data }: Props) => {
     }, {} as {[semester: string]: Meeting[]
   })
   return (
-    <>
-      <section id="meetings" className="pb-8">
-        <div className="flex flex-col mx-auto page-width">
-          <h1>Meetings</h1>
-          <div className="panel">
-            {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
-              <div key={semester}>
-                <p className="font-bold text-2xl m-0">{formatSemester(semester)}</p>
-                <div className="flex flex-col pb-2">
-                  {meetings.map((meeting: Meeting) => (
-                    <div key={meeting.slug} className="flex flex-row gap-x-4">
-                      <div className="hidden sm:flex sm:flex-col min-w-max ">
-                        <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}</span>
-                      </div>
-                      <div className="flex flex-row w-full md:w-3/5 truncate justify-between">
-                        <Link to={`${meeting.slug}`} className="truncate">
-                          <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
-                        </Link>
-                        <div className="flex flex-row">
-                          {meeting.recording && (
-                            <a
-                              href={meeting.recording}
-                              title={meeting.title + " recording"}
-                              className="mx-2"
-                            >
-                              <YouTubeSvg />
-                            </a>
-                          )}
-                          {meeting.slides?.publicURL && (
-                            <a
-                              href={meeting.slides.publicURL}
-                              title={meeting.title + " slides"}
-                              className="mx-2"
-                            >
-                              <PdfSvg />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                      <div className="hidden md:flex md:flex-col md:w-1/5 overflow-x-auto whitespace-nowrap no-scrollbar">
-                        {meeting.credit.length > 0 ? meeting.credit.join(', ') : "SIGPwny" }
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+    <section id="meetings" className="pb-8">
+      <div className="flex flex-col mx-auto page-width">
+        <h1>Meetings</h1>
+        <div className="panel">
+          {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
+            <div key={semester}>
+              <p className="font-bold text-2xl m-0">{formatSemester(semester)}</p>
+              <ul className="flex flex-col pb-2">
+                {meetings.map((meeting: Meeting) => (
+                  <MeetingRow meeting={meeting} />
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
 
