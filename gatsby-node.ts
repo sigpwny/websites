@@ -379,6 +379,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       time_close: Date @dateformat
       week_number: Int!
       credit: [String!]!
+      credit_profiles: [Profile] @link(by: "name", from: "credit")
       featured: Boolean
       location: String
       image: ImageAlt
@@ -433,7 +434,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       slug: String
     }
 
-    type Admin implements Node @dontInfer {
+    interface Profile {
       name: String!
       profile_image: File! @fileByRelativePath
       handle: String
@@ -443,7 +444,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       weight: Int!
     }
 
-    type Helper implements Node @dontInfer {
+    type Admin implements Node & Profile @dontInfer {
       name: String!
       profile_image: File! @fileByRelativePath
       handle: String
@@ -453,7 +454,17 @@ exports.createSchemaCustomization = ({ actions }) => {
       weight: Int!
     }
 
-    type Alum implements Node @dontInfer {
+    type Helper implements Node & Profile @dontInfer {
+      name: String!
+      profile_image: File! @fileByRelativePath
+      handle: String
+      bio: String
+      links: [Link]
+      role: String!
+      weight: Int!
+    }
+
+    type Alum implements Node & Profile @dontInfer {
       name: String!
       profile_image: File! @fileByRelativePath
       handle: String

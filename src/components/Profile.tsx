@@ -3,6 +3,53 @@ import { motion } from "framer-motion"
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { ChevronDownSvg, getSocialIcon } from "./Icons"
 
+/* TODO: Do not use type 'any' */
+export const Avatar = ({ profile }: { profile: any }) => {
+  return (
+    <>
+      {profile?.profile_image?.childImageSharp?.gatsbyImageData ? (
+        <div className="h-full w-full rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
+          <GatsbyImage
+            image={profile.profile_image.childImageSharp.gatsbyImageData}
+            alt={profile.name}
+            className="w-full h-full"
+          />
+        </div>
+      ) : (
+        <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
+          <span className="h-full w-full flex items-center justify-center text-sm select-none">
+            NO
+          </span>
+        </div>
+      )}
+    </>
+  )
+}
+
+/* TODO: Do not use type 'any' */
+export const AvatarGroup = ({ profiles, count }: { profiles: any, count?: number }) => {
+  if (!count) count = profiles.length
+  console.log(profiles)
+  return (
+    <div className="grid h-8 gap-1" style={{gridTemplateColumns: `repeat(${count}, 2rem)`}}>
+      {profiles.slice(0, count - 1).map((profile: any, idx: number) => (
+        <Avatar key={idx} profile={profile} />
+      ))}
+      {profiles.length === count && (
+        <Avatar profile={profiles[count - 1]} />
+      )}
+      {profiles.length > count && (
+        <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
+          <span className="h-full w-full flex items-center justify-center text-sm select-none">
+            +{profiles.length - (count - 1)}
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/* TODO: Do not use type 'any' */
 const ProfileCardGrid = ({ profiles }: any) => {
   return (
     <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
