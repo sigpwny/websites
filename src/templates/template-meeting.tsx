@@ -89,7 +89,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
             return url ? (
               <iframe
                 title={curr.title + " video"}
-                className="bg-surface0 w-full max-w-2xl aspect-video mx-auto mb-4"
+                className="bg-surface-000 w-full max-w-2xl aspect-video mx-auto mb-4"
                 allow="encrypted-media; fullscreen; picture-in-picture"
                 allowFullScreen={true}
                 src={url}

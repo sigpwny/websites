@@ -37,10 +37,10 @@
   padding: 6px 13px;
 }
 .md-root table tr:nth-child(2n) {
-  background-color: var(--color-surface1);
+  background-color: var(--color-surface-100);
 }
 .md-root table tr:nth-child(2n+1) {
-  background-color: var(--color-surface1);
+  background-color: var(--color-surface-100);
 }
 .md-root .gatsby-resp-image-wrapper {
   @apply mb-2;

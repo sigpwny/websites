@@ -21,7 +21,7 @@ export function Head() {
 }
 
 const MeetingRow = ({ meeting }: { meeting: Meeting }) => (
-  <li key={meeting.slug} className="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface2">
+  <li key={meeting.slug} className="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
     <div className="hidden sm:flex sm:flex-col min-w-max ">
       <span className="font-mono">{convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}</span>
     </div>
