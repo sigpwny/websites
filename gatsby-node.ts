@@ -386,7 +386,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       slides: File @fileByRelativePath
       recording: String
       assets: [File] @fileByRelativePath
-      tags: [String]
+      tags: [String!]
       semester: String
       slug: String!
       timezone: String!

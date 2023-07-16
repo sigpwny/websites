@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, createContext } from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 
@@ -68,7 +68,11 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => (
             )}
           </div>
         </div>
-        <AvatarGroup profiles={meeting.credit_profiles} count={3} />
+        <AvatarGroup
+          profiles={meeting.credit_profiles}
+          names={meeting.credit}
+          limit={3}
+        />
       </div>
     </div>
     <hr className="border-surface-200" />
@@ -126,7 +130,7 @@ export const query = graphql`
           name
           profile_image {
             childImageSharp {
-              gatsbyImageData(width: 600, placeholder: BLURRED)
+              gatsbyImageData(width: 160, placeholder: BLURRED)
             }
           }
         }

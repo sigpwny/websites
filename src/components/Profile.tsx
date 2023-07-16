@@ -3,45 +3,69 @@ import { motion } from "framer-motion"
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { ChevronDownSvg, getSocialIcon } from "./Icons"
 
-/* TODO: Do not use type 'any' */
-export const Avatar = ({ profile }: { profile: any }) => {
-  return (
-    <>
-      {profile?.profile_image?.childImageSharp?.gatsbyImageData ? (
-        <div className="h-full w-full rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
-          <GatsbyImage
-            image={profile.profile_image.childImageSharp.gatsbyImageData}
-            alt={profile.name}
-            className="w-full h-full"
-          />
-        </div>
-      ) : (
-        <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
-          <span className="h-full w-full flex items-center justify-center text-sm select-none">
-            NO
-          </span>
-        </div>
-      )}
-    </>
-  )
+interface AvatarProps {
+  profile?: any
+  name?: string
+}
+
+interface AvatarGroupProps {
+  profiles: any[]
+  names: string[]
+  limit?: number
+}
+
+function calculateInitials(name: string) {
+  const names = name.split(" ")
+  if (names.length === 1) {
+    return names[0][0]
+  } else {
+    return names[0][0] + names[names.length - 1][0]
+  }
 }
 
 /* TODO: Do not use type 'any' */
-export const AvatarGroup = ({ profiles, count }: { profiles: any, count?: number }) => {
-  if (!count) count = profiles.length
-  console.log(profiles)
+export const Avatar = ({ profile, name }: AvatarProps) => {
+  if (!profile && !name) throw new Error(`invalid argument: "profile" and "name" are both undefined`)
+  if (profile?.profile_image?.childImageSharp?.gatsbyImageData) {
+    return (
+      <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
+        <GatsbyImage
+          image={profile.profile_image.childImageSharp.gatsbyImageData}
+          alt={profile.name}
+          className="w-full h-full"
+        />
+      </div>
+    )
+  } else if (name) {
+    return (
+      <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
+        <span className="w-full h-full flex items-center justify-center text-sm select-none">
+          {calculateInitials(name)}
+        </span>
+      </div>
+    )
+  }
+  return null
+}
+
+/* TODO: Do not use type 'any' */
+export const AvatarGroup = ({ profiles, names, limit }: AvatarGroupProps) => {
+  if (profiles && names && profiles.length !== names.length) {
+    throw new Error(`invalid argument: "profiles" and "names" must be the same length`)
+  }
+  if (!limit) limit = profiles.length
   return (
-    <div className="grid h-8 gap-1" style={{gridTemplateColumns: `repeat(${count}, 2rem)`}}>
-      {profiles.slice(0, count - 1).map((profile: any, idx: number) => (
-        <Avatar key={idx} profile={profile} />
+    <div className="grid h-8 gap-1" style={{gridTemplateColumns: `repeat(${limit}, 2rem)`}}>
+      {profiles.slice(0, limit - 1).map((profile: any, idx: number) => (
+        <Avatar key={idx} profile={profile} name={names[idx]} />
       ))}
-      {profiles.length === count && (
-        <Avatar profile={profiles[count - 1]} />
+      {profiles.length === limit && (
+        <Avatar profile={profiles[limit - 1]} name={names[limit - 1]} />
       )}
-      {profiles.length > count && (
+      {profiles.length > limit && (
         <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
-          <span className="h-full w-full flex items-center justify-center text-sm select-none">
-            +{profiles.length - (count - 1)}
+          <span className="w-full h-full flex items-center justify-center text-sm select-none">
+            +{profiles.length - (limit - 1)}
           </span>
         </div>
       )}

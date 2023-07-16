@@ -1,7 +1,7 @@
 import React from "react"
 
 interface TagGroupProps {
-  tags: Array<string>,
+  tags: string[],
   char_limit?: number,
   tag_limit?: number
 }
@@ -18,7 +18,7 @@ export const TagGroup = ({ tags, char_limit, tag_limit }: TagGroupProps) => {
   if (char_limit) {
     let curr_count = 0;
     // Filter tags until we can't fit any more within char_limit
-    tags_to_show = tags.filter((tag) => {
+    tags_to_show = tags_to_show.filter((tag) => {
       curr_count += tag.length;
       return curr_count <= char_limit;
     });
