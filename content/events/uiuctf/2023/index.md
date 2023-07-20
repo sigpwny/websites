@@ -51,7 +51,7 @@ For UIUCTF 2023 we paid out $1,500 in writeup prizes. We prioritize concise tech
 | [Mock Kernel](https://maplebacon.org/2023/07/uiuctf-mock-kernel/) | Maple Bacon - nneonneo |
 | [Morphing Time](https://github.com/SuperBeetleGamer/Crypto-Writeups/blob/main/UIUCTF%202023/morphing_time.md) | ARESx |
 | [Morphing Time](https://bronson113.github.io/2023/07/03/uiuctf-2023-writeups.html#morphing-time) | b01lers |
-| [peanut-xss](https://immense-geology-c53.notion.site/UIUC-CTF-1451335984bd45a787e0ec08f9092c49?pvs=4) | Rubi Di Cubrik - Prosti, Fanta and others  |
+| [peanut-xss](https://immense-geology-c53.notion.site/UIUC-CTF-1451335984bd45a787e0ec08f9092c49?pvs=4) | Rubi Di Cubrik |
 | [pwnykey](https://gist.github.com/RubenBrocke/248e80151e2ff4d4ea67a5af792ec4d6) | Spotless |
 | [Rattler Read](https://ur4ndom.dev/posts/2023-07-02-uiuctf-rattler-read/) | decipher - /dev/ur4ndom |
 | [Rattler Read](https://radboudinstituteof.pwning.nl/posts/rattlerread/) | Radboud Institute of Pwning - Areca |
