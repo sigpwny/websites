@@ -18,6 +18,8 @@ module.exports = {
           "100": "var(--color-surface-100)",
           "150": "var(--color-surface-150)",
           "200": "var(--color-surface-200)",
+          "250": "var(--color-surface-250)",
+          "300": "var(--color-surface-300)",
         },
         text: "var(--color-text)",
         transparent: "transparent",

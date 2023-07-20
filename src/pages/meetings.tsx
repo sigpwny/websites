@@ -1,12 +1,15 @@
 import React, { useState, createContext } from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
+import { Tooltip } from "react-tooltip"
 
 import { AvatarGroup } from "../components/Profile"
 import Seo from "../components/Seo"
 import { TagGroup } from "../components/Tag"
 import { weekNumber, convertDate, formatSemester } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
+
+import "../styles/tooltip.css"
 
 type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0]
 
@@ -99,7 +102,7 @@ const MeetingsPage = ({ data }: Props) => {
         <h1>Meetings</h1>
         <div className="panel">
           {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
-            <div key={semester}>
+            <div key={semester} id={semester}>
               <p className="font-bold text-2xl m-0">{formatSemester(semester)}</p>
               <hr className="border-surface-200" />
               <ul className="flex flex-col pb-2">
@@ -109,6 +112,16 @@ const MeetingsPage = ({ data }: Props) => {
               </ul>
             </div>
           ))}
+          <span className="tooltip-container">
+            <Tooltip
+              anchorSelect=".tag-tooltip"
+              className="tooltip"
+              opacity={1}
+              offset={16}
+              clickable
+            >
+            </Tooltip>
+          </span>
         </div>
       </div>
     </section>

@@ -15,6 +15,8 @@ body {
   --color-surface-100: #222222;
   --color-surface-150: #333333;
   --color-surface-200: #444444;
+  --color-surface-250: #555555;
+  --color-surface-300: #666666;
   --color-text: #ffffff;
 
   --font-size-small: 0.875rem;
