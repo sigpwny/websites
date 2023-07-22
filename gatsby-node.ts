@@ -379,7 +379,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       time_close: Date @dateformat
       week_number: Int!
       credit: [String!]!
-      credit_profiles: [Profile] @link(by: "name", from: "credit")
+      credit_profiles: [Profile]! @link(by: "name", from: "credit")
       featured: Boolean
       location: String
       image: ImageAlt

@@ -3,13 +3,11 @@ import { Link, graphql } from "gatsby"
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { Tooltip } from "react-tooltip"
 
-import { AvatarGroup } from "../components/Profile"
+import { AvatarGroup, ProfileCard } from "../components/Profile"
 import Seo from "../components/Seo"
 import { TagGroup } from "../components/Tag"
 import { weekNumber, convertDate, formatSemester } from "../utils/util"
 import { PdfSvg, YouTubeSvg } from "../components/Icons"
-
-import "../styles/tooltip.css"
 
 type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0]
 
@@ -26,61 +24,68 @@ export function Head() {
   )
 }
 
-const MeetingRow = ({ meeting }: { meeting: Meeting }) => (
-  <li>
-    <div className="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
-      <div className="flex flex-row flex-grow lg:flex-grow-0 min-w-0 lg:w-1/2 xl:w-3/5 gap-x-4 items-center justify-content-center">
-        <span className="hidden sm:flex font-mono min-w-max">
-          {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
-        </span>
-        <Link to={`${meeting.slug}`} className="truncate">
-          <span>
-            <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
+const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
+  const profiles = meeting.credit_profiles.map((profile, idx) => {
+    if (profile) return profile
+    return {
+      name: meeting.credit[idx]
+    }
+  })
+  return (
+    <li>
+      <div className="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
+        <div className="flex flex-row flex-grow lg:flex-grow-0 min-w-0 lg:w-1/2 xl:w-3/5 gap-x-4 items-center justify-content-center">
+          <span className="hidden sm:flex font-mono min-w-max">
+            {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
           </span>
-        </Link>
-      </div>
-      <div className="hidden lg:flex flex-row lg:flex-grow gap-x-4 truncate">
-        {meeting.tags && meeting.tags.length > 0 && (
-          <TagGroup tags={meeting.tags} char_limit={25} tag_limit={3} />
-        )}
-      </div>
-      <div className="hidden md:flex flex-row gap-x-4 min-w-fit truncate">
-        <div className="grid grid-cols-3" style={{gridTemplateColumns: `repeat(3, 2rem)`}}>
-          <div className="flex items-center justify-items-center">
-          </div>
-          <div className="flex items-center justify-items-center">
-            {meeting.recording && (
-              <a
-                href={meeting.recording}
-                title={"Watch video"}
-                className="px-2"
-              >
-                <YouTubeSvg />
-              </a>
-            )}
-          </div>
-          <div className="flex items-center justify-items-center">
-            {meeting.slides?.publicURL && (
-              <a
-                href={meeting.slides.publicURL}
-                title={"Download slides"}
-                className="px-2"
-              >
-                <PdfSvg />
-              </a>
-            )}
-          </div>
+          <Link to={`${meeting.slug}`} className="truncate">
+            <span>
+              <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
+            </span>
+          </Link>
         </div>
-        <AvatarGroup
-          profiles={meeting.credit_profiles}
-          names={meeting.credit}
-          limit={3}
-        />
+        <div className="hidden lg:flex flex-row lg:flex-grow gap-x-4 truncate">
+          {meeting.tags && meeting.tags.length > 0 && (
+            <TagGroup tags={meeting.tags} char_limit={25} tag_limit={3} />
+          )}
+        </div>
+        <div className="hidden md:flex flex-row gap-x-4 min-w-fit truncate">
+          <div className="grid grid-cols-3" style={{gridTemplateColumns: `repeat(3, 2rem)`}}>
+            <div className="flex items-center justify-items-center">
+            </div>
+            <div className="flex items-center justify-items-center">
+              {meeting.recording && (
+                <a
+                  href={meeting.recording}
+                  title={"Watch video"}
+                  className="px-2"
+                >
+                  <YouTubeSvg />
+                </a>
+              )}
+            </div>
+            <div className="flex items-center justify-items-center">
+              {meeting.slides?.publicURL && (
+                <a
+                  href={meeting.slides.publicURL}
+                  title={"Download slides"}
+                  className="px-2"
+                >
+                  <PdfSvg />
+                </a>
+              )}
+            </div>
+          </div>
+          <AvatarGroup
+            profiles={profiles}
+            limit={3}
+          />
+        </div>
       </div>
-    </div>
-    <hr className="border-surface-200" />
-  </li>
-)
+      <hr className="border-surface-200" />
+    </li>
+  )
+}
 
 const MeetingsPage = ({ data }: Props) => {
   const meetingsBySemester = data.allMeeting.meetings
@@ -114,13 +119,26 @@ const MeetingsPage = ({ data }: Props) => {
           ))}
           <span className="tooltip-container">
             <Tooltip
-              anchorSelect=".tag-tooltip"
-              className="tooltip"
+              anchorSelect=".tooltip-select"
+              className="!p-2 shadow-2xl bg-surface-300 rounded-xl"
               opacity={1}
-              offset={16}
               clickable
-            >
-            </Tooltip>
+            />
+            <Tooltip
+              anchorSelect=".profile-tooltip-select"
+              className="!p-0 shadow-2xl bg-transparent"
+              opacity={1}
+              place={"top-end"}
+              clickable
+              noArrow
+              render={({ content }) => {
+                if (!content) return null
+                const profile = JSON.parse(content)
+                return (
+                  <ProfileCard profile={profile} />
+                )
+              }}
+            />
           </span>
         </div>
       </div>
@@ -143,9 +161,15 @@ export const query = graphql`
           name
           profile_image {
             childImageSharp {
-              gatsbyImageData(width: 160, placeholder: BLURRED)
+              gatsbyImageData(width: 160, aspectRatio: 1)
             }
           }
+          handle
+          links {
+            name
+            link
+          }
+          role
         }
         image {
           path {

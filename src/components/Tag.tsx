@@ -1,6 +1,5 @@
-import React, { useId } from "react"
+import React from "react"
 import ReactDOMServer from "react-dom/server"
-import { Tooltip } from "react-tooltip"
 
 interface TagGroupProps {
   tags: string[],
@@ -10,31 +9,28 @@ interface TagGroupProps {
 
 export const Tag = ({ tag }: { tag: string }) => (
   <div
-    className="h-fit px-2 py-1 text-xs select-none bg-surface-200 hover:bg-surface-300 border-2 border-surface-100 rounded-lg"
+    className="flex-none h-fit px-2 py-1 text-xs select-none bg-surface-200 hover:bg-surface-300 border-2 border-surface-100 rounded-lg"
   >
     {tag}
   </div>
 )
 
-export const TagNested = ({ nested_tag_label, nested_tags }: { nested_tag_label: string, nested_tags: string[] }) => {
-  const id = useId();
-  return (
-    <>
-      <a
-        className="tag-tooltip"
-        data-tooltip-html={
-          ReactDOMServer.renderToString(
-            <TagGroup tags={nested_tags} />
-          )
-        }
-      >
-        <Tag
-          tag={nested_tag_label}
-        />
-      </a>
-    </>
-  )
-}
+export const TagNested = ({ nested_tag_label, nested_tags }: { nested_tag_label: string, nested_tags: string[] }) => (
+  <a
+    className="tooltip-select"
+    data-tooltip-html={
+      ReactDOMServer.renderToString(
+        <div className="max-w-md">
+          <TagGroup tags={nested_tags} />
+        </div>
+      )
+    }
+  >
+    <Tag
+      tag={nested_tag_label}
+    />
+  </a>
+)
 
 export const TagGroup = ({ tags, char_limit, tag_limit }: TagGroupProps) => {
   let tags_to_show: string[] = tags;
@@ -45,9 +41,8 @@ export const TagGroup = ({ tags, char_limit, tag_limit }: TagGroupProps) => {
     let char_count = 0;
     tags.forEach((tag, idx) => {
       if (char_count + tag.length > char_limit) {
-        let tags_to_show_count = idx > 0 ? idx - 1 : 0;
-        tags_to_show = tags.slice(0, tags_to_show_count);
-        tags_to_nest = tags.slice(tags_to_show_count, tags.length);
+        tags_to_show = tags.slice(0, idx);
+        tags_to_nest = tags.slice(idx, tags.length);
         return;
       }
       char_count += tag.length;
@@ -80,13 +75,13 @@ export const TagGroup = ({ tags, char_limit, tag_limit }: TagGroupProps) => {
     }
   }
   return (
-    <div className="flex flex-row items-center gap-1">
+    <div className="flex flex-row flex-wrap items-center gap-1">
       {tags_to_show.map((tag, idx) => (
         <Tag key={idx} tag={tag} />
       ))}
-      {tags_to_nest.length > 0 && (
+      {tags_to_nest.length > 0 ? (
         <TagNested nested_tag_label={nested_tags_label} nested_tags={tags_to_nest} />
-      )}
+      ) : null}
     </div>
   )
 }

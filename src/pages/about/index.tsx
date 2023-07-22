@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { StaticImage } from "gatsby-plugin-image"
 
 import Seo from "../../components/Seo"
-import ProfileCardGrid from "../../components/Profile"
+import { ProfileCardGrid } from "../../components/Profile"
 import SIGPwnyMorphology from "../../components/SIGPwnyMorphology"
 import Timeline, { type Event } from "../../components/Timeline"
 
