@@ -120,13 +120,13 @@ const MeetingsPage = ({ data }: Props) => {
           <span className="tooltip-container">
             <Tooltip
               anchorSelect=".tooltip-select"
-              className="!p-2 shadow-2xl bg-surface-300 rounded-xl"
+              className="!p-2 !transition-none !bg-surface-300 shadow-2xl rounded-xl"
               opacity={1}
               clickable
             />
             <Tooltip
               anchorSelect=".profile-tooltip-select"
-              className="!p-0 shadow-2xl bg-transparent"
+              className="!p-0 !transition-none !bg-transparent shadow-2xl"
               opacity={1}
               place={"top-end"}
               clickable
