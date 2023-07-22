@@ -1,5 +1,5 @@
 ---
-name: "Jesse" # required
+name: "Jesse Wang"
 profile_image: "./logo.png"
 handle: "jjwang11"
 role: "Leech"

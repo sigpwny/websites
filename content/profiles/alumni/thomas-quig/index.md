@@ -1,5 +1,5 @@
 ---
-name: "Thomas" # required
+name: "Thomas Quig"
 profile_image: "./profile.jpg"
 handle: "Thomas_Quig"
 role: "Ex-President"

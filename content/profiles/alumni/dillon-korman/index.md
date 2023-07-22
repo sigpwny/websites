@@ -1,5 +1,5 @@
 ---
-name: "Dillon" # required
+name: "Dillon Korman"
 profile_image: "./logo.png"
 handle: "DrDinosaur"
 role: "Ex Officer"

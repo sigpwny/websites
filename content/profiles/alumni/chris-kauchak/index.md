@@ -1,5 +1,5 @@
 ---
-name: "Chris" # required
+name: "Chris Kauchak"
 profile_image: "./logo.png"
 handle: "2much4u"
 role: "Ex Research Director"

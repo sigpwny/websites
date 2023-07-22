@@ -1,5 +1,5 @@
 ---
-name: "Nathan" # required
+name: "Nathan Farlow"
 profile_image: "./profile.jpg"
 handle: "0x1337cafe"
 role: "Ex-President"

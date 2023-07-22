@@ -1,5 +1,5 @@
 ---
-name: "Faisal" # required
+name: "Faisal Khalid"
 profile_image: "./logo.png"
 handle: "Chief"
 role: "Ex Admin"
