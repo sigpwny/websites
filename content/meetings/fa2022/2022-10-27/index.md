@@ -5,7 +5,7 @@ time_close: ""
 week_number: 9
 credit:
   - Thomas Quig
-  - Sam Ruggiero
+  - Sam Ruggerio
 featured: true
 location: Siebel CS 1404 + Zoom
 slides: week_09_lockpicking.pdf

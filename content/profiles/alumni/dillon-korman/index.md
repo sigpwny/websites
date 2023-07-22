@@ -2,7 +2,7 @@
 name: "Dillon Korman"
 profile_image: "./logo.png"
 handle: "DrDinosaur"
-role: "Ex Officer"
+role: "Ex-Officer"
 period: "Class of 2020"
 work: ""
 weight: 0

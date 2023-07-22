@@ -4,7 +4,7 @@ time_start: 2022-10-02T14:00:00-05:00
 time_close: ""
 week_number: 5
 credit:
-  - Sam Ruggiero
+  - Sam Ruggerio
 featured: true
 location: DCL 1310 + Zoom
 slides: week_05_x86-64_assembly.pdf

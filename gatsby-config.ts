@@ -105,6 +105,14 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        name: "members",
+        path: "./content/profiles/members/",
+        ignore: [`**/.*`],
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: "redirects",
         path: "./content/redirects/",
         ignore: [`**/.*`],
