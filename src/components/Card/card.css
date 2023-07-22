@@ -1,6 +1,6 @@
 .card {
-  background-color: var(--color-surface);
-  border-color: var(--color-surface);
+  background-color: var(--color-surface-100);
+  border-color: var(--color-surface-100);
   border-radius: 0.75rem;
   isolation: isolate;
   overflow: hidden;

@@ -1,5 +1,5 @@
 ---
-name: "Josh" # required
+name: "Joshua Park" # required
 profile_image: "./profile.jpg"
 handle: "_dingu"
 role: "Ex-Helper (Infra)"

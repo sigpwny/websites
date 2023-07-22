@@ -258,6 +258,27 @@ const content_node_types: ContentNode[] = [
       },
     ],
   },
+  {
+    type: "Member",
+    gatsbySourceInstanceName: "members",
+    fields: [
+      { name: "name", required: true },
+      { name: "profile_image", required: true },
+      { name: "handle" },
+      { name: "bio" },
+      { name: "links" },
+    ],
+    computedFields: [
+      {
+        name: "role",
+        resolve: (node, file_node) => node.frontmatter.role ?? "Member"
+      },
+      {
+        name: "weight",
+        resolve: (node, file_node) => node.frontmatter.weight ?? 0
+      },
+    ],
+  },
 ];
 
 exports.onCreateNode = ({
@@ -379,13 +400,14 @@ exports.createSchemaCustomization = ({ actions }) => {
       time_close: Date @dateformat
       week_number: Int!
       credit: [String!]!
+      credit_profiles: [Profile]! @link(by: "name", from: "credit")
       featured: Boolean
       location: String
       image: ImageAlt
       slides: File @fileByRelativePath
       recording: String
       assets: [File] @fileByRelativePath
-      tags: [String]
+      tags: [String!]
       semester: String
       slug: String!
       timezone: String!
@@ -433,7 +455,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       slug: String
     }
 
-    type Admin implements Node @dontInfer {
+    interface Profile {
       name: String!
       profile_image: File! @fileByRelativePath
       handle: String
@@ -443,7 +465,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       weight: Int!
     }
 
-    type Helper implements Node @dontInfer {
+    type Admin implements Node & Profile @dontInfer {
       name: String!
       profile_image: File! @fileByRelativePath
       handle: String
@@ -453,12 +475,32 @@ exports.createSchemaCustomization = ({ actions }) => {
       weight: Int!
     }
 
-    type Alum implements Node @dontInfer {
+    type Helper implements Node & Profile @dontInfer {
+      name: String!
+      profile_image: File! @fileByRelativePath
+      handle: String
+      bio: String
+      links: [Link]
+      role: String!
+      weight: Int!
+    }
+
+    type Alum implements Node & Profile @dontInfer {
       name: String!
       profile_image: File! @fileByRelativePath
       handle: String
       period: String
       work: String
+      bio: String
+      links: [Link]
+      role: String!
+      weight: Int!
+    }
+
+    type Member implements Node & Profile @dontInfer {
+      name: String!
+      profile_image: File! @fileByRelativePath
+      handle: String
       bio: String
       links: [Link]
       role: String!

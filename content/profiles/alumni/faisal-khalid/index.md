@@ -1,8 +1,8 @@
 ---
-name: "Faisal" # required
+name: "Faisal Khalid"
 profile_image: "./logo.png"
 handle: "Chief"
-role: "Ex Admin"
+role: "Ex-Admin"
 period: "Class of 2022"
 work: "Cyber Risk @ Deloitte"
 weight: 0

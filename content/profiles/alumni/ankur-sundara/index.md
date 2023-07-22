@@ -1,5 +1,5 @@
 ---
-name: Ankur
+name: Ankur Sundara
 bio: " "
 profile_image: avatar.jpeg
 role: Ex-Officer

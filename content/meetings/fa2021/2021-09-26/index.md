@@ -2,7 +2,7 @@
 credit:
 - Husnain Raza
 - Anakin Dey
-- Heassam Uddin
+- Hassam Uddin
 - Pranav Goel
 - Nebu
 featured: false
