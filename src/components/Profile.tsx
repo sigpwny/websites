@@ -25,7 +25,7 @@ function calculateInitials(name: string) {
 export const Avatar = ({ profile, label }: AvatarProps) => {
   if (getImage(profile?.profile_image)) {
     return (
-      <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100">
+      <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 select-none">
         <GatsbyImage
           image={getImage(profile.profile_image) as IGatsbyImageData}
           alt={profile.name}
@@ -68,7 +68,7 @@ export const AvatarGroup = ({ profiles, limit }: AvatarGroupProps) => {
 }
 
 export const ProfileCard = ({ profile }: any) => (
-  <div className="flex flex-row gap-4 bg-surface-250 rounded-xl isolate overflow-hidden p-4 relative bottom-0 right-0 max-h-fit max-w-fit">
+  <div className="flex flex-row gap-4 bg-surface-250 border-surface-300 border-2 rounded-xl isolate overflow-hidden p-4 relative bottom-0 right-0 max-h-fit max-w-fit">
     {profile?.profile_image ? (
       <div className="w-32 h-32">
         <Avatar profile={profile} />

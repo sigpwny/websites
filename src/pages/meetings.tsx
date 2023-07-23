@@ -1,7 +1,7 @@
-import React, { useState, createContext } from "react"
+import React from "react"
 import { Link, graphql } from "gatsby"
-import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
 import { Tooltip } from "react-tooltip"
+import dayjs from "dayjs"
 
 import { AvatarGroup, ProfileCard } from "../components/Profile"
 import Seo from "../components/Seo"
@@ -35,7 +35,10 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
     <li>
       <div className="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
         <div className="flex flex-row flex-grow lg:flex-grow-0 min-w-0 lg:w-1/2 xl:w-3/5 gap-x-4 items-center justify-content-center">
-          <span className="hidden sm:flex font-mono min-w-max">
+          <span
+            className="hidden sm:flex font-mono min-w-max day-tooltip-select"
+            data-tooltip-content={convertDate(meeting.time_start, "ddd", meeting.timezone)}
+          >
             {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
           </span>
           <Link to={`${meeting.slug}`} className="truncate">
@@ -57,8 +60,9 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
               {meeting.recording && (
                 <a
                   href={meeting.recording}
-                  title={"Watch video"}
-                  className="px-2"
+                  className="px-2 link-tooltip-select"
+                  aria-label={"Watch video"}
+                  data-tooltip-content={"Watch video"}
                 >
                   <YouTubeSvg />
                 </a>
@@ -68,8 +72,9 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
               {meeting.slides?.publicURL && (
                 <a
                   href={meeting.slides.publicURL}
-                  title={"Download slides"}
-                  className="px-2"
+                  className="px-2 link-tooltip-select"
+                  aria-label={"Download slides"}
+                  data-tooltip-content={"Download slides"}
                 >
                   <PdfSvg />
                 </a>
@@ -119,10 +124,24 @@ const MeetingsPage = ({ data }: Props) => {
           ))}
           <span className="tooltip-container">
             <Tooltip
+              anchorSelect=".day-tooltip-select"
+              className="!px-2 !py-0 !transition-none !bg-surface-250 !shadow-2xl !rounded-xl font-mono hidden md:block"
+              border={"2px solid var(--color-surface-300"}
+              opacity={1}
+              place={"left"}
+            />
+            <Tooltip
               anchorSelect=".tooltip-select"
-              className="!p-2 !transition-none !bg-surface-300 !shadow-2xl !rounded-xl"
+              className="!p-2 !transition-none !bg-surface-250 !shadow-2xl !rounded-xl"
+              border={"2px solid var(--color-surface-300"}
               opacity={1}
               clickable
+            />
+            <Tooltip
+              anchorSelect=".link-tooltip-select"
+              className="!px-3 !py-2 !transition-none !bg-surface-250 !shadow-2xl !rounded-xl"
+              border={"2px solid var(--color-surface-300"}
+              opacity={1}
             />
             <Tooltip
               anchorSelect=".profile-tooltip-select"
