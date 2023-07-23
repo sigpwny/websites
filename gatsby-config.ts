@@ -195,6 +195,12 @@ const config: GatsbyConfig = {
               destinationDir: "static",
             },
           },
+          {
+            resolve: `gatsby-remark-katex`,
+            options: {
+              strict: `ignore`,
+            },
+          },
         ],
         mdxOptions: {
           remarkPlugins: [remarkGfm],
