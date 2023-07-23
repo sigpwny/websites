@@ -104,6 +104,21 @@ Tables also aren't supported in CommonMark, but they are supported in GFM!
 |Row 1, Column 1|Row 1, Column 2|Row 1, Column 3|
 |Row 2, Column 1|Row 2, Column 2|Row 2, Column 3|
 
+Here is some LaTeX (technically KaTeX):
+
+$a^2 + b^2 = c^2$
+
+This is a test of inline math, with variable $x$ 
+and variable $y$. Let's say $x=0$ and $y = 1$. Then $x + y = 1$.
+
+$$
+\begin{align}
+\frac{1}{2} \times 2 &= 1 \\
+\frac{1}{2} \times 2 \times 2 &= 2 \\
+\frac{1}{2} \times 2 \times 2 \times 2 &= 4 \\
+\end{align}
+$$
+
 # Heading 1
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nunc scelerisque viverra mauris in aliquam sem fringilla. Et egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Aliquet sagittis id consectetur purus ut faucibus. In nibh mauris cursus mattis molestie a. Vulputate sapien nec sagittis aliquam malesuada bibendum. Eget sit amet tellus cras adipiscing. Ac tincidunt vitae semper quis lectus nulla. Urna porttitor rhoncus dolor purus non enim praesent elementum. In hac habitasse platea dictumst vestibulum rhoncus est. Id diam maecenas ultricies mi eget. Ante in nibh mauris cursus mattis molestie a iaculis. Duis at tellus at urna condimentum. Varius duis at consectetur lorem donec massa sapien faucibus et.
