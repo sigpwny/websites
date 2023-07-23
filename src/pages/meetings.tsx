@@ -36,7 +36,7 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
       <div className="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
         <div className="flex flex-row flex-grow lg:flex-grow-0 min-w-0 lg:w-1/2 xl:w-3/5 gap-x-4 items-center justify-content-center">
           <span
-            className="hidden sm:flex font-mono min-w-max day-tooltip-select"
+            className="hidden sm:flex font-mono min-w-max cursor-default day-tooltip-select"
             data-tooltip-content={convertDate(meeting.time_start, "ddd", meeting.timezone)}
           >
             {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
