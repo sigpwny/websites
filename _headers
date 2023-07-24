@@ -1,0 +1,4 @@
+/.netlify/*
+  Access-Control-Allow-Origin: https://sigpwny.com
+  Access-Control-Allow-Credentials: true
+  Access-Control-Allow-Methods: GET, POST, OPTION
