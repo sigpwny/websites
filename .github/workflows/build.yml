@@ -22,6 +22,7 @@ jobs:
       - name: Check out main repository code
         uses: actions/checkout@v3
         with:
+          ssh-key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
           fetch-depth: 0
 
       - name: Configure git
