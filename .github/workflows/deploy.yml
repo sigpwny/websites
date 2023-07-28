@@ -1,35 +1,17 @@
-name: Build site
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+name: Build and deploy site
+on: [push]
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     env:
-      CI_BRANCH: build
+      CI: true
       CI_BUILD_DIR: public
-      CI_COMMIT_MESSAGE: CI build artifacts for commit ${{ github.sha }}
-      CI_COMMIT_AUTHOR_NAME: ${{ github.event.repository.name }} CI
-      CI_COMMIT_AUTHOR_EMAIL: sigpwny-uiuc@users.noreply.github.com
     steps:
       - name: Check out main repository code
         uses: actions/checkout@v3
-        with:
-          ssh-key: ${{ secrets.DEPLOY_KEY_PRIVATE }}
-          fetch-depth: 0
-
-      - name: Configure git
-        run: |
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR_NAME }}"
-          git config --global user.email "${{ env.CI_COMMIT_AUTHOR_EMAIL }}"
-          git show-ref
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -67,12 +49,14 @@ jobs:
       - name: Install gatsby-cli
         run: npm install -g gatsby-cli
 
-      - name: Build
+      - name: Build site
         run: npm run build
 
-      - if: github.event_name == 'push'
-        name: Commit build artifacts to CI branch
-        run: |
-          git add --force "${{ env.CI_BUILD_DIR }}"
-          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-          git push --force origin HEAD:${{ env.CI_BRANCH }}
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          directory: ${{ env.CI_BUILD_DIR }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
