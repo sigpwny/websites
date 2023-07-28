@@ -1,11 +1,36 @@
 ---
 title: UIUCTF 2022
 series: uiuctf
-description: UIUCTF 2022 was organized by a team of 21 led by Nathan. The theme
-  was a digital art exhibition!
+description: UIUCTF 2022's theme was a digital gallery exhibition featuring generative art!
 time_start: 2022-07-30T00:00:00.000Z
 time_close: 2022-08-01T00:00:00.000Z
 timezone: Etc/UTC
+credit:
+  - Anakin Dey
+  - Ankur Sundara
+  - Anusha Ghosh
+  - Daniel Wang
+  - David Zheng
+  - Dhruv Baronia
+  - Emma Hartman
+  - Faisal Khalid
+  - Hassam Uddin
+  - Husnain Raza
+  - Ian Klatzco
+  - Joseph Ravichandran
+  - Julie Oh
+  - Kevin Higgs
+  - kuilin
+  - Nathan Farlow
+  - Michael Chang
+  - Minh Duong
+  - Nicholas Husin
+  - Pete Stenger
+  - Richard Liu
+  - Sahil Jain
+  - Sam Ruggerio
+  - Thomas Quig
+  - YiFei Zhu
 location: Online
 background_image:
   path: spotlights.png
