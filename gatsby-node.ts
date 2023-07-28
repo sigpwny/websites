@@ -640,10 +640,10 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
           const ical_event_data = {
             uid: source.ical?.uid ?? createICalendarUID(`meeting-${source.semester}-${source.title}`),
             sequence: source.ical?.revision ?? 0,
-            title: source.ical?.title ?? source.title,
+            title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, page_url) /* TODO: Create generated description */,
             location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
-            url: source.ical?.url ?? source.recording,
+            url: source.ical?.url ? source.ical.url : (source.recording ? source.recording : undefined),
           };
           return ical_event_data;
         }
@@ -657,10 +657,10 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
           return {
             uid: source.ical?.uid ?? createICalendarUID(`event-${source.series}-${source.title}`),
             sequence: source.ical?.revision ?? 0,
-            title: source.ical?.title ?? source.title,
+            title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, page_url) /* TODO: Create generated description */,
             location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
-            url: source.ical?.url,
+            url: source.ical?.url ? source.ical.url : undefined,
           };
         }
       },
