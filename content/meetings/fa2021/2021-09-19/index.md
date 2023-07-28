@@ -9,7 +9,6 @@ tags:
 - misc
 - csaw
 - recap
-time_close: ''
 time_start: 2021-09-19T14:00:00.000000-05:00
 title: CSAW CTF Qualifications 2021 Recap
 week_number: 3

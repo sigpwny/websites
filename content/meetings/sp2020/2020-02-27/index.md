@@ -7,7 +7,6 @@ recording: ''
 tags:
 - misc
 - lockpicking
-time_close: ''
 time_start: 2020-02-27T18:00:00.000000-06:00
 title: Lockpicking
 week_number: 5

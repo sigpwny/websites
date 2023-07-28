@@ -11,7 +11,6 @@ tags:
 - tension wrench
 - rake
 - hook pick
-time_close: ''
 time_start: 2017-10-05T18:00:00.000000-05:00
 title: Lockpicking
 week_number: 5

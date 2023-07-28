@@ -7,7 +7,6 @@ recording: 'https://youtu.be/Tchsuer9JK0'
 slides: pwn.pdf
 tags:
 - pwn
-time_close: ''
 time_start: 2020-10-22T18:00:00.000000-05:00
 title: Binary Exploitation Help Session
 week_number: 8

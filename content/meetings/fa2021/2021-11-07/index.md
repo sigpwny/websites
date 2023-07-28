@@ -14,7 +14,6 @@ tags:
 - nmap
 - shodan
 - tineye
-time_close: ''
 time_start: 2021-11-07T14:00:00.000000-06:00
 title: OSINT II
 week_number: 10

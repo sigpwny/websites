@@ -8,7 +8,6 @@ slides: intro_to_cryptography.pdf
 tags:
 - crypto
 - intro
-time_close: ''
 time_start: 2018-10-25T18:00:00.000000Z
 title: Intro to Cryptography
 week_number: 8

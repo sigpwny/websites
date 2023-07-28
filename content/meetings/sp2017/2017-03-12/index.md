@@ -9,7 +9,6 @@ tags:
 - compilation
 - x86
 - in-depth
-time_close: ''
 time_start: 2017-03-12T18:00:00.000000Z
 title: Reverse Engineering (Part 2)
 week_number: 8

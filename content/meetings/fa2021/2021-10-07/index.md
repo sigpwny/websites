@@ -14,7 +14,6 @@ tags:
 - ghidra
 - gdb
 - binutils
-time_close: ''
 time_start: 2021-10-07T18:00:00.000000-05:00
 title: Reverse Engineering I
 week_number: 6

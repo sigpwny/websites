@@ -8,7 +8,6 @@ slides: ''
 tags:
 - welcome
 - intro
-time_close: ''
 time_start: 2020-09-10T18:00:00.000000-05:00
 title: Introduction
 week_number: 2

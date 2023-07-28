@@ -8,7 +8,6 @@ tags:
 - welcome
 - intro
 - ctf
-time_close: ''
 time_start: 2017-02-08T18:00:00.000000Z
 title: Intro to CTF (Part 2)
 week_number: 3

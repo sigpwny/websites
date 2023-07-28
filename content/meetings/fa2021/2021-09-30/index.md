@@ -10,7 +10,6 @@ tags:
 - misc
 - opsec
 - intro
-time_close: ''
 time_start: 2021-09-30T18:00:00.000000-05:00
 title: Operational Security
 week_number: 5

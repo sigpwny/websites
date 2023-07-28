@@ -12,7 +12,6 @@ tags:
 - javascript
 - cookies
 - devtools
-time_close: ''
 time_start: 2021-09-09T18:00:00.000000-05:00
 title: Web Hacking I
 week_number: 2

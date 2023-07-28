@@ -18,7 +18,6 @@ tags:
 - dep
 - stack canary
 - in-depth
-time_close: ''
 time_start: 2020-10-15T18:00:00.000000-05:00
 title: Binary Exploitation
 week_number: 7

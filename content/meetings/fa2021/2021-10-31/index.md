@@ -9,7 +9,6 @@ tags:
 - misc
 - social
 - halloween
-time_close: ''
 time_start: 2021-10-31T14:00:00.000000-05:00
 title: SIGPwny Spooky Summary
 week_number: 9

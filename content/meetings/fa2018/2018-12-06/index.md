@@ -14,7 +14,6 @@ tags:
 - netcat
 - scapy
 - wireshark
-time_close: ''
 time_start: 2018-12-06T18:00:00.000000Z
 title: Intro to Networking
 week_number: 14

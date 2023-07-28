@@ -20,7 +20,6 @@ tags:
 - RELRO
 - stack canary
 - pwntools
-time_close: ''
 time_start: 2021-10-14T18:00:00.000000-05:00
 title: PWN I
 week_number: 7

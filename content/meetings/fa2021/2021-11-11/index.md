@@ -14,7 +14,6 @@ tags:
 - mitm
 - wireshark
 - burp suite
-time_close: ''
 time_start: 2021-11-11T18:00:00.000000-06:00
 title: Networking
 week_number: 11

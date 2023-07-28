@@ -10,7 +10,6 @@ tags:
 - pwn
 - networking
 - game hacking
-time_close: ''
 time_start: 2019-09-19T18:00:00.000000-05:00
 title: Game Hacking
 week_number: 3

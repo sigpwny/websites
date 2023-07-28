@@ -10,7 +10,6 @@ tags:
 - misc
 - opsec
 - intro
-time_close: ''
 time_start: 2020-10-29T18:00:00.000000-05:00
 title: Intro to OpSec
 week_number: 9

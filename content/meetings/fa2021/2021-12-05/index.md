@@ -15,7 +15,6 @@ tags:
 - api sniffing
 - frida
 - apktool
-time_close: ''
 time_start: 2021-12-05T15:00:00.000000-06:00
 title: Mobile Application Hacking
 week_number: 14

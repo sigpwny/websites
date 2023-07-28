@@ -16,7 +16,6 @@ tags:
 - foremost
 - wireshark
 - exiftool
-time_close: ''
 time_start: 2021-10-28T18:00:00.000000-05:00
 title: Forensics
 week_number: 9
