@@ -118,6 +118,7 @@ const config: GatsbyConfig = {
         ignore: [`**/.*`],
       },
     },
+    "gatsby-plugin-catch-links",
     "gatsby-plugin-image",
     "gatsby-plugin-netlify",
     "gatsby-plugin-postcss",

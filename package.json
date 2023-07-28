@@ -23,6 +23,7 @@
     "dayjs": "^1.11.7",
     "framer-motion": "^8.0.2",
     "gatsby": "^5.3.3",
+    "gatsby-plugin-catch-links": "^5.11.0",
     "gatsby-plugin-image": "^3.10.0",
     "gatsby-plugin-manifest": "^5.3.1",
     "gatsby-plugin-mdx": "^5.3.1",
