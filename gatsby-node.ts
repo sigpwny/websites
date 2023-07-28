@@ -416,20 +416,6 @@ exports.onCreateNode = ({
 
 exports.createSchemaCustomization = ({ actions, schema }) => {
   const { createTypes } = actions;
-  const typeDefs = [
-    schema.buildObjectType({
-      name: "LocationsJson",
-      fields: {
-        address: "String!",
-        matches: {
-          type: "[String!]!",
-          resolve: source => source.receivedSwag || false,
-        },
-      },
-      interfaces: ["Node"],
-    }),
-  ]
-  createTypes(typeDefs)
   createTypes(`
     type Site implements Node {
       siteMetadata: SiteMetadata!
@@ -461,6 +447,11 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       value: String!
     }
 
+    interface TemplatedPage implements Node @dontInfer {
+      id: ID!
+      slug: String!
+    }
+
     type ICalendarEventData {
       uid: String!
       sequence: Int!
@@ -477,7 +468,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       time_close: Date! @dateformat
     }
 
-    type Meeting implements Node & ICalendarEvent @dontInfer {
+    type Meeting implements Node & TemplatedPage & ICalendarEvent @dontInfer {
       title: String!
       ical: ICalendarEventData!
       time_start: Date! @dateformat
@@ -498,7 +489,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       timezone: String!
     }
 
-    type Event implements Node & ICalendarEvent @dontInfer {
+    type Event implements Node & TemplatedPage & ICalendarEvent @dontInfer {
       title: String!
       ical: ICalendarEventData!
       time_start: Date! @dateformat
@@ -516,7 +507,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       timezone: String!
     }
 
-    type Publication implements Node @dontInfer {
+    type Publication implements Node & TemplatedPage @dontInfer {
       title: String!
       credit: [String!]!
       publication_type: String!
@@ -536,11 +527,11 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       no_background: Boolean
     }
 
-    type PageMarkdown implements Node @dontInfer {
+    type PageMarkdown implements Node & TemplatedPage @dontInfer {
       title: String!
       description: String
       options: PageMarkdownOptions
-      slug: String
+      slug: String!
     }
 
     interface Profile {
@@ -673,8 +664,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
   const result = await graphql(`
     query GatsbyNode {
-      allMeeting(sort: { time_start: ASC }) {
-        meetings: nodes {
+      allTemplatedPage {
+        nodes {
+          __typename
           id
           slug
           parent {
@@ -684,46 +676,9 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
-          slides {
-            publicURL
-          }
-        }
-      }
-      allEvent(sort: { time_start: ASC }) {
-        events: nodes {
-          id
-          slug
-          parent {
-            ... on Mdx {
-              internal {
-                contentFilePath
-              }
-            }
-          }
-        }
-      }
-      allPublication(sort: { date: ASC }) {
-        publications: nodes {
-          id
-          slug
-          parent {
-            ... on Mdx {
-              internal {
-                contentFilePath
-              }
-            }
-          }
-        }
-      }
-      allPageMarkdown {
-        pages_md: nodes {
-          id
-          slug
-          parent {
-            ... on Mdx {
-              internal {
-                contentFilePath
-              }
+          ... on Meeting {
+            slides {
+              publicURL
             }
           }
         }
@@ -752,13 +707,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const template_meeting = path.resolve(`./src/templates/template-meeting.tsx`);
   const template_event = path.resolve(`./src/templates/template-event.tsx`);
-  const template_publication = path.resolve(
-    `./src/templates/template-publication.tsx`
-  );
+  const template_publication = path.resolve(`./src/templates/template-publication.tsx`);
   const template_page_md = path.resolve(`./src/templates/template-page_md.tsx`);
-  const template_redirect_external = path.resolve(
-    `./src/templates/template-redirect-external.tsx`
-  );
+  const template_redirect_external = path.resolve(`./src/templates/template-redirect-external.tsx`);
 
   // Generate external redirects
   const redirects_external = result.data.allRedirectsExternalJson.redirects;
@@ -797,80 +748,53 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   }
 
-  const meetings = result.data.allMeeting.meetings;
-  if (meetings.length > 0) {
-    meetings.forEach((meeting, index) => {
-      const prev_id =
-        index === meetings.length - 1 ? null : meetings[index + 1].id;
-      const next_id = index === 0 ? null : meetings[index - 1].id;
-      createPage({
-        path: meeting.slug,
-        component: `${template_meeting}?__contentFilePath=${meeting.parent.internal.contentFilePath}`,
-        context: {
-          id: meeting.id,
-          prev_id,
-          next_id,
-          layout: "meeting",
-        },
-        trailingSlash: true,
-      });
-      // Generate /slides and /slides/ redirect for each meeting
-      if (meeting.slides?.publicURL) {
-        createRedirect({
-          fromPath: `${meeting.slug}slides`,
-          toPath: meeting.slides.publicURL,
-          statusCode: 301,
-        });
-        createRedirect({
-          fromPath: `${meeting.slug}slides/`,
-          toPath: meeting.slides.publicURL,
-          statusCode: 301,
-        });
-      }
+  // Generate templated pages
+  const templated_pages = result.data.allTemplatedPage.nodes;
+  templated_pages.forEach((page) => {
+    let template;
+    let layout = "default";
+    switch (page.__typename) {
+      case "Meeting":
+        template = template_meeting;
+        layout = "meeting";
+        // Generate /slides and /slides/ redirects for each meeting
+        if (page.slides?.publicURL) {
+          createRedirect({
+            fromPath: `${page.slug}slides`,
+            toPath: page.slides.publicURL,
+            statusCode: 301,
+          });
+          createRedirect({
+            fromPath: `${page.slug}slides/`,
+            toPath: page.slides.publicURL,
+            statusCode: 301,
+          });
+        }
+        break;
+      case "Event":
+        template = template_event;
+        break;
+      case "Publication":
+        template = template_publication;
+        break;
+      case "PageMarkdown":
+        template = template_page_md;
+        break;
+      default:
+        // throw new Error(`Unknown templated page type: ${page.__typename}`);
+        console.warn(`Unknown templated page type: ${page.__typename}`)
+        return;
+    }
+    createPage({
+      path: page.slug,
+      component: `${template}?__contentFilePath=${page.parent.internal.contentFilePath}`,
+      context: {
+        id: page.id,
+        layout,
+      },
+      trailingSlash: true,
     });
-  }
-
-  const events = result.data.allEvent.events;
-  if (events.length > 0) {
-    events.forEach((event_) => {
-      createPage({
-        path: event_.slug,
-        component: `${template_event}?__contentFilePath=${event_.parent.internal.contentFilePath}`,
-        context: {
-          id: event_.id,
-        },
-        trailingSlash: true,
-      });
-    });
-  }
-
-  const publications = result.data.allPublication.publications;
-  if (publications.length > 0) {
-    publications.forEach((publication) => {
-      createPage({
-        path: publication.slug,
-        component: `${template_publication}?__contentFilePath=${publication.parent.internal.contentFilePath}`,
-        context: {
-          id: publication.id,
-        },
-        trailingSlash: true,
-      });
-    });
-  }
-
-  const pages_md = result.data.allPageMarkdown.pages_md;
-  if (pages_md.length > 0) {
-    pages_md.forEach((page_md) => {
-      createPage({
-        path: page_md.slug,
-        component: `${template_page_md}?__contentFilePath=${page_md.parent.internal.contentFilePath}`,
-        context: {
-          id: page_md.id,
-        },
-        trailingSlash: true,
-      });
-    });
-  }
+  });
 };
 
 // Export calendar items to ICS file
