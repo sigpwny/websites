@@ -1,5 +1,5 @@
 import React from 'react'
-import MeetingSidebar from './MeetingSidebar'
+import MeetingSidebar from '../components/MeetingSidebar'
 
 const LayoutMeeting = ({ children }: { children: React.ReactNode }) => {
   return (
