@@ -1,7 +1,6 @@
 ---
 title: Fall Research Show and Tell
 time_start: 2022-01-23T14:00:00.000000-06:00
-time_close: ""
 week_number: 0
 credit:
   - SIGPwny

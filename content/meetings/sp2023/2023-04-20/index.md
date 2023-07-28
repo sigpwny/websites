@@ -1,7 +1,6 @@
 ---
 title: "Crypto III: Block Ciphers"
 time_start: 2023-04-20T18:00:00.000-05:00
-time_close: ""
 week_number: 13
 credit:
   - Sagnik Chakraborty

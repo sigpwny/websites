@@ -1,7 +1,6 @@
 ---
 title: Reconnaissance + IoT Security with CypherCon
 time_start: 2023-04-30T14:00:00.000-05:00
-time_close: ""
 week_number: 14
 credit:
   - David An

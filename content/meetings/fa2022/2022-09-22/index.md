@@ -1,7 +1,6 @@
 ---
 title: Reverse Engineering I
 time_start: 2022-09-22T18:00:00-05:00
-time_close: ""
 week_number: 4
 credit:
   - Richard Liu

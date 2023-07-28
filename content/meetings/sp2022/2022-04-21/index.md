@@ -1,7 +1,6 @@
 ---
 title: AI Security
 time_start: 2022-04-21T18:00:00.000000-05:00
-time_close: ""
 week_number: 13
 credit:
   - Anusha Ghosh

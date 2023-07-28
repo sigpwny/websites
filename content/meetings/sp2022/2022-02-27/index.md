@@ -1,7 +1,6 @@
 ---
 title: Crypto Math I
 time_start: 2022-02-27T14:00:00.000000-06:00
-time_close: ""
 week_number: 5
 credit:
   - Nebu

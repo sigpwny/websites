@@ -1,7 +1,6 @@
 ---
 title: Introduction
 time_start: 2022-08-25T18:00:00-05:00
-time_close: ""
 week_number: 0
 credit:
   - SIGPwny

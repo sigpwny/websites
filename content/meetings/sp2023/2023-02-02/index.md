@@ -1,7 +1,6 @@
 ---
 title: Web Hacking III
 time_start: 2023-02-02T18:00:00.000-06:00
-time_close: ""
 week_number: 2
 credit:
   - Daniel Wang

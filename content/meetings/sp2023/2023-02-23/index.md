@@ -1,7 +1,6 @@
 ---
 title: Reverse Engineering III
 time_start: 2023-02-23T18:00:00.000-06:00
-time_close: ""
 week_number: 5
 credit:
   - Richard Liu

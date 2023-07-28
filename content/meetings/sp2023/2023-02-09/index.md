@@ -1,7 +1,6 @@
 ---
 title: "PWN III: ROP"
 time_start: 2023-02-09T18:00:00.000-06:00
-time_close: ""
 week_number: 3
 credit:
   - Sam Ruggerio

@@ -1,7 +1,6 @@
 ---
 title: IoT Security (Paper Reading)
 time_start: 2022-02-20T14:00:00.000000-06:00
-time_close: ""
 week_number: 4
 credit:
   - Thomas Quig

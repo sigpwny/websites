@@ -1,7 +1,6 @@
 ---
 title: AI Hacking II
 time_start: 2023-03-26T14:00:00.000-05:00
-time_close: ""
 week_number: 9
 credit:
  - Anusha Ghosh

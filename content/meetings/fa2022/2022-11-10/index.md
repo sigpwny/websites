@@ -1,7 +1,6 @@
 ---
 title: Python Jails
 time_start: 2022-11-10T18:00:00-06:00
-time_close: ""
 week_number: 11
 credit:
   - Pete Stenger

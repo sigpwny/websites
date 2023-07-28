@@ -1,7 +1,6 @@
 ---
 title: "PWN IV: Heap"
 time_start: 2023-02-19T14:00:00.000-06:00
-time_close: ""
 week_number: 4
 credit:
   - Kevin Higgs
