@@ -593,8 +593,11 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
     const hash = crypto.createHash("sha256").update(uniq_id).digest("hex");
     return `${hash}@sigpwny.com`; // TODO: Programmatically get domain
   }
-  const createICalendarDescription = (description: string, url: string) => {
-    return `${url}\n\n${description ?? ""}`.trim();
+  const createICalendarDescription = (description: string, page_url: string, video_url?: string) => {
+    const str_page_url = page_url ? `${page_url}\n\n` : "";
+    const str_description = description ? `${description}\n\n` : "";
+    const str_video_url = video_url ? `----( Video Call )----\n${video_url}\n---===---\n\n` : "";
+    return `${str_page_url}${str_description}${str_video_url}`.trim();
   }
   const createICalendarLocation = (init_loc: string, locations: any[]) => {
     return init_loc
@@ -628,13 +631,14 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
         resolve: (source, args, context, info) => {
           const site_url = context.nodeModel.getNodeById({ id: "Site" }).siteMetadata.siteUrl;
           const page_url = `${site_url}${source.slug}`;
+          const video_url = source.ical?.url ? source.ical.url : (source.recording ? source.recording : undefined);
           const ical_event_data = {
             uid: source.ical?.uid ?? createICalendarUID(`meeting-${source.semester}-${source.title}`),
             sequence: source.ical?.revision ?? 0,
             title: source.ical?.title ? source.ical.title : source.title,
-            description: source.ical?.description ?? createICalendarDescription(source.description, page_url) /* TODO: Create generated description */,
+            description: source.ical?.description ?? createICalendarDescription(source.description, page_url, video_url),
             location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
-            url: source.ical?.url ? source.ical.url : (source.recording ? source.recording : undefined),
+            url: video_url,
           };
           return ical_event_data;
         }
@@ -649,7 +653,7 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
             uid: source.ical?.uid ?? createICalendarUID(`event-${source.series}-${source.title}`),
             sequence: source.ical?.revision ?? 0,
             title: source.ical?.title ? source.ical.title : source.title,
-            description: source.ical?.description ?? createICalendarDescription(source.description, page_url) /* TODO: Create generated description */,
+            description: source.ical?.description ?? createICalendarDescription(source.description, page_url),
             location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
             url: source.ical?.url ? source.ical.url : undefined,
           };
@@ -799,16 +803,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
 // Export calendar items to ICS file
 exports.onPostBuild = ({ graphql, reporter }) => {
-  const toDateArray = (date: string): ics.DateArray => {
-    const date_obj = dayjs.utc(date);
-    return [
-      date_obj.year(),
-      date_obj.month() + 1,
-      date_obj.date(),
-      date_obj.hour(),
-      date_obj.minute()
-    ];
-  };
   // Get all ICalendarEvents from GraphQL
   return graphql(`
     query CreateICS {
@@ -826,12 +820,18 @@ exports.onPostBuild = ({ graphql, reporter }) => {
           time_close
         }
       }
+      site {
+        siteMetadata {
+          title
+        }
+      }
     }
   `).then((result) => {
     if (result.errors) {
       result.errors.forEach((e) => reporter.error(e.toString()));
       return;
     }
+    const site_name = result.data.site.siteMetadata.title;
     const ical_events = result.data.allICalendarEvent.nodes;
     if (ical_events.length > 0) {
       // Generate ICS file
@@ -840,10 +840,11 @@ exports.onPostBuild = ({ graphql, reporter }) => {
         ical_events.map((event) => {
           const ics_event: ics.EventAttributes = {
             uid: event.ical.uid,
-            start: toDateArray(event.time_start),
+            calName: site_name,
+            start: ics.convertTimestampToArray(event.time_start, "utc"),
             startInputType: "utc",
             startOutputType: "utc",
-            end: toDateArray(event.time_close),
+            end: ics.convertTimestampToArray(event.time_close, "utc"),
             endInputType: "utc",
             endOutputType: "utc",
             title: event.ical.title ?? undefined,
