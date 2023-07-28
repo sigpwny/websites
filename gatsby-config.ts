@@ -113,8 +113,8 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "redirects",
-        path: "./content/redirects/",
+        name: "json",
+        path: "./content/json/",
         ignore: [`**/.*`],
       },
     },

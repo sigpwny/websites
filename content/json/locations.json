@@ -1,0 +1,102 @@
+[
+  {
+    "address": "Siebel Center for Computer Science\n201 N. Goodwin Ave, Urbana, IL 61801, United States",
+    "matches": [
+      "Siebel CS",
+      "Siebel Center for CS",
+      "Siebel Center for Computer Science"
+    ]
+  },
+  {
+    "address": "Ceramics Building\n105 S Goodwin Ave, Urbana, IL 61801, United States",
+    "matches": [
+      "Ceramics Building"
+    ]
+  },
+  {
+    "address": "Campus Instructional Facility\n1405 W Springfield Ave, Urbana, IL 61801, United States",
+    "matches": [
+      "CIF",
+      "Campus Instructional Facility"
+    ]
+  },
+  {
+    "address": "Coordinated Science Laboratory\n1308 W Main St, Urbana, IL 61801, United States",
+    "matches": [
+      "CSL",
+      "Coordinated Science Laboratory"
+    ]
+  },
+  {
+    "address": "Digital Computer Laboratory\n1304 W Springfield Ave, Urbana, IL 61801, United States",
+    "matches": [
+      "DCL",
+      "Digital Computer Laboratory"
+    ]
+  },
+  {
+    "address": "Electrical and Computer Engineering Building\n306 N Wright St, Urbana, IL 61801, United States",
+    "matches": [
+      "ECEB",
+      "Electrical and Computer Engineering Building"
+    ]
+  },
+  {
+    "address": "Engineering Hall\n1308 W Green St, Urbana, IL 61801, United States",
+    "matches": [
+      "Engineering Hall"
+    ]
+  },
+  {
+    "address": "Everitt Laboratory\n1406 W Green St, Urbana, IL 61801, United States",
+    "matches": [
+      "Everitt"
+    ]
+  },
+  {
+    "address": "Foelinger Auditorium\n709 S Mathews Ave, Urbana, IL 61801, United States",
+    "matches": [
+      "Foellinger"
+    ]
+  },
+  {
+    "address": "Grainger Engineering Library\n1301 W Springfield Ave, Urbana, IL 61801, United States",
+    "matches": [
+      "Grainger Library",
+      "Grainger Engineering Library"
+    ]
+  },
+  {
+    "address": "Illini Union\n1401 W Green St, Urbana, IL 61801, United States",
+    "matches": [
+      "Illini Union"
+    ]
+  },
+  {
+    "address": "Loomis Laboratory of Physics\n1110 W Green St, Urbana, IL 61801, United States",
+    "matches": [
+      "Loomis"
+    ]
+  },
+  {
+    "address": "Material Sciences and Engineering Building\n1304 W Green St, Urbana, IL 61801, United States",
+    "matches": [
+      "MSEB",
+      "Material Sciences and Engineering Building"
+    ]
+  },
+  {
+    "address": "Siebel Center for Design\n1208 S Fourth St, Champaign, IL 61820, United States",
+    "matches": [
+      "SCD",
+      "Siebel Center for Design"
+    ]
+  },
+  {
+    "address": "Transportation Building\n104 S Mathews Ave, Urbana, IL 61801, United States",
+    "matches": [
+      "TB",
+      "Transportation Building"
+    ]
+  }
+]

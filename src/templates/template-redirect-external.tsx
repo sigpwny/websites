@@ -34,7 +34,7 @@ export default RedirectExternalTemplate
 
 export const query = graphql`
   query RedirectExternalTemplate($id: String!) {
-    redirect: externalJson(id: { eq: $id }) {
+    redirect: redirectsExternalJson(id: { eq: $id }) {
       dst
     }
   }

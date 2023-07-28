@@ -1,7 +1,0 @@
-[
-  {
-    "src": "/presentation-content/*",
-    "dst": "/meetings/:splat",
-    "type": "splat"
-  }
-]

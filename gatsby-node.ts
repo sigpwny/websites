@@ -1,12 +1,26 @@
+import crypto from "crypto";
+import fs from "fs";
 import path from "path";
-import { createFilePath } from "gatsby-source-filesystem";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import * as ics from "ics";
 import { calculateSemester } from "./src/utils/util";
-import config from "./gatsby-config"
+import config from "./gatsby-config";
+import * as locations_json from "./content/json/locations.json";
+
+dayjs.extend(utc);
 
 interface Field {
   name: string;
   required?: boolean;
   fields?: Field[];
+}
+
+// TODO: Fix types
+interface ResolverParams {
+  node: any;
+  file_node: any;
+  reporter: any;
 }
 
 interface ContentNode {
@@ -15,7 +29,7 @@ interface ContentNode {
   fields?: Field[];
   computedFields?: {
     name: string;
-    resolve: (node: any, file_node: any) => any;
+    resolve: (ResolverParams) => any;
   }[];
 }
 
@@ -51,18 +65,28 @@ function createSlug(base_dir: string, file_node: any, slug?: string) {
   return slug;
 }
 
+// const content_type_icalendar_event_data = [
+//   { name: "uid" },
+//   { name: "sequence" },
+//   { name: "title" },
+//   { name: "description" },
+//   { name: "location" },
+//   { name: "url" },
+// ]
+
 const content_node_types: ContentNode[] = [
   {
     type: "Meeting",
     gatsbySourceInstanceName: "meetings",
     fields: [
       { name: "title", required: true },
+      { name: "ical" }, // TODO: Verify that simple assignment works
       { name: "time_start", required: true },
-      { name: "time_close" },
       { name: "week_number", required: true },
       { name: "credit", required: true },
       { name: "featured" },
       { name: "location" },
+      { name: "description" },
       {
         name: "image",
         required: false,
@@ -79,11 +103,11 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "semester",
-        resolve: (node, file_node) => {
+        resolve: ({ node, file_node, reporter }) => {
           const semester = calculateSemester(node.frontmatter.time_start);
           const semester_from_path = file_node.relativePath.split("/")[0];
           if (semester.toLowerCase() != semester_from_path.toLowerCase()) {
-            console.warn(
+            reporter.warn(
               `Calculated semester "${semester}" does not match directory "${semester_from_path}" for ${file_node.absolutePath}`
             );
           }
@@ -92,11 +116,25 @@ const content_node_types: ContentNode[] = [
       },
       {
         name: "slug",
-        resolve: (node, file_node) => createSlug("/meetings/", file_node),
+        resolve: ({ file_node }) => createSlug("/meetings/", file_node),
+      },
+      {
+        name: "time_close",
+        resolve: ({ node, file_node, reporter }) => {
+          if (node.frontmatter.time_close && dayjs(node.frontmatter.time_close).isValid()) {
+            if (dayjs(node.frontmatter.time_close).isAfter(dayjs(node.frontmatter.time_start))) {
+              return node.frontmatter.time_close;
+            } else {
+              reporter.warn(`${file_node.relativePath}: time_close is before time_start, using default duration`);
+            }
+          }
+          // If time_close is not set, use time_start + 1 hour
+          return dayjs(node.frontmatter.time_start).add(1, "hour").toISOString();
+        },
       },
       {
         name: "timezone",
-        resolve: (node, file_node) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
+        resolve: ({ node }) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
       },
     ],
   },
@@ -105,11 +143,12 @@ const content_node_types: ContentNode[] = [
     gatsbySourceInstanceName: "events",
     fields: [
       { name: "title", required: true },
-      { name: "series", required: true },
-      { name: "description", required: true },
+      { name: "ical" },
       { name: "time_start", required: true },
-      { name: "time_close" },
+      { name: "series", required: true },
+      { name: "credit", required: true },
       { name: "location" },
+      { name: "description", required: true },
       {
         name: "overlay_image",
         required: false,
@@ -132,11 +171,25 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "slug",
-        resolve: (node, file_node) => createSlug("/events/", file_node),
+        resolve: ({ file_node }) => createSlug("/events/", file_node),
+      },
+      {
+        name: "time_close",
+        resolve: ({ node, file_node, reporter }) => {
+          if (node.frontmatter.time_close && dayjs(node.frontmatter.time_close).isValid()) {
+            if (dayjs(node.frontmatter.time_close).isAfter(dayjs(node.frontmatter.time_start))) {
+              return node.frontmatter.time_close;
+            } else {
+              reporter.warn(`${file_node.relativePath}: time_close is before time_start, using default duration`);
+            }
+          }
+          // If time_close is not set, use time_start + 1 hour
+          return dayjs(node.frontmatter.time_start).add(1, "hour").toISOString();
+        }
       },
       {
         name: "timezone",
-        resolve: (node, file_node) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
+        resolve: ({ node }) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
       },
     ],
   },
@@ -165,12 +218,12 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "slug",
-        resolve: (node, file_node) =>
+        resolve: ({ node, file_node }) =>
           createSlug("/publications/", file_node, node.frontmatter.slug),
       },
       {
         name: "timezone",
-        resolve: (node, file_node) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
+        resolve: ({ node }) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
       },
     ],
   },
@@ -188,7 +241,7 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "slug",
-        resolve: (node, file_node) =>
+        resolve: ({ node, file_node }) =>
           createSlug("/", file_node, node.frontmatter.slug),
       },
     ],
@@ -206,11 +259,11 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "role",
-        resolve: (node, file_node) => node.frontmatter.role ?? "Admin"
+        resolve: ({ node }) => node.frontmatter.role ?? "Admin"
       },
       {
         name: "weight",
-        resolve: (node, file_node) => node.frontmatter.weight ?? 0
+        resolve: ({ node }) => node.frontmatter.weight ?? 0
       },
     ],
   },
@@ -227,11 +280,11 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "role",
-        resolve: (node, file_node) => node.frontmatter.role ?? "Helper"
+        resolve: ({ node }) => node.frontmatter.role ?? "Helper"
       },
       {
         name: "weight",
-        resolve: (node, file_node) => node.frontmatter.weight ?? 0
+        resolve: ({ node }) => node.frontmatter.weight ?? 0
       },
     ],
   },
@@ -250,11 +303,11 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "role",
-        resolve: (node, file_node) => node.frontmatter.role ?? "Alum"
+        resolve: ({ node }) => node.frontmatter.role ?? "Alum"
       },
       {
         name: "weight",
-        resolve: (node, file_node) => node.frontmatter.weight ?? 0
+        resolve: ({ node }) => node.frontmatter.weight ?? 0
       },
     ],
   },
@@ -271,11 +324,11 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "role",
-        resolve: (node, file_node) => node.frontmatter.role ?? "Member"
+        resolve: ({ node }) => node.frontmatter.role ?? "Member"
       },
       {
         name: "weight",
-        resolve: (node, file_node) => node.frontmatter.weight ?? 0
+        resolve: ({ node }) => node.frontmatter.weight ?? 0
       },
     ],
   },
@@ -287,6 +340,7 @@ exports.onCreateNode = ({
   getNode,
   createNodeId,
   createContentDigest,
+  reporter
 }) => {
   const { createNode, createParentChildLink } = actions;
   if (node.internal.type === "Mdx") {
@@ -351,7 +405,7 @@ exports.onCreateNode = ({
       // Add fields that need to be resolved/computed
       ...(computedFields &&
         computedFields.reduce((acc, field) => {
-          acc[field.name] = field.resolve(node, file_node);
+          acc[field.name] = field.resolve({ node, file_node, reporter });
           return acc;
         }, {})),
     };
@@ -360,9 +414,22 @@ exports.onCreateNode = ({
   }
 };
 
-exports.createSchemaCustomization = ({ actions }) => {
+exports.createSchemaCustomization = ({ actions, schema }) => {
   const { createTypes } = actions;
-
+  const typeDefs = [
+    schema.buildObjectType({
+      name: "LocationsJson",
+      fields: {
+        address: "String!",
+        matches: {
+          type: "[String!]!",
+          resolve: source => source.receivedSwag || false,
+        },
+      },
+      interfaces: ["Node"],
+    }),
+  ]
+  createTypes(typeDefs)
   createTypes(`
     type Site implements Node {
       siteMetadata: SiteMetadata!
@@ -384,7 +451,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       timezone: String!
     }
 
-    type ImageAlt @dontInfer {
+    type ImageAlt {
       path: File! @fileByRelativePath
       alt: String!
     }
@@ -394,32 +461,53 @@ exports.createSchemaCustomization = ({ actions }) => {
       value: String!
     }
 
-    type Meeting implements Node @dontInfer {
+    type ICalendarEventData {
+      uid: String!
+      sequence: Int!
       title: String!
+      description: String
+      location: String
+      url: String
+    }
+
+    interface ICalendarEvent implements Node @dontInfer {
+      id: ID!
+      ical: ICalendarEventData!
       time_start: Date! @dateformat
-      time_close: Date @dateformat
+      time_close: Date! @dateformat
+    }
+
+    type Meeting implements Node & ICalendarEvent @dontInfer {
+      title: String!
+      ical: ICalendarEventData!
+      time_start: Date! @dateformat
+      time_close: Date! @dateformat
       week_number: Int!
       credit: [String!]!
       credit_profiles: [Profile]! @link(by: "name", from: "credit")
       featured: Boolean
       location: String
+      description: String
       image: ImageAlt
       slides: File @fileByRelativePath
       recording: String
       assets: [File] @fileByRelativePath
       tags: [String!]
-      semester: String
+      semester: String!
       slug: String!
       timezone: String!
     }
 
-    type Event implements Node @dontInfer {
+    type Event implements Node & ICalendarEvent @dontInfer {
       title: String!
-      series: String!
-      description: String!
+      ical: ICalendarEventData!
       time_start: Date! @dateformat
-      time_close: Date @dateformat
+      time_close: Date! @dateformat
+      series: String!
+      credit: [String!]!
+      credit_profiles: [Profile]! @link(by: "name", from: "credit")
       location: String
+      description: String!
       overlay_image: ImageAlt
       background_image: ImageAlt
       links: [Link]
@@ -443,7 +531,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       timezone: String!
     }
 
-    type PageMarkdownOptions @dontInfer {
+    type PageMarkdownOptions {
       full_width: Boolean
       no_background: Boolean
     }
@@ -509,16 +597,26 @@ exports.createSchemaCustomization = ({ actions }) => {
   `);
 };
 
-exports.createResolvers = ({ createResolvers }) => {
+exports.createResolvers = ({ createResolvers }, reporter) => {
+  const createICalendarUID = (uniq_id: string) => {
+    const hash = crypto.createHash("sha256").update(uniq_id).digest("hex");
+    return `${hash}@sigpwny.com`; // TODO: Programmatically get domain
+  }
+  const createICalendarDescription = (description: string, url: string) => {
+    return `${url}\n\n${description ?? ""}`.trim();
+  }
+  const createICalendarLocation = (init_loc: string, locations: any[]) => {
+    return init_loc
+      ? locations.find((location) =>
+          location.matches.some((match) => new RegExp(match).test(init_loc))
+        )?.address ?? init_loc
+      : undefined;
+  }
+
   const resolvers = {
     Site: {
       siteMetadata: {
         resolve: (source, args, context, info) => {
-          // Customize the data that is returned for the siteMetadata field here.
-          // You can access the original site metadata by calling source.siteMetadata.
-          // The context object contains information about the current GraphQL request,
-          // and the info object contains information about the field being queried.
-          // You can return any data that you want to be included in the siteMetadata field.
           return {
             title: source.siteMetadata.title || "SIGPwny",
             siteUrl: source.siteMetadata.siteUrl || "https://sigpwny.com",
@@ -532,6 +630,39 @@ exports.createResolvers = ({ createResolvers }) => {
             timezone: source.siteMetadata.timezone || "America/Chicago",
           };
         },
+      },
+    },
+    Meeting: {
+      ical: {
+        resolve: (source, args, context, info) => {
+          const site_url = context.nodeModel.getNodeById({ id: "Site" }).siteMetadata.siteUrl;
+          const page_url = `${site_url}${source.slug}`;
+          const ical_event_data = {
+            uid: source.ical?.uid ?? createICalendarUID(`meeting-${source.semester}-${source.title}`),
+            sequence: source.ical?.revision ?? 0,
+            title: source.ical?.title ?? source.title,
+            description: source.ical?.description ?? createICalendarDescription(source.description, page_url) /* TODO: Create generated description */,
+            location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
+            url: source.ical?.url ?? source.recording,
+          };
+          return ical_event_data;
+        }
+      },
+    },
+    Event: {
+      ical: {
+        resolve: (source, args, context, info) => {
+          const site_url = context.nodeModel.getNodeById({ id: "Site" }).siteMetadata.siteUrl;
+          const page_url = `${site_url}${source.slug}`;
+          return {
+            uid: source.ical?.uid ?? createICalendarUID(`event-${source.series}-${source.title}`),
+            sequence: source.ical?.revision ?? 0,
+            title: source.ical?.title ?? source.title,
+            description: source.ical?.description ?? createICalendarDescription(source.description, page_url) /* TODO: Create generated description */,
+            location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
+            url: source.ical?.url,
+          };
+        }
       },
     },
   };
@@ -597,14 +728,14 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allExternalJson {
+      allRedirectsExternalJson {
         redirects: nodes {
           id
           src
           dst
         }
       }
-      allInternalJson {
+      allRedirectsInternalJson {
         redirects: nodes {
           id
           src
@@ -630,7 +761,7 @@ exports.createPages = async ({ graphql, actions }) => {
   );
 
   // Generate external redirects
-  const redirects_external = result.data.allExternalJson.redirects;
+  const redirects_external = result.data.allRedirectsExternalJson.redirects;
   if (redirects_external.length > 0) {
     redirects_external.forEach((redirect) => {
       createPage({
@@ -645,7 +776,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Generate internal redirects
-  const redirects_internal = result.data.allInternalJson.redirects;
+  const redirects_internal = result.data.allRedirectsInternalJson.redirects;
   if (redirects_internal.length > 0) {
     redirects_internal.forEach((redirect) => {
       // Generate server side redirects for internal routes
@@ -740,4 +871,74 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     });
   }
+};
+
+// Export calendar items to ICS file
+exports.onPostBuild = ({ graphql, reporter }) => {
+  const toDateArray = (date: string): ics.DateArray => {
+    const date_obj = dayjs.utc(date);
+    return [
+      date_obj.year(),
+      date_obj.month() + 1,
+      date_obj.date(),
+      date_obj.hour(),
+      date_obj.minute()
+    ];
+  };
+  // Get all ICalendarEvents from GraphQL
+  return graphql(`
+    query CreateICS {
+      allICalendarEvent(sort: {time_start: DESC}) {
+        nodes {
+          ical {
+            uid
+            sequence
+            title
+            description
+            location
+            url
+          }
+          time_start
+          time_close
+        }
+      }
+    }
+  `).then((result) => {
+    if (result.errors) {
+      result.errors.forEach((e) => reporter.error(e.toString()));
+      return;
+    }
+    const ical_events = result.data.allICalendarEvent.nodes;
+    if (ical_events.length > 0) {
+      // Generate ICS file
+      ics.createEvents(
+        // TODO: calName, X-APPLE-STRUCTURED-LOCATION
+        ical_events.map((event) => {
+          const ics_event: ics.EventAttributes = {
+            uid: event.ical.uid,
+            start: toDateArray(event.time_start),
+            startInputType: "utc",
+            startOutputType: "utc",
+            end: toDateArray(event.time_close),
+            endInputType: "utc",
+            endOutputType: "utc",
+            title: event.ical.title ?? undefined,
+            description: event.ical.description ?? undefined,
+            location: event.ical.location ?? undefined,
+            url: event.ical.url ?? undefined,
+          };
+          return ics_event;
+        }),
+        (error, value) => {
+          if (error) {
+            reporter.error(error);
+            return;
+          }
+          // Write ICS file to public directory
+          const ics_path = path.join(__dirname, "public", "calendar.ics");
+          fs.writeFileSync(ics_path, value);
+        }
+      );
+    }
+  });
 };

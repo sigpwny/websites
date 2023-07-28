@@ -1,10 +1,31 @@
 ---
 title: UIUCTF 2023
 series: uiuctf
-description: UIUCTF 2023 was led by Pete alongside a team of 17. The theme was Windows 95.
+description: |
+  UIUCTF 2023 was themed after Windows 95 and featured a fully interactive
+  desktop environment as the CTFd theme.
 time_start: 2023-07-01T00:15:00.000Z
 time_close: 2023-07-03T00:15:00.000Z
 timezone: Etc/UTC
+credit:
+  - Anakin Dey
+  - Ankur Sundara
+  - Anusha Ghosh
+  - David An
+  - Ellie Popoca
+  - Emma Hartman
+  - George Huebner
+  - Hassam Uddin
+  - Husnain Raza
+  - Joseph Ravichandran
+  - kuilin
+  - Minh Duong
+  - Nitya Sunkad
+  - Pete Stenger
+  - Pomona Carrington-Hoekstra
+  - Richard Liu
+  - Sam Ruggerio
+  - YiFei Zhu
 location: Online
 background_image:
   path: windows-95-clouds.jpg
