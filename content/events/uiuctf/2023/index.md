@@ -1,9 +1,7 @@
 ---
 title: UIUCTF 2023
 series: uiuctf
-description: |
-  UIUCTF 2023 was themed after Windows 95 and featured a fully interactive
-  desktop environment as the CTFd theme.
+description: UIUCTF 2023 was themed after Windows 95 and featured a fully interactive desktop environment as the CTFd theme.
 time_start: 2023-07-01T00:15:00.000Z
 time_close: 2023-07-03T00:15:00.000Z
 timezone: Etc/UTC

@@ -1,8 +1,7 @@
 ---
 title: UIUCTF 2020
 series: uiuctf
-description: |
-  UIUCTF 2020 was the first UIUCTF of the new SIGPwny club model. The theme was Animal Crossing!
+description: UIUCTF 2020 was the first UIUCTF of the new SIGPwny club model. The theme was Animal Crossing!
 time_start: 2020-07-18T00:00:00.000Z
 time_close: 2020-07-20T02:00:00.000Z
 timezone: Etc/UTC
