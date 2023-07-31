@@ -12,7 +12,6 @@ tags:
 - ctfd
 - b01lers
 - legendary
-time_close: ''
 time_start: 2020-01-30T18:00:00.000000-06:00
 title: Introduction (feat. Purdue) [LEGENDARY]
 week_number: 1

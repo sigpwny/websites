@@ -12,7 +12,6 @@ tags:
 - cameras
 - cctv
 - safe cracking
-time_close: ''
 time_start: 2021-10-21T18:00:00.000000-05:00
 title: Physical Security (Lockpicking)
 week_number: 8

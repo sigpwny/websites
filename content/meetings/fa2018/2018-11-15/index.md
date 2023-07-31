@@ -10,7 +10,6 @@ tags:
 - misc
 - opsec
 - intro
-time_close: ''
 time_start: 2018-11-15T18:00:00.000000Z
 title: Intro to OpSec
 week_number: 11

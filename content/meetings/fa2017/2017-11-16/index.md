@@ -8,7 +8,6 @@ tags:
 - pwn
 - stack exploitation
 - dynamic analysis
-time_close: ''
 time_start: 2017-11-16T18:00:00.000000-06:00
 title: Modern Binary Exploitation
 week_number: 11

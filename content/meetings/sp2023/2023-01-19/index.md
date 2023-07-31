@@ -1,7 +1,6 @@
 ---
 title: Welcome Back
 time_start: 2023-01-19T18:00:00-06:00
-time_close: ""
 week_number: 0
 credit:
   - SIGPwny

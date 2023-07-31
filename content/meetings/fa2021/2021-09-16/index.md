@@ -11,7 +11,6 @@ tags:
 - sqli
 - javascript
 - xss
-time_close: ''
 time_start: 2021-09-16T18:00:00.000000-05:00
 title: Web Hacking II
 week_number: 3

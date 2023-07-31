@@ -1,7 +1,6 @@
 ---
 title: Pentesting I
 time_start: 2023-02-16T18:00:00.000-06:00
-time_close: ""
 week_number: 4
 credit:
   - Minh Duong

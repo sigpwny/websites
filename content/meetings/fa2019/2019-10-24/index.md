@@ -8,7 +8,6 @@ slides: recursive.pdf
 tags:
 - misc
 - involvement 
-time_close: ''
 time_start: 2019-10-24T18:00:00.000000-05:00
 title: Recursive Meeting
 week_number: 8

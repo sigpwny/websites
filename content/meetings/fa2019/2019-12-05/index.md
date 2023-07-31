@@ -8,7 +8,6 @@ tags:
 - misc
 - social
 - defcon 
-time_close: ''
 time_start: 2019-12-05T18:00:00.000000-06:00
 title: DEF CON Talk Watch Party
 week_number: 14

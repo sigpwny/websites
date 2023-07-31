@@ -12,7 +12,6 @@ tags:
 - tcpdump
 - wireshark
 - aircrack-ng
-time_close: ''
 time_start: 2021-11-14T14:00:00.000000-06:00
 title: Wireless Security
 week_number: 11

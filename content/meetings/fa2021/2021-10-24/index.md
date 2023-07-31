@@ -10,7 +10,6 @@ tags:
 - iot
 - botnet
 - rickroll
-time_close: ''
 time_start: 2021-10-24T14:00:00.000000-05:00
 title: The Big Rick
 week_number: 8

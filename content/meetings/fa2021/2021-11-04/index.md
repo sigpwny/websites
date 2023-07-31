@@ -12,7 +12,6 @@ tags:
 - social media
 - sherlock
 - maltego
-time_close: ''
 time_start: 2021-11-04T18:00:00.000000-05:00
 title: OSINT I
 week_number: 10

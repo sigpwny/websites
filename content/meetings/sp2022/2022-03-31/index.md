@@ -1,7 +1,6 @@
 ---
 title: UIUC Technology Services Cybersecurity AMA
 time_start: 2022-03-31T18:00:00.000000-05:00
-time_close: ""
 week_number: 10
 credit:
   - UIUC Technology Services

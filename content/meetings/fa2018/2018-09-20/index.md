@@ -9,7 +9,6 @@ tags:
 - setup
 - shell
 - unix
-time_close: ''
 time_start: 2018-09-20T18:00:00.000000Z
 title: Intro to Unix and CLI
 week_number: 3

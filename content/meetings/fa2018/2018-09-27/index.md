@@ -11,7 +11,6 @@ tags:
 - buffer overflow
 - gdb
 - pwntools
-time_close: ''
 time_start: 2018-09-27T18:00:00.000000Z
 title: Intro to PWN
 week_number: 4

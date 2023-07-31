@@ -1,7 +1,6 @@
 ---
 title: Network and Security Research Group (NSRG)
 time_start: 2022-04-03T14:00:00.000000-05:00
-time_close: ""
 week_number: 10
 credit:
   - Max Bland

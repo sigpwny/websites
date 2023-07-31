@@ -92,6 +92,9 @@ Here is an ordered list:
 	2. Subitem 4
 ```
 
+Here is an [internal link](/meetings/). Here is an [external link](https://google.com/).
+Here is the [external link to the internal link](https://sigpwny.com/meetings/).
+
 Dramatic...
 ***
 thematic break!

@@ -1,7 +1,6 @@
 ---
 title: Setup
 time_start: 2023-01-29T14:00:00.000-06:00
-time_close: ""
 week_number: 1
 credit:
   - Pete Stenger

@@ -14,7 +14,6 @@ tags:
 - foremost
 - wireshark
 - stegsolve
-time_close: ''
 time_start: 2019-10-31T18:00:00.000000-05:00
 title: Intro to Forensics
 week_number: 9

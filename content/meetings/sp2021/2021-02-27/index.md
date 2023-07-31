@@ -10,7 +10,6 @@ tags:
 - paper
 - smart contract
 - cryptocurrency
-time_close: ''
 time_start: 2021-02-27T18:00:00.000000-06:00
 title: Ethereum Security (Paper Reading)
 week_number: 4

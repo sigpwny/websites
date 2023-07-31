@@ -1,11 +1,36 @@
 ---
 title: UIUCTF 2021
 series: uiuctf
-description: UIUCTF 2021 was organized by a team of 30 led by Thomas. The theme
-  did not have a name, but the vibe was Futuristic Art Deco / Roaring 20s.
+description: UIUCTF 2021's theme was "Futuristic Art Deco" and "Roaring 20's."
 time_start: 2021-07-31T00:00:00.000Z
 time_close: 2021-08-02T00:00:00.000Z
 timezone: Etc/UTC
+credit:
+  - Akshunna Vaishnav
+  - Anakin Dey
+  - Ankur Sundara
+  - Anusha Ghosh
+  - Chris Kauchak
+  - Daniel Wang
+  - Dhruv Baronia
+  - Dillon Korman
+  - Faisal Khalid
+  - Hassam Uddin
+  - Husnain Raza
+  - Ian Klatzco
+  - Joseph Ravichandran
+  - Kevin Higgs
+  - kuilin
+  - Michael Chang
+  - Minh Duong
+  - Nathan Farlow
+  - Nicholas Husin
+  - Pete Stenger
+  - Pranav Goel
+  - Rohan Sreenivasan
+  - Sam Sharps
+  - Thomas Quig
+  - YiFei Zhu
 location: Online
 # background_image:
 #   path: uiuctf-2021-cover-cropped.png

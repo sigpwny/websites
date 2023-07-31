@@ -1,7 +1,6 @@
 ---
 title: Setup
 time_start: 2022-09-04T14:00:00-05:00
-time_close: ""
 week_number: 1
 credit:
   - Nathan Farlow

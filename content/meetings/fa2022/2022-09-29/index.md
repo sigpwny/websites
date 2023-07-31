@@ -1,7 +1,6 @@
 ---
 title: OSINT I
 time_start: 2022-09-29T18:00:00-05:00
-time_close: ""
 week_number: 5
 credit:
   - Thomas Quig

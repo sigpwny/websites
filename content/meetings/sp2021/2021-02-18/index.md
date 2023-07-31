@@ -16,7 +16,6 @@ tags:
 - double free
 - fastbins
 - in-depth
-time_close: ''
 time_start: 2021-02-18T18:00:00.000000-06:00
 title: Heap Exploitation II and III, Show and Tell
 week_number: 3

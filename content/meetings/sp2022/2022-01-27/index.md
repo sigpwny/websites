@@ -1,7 +1,6 @@
 ---
 title: ROP (Return Oriented Programming)
 time_start: 2022-01-27T18:00:00.000000-06:00
-time_close: ""
 week_number: 1
 credit:
   - Nathan Farlow

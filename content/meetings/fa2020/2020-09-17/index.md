@@ -14,7 +14,6 @@ tags:
 - shell
 - terminal
 - in-depth
-time_close: ''
 time_start: 2020-09-17T18:00:00.000000-05:00
 title: Tutorial
 week_number: 3

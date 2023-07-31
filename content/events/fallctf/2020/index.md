@@ -1,9 +1,11 @@
 ---
 title: Fall CTF 2020
 series: fallctf
-description: Fall CTF 2020 was held entirely online due to COVID-19. It was organized by Ravi.
+description: Fall CTF 2020 was held entirely online due to COVID-19.
 time_start: 2020-10-03T13:00:00.000-05:00
 time_close: 2020-10-03T18:00:00.000-05:00
+credit:
+  - SIGPwny
 location: Online
 background_image:
   path: fallctf-2020-cover.jpg

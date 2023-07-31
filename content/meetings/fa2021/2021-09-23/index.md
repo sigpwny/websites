@@ -21,7 +21,6 @@ tags:
 - aes
 - dhke
 - rsa
-time_close: ''
 time_start: 2021-09-23T18:00:00.000000-05:00
 title: Crypto I
 week_number: 4

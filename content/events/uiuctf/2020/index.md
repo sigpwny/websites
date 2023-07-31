@@ -1,11 +1,26 @@
 ---
 title: UIUCTF 2020
 series: uiuctf
-description: UIUCTF 2020 was the first UIUCTF of the new SIGPwny club model, and
-  was organized by a team of 13 led by Thomas.  The theme was Animal Crossing.
+description: UIUCTF 2020 was the first UIUCTF of the new SIGPwny club model. The theme was Animal Crossing!
 time_start: 2020-07-18T00:00:00.000Z
 time_close: 2020-07-20T02:00:00.000Z
 timezone: Etc/UTC
+credit:
+  - Ankur Sundara
+  - Chris Kauchak
+  - Dillon Korman
+  - Eric Huber
+  - Grace Robbins
+  - Husnain Raza
+  - Ian Klatzco
+  - Jesse Wang
+  - Joseph Ravichandran
+  - kuilin
+  - Nathan Farlow
+  - Nicholas Husin
+  - Pranav Goel
+  - Sam Sharps
+  - Thomas Quig
 location: Online
 background_image:
   path: acnh.jpg

@@ -17,7 +17,6 @@ tags:
 - discrete logs
 - ecc
 - ecdh
-time_close: ''
 time_start: 2021-09-26T14:00:00.000000-05:00
 title: Crypto II
 week_number: 4

@@ -7,7 +7,6 @@ slides: intro_meeting.pdf
 tags:
 - welcome
 - intro
-time_close: ''
 time_start: 2018-09-06T18:00:00.000000Z
 title: Introduction
 week_number: 1

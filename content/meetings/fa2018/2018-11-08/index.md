@@ -9,7 +9,6 @@ tags:
 - rev
 - format strings
 - printf
-time_close: ''
 time_start: 2018-11-08T18:00:00.000000Z
 title: Format String Vulnerabilities
 week_number: 10

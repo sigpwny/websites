@@ -15,7 +15,6 @@ tags:
 - rsa
 - cyberchef
 - pycrypto
-time_close: ''
 time_start: 2021-03-11T18:00:00.000000-06:00
 title: Basics of Cryptography
 week_number: 6

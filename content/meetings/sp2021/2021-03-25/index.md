@@ -8,7 +8,6 @@ slides: ''
 tags:
 - pwn
 - social
-time_close: ''
 time_start: 2021-03-25T18:00:00.000000-06:00
 title: Pwny Racing
 week_number: 8

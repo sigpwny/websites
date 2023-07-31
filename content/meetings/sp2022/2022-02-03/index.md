@@ -1,7 +1,6 @@
 ---
 title: Format Strings
 time_start: 2022-02-03T18:00:00.000000-06:00
-time_close: ""
 week_number: 2
 credit:
   - Nathan Farlow

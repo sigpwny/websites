@@ -1,7 +1,6 @@
 ---
 title: Password Cracking
 time_start: 2023-04-06T18:00:00.000-05:00
-time_close: ""
 week_number: 11
 credit:
  - Minh Duong

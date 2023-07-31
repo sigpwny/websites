@@ -9,7 +9,6 @@ tags:
 - pwn
 - rev
 - dynamorio
-time_close: ''
 time_start: 2019-03-13T19:00:00.000000-05:00
 title: DynamoRIO
 week_number: 8

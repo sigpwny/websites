@@ -11,7 +11,6 @@ tags:
 - intro
 - setup
 - unix
-time_close: ''
 time_start: 2021-09-05T14:00:00.000000-05:00
 title: Terminal
 week_number: 1

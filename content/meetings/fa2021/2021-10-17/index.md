@@ -15,7 +15,6 @@ tags:
 - GOT/PLT
 - RELRO
 - stack canary
-time_close: ''
 time_start: 2021-10-17T14:00:00.000000-05:00
 title: PWN II
 week_number: 7

@@ -10,7 +10,6 @@ tags:
 - setup
 - terminal
 - wsl
-time_close: ''
 time_start: 2021-08-29T14:00:00.000000-05:00
 title: Setup
 week_number: 0

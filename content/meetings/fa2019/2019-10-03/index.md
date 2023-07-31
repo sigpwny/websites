@@ -11,7 +11,6 @@ tags:
 - r2
 - tmux
 - vim
-time_close: ''
 time_start: 2019-10-03T18:00:00.000000-05:00
 title: CLI Tools (R2, tmux, vim)
 week_number: 5

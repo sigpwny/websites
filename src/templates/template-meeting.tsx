@@ -13,21 +13,21 @@ interface Props {
 }
 
 export const Head = ({ data }: Props) => {
-  const { curr } = data
-  if (!curr) {
-    throw new Error(`invalid argument: "curr" meeting is undefined`)
+  const { meeting } = data
+  if (!meeting) {
+    throw new Error(`invalid argument: "meeting" is undefined`)
   }
   return (
     <Seo
-      title={curr.title}
-      description={curr.semester + " Week " + weekNumber(curr.week_number) +
-        " • " + convertDate(curr.time_start, "MMMM DD, YYYY", curr.timezone)
+      title={meeting.title}
+      description={meeting.semester + " Week " + weekNumber(meeting.week_number) +
+        " • " + convertDate(meeting.time_start, "MMMM DD, YYYY", meeting.timezone)
       }
-      image={curr.image?.path ? (
-        curr.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
+      image={meeting.image?.path ? (
+        meeting.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
       ) : undefined}
-      video={curr.recording ? (
-        getYouTubeEmbedUrl(curr.recording)
+      video={meeting.recording ? (
+        getYouTubeEmbedUrl(meeting.recording)
       ) : undefined}
       type="article"
     />
@@ -35,9 +35,9 @@ export const Head = ({ data }: Props) => {
 }
 
 const MeetingTemplate = ({ data, children }: Props) => {
-  const { curr, prev, next } = data
-  if (!curr) {
-    throw new Error(`invalid argument: "curr" meeting is undefined`)
+  const { meeting } = data
+  if (!meeting) {
+    throw new Error(`invalid argument: "meeting" is undefined`)
   }
 
   const [numPages, setNumPages] = useState(1)
@@ -48,20 +48,20 @@ const MeetingTemplate = ({ data, children }: Props) => {
       <article className="panel w-full grow" itemScope itemType="http://schema.org/Article">
         <header>
           <p className="font-mono m-0">
-            {curr.semester} Week {weekNumber(curr.week_number)} &bull; <time>{convertDate(curr.time_start, "MMMM DD, YYYY", curr.timezone)}</time>
+            {meeting.semester} Week {weekNumber(meeting.week_number)} &bull; <time>{convertDate(meeting.time_start, "MMMM DD, YYYY", meeting.timezone)}</time>
           </p>
-          <h1 className="mb-1" itemProp="headline">{curr.title}</h1>
+          <h1 className="mb-1" itemProp="headline">{meeting.title}</h1>
           <p>
             Presented by:&nbsp;
             <span rel="author" itemProp="author">
-              {curr.credit.length > 0 ? curr.credit.join(', ') : "SIGPwny" }
+              {meeting.credit.length > 0 ? meeting.credit.join(', ') : "SIGPwny" }
             </span>
           </p>
         </header>
         <div className="grid sm:flex sm:flex-row gap-2 mb-4">
-          {curr.recording ? (
+          {meeting.recording ? (
             <a
-              href={curr.recording}
+              href={meeting.recording}
               className="btn-primary"
               target="_blank" rel="noopener noreferrer"
             >
@@ -71,9 +71,9 @@ const MeetingTemplate = ({ data, children }: Props) => {
               </p>
             </a>
           ) : null}
-          {curr.slides?.publicURL ? (
+          {meeting.slides?.publicURL ? (
             <a
-              href={curr.slides.publicURL}
+              href={meeting.slides.publicURL}
               className="btn-primary"
             >
               <PdfSvg />
@@ -83,12 +83,12 @@ const MeetingTemplate = ({ data, children }: Props) => {
             </a>
           ) : null}
         </div>
-        {curr.recording && (
+        {meeting.recording && (
           (() => {
-            const url = getYouTubeEmbedUrl(curr.recording)
+            const url = getYouTubeEmbedUrl(meeting.recording)
             return url ? (
               <iframe
-                title={curr.title + " video"}
+                title={meeting.title + " video"}
                 className="bg-surface-000 w-full max-w-2xl aspect-video mx-auto mb-4"
                 allow="encrypted-media; fullscreen; picture-in-picture"
                 allowFullScreen={true}
@@ -98,10 +98,10 @@ const MeetingTemplate = ({ data, children }: Props) => {
             ) : null
           })()
         )}
-        {curr.slides?.publicURL && !curr.recording && (
+        {meeting.slides?.publicURL && !meeting.recording && (
           <div className="flex flex-col items-center">
             <Document
-              className="flex flex-col" file={curr.slides.publicURL} 
+              className="flex flex-col" file={meeting.slides.publicURL} 
               onLoadError={console.error} 
               onLoadSuccess={({ numPages }) => setNumPages(numPages)}
             >
@@ -141,12 +141,8 @@ const MeetingTemplate = ({ data, children }: Props) => {
 export default MeetingTemplate
 
 export const query = graphql`
-  query MeetingTemplate(
-    $id: String!
-    $prev_id: String
-    $next_id: String
-  ) {
-    curr: meeting(id: { eq: $id }) {
+  query MeetingTemplate($id: String!) {
+    meeting(id: { eq: $id }) {
       title
       time_start
       time_close
@@ -167,14 +163,6 @@ export const query = graphql`
         base
         publicURL
       }
-    }
-    prev: meeting(id: { eq: $prev_id }) {
-      title
-      slug
-    }
-    next: meeting(id: { eq: $next_id }) {
-      title
-      slug
     }
   }
 `
