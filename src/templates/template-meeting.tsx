@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { Link, graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { Document, Page } from 'react-pdf'
-import MeetingSidebar from "../components/MeetingSidebar"
 import Seo from "../components/Seo"
 import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util"
 import { LeftSvg, PdfSvg, RightSvg, YouTubeSvg } from "../components/Icons"
