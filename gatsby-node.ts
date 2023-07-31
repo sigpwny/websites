@@ -855,9 +855,10 @@ exports.onPostBuild = ({ graphql, reporter }) => {
     const ical_events = result.data.allICalendarEvent.nodes;
     if (ical_events.length > 0) {
       // Generate ICS file
-      const calendar_file = ical({ name: site_name });
+      const full_ics_path = path.join("public", "calendar", "full.ics");
+      const full_ics = ical({ name: site_name });
       ical_events.forEach((event) => {
-        calendar_file.createEvent({
+        full_ics.createEvent({
           id: event.ical.uid,
           sequence: event.ical.sequence,
           start: dayjs.utc(event.time_start),
@@ -868,8 +869,7 @@ exports.onPostBuild = ({ graphql, reporter }) => {
           url: event.ical.url ?? undefined,
         });
       });
-      const ics_path = path.join("public", "calendar", "full.ics");
-      fs.outputFileSync(ics_path, calendar_file.toString());
+      fs.outputFileSync(full_ics_path, full_ics.toString());
     }
   });
 };
