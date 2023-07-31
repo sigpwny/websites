@@ -4,7 +4,6 @@ import ical, { ICalLocation } from "ical-generator";
 import path from "path";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import * as ics from "ics";
 import { calculateSemester } from "./src/utils/util";
 import config from "./gatsby-config";
 import * as locations_json from "./content/json/locations.json";
@@ -65,15 +64,6 @@ function createSlug(base_dir: string, file_node: any, slug?: string) {
   }
   return slug;
 }
-
-// const content_type_icalendar_event_data = [
-//   { name: "uid" },
-//   { name: "sequence" },
-//   { name: "title" },
-//   { name: "description" },
-//   { name: "location" },
-//   { name: "url" },
-// ]
 
 const content_node_types: ContentNode[] = [
   {
@@ -662,11 +652,6 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
             sequence: source.ical?.revision ?? 0,
             title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, page_url, video_url),
-            // location: {
-            //   title: ,
-            //   address:  ?? createICalendarLocation(source.location, locations_json), // TODO: Fix location type
-            //   geo: ,
-            // },
             location: createICalendarLocation(source.location, locations_json),
             url: video_url,
           };
@@ -770,14 +755,14 @@ exports.createPages = async ({ graphql, actions }) => {
           ? redirect.src.slice(0, -1)
           : redirect.src,
         toPath: redirect.dst,
-        statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
+        statusCode: redirect.code ? redirect.code : 301,
       });
       createRedirect({
         fromPath: redirect.src.endsWith("/")
           ? redirect.src
           : redirect.src + "/",
         toPath: redirect.dst,
-        statusCode: redirect.code ? redirect.code : 301, // use permanent redirect by default
+        statusCode: redirect.code ? redirect.code : 301,
       });
     });
   }
@@ -815,9 +800,7 @@ exports.createPages = async ({ graphql, actions }) => {
         template = template_page_md;
         break;
       default:
-        // throw new Error(`Unknown templated page type: ${page.__typename}`);
-        console.warn(`Unknown templated page type: ${page.__typename}`)
-        return;
+        throw new Error(`Unknown templated page type: ${page.__typename}`);
     }
     createPage({
       path: page.slug,
@@ -833,7 +816,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
 // Export calendar items to ICS file
 exports.onPostBuild = ({ graphql, reporter }) => {
-  // Get all ICalendarEvents from GraphQL
   return graphql(`
     query CreateICS {
       allICalendarEvent(sort: {time_start: DESC}) {
@@ -873,7 +855,7 @@ exports.onPostBuild = ({ graphql, reporter }) => {
     const ical_events = result.data.allICalendarEvent.nodes;
     if (ical_events.length > 0) {
       // Generate ICS file
-      const calendar_file = ical({ name: "SIGPwny" });
+      const calendar_file = ical({ name: site_name });
       ical_events.forEach((event) => {
         console.log(event.ical.location)
         calendar_file.createEvent({
@@ -887,38 +869,8 @@ exports.onPostBuild = ({ graphql, reporter }) => {
           url: event.ical.url ?? undefined,
         });
       });
-      const ics_path = path.join(__dirname, "public", "calendar2.ics");
+      const ics_path = path.join(__dirname, "public", "calendar.ics");
       fs.writeFileSync(ics_path, calendar_file.toString());
-      // // Generate ICS file
-      // ics.createEvents(
-      //   // TODO: calName, X-APPLE-STRUCTURED-LOCATION
-      //   ical_events.map((event) => {
-      //     const ics_event: ics.EventAttributes = {
-      //       uid: event.ical.uid,
-      //       calName: site_name,
-      //       start: ics.convertTimestampToArray(event.time_start, "utc"),
-      //       startInputType: "utc",
-      //       startOutputType: "utc",
-      //       end: ics.convertTimestampToArray(event.time_close, "utc"),
-      //       endInputType: "utc",
-      //       endOutputType: "utc",
-      //       title: event.ical.title ?? undefined,
-      //       description: event.ical.description ?? undefined,
-      //       location: event.ical.location ?? undefined,
-      //       url: event.ical.url ?? undefined,
-      //     };
-      //     return ics_event;
-      //   }),
-      //   (error, value) => {
-      //     if (error) {
-      //       reporter.error(error);
-      //       return;
-      //     }
-      //     // Write ICS file to public directory
-      //     const ics_path = path.join(__dirname, "public", "calendar.ics");
-      //     fs.writeFileSync(ics_path, value);
-      //   }
-      // );
     }
   });
 };
