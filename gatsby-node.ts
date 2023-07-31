@@ -4,6 +4,7 @@ import ical, { ICalLocation } from "ical-generator";
 import path from "path";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { Node } from "gatsby";
 import { calculateSemester } from "./src/utils/util";
 import config from "./gatsby-config";
 import * as locations_json from "./content/json/locations.json";
@@ -14,14 +15,12 @@ interface Field {
   name: string;
   required?: boolean;
   fields?: Field[];
-}
+};
 
-// TODO: Fix types
 interface ResolverParams {
-  node: any;
-  file_node: any;
-  reporter: any;
-}
+  node: Node;
+  file_node: Node;
+};
 
 interface ContentNode {
   type: string;
@@ -31,7 +30,7 @@ interface ContentNode {
     name: string;
     resolve: (ResolverParams) => any;
   }[];
-}
+};
 
 // https://github.com/react-pdf-viewer/react-pdf-viewer/issues/497#issuecomment-812905172
 // https://github.com/wojtekmaj/react-pdf/issues/874#issuecomment-1539023628
@@ -71,7 +70,7 @@ const content_node_types: ContentNode[] = [
     gatsbySourceInstanceName: "meetings",
     fields: [
       { name: "title", required: true },
-      { name: "ical" }, // TODO: Verify that simple assignment works
+      { name: "ical" },
       { name: "time_start", required: true },
       { name: "week_number", required: true },
       { name: "credit", required: true },
@@ -94,11 +93,11 @@ const content_node_types: ContentNode[] = [
     computedFields: [
       {
         name: "semester",
-        resolve: ({ node, file_node, reporter }) => {
+        resolve: ({ node, file_node }) => {
           const semester = calculateSemester(node.frontmatter.time_start);
           const semester_from_path = file_node.relativePath.split("/")[0];
           if (semester.toLowerCase() != semester_from_path.toLowerCase()) {
-            reporter.warn(
+            console.warn(
               `Calculated semester "${semester}" does not match directory "${semester_from_path}" for ${file_node.absolutePath}`
             );
           }
@@ -111,12 +110,12 @@ const content_node_types: ContentNode[] = [
       },
       {
         name: "time_close",
-        resolve: ({ node, file_node, reporter }) => {
+        resolve: ({ node, file_node }) => {
           if (node.frontmatter.time_close && dayjs(node.frontmatter.time_close).isValid()) {
             if (dayjs(node.frontmatter.time_close).isAfter(dayjs(node.frontmatter.time_start))) {
               return node.frontmatter.time_close;
             } else {
-              reporter.warn(`${file_node.relativePath}: time_close is before time_start, using default duration`);
+              console.warn(`${file_node.relativePath}: time_close is before time_start, using default duration`);
             }
           }
           // If time_close is not set, use time_start + 1 hour
@@ -166,12 +165,12 @@ const content_node_types: ContentNode[] = [
       },
       {
         name: "time_close",
-        resolve: ({ node, file_node, reporter }) => {
+        resolve: ({ node, file_node }) => {
           if (node.frontmatter.time_close && dayjs(node.frontmatter.time_close).isValid()) {
             if (dayjs(node.frontmatter.time_close).isAfter(dayjs(node.frontmatter.time_start))) {
               return node.frontmatter.time_close;
             } else {
-              reporter.warn(`${file_node.relativePath}: time_close is before time_start, using default duration`);
+              console.warn(`${file_node.relativePath}: time_close is before time_start, using default duration`);
             }
           }
           // If time_close is not set, use time_start + 1 hour
@@ -330,8 +329,7 @@ exports.onCreateNode = ({
   actions,
   getNode,
   createNodeId,
-  createContentDigest,
-  reporter
+  createContentDigest
 }) => {
   const { createNode, createParentChildLink } = actions;
   if (node.internal.type === "Mdx") {
@@ -396,7 +394,7 @@ exports.onCreateNode = ({
       // Add fields that need to be resolved/computed
       ...(computedFields &&
         computedFields.reduce((acc, field) => {
-          acc[field.name] = field.resolve({ node, file_node, reporter });
+          acc[field.name] = field.resolve({ node, file_node });
           return acc;
         }, {})),
     };
@@ -594,7 +592,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
 exports.createResolvers = ({ createResolvers }) => {
   const createICalendarUID = (uniq_id: string) => {
     const hash = crypto.createHash("sha256").update(uniq_id).digest("hex");
-    return `${hash}@sigpwny.com`; // TODO: Programmatically get domain
+    return `${hash}@sigpwny.com`;
   }
   const createICalendarDescription = (
     description: string,
@@ -821,7 +819,7 @@ exports.createPages = async ({ graphql, actions }) => {
 };
 
 // Export calendar items to ICS file
-exports.onPostBuild = ({ graphql, reporter }) => {
+exports.onPostBuild = ({ graphql }) => {
   return graphql(`
     query CreateICS {
       allICalendarEvent(sort: {time_start: DESC}) {
@@ -854,7 +852,7 @@ exports.onPostBuild = ({ graphql, reporter }) => {
     }
   `).then((result) => {
     if (result.errors) {
-      result.errors.forEach((e) => reporter.error(e.toString()));
+      result.errors.forEach((e) => console.error(e.toString()));
       return;
     }
     const site_name = result.data.site.siteMetadata.title;
