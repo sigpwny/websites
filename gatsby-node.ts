@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import fs from "fs";
+import fs from "fs-extra";
 import ical, { ICalLocation } from "ical-generator";
 import path from "path";
 import dayjs from "dayjs";
@@ -857,7 +857,6 @@ exports.onPostBuild = ({ graphql, reporter }) => {
       // Generate ICS file
       const calendar_file = ical({ name: site_name });
       ical_events.forEach((event) => {
-        console.log(event.ical.location)
         calendar_file.createEvent({
           id: event.ical.uid,
           sequence: event.ical.sequence,
@@ -869,8 +868,8 @@ exports.onPostBuild = ({ graphql, reporter }) => {
           url: event.ical.url ?? undefined,
         });
       });
-      const ics_path = path.join(__dirname, "public", "calendar.ics");
-      fs.writeFileSync(ics_path, calendar_file.toString());
+      const ics_path = path.join("public", "calendar", "full.ics");
+      fs.outputFileSync(ics_path, calendar_file.toString());
     }
   });
 };
