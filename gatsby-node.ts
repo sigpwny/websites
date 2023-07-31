@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import fs from "fs";
+import ical, { ICalLocation } from "ical-generator";
 import path from "path";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -457,8 +458,20 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       sequence: Int!
       title: String!
       description: String
-      location: String
+      location: ICalendarLocationData
       url: String
+    }
+
+    type ICalendarLocationData {
+      title: String
+      address: String
+      radius: Float
+      geo: ICalendarGeoData
+    }
+
+    type ICalendarGeoData {
+      lat: Float!
+      lon: Float!
     }
 
     interface ICalendarEvent implements Node @dontInfer {
@@ -600,11 +613,23 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
     return `${str_page_url}${str_description}${str_video_url}`.trim();
   }
   const createICalendarLocation = (init_loc: string, locations: any[]) => {
-    return init_loc
-      ? locations.find((location) =>
-          location.matches.some((match) => new RegExp(match).test(init_loc))
-        )?.address ?? init_loc
-      : undefined;
+    if (!init_loc) return undefined;
+    if (locations.length !== 0) {
+      const full_loc = locations.find((location) =>
+        location.matches.some((match) => new RegExp(match).test(init_loc))
+      );
+      if (full_loc) {
+        return {
+          title: full_loc.title,
+          address: full_loc.address,
+          radius: full_loc.radius ?? 100.0,
+          geo: full_loc.geo,
+        } as ICalLocation;
+      }
+    }
+    return {
+      title: init_loc
+    } as ICalLocation;
   }
 
   const resolvers = {
@@ -637,7 +662,12 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
             sequence: source.ical?.revision ?? 0,
             title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, page_url, video_url),
-            location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
+            // location: {
+            //   title: ,
+            //   address:  ?? createICalendarLocation(source.location, locations_json), // TODO: Fix location type
+            //   geo: ,
+            // },
+            location: createICalendarLocation(source.location, locations_json),
             url: video_url,
           };
           return ical_event_data;
@@ -813,7 +843,15 @@ exports.onPostBuild = ({ graphql, reporter }) => {
             sequence
             title
             description
-            location
+            location {
+              title
+              address
+              radius
+              geo {
+                lat
+                lon
+              }
+            }
             url
           }
           time_start
@@ -835,35 +873,52 @@ exports.onPostBuild = ({ graphql, reporter }) => {
     const ical_events = result.data.allICalendarEvent.nodes;
     if (ical_events.length > 0) {
       // Generate ICS file
-      ics.createEvents(
-        // TODO: calName, X-APPLE-STRUCTURED-LOCATION
-        ical_events.map((event) => {
-          const ics_event: ics.EventAttributes = {
-            uid: event.ical.uid,
-            calName: site_name,
-            start: ics.convertTimestampToArray(event.time_start, "utc"),
-            startInputType: "utc",
-            startOutputType: "utc",
-            end: ics.convertTimestampToArray(event.time_close, "utc"),
-            endInputType: "utc",
-            endOutputType: "utc",
-            title: event.ical.title ?? undefined,
-            description: event.ical.description ?? undefined,
-            location: event.ical.location ?? undefined,
-            url: event.ical.url ?? undefined,
-          };
-          return ics_event;
-        }),
-        (error, value) => {
-          if (error) {
-            reporter.error(error);
-            return;
-          }
-          // Write ICS file to public directory
-          const ics_path = path.join(__dirname, "public", "calendar.ics");
-          fs.writeFileSync(ics_path, value);
-        }
-      );
+      const calendar_file = ical({ name: "SIGPwny" });
+      ical_events.forEach((event) => {
+        console.log(event.ical.location)
+        calendar_file.createEvent({
+          id: event.ical.uid,
+          sequence: event.ical.sequence,
+          start: dayjs.utc(event.time_start),
+          end: dayjs.utc(event.time_close),
+          summary: event.ical.title ?? undefined,
+          description: event.ical.description ?? undefined,
+          location: event.ical.location as ICalLocation ?? undefined,
+          url: event.ical.url ?? undefined,
+        });
+      });
+      const ics_path = path.join(__dirname, "public", "calendar2.ics");
+      fs.writeFileSync(ics_path, calendar_file.toString());
+      // // Generate ICS file
+      // ics.createEvents(
+      //   // TODO: calName, X-APPLE-STRUCTURED-LOCATION
+      //   ical_events.map((event) => {
+      //     const ics_event: ics.EventAttributes = {
+      //       uid: event.ical.uid,
+      //       calName: site_name,
+      //       start: ics.convertTimestampToArray(event.time_start, "utc"),
+      //       startInputType: "utc",
+      //       startOutputType: "utc",
+      //       end: ics.convertTimestampToArray(event.time_close, "utc"),
+      //       endInputType: "utc",
+      //       endOutputType: "utc",
+      //       title: event.ical.title ?? undefined,
+      //       description: event.ical.description ?? undefined,
+      //       location: event.ical.location ?? undefined,
+      //       url: event.ical.url ?? undefined,
+      //     };
+      //     return ics_event;
+      //   }),
+      //   (error, value) => {
+      //     if (error) {
+      //       reporter.error(error);
+      //       return;
+      //     }
+      //     // Write ICS file to public directory
+      //     const ics_path = path.join(__dirname, "public", "calendar.ics");
+      //     fs.writeFileSync(ics_path, value);
+      //   }
+      // );
     }
   });
 };

@@ -39,6 +39,7 @@
     "gatsby-transformer-json": "^5.3.0",
     "gatsby-transformer-remark": "^6.9.0",
     "gatsby-transformer-sharp": "^5.10.0",
+    "ical-generator": "^5.0.0",
     "ics": "^3.2.0",
     "katex": "^0.13.24",
     "prismjs": "^1.29.0",
