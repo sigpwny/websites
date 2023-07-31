@@ -591,16 +591,22 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
   `);
 };
 
-exports.createResolvers = ({ createResolvers }, reporter) => {
+exports.createResolvers = ({ createResolvers }) => {
   const createICalendarUID = (uniq_id: string) => {
     const hash = crypto.createHash("sha256").update(uniq_id).digest("hex");
     return `${hash}@sigpwny.com`; // TODO: Programmatically get domain
   }
-  const createICalendarDescription = (description: string, page_url: string, video_url?: string) => {
+  const createICalendarDescription = (
+    description: string,
+    location: string,
+    page_url: string,
+    video_url?: string
+  ) => {
     const str_page_url = page_url ? `${page_url}\n\n` : "";
+    const str_location = location ? `Location: ${location}\n\n` : "";
     const str_description = description ? `${description}\n\n` : "";
     const str_video_url = video_url ? `----( Video Call )----\n${video_url}\n---===---\n\n` : "";
-    return `${str_page_url}${str_description}${str_video_url}`.trim();
+    return `${str_page_url}${str_location}${str_description}${str_video_url}`.trim();
   }
   const createICalendarLocation = (init_loc: string, locations: any[]) => {
     if (!init_loc) return undefined;
@@ -651,7 +657,7 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
             uid: source.ical?.uid ?? createICalendarUID(`meeting-${source.semester}-${source.title}`),
             sequence: source.ical?.revision ?? 0,
             title: source.ical?.title ? source.ical.title : source.title,
-            description: source.ical?.description ?? createICalendarDescription(source.description, page_url, video_url),
+            description: source.ical?.description ?? createICalendarDescription(source.description, source.location, page_url, video_url),
             location: createICalendarLocation(source.location, locations_json),
             url: undefined,
           };
@@ -668,7 +674,7 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
             uid: source.ical?.uid ?? createICalendarUID(`event-${source.series}-${source.title}`),
             sequence: source.ical?.revision ?? 0,
             title: source.ical?.title ? source.ical.title : source.title,
-            description: source.ical?.description ?? createICalendarDescription(source.description, page_url),
+            description: source.ical?.description ?? createICalendarDescription(source.description, source.location, page_url),
             location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
             url: undefined,
           };
