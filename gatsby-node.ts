@@ -653,7 +653,7 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
             title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, page_url, video_url),
             location: createICalendarLocation(source.location, locations_json),
-            url: video_url,
+            url: undefined,
           };
           return ical_event_data;
         }
@@ -670,7 +670,7 @@ exports.createResolvers = ({ createResolvers }, reporter) => {
             title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, page_url),
             location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
-            url: source.ical?.url ? source.ical.url : undefined,
+            url: undefined,
           };
         }
       },
