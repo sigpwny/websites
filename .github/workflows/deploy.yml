@@ -57,6 +57,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
           directory: ${{ env.CI_BUILD_DIR }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
