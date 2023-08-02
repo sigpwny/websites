@@ -7,9 +7,8 @@ time_close: 2020-10-03T18:00:00.000-05:00
 credit:
   - SIGPwny
 location: Online
-background_image:
-  path: fallctf-2020-cover.jpg
-  alt: Fall CTF 2020 cover image
+card_image:
+  background: fallctf-2020-cover.jpg
 links: []
 ---
 ## Schedule

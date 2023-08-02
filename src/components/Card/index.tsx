@@ -21,8 +21,7 @@ export function createCard(
     return ({
       heading: convertDate(event.time_start, "YYYY-MM-DD", timezone),
       title: event.title,
-      image: event.background_image as Image,
-      overlay_image: event.overlay_image as Image,
+      card_image: event.card_image as CardImageProps,
       link: event.slug
     })
   } else if ("publication" in content) {
@@ -38,12 +37,14 @@ export function createCard(
   throw new Error("invalid argument: content")
 }
 
-const Card = ({ heading, title, image, overlay_image, link }: CardProps) => {
+export const Card = ({ heading, title, image, overlay_image, card_image, link }: CardProps) => {
   const card_component = (
     <div className="card">
       <div className="aspect-video grid pointer-events-none">
-        {(image || overlay_image) ? (
+        {(image || overlay_image || card_image) ? (
           <>
+            {/* TODO: keep track if alt has already been placed */}
+            {/* TODO: REPLACE */}
             {image?.path && getImage(image.path) && (
               <GatsbyImage
                 image={getImage(image.path) as IGatsbyImageData}
@@ -51,22 +52,73 @@ const Card = ({ heading, title, image, overlay_image, link }: CardProps) => {
                 className="row-span-full col-span-full"
               />
             )}
+            {/* TODO: REPLACE */}
             {overlay_image?.path && getImage(overlay_image.path) && (
               <div className="row-span-full col-span-full overflow-hidden p-4 grid items-center">
-                {/* I spent a while to figure out that the combination of:
-                    - parent div: overflow-hidden
-                    - child div: max-h-full
-                    - child img: scale-down
-                    will resize the image in a nice way... I have no idea
-                    how it works.*/}
-                  <GatsbyImage
-                    image={getImage(overlay_image.path) as IGatsbyImageData}
-                    alt={overlay_image.alt}
-                    className="max-h-full"
-                    objectFit="scale-down"
-                  />
+                {/*
+                  I spent a while to figure out that the combination of:
+                  - parent div: overflow-hidden
+                  - child div: max-h-full
+                  - child img: scale-down
+                  will resize the image in a nice way... I have no idea
+                  how it works.
+                */}
+                <GatsbyImage
+                  image={getImage(overlay_image.path) as IGatsbyImageData}
+                  alt={overlay_image.alt}
+                  className="max-h-full"
+                  objectFit="scale-down"
+                />
               </div>
             )}
+
+            {(card_image?.background_image?.childImageSharp || card_image?.background?.publicURL) ?
+              (
+                card_image.background_image?.childImageSharp ? (
+                  <GatsbyImage
+                    image={getImage(card_image.background_image) as IGatsbyImageData}
+                    alt={card_image.alt ?? ""}
+                    className="row-span-full col-span-full"
+                  />
+                ) : (
+                  <img
+                    src={card_image.background?.publicURL}
+                    alt={card_image.alt ?? ""}
+                    className="row-span-full col-span-full"
+                  />
+                )
+              ) : (
+                card_image?.background_color ? (
+                  <div className="row-span-full col-span-full" style={{ backgroundColor: card_image.background_color }} />
+                ) : (
+                  undefined
+                )
+              )
+            }
+            {(card_image?.foreground_image?.childImageSharp || card_image?.foreground?.publicURL) ?
+              (
+                <div className="row-span-full col-span-full overflow-hidden p-4 grid items-center">
+                  {
+                    card_image.foreground_image?.childImageSharp ? (
+                      <GatsbyImage
+                        image={getImage(card_image.foreground_image) as IGatsbyImageData}
+                        alt={card_image.alt ?? ""}
+                        className="max-h-full"
+                        objectFit="scale-down"
+                      />
+                    ) : (
+                      <img
+                        src={card_image.foreground?.publicURL}
+                        alt={card_image.alt ?? ""}
+                        className="max-h-full object-scale-down"
+                      />
+                    )
+                  }
+                </div>
+              ) : (
+                undefined
+              )
+            }
           </>
         ) : (
           <StaticImage

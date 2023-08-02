@@ -113,6 +113,14 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        name: "orgs",
+        path: "./content/profiles/orgs/",
+        ignore: [`**/.*`],
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: "json",
         path: "./content/json/",
         ignore: [`**/.*`],

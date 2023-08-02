@@ -13,15 +13,19 @@ interface Props {
 }
 
 export const Head = ({ data }: Props) => {
-  const { event_ } = data
-  if (!event_) {
-    throw new Error(`invalid argument: "event_" is undefined`)
+  const { event } = data;
+  if (!event) {
+    throw new Error(`invalid argument: "event" is undefined`);
   }
+  const meta_image = 
+    event.card_image.background?.publicURL ??
+    event.card_image.foreground?.publicURL ??
+    undefined;
   return (
     <Seo
-      title={event_.title}
-      description={event_.description}
-      image={event_.background_image?.path?.childImageSharp?.gatsbyImageData.images.fallback?.src}
+      title={event.title}
+      description={event.description}
+      image={meta_image}
     />
   )
 }
@@ -33,21 +37,18 @@ const getLinkName = (name: string) => {
 }
 
 const EventTemplate = ({ data, children }: Props) => {
-  if (!data.event_) {
-    throw new Error(`invalid argument: "event_" is undefined`)
+  if (!data.event) {
+    throw new Error(`invalid argument: "event" is undefined`)
   }
 
-  const event = data.event_
+  const event = data.event
 
   return (
     <div className="flex lg:flex-row flex-col gap-4">
       <aside className="flex shrink-0 xl:w-96 lg:w-80">
         <div className="block">
           <div className="flex flex-col gap-4 sticky top-4">
-            <Card
-              image={event.background_image as Image}
-              overlay_image={event.overlay_image as Image}
-            />
+            <Card card_image={event.card_image as CardImageProps} />
             <div className="panel">
               <h1>{event.title}</h1>
               {(event.time_start || event.time_close) && (
@@ -105,17 +106,17 @@ const EventTemplate = ({ data, children }: Props) => {
 
       <div className="flex-1">
         <div className="grid gap-4">
-          {data.event_.description && (
+          {data.event.description && (
             <section id="description" className="panel">
               <h2>Event Description</h2>
-              <p>{data.event_.description}</p>
+              <p>{data.event.description}</p>
             </section>
           )}
-          {data.event_.stats && (
+          {data.event.stats && (
             <section id="stats" className="panel">
               <h2>Event Statistics</h2>
               <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2">
-                {data.event_.stats.map((stat, i) => (
+                {data.event.stats.map((stat, i) => (
                   <div key={i} className="mb-2">
                     <p className="m-0 font-bold">{stat?.name}</p>
                     <p className="m-0 font-mono text-4xl">{stat?.value}</p>
@@ -142,27 +143,31 @@ export default EventTemplate
 
 export const query = graphql`
   query EventTemplate($id: String!) {
-    event_: event(id: { eq: $id }) {
+    event: event(id: { eq: $id }) {
       title
       description
       time_start
       time_close
       timezone
       location
-      overlay_image {
-        path {
+      card_image {
+        foreground {
+          publicURL
+        }
+        background {
+          publicURL
+        }
+        foreground_image {
           childImageSharp {
             gatsbyImageData(width: 1024)
           }
         }
-        alt
-      }
-      background_image {
-        path {
+        background_image {
           childImageSharp {
             gatsbyImageData(width: 1024, placeholder: BLURRED)
           }
         }
+        background_color
         alt
       }
       links {

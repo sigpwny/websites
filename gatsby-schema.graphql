@@ -1,0 +1,201 @@
+type Site implements Node {
+  siteMetadata: SiteMetadata!
+}
+
+type Link {
+  name: String!
+  link: String!
+}
+
+type SiteMetadata {
+  title: String!
+  siteUrl: String!
+  description: String!
+  image: String!
+  navLinks: [Link]
+  navCallToActionLinks: [Link]
+  socialLinks: [Link]
+  timezone: String!
+}
+
+type ImageAlt {
+  path: File! @fileByRelativePath
+  alt: String!
+}
+
+type Stat {
+  name: String!
+  value: String!
+}
+
+interface TemplatedPage implements Node @dontInfer {
+  id: ID!
+  slug: String!
+}
+
+type ICalendarEventData {
+  uid: String!
+  sequence: Int!
+  title: String!
+  description: String
+  location: ICalendarLocationData
+  url: String
+}
+
+type ICalendarLocationData {
+  title: String
+  address: String
+  radius: Float
+  geo: ICalendarGeoData
+}
+
+type ICalendarGeoData {
+  lat: Float!
+  lon: Float!
+}
+
+interface ICalendarEvent implements Node @dontInfer {
+  id: ID!
+  ical: ICalendarEventData!
+  time_start: Date! @dateformat
+  time_close: Date! @dateformat
+}
+
+type Meeting implements Node & TemplatedPage & ICalendarEvent @dontInfer {
+  title: String!
+  ical: ICalendarEventData!
+  time_start: Date! @dateformat
+  time_close: Date! @dateformat
+  week_number: Int!
+  credit: [String!]!
+  credit_profiles: [Profile]! @link(by: "name", from: "credit")
+  featured: Boolean
+  location: String
+  description: String
+  image: ImageAlt
+  slides: File @fileByRelativePath
+  recording: String
+  assets: [File] @fileByRelativePath
+  tags: [String!]
+  semester: String!
+  slug: String!
+  timezone: String!
+}
+
+type Event implements Node & TemplatedPage & ICalendarEvent @dontInfer {
+  title: String!
+  ical: ICalendarEventData!
+  time_start: Date! @dateformat
+  time_close: Date! @dateformat
+  series: String!
+  credit: [String!]!
+  credit_profiles: [Profile]! @link(by: "name", from: "credit")
+  location: String
+  description: String!
+  card_image: CardImage!
+  links: [Link]
+  stats: [Stat]
+  slug: String!
+  timezone: String!
+}
+
+type Publication implements Node & TemplatedPage @dontInfer {
+  title: String!
+  credit: [String!]!
+  publication_type: String!
+  publisher: String
+  date: Date! @dateformat
+  description: String
+  image: ImageAlt!
+  primary_link: String
+  other_links: [String]
+  tags: [String]
+  slug: String!
+  timezone: String!
+}
+
+type PageMarkdownOptions {
+  full_width: Boolean
+  no_background: Boolean
+}
+
+type PageMarkdown implements Node & TemplatedPage @dontInfer {
+  title: String!
+  description: String
+  options: PageMarkdownOptions
+  slug: String!
+}
+
+interface Profile {
+  name: String!
+  profile_image: File! @fileByRelativePath
+  handle: String
+  bio: String
+  links: [Link]
+  role: String!
+  weight: Int!
+}
+
+type Admin implements Node & Profile @dontInfer {
+  name: String!
+  profile_image: File! @fileByRelativePath
+  handle: String
+  bio: String
+  links: [Link]
+  role: String!
+  weight: Int!
+}
+
+type Helper implements Node & Profile @dontInfer {
+  name: String!
+  profile_image: File! @fileByRelativePath
+  handle: String
+  bio: String
+  links: [Link]
+  role: String!
+  weight: Int!
+}
+
+type Alum implements Node & Profile @dontInfer {
+  name: String!
+  profile_image: File! @fileByRelativePath
+  handle: String
+  period: String
+  work: String
+  bio: String
+  links: [Link]
+  role: String!
+  weight: Int!
+}
+
+type Member implements Node & Profile @dontInfer {
+  name: String!
+  profile_image: File! @fileByRelativePath
+  handle: String
+  bio: String
+  links: [Link]
+  role: String!
+  weight: Int!
+}
+
+type CardImage {
+  foreground: File @fileByRelativePath
+  background: File @fileByRelativePath
+  foreground_image: File @fileByRelativePath
+  background_image: File @fileByRelativePath
+  background_color: String
+  alt: String
+}
+
+# TODO: & Profile
+type Org implements Node @dontInfer {
+  name: String!
+  profile_image: File! @fileByRelativePath
+  card_image: CardImage
+  affiliation: String # takes precedence over handle
+  handle: String
+  bio: String
+  role: String!
+  weight: Int!
+  links: [Link]
+}

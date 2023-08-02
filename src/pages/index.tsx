@@ -144,20 +144,24 @@ export const query = graphql`
         time_start
         time_close
         timezone
-        overlay_image {
-          path {
+        card_image {
+          foreground {
+            publicURL
+          }
+          background {
+            publicURL
+          }
+          foreground_image {
             childImageSharp {
               gatsbyImageData(width: 600)
             }
           }
-          alt
-        }
-        background_image {
-          path {
+          background_image {
             childImageSharp {
               gatsbyImageData(width: 600, placeholder: BLURRED)
             }
           }
+          background_color
           alt
         }
         slug

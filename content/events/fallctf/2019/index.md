@@ -7,9 +7,8 @@ time_close: 2019-09-08T18:00:00.000-05:00
 credit:
   - SIGPwny
 location: Siebel CS 1404
-background_image:
-  path: hackathon-2019-cover.png
-  alt: HACKathon 2019 cover
+card_image:
+  background: hackathon-2019-cover.png
 links:
   - name: Writeup
     link: https://dillonkorman.com/running-sigpwnys-first-recruiting-ctf/

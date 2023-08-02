@@ -8,9 +8,8 @@ time_close: 2022-09-24T18:00:00.000-05:00
 credit:
   - SIGPwny
 location: Campus Instructional Facility 3039
-overlay_image:
-  path: fall-ctf-2022-logo.png
-  alt: Fall CTF 2022
+card_image:
+  foreground: fall-ctf-2022-logo.png
 links:
   - name: website
     link: https://fallctf.sigpwny.com/

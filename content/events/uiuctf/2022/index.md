@@ -32,12 +32,9 @@ credit:
   - Thomas Quig
   - YiFei Zhu
 location: Online
-background_image:
-  path: spotlights.png
-  alt: A dark wall covered with spotlights on the corners and edges
-overlay_image:
-  path: ./logo.png
-  alt: UIUCTF 2022 logo
+card_image:
+  foreground: ./logo.png
+  background: spotlights.png
 links:
   - name: website
     link: https://2022.uiuc.tf/

@@ -25,12 +25,9 @@ credit:
   - Sam Ruggerio
   - YiFei Zhu
 location: Online
-background_image:
-  path: windows-95-clouds.jpg
-  alt: Clouds from Windows 95
-overlay_image:
-  alt: UIUCTF 2023 logo in the style of the Windows 95 logo
-  path: uiuctf-2023-logo-stylized.png
+card_image:
+  foreground: uiuctf-2023-logo-stylized.png
+  background: windows-95-clouds.jpg
 links:
   - name: website
     link: https://2023.uiuc.tf
