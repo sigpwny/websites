@@ -1,5 +1,5 @@
 # sigpwny.com
-![Production deployment build status](https://github.com/sigpwny/sigpwny.com/actions/workflows/deploy.yml/badge.svg?branch=main)
+[![Production deployment build status](https://github.com/sigpwny/sigpwny.com/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/sigpwny/sigpwny.com/actions/workflows/deploy.yml)
 
 The SIGPwny website, built with Gatsby.
 
