@@ -56,7 +56,7 @@ function createSlug(base_dir: string, file_node: any, slug?: string) {
   if (!slug) {
     const parsed_path = path.parse(file_node.relativePath);
     if (parsed_path.name === "index") slug = `${base_dir}${parsed_path.dir}/`;
-    else slug = `${base_dir}${path.join(parsed_path.dir, parsed_path.name)}`;
+    else slug = `${base_dir}${path.posix.join(parsed_path.dir, parsed_path.name)}`;
   }
   return slug;
 }
