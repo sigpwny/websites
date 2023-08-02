@@ -110,7 +110,7 @@ export const Card = ({ heading, title, image, overlay_image, card_image, link }:
                       <img
                         src={card_image.foreground?.publicURL}
                         alt={card_image.alt ?? ""}
-                        className="max-h-full object-scale-down"
+                        className="max-h-full m-auto overflow-hidden"
                       />
                     )
                   }

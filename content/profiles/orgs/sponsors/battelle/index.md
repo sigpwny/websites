@@ -8,7 +8,7 @@ affiliation: Battelle
 handle: Battelle
 bio: It can be done.
 role: Sponsor
-weight: 0
+weight: 8
 links:
   - name: website
     link: https://www.battelle.org/

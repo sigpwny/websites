@@ -2,7 +2,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 
 import Seo from "../components/Seo"
-import { CardRow, createCard } from "../components/Card"
+import { CardGrid, createCard } from "../components/Card"
 
 interface Props {
   data: Queries.SponsorsPageQuery
@@ -30,7 +30,8 @@ const SponsorsPage = ({ data }: Props) => {
   ))
   return (
     <div className="flex flex-col mx-auto 2xl:w-5/6">
-      <CardRow cards={sponsor_cards} />
+      <h1>Sponsors</h1>
+      <CardGrid cards={sponsor_cards} />
     </div>
   )
 }
