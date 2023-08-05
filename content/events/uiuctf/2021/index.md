@@ -31,6 +31,12 @@ credit:
   - Sam Sharps
   - Thomas Quig
   - YiFei Zhu
+sponsors:
+  - Leviathan Security Group
+  - REDLattice
+  - NCC Group
+  - RET2 Systems
+  - Google Cloud
 location: Online
 # background_image:
 #   path: uiuctf-2021-cover-cropped.png
@@ -48,6 +54,8 @@ stats:
     value: "658"
   - name: Rating Weight
     value: "23.76"
+  - name: Cash Prizes (USD)
+    value: "$7,700+"
 ---
 ## Writeups
 

@@ -90,6 +90,8 @@ type Event implements Node & TemplatedPage & ICalendarEvent @dontInfer {
   series: String!
   credit: [String!]!
   credit_profiles: [Profile]! @link(by: "name", from: "credit")
+  sponsors: [String!]
+  sponsors_profiles: [Org] @link(by: "name", from: "sponsors")
   location: String
   description: String!
   card_image: CardImage!
@@ -187,8 +189,7 @@ type CardImage {
   alt: String
 }
 
-# TODO: & Profile
-type Org implements Node @dontInfer {
+type Org implements Node & Profile @dontInfer {
   name: String!
   profile_image: File! @fileByRelativePath
   card_image: CardImage

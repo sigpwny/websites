@@ -31,6 +31,11 @@ credit:
   - Sam Ruggerio
   - Thomas Quig
   - YiFei Zhu
+sponsors:
+  - Battelle
+  - REDLattice
+  - Trail of Bits
+  - Google Cloud
 location: Online
 card_image:
   foreground: ./logo.png
@@ -47,6 +52,8 @@ stats:
     value: "1400+"
   - name: Rating Weight
     value: "34.64"
+  - name: Cash Prizes (USD)
+    value: "$6,000"
 ---
 ## Information
 [Trailer](https://youtu.be/Wl8TsiUgzmk)  

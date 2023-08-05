@@ -17,16 +17,42 @@ interface CardImageProps {
 }
 
 interface CardMeetingProps {
-  meeting: Queries.Meeting
+  meeting: {
+    title: string
+    time_start: string
+    semester: string
+    week_number: number
+    image: Image
+    slug: string
+  }
   timezone: string
 }
 
 interface CardEventProps {
-  event: Queries.Event
+  event: {
+    title: string
+    time_start: string
+    card_image: CardImageProps
+    slug: string
+  }
   timezone: string
 }
 
 interface CardPublicationProps {
-  publication: Queries.Publication
+  publication: {
+    title: string
+    date: string
+    publisher: string
+    publication_type: string
+    image: Image
+    slug: string
+  }
   timezone: string
+}
+
+interface CardSponsorProps {
+  sponsor: {
+    name: string
+    card_image: CardImageProps
+  }
 }

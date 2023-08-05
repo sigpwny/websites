@@ -7,6 +7,10 @@ time_start: 2022-09-24T12:00:00.000-05:00
 time_close: 2022-09-24T18:00:00.000-05:00
 credit:
   - SIGPwny
+sponsors:
+  - John Deere
+  - IMC Trading
+  - Forcepoint
 location: Campus Instructional Facility 3039
 card_image:
   foreground: fall-ctf-2022-logo.png
@@ -14,6 +18,8 @@ links:
   - name: website
     link: https://fallctf.sigpwny.com/
 stats:
-  - name: Participants
+  - name: Attendees
+    value: "300+"
+  - name: Teams
     value: "128"
 ---

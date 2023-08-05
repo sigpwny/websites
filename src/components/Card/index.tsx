@@ -6,35 +6,40 @@ import SmartLink from "../SmartLink"
 import { weekNumber, convertDate } from "../../utils/util"
 
 export function createCard(
-  content: CardMeetingProps | CardEventProps | CardPublicationProps
+  content: CardMeetingProps | CardEventProps | CardPublicationProps | CardSponsorProps
 ): CardProps {
   if ("meeting" in content) {
-    const { meeting, timezone } = content as CardMeetingProps
+    const { meeting, timezone } = content as CardMeetingProps;
     return ({
       heading: meeting.semester + " Week " + weekNumber(meeting.week_number) + " • " + convertDate(meeting.time_start, "YYYY-MM-DD", timezone),
       title: meeting.title,
-      image: meeting.image as Image,
+      image: meeting.image,
       link: meeting.slug
-    })
+    });
   } else if ("event" in content) {
-    const { event, timezone } = content as CardEventProps
+    const { event, timezone } = content as CardEventProps;
     return ({
       heading: convertDate(event.time_start, "YYYY-MM-DD", timezone),
       title: event.title,
-      card_image: event.card_image as CardImageProps,
+      card_image: event.card_image,
       link: event.slug
-    })
+    });
   } else if ("publication" in content) {
-    const { publication } = content as CardPublicationProps
+    const { publication } = content as CardPublicationProps;
     return ({
       heading: publication.publication_type.toUpperCase() +
         (publication.publisher ? " • " + publication.publisher : ""),
       title: publication.title,
-      image: publication.image as Image,
+      image: publication.image,
       link: publication.slug
-    })
+    });
+  } else if ("sponsor" in content) {
+    const { sponsor } = content as CardSponsorProps;
+    return ({
+      card_image: sponsor.card_image,
+    });
   }
-  throw new Error("invalid argument: content")
+  throw new Error("invalid argument: content");
 }
 
 export const Card = ({ heading, title, image, overlay_image, card_image, link }: CardProps) => {

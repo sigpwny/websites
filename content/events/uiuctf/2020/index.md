@@ -21,6 +21,9 @@ credit:
   - Pranav Goel
   - Sam Sharps
   - Thomas Quig
+sponsors:
+  - Leviathan Security Group
+  - REDLattice
 location: Online
 card_image:
   foreground: uiuctf-logo.png
@@ -35,6 +38,8 @@ stats:
     value: "390"
   - name: Rating Weight
     value: "23.76"
+  - name: Cash Prizes (USD)
+    value: "$4,500+"
 ---
 ## Information
 [Teaser trailer](https://youtu.be/1Rwc6tdyD18)

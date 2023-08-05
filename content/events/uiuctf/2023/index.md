@@ -24,6 +24,12 @@ credit:
   - Richard Liu
   - Sam Ruggerio
   - YiFei Zhu
+sponsors:
+  - Battelle
+  - Trail of Bits
+  - Zellic
+  - David An
+  - Google Cloud
 location: Online
 card_image:
   foreground: uiuctf-2023-logo-stylized.png
@@ -38,6 +44,8 @@ stats:
     value: "818"
   - name: Rating Weight
     value: "50.75"
+  - name: Cash Prizes (USD)
+    value: "$6,000+"
 ---
 
 ## Winning Writeups

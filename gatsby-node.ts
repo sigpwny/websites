@@ -157,6 +157,7 @@ const content_node_types: ContentNode[] = [
       { name: "time_start", required: true },
       { name: "series", required: true },
       { name: "credit", required: true },
+      { name: "sponsors" },
       { name: "location" },
       { name: "description", required: true },
       { name: "card_image", fields: field_resolvers_card_image },
