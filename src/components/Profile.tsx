@@ -1,15 +1,25 @@
 import React, { useState } from "react"
 import { motion } from "framer-motion"
-import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
+import {
+  GatsbyImage,
+  getImage,
+  IGatsbyImageData,
+  ImageDataLike
+} from "gatsby-plugin-image"
 import { ChevronDownSvg, getSocialIcon } from "./Icons"
 
+interface ProfileProps {
+  name: string
+  profile_image: ImageDataLike
+}
+
 interface AvatarProps {
-  profile?: any // TODO: Do not use type 'any'
+  profile?: ProfileProps
   label?: string
 }
 
 interface AvatarGroupProps {
-  profiles: any[] // TODO: Do not use type 'any'
+  profiles: ProfileProps[]
   limit?: number
 }
 
@@ -23,7 +33,7 @@ function calculateInitials(name: string) {
 }
 
 export const Avatar = ({ profile, label }: AvatarProps) => {
-  if (getImage(profile?.profile_image)) {
+  if (profile && getImage(profile.profile_image)) {
     return (
       <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 select-none">
         <GatsbyImage
@@ -33,8 +43,8 @@ export const Avatar = ({ profile, label }: AvatarProps) => {
         />
       </div>
     )
-  } else if (label || profile.name) {
-    const text_content = label ?? calculateInitials(profile.name)
+  } else if (label || (profile && profile.name)) {
+    const text_content = label ?? calculateInitials(profile!.name)
     return (
       <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 w-full h-full flex items-center justify-center text-sm select-none">
         {text_content}
