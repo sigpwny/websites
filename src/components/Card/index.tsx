@@ -102,7 +102,7 @@ export const Card = ({ heading, title, image, overlay_image, card_image, link }:
             }
             {(card_image?.foreground_image?.childImageSharp || card_image?.foreground?.publicURL) ?
               (
-                <div className="row-span-full col-span-full overflow-hidden p-4 grid items-center">
+                <div className="row-span-full col-span-full overflow-hidden p-[5%] grid items-center">
                   {
                     card_image.foreground_image?.childImageSharp ? (
                       <GatsbyImage
@@ -112,11 +112,11 @@ export const Card = ({ heading, title, image, overlay_image, card_image, link }:
                         objectFit="scale-down"
                       />
                     ) : (
-                      <div className="flex h-full w-full relative overflow-hidden">
+                      <div className="flex h-full w-full overflow-hidden">
                         <img
                           src={card_image.foreground?.publicURL}
                           alt={card_image.alt ?? ""}
-                          className="absolute top-0 left-0 right-0 bottom-0 m-auto object-scale-down max-h-full"
+                          className="object-contain mx-auto"
                         />
                       </div>
                     )
