@@ -1,10 +1,10 @@
-import React, { useState } from "react"
-import { Link, graphql } from "gatsby"
-import { MDXProvider } from "@mdx-js/react"
-import { Document, Page } from 'react-pdf'
-import Seo from "../components/Seo"
-import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util"
-import { LeftSvg, PdfSvg, RightSvg, YouTubeSvg } from "../components/Icons"
+import React, { useState } from "react";
+import { Link, graphql } from "gatsby";
+import { MDXProvider } from "@mdx-js/react";
+import { Document, Page } from "react-pdf";
+import Seo from "../components/Seo";
+import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util";
+import { LeftSvg, PdfSvg, RightSvg, YouTubeSvg } from "../components/Icons";
 
 interface Props {
   data: Queries.MeetingTemplateQuery
@@ -12,9 +12,9 @@ interface Props {
 }
 
 export const Head = ({ data }: Props) => {
-  const { meeting } = data
+  const { meeting } = data;
   if (!meeting) {
-    throw new Error(`invalid argument: "meeting" is undefined`)
+    throw new Error(`invalid argument: "meeting" is undefined`);
   }
   return (
     <Seo
@@ -36,12 +36,10 @@ export const Head = ({ data }: Props) => {
 const MeetingTemplate = ({ data, children }: Props) => {
   const { meeting } = data
   if (!meeting) {
-    throw new Error(`invalid argument: "meeting" is undefined`)
+    throw new Error(`invalid argument: "meeting" is undefined`);
   }
-
-  const [numPages, setNumPages] = useState(1)
-  const [pageNumber, setPageNumber] = useState(1)
-
+  const [numPages, setNumPages] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
   return (
     <>
       <article className="panel w-full grow" itemScope itemType="http://schema.org/Article">
@@ -84,7 +82,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
         </div>
         {meeting.recording && (
           (() => {
-            const url = getYouTubeEmbedUrl(meeting.recording)
+            const url = getYouTubeEmbedUrl(meeting.recording);
             return url ? (
               <iframe
                 title={meeting.title + " video"}
@@ -94,7 +92,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
                 src={url}
                 itemProp="video"
               />
-            ) : null
+            ) : null;
           })()
         )}
         {meeting.slides?.publicURL && !meeting.recording && (
@@ -134,10 +132,10 @@ const MeetingTemplate = ({ data, children }: Props) => {
         </MDXProvider>
       </article>
     </>
-  )
+  );
 }
 
-export default MeetingTemplate
+export default MeetingTemplate;
 
 export const query = graphql`
   query MeetingTemplate($id: String!) {
@@ -164,4 +162,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
