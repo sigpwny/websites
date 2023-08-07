@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import dayjs from "dayjs";
+import { graphql } from "gatsby";
 
 import Seo from "../components/Seo";
 import { CardGrid, createCard } from "../components/Card";
@@ -7,8 +8,6 @@ import { CardGrid, createCard } from "../components/Card";
 interface Props {
   data: Queries.SponsorsPageQuery
 }
-
-type Sponsor = Queries.SponsorsPageQuery["allOrg"]["nodes"][0];
 
 export function Head() {
   return (
@@ -20,13 +19,50 @@ export function Head() {
 }
 
 const SponsorsPage = ({ data }: Props) => {
-  const sponsors = data.allOrg.nodes;
-  const sponsor_cards = sponsors.map((sponsor: Sponsor) =>
-    createCard({sponsor} as CardSponsorProps));
+  const events = data.allEvent.nodes;
+  // Filter for events that occured in the past year or in the future
+  // and are the most recent event in each series
+  const min_date = dayjs().subtract(1, "year");
+  const uniq_series = new Set<string>();
+  const recent_events = events.filter((event) => {
+    if (
+      dayjs(event.time_start) < min_date ||
+      uniq_series.has(event.series) ||
+      !event.sponsors_profiles ||
+      event.sponsors_profiles.length === 0
+    ) return false;
+    uniq_series.add(event.series);
+    return true;
+  });
+  // TODO: Add support for meeting sponsors
   return (
-    <div className="flex flex-col mx-auto 2xl:w-5/6">
-      <h1>Sponsors</h1>
-      <CardGrid cards={sponsor_cards} />
+    <div className="flex flex-col gap-4 mx-auto page-width-lg">
+      <span>
+        <h1>Sponsors</h1>
+        <p>
+          Thank you to our sponsors for supporting SIGPwny!
+        </p>
+        <div className="flex flex-col gap-4">
+          {recent_events.map((event, idx) => (
+            <span key={idx}>
+              <h2>{event.title}</h2>
+              <CardGrid cards={
+                event.sponsors_profiles!.map((sponsor) =>
+                  createCard({sponsor} as CardSponsorProps)
+                )
+              } />
+            </span>
+          ))}
+        </div>
+      </span>
+      <div className="panel">
+        <h2>Interested in sponsoring SIGPwny?</h2>
+        <p>
+          Please contact us at <a href="mailto:sponsors@sigpwny.com">sponsors@sigpwny.com</a>!
+          Sponsors can receive a variety of benefits, from resume books to 
+          recruiting events. We are happy to work with you!
+        </p>
+      </div>
     </div>
   );
 }
@@ -35,46 +71,49 @@ export default SponsorsPage;
 
 export const query = graphql`
   query SponsorsPage {
-    allOrg(
-      filter: {role: {eq: "Sponsor"}}
-      sort: [{weight: DESC}, {name: ASC}]
-    ) {
+    allEvent(sort: {time_start: DESC}) {
       nodes {
-        name
-        profile_image {
-          childImageSharp {
-            gatsbyImageData(width: 160, aspectRatio: 1)
-          }
-        }
-        card_image {
-          foreground {
-            publicURL
-          }
-          background {
-            publicURL
-          }
-          foreground_image {
-            childImageSharp {
-              gatsbyImageData(width: 600)
-            }
-          }
-          background_image {
-            childImageSharp {
-              gatsbyImageData(width: 600, placeholder: BLURRED)
-            }
-          }
-          background_color
-          alt
-        }
-        affiliation
-        handle
-        bio
-        role
-        weight
-        links {
+        title
+        series
+        time_start
+        sponsors_profiles {
           name
-          link
+          profile_image {
+            childImageSharp {
+              gatsbyImageData(width: 160, aspectRatio: 1)
+            }
+          }
+          card_image {
+            foreground {
+              publicURL
+            }
+            background {
+              publicURL
+            }
+            foreground_image {
+              childImageSharp {
+                gatsbyImageData(width: 600)
+              }
+            }
+            background_image {
+              childImageSharp {
+                gatsbyImageData(width: 600, placeholder: BLURRED)
+              }
+            }
+            background_color
+            alt
+          }
+          affiliation
+          handle
+          bio
+          role
+          weight
+          links {
+            name
+            link
+          }
         }
+        slug
       }
     }
   }

@@ -108,7 +108,7 @@ const MeetingsPage = ({ data }: Props) => {
   })
   return (
     <section id="meetings" className="pb-8">
-      <div className="flex flex-col mx-auto 2xl:w-5/6">
+      <div className="flex flex-col mx-auto page-width-lg">
         <h1>Meetings</h1>
         <div className="panel">
           {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
