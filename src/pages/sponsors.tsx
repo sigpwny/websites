@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { graphql } from "gatsby";
 
 import Seo from "../components/Seo";
-import { CardGrid, createCard } from "../components/Card";
+import { Card, CardGrid, createCard } from "../components/Card";
 
 interface Props {
   data: Queries.SponsorsPageQuery
@@ -42,7 +42,7 @@ const SponsorsPage = ({ data }: Props) => {
         <p>
           Thank you to our sponsors for supporting SIGPwny!
         </p>
-        <div className="flex flex-col gap-4">
+        {/* <div className="flex flex-col gap-4">
           {recent_events.map((event, idx) => (
             <span key={idx}>
               <h2>{event.title}</h2>
@@ -51,6 +51,19 @@ const SponsorsPage = ({ data }: Props) => {
                   createCard({sponsor} as CardSponsorProps)
                 )
               } />
+            </span>
+          ))}
+          
+        </div> */}
+        <div className="flex flex-col gap-4">
+          {recent_events.map((event, idx) => (
+            <span key={idx}>
+              <h2>{event.title}</h2>
+              <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                {event.sponsors_profiles!.map((sponsor) => (
+                  <Card {...createCard({sponsor} as CardSponsorProps)} />
+                ))}
+              </div>
             </span>
           ))}
         </div>

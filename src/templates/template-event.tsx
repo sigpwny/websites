@@ -87,8 +87,8 @@ const EventTemplate = ({ data, children }: Props) => {
               )}
               {event.links && (
                 <ul>
-                  {event.links.map((link, index) => (
-                    <li key={index}>
+                  {event.links.map((link, idx) => (
+                    <li key={idx}>
                       <a
                         href={link?.link}
                         target="_blank" rel="noopener noreferrer"
@@ -133,9 +133,9 @@ const EventTemplate = ({ data, children }: Props) => {
                   This event would not be possible without the support of our sponsors!
                 </p>
               </section>
-              <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
-                {sponsor_cards.map((card, index) => (
-                  <div key={index} className="flex grow">
+              <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
+                {sponsor_cards.map((card, idx) => (
+                  <div key={idx} className="flex grow">
                     <Card {...card} />
                   </div>
                 ))}

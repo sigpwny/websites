@@ -169,8 +169,8 @@ export default Card
 export const CardGrid = ({ cards }: { cards: CardProps[] }) => {
   return (
     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-      {cards.map((card, index) => (
-        <div key={index} className="flex grow">
+      {cards.map((card, idx) => (
+        <div key={idx} className="flex grow">
           <Card {...card} />
         </div>
       ))}

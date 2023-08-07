@@ -49,7 +49,7 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
         </div>
         <div className="hidden lg:flex flex-row lg:flex-grow gap-x-4 truncate">
           {meeting.tags && meeting.tags.length > 0 && (
-            <TagGroup tags={meeting.tags} char_limit={25} tag_limit={3} />
+            <TagGroup tags={meeting.tags.concat()} char_limit={25} tag_limit={3} />
           )}
         </div>
         <div className="hidden md:flex flex-row gap-x-4 min-w-fit truncate">
