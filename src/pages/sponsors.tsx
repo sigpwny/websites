@@ -48,7 +48,9 @@ const SponsorsPage = ({ data }: Props) => {
               <h2>{event.title}</h2>
               <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {event.sponsors_profiles!.map((sponsor) => (
-                  <Card {...createCard({sponsor} as CardSponsorProps)} />
+                  <div key={idx} className="flex grow">
+                    <Card {...createCard({sponsor} as CardSponsorProps)} />
+                  </div>
                 ))}
               </div>
             </span>
