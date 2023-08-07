@@ -18,8 +18,8 @@ export const Head = ({ data }: Props) => {
     throw new Error(`invalid argument: "event" is undefined`);
   }
   const meta_image = 
-    event.card_image.background?.publicURL ??
     event.card_image.foreground?.publicURL ??
+    event.card_image.background?.publicURL ??
     undefined;
   return (
     <Seo
