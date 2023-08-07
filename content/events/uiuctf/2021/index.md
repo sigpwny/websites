@@ -31,16 +31,19 @@ credit:
   - Sam Sharps
   - Thomas Quig
   - YiFei Zhu
+sponsors:
+  - Leviathan Security Group
+  - REDLattice
+  - NCC Group
+  - RET2 Systems
+  - Google Cloud
 location: Online
 # background_image:
 #   path: uiuctf-2021-cover-cropped.png
 #   alt: UIUCTF 2021 logo
-background_image:
-  path: 0d1a28.png
-  alt: Solid color background
-overlay_image:
-  path: uiuctf-2021-logo-simple.png
-  alt: Neon sign saying "UIUCTF 2021"
+card_image:
+  foreground: uiuctf-2021-logo-simple.png
+  background_color: "#0d1a28"
 links:
   - name: website
     link: https://2021.uiuc.tf/
@@ -51,6 +54,8 @@ stats:
     value: "658"
   - name: Rating Weight
     value: "23.76"
+  - name: Cash Prizes (USD)
+    value: "$7,700+"
 ---
 ## Writeups
 

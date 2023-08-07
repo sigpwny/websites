@@ -29,15 +29,13 @@ const EventsPage = ({ data }: Props) => {
   )
   const cards_uiuctf = events_uiuctf.map((event_: Event) => (
     {
-      image: event_.background_image,
-      overlay_image: event_.overlay_image,
+      card_image: event_.card_image,
       link: event_.slug,
     }
   )) as CardProps[]
   const cards_fallctf = events_fallctf.map((event_: Event) => (
     {
-      image: event_.background_image,
-      overlay_image: event_.overlay_image,
+      card_image: event_.card_image,
       link: event_.slug,
     }
   )) as CardProps[]
@@ -71,20 +69,24 @@ export const query = graphql`
         title
         series
         time_start(formatString: "YYYY-MM-DD")
-        overlay_image {
-          path {
+        card_image {
+          foreground {
+            publicURL
+          }
+          background {
+            publicURL
+          }
+          foreground_image {
             childImageSharp {
               gatsbyImageData(width: 600)
             }
           }
-          alt
-        }
-        background_image {
-          path {
+          background_image {
             childImageSharp {
               gatsbyImageData(width: 600, placeholder: BLURRED)
             }
           }
+          background_color
           alt
         }
         slug

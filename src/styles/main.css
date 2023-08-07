@@ -79,6 +79,9 @@ a:hover {
 .page-width {
   @apply xl:w-2/3 lg:w-4/5;
 }
+.page-width-lg {
+  @apply 2xl:w-5/6;
+}
 .font-size-small {
   font-size: var(--font-size-small);
 }

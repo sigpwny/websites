@@ -1,15 +1,37 @@
 import React, { useState } from "react"
 import { motion } from "framer-motion"
-import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image"
+import {
+  GatsbyImage,
+  getImage,
+  IGatsbyImageData,
+  ImageDataLike
+} from "gatsby-plugin-image"
 import { ChevronDownSvg, getSocialIcon } from "./Icons"
 
+interface SimpleProfileProps {
+  name: string
+  profile_image: ImageDataLike
+  handle?: string
+  links?: {
+    name: string
+    link: string
+  }[]
+  role?: string
+}
+
+interface AdvancedProfileProps extends SimpleProfileProps {
+  period?: string
+  work?: string
+  bio?: string
+}
+
 interface AvatarProps {
-  profile?: any // TODO: Do not use type 'any'
+  profile?: SimpleProfileProps
   label?: string
 }
 
 interface AvatarGroupProps {
-  profiles: any[] // TODO: Do not use type 'any'
+  profiles: SimpleProfileProps[]
   limit?: number
 }
 
@@ -23,7 +45,7 @@ function calculateInitials(name: string) {
 }
 
 export const Avatar = ({ profile, label }: AvatarProps) => {
-  if (getImage(profile?.profile_image)) {
+  if (profile && getImage(profile.profile_image)) {
     return (
       <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 select-none">
         <GatsbyImage
@@ -33,8 +55,8 @@ export const Avatar = ({ profile, label }: AvatarProps) => {
         />
       </div>
     )
-  } else if (label || profile.name) {
-    const text_content = label ?? calculateInitials(profile.name)
+  } else if (label || (profile && profile.name)) {
+    const text_content = label ?? calculateInitials(profile!.name)
     return (
       <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 w-full h-full flex items-center justify-center text-sm select-none">
         {text_content}
@@ -51,7 +73,7 @@ export const AvatarGroup = ({ profiles, limit }: AvatarGroupProps) => {
   const nested_label = `+${nested_profiles.length}`;
   return (
     <div className="grid h-8 gap-1" style={{gridTemplateColumns: `repeat(${limit ?? profiles.length}, 2rem)`}}>
-      {shown_profiles.map((profile: any, idx: number) => (
+      {shown_profiles.map((profile, idx) => (
         <span
           key={idx}
           className="profile-tooltip-select"
@@ -67,7 +89,7 @@ export const AvatarGroup = ({ profiles, limit }: AvatarGroupProps) => {
   )
 }
 
-export const ProfileCard = ({ profile }: any) => (
+export const ProfileCard = ({ profile }: { profile: SimpleProfileProps }) => (
   <div className="flex flex-row gap-4 bg-surface-250 border-surface-300 border-2 rounded-xl isolate overflow-hidden p-4 relative bottom-0 right-0 max-h-fit max-w-fit">
     {profile?.profile_image ? (
       <div className="w-32 h-32">
@@ -99,16 +121,16 @@ export const ProfileCard = ({ profile }: any) => (
   </div>
 )
 
-ProfileCard.Links = ({ profile }: any) => (
+ProfileCard.Links = ({ profile }: { profile: SimpleProfileProps }) => (
   <>
-    {profile.links.map((link: any, index: number) => {
+    {profile && profile.links?.map((link, idx) => {
       const social = getSocialIcon(link.name)
       if (!social) return null
       if (link.link === "") return null
       const url = link.name === "email" ? `mailto:${link.link}` : link.link
       return (
         <a
-          key={index}
+          key={idx}
           href={url}
           title={social.display}
           className="mr-2"
@@ -121,7 +143,7 @@ ProfileCard.Links = ({ profile }: any) => (
   </>
 )
 
-export const ProfileCardGrid = ({ profiles }: any) => {
+export const ProfileCardGrid = ({ profiles }: { profiles: AdvancedProfileProps[] }) => {
   const [expanded_profiles, setIsExpanded] = useState(Array(profiles.length).fill(false))
   const handleSetIsExpanded = (index: number) => {
     const new_expanded_profiles = [...expanded_profiles]
@@ -130,11 +152,11 @@ export const ProfileCardGrid = ({ profiles }: any) => {
   }
   return (
     <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
-      {profiles.map((profile: any, index: number) => {
-        const isExpanded = expanded_profiles[index]
+      {profiles.map((profile, idx) => {
+        const isExpanded = expanded_profiles[idx]
         return (
           <motion.div
-            key={index}
+            key={idx}
             layout="position"
             transition={{ duration: 0.0 }}
             className="bg-surface-100 rounded-xl isolate overflow-hidden p-4 relative bottom-0 right-0"
@@ -195,7 +217,7 @@ export const ProfileCardGrid = ({ profiles }: any) => {
             ) : null}
             {/* Expand/minimize button: only shows on mobile */}
             <span className="absolute top-8 right-4 md:hidden">
-              <button title="Expand profile" onClick={() => handleSetIsExpanded(index)}>
+              <button title="Expand profile" onClick={() => handleSetIsExpanded(idx)}>
                 <motion.div
                   layout
                   animate={{ rotate: isExpanded ? 180 : 0, transition: { ease: "easeInOut" } }}

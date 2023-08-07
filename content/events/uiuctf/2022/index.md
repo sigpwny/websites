@@ -31,13 +31,15 @@ credit:
   - Sam Ruggerio
   - Thomas Quig
   - YiFei Zhu
+sponsors:
+  - Battelle
+  - REDLattice
+  - Trail of Bits
+  - Google Cloud
 location: Online
-background_image:
-  path: spotlights.png
-  alt: A dark wall covered with spotlights on the corners and edges
-overlay_image:
-  path: ./logo.png
-  alt: UIUCTF 2022 logo
+card_image:
+  foreground: ./logo.png
+  background: spotlights.png
 links:
   - name: website
     link: https://2022.uiuc.tf/
@@ -50,6 +52,8 @@ stats:
     value: "1400+"
   - name: Rating Weight
     value: "34.64"
+  - name: Cash Prizes (USD)
+    value: "$6,000"
 ---
 ## Information
 [Trailer](https://youtu.be/Wl8TsiUgzmk)  

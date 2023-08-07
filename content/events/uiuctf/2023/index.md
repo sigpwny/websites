@@ -24,13 +24,16 @@ credit:
   - Richard Liu
   - Sam Ruggerio
   - YiFei Zhu
+sponsors:
+  - Battelle
+  - Trail of Bits
+  - Zellic
+  - David An
+  - Google Cloud
 location: Online
-background_image:
-  path: windows-95-clouds.jpg
-  alt: Clouds from Windows 95
-overlay_image:
-  alt: UIUCTF 2023 logo in the style of the Windows 95 logo
-  path: uiuctf-2023-logo-stylized.png
+card_image:
+  foreground: uiuctf-2023-logo-stylized.png
+  background: windows-95-clouds.jpg
 links:
   - name: website
     link: https://2023.uiuc.tf
@@ -41,6 +44,8 @@ stats:
     value: "818"
   - name: Rating Weight
     value: "50.75"
+  - name: Cash Prizes (USD)
+    value: "$6,000+"
 ---
 
 ## Winning Writeups

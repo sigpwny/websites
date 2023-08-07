@@ -21,13 +21,13 @@ credit:
   - Pranav Goel
   - Sam Sharps
   - Thomas Quig
+sponsors:
+  - Leviathan Security Group
+  - REDLattice
 location: Online
-background_image:
-  path: acnh.jpg
-  alt: Animal Crossing New Horizons beach background
-overlay_image:
-  path: uiuctf-logo.png
-  alt: Board saying SIGPWNY presents UIUCTF
+card_image:
+  foreground: uiuctf-logo.png
+  background: acnh.jpg
 links:
   - name: website
     link: https://2020.uiuc.tf/
@@ -38,6 +38,8 @@ stats:
     value: "390"
   - name: Rating Weight
     value: "23.76"
+  - name: Cash Prizes (USD)
+    value: "$4,500+"
 ---
 ## Information
 [Teaser trailer](https://youtu.be/1Rwc6tdyD18)

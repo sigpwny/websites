@@ -1,15 +1,18 @@
 .card {
-  background-color: var(--color-surface-100);
-  border-color: var(--color-surface-100);
-  border-radius: 0.75rem;
-  isolation: isolate;
-  overflow: hidden;
-  position: relative;
-  box-shadow: none;
-  bottom: 0;
-  right: 0;
-  line-height: 1.2;
-  transition: 0.1s;
+  @apply
+    bg-surface-100
+    border-surface-150
+    border-2
+    text-text
+    rounded-xl
+    isolate
+    overflow-hidden
+    relative
+    bottom-0
+    right-0
+    leading-5
+    grow
+    duration-100;
 }
 .card-hover:hover .card {
   box-shadow: 14px 14px var(--color-primary);
