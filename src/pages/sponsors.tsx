@@ -56,7 +56,7 @@ const SponsorsPage = ({ data }: Props) => {
         </div>
       </span>
       <div className="panel">
-        <h2>Interested in sponsoring SIGPwny?</h2>
+        <h2>Interested in sponsoring?</h2>
         <p>
           Please contact us at <a href="mailto:sponsors@sigpwny.com">sponsors@sigpwny.com</a>!
           Sponsors can receive a variety of benefits, from resume books to 
