@@ -112,11 +112,13 @@ export const Card = ({ heading, title, image, overlay_image, card_image, link }:
                         objectFit="scale-down"
                       />
                     ) : (
-                      <img
-                        src={card_image.foreground?.publicURL}
-                        alt={card_image.alt ?? ""}
-                        className="max-h-full m-auto overflow-hidden"
-                      />
+                      <div className="flex border-2 h-full w-full relative">
+                        <img
+                          src={card_image.foreground?.publicURL}
+                          alt={card_image.alt ?? ""}
+                          className="absolute top-0 left-0 right-0 bottom-0 h-auto w-full m-auto"
+                        />
+                      </div>
                     )
                   }
                 </div>
