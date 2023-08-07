@@ -80,9 +80,7 @@ const Footer = () => {
         </div>
         <p>
           &copy; {new Date().getFullYear()} SIGPwny. ACM@UIUC is a 501(c)(3) non-profit organization.
-          This site is open source on <a href="https://github.com/sigpwny/sigpwny.com" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>.
+          Site source on <a href="https://github.com/sigpwny/sigpwny.com" target="_blank" rel="noopener noreferrer">GitHub</a>.
         </p>
       </div>
     </footer>
