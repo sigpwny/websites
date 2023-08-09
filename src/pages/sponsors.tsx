@@ -36,7 +36,7 @@ const SponsorsPage = ({ data }: Props) => {
   });
   // TODO: Add support for meeting sponsors
   return (
-    <div className="flex flex-col gap-4 mx-auto page-width-lg">
+    <div className="flex flex-col gap-8 mx-auto page-width-lg">
       <span>
         <h1>Sponsors</h1>
         <p>

@@ -107,6 +107,7 @@ const content_node_types: ContentNode[] = [
           { name: "alt", required: true },
         ],
       },
+      { name: "live_video_url" },
       { name: "slides" },
       { name: "recording" },
       { name: "assets" },
