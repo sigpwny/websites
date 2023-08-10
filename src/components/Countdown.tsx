@@ -106,7 +106,7 @@ export const CountdownBadge = ({time_start, time_close}: CountdownBadgeProps) =>
   return (
     <>
       {countdown ? (
-        <div className={"inline-flex self-center px-1 text-sm font-mono select-none rounded-md " + (() => {
+        <div className={"inline-flex self-center px-1 text-sm font-mono select-none whitespace-nowrap rounded-md " + (() => {
           switch(countdown.type) {
             case CountdownStatusType.Upcoming:
               return "bg-gradient-to-r from-purple-500 to-blue-500";

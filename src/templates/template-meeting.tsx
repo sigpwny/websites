@@ -72,13 +72,13 @@ const MeetingTemplate = ({ data, children }: Props) => {
             </p>
             {meeting.tags && meeting.tags.length > 0 ? (
               <div className="flex flex-row gap-2 items-center">
-                <TagRegular className="text-secondary" />
+                <TagRegular className="flex flex-shrink-0 flex-grow-0 text-secondary" />
                 <TagGroup tags={meeting.tags.concat()} />
               </div>
             ) : null}
             {time_start ? (
               <div className="flex flex-row gap-2 items-center">
-                <CalendarRegular className="text-secondary" />
+                <CalendarRegular className="flex flex-shrink-0 flex-grow-0 text-secondary" />
                 <time dateTime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
                   <span className="inline align-middle">
                     {time_start.format("dddd, MMMM D, YYYY")}
@@ -88,7 +88,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
             ) : null}
             {time_start && time_close ? (
               <div className="flex flex-row gap-2 items-center">
-                <ClockRegular className="text-secondary" />
+                <ClockRegular className="flex flex-shrink-0 flex-grow-0 text-secondary" />
                 <time dateTime={duration.toISOString()}>
                   <span className="inline align-middle">
                     {time_start.minute() == 0 ?
@@ -111,7 +111,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
             ) : null}
             {meeting.location ? (
               <div className="flex flex-row gap-2 items-center">
-                <LocationRegular className="text-secondary" />
+                <LocationRegular className="flex flex-shrink-0 flex-grow-0 text-secondary" />
                 <span className="inline align-middle">
                   {meeting.location}
                 </span>

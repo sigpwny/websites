@@ -19,7 +19,7 @@ function calculateInitials(name: string) {
 export const Avatar = ({ profile, label }: AvatarProps) => {
   if (profile && getImage(profile.profile_image)) {
     return (
-      <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 select-none">
+      <div className="flex flex-shrink-0 flex-grow-0 rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 select-none">
         <GatsbyImage
           image={getImage(profile.profile_image) as IGatsbyImageData}
           alt={profile.name}
@@ -30,7 +30,7 @@ export const Avatar = ({ profile, label }: AvatarProps) => {
   } else if (label || (profile && profile.name)) {
     const text_content = label ?? calculateInitials(profile!.name);
     return (
-      <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 w-full h-full flex items-center justify-center text-sm select-none">
+      <div className="flex flex-shrink-0 flex-grow-0 rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 w-full h-full items-center justify-center text-sm select-none">
         {text_content}
       </div>
     );
@@ -65,7 +65,7 @@ export const AvatarPersona = (props: AvatarPersonaProps) => {
   const { profile, children } = props;
   return (
     <div className="flex flex-row gap-1 items-center">
-      <div className="w-8 h-8">
+      <div className="flex flex-shrink-0 flex-grow-0 w-8 h-8">
         <span
           className="profile-tooltip-select"
           data-tooltip-content={JSON.stringify(profile)}

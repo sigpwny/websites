@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 
+import { CountdownBadge } from "../components/Countdown";
 import { AvatarGroup, ProfileCard } from "../components/Profile";
 import Seo from "../components/Seo";
 import { TagGroup } from "../components/Tag";
@@ -40,6 +41,7 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
           >
             {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
           </span>
+          <CountdownBadge time_start={meeting.time_start} time_close={meeting.time_close} />
           <Link to={`${meeting.slug}`} className="truncate">
             <span>
               <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
@@ -141,6 +143,7 @@ export const query = graphql`
       meetings: nodes {
         title
         time_start
+        time_close
         timezone
         week_number
         credit
