@@ -245,7 +245,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
           </section>
         </MDXProvider>
         <span className="z-50 hidden md:block">
-          <Tooltip.Profile offset={3} />
+          <Tooltip.Profile offset={3} place="top-start" />
         </span>
       </article>
     </>
