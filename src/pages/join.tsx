@@ -109,10 +109,12 @@ const JoinPage = ({ data }: Props) => {
       </section>
 
       <section id="join-leadership" className="py-8">
-        <h1>Leadership Opportunities</h1>
+        <h1>FAQ / Get Involved</h1>
         <p className="mt-4 mb-0">
-          TODO: talk about helper applications, our teams (marketing, infra,
-          etc.), and meeting presenting
+          Interested in learning more about the club? Want to get involved?
+
+          Check out our <Link to="/faq/">FAQ</Link> or reach out to a helper on
+          Discord!
         </p>
       </section>
     </div>
