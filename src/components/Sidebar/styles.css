@@ -2,6 +2,9 @@
   @apply !text-text hover:bg-surface-100 active:bg-surface-050 rounded-lg
     pr-2 py-1 flex flex-row items-center relative;
 }
+.sidebar-item.active {
+  @apply bg-surface-100 active:bg-surface-050;
+}
 .sidebar-item .indicator {
   @apply h-5 w-1 self-center bg-primary rounded-lg;
   @apply transition-transform duration-200 scale-y-0;
