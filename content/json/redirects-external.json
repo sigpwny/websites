@@ -24,6 +24,10 @@
     "dst": "https://drive.google.com/drive/u/0/folders/0B_xHmzNKe4EEb083emxTM3ItYVE"
   },
   {
+    "src": "/gcal",
+    "dst": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/full.ics"
+  },
+  {
     "src": "/old",
     "dst": "https://sigpwny.github.io/"
   },
