@@ -34,9 +34,9 @@ collections:
           {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
       - {label: "Card Image", name: "card_image", widget: "object", required: false, fields: [
-          {label: "Foreground", name: "path", widget: "image", hint: "PNG/JPEG or SVG", choose_url: false, required: false},
-          {label: "Background", name: "path", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
-          {label: "Background color", name: "alt", widget: "string", hint: "Overridden by background image. Include hashtag. Example: '#33cc55'", required: false},
+          {label: "Foreground", name: "foreground", widget: "image", hint: "PNG/JPEG or SVG", choose_url: false, required: false},
+          {label: "Background", name: "background", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
+          {label: "Background color", name: "background_color", widget: "string", hint: "Overridden by background image. Include hashtag. Example: '#33cc55'", required: false},
           {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
       - {label: "Slides", name: "slides", widget: "file", choose_url: false, hint: "Please upload PDFs instead of PPTX files. If downloading from Google Slides, ensure that skipped slides are not present.", required: false}
@@ -68,9 +68,9 @@ collections:
       - {label: "Display Timezone", name: "timezone", widget: "string", hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'Examples: "Online" or "CIF 3039"', required: false}
       - {label: "Card Image", name: "card_image", widget: "object", required: false, fields: [
-          {label: "Foreground", name: "path", widget: "image", hint: "PNG/JPEG or SVG", choose_url: false, required: false},
-          {label: "Background", name: "path", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
-          {label: "Background color", name: "alt", widget: "string", hint: "Overridden by background image. Include hashtag. Example: '#33cc55'", required: false},
+          {label: "Foreground", name: "foreground", widget: "image", hint: "PNG/JPEG or SVG", choose_url: false, required: false},
+          {label: "Background", name: "background", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
+          {label: "Background color", name: "background_color", widget: "string", hint: "Overridden by background image. Include hashtag. Example: '#33cc55'", required: false},
           {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
