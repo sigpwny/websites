@@ -29,7 +29,7 @@ collections:
       - {label: "Credit", name: "credit", widget: "list", hint: "Separate names with commas. To add whitespace, surround the name with double quotes."}
       - {label: "Featured", name: "featured", widget: "boolean", default: true, hint: "The meeting will be shown on the home page if set to true.", required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'Example: "Siebel CS 1404 + Zoom"', required: false}
-      - {label: "Cover Image", name: "image", widget: "object", required: false hint: "Will be deprecated soon: Use Card Image instead", fields: [
+      - {label: "Cover Image", name: "image", widget: "object", required: false, hint: "Will be deprecated soon: Use Card Image instead", fields: [
           {label: "Image Upload", name: "path", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
           {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
