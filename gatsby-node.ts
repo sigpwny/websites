@@ -156,7 +156,10 @@ const content_node_types: ContentNode[] = [
       { name: "ical" },
       { name: "time_start", required: true },
       { name: "series", required: true },
-      { name: "credit", required: true },
+      {
+        name: "credit",
+        resolve: ({ node }) => node.frontmatter.credit ?? ["SIGPwny"]
+      },
       { name: "sponsors" },
       { name: "location" },
       { name: "description", required: true },
