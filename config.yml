@@ -65,6 +65,7 @@ collections:
       - {label: "Description", name: "description", widget: "string", hint: ''}
       - {label: "Start Time", name: "time_start", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: 'Make sure to use UTC time!'}
       - {label: "End Time", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: 'Make sure to use UTC time!', required: false}
+      - {label: "Display Timezone", name: "timezone", widget: "string", hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'Examples: "Online" or "CIF 3039"', required: false}
       - {label: "Card Image", name: "card_image", widget: "object", required: false, fields: [
           {label: "Foreground", name: "path", widget: "image", hint: "PNG/JPEG or SVG", choose_url: false, required: false},
@@ -96,6 +97,7 @@ collections:
       - {label: "Publisher", name: "publisher", widget: "string", hint: 'Changes meaning depending on publication type. For talks, conferences and events. For blogs and news, the primary site source. For papers, journals/conferences.', required: false}
       - {label: "Credit", name: "credit", widget: "list", hint: 'Separate names with commas. To add whitespace, surround the name with double quotes.'}
       - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", hint: ''}
+      - {label: "Display Timezone", name: "timezone", widget: "string", hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: "Description", name: "description", widget: "string", hint: 'Describe the content.'}
       - {label: "Thumbnail Image", name: "image", widget: "object", fields: [
           {label: "Image Upload", name: "path", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false},
