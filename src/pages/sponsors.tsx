@@ -43,12 +43,12 @@ const SponsorsPage = ({ data }: Props) => {
           Thank you to our sponsors for supporting SIGPwny!
         </p>
         <div className="flex flex-col gap-4">
-          {recent_events.map((event, idx) => (
-            <span key={idx}>
+          {recent_events.map((event, event_idx) => (
+            <span key={event_idx}>
               <h2>{event.title}</h2>
               <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {event.sponsors_profiles!.map((sponsor) => (
-                  <div key={idx} className="flex grow">
+                {event.sponsors_profiles!.map((sponsor, sponsor_idx) => (
+                  <div key={sponsor_idx} className="flex grow">
                     <Card {...createCard({sponsor} as CardSponsorProps)} />
                   </div>
                 ))}

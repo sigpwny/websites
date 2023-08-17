@@ -48,7 +48,7 @@ export const AvatarGroup = ({ profiles, limit }: AvatarGroupProps) => {
       {shown_profiles.map((profile, idx) => (
         <span
           key={idx}
-          className="profile-tooltip-select"
+          className="profile-tooltip-select w-full h-full"
           data-tooltip-content={JSON.stringify(profile)}
         >
           <Avatar profile={profile} />
@@ -67,7 +67,7 @@ export const AvatarPersona = (props: AvatarPersonaProps) => {
     <div className="flex flex-row gap-1 items-center">
       <div className="flex flex-shrink-0 flex-grow-0 w-8 h-8">
         <span
-          className="profile-tooltip-select"
+          className="profile-tooltip-select w-full h-full"
           data-tooltip-content={JSON.stringify(profile)}
         >
           <Avatar profile={profile} />
