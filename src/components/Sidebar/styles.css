@@ -1,0 +1,20 @@
+.sidebar-item {
+  @apply !text-text hover:bg-surface-100 active:bg-surface-050 rounded-lg
+    pr-2 py-1 flex flex-row items-center relative;
+}
+.sidebar-item.active {
+  @apply bg-surface-100 active:bg-surface-050;
+}
+.sidebar-folder-items:has(.active) > .sidebar-folder.unexpanded {
+  @apply bg-surface-100 active:bg-surface-050;
+}
+.sidebar-item .indicator {
+  @apply h-full w-1 self-center bg-primary rounded-lg absolute;
+  @apply transition-transform duration-200 scale-y-0;
+}
+.sidebar-item.active .indicator {
+  @apply scale-y-[60%];
+}
+.sidebar-folder-items:has(.active) > .sidebar-folder.unexpanded .indicator {
+  @apply scale-y-[60%];
+}

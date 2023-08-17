@@ -1,70 +1,42 @@
-import React, { useState } from "react"
-import { motion } from "framer-motion"
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   GatsbyImage,
   getImage,
-  IGatsbyImageData,
-  ImageDataLike
-} from "gatsby-plugin-image"
-import { ChevronDownSvg, getSocialIcon } from "./Icons"
-
-interface SimpleProfileProps {
-  name: string
-  profile_image: ImageDataLike
-  handle?: string
-  links?: {
-    name: string
-    link: string
-  }[]
-  role?: string
-}
-
-interface AdvancedProfileProps extends SimpleProfileProps {
-  period?: string
-  work?: string
-  bio?: string
-}
-
-interface AvatarProps {
-  profile?: SimpleProfileProps
-  label?: string
-}
-
-interface AvatarGroupProps {
-  profiles: SimpleProfileProps[]
-  limit?: number
-}
+  IGatsbyImageData
+} from "gatsby-plugin-image";
+import { ChevronDownSvg, getSocialIcon } from "../Icons";
 
 function calculateInitials(name: string) {
-  const names = name.split(" ")
+  const names = name.split(" ");
   if (names.length === 1) {
-    return names[0][0]
+    return names[0][0];
   } else {
-    return names[0][0] + names[names.length - 1][0]
+    return names[0][0] + names[names.length - 1][0];
   }
 }
 
 export const Avatar = ({ profile, label }: AvatarProps) => {
   if (profile && getImage(profile.profile_image)) {
     return (
-      <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 select-none">
+      <div className="flex flex-shrink-0 flex-grow-0 rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 select-none">
         <GatsbyImage
           image={getImage(profile.profile_image) as IGatsbyImageData}
           alt={profile.name}
           className="w-full h-full"
         />
       </div>
-    )
+    );
   } else if (label || (profile && profile.name)) {
-    const text_content = label ?? calculateInitials(profile!.name)
+    const text_content = label ?? calculateInitials(profile!.name);
     return (
-      <div className="rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 w-full h-full flex items-center justify-center text-sm select-none">
+      <div className="flex flex-shrink-0 flex-grow-0 rounded-full overflow-hidden border-surface-200 border-2 bg-surface-100 w-full h-full items-center justify-center text-sm select-none">
         {text_content}
       </div>
-    )
+    );
   }
-  return null
-}
+  return null;
+};
 
 export const AvatarGroup = ({ profiles, limit }: AvatarGroupProps) => {
   const show_count = limit && profiles.length > limit ? limit - 1 : profiles.length;
@@ -76,7 +48,7 @@ export const AvatarGroup = ({ profiles, limit }: AvatarGroupProps) => {
       {shown_profiles.map((profile, idx) => (
         <span
           key={idx}
-          className="profile-tooltip-select"
+          className="profile-tooltip-select w-full h-full"
           data-tooltip-content={JSON.stringify(profile)}
         >
           <Avatar profile={profile} />
@@ -86,10 +58,29 @@ export const AvatarGroup = ({ profiles, limit }: AvatarGroupProps) => {
         <Avatar label={nested_label} />
       )}
     </div>
-  )
-}
+  );
+};
 
-export const ProfileCard = ({ profile }: { profile: SimpleProfileProps }) => (
+export const AvatarPersona = (props: AvatarPersonaProps) => {
+  const { profile, children } = props;
+  return (
+    <div className="flex flex-row gap-1 items-center">
+      <div className="flex flex-shrink-0 flex-grow-0 w-8 h-8">
+        <span
+          className="profile-tooltip-select w-full h-full"
+          data-tooltip-content={JSON.stringify(profile)}
+        >
+          <Avatar profile={profile} />
+        </span>
+      </div>
+      <div className="flex flex-row items-center">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export const ProfileCard = ({ profile }: { profile: ProfileBasicProps }) => (
   <div className="flex flex-row gap-4 bg-surface-250 border-surface-300 border-2 rounded-xl isolate overflow-hidden p-4 relative bottom-0 right-0 max-h-fit max-w-fit">
     {profile?.profile_image ? (
       <div className="w-32 h-32">
@@ -119,15 +110,15 @@ export const ProfileCard = ({ profile }: { profile: SimpleProfileProps }) => (
       ) : null}
     </div>
   </div>
-)
+);
 
-ProfileCard.Links = ({ profile }: { profile: SimpleProfileProps }) => (
+ProfileCard.Links = ({ profile }: { profile: ProfileBasicProps }) => (
   <>
     {profile && profile.links?.map((link, idx) => {
-      const social = getSocialIcon(link.name)
-      if (!social) return null
-      if (link.link === "") return null
-      const url = link.name === "email" ? `mailto:${link.link}` : link.link
+      const social = getSocialIcon(link.name);
+      if (!social) return null;
+      if (link.link === "") return null;
+      const url = link.name === "email" ? `mailto:${link.link}` : link.link;
       return (
         <a
           key={idx}
@@ -138,18 +129,19 @@ ProfileCard.Links = ({ profile }: { profile: SimpleProfileProps }) => (
         >
           {social.svg}
         </a>
-      )
+      );
     })}
   </>
-)
+);
 
-export const ProfileCardGrid = ({ profiles }: { profiles: AdvancedProfileProps[] }) => {
-  const [expanded_profiles, setIsExpanded] = useState(Array(profiles.length).fill(false))
+export const ProfileCardGrid = ({ profiles }: { profiles: ProfileAdvancedProps[] }) => {
+  const [expanded_profiles, setIsExpanded] =
+    useState(Array(profiles.length).fill(false));
   const handleSetIsExpanded = (index: number) => {
-    const new_expanded_profiles = [...expanded_profiles]
-    new_expanded_profiles[index] = !new_expanded_profiles[index]
-    setIsExpanded(new_expanded_profiles)
-  }
+    const new_expanded_profiles = [...expanded_profiles];
+    new_expanded_profiles[index] = !new_expanded_profiles[index];
+    setIsExpanded(new_expanded_profiles);
+  };
   return (
     <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
       {profiles.map((profile, idx) => {
@@ -228,8 +220,8 @@ export const ProfileCardGrid = ({ profiles }: { profiles: AdvancedProfileProps[]
               </button>
             </span>
           </motion.div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};

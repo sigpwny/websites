@@ -73,6 +73,7 @@ type Meeting implements Node & TemplatedPage & ICalendarEvent @dontInfer {
   location: String
   description: String
   image: ImageAlt
+  live_video_url: String
   slides: File @fileByRelativePath
   recording: String
   assets: [File] @fileByRelativePath

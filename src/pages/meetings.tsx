@@ -1,15 +1,15 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-import { Tooltip } from "react-tooltip"
-import dayjs from "dayjs"
+import React from "react";
+import { Link, graphql } from "gatsby";
 
-import { AvatarGroup, ProfileCard } from "../components/Profile"
-import Seo from "../components/Seo"
-import { TagGroup } from "../components/Tag"
-import { weekNumber, convertDate, formatSemester } from "../utils/util"
-import { PdfSvg, YouTubeSvg } from "../components/Icons"
+import { CountdownBadge } from "../components/Countdown";
+import { AvatarGroup, ProfileCard } from "../components/Profile";
+import Seo from "../components/Seo";
+import { TagGroup } from "../components/Tag";
+import { Tooltip } from "../components/Tooltip";
+import { weekNumber, convertDate, formatSemester } from "../utils/util";
+import { PdfSvg, YouTubeSvg } from "../components/Icons";
 
-type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0]
+type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0];
 
 interface Props {
   data: Queries.MeetingsPageQuery 
@@ -41,6 +41,7 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
           >
             {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
           </span>
+          <CountdownBadge time_start={meeting.time_start} time_close={meeting.time_close} />
           <Link to={`${meeting.slug}`} className="truncate">
             <span>
               <span className="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
@@ -82,7 +83,7 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
             </div>
           </div>
           <AvatarGroup
-            profiles={profiles}
+            profiles={profiles as ProfileBasicProps[]}
             limit={3}
           />
         </div>
@@ -122,42 +123,11 @@ const MeetingsPage = ({ data }: Props) => {
               </ul>
             </div>
           ))}
-          <span className="tooltip-container">
-            <Tooltip
-              anchorSelect=".day-tooltip-select"
-              className="!px-2 !py-0 !transition-none !bg-surface-250 !shadow-2xl !rounded-xl font-mono hidden md:block"
-              border={"2px solid var(--color-surface-300"}
-              opacity={1}
-              place={"left"}
-            />
-            <Tooltip
-              anchorSelect=".tooltip-select"
-              className="!p-2 !transition-none !bg-surface-250 !shadow-2xl !rounded-xl"
-              border={"2px solid var(--color-surface-300"}
-              opacity={1}
-              clickable
-            />
-            <Tooltip
-              anchorSelect=".link-tooltip-select"
-              className="!px-3 !py-2 !transition-none !bg-surface-250 !shadow-2xl !rounded-xl"
-              border={"2px solid var(--color-surface-300"}
-              opacity={1}
-            />
-            <Tooltip
-              anchorSelect=".profile-tooltip-select"
-              className="!p-0 !transition-none !bg-transparent !shadow-2xl"
-              opacity={1}
-              place={"top-end"}
-              clickable
-              noArrow
-              render={({ content }) => {
-                if (!content) return null
-                const profile = JSON.parse(content)
-                return (
-                  <ProfileCard profile={profile} />
-                )
-              }}
-            />
+          <span>
+            <Tooltip.Day />
+            <Tooltip />
+            <Tooltip.Link />
+            <Tooltip.Profile />
           </span>
         </div>
       </div>
@@ -173,6 +143,7 @@ export const query = graphql`
       meetings: nodes {
         title
         time_start
+        time_close
         timezone
         week_number
         credit

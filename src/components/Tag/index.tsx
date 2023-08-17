@@ -1,12 +1,6 @@
 import React from "react"
 import ReactDOMServer from "react-dom/server"
 
-interface TagGroupProps {
-  tags: string[],
-  char_limit?: number,
-  tag_limit?: number
-}
-
 export const Tag = ({ tag }: { tag: string }) => (
   <div
     className="flex-none h-fit px-2 py-1 text-xs select-none bg-surface-200 hover:bg-surface-300 border-2 border-surface-100 rounded-lg"

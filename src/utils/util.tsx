@@ -33,15 +33,15 @@ export function formatSemester(semester: string): string {
   return semester
 }
 
-export function convertDate(input_date: string, format: string, input_tz: string): string {
-  dayjs.extend(utc)
-  dayjs.extend(timezone)
-  dayjs.extend(advanced)
-  const date = input_tz ? dayjs(input_date).tz(input_tz) : dayjs(input_date)
+export function convertDate(input_date: string, format?: string, input_tz?: string): string {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  dayjs.extend(advanced);
+  const date = input_tz ? dayjs(input_date).tz(input_tz) : dayjs(input_date);
   if (format) {
-    return date.format(format)
+    return date.format(format);
   }
-  return date.toISOString()
+  return date.toISOString();
 }
 
 export function getYouTubeEmbedUrl(url: string): string {
