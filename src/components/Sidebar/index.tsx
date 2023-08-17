@@ -1,47 +1,47 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "gatsby";
 import { motion, LayoutGroup } from "framer-motion";
 import { ChevronRightRegular } from "@fluentui/react-icons";
 
 import "./styles.css";
 
-// TODO: Add option to expand all items by default
-export const Sidebar = ({ root_items }: SidebarProps) => {
+export const Sidebar = ({ root_items, expand_all }: SidebarProps) => {
   return (
     <LayoutGroup>
       <span className="flex flex-col gap-1 w-full select-none">
         {root_items.map((item, idx) => (
-          <SidebarItem key={idx} item={item} />
+          <SidebarItem key={idx} item={item} expand_all={expand_all} />
         ))}
       </span>
     </LayoutGroup>
   )
 };
 
-export const SidebarItem = ({ item, depth }: {item: SidebarItem, depth?: number}) => {
+export const SidebarItem = ({ item, depth, expand_all }: SidebarItemProps) => {
   const curr_depth = depth || 0;
   const padding = {paddingLeft: `${curr_depth}em`};
   const transition = {duration: 0.2, ease: "easeOut"};
   if (item.items && item.items.length > 0) {
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(expand_all || false);
     const subitems_ref = useRef<HTMLSpanElement>(null);
     const new_depth = curr_depth + 1;
+    useEffect(() => {
+      if (subitems_ref.current?.querySelector(".active")) setExpanded(true);
+    }, []);
     return (
       <motion.span
-        className="flex flex-col gap-1"
+        className="flex flex-col gap-1 sidebar-folder-items"
         transition={transition}
         layout="position"
       >
         <button
           style={padding}
-          className={`sidebar-item cursor-pointer ${
-            !expanded && subitems_ref?.current?.querySelector(".active") ? "active" : ""
-          }`}
+          className={`sidebar-item sidebar-folder ${expanded ? "" : "unexpanded"}`}
           onClick={() => setExpanded(!expanded)}
         >
           <span className="indicator" />
           <motion.span
-            className="flex flex-shrink-0 flex-grow-0 rotate-90"
+            className="flex flex-shrink-0 flex-grow-0 rotate-90 ml-2"
             initial={false}
             animate={{rotate: expanded ? 90 : 0}}
             transition={transition}
@@ -67,7 +67,7 @@ export const SidebarItem = ({ item, depth }: {item: SidebarItem, depth?: number}
           layout="position"
         >
           {item.items.map((subitem, idx) => (
-            <SidebarItem key={idx} item={subitem} depth={new_depth} />
+            <SidebarItem key={idx} item={subitem} depth={new_depth} expand_all={expand_all} />
           ))}
         </motion.span>
       </motion.span>
@@ -85,7 +85,7 @@ export const SidebarItem = ({ item, depth }: {item: SidebarItem, depth?: number}
           activeClassName="active"
         >
           <span className="indicator" />
-          <span className="ml-2">{item.name}</span>
+          <span className="ml-4">{item.name}</span>
         </Link>
       </motion.span>
     );
