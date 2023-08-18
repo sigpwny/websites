@@ -157,7 +157,7 @@ export const query = graphql`
           handle
           links {
             name
-            link
+            url
           }
           role
         }

@@ -95,7 +95,10 @@ const content_node_types: ContentNode[] = [
       { name: "ical" },
       { name: "time_start", required: true },
       { name: "week_number", required: true },
-      { name: "credit", required: true },
+      {
+        name: "credit",
+        resolve: ({ node }) => node.frontmatter.credit ?? ["SIGPwny"]
+      },
       { name: "featured" },
       { name: "location" },
       { name: "description" },
@@ -201,25 +204,14 @@ const content_node_types: ContentNode[] = [
       { name: "publisher" },
       { name: "date", required: true },
       { name: "description" },
-      {
-        name: "image",
-        required: true,
-        fields: [
-          { name: "path", required: true },
-          { name: "alt", required: true },
-        ],
-      },
+      { name: "card_image", fields: field_resolvers_card_image },
       { name: "primary_link" },
-      { name: "other_links" },
+      { name: "links" },
       { name: "tags" },
       {
         name: "slug",
         resolve: ({ node, file_node }) =>
           createSlug("/publications/", file_node, node.frontmatter.slug),
-      },
-      {
-        name: "timezone",
-        resolve: ({ node }) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
       },
     ],
   },

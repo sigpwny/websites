@@ -117,8 +117,8 @@ ProfileCard.Links = ({ profile }: { profile: ProfileBasicProps }) => (
     {profile && profile.links?.map((link, idx) => {
       const social = getSocialIcon(link.name);
       if (!social) return null;
-      if (link.link === "") return null;
-      const url = link.name === "email" ? `mailto:${link.link}` : link.link;
+      if (link.url === "") return null;
+      const url = link.name === "email" ? `mailto:${link.url}` : link.url;
       return (
         <a
           key={idx}

@@ -11,9 +11,9 @@ card_image:
   background: hackathon-2019-cover.png
 links:
   - name: Writeup
-    link: https://dillonkorman.com/running-sigpwnys-first-recruiting-ctf/
+    url: https://dillonkorman.com/running-sigpwnys-first-recruiting-ctf/
   - name: Opening Slides
-    link: https://docs.google.com/presentation/d/1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4/edit?usp=sharing
+    url: https://docs.google.com/presentation/d/1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4/edit?usp=sharing
 stats: []
 ---
 

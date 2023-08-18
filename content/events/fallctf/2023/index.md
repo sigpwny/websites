@@ -13,6 +13,6 @@ card_image:
   background_color: "#000000"
   foreground: screenshot-2023-08-16-171303.png
 links:
-  - link: https://fallctf.sigpwny.com/
+  - url: https://fallctf.sigpwny.com/
     name: website
 ---

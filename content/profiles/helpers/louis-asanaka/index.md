@@ -7,5 +7,5 @@ role: Helper
 weight: 0
 links:
   - name: github
-    link: https://github.com/LouisAsanaka
+    url: https://github.com/LouisAsanaka
 ---

@@ -1,6 +1,6 @@
 interface SidebarItem {
   name: string;
-  link?: string;
+  url?: string;
   items?: SidebarItem[];
 }
 

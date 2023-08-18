@@ -44,10 +44,9 @@ interface CardPublicationProps {
     date: string
     publisher: string
     publication_type: string
-    image: Image
+    card_image: CardImageProps
     slug: string
   }
-  timezone: string
 }
 
 interface CardSponsorProps {

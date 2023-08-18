@@ -13,7 +13,7 @@ export function createCard(
     return ({
       heading: meeting.semester + " Week " + weekNumber(meeting.week_number) + " • " + convertDate(meeting.time_start, "YYYY-MM-DD", timezone),
       title: meeting.title,
-      image: meeting.image,
+      image: meeting.image, // TODO: REPLACE
       link: meeting.slug
     });
   } else if ("event" in content) {
@@ -30,7 +30,7 @@ export function createCard(
       heading: publication.publication_type.toUpperCase() +
         (publication.publisher ? " • " + publication.publisher : ""),
       title: publication.title,
-      image: publication.image,
+      card_image: publication.card_image,
       link: publication.slug
     });
   } else if ("sponsor" in content) {

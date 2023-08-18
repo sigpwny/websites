@@ -6,7 +6,7 @@ import { PwnySvg } from "./Icons"
 
 interface NavLink {
   name: string
-  link: string
+  url: string
 }
 
 const Nav = () => {
@@ -38,11 +38,11 @@ const Nav = () => {
         siteMetadata {
           navLinks {
             name
-            link
+            url
           }
           navCallToActionLinks {
             name
-            link
+            url
           }
         }
       }
@@ -52,22 +52,22 @@ const Nav = () => {
   const navCallToActionLinksResult = data.site?.siteMetadata.navCallToActionLinks
   // create non-nullable array of nav call to action links
   const navLinks: NavLink[] = []
-  navLinksResult?.forEach((item) => {
-    if (item?.name && item?.link) {
+  navLinksResult?.forEach((link) => {
+    if (link?.name && link?.url) {
       const new_link: NavLink = {
-        name: item.name,
-        link: item.link,
+        name: link.name,
+        url: link.url,
       }
       navLinks.push(new_link)
     }
   })
   // create non-nullable array of nav call to action links
   const navCallToActionLinks: NavLink[] = []
-  navCallToActionLinksResult?.forEach((item) => {
-    if (item?.name && item?.link) {
+  navCallToActionLinksResult?.forEach((link) => {
+    if (link?.name && link?.url) {
       const new_link: NavLink = {
-        name: item.name,
-        link: item.link,
+        name: link.name,
+        url: link.url,
       }
       navCallToActionLinks.push(new_link)
     }
@@ -100,26 +100,26 @@ const Nav = () => {
                   <div className="hidden md:block md:ml-6 my-auto">
                     <div className="flex">
                       <div className="flex space-x-6 lg:space-x-8">
-                        {navLinks.map((item) => (
+                        {navLinks.map((link) => (
                           <Link
-                            key={item.name}
-                            to={item.link}
+                            key={link.name}
+                            to={link.url}
                             className="font-bold text-xl lg:text-2xl my-auto leading-normal"
                             activeClassName="nav-active"
                           >
-                            {item.name}
+                            {link.name}
                           </Link>
                         ))}
                       </div>
                       <div className="absolute right-0 space-x-2 lg:space-x-4">
-                        {navCallToActionLinks.map((item) => (
+                        {navCallToActionLinks.map((link) => (
                           <Link
-                            key={item.name}
-                            to={item.link}
+                            key={link.name}
+                            to={link.url}
                             className="font-bold text-xl lg:text-2xl my-auto leading-normal btn-primary"
                             activeClassName="nav-active"
                           >
-                            {item.name}
+                            {link.name}
                           </Link>
                         ))}
                       </div>
@@ -139,25 +139,25 @@ const Nav = () => {
             >
               <Disclosure.Panel className="md:hidden">
                 <div className="container">
-                  {navLinks.map((item) => (
+                  {navLinks.map((link) => (
                     <Disclosure.Button as={Link}
-                      key={item.name}
-                      to={item.link}
+                      key={link.name}
+                      to={link.url}
                       className="font-bold text-2xl leading-normal block my-1"
                       activeClassName="nav-active"
                     >
-                      {item.name}
+                      {link.name}
                     </Disclosure.Button>
                   ))}
                   <hr />
-                  {navCallToActionLinks.map((item) => (
+                  {navCallToActionLinks.map((link) => (
                     <Disclosure.Button as={Link}
-                      key={item.name}
-                      to={item.link}
+                      key={link.name}
+                      to={link.url}
                       className="font-bold text-2xl leading-normal block my-1"
                       activeClassName="nav-active"
                     >
-                      {item.name}
+                      {link.name}
                     </Disclosure.Button>
                   ))}
                   <hr />

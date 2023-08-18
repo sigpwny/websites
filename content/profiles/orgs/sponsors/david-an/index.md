@@ -8,5 +8,5 @@ role: Member
 weight: 1
 links:
   - name: Website
-    link: https://davidan.dev/
+    url: https://davidan.dev/
 ---

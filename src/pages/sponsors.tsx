@@ -112,7 +112,7 @@ export const query = graphql`
           weight
           links {
             name
-            link
+            url
           }
         }
         slug

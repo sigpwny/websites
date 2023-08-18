@@ -38,7 +38,7 @@ const JoinPage = ({ data }: Props) => {
     createCard({meeting, timezone: meeting.timezone} as CardMeetingProps)
   ))
   const socials = data.site?.siteMetadata?.socialLinks
-  const discord_link = socials?.find((social) => social?.name === "Discord")?.link || "https://sigpwny.com/discord"
+  const discord_link = socials?.find((social) => social?.name === "Discord")?.url || "https://sigpwny.com/discord"
   return (
     <div className="2xl:px-40">
       <section id="join-title" className="grid gap-x-8 lg:grid-cols-2 py-8">
@@ -131,7 +131,7 @@ export const query = graphql`
         timezone
         socialLinks {
           name
-          link
+          url
         }
       }
     }

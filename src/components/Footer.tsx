@@ -18,11 +18,11 @@ const Footer = () => {
         siteMetadata {
           navLinks {
             name
-            link
+            url
           }
           socialLinks {
             name
-            link
+            url
           }
         }
       }
@@ -37,13 +37,13 @@ const Footer = () => {
           <div className="flex flex-row basis-1/2 max-w-md mb-8">
             <div className="flex flex-col basis-1/2">
               <p className="font-bold m-0">Sitemap</p>
-              {data.site?.siteMetadata?.navLinks?.map((item) => {
-                if (item?.name && item?.link) {
+              {data.site?.siteMetadata?.navLinks?.map((link) => {
+                if (link?.name && link?.url) {
                   return (
-                    <span key={item.name} className="m-0">
-                      <Link to={item.link}>
+                    <span key={link.name} className="m-0">
+                      <Link to={link.url}>
                         <p className="inline align-middle m-0">
-                          {item.link === "/" ? "Home" : item.name}
+                          {link.url === "/" ? "Home" : link.name}
                         </p>
                       </Link>
                     </span>
@@ -53,17 +53,17 @@ const Footer = () => {
             </div>
             <div className="flex flex-col basis-1/2">
               <p className="font-bold m-0">Connect</p>
-              {data.site?.siteMetadata?.socialLinks?.map((item) => {
-                if (item?.name && item?.link) {
+              {data.site?.siteMetadata?.socialLinks?.map((link) => {
+                if (link?.name && link?.url) {
                   return (
-                    <span key={item.name} className="m-0">
+                    <span key={link.name} className="m-0">
                       <a
-                        href={item.link} className="w-full"
+                        href={link.url} className="w-full"
                         target="_blank" rel="noopener noreferrer"
                       >
-                        {icons.has(item.name) ? icons.get(item.name) : null}
+                        {icons.has(link.name) ? icons.get(link.name) : null}
                         <p className="inline align-middle m-0 ml-2">
-                          {item.name}
+                          {link.name}
                         </p>
                       </a>
                     </span>

@@ -9,5 +9,5 @@ weight: 0
 handle: zhuyifei1999
 links:
   - name: github
-    link: https://github.com/zhuyifei1999/
+    url: https://github.com/zhuyifei1999/
 ---

@@ -36,9 +36,9 @@ card_image:
   background: windows-95-clouds.jpg
 links:
   - name: website
-    link: https://2023.uiuc.tf
+    url: https://2023.uiuc.tf
   - name: ctftime
-    link: https://ctftime.org/event/1899
+    url: https://ctftime.org/event/1899
 stats:
   - name: Teams
     value: "818"

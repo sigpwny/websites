@@ -358,7 +358,7 @@ export const query = graphql`
         bio
         links {
           name
-          link
+          url
         }
         role
         weight
@@ -376,7 +376,7 @@ export const query = graphql`
         bio
         links {
           name
-          link
+          url
         }
         role
         weight
@@ -396,7 +396,7 @@ export const query = graphql`
         bio
         links {
           name
-          link
+          url
         }
         role
         weight

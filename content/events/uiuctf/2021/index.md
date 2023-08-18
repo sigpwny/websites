@@ -46,9 +46,9 @@ card_image:
   background_color: "#0d1a28"
 links:
   - name: website
-    link: https://2021.uiuc.tf/
+    url: https://2021.uiuc.tf/
   - name: ctftime
-    link: https://ctftime.org/event/1372
+    url: https://ctftime.org/event/1372
 stats:
   - name: Teams
     value: "658"

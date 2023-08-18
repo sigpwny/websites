@@ -7,5 +7,5 @@ period: "Class of 2022"
 work: ""
 weight: 0
 links:
-  - {name: "twitter", link: "https://twitter.com/2much4ux"}
+  - {name: "twitter", url: "https://twitter.com/2much4ux"}
 ---

@@ -30,9 +30,9 @@ card_image:
   background: acnh.jpg
 links:
   - name: website
-    link: https://2020.uiuc.tf/
+    url: https://2020.uiuc.tf/
   - name: ctftime
-    link: https://ctftime.org/event/1075
+    url: https://ctftime.org/event/1075
 stats:
   - name: Teams
     value: "390"

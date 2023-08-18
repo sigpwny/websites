@@ -1,10 +1,10 @@
-import React from "react"
-import { graphql, Link } from "gatsby"
-import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
-import { MDXProvider } from "@mdx-js/react"
+import React from "react";
+import { graphql } from "gatsby";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
+import { MDXProvider } from "@mdx-js/react";
 
-import Seo from "../components/Seo"
-import { convertDate } from "../utils/util"
+import Seo from "../components/Seo";
+import { convertDate } from "../utils/util";
 
 interface Props {
   data: Queries.PublicationTemplateQuery
@@ -12,55 +12,69 @@ interface Props {
 }
 
 export const Head = ({ data }: Props) => {
-  const { publication } = data
-  if (!publication) {
-    throw new Error(`invalid argument: "publication" is undefined`)
+  const p = data.publication;
+  if (!p) {
+    throw new Error(`invalid argument: "publication" is undefined`);
   }
+  const meta_image = 
+    p.card_image.foreground?.publicURL ??
+    p.card_image.background?.publicURL ??
+    undefined;
   return (
     <Seo
-      title={publication.title}
-      description={publication.description ? publication.description : undefined}
-      image={publication.image?.path ? (
-        publication.image.path.childImageSharp?.gatsbyImageData.images.fallback?.src
-      ) : undefined}
+      title={p.title}
+      description={p.description ? p.description : undefined}
+      image={meta_image}
     />
-  )
+  );
 }
 
 const PublicationTemplate = ({ data, children }: Props) => {
-  const { publication } = data
-  if (!publication) {
-    throw new Error(`invalid argument: "publication" is undefined`)
+  const p = data.publication;
+  if (!p) {
+    throw new Error(`invalid argument: "publication" is undefined`);
   }
   return (
     <div className="mx-auto panel page-width">
-      <h1>{publication.title}</h1>
+      <h1>{p.title}</h1>
       <div>
-        <p>{convertDate(publication.date, "MMM DD, YYYY", publication.timezone)} - {publication.credit.join(', ')}</p>
+        <p>{convertDate(p.date, "MMM DD, YYYY")} - {p.credit.join(', ')}</p>
         <div className="flex flex-row">
-          {publication.tags?.map((tag) => (
+          {p.tags?.map((tag) => (
             <span className="rounded-lg bg-primary text-white">{tag}</span>
           ))}
         </div>
       </div>
-      <p>{publication.description}</p>
-      <Link to={publication.primary_link || ''} className="btn-primary">Check it out</Link>
-      {publication.other_links && 
+      <p>{p.description}</p>
+      {p.primary_link ? (
+        <a
+          href={p.primary_link.url}
+          className="btn-primary"
+          target="_blank" rel="noopener noreferrer"
+        >
+          {p.primary_link.name}
+        </a>
+      ) : null}
+      {p.links?.length && p.links.length > 0 ? ( 
         <div className="mt-4">
           <h3>Additional Links</h3>
           <ul>
-            {publication.other_links.map((link) => (
-              <li><a href={link || ''}>{(link||'').slice(0,50) + (((link||'').length > 50) ? '...' : '')}</a></li>
+            {p.links.map((link) => (
+              <li>
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.name}
+                </a>
+              </li>
             ))}
           </ul>
         </div>
-      }
+      ) : null}
       <div className="max-w-prose mx-auto">
-        <GatsbyImage
-          image={publication.image.path.childImageSharp?.gatsbyImageData as IGatsbyImageData}
-          alt={publication.image.alt}
+        {/* <GatsbyImage
+          image={p.image.path.childImageSharp?.gatsbyImageData as IGatsbyImageData}
+          alt={p.image.alt}
           className="rounded-xl"
-        />
+        /> */}
       </div>
       <MDXProvider>
         <div className="md-root w-full max-w-prose mx-auto">
@@ -68,10 +82,10 @@ const PublicationTemplate = ({ data, children }: Props) => {
         </div>
       </MDXProvider>
     </div>
-  )
-}
+  );
+};
 
-export default PublicationTemplate
+export default PublicationTemplate;
 
 export const query = graphql`
   query PublicationTemplate($id: String!) {
@@ -81,20 +95,37 @@ export const query = graphql`
       publication_type
       publisher
       date
-      timezone
       description
-      image {
-        path {
+      card_image {
+        foreground {
+          publicURL
+        }
+        background {
+          publicURL
+        }
+        foreground_image {
+          childImageSharp {
+            gatsbyImageData(width: 1024)
+          }
+        }
+        background_image {
           childImageSharp {
             gatsbyImageData(width: 1024, placeholder: BLURRED)
           }
         }
+        background_color
         alt
       }
-      primary_link
-      other_links
+      primary_link {
+        name
+        url
+      }
+      links {
+        name
+        url
+      }
       tags
       slug
     }
   }
-`
+`;

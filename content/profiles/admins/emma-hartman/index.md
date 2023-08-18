@@ -7,8 +7,8 @@ role: Admin
 weight: 0
 handle: lukewarmdaisies
 links:
-  - {name: "email", link: "lukewarmdaisies@gmail.com"}
-  - {name: "website", link: "https://emmahartman.dev"}
-  - {name: "discord", link: "https://discord.com/users/297854667310891009"}
-  - {name: "github", link: "https://github.com/eihart123"}
+  - {name: "email", url: "lukewarmdaisies@gmail.com"}
+  - {name: "website", url: "https://emmahartman.dev"}
+  - {name: "discord", url: "https://discord.com/users/297854667310891009"}
+  - {name: "github", url: "https://github.com/eihart123"}
 ---

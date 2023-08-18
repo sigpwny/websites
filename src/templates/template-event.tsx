@@ -90,10 +90,10 @@ const EventTemplate = ({ data, children }: Props) => {
                   {event.links.map((link, idx) => (
                     <li key={idx}>
                       <a
-                        href={link?.link}
+                        href={link.url}
                         target="_blank" rel="noopener noreferrer"
                       >
-                        {getLinkName(link?.name || '')}
+                        {getLinkName(link.name)}
                       </a>
                     </li>
                   ))}
@@ -176,7 +176,7 @@ export const query = graphql`
         handle
         links {
           name
-          link
+          url
         }
         role
       }
@@ -211,7 +211,7 @@ export const query = graphql`
         handle
         links {
           name
-          link
+          url
         }
         role
       }
@@ -238,7 +238,7 @@ export const query = graphql`
       }
       links {
         name
-        link
+        url
       }
       stats {
         name

@@ -11,5 +11,5 @@ card_image:
   foreground: fallctf-2021-cover.png
 links:
   - name: Opening Slides
-    link: https://drive.google.com/open?id=1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4
+    url: https://drive.google.com/open?id=1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4
 ---

@@ -30,7 +30,7 @@ const IndexPage = ({ data }: Props) => {
     createCard({event, timezone: event.timezone} as CardEventProps)
   ))
   const publication_cards = data.allPublication.publications.map((p: Publication) => (
-    createCard({publication: p, timezone: p.timezone} as CardPublicationProps)
+    createCard({publication: p} as CardPublicationProps)
   ))
   return (
     <>
@@ -177,13 +177,24 @@ export const query = graphql`
         publication_type
         publisher
         date
-        timezone
-        image {
-          path {
+        card_image {
+          foreground {
+            publicURL
+          }
+          background {
+            publicURL
+          }
+          foreground_image {
+            childImageSharp {
+              gatsbyImageData(width: 600)
+            }
+          }
+          background_image {
             childImageSharp {
               gatsbyImageData(width: 600, placeholder: BLURRED)
             }
           }
+          background_color
           alt
         }
         slug
