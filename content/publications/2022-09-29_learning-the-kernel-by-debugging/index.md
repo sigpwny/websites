@@ -9,7 +9,7 @@ card_image:
   background: slide-cover.png
   alt: Title slide of the presentation
 primary_link:
-  name: Recording (Goodle Drive)
+  name: Recording (Google Drive)
   url: https://drive.google.com/file/d/1aHMV4wCBp2ctSE5HHrT9P2L1mAQ8eLxu/view?usp=sharing
 other_links:
   - name: Slides (Google Drive)

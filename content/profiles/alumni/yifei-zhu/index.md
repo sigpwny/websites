@@ -1,5 +1,5 @@
 ---
-name: YiFei
+name: YiFei Zhu
 bio: Playing with the Linux kernel
 profile_image: yifei.jpg
 role: UIUCTF Infra

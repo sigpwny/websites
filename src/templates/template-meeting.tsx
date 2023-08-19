@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { graphql } from "gatsby";
-import { MDXProvider } from "@mdx-js/react";
 import { Document, Page } from "react-pdf";
 
 import Seo from "../components/Seo";
 import { AvatarPersona } from "../components/Profile";
 import { CountdownBadge } from "../components/Countdown";
+import { MDXProvider } from "../components/MDXProvider";
 import { TagGroup } from "../components/Tag";
 import { Tooltip } from "../components/Tooltip";
 import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util";
@@ -31,15 +31,13 @@ dayjs.extend(advanced);
 dayjs.extend(duration);
 
 interface Props {
-  data: Queries.MeetingTemplateQuery
-  children: React.ReactNode
+  data: Queries.MeetingTemplateQuery;
+  children: React.ReactNode;
 }
 
 export const Head = ({ data }: Props) => {
   const { meeting } = data;
-  if (!meeting) {
-    throw new Error(`invalid argument: "meeting" is undefined`);
-  }
+  if (!meeting) throw new Error(`invalid argument: "meeting" is undefined`);
   return (
     <Seo
       title={meeting.title}
@@ -54,20 +52,17 @@ export const Head = ({ data }: Props) => {
       ) : undefined}
       type="article"
     />
-  )
-}
+  );
+};
 
 const MeetingTemplate = ({ data, children }: Props) => {
-  const { meeting } = data
-  if (!meeting) {
-    throw new Error(`invalid argument: "meeting" is undefined`);
-  }
+  const { meeting } = data;
+  if (!meeting) throw new Error(`invalid argument: "meeting" is undefined`);
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const time_start = dayjs(meeting.time_start).tz(meeting.timezone);
   const time_close = dayjs(meeting.time_close).tz(meeting.timezone);
   const duration = dayjs.duration(time_close.diff(time_start));
-
   return (
     <article className="panel w-full self-start" itemScope itemType="http://schema.org/Article">
       <header>
@@ -260,7 +255,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
       </span>
     </article>
   );
-}
+};
 
 export default MeetingTemplate;
 

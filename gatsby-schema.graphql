@@ -105,6 +105,7 @@ type Event implements Node & TemplatedPage & ICalendarEvent @dontInfer {
 type Publication implements Node & TemplatedPage @dontInfer {
   title: String!
   credit: [String!]!
+  credit_profiles: [Profile]! @link(by: "name", from: "credit")
   publication_type: String!
   publisher: String
   date: Date! @dateformat

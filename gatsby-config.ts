@@ -11,6 +11,7 @@ const config: GatsbyConfig = {
       { name: "SIGPwny", url: "/" },
       { name: "About", url: "/about/" },
       { name: "Meetings", url: "/meetings/" },
+      { name: "Publications", url: "/publications/"},
       { name: "Events", url: "/events/" },
       { name: "Sponsors", url: "/sponsors/" },
     ],

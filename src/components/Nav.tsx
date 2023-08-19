@@ -79,7 +79,7 @@ const Nav = () => {
           <>
             <div className="container">
               <div className="relative flex items-center justify-between h-16">
-                <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
+                <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                   {/* Mobile hamburger menu button*/}
                   <Disclosure.Button className="navbar-toggler">
                     <span className="sr-only">Open main menu</span>
@@ -91,13 +91,13 @@ const Nav = () => {
                   </Disclosure.Button>
                 </div>
                 {/* Desktop navbar */}
-                <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
+                <div className="flex-1 flex items-center justify-center lg:items-stretch lg:justify-start">
                   <div className="flex-shrink-0 flex items-center">
                     <button title="Pwny" className="hover:rotate-[5deg]" onClick={incrementCounter}>
                       <PwnySvg height="48px" />
                     </button>
                   </div>
-                  <div className="hidden md:block md:ml-6 my-auto">
+                  <div className="hidden lg:block lg:ml-6 my-auto">
                     <div className="flex">
                       <div className="flex space-x-6 lg:space-x-8">
                         {navLinks.map((link) => (
@@ -137,7 +137,7 @@ const Nav = () => {
               leaveFrom="transform scale-100 opacity-100"
               leaveTo="transform scale-95 opacity-0"
             >
-              <Disclosure.Panel className="md:hidden">
+              <Disclosure.Panel className="lg:hidden">
                 <div className="container">
                   {navLinks.map((link) => (
                     <Disclosure.Button as={Link}

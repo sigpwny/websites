@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { MDXProvider } from "@mdx-js/react";
 
 import Seo from "../components/Seo";
 import { Card, createCard } from "../components/Card";
+import { MDXProvider } from "../components/MDXProvider";
 import { LocationSvg } from "../components/Icons";
 import { convertDate } from "../utils/util";
 
@@ -142,7 +142,7 @@ const EventTemplate = ({ data, children }: Props) => {
               </div>
             </>
           ) : null}
-          <section id="content" className="panel">
+          <section id="content" className="panel overflow-hidden">
             <MDXProvider>
               <div className="md-root">
                 {children}
