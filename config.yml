@@ -24,7 +24,7 @@ collections:
     fields:
       - {label: "Title", name: "title", hint: 'Example: "PWN II"', widget: "string"}
       - {label: "Start Time", name: "time_start", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Ensure date matches date in path."}
-      - {label: "End Time", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Leave blank to default to 1-hour duration." required: false}
+      - {label: "End Time", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Leave blank to default to 1-hour duration.", required: false}
       - {label: "Display Timezone", name: "timezone", widget: "string", hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: "Week Number", name: "week_number", hint: "Current week number in the semester, 0-indexed. Be careful not to scroll on the input box since it may change the value.", widget: "number", value_type: "int", min: 0, max: 52, step: 1}
       - {label: "Credit", name: "credit", widget: "list", hint: "Separate names with commas. To add whitespace, surround the name with double quotes. Also works with organization names."}
