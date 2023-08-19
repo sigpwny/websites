@@ -27,7 +27,7 @@ collections:
       - {label: "End Time", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Leave blank to default to 1-hour duration.", required: false}
       - {label: "Display Timezone", name: "timezone", widget: "string", hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: "Week Number", name: "week_number", hint: "Current week number in the semester, 0-indexed. Be careful not to scroll on the input box since it may change the value.", widget: "number", value_type: "int", min: 0, max: 52, step: 1}
-      - {label: "Credit", name: "credit", widget: "list", hint: "Separate names with commas. To add whitespace, surround the name with double quotes. Also works with organization names."}
+      - {label: "Credit", name: "credit", widget: "list", hint: "Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces. Also works with organization names."}
       - {label: "Featured", name: "featured", widget: "boolean", default: true, hint: "The meeting will be shown on the home page if set to true.", required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'Example: "Siebel CS 1404 + Zoom"', required: false}
       - {label: "Cover Image", name: "image", widget: "object", required: false, hint: "Deprecated: Use Card Image instead", fields: [
@@ -75,8 +75,8 @@ collections:
           {label: "Background color", name: "background_color", widget: "string", hint: "Overridden by background image. Include the hashtag. Example: '#33cc55'", required: false},
           {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
-      - {label: "Credit", name: "credit", widget: "list", hint: 'Separate names with commas. To add a name with whitespace, surround the name with double quotes.', required: false}
-      - {label: "Sponsors", name: "sponsors", widget: "list", hint: 'Be sure to create sponsor profiles first. Separate names with commas. To add a name with whitespace, surround the name with double quotes.', required: false}
+      - {label: "Credit", name: "credit", widget: "list", hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
+      - {label: "Sponsors", name: "sponsors", widget: "list", hint: 'Be sure to create sponsor profiles first. Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
           {label: "Name", name: "name", widget: "select", options: ["website", "ctftime"], hint: ''},
           {label: "URL", name: "url", widget: "string", hint: ''}
@@ -99,7 +99,7 @@ collections:
       - {label: "Title", name: "title", widget: "string", hint: 'Example: "Announcing our new site!"'}
       - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news", "writeup"], hint: ''}
       - {label: "Publisher", name: "publisher", widget: "string", hint: 'Changes meaning depending on publication type. For talks: conferences and events. For blogs and news: the primary site source. For papers: journals/conferences.', required: false}
-      - {label: "Credit", name: "credit", widget: "list", hint: 'Separate names with commas. To add a name with whitespace, surround the name with double quotes.'}
+      - {label: "Credit", name: "credit", widget: "list", hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.'}
       - {label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD", hint: ''}
       - {label: "Description", name: "description", widget: "string", hint: 'Describe the content.', required: false}
       - {label: "Card Image", name: "card_image", widget: "object", required: false, fields: [
