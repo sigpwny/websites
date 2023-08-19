@@ -17,30 +17,48 @@
 .md-root ol ol { list-style-type: lower-alpha; }
 .md-root ol ol ol { list-style-type: lower-roman; }
 .md-root hr {
+  border-color: var(--color-surface-300);
   margin-top: 1em;
   margin-bottom: 1em;
 }
 .md-root table {
-  border-collapse: collapse;
+  border-collapse: separate !important;
   border-spacing: 0;
-  margin: 1em 0;
+  margin-bottom: 0.5rem;
   width: 100%;
 }
 .md-root table th {
-  border: 1px solid var(--color-text);
+  background-color: var(--color-surface-200);
+  border: 1px solid var(--color-surface-300);
   font-weight: bold;
   padding: 6px 13px;
   text-align: left;
 }
-.md-root table td {
-  border: 1px solid var(--color-text);
+.md-root table th:first-child {
+  border-radius: 0.75rem 0 0 0;
+}
+.md-root table th:last-child {
+  border-radius: 0 0.75rem 0 0;
+}
+.md-root tbody tr:nth-child(2n) {
+  background-color: var(--color-surface-150);
+}
+.md-root tbody tr:nth-child(2n+1) {
+  background-color: var(--color-surface-100);
+}
+.md-root tr td {
+  border-left: 1px solid var(--color-surface-300);
+  border-right: 1px solid var(--color-surface-300);
   padding: 6px 13px;
 }
-.md-root table tr:nth-child(2n) {
-  background-color: var(--color-surface-100);
+.md-root tbody tr:last-child td {
+  border-bottom: 1px solid var(--color-surface-300);
 }
-.md-root table tr:nth-child(2n+1) {
-  background-color: var(--color-surface-100);
+.md-root tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 0.75rem;
+}
+.md-root tbody tr:last-child td:last-child {
+  border-radius: 0 0 0.75rem 0;
 }
 .md-root .gatsby-resp-image-wrapper {
   @apply mb-2;

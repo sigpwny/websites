@@ -7,5 +7,5 @@ period: "Class of 2020"
 work: "SDE @ Google"
 weight: 0
 links:
-  - {name: "website", link: "https://nicholas.sh/"}
+  - {name: "website", url: "https://nicholas.sh/"}
 ---

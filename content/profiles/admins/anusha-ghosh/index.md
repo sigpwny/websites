@@ -6,7 +6,7 @@ bio: I'm an MSCS student interested in exploring AI security! Outside of school
   (and SIGPwny), I love fiber arts and music :D
 links:
   - name: twitter
-    link: https://twitter.com/0xk4l1
+    url: https://twitter.com/0xk4l1
 role: President
 weight: 10
 ---

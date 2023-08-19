@@ -4,7 +4,7 @@ type Site implements Node {
 
 type Link {
   name: String!
-  link: String!
+  url: String!
 }
 
 type SiteMetadata {
@@ -12,9 +12,9 @@ type SiteMetadata {
   siteUrl: String!
   description: String!
   image: String!
-  navLinks: [Link]
-  navCallToActionLinks: [Link]
-  socialLinks: [Link]
+  navLinks: [Link!]
+  navCallToActionLinks: [Link!]
+  socialLinks: [Link!]
   timezone: String!
 }
 
@@ -66,6 +66,7 @@ type Meeting implements Node & TemplatedPage & ICalendarEvent @dontInfer {
   ical: ICalendarEventData!
   time_start: Date! @dateformat
   time_close: Date! @dateformat
+  timezone: String!
   week_number: Int!
   credit: [String!]!
   credit_profiles: [Profile]! @link(by: "name", from: "credit")
@@ -76,11 +77,10 @@ type Meeting implements Node & TemplatedPage & ICalendarEvent @dontInfer {
   live_video_url: String
   slides: File @fileByRelativePath
   recording: String
-  assets: [File] @fileByRelativePath
+  assets: [File!] @fileByRelativePath
   tags: [String!]
   semester: String!
   slug: String!
-  timezone: String!
 }
 
 type Event implements Node & TemplatedPage & ICalendarEvent @dontInfer {
@@ -88,6 +88,7 @@ type Event implements Node & TemplatedPage & ICalendarEvent @dontInfer {
   ical: ICalendarEventData!
   time_start: Date! @dateformat
   time_close: Date! @dateformat
+  timezone: String!
   series: String!
   credit: [String!]!
   credit_profiles: [Profile]! @link(by: "name", from: "credit")
@@ -96,25 +97,24 @@ type Event implements Node & TemplatedPage & ICalendarEvent @dontInfer {
   location: String
   description: String!
   card_image: CardImage!
-  links: [Link]
-  stats: [Stat]
+  links: [Link!]
+  stats: [Stat!]
   slug: String!
-  timezone: String!
 }
 
 type Publication implements Node & TemplatedPage @dontInfer {
   title: String!
   credit: [String!]!
+  credit_profiles: [Profile]! @link(by: "name", from: "credit")
   publication_type: String!
   publisher: String
   date: Date! @dateformat
   description: String
-  image: ImageAlt!
-  primary_link: String
-  other_links: [String]
-  tags: [String]
+  card_image: CardImage!
+  primary_link: Link
+  links: [Link!]
+  tags: [String!]
   slug: String!
-  timezone: String!
 }
 
 type PageMarkdownOptions {
@@ -134,7 +134,7 @@ interface Profile {
   profile_image: File! @fileByRelativePath
   handle: String
   bio: String
-  links: [Link]
+  links: [Link!]
   role: String!
   weight: Int!
 }
@@ -144,7 +144,7 @@ type Admin implements Node & Profile @dontInfer {
   profile_image: File! @fileByRelativePath
   handle: String
   bio: String
-  links: [Link]
+  links: [Link!]
   role: String!
   weight: Int!
 }
@@ -154,7 +154,7 @@ type Helper implements Node & Profile @dontInfer {
   profile_image: File! @fileByRelativePath
   handle: String
   bio: String
-  links: [Link]
+  links: [Link!]
   role: String!
   weight: Int!
 }
@@ -166,7 +166,7 @@ type Alum implements Node & Profile @dontInfer {
   period: String
   work: String
   bio: String
-  links: [Link]
+  links: [Link!]
   role: String!
   weight: Int!
 }
@@ -176,7 +176,7 @@ type Member implements Node & Profile @dontInfer {
   profile_image: File! @fileByRelativePath
   handle: String
   bio: String
-  links: [Link]
+  links: [Link!]
   role: String!
   weight: Int!
 }
@@ -199,5 +199,5 @@ type Org implements Node & Profile @dontInfer {
   bio: String
   role: String!
   weight: Int!
-  links: [Link]
+  links: [Link!]
 }

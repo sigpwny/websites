@@ -32,8 +32,8 @@ export const LayoutMeeting = ({ children }: { children: React.ReactNode }) => {
   const meetings_sidebar_items = Object.keys(meetings_by_semester).map((semester) => ({
     name: formatSemester(semester),
     items: meetings_by_semester[semester].map((meeting) => ({
-      name: `Wk ${weekNumber(meeting.week_number)}: ${meeting.title}`,
-      link: meeting.slug,
+      name: `Week ${weekNumber(meeting.week_number)}: ${meeting.title}`,
+      url: meeting.slug,
     })),
   }));
   return (

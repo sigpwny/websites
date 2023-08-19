@@ -16,7 +16,7 @@ card_image:
   foreground: fall-ctf-2022-logo.png
 links:
   - name: website
-    link: https://fallctf.sigpwny.com/
+    url: https://fallctf.sigpwny.com/
 stats:
   - name: Attendees
     value: "300+"

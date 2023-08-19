@@ -5,13 +5,13 @@ bio: Hello! I am a Junior in Computer Science and Economics. I am interested in
   personal finance and entrepreneurship!
 links:
   - name: email
-    link: jwhit33@illinois.edu
+    url: jwhit33@illinois.edu
   - name: github
-    link: https://github.com/jcw515awsm
+    url: https://github.com/jcw515awsm
   - name: linkedin
-    link: https://www.linkedin.com/in/julius-white-v-18146a21b/
+    url: https://www.linkedin.com/in/julius-white-v-18146a21b/
   - name: discord
-    link: https://discord.com/users/758036817344856066
+    url: https://discord.com/users/758036817344856066
 role: Admin
 weight: 0
 ---

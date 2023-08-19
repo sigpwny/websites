@@ -7,6 +7,6 @@ role: Admin
 weight: 0
 handle: richyliu
 links:
-  - {name: "website", link: "https://rliu.dev/"}
-  - {name: "github", link: "https://github.com/richyliu"}
+  - {name: "website", url: "https://rliu.dev/"}
+  - {name: "github", url: "https://github.com/richyliu"}
 ---

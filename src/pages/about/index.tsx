@@ -255,7 +255,7 @@ const AboutPage = ({ data }: any) => {
             <SIGPwnyMorphology />
             <div className="flex flex-row justify-center">
               <p>sig-<b>poh</b>-nee</p>
-              <p>&nbsp;<small>[audio]</small></p>
+              {/* <p>&nbsp;<small>[audio]</small></p> */}
             </div>
           </div>
         </section>
@@ -313,7 +313,7 @@ const AboutPage = ({ data }: any) => {
         <section id="who-we-are">
           <div className="text-center pb-8">
             <div className="panel mx-auto max-w-prose">
-              <p className="font-bold text-4xl">Who we are</p>
+              <p className="font-bold text-4xl">Who are we?</p>
               <p className="m-0">
                 SIGPwny is completely student-run and would not be able to support everyone without the contributions 
                 from our admin team, helpers, and alumni.
@@ -358,7 +358,7 @@ export const query = graphql`
         bio
         links {
           name
-          link
+          url
         }
         role
         weight
@@ -376,7 +376,7 @@ export const query = graphql`
         bio
         links {
           name
-          link
+          url
         }
         role
         weight
@@ -396,7 +396,7 @@ export const query = graphql`
         bio
         links {
           name
-          link
+          url
         }
         role
         weight

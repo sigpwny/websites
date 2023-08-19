@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "gatsby";
 import { motion, LayoutGroup } from "framer-motion";
-import { ChevronRightRegular } from "@fluentui/react-icons";
+import { ChevronRightRegular } from "../Icons/fluentui";
 
 import "./styles.css";
 
@@ -46,7 +46,7 @@ export const SidebarItem = ({ item, depth, expand_all }: SidebarItemProps) => {
             animate={{rotate: expanded ? 90 : 0}}
             transition={transition}
           >
-            <ChevronRightRegular className="flex flex-shrink-0 flex-grow-0 checked:hidden" />
+            <ChevronRightRegular width="1em" height="1em" />
           </motion.span>
           <span className="ml-2">{item.name}</span>
         </button>
@@ -72,14 +72,14 @@ export const SidebarItem = ({ item, depth, expand_all }: SidebarItemProps) => {
         </motion.span>
       </motion.span>
     );
-  } else if (item.link) {
+  } else if (item.url) {
     return (
       <motion.span
         transition={transition}
         layout="position"
       >
         <Link
-          to={item.link}
+          to={item.url}
           style={padding}
           className="sidebar-item"
           activeClassName="active"

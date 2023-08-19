@@ -7,7 +7,7 @@ period: "Class of 2022"
 work: "privacy @ apple"
 weight: 0
 links:
-  - {name: "website", link: "https://thomasquig.dev/"}
-  - {name: "github", link: "https://github.com/Thomas-Quig"}
-  - {name: "twitter", link: "https://twitter.com/thomas_quig"}
+  - {name: "website", url: "https://thomasquig.dev/"}
+  - {name: "github", url: "https://github.com/Thomas-Quig"}
+  - {name: "twitter", url: "https://twitter.com/thomas_quig"}
 ---

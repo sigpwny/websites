@@ -9,5 +9,5 @@ role: Sponsor
 weight: 1
 links:
 - name: CTF Sponsorship
-  link: https://goo.gle/ctfsponsorship
+  url: https://goo.gle/ctfsponsorship
 ---

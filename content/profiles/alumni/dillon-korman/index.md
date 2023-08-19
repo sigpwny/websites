@@ -7,5 +7,5 @@ period: "Class of 2020"
 work: ""
 weight: 0
 links:
-  - {name: "website", link: "https://dillonkorman.com/"}
+  - {name: "website", url: "https://dillonkorman.com/"}
 ---

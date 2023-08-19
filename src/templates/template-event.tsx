@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { MDXProvider } from "@mdx-js/react";
 
 import Seo from "../components/Seo";
 import { Card, createCard } from "../components/Card";
+import { MDXProvider } from "../components/MDXProvider";
 import { LocationSvg } from "../components/Icons";
 import { convertDate } from "../utils/util";
 
@@ -90,10 +90,10 @@ const EventTemplate = ({ data, children }: Props) => {
                   {event.links.map((link, idx) => (
                     <li key={idx}>
                       <a
-                        href={link?.link}
+                        href={link.url}
                         target="_blank" rel="noopener noreferrer"
                       >
-                        {getLinkName(link?.name || '')}
+                        {getLinkName(link.name)}
                       </a>
                     </li>
                   ))}
@@ -142,7 +142,7 @@ const EventTemplate = ({ data, children }: Props) => {
               </div>
             </>
           ) : null}
-          <section id="content" className="panel">
+          <section id="content" className="panel overflow-hidden">
             <MDXProvider>
               <div className="md-root">
                 {children}
@@ -176,7 +176,7 @@ export const query = graphql`
         handle
         links {
           name
-          link
+          url
         }
         role
       }
@@ -211,7 +211,7 @@ export const query = graphql`
         handle
         links {
           name
-          link
+          url
         }
         role
       }
@@ -238,7 +238,7 @@ export const query = graphql`
       }
       links {
         name
-        link
+        url
       }
       stats {
         name

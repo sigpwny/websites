@@ -7,5 +7,5 @@ period: "Class of 2020"
 work: "Security Analyst"
 weight: 0
 links:
-  - {name: "twitter", link: "https://twitter.com/_dingu"}
+  - {name: "twitter", url: "https://twitter.com/_dingu"}
 ---

@@ -42,9 +42,9 @@ card_image:
   background: spotlights.png
 links:
   - name: website
-    link: https://2022.uiuc.tf/
+    url: https://2022.uiuc.tf/
   - name: ctftime
-    link: https://ctftime.org/event/1600
+    url: https://ctftime.org/event/1600
 stats:
   - name: Teams
     value: "395"

@@ -4,7 +4,7 @@ interface ProfileBasicProps {
   handle?: string
   links?: {
     name: string
-    link: string
+    url: string
   }[]
   role?: string
 }

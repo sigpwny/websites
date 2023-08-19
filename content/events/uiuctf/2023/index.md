@@ -36,9 +36,9 @@ card_image:
   background: windows-95-clouds.jpg
 links:
   - name: website
-    link: https://2023.uiuc.tf
+    url: https://2023.uiuc.tf
   - name: ctftime
-    link: https://ctftime.org/event/1899
+    url: https://ctftime.org/event/1899
 stats:
   - name: Teams
     value: "818"
@@ -53,7 +53,7 @@ stats:
 For UIUCTF 2023 we paid out $1,500 in writeup prizes. We prioritize concise technical communication and writeups that are fun to read and learn from, including those written from/for the perspective of beginners. Here are all writeups that won.
 
 | Challenge | Author |
-| :------- | ---: |
+| --------- | ------ |
 | [adminplz](https://hackmd.io/@Solderet/UIUCTF2023-adminplz) | TCP1P - dimas |
 | [adminplz](https://immense-geology-c53.notion.site/UIUC-CTF-1451335984bd45a787e0ec08f9092c49?pvs=4) | Rubi di Cubrik |
 | [At Home](https://bronson113.github.io/2023/07/03/uiuctf-2023-writeups.html#at-home) | b01lers |
@@ -66,8 +66,8 @@ For UIUCTF 2023 we paid out $1,500 in writeup prizes. We prioritize concise tech
 | [Fast Calculator (Battelle)](https://gitlab.com/shalaamum/ctf-writeups/-/blob/master/UIUCTF%202023/Fast%20Calculator/writeup.md) | Kalmarunionen - shalaamum |
 | [Fast Calculator (Battelle)](https://bronson113.github.io/2023/07/03/uiuctf-2023-writeups.html#fast-calculator) | b01lers |
 | [Finding Artifacts Suite](https://medium.com/@Crimz/uiuctf-osint-writeups-part-1-954f800494c2) | Drift2Win - CrimzDG |
-| [Finding Jonah Suite (What's for Dinner, Finding Jonah, Jonah's Journal, First Class Mail)](https://github.com/D13David/ctf-writeups/blob/main/uiuctf23/osint/finding_jonah/README.md) | Davidpb - Davidpb |
-| [Finding Jonah Suite (What's for Dinner, Finding Jonah, Jonah's Journal, First Class Mail)](https://www.antoine.rocks/UIUCTF%202023%20-%20OSINT.html#whats-for-dinner-50-points) | GCC |
+| [Finding Jonah Suite](https://github.com/D13David/ctf-writeups/blob/main/uiuctf23/osint/finding_jonah/README.md) | Davidpb - Davidpb |
+| [Finding Jonah Suite](https://www.antoine.rocks/UIUCTF%202023%20-%20OSINT.html#whats-for-dinner-50-points) | GCC |
 | [futuredisk](https://gist.github.com/MaeIsBad/f2675042f53769e1b16d5aebe139ccca#futuredisk-1---22-solves) | Spotless |
 | [geoguesser](https://github.com/abhishekg999/UIUCTF-2023/blob/main/geoguesser/README.md) | l3ak - GoodNoodles |
 | [Group Project + Group Projection](https://banua.medium.com/uiuctf-2023-group-project-cryptography-74248dda81a9) | TCP1P - banua |

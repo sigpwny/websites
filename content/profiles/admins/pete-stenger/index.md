@@ -8,15 +8,15 @@ weight: 11
 handle: spicypete
 links:
   - name: email
-    link: pete@stenger.io
+    url: pete@stenger.io
   - name: website
-    link: https://stenger.io
+    url: https://stenger.io
   - name: github
-    link: https://github.com/reteps
+    url: https://github.com/reteps
   - name: twitter
-    link: https://twitter.com/_spicypete
+    url: https://twitter.com/_spicypete
   - name: linkedin
-    link: https://www.linkedin.com/in/pete-stenger/
+    url: https://www.linkedin.com/in/pete-stenger/
   - name: discord
-    link: https://discord.com/users/191210435746201600
+    url: https://discord.com/users/191210435746201600
 ---

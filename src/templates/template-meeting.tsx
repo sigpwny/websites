@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import { Link, graphql } from "gatsby";
-import { MDXProvider } from "@mdx-js/react";
+import { graphql } from "gatsby";
 import { Document, Page } from "react-pdf";
+
+import Seo from "../components/Seo";
+import { AvatarPersona } from "../components/Profile";
+import { CountdownBadge } from "../components/Countdown";
+import { MDXProvider } from "../components/MDXProvider";
+import { TagGroup } from "../components/Tag";
+import { Tooltip } from "../components/Tooltip";
+import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util";
+import { PdfSvg, YouTubeSvg } from "../components/Icons";
 import {
   CalendarRegular,
   ChevronCircleLeftRegular,
   ChevronCircleRightRegular,
   ClockRegular,
   LiveRegular,
-  LocationRegular,
-  TagRegular
-} from "@fluentui/react-icons";
-
-import Seo from "../components/Seo";
-import { AvatarPersona } from "../components/Profile";
-import { CountdownBadge } from "../components/Countdown";
-import { TagGroup } from "../components/Tag";
-import { Tooltip } from "../components/Tooltip";
-import { weekNumber, convertDate, getYouTubeEmbedUrl } from "../utils/util";
-import { PdfSvg, YouTubeSvg } from "../components/Icons";
+  LocationRegular
+} from "../components/Icons/fluentui";
 
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -32,15 +31,13 @@ dayjs.extend(advanced);
 dayjs.extend(duration);
 
 interface Props {
-  data: Queries.MeetingTemplateQuery
-  children: React.ReactNode
+  data: Queries.MeetingTemplateQuery;
+  children: React.ReactNode;
 }
 
 export const Head = ({ data }: Props) => {
   const { meeting } = data;
-  if (!meeting) {
-    throw new Error(`invalid argument: "meeting" is undefined`);
-  }
+  if (!meeting) throw new Error(`invalid argument: "meeting" is undefined`);
   return (
     <Seo
       title={meeting.title}
@@ -55,20 +52,17 @@ export const Head = ({ data }: Props) => {
       ) : undefined}
       type="article"
     />
-  )
-}
+  );
+};
 
 const MeetingTemplate = ({ data, children }: Props) => {
-  const { meeting } = data
-  if (!meeting) {
-    throw new Error(`invalid argument: "meeting" is undefined`);
-  }
+  const { meeting } = data;
+  if (!meeting) throw new Error(`invalid argument: "meeting" is undefined`);
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const time_start = dayjs(meeting.time_start).tz(meeting.timezone);
   const time_close = dayjs(meeting.time_close).tz(meeting.timezone);
   const duration = dayjs.duration(time_close.diff(time_start));
-
   return (
     <article className="panel w-full self-start" itemScope itemType="http://schema.org/Article">
       <header>
@@ -78,66 +72,69 @@ const MeetingTemplate = ({ data, children }: Props) => {
             {meeting.semester} Week {weekNumber(meeting.week_number)}
           </p>
           {meeting.tags && meeting.tags.length > 0 ? (
-            <div className="flex flex-row gap-2 items-center">
-              <TagRegular className="flex flex-shrink-0 flex-grow-0 text-secondary" />
+            <div className="flex flex-row mb-1">
               <TagGroup tags={meeting.tags.concat()} />
             </div>
           ) : null}
-          {time_start ? (
-            <div className="flex flex-row gap-2 items-center">
-              <CalendarRegular className="flex flex-shrink-0 flex-grow-0 text-secondary" />
-              <time dateTime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
+          {meeting.credit_profiles?.length > 0 ? (
+            <div className="flex flex-col md:flex-row flex-shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center mb-2">
+              {meeting.credit_profiles.map((p, idx) => {
+                const profile = (p ?? { name: meeting.credit[idx] }) as ProfileBasicProps;
+                return (
+                  <AvatarPersona key={idx} profile={profile}>
+                    <span rel="author" itemProp="author">
+                      {profile.name}
+                    </span>
+                    {idx === meeting.credit_profiles.length - 1 ? null : (
+                      <span className="hidden md:block">,</span>
+                    )}
+                  </AvatarPersona>
+                );
+              })}
+            </div>
+          ) : null}
+          <div className="flex flex-col mb-2">
+            {time_start ? (
+              <div className="flex flex-row gap-2 items-center">
+                <CalendarRegular className="text-primary" />
                 <span className="inline align-middle">
-                  {time_start.format("dddd, MMMM D, YYYY")}
+                  <time dateTime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
+                    {time_start.format("dddd, MMMM D, YYYY")}
+                  </time>
                 </span>
-              </time>
-            </div>
-          ) : null}
-          {time_start && time_close ? (
-            <div className="flex flex-row gap-2 items-center">
-              <ClockRegular className="flex flex-shrink-0 flex-grow-0 text-secondary" />
-              <time dateTime={duration.toISOString()}>
+              </div>
+            ) : null}
+            {time_start && time_close ? (
+              <div className="flex flex-row gap-2 items-center">
+                <ClockRegular className="text-primary" />
                 <span className="inline align-middle">
-                  {time_start.minute() == 0 ?
-                    <>{time_start.format("h")}</> :
-                    <>{time_start.format("h:mm")}</>
-                  }
-                  {time_start.format("A") !== time_close.format("A") ?
-                    <>{time_start.format(" A")}</> :
-                    null
-                  }
-                  &ndash;
-                  {time_close.minute() == 0 ?
-                    <>{time_close.format("h A")}</> :
-                    <>{time_close.format("h:mm A")}</>
-                  }
+                  <time dateTime={duration.toISOString()}>
+                    {time_start.minute() == 0 ?
+                      <>{time_start.format("h")}</> :
+                      <>{time_start.format("h:mm")}</>
+                    }
+                    {time_start.format("A") !== time_close.format("A") ?
+                      <>{time_start.format(" A")}</> :
+                      null
+                    }
+                    &ndash;
+                    {time_close.minute() == 0 ?
+                      <>{time_close.format("h A")}</> :
+                      <>{time_close.format("h:mm A")}</>
+                    }
+                  </time>
                 </span>
-              </time>
-              <CountdownBadge time_start={meeting.time_start} time_close={meeting.time_close} />
-            </div>
-          ) : null}
-          {meeting.location ? (
-            <div className="flex flex-row gap-2 items-center">
-              <LocationRegular className="flex flex-shrink-0 flex-grow-0 text-secondary" />
-              <span className="inline align-middle">
-                {meeting.location}
-              </span>
-            </div>
-          ) : null}
-          <div className="flex flex-col md:flex-row flex-shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center pb-2">
-            {meeting.credit_profiles.map((p, idx) => {
-              const profile = (p ?? { name: meeting.credit[idx] }) as ProfileBasicProps;
-              return (
-                <AvatarPersona key={idx} profile={profile}>
-                  <span rel="author" itemProp="author">
-                    {profile.name}
-                  </span>
-                  {idx === meeting.credit_profiles.length - 1 ? null : (
-                    <span className="hidden md:block">,</span>
-                  )}
-                </AvatarPersona>
-              );
-            })}
+                <CountdownBadge time_start={meeting.time_start} time_close={meeting.time_close} />
+              </div>
+            ) : null}
+            {meeting.location ? (
+              <div className="flex flex-row gap-2 items-center">
+                <LocationRegular className="text-primary" />
+                <span className="inline align-middle">
+                  {meeting.location}
+                </span>
+              </div>
+            ) : null}
           </div>
         </div>
       </header>
@@ -162,9 +159,9 @@ const MeetingTemplate = ({ data, children }: Props) => {
                 target="_blank" rel="noopener noreferrer"
               >
                 <LiveRegular />
-                <p className="inline align-middle m-0 ml-2">
+                <span className="inline align-middle m-0 ml-2">
                   Join live video
-                </p>
+                </span>
               </a>
             ) : null
           )}
@@ -232,7 +229,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
               disabled={pageNumber <= 1}
               onClick={() => setPageNumber(pageNumber - 1)}
             >
-              <ChevronCircleLeftRegular className="flex flex-shrink-0 flex-grow-0 text-3xl" />
+              <ChevronCircleLeftRegular height="2em" width="2em" />
             </button>
             <span className="w-24 text-center">
               {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
@@ -243,7 +240,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
               disabled={pageNumber >= numPages}
               onClick={() => setPageNumber(pageNumber + 1)}
             >
-              <ChevronCircleRightRegular className="flex flex-shrink-0 flex-grow-0 text-3xl" />
+              <ChevronCircleRightRegular height="2em" width="2em" />
             </button>
           </div>
         </div>
@@ -254,11 +251,11 @@ const MeetingTemplate = ({ data, children }: Props) => {
         </section>
       </MDXProvider>
       <span className="z-50 hidden md:block">
-        <Tooltip.Profile offset={3} place="top-start" />
+        <Tooltip.Profile offset={3} place="bottom-start" />
       </span>
     </article>
   );
-}
+};
 
 export default MeetingTemplate;
 
@@ -281,7 +278,7 @@ export const query = graphql`
         handle
         links {
           name
-          link
+          url
         }
         role
       }

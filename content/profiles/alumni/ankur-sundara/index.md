@@ -8,7 +8,7 @@ weight: 0
 handle: arxenix
 links:
   - name: twitter
-    link: https://twitter.com/ankursundara
+    url: https://twitter.com/ankursundara
   - name: website
-    link: https://ankursundara.com
+    url: https://ankursundara.com
 ---

@@ -7,5 +7,5 @@ period: "Class of 2021"
 work: "microarchitectural security @ MIT"
 weight: 0
 links:
-  - {name: "twitter", link: "https://twitter.com/0xjprx"}
+  - {name: "twitter", url: "https://twitter.com/0xjprx"}
 ---

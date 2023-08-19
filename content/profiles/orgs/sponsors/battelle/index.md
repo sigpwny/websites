@@ -11,5 +11,5 @@ role: Sponsor
 weight: 8
 links:
   - name: website
-    link: https://www.battelle.org/
+    url: https://www.battelle.org/
 ---

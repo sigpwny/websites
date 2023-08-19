@@ -1,8 +1,8 @@
-import React from "react"
-import { graphql } from "gatsby"
-import { MDXProvider } from "@mdx-js/react"
+import React from "react";
+import { graphql } from "gatsby";
 
-import Seo from "../components/Seo"
+import Seo from "../components/Seo";
+import { MDXProvider } from "../components/MDXProvider";
 
 interface Props {
   data: Queries.PageMarkdownTemplateQuery
@@ -10,37 +10,34 @@ interface Props {
 }
 
 export const Head = ({ data }: Props) => {
-  const { pageMarkdown } = data
-  if (!pageMarkdown) {
-    throw new Error(`invalid argument: "pageMarkdown" is undefined`)
-  }
+  const p = data.pageMarkdown;
+  if (!p) throw new Error(`invalid argument: "pageMarkdown" is undefined`);
   return (
     <Seo
-      title={pageMarkdown.title}
-      description={pageMarkdown.description}
+      title={p.title}
+      description={p.description ? p.description : undefined}
     />
-  )
-}
+  );
+};
 
 const PageMarkdownTemplate = ({ data, children }: Props) => {
-  const { pageMarkdown } = data
-  if (!pageMarkdown) {
-    throw new Error(`invalid argument: "pageMarkdown" is undefined`)
-  }
+  const p = data.pageMarkdown;
+  if (!p) throw new Error(`invalid argument: "pageMarkdown" is undefined`);
   return (
     <MDXProvider>
       <div
         className={"md-root mx-auto" +
-          (pageMarkdown.options?.full_width ? "" : " page-width") +
-          (pageMarkdown.options?.no_background ? "" : " panel")
+          (p.options?.full_width ? "" : " page-width") +
+          (p.options?.no_background ? "" : " panel")
         }
       >
         {children}
       </div>
     </MDXProvider>
-  )
-}
-export default PageMarkdownTemplate
+  );
+};
+
+export default PageMarkdownTemplate;
 
 export const query = graphql`
   query PageMarkdownTemplate($id: String!) {
@@ -53,4 +50,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

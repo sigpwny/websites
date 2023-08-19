@@ -6,7 +6,7 @@ import { PwnySvg } from "./Icons"
 
 interface NavLink {
   name: string
-  link: string
+  url: string
 }
 
 const Nav = () => {
@@ -38,11 +38,11 @@ const Nav = () => {
         siteMetadata {
           navLinks {
             name
-            link
+            url
           }
           navCallToActionLinks {
             name
-            link
+            url
           }
         }
       }
@@ -52,22 +52,22 @@ const Nav = () => {
   const navCallToActionLinksResult = data.site?.siteMetadata.navCallToActionLinks
   // create non-nullable array of nav call to action links
   const navLinks: NavLink[] = []
-  navLinksResult?.forEach((item) => {
-    if (item?.name && item?.link) {
+  navLinksResult?.forEach((link) => {
+    if (link?.name && link?.url) {
       const new_link: NavLink = {
-        name: item.name,
-        link: item.link,
+        name: link.name,
+        url: link.url,
       }
       navLinks.push(new_link)
     }
   })
   // create non-nullable array of nav call to action links
   const navCallToActionLinks: NavLink[] = []
-  navCallToActionLinksResult?.forEach((item) => {
-    if (item?.name && item?.link) {
+  navCallToActionLinksResult?.forEach((link) => {
+    if (link?.name && link?.url) {
       const new_link: NavLink = {
-        name: item.name,
-        link: item.link,
+        name: link.name,
+        url: link.url,
       }
       navCallToActionLinks.push(new_link)
     }
@@ -79,7 +79,7 @@ const Nav = () => {
           <>
             <div className="container">
               <div className="relative flex items-center justify-between h-16">
-                <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
+                <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                   {/* Mobile hamburger menu button*/}
                   <Disclosure.Button className="navbar-toggler">
                     <span className="sr-only">Open main menu</span>
@@ -91,35 +91,35 @@ const Nav = () => {
                   </Disclosure.Button>
                 </div>
                 {/* Desktop navbar */}
-                <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
+                <div className="flex-1 flex items-center justify-center lg:items-stretch lg:justify-start">
                   <div className="flex-shrink-0 flex items-center">
                     <button title="Pwny" className="hover:rotate-[5deg]" onClick={incrementCounter}>
                       <PwnySvg height="48px" />
                     </button>
                   </div>
-                  <div className="hidden md:block md:ml-6 my-auto">
+                  <div className="hidden lg:block lg:ml-6 my-auto">
                     <div className="flex">
                       <div className="flex space-x-6 lg:space-x-8">
-                        {navLinks.map((item) => (
+                        {navLinks.map((link) => (
                           <Link
-                            key={item.name}
-                            to={item.link}
+                            key={link.name}
+                            to={link.url}
                             className="font-bold text-xl lg:text-2xl my-auto leading-normal"
                             activeClassName="nav-active"
                           >
-                            {item.name}
+                            {link.name}
                           </Link>
                         ))}
                       </div>
                       <div className="absolute right-0 space-x-2 lg:space-x-4">
-                        {navCallToActionLinks.map((item) => (
+                        {navCallToActionLinks.map((link) => (
                           <Link
-                            key={item.name}
-                            to={item.link}
+                            key={link.name}
+                            to={link.url}
                             className="font-bold text-xl lg:text-2xl my-auto leading-normal btn-primary"
                             activeClassName="nav-active"
                           >
-                            {item.name}
+                            {link.name}
                           </Link>
                         ))}
                       </div>
@@ -137,27 +137,27 @@ const Nav = () => {
               leaveFrom="transform scale-100 opacity-100"
               leaveTo="transform scale-95 opacity-0"
             >
-              <Disclosure.Panel className="md:hidden">
+              <Disclosure.Panel className="lg:hidden">
                 <div className="container">
-                  {navLinks.map((item) => (
+                  {navLinks.map((link) => (
                     <Disclosure.Button as={Link}
-                      key={item.name}
-                      to={item.link}
+                      key={link.name}
+                      to={link.url}
                       className="font-bold text-2xl leading-normal block my-1"
                       activeClassName="nav-active"
                     >
-                      {item.name}
+                      {link.name}
                     </Disclosure.Button>
                   ))}
                   <hr />
-                  {navCallToActionLinks.map((item) => (
+                  {navCallToActionLinks.map((link) => (
                     <Disclosure.Button as={Link}
-                      key={item.name}
-                      to={item.link}
+                      key={link.name}
+                      to={link.url}
                       className="font-bold text-2xl leading-normal block my-1"
                       activeClassName="nav-active"
                     >
-                      {item.name}
+                      {link.name}
                     </Disclosure.Button>
                   ))}
                   <hr />

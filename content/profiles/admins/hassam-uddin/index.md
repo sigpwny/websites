@@ -7,9 +7,9 @@ role: Admin
 weight: 0
 handle: Heasummn
 links:
-  - {name: "website", link: "https://hassamuddin.com"}
-  - {name: "github", link: "https://github.com/Heasummn"}
-  - {name: "twitter", link: "https://twitter.com/Heasummn"}
-  - {name: "linkedin", link: "https://www.linkedin.com/in/hassamuddin1/"}
-  - {name: "discord", link: "Heasummn#6757"}
+  - {name: "website", url: "https://hassamuddin.com"}
+  - {name: "github", url: "https://github.com/Heasummn"}
+  - {name: "twitter", url: "https://twitter.com/Heasummn"}
+  - {name: "linkedin", url: "https://www.linkedin.com/in/hassamuddin1/"}
+  - {name: "discord", url: "Heasummn#6757"}
 ---

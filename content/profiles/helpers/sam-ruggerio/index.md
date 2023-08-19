@@ -7,8 +7,8 @@ role: Helper
 weight: 0
 handle: Surg
 links:
-  - link: surg.dev
+  - url: surg.dev
     name: website
   - name: twitter
-    link: https://twitter.com/@Sam_Ruggerio
+    url: https://twitter.com/@Sam_Ruggerio
 ---
