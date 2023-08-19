@@ -24,21 +24,23 @@ collections:
     fields:
       - {label: "Title", name: "title", hint: 'Example: "PWN II"', widget: "string"}
       - {label: "Start Time", name: "time_start", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Ensure date matches date in path."}
-      - {label: "End Time", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", required: false}
+      - {label: "End Time", name: "time_close", widget: "datetime", default: "", date_format: "YYYY-MM-DD", time_format: "HH:mm", hint: "Leave blank to default to 1-hour duration.", required: false}
+      - {label: "Display Timezone", name: "timezone", widget: "string", hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: "Week Number", name: "week_number", hint: "Current week number in the semester, 0-indexed. Be careful not to scroll on the input box since it may change the value.", widget: "number", value_type: "int", min: 0, max: 52, step: 1}
-      - {label: "Credit", name: "credit", widget: "list", hint: "Separate names with commas. To add whitespace, surround the name with double quotes."}
+      - {label: "Credit", name: "credit", widget: "list", hint: "Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces. Also works with organization names."}
       - {label: "Featured", name: "featured", widget: "boolean", default: true, hint: "The meeting will be shown on the home page if set to true.", required: false}
       - {label: "Location", name: "location", widget: "string", hint: 'Example: "Siebel CS 1404 + Zoom"', required: false}
-      - {label: "Cover Image", name: "image", widget: "object", required: false, hint: "Will be deprecated soon: Use Card Image instead", fields: [
+      - {label: "Cover Image", name: "image", widget: "object", required: false, hint: "Deprecated: Use Card Image instead", fields: [
           {label: "Image Upload", name: "path", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
           {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
       - {label: "Card Image", name: "card_image", widget: "object", required: false, fields: [
-          {label: "Foreground", name: "foreground", widget: "image", hint: "PNG/JPEG or SVG", choose_url: false, required: false},
+          # {label: "Foreground", name: "foreground", widget: "image", hint: "You usually do not need to set this for meetings.", choose_url: false, required: false},
           {label: "Background", name: "background", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
-          {label: "Background color", name: "background_color", widget: "string", hint: "Overridden by background image. Include hashtag. Example: '#33cc55'", required: false},
+          {label: "Background color", name: "background_color", widget: "string", hint: "Overridden by background image. Include the hashtag. Example: '#33cc55'", required: false},
           {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
+      - {label: "Zoom/live video URL", name: "live_video_url", widget: "string", hint: "STRONGLY recommend setting this beforehand by scheduling the Zoom meeting so people can access the meeting before the event starts.", required: false}
       - {label: "Slides", name: "slides", widget: "file", choose_url: false, hint: "Please upload PDFs instead of PPTX files. If downloading from Google Slides, ensure that skipped slides are not present.", required: false}
       - {label: "Recording URL", name: "recording", widget: "string", required: false}
       - {label: "Additional assets", name: "assets", widget: "list", field: {label: File, name: file, widget: "file", choose_url: false}, hint: "Zip or compress files together when possible.", required: false}
@@ -70,12 +72,14 @@ collections:
       - {label: "Card Image", name: "card_image", widget: "object", required: false, fields: [
           {label: "Foreground", name: "foreground", widget: "image", hint: "PNG/JPEG or SVG", choose_url: false, required: false},
           {label: "Background", name: "background", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
-          {label: "Background color", name: "background_color", widget: "string", hint: "Overridden by background image. Include hashtag. Example: '#33cc55'", required: false},
+          {label: "Background color", name: "background_color", widget: "string", hint: "Overridden by background image. Include the hashtag. Example: '#33cc55'", required: false},
           {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
+      - {label: "Credit", name: "credit", widget: "list", hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
+      - {label: "Sponsors", name: "sponsors", widget: "list", hint: 'Be sure to create sponsor profiles first. Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
       - {label: "Links", name: "links", widget: "list", required: false, fields: [
           {label: "Name", name: "name", widget: "select", options: ["website", "ctftime"], hint: ''},
-          {label: "Link", name: "link", widget: "string", hint: ''}
+          {label: "URL", name: "url", widget: "string", hint: ''}
         ]}
       - {label: "Stats", name: "stats", widget: "list", hint: 'Examples: Participants, Teams, Solves, Rating Weight', required: false, fields: [
           {label: "Name", name: "name", widget: "string"},
@@ -93,18 +97,25 @@ collections:
     public_folder: ""
     fields:
       - {label: "Title", name: "title", widget: "string", hint: 'Example: "Announcing our new site!"'}
-      - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news"], hint: ''}
-      - {label: "Publisher", name: "publisher", widget: "string", hint: 'Changes meaning depending on publication type. For talks, conferences and events. For blogs and news, the primary site source. For papers, journals/conferences.', required: false}
-      - {label: "Credit", name: "credit", widget: "list", hint: 'Separate names with commas. To add whitespace, surround the name with double quotes.'}
-      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", hint: ''}
-      - {label: "Display Timezone", name: "timezone", widget: "string", hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
-      - {label: "Description", name: "description", widget: "string", hint: 'Describe the content.'}
-      - {label: "Thumbnail Image", name: "image", widget: "object", fields: [
-          {label: "Image Upload", name: "path", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false},
-          {label: "Alt text", name: "alt", widget: "string", hint: 'Provide a description of the image for accessibility purposes.'}
+      - {label: "Publication Type", name: "publication_type", widget: "select", options: ["talk", "blog", "paper", "news", "writeup"], hint: ''}
+      - {label: "Publisher", name: "publisher", widget: "string", hint: 'Changes meaning depending on publication type. For talks: conferences and events. For blogs and news: the primary site source. For papers: journals/conferences.', required: false}
+      - {label: "Credit", name: "credit", widget: "list", hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.'}
+      - {label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD", hint: ''}
+      - {label: "Description", name: "description", widget: "string", hint: 'Describe the content.', required: false}
+      - {label: "Card Image", name: "card_image", widget: "object", required: false, fields: [
+          {label: "Foreground", name: "foreground", widget: "image", hint: "PNG/JPEG or SVG", choose_url: false, required: false},
+          {label: "Background", name: "background", widget: "image", hint: "Image should be 16:9 aspect ratio with a minimum width of 512px.", choose_url: false, required: false},
+          {label: "Background color", name: "background_color", widget: "string", hint: "Overridden by background image. Include the hashtag. Example: '#33cc55'", required: false},
+          {label: "Alt text", name: "alt", widget: "string", hint: "Provide a description of the image for accessibility purposes.", required: false}
         ]}
-      - {label: "Primary Link", name: "primary_link", widget: "string", hint: 'This is the primary source which represents the publication.'}
-      - {label: "Other Links", name: "other_links", widget: "list", hint: 'These are additional supporting sources.', required: false}
+      - {label: "Primary Link", name: "primary_link", widget: "object", hint: 'This is the primary source which represents the publication.', required: false, fields: [
+          {label: "Name", name: "name", widget: "string", hint: 'Example: "Recording (YouTube)" or "Paper Download (Google Scholar)"', required: false},
+          {label: "URL", name: "url", widget: "string", hint: '', required: false}
+        ]}
+      - {label: "Links", name: "links", widget: "list", required: false, fields: [
+          {label: "Name", name: "name", widget: "string", hint: 'Example: "Recording (YouTube)" or "Paper Download (Google Scholar)"'},
+          {label: "URL", name: "url", widget: "string", hint: ''}
+        ]}
       - {label: "Tags", name: "tags", widget: "list", hint: 'Separate tags with commas.', required: false}
       - {label: "Body", name: "body", widget: "markdown", mode: "raw", required: false}
     meta: { path: { widget: string, label: "Path", index_file: "index", hint: 'Examples: "2022-02-20_new_site"' } }
@@ -125,7 +136,7 @@ collections:
           {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less.', options: [
             "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
           ]},
-          {label: "Link", name: "link", widget: "string", hint: ''}
+          {label: "URL", name: "url", widget: "string", hint: ''}
         ]}
       - {label: "Role", name: "role", hint: 'Examples: "Admin", "President"', widget: "string", required: false}
       - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number", required: false}
@@ -149,7 +160,7 @@ collections:
           {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less.', options: [
             "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
           ]},
-          {label: "Link", name: "link", widget: "string", hint: ''}
+          {label: "URL", name: "url", widget: "string", hint: ''}
         ]}
       - {label: "Role", name: "role", hint: 'Examples: "Helper", "Project Lead"', widget: "string", required: false}
       - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number", required: false}
@@ -175,7 +186,7 @@ collections:
           {label: "Name", name: "name", widget: "select", hint: 'Remember, practice good opsec! Sort these by how you want them to appear. Try to limit to 6 links or less.', options: [
             "bluesky", "ctftime", "discord", "email", "github", "instagram", "linkedin", "mastodon", "reddit", "twitter", "website", "youtube"
           ]},
-          {label: "Link", name: "link", widget: "string", hint: ''}
+          {label: "URL", name: "url", widget: "string", hint: ''}
         ]}
       - {label: "Role", name: "role", hint: 'Examples: "Alum", "Ex-President"', widget: "string", required: false}
       - {label: "Weight", name: "weight", hint: "Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.", widget: "number", required: false}
