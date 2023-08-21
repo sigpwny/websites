@@ -42,5 +42,9 @@
   {
     "src": "/oldest",
     "dst": "https://sigpwny.github.io/pony-site/old/"
+  },
+  {
+    "src": "/report",
+    "dst": "https://forms.gle/PGdwxrCFgDQRM9oX6"
   }
 ]
