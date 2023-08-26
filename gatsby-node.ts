@@ -592,14 +592,14 @@ exports.createPages = async ({ graphql, actions }) => {
           ? redirect.src.slice(0, -1)
           : redirect.src,
         toPath: redirect.dst,
-        statusCode: redirect.code ? redirect.code : 301,
+        statusCode: redirect.code ? redirect.code : 302,
       });
       createRedirect({
         fromPath: redirect.src.endsWith("/")
           ? redirect.src
           : redirect.src + "/",
         toPath: redirect.dst,
-        statusCode: redirect.code ? redirect.code : 301,
+        statusCode: redirect.code ? redirect.code : 302,
       });
     });
   }
@@ -618,12 +618,12 @@ exports.createPages = async ({ graphql, actions }) => {
           createRedirect({
             fromPath: `${page.slug}slides`,
             toPath: page.slides.publicURL,
-            statusCode: 301,
+            statusCode: 302,
           });
           createRedirect({
             fromPath: `${page.slug}slides/`,
             toPath: page.slides.publicURL,
-            statusCode: 301,
+            statusCode: 302,
           });
         }
         break;
