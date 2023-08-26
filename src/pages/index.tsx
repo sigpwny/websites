@@ -1,37 +1,34 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import React from "react";
+import { Link, graphql } from "gatsby";
+import { motion } from "framer-motion";
+import { StaticImage } from "gatsby-plugin-image";
 
-import Seo from "../components/Seo"
-import { CardRow, createCard } from "../components/Card"
-import { RightSvg } from "../components/Icons"
+import Seo from "../components/Seo";
+import { CardRow, createCard } from "../components/Card";
+import { ChevronCircleRightRegular, ChevronRightRegular } from "../components/Icons/fluentui";
 
 interface Props {
-  data: Queries.IndexPageQuery
+  data: Queries.IndexPageQuery;
 }
 
-type Meeting = Queries.IndexPageQuery["allMeeting"]["meetings"][0]
-type Event = Queries.IndexPageQuery["allEvent"]["events"][0]
-type Publication = Queries.IndexPageQuery["allPublication"]["publications"][0]
-
-export function Head() {
+export const Head = () => {
   return (
     <Seo
       title="Home"
     />
-  )
-}
+  );
+};
 
 const IndexPage = ({ data }: Props) => {
-  const meeting_cards = data.allMeeting.meetings.map((meeting: Meeting) => (
+  const meeting_cards = data.allMeeting.nodes.map((meeting) =>
     createCard({meeting, timezone: meeting.timezone} as CardMeetingProps)
-  ))
-  const event_cards = data.allEvent.events.map((event: Event) => (
+  );
+  const event_cards = data.allEvent.nodes.map((event) =>
     createCard({event, timezone: event.timezone} as CardEventProps)
-  ))
-  const publication_cards = data.allPublication.publications.map((p: Publication) => (
+  );
+  const publication_cards = data.allPublication.nodes.map((p) =>
     createCard({publication: p} as CardPublicationProps)
-  ))
+  );
   return (
     <>
       <section id="welcome" className="pb-8">
@@ -67,42 +64,54 @@ const IndexPage = ({ data }: Props) => {
       </section>
 
       <section id="meetings" className="pb-8">
-        <div className="flex flex-col sm:flex-row justify-between mb-4">
-          <h1 className="m-0">Meetings</h1>
-          <Link to="/meetings/" className="my-0 sm:self-end">
-            <p className="inline align-middle m-0 mr-2">View all</p>
-            <RightSvg />
+        <div className="flex flex-col sm:flex-row gap-1 justify-between mb-3">
+          <h1 className="m-0">
+            Meetings
+          </h1>
+          <Link to="/meetings/" className="self-start button !text-white bg-surface-100 hover:bg-surface-150">
+            <span>
+              View all
+            </span>
+            <ChevronRightRegular className="flex-none" />
           </Link>
         </div>
         <CardRow cards={meeting_cards} />
       </section>
 
       <section id="publications" className="pb-8">
-        <div className="flex flex-col sm:flex-row justify-between mb-4">
-          <h1 className="m-0">Publications</h1>
-          <Link to="/publications/" className="my-0 sm:self-end">
-            <p className="inline align-middle m-0 mr-2">View all</p>
-            <RightSvg />
+        <div className="flex flex-col sm:flex-row gap-1 justify-between mb-3">
+          <h1 className="m-0">
+            Publications
+          </h1>
+          <Link to="/publications/" className="self-start button !text-white bg-surface-100 hover:bg-surface-150">
+            <span>
+              View all
+            </span>
+            <ChevronRightRegular className="flex-none" />
           </Link>
         </div>
         <CardRow cards={publication_cards} />
       </section>
 
       <section id="events" className="pb-8">
-        <div className="flex flex-col sm:flex-row justify-between mb-4">
-          <h1 className="m-0">Events</h1>
-          <Link to="/events/" className="my-0 sm:self-end">
-            <p className="inline align-middle m-0 mr-2">View all</p>
-            <RightSvg />
+        <div className="flex flex-col sm:flex-row gap-1 justify-between mb-3">
+          <h1 className="m-0">
+            Events
+          </h1>
+          <Link to="/events/" className="self-start button !text-white bg-surface-100 hover:bg-surface-150">
+            <span>
+              View all
+            </span>
+            <ChevronRightRegular className="flex-none" />
           </Link>
         </div>
         <CardRow cards={event_cards} />
       </section>
     </>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
 
 export const query = graphql`
   query IndexPage {
@@ -117,7 +126,7 @@ export const query = graphql`
       sort: {time_start: DESC}
       limit: 10
     ) {
-      meetings: nodes {
+      nodes {
         title
         time_start
         time_close
@@ -139,7 +148,7 @@ export const query = graphql`
       sort: {time_start: DESC}
       limit: 10
     ) {
-      events: nodes {
+      nodes {
         title
         time_start
         time_close
@@ -171,7 +180,7 @@ export const query = graphql`
       sort: {date: DESC}
       limit: 10
     ) {
-      publications: nodes {
+      nodes {
         title
         credit
         publication_type
@@ -201,4 +210,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
