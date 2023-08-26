@@ -152,7 +152,7 @@ export const Card = ({ heading, title, image, overlay_image, card_image, link }:
   )
   if (link) {
     return (
-      <SmartLink to={link} className="card-hover flex grow">
+      <SmartLink to={link} className="card-hover flex grow rounded-xl">
         {card_component}
       </SmartLink>
     )
