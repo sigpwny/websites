@@ -205,7 +205,7 @@ type Org implements Node & Profile @dontInfer {
 type RedirectsInternalJson implements Node @dontInfer {
   src: String!
   dst: String!
-  code: number?
+  code: number
 }
 
 type RedirectsExternalJson implements Node @dontInfer {
