@@ -539,14 +539,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allRedirectsExternalJson {
-        redirects: nodes {
-          id
-          src
-          dst
-        }
-      }
-      allRedirectsInternalJson {
+      allRedirectsJson {
         redirects: nodes {
           id
           src
@@ -565,41 +558,35 @@ exports.createPages = async ({ graphql, actions }) => {
   const template_event = path.resolve(`./src/templates/template-event.tsx`);
   const template_publication = path.resolve(`./src/templates/template-publication.tsx`);
   const template_page_md = path.resolve(`./src/templates/template-page_md.tsx`);
-  const template_redirect_external = path.resolve(`./src/templates/template-redirect-external.tsx`);
+  // const template_redirect_client = path.resolve(`./src/templates/template-redirect-client.tsx`);
 
-  // Generate external redirects
-  const redirects_external = result.data.allRedirectsExternalJson.redirects;
-  if (redirects_external.length > 0) {
-    redirects_external.forEach((redirect) => {
-      createPage({
-        path: redirect.src,
-        component: template_redirect_external,
-        context: {
-          id: redirect.id,
-        },
-        trailingSlash: true,
-      });
-    });
-  }
-
-  // Generate internal redirects
-  const redirects_internal = result.data.allRedirectsInternalJson.redirects;
-  if (redirects_internal.length > 0) {
-    redirects_internal.forEach((redirect) => {
+  // Generate redirects
+  const redirects = result.data.allRedirectsJson.redirects;
+  if (redirects.length > 0) {
+    redirects.forEach((redirect) => {
+      // Generate client side redirect pages (in case server side redirects are not supported)
+      // createPage({
+      //   path: redirect.src,
+      //   component: template_redirect_client,
+      //   context: {
+      //     id: redirect.id,
+      //   },
+      //   trailingSlash: true,
+      // });
       // Generate server side redirects for internal routes
       createRedirect({
         fromPath: redirect.src.endsWith("/")
           ? redirect.src.slice(0, -1)
           : redirect.src,
         toPath: redirect.dst,
-        statusCode: redirect.code ? redirect.code : 302,
+        statusCode: redirect.code ?? 302,
       });
       createRedirect({
         fromPath: redirect.src.endsWith("/")
           ? redirect.src
           : redirect.src + "/",
         toPath: redirect.dst,
-        statusCode: redirect.code ? redirect.code : 302,
+        statusCode: redirect.code ?? 302,
       });
     });
   }
