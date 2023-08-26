@@ -201,3 +201,14 @@ type Org implements Node & Profile @dontInfer {
   weight: Int!
   links: [Link!]
 }
+
+type RedirectsInternalJson implements Node @dontInfer {
+  src: String!
+  dst: String!
+  code: number?
+}
+
+type RedirectsExternalJson implements Node @dontInfer {
+  src: String!
+  dst: String!
+}
