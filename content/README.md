@@ -173,7 +173,7 @@ Internal redirects are defined in [content/redirects/internal.json](./redirects/
   {
     "src": "/fallctf", // required
     "dst": "/events/", // required: add trailing slash to prevent an additional redirect (no trailing slash to trailing slash)
-    "code": 302, // optional: uses 301 permanent redirect by default; use 302 for temporary redirects
+    "code": 302, // optional: uses 302 temporary redirect by default
     "type": "" // optional: currently unused, planned for supporting different types of redirects, such as splats or query parameters
   },
   // ...
