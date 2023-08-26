@@ -96,17 +96,17 @@ const MeetingTemplate = ({ data, children }: Props) => {
           <div className="flex flex-col mb-2">
             {time_start ? (
               <div className="flex flex-row gap-2 items-center">
-                <CalendarRegular className="text-primary" />
+                <CalendarRegular className="flex-none text-primary" />
                 <span className="inline align-middle">
                   <time dateTime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
-                    {time_start.format("dddd, MMMM D, YYYY")}
+                    {time_start.format("dddd, MMMM Do, YYYY")}
                   </time>
                 </span>
               </div>
             ) : null}
             {time_start && time_close ? (
               <div className="flex flex-row gap-2 items-center">
-                <ClockRegular className="text-primary" />
+                <ClockRegular className="flex-none text-primary" />
                 <span className="inline align-middle">
                   <time dateTime={duration.toISOString()}>
                     {time_start.minute() == 0 ?
@@ -129,7 +129,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
             ) : null}
             {meeting.location ? (
               <div className="flex flex-row gap-2 items-center">
-                <LocationRegular className="text-primary" />
+                <LocationRegular className="flex-none text-primary" />
                 <span className="inline align-middle">
                   {meeting.location}
                 </span>
@@ -152,17 +152,19 @@ const MeetingTemplate = ({ data, children }: Props) => {
               </p>
             </a>
           ) : (
-            meeting.live_video_url ? (
+          meeting.live_video_url ? (
+            <div className="grid sm:flex sm:flex-row gap-2 mb-4">
               <a
                 href={meeting.live_video_url}
-                className="btn-primary"
+                className="btn-primary flex flex-row items-center"
                 target="_blank" rel="noopener noreferrer"
               >
-                <LiveRegular />
-                <span className="inline align-middle m-0 ml-2">
+                <LiveRegular className="flex-none" />
+                <span className="m-0 ml-2">
                   Join live video
                 </span>
               </a>
+              </div>
             ) : null
           )}
           {meeting.slides?.publicURL ? (

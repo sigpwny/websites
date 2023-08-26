@@ -43,24 +43,24 @@ const IndexPage = ({ data }: Props) => {
           </div>
           <div className="flex lg:order-1 gap-8 pr-20 sm:columns-2 sm:p-0 md:pr-20 lg:columns-3 lg:gap-12 lg:p-0 lg:pb-2 xl:gap-16 2xl:gap-16 2xl:px-28">
             <div className="pt-6 w-full">
-              <StaticImage className="rounded-xl pointer-events-none border-surface-100 border-2" src="../images/home-promo/home-1.jpg" alt="SIGPwny members concentrated on solving challenges during a CTF" placeholder="blurred" />
+              <StaticImage className="rounded-xl pointer-events-none select-none border-surface-100 border-2" src="../images/home-promo/home-1.jpg" alt="SIGPwny members concentrated on solving challenges during a CTF" placeholder="blurred" />
             </div>
             <div className="pt-0 w-full hidden sm:block">
-              <StaticImage className="rounded-xl pointer-events-none border-surface-100 border-2" src="../images/home-promo/home-2.jpg" alt="Two SIGPwny members taking a pizza break during Fall CTF 2023" placeholder="blurred" />
+              <StaticImage className="rounded-xl pointer-events-none select-none border-surface-100 border-2" src="../images/home-promo/home-2.jpg" alt="Two SIGPwny members taking a pizza break during Fall CTF 2023" placeholder="blurred" />
             </div>
             <div className="pt-12 w-full hidden lg:block">
-              <StaticImage className="rounded-xl pointer-events-none border-surface-100 border-2" src="../images/home-promo/home-3.jpg" alt="SIGPwny helpers present on web hacking during a weekly meting" placeholder="blurred" />
+              <StaticImage className="rounded-xl pointer-events-none select-none border-surface-100 border-2" src="../images/home-promo/home-3.jpg" alt="SIGPwny helpers present on web hacking during a weekly meting" placeholder="blurred" />
             </div>
           </div>
           <div className="flex lg:order-3 gap-8 pl-20 pb-2 sm:columns-2 sm:p-0 md:pl-20 lg:columns-3 lg:gap-12 lg:p-0 xl:gap-16 2xl:gap-16 2xl:px-28">
             <div className="pt-0 w-full hidden lg:block">
-              <StaticImage className="rounded-xl pointer-events-none border-surface-100 border-2" src="../images/home-promo/home-4.jpg" alt="A presentation on reverse engineering during Fall CTF 2023" placeholder="blurred" />
+              <StaticImage className="rounded-xl pointer-events-none select-none border-surface-100 border-2" src="../images/home-promo/home-4.jpg" alt="A presentation on reverse engineering during Fall CTF 2023" placeholder="blurred" />
             </div>
             <div className="pt-12 w-full hidden sm:block">
-              <StaticImage className="rounded-xl pointer-events-none border-surface-100 border-2" src="../images/home-promo/home-5.jpg" alt="SIGPwny members laughing in front of grafitti during a spray paint social event" placeholder="blurred" />
+              <StaticImage className="rounded-xl pointer-events-none select-none border-surface-100 border-2" src="../images/home-promo/home-5.jpg" alt="SIGPwny members laughing in front of grafitti during a spray paint social event" placeholder="blurred" />
             </div>
             <div className="pt-6 w-full">
-              <StaticImage className="rounded-xl pointer-events-none border-surface-100 border-2" src="../images/home-promo/home-6.jpg" alt="Two SIGPwny members solving Fall CTF 2023 challenges" placeholder="blurred" />
+              <StaticImage className="rounded-xl pointer-events-none select-none border-surface-100 border-2" src="../images/home-promo/home-6.jpg" alt="Two SIGPwny members solving Fall CTF 2023 challenges" placeholder="blurred" />
             </div>
           </div>
         </div>

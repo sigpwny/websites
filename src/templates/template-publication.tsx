@@ -154,7 +154,7 @@ export const query = graphql`
       publication_type
       publisher
       iso_date: date(formatString: "YYYY-MM-DD")
-      full_date: date(formatString: "dddd, MMMM Do, YYYY")
+      full_date: date(formatString: "MMMM Do, YYYY")
       description
       card_image {
         foreground {
