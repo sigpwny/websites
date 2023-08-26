@@ -93,9 +93,9 @@ const Nav = () => {
                 {/* Desktop navbar */}
                 <div className="flex-1 flex items-center justify-center lg:items-stretch lg:justify-start">
                   <div className="flex-shrink-0 flex items-center">
-                    <button title="Pwny" className="hover:rotate-[5deg]" onClick={incrementCounter}>
+                    {/* <button title="Pwny" className="hover:rotate-[5deg]" onClick={incrementCounter}> */}
                       <PwnySvg height="48px" />
-                    </button>
+                    {/* </button> */}
                   </div>
                   <div className="hidden lg:block lg:ml-6 my-auto">
                     <div className="flex">

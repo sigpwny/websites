@@ -45,7 +45,7 @@ export function createCard(
 export const Card = ({ heading, title, image, overlay_image, card_image, link }: CardProps) => {
   const card_component = (
     <div className="card">
-      <div className="aspect-video grid pointer-events-none">
+      <div className="aspect-video grid pointer-events-none select-none">
         {(image || overlay_image || card_image) ? (
           <>
             {/* TODO: keep track if alt has already been placed */}
@@ -152,7 +152,7 @@ export const Card = ({ heading, title, image, overlay_image, card_image, link }:
   )
   if (link) {
     return (
-      <SmartLink to={link} className="card-hover flex grow">
+      <SmartLink to={link} className="card-hover flex grow rounded-xl">
         {card_component}
       </SmartLink>
     )

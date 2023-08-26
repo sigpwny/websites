@@ -158,7 +158,7 @@ export const ProfileCardGrid = ({ profiles }: { profiles: ProfileAdvancedProps[]
               {getImage(profile?.profile_image) ? (
                 <motion.div
                   layout
-                  className={`md:basis-1/3 shrink-0 ${isExpanded ? "w-48" : "w-16"}`}
+                  className={`md:basis-1/3 shrink-0 select-none ${isExpanded ? "w-48" : "w-16"}`}
                 >
                   <GatsbyImage
                     image={getImage(profile.profile_image) as IGatsbyImageData}
