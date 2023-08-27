@@ -1,36 +1,36 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 
-import { CountdownBadge } from "../components/Countdown";
-import { AvatarGroup, ProfileCard } from "../components/Profile";
 import Seo from "../components/Seo";
+import { AvatarGroup } from "../components/Profile";
+import { CountdownBadge } from "../components/Countdown";
 import { TagGroup } from "../components/Tag";
 import { Tooltip } from "../components/Tooltip";
 import { weekNumber, convertDate, formatSemester } from "../utils/util";
 import { PdfSvg, YouTubeSvg } from "../components/Icons";
 
-type Meeting = Queries.MeetingsPageQuery["allMeeting"]["meetings"][0];
+type Meeting = Queries.MeetingsPageQuery["allMeeting"]["nodes"][0];
 
 interface Props {
-  data: Queries.MeetingsPageQuery 
+  data: Queries.MeetingsPageQuery;
 }
 
-export function Head() {
+export const Head = () => {
   return (
     <Seo
       title="Meetings"
       description="Index of all SIGPwny meetings"
     />
-  )
-}
+  );
+};
 
 const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
   const profiles = meeting.credit_profiles.map((profile, idx) => {
-    if (profile) return profile
+    if (profile) return profile;
     return {
       name: meeting.credit[idx]
-    }
-  })
+    };
+  });
   return (
     <li>
       <div className="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
@@ -90,23 +90,22 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
       </div>
       <hr className="border-surface-200" />
     </li>
-  )
-}
+  );
+};
 
 const MeetingsPage = ({ data }: Props) => {
-  const meetingsBySemester = data.allMeeting.meetings
-  .reduce(
+  const meetingsBySemester = data.allMeeting.nodes.reduce(
     (acc, meeting) => {
-      const semester = meeting.semester
-      if (!semester) return acc
+      const semester = meeting.semester;
+      if (!semester) return acc;
       if (acc[semester]) {
-        acc[semester].push(meeting)
+        acc[semester].push(meeting);
       } else {
-        acc[semester] = [meeting]
+        acc[semester] = [meeting];
       }
-      return acc
+      return acc;
     }, {} as {[semester: string]: Meeting[]
-  })
+  });
   return (
     <section id="meetings" className="pb-8">
       <div className="flex flex-col mx-auto page-width-lg">
@@ -132,15 +131,15 @@ const MeetingsPage = ({ data }: Props) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default MeetingsPage
+export default MeetingsPage;
 
 export const query = graphql`
   query MeetingsPage {
     allMeeting(sort: {time_start: DESC}) {
-      meetings: nodes {
+      nodes {
         title
         time_start
         time_close
@@ -179,4 +178,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
