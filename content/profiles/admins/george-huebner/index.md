@@ -1,9 +1,11 @@
 ---
 name: George Huebner
 profile_image: ghuebner.png
-bio: CS fan by day, physics enjoyer by night
+handle: shorden
+bio: Sophomore in CS and Physics. Come talk to me about Emacsen, quantum
+  computers, and Nix!
 links:
   - name: github
     url: https://github.com/Feyorsh
-role: Helper
+role: Admin
 ---
