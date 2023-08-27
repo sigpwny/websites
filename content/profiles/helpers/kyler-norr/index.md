@@ -1,6 +1,6 @@
 ---
 name: Kyler Norr
-profile_image: 20230827_113656.jpg
+profile_image: kyler_norr_cropped.jpg
 bio: Social chair, Computer Science and Astrophysics, Computational Astrophysics
   and Systems Engineering
 links:
