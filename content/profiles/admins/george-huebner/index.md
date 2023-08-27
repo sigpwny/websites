@@ -1,6 +1,6 @@
 ---
 name: George Huebner
-profile_image: shorden.png
+profile_image: ghuebner.png
 bio: CS fan by day, physics enjoyer by night
 links:
   - name: github
