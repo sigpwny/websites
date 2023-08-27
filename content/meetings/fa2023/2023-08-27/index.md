@@ -7,10 +7,14 @@ credit:
   - SIGPwny
 featured: true
 location: Siebel CS 1404 + Zoom
+image:
+  path: img_0986.jpeg
+  alt: A crowded room of SIGPwny members
 card_image:
   background: img_0986.jpeg
   alt: A crowded room of SIGPwny members
 live_video_url: https://illinois.zoom.us/j/81312114426?pwd=N3dMeWMwdCtqNVRvWnJOeTR5WGlSZz09
+slides: week-00_-introduction.pdf
 tags:
   - welcome
   - intro
