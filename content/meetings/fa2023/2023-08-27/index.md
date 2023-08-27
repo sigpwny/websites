@@ -15,6 +15,7 @@ card_image:
   alt: A crowded room of SIGPwny members
 live_video_url: https://illinois.zoom.us/j/81312114426?pwd=N3dMeWMwdCtqNVRvWnJOeTR5WGlSZz09
 slides: week-00_-introduction.pdf
+recording: https://youtu.be/c08qoljJfzI
 tags:
   - welcome
   - intro
