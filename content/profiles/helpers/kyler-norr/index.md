@@ -1,6 +1,6 @@
 ---
 name: Kyler Norr
-profile_image: kyler_norr.jpg
+profile_image: 20230827_105716.jpg
 bio: Social chair, CS and Astrophysics
 links:
   - name: discord
