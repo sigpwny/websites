@@ -40,6 +40,10 @@
     "dst": "/events/fallctf/2023/"
   },
   {
+    "src": "/register23",
+    "dst": "https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform"
+  },
+  {
     "src": "/gcal",
     "dst": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/full.ics"
   },
