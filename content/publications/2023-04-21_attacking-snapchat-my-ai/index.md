@@ -1,5 +1,5 @@
 ---
-title: Adversial AI and Attacking Snapchat’s My AI
+title: Adversarial AI and Attacking Snapchat’s My AI
 credit:
   - David An
 publisher: davidan.dev
