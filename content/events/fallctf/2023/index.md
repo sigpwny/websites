@@ -9,15 +9,16 @@ description: Fall CTF is a 6-hour hacking competition for UIUC students hosted
 time_start: 2023-09-23T17:00:00.000Z
 time_close: 2023-09-23T23:00:00.000Z
 location: TBD
-sponsors:
-- John Deere
-- Hudson River Trading
-- Trail of Bits
-- State Farm
-- Hak5
 card_image:
   background_color: "#000000"
   foreground: screenshot-2023-08-16-171303.png
+sponsors:
+  - John Deere
+  - REDLattice
+  - Hudson River Trading
+  - Trail of Bits
+  - State Farm
+  - Hak5
 links:
   - url: https://fallctf.sigpwny.com/
     name: website
