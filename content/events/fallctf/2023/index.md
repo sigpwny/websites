@@ -12,6 +12,7 @@ location: TBD
 sponsors:
 - John Deere
 - Hudson River Trading
+- Trail of Bits
 - Hak5
 card_image:
   background_color: "#000000"
