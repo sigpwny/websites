@@ -490,6 +490,7 @@ exports.createResolvers = ({ createResolvers }) => {
             title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, source.location, page_url, video_url),
             location: createICalendarLocation(source.location, locations_json),
+            location_short: source.location,
             url: undefined,
           };
           return ical_event_data;
@@ -507,6 +508,7 @@ exports.createResolvers = ({ createResolvers }) => {
             title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, source.location, page_url),
             location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
+            location_short: source.location,
             url: undefined,
           };
         }
@@ -658,6 +660,7 @@ exports.onPostBuild = ({ graphql }) => {
                 lon
               }
             }
+            location_short
             url
           }
           time_start
@@ -691,6 +694,7 @@ exports.onPostBuild = ({ graphql }) => {
           description: event.ical.description ?? undefined,
           location: event.ical.location as ICalLocation ?? undefined,
           url: event.ical.url ?? undefined,
+          x: event.ical.location_short ? { "X-DISCORD-LOCATION": event.ical.location_short } : undefined,
         });
       });
       fs.outputFileSync(full_ics_path, full_ics.toString());
