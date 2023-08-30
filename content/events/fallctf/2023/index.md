@@ -23,4 +23,4 @@ links:
   - url: https://fallctf.sigpwny.com/
     name: website
 ---
-Register now: [https://sigpwny.com/register23](https://sigpwny.com/register23 "https\://sigpwny.com/register23")
+Register now: [https://sigpwny.com/register23](https://sigpwny.com/register23)
