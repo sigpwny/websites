@@ -39,7 +39,6 @@ type ICalendarEventData {
   title: String!
   description: String
   location: ICalendarLocationData
-  location_short: String
   url: String
 }
 
@@ -55,9 +54,18 @@ type ICalendarGeoData {
   lon: Float!
 }
 
+type ICalendarDiscordEventData {
+  update_disabled: Boolean!
+  name: String!
+  location: String!
+  description: String
+  image_url: String
+}
+
 interface ICalendarEvent implements Node @dontInfer {
   id: ID!
   ical: ICalendarEventData!
+  discord_event: ICalendarDiscordEventData!
   time_start: Date! @dateformat
   time_close: Date! @dateformat
 }
@@ -65,6 +73,7 @@ interface ICalendarEvent implements Node @dontInfer {
 type Meeting implements Node & TemplatedPage & ICalendarEvent @dontInfer {
   title: String!
   ical: ICalendarEventData!
+  discord_event: ICalendarDiscordEventData!
   time_start: Date! @dateformat
   time_close: Date! @dateformat
   timezone: String!
@@ -87,6 +96,7 @@ type Meeting implements Node & TemplatedPage & ICalendarEvent @dontInfer {
 type Event implements Node & TemplatedPage & ICalendarEvent @dontInfer {
   title: String!
   ical: ICalendarEventData!
+  discord_event: ICalendarDiscordEventData!
   time_start: Date! @dateformat
   time_close: Date! @dateformat
   timezone: String!
