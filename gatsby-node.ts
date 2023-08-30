@@ -502,7 +502,7 @@ exports.createResolvers = ({ createResolvers }) => {
           const site_url = context.nodeModel.getNodeById({ id: "Site" }).siteMetadata.siteUrl;
           const page_url = `${site_url}${source.slug}`;
           // TODO: Migrate to card_image
-          const image_url = source.image?.publicURL ? `${site_url}${source.image.publicURL}` : undefined;
+          const image_url = source.image?.path?.publicURL ? `${site_url}${source.image.path.publicURL}` : undefined;
           return {
             update_disabled: source.discord_event?.update_disabled ? source.discord_event.update_disabled : false,
             name: source.discord_event?.name ?? `Week ${weekNumber(source.week_number)}: ${source.title}`,
