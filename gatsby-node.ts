@@ -5,7 +5,7 @@ import path from "path";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Node } from "gatsby";
-import { calculateSemester } from "./src/utils/util";
+import { calculateSemester, weekNumber } from "./src/utils/util";
 import config from "./gatsby-config";
 import * as locations_json from "./content/json/locations.json";
 
@@ -93,6 +93,7 @@ const content_node_types: ContentNode[] = [
     fields: [
       { name: "title", required: true },
       { name: "ical" },
+      { name: "discord_event" },
       { name: "time_start", required: true },
       { name: "week_number", required: true },
       {
@@ -158,6 +159,7 @@ const content_node_types: ContentNode[] = [
     fields: [
       { name: "title", required: true },
       { name: "ical" },
+      { name: "discord_event" },
       { name: "time_start", required: true },
       { name: "series", required: true },
       {
@@ -490,10 +492,24 @@ exports.createResolvers = ({ createResolvers }) => {
             title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, source.location, page_url, video_url),
             location: createICalendarLocation(source.location, locations_json),
-            location_short: source.location,
             url: undefined,
           };
           return ical_event_data;
+        }
+      },
+      discord_event: {
+        resolve: (source, args, context, info) => {
+          const site_url = context.nodeModel.getNodeById({ id: "Site" }).siteMetadata.siteUrl;
+          const page_url = `${site_url}${source.slug}`;
+          // TODO: Migrate to card_image
+          const image_url = source.image?.publicURL ? `${site_url}${source.image.publicURL}` : undefined;
+          return {
+            update_disabled: source.discord_event?.update_disabled ? source.discord_event.update_disabled : false,
+            name: source.discord_event?.name ?? `Week ${weekNumber(source.week_number)}: ${source.title}`,
+            location: source.discord_event?.location ?? source.location ?? "TBD",
+            description: source.discord_event?.description ?? (source.description ? `${page_url}\n${source.description}` : page_url),
+            image_url: source.discord_event?.image_url ?? image_url,
+          };
         }
       },
     },
@@ -508,8 +524,24 @@ exports.createResolvers = ({ createResolvers }) => {
             title: source.ical?.title ? source.ical.title : source.title,
             description: source.ical?.description ?? createICalendarDescription(source.description, source.location, page_url),
             location: source.ical?.location ?? createICalendarLocation(source.location, locations_json),
-            location_short: source.location,
             url: undefined,
+          };
+        }
+      },
+      discord_event: {
+        resolve: (source, args, context, info) => {
+          const site_url = context.nodeModel.getNodeById({ id: "Site" }).siteMetadata.siteUrl;
+          const page_url = `${site_url}${source.slug}`;
+          const image_url =
+            source.card_image.foreground?.publicURL ??
+            source.card_image.background?.publicURL ??
+            undefined;
+          return {
+            update_disabled: source.discord_event?.update_disabled ? source.discord_event.update_disabled : false,
+            name: source.discord_event?.name ?? source.title,
+            location: source.discord_event?.location ?? source.location ?? "TBD",
+            description: source.discord_event?.description ?? (source.description ? `${page_url}\n${source.description}` : page_url),
+            image_url: source.discord_event?.image_url ?? image_url,
           };
         }
       },
@@ -660,8 +692,14 @@ exports.onPostBuild = ({ graphql }) => {
                 lon
               }
             }
-            location_short
             url
+          }
+          discord_event {
+            update_disabled
+            name
+            location
+            description
+            image_url
           }
           time_start
           time_close
@@ -694,7 +732,14 @@ exports.onPostBuild = ({ graphql }) => {
           description: event.ical.description ?? undefined,
           location: event.ical.location as ICalLocation ?? undefined,
           url: event.ical.url ?? undefined,
-          x: event.ical.location_short ? { "X-DISCORD-LOCATION": event.ical.location_short } : undefined,
+          x: {
+            // Discord event metadata
+            ...({"X-DISCORD-EVENT-UPDATE-DISABLED": (event.discord_event.update_disabled ? "1" : "0")}),
+            ...({"X-DISCORD-EVENT-NAME": event.discord_event.name}),
+            ...({"X-DISCORD-EVENT-LOCATION": event.discord_event.location}),
+            ...(event.discord_event.description && {"X-DISCORD-EVENT-DESCRIPTION": event.discord_event.description}),
+            ...(event.discord_event.image_url && {"X-DISCORD-EVENT-IMAGE-URL": event.discord_event.image_url}),
+          },
         });
       });
       fs.outputFileSync(full_ics_path, full_ics.toString());
