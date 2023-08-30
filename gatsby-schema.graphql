@@ -39,6 +39,7 @@ type ICalendarEventData {
   title: String!
   description: String
   location: ICalendarLocationData
+  location_short: String
   url: String
 }
 
