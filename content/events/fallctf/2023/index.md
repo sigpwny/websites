@@ -11,7 +11,8 @@ time_close: 2023-09-23T23:00:00.000Z
 location: CIF 3039
 card_image:
   background_color: "#000000"
-  foreground: screenshot-2023-08-16-171303.png
+  foreground: ""
+  background: fallctf-23-event-page-graphic.png
 sponsors:
   - John Deere
   - REDLattice
