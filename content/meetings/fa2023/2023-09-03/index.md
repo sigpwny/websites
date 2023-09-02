@@ -7,6 +7,7 @@ credit:
   - SIGPwny
 featured: true
 location: Siebel CS 1404
+live_video_url: https://illinois.zoom.us/j/82109894519?pwd=aTZ0Zjg3NDRLL2crSVJTazl5TmZoUT09
 tags:
   - welcome
   - setup
