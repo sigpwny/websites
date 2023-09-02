@@ -5,7 +5,7 @@ time_close: ""
 week_number: 2
 credit:
   - SIGPwny
-featured: false
+featured: true
 location: Siebel CS 1404 + Zoom
 tags:
   - web

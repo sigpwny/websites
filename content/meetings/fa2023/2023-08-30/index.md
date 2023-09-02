@@ -11,7 +11,7 @@ image:
   path: img_0071.jpeg
   alt: The Illini Union Rec Room bowling lanes
 tags:
-  - welcome
+  - misc
   - social
   - bowling
 ---

@@ -8,8 +8,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 tags:
-  - welcome
-  - setup
+  - misc
   - terminal
 ---
 # Summary
