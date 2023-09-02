@@ -151,22 +151,18 @@ const MeetingTemplate = ({ data, children }: Props) => {
                 Watch video
               </p>
             </a>
-          ) : (
-          meeting.live_video_url ? (
-            <div className="grid sm:flex sm:flex-row gap-2 mb-4">
-              <a
-                href={meeting.live_video_url}
-                className="btn-primary flex flex-row items-center"
-                target="_blank" rel="noopener noreferrer"
-              >
-                <LiveRegular className="flex-none" />
-                <span className="m-0 ml-2">
-                  Join live video
-                </span>
-              </a>
-              </div>
-            ) : null
-          )}
+          ) : (meeting.live_video_url ? (
+            <a
+              href={meeting.live_video_url}
+              className="btn-primary flex flex-row items-center"
+              target="_blank" rel="noopener noreferrer"
+            >
+              <LiveRegular className="flex-none" />
+              <span className="m-0 ml-2">
+                Join live video
+              </span>
+            </a>
+          ) : null)}
           {meeting.slides?.publicURL ? (
             <a
               href={meeting.slides.publicURL}
