@@ -16,6 +16,7 @@ card_image:
   alt: The Windows Terminal interface
 live_video_url: https://illinois.zoom.us/j/82109894519?pwd=aTZ0Zjg3NDRLL2crSVJTazl5TmZoUT09
 slides: week-01-setup.pdf
+recording: https://youtu.be/dnA0dsL5pQ8
 tags:
   - welcome
   - setup
