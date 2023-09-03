@@ -2,11 +2,14 @@
 title: "Team Event: PatriotCTF 2023"
 time_start: 2023-09-08T21:00:00.000Z
 time_close: 2023-09-10T21:00:00.000Z
-week_number: 2
+week_number: 0
 credit:
   - SIGPwny
 featured: false
 location: Siebel CS (TBD)
+image:
+  path: patriotctf-2023-banner.png
+  alt: PatriotCTF logo
 tags:
   - ctf
 ---
