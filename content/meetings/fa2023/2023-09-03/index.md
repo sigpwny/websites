@@ -8,8 +8,12 @@ credit:
   - Emma Hartman
 featured: true
 location: Siebel CS 1404
+image:
+  path: img_0074.jpeg
+  alt: The Windows Terminal interface
 card_image:
   background: img_0074.jpeg
+  alt: The Windows Terminal interface
 live_video_url: https://illinois.zoom.us/j/82109894519?pwd=aTZ0Zjg3NDRLL2crSVJTazl5TmZoUT09
 slides: week-01-setup.pdf
 tags:
