@@ -2,7 +2,7 @@
 title: "Team Event: PatriotCTF 2023"
 time_start: 2023-09-08T21:00:00.000Z
 time_close: 2023-09-10T21:00:00.000Z
-week_number: 1
+week_number: 2
 credit:
   - SIGPwny
 featured: false
