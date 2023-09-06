@@ -15,7 +15,9 @@ card_image:
   background: fallctf-23-event-page-graphic.png
 sponsors:
   - John Deere
+  - Battelle
   - REDLattice
+  - Sandia National Laboratories
   - Hudson River Trading
   - Trail of Bits
   - State Farm
