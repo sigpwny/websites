@@ -7,6 +7,7 @@ credit:
   - SIGPwny
 featured: true
 location: Siebel CS 1404
+live_video_url: https://illinois.zoom.us/j/84293276305?pwd=cytNRDA4a2pzeGFpQ0l5Ty9aWVd4UT09
 tags:
   - misc
   - terminal
