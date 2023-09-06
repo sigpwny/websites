@@ -15,13 +15,24 @@ card_image:
   background: fallctf-23-event-page-graphic.png
 sponsors:
   - John Deere
+  - Battelle
   - REDLattice
+  - Sandia National Laboratories
   - Hudson River Trading
   - Trail of Bits
   - State Farm
   - Hak5
+  - Binary Ninja
 links:
   - url: https://fallctf.sigpwny.com/
     name: website
 ---
-Register now: [https://sigpwny.com/register23](https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform)
+## Registration
+Register now to secure your free shirt, electronic badge, and pizza at the event! Register through our [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform).
+
+## Prizes
+We are thrilled to offer prizes to the top placing teams at Fall CTF 2023! We will be offering winning teams a selection of the following:
+- Hak5 products, prize TBD (thank you to [Hak5](https://hak5.org/)!)
+- 6x Binary Ninja Personal licenses (thank you to [Binary Ninja](https://binary.ninja/)!)
+- 2x Sparrows Lockpick Sets
+- More prizes TBD!
