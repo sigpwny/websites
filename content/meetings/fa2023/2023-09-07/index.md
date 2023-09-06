@@ -6,7 +6,8 @@ week_number: 2
 credit:
   - SIGPwny
 featured: true
-location: Siebel CS 1404 + Zoom
+location: Siebel CS 1404
+live_video_url: https://illinois.zoom.us/j/87459758124?pwd=TjNkdllya1ZocUtzMlZJL2JnUVo3Zz09
 tags:
   - web
   - intro
