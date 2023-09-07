@@ -12,3 +12,6 @@ tags:
   - web
   - intro
 ---
+
+# Summary
+Come learn about the technology behind the Internet! We'll cover the basics of HTML, CSS, and Javascript, plus an intro to how HTTP servers actually transmit this data via requests and responses. You'll also learn about the Devtools feature in most browsers, which enables you to inspect and change the way a website works on your computer.
