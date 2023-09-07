@@ -4,9 +4,13 @@ time_start: 2023-09-08T00:00:00.000Z
 time_close: ""
 week_number: 2
 credit:
-  - SIGPwny
+  - Pomona Carrington Hoekstra
+  - Jake Mayer
 featured: true
 location: Siebel CS 1404
+image:
+  path: devtools.png
+  alt: A simplified graphic of browser devtools
 live_video_url: https://illinois.zoom.us/j/87459758124?pwd=TjNkdllya1ZocUtzMlZJL2JnUVo3Zz09
 tags:
   - web
@@ -14,4 +18,4 @@ tags:
 ---
 
 ## Summary
-Come learn about the technology behind the Internet! We'll cover the basics of HTML, CSS, and Javascript, plus an intro to how HTTP servers actually transmit this data via requests and responses. You'll also learn about the Devtools feature in most browsers, which enables you to inspect and change the way a website works on your computer.
+Come learn about the technology behind the Internet! We'll cover the basics of HTML, CSS, and JavaScript, plus an intro to how HTTP servers actually transmit this data via requests and responses. You'll also learn about the devtools feature in most browsers, which enables you to inspect and change the way a website works on your computer.
