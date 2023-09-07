@@ -202,7 +202,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
           return url ? (
             <iframe
               title={meeting.title + " video"}
-              className="bg-surface-000 w-full max-w-2xl aspect-video mx-auto mb-4"
+              className="bg-surface-000 w-full max-w-prose aspect-video mx-auto mb-4"
               allow="encrypted-media; fullscreen; picture-in-picture"
               allowFullScreen={true}
               src={url}
@@ -214,7 +214,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
       {meeting.slides?.publicURL && !meeting.recording && (
         <div className="flex flex-col items-center">
           <Document
-            className="flex flex-col" file={meeting.slides.publicURL} 
+            className="flex flex-col w-full max-w-prose text-center" file={meeting.slides.publicURL} 
             onLoadError={console.error} 
             onLoadSuccess={({ numPages }) => setNumPages(numPages)}
           >
