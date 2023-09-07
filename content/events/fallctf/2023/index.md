@@ -45,7 +45,7 @@ Prize distribution across top placing teams will be announced once all prizes ha
 1. No sharing flags or solutions.
 2. No attacking infrastructure (brute force is not allowed).
 3. No sabotaging other teams.
-4. Teams are limited to 2 players each.
+4. Teams are limited to two players each.
 5. Unless specified otherwise, the flag format is `sigpwny{*}`.
 
 ## Divisions
@@ -66,8 +66,8 @@ If either you or your teammate have taken CS 341 (previously CS 241), ECE 391, o
 **Q:** How are tie-breakers determined?  
 **A:** The leaderboard is sorted first by the team with the most points. If teams have the same number of points, then the team who submitted their most recent flag earlier wins the tie-break.
 
-**Q:** How do I form a team?
+**Q:** How do I form a team?  
 **A:** By the day before the competition, we will be opening team registration on our competition platform. Feel free to find your team partner beforehand. We will also have multiple opportunities before and during the event to find and form teams!
 
-**Q:** I heard that there will be companies present. Do I need to dress up or prepare a resume?
+**Q:** I heard that there will be companies present. Do I need to dress up or prepare a resume?  
 **A:** We do not require a dress code and the expectation is that most people will be dressed casually. We will be offering a resume book to our sponsors and a resume PDF upload form will be provided during the event. If you need help preparing a resume, feel free to ask for advice in our Discord or take advantage of campus career resources!
