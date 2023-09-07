@@ -28,11 +28,43 @@ links:
     name: website
 ---
 ## Registration
-Register now to secure your free shirt, electronic badge, and pizza at the event! Register through our [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform).
+Register now via our [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform) to secure your free shirt, electronic badge, and pizza at the event!
 
 ## Prizes
-We are thrilled to offer prizes to the top placing teams at Fall CTF 2023! We will be offering winning teams a selection of the following:
+We are thrilled to offer prizes to the top-placing teams at Fall CTF 2023! We will be offering winning teams a selection of the following:
 - Hak5 products, prize TBD (thank you to [Hak5](https://hak5.org/)!)
 - 6x Binary Ninja Personal licenses (thank you to [Binary Ninja](https://binary.ninja/)!)
 - 2x Sparrows Lockpick Sets
 - More prizes TBD!
+
+Prize distribution across top placing teams will be announced once all prizes have been determined.
+
+**Disclaimer:** SIGPwny does not condone illegal activities by distributing these prizes. They are intended for educational purposes only.
+
+## Rules
+1. No sharing flags or solutions.
+2. No attacking infrastructure (brute force is not allowed).
+3. No sabotaging other teams.
+4. Teams are limited to 2 players each.
+5. Unless specified otherwise, the flag format is `sigpwny{*}`.
+
+## Divisions
+The competition is divided into a Beginner and Advanced division to fairly distribute prizes. There are no differences in challenges or challenge difficulty between divisions—all challenges are designed to be approached by beginners. 
+
+If one team member meets the requirements for the Advanced division, the entire team must compete under the Advanced division.
+
+### Beginner Division
+The beginner division is intended for underclassmen students who do not have much experience with CTFs, cybersecurity, or even computer science! We require teams with experience to compete in the Advanced division instead.
+
+### Advanced Division
+If either you or your teammate have taken CS 341 (previously CS 241), ECE 391, or have played in three or more CTFs, then your team should be registered in the Advanced division. If you have some experience or would like to compete in the Advanced Division, teams can opt into the Advanced division! Otherwise, teams will play in the Beginner division.
+
+## Frequently Asked Questions
+**Q:** What is a CTF?  
+**A:** CTF is an acronym for "capture-the-flag," which in the context of the cybersecurity field are competitions where teams solve security-related challenges to find a flag (usually a string of text). The flag can then be submitted to the competition platform for points, and the teams compete against each other for the most points!
+
+**Q:** How are tie-breakers determined?  
+**A:** The leaderboard is sorted first by the team with the most points. If teams have the same number of points, then the team who submitted their most recent flag earlier wins the tie-break.
+
+**Q:** How do I form a team?
+**A:** By the day before the competition, we will be opening team registration on our competition platform. Feel free to find your team partner beforehand. We will also have multiple opportunities before and during the event to find and form teams!
