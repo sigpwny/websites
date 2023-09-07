@@ -110,7 +110,10 @@ const MeetingsPage = ({ data }: Props) => {
     <section id="meetings" className="pb-8">
       <div className="flex flex-col mx-auto page-width-lg">
         <h1>Meetings</h1>
-        <p>Our meetings are Thursdays at 7–8 PM and Sundays at 2–3 PM. We are usually located in Siebel CS 1404.</p>
+        <p>
+          Our meetings are on Thursdays at 7–8 PM and Sundays at 2–3 PM and are usually located in Siebel CS 1404.
+          We will always provide a Zoom meeting link and publish a recording on YouTube afterward.
+        </p>
         <div className="panel">
           {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
             <div key={semester} id={semester}>
