@@ -112,7 +112,7 @@ const MeetingsPage = ({ data }: Props) => {
         <h1>Meetings</h1>
         <p>
           Our meetings are on Thursdays at 7–8 PM and Sundays at 2–3 PM and are usually located in Siebel CS 1404.
-          <br className="hidden lg:block" />
+          <br className="hidden lg:block" />&nbsp;
           We will always provide a Zoom meeting link and publish a recording on YouTube afterward.
         </p>
         <div className="panel">
