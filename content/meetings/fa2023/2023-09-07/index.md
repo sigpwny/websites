@@ -17,6 +17,9 @@ recording: https://youtu.be/GMDQYFs97yo
 tags:
   - web
   - intro
+  - javascript
+  - cookies
+  - devtools
 ---
 
 ## Summary
