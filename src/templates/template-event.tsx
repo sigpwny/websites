@@ -4,7 +4,8 @@ import { graphql } from "gatsby";
 import Seo from "../components/Seo";
 import { Card, createCard } from "../components/Card";
 import { MDXProvider } from "../components/MDXProvider";
-import { LocationSvg } from "../components/Icons";
+import { LocationRegular } from "../components/Icons/fluentui";
+import { OpenRegular } from "../components/Icons/fluentui";
 import { convertDate } from "../utils/util";
 
 interface Props {
@@ -78,22 +79,26 @@ const EventTemplate = ({ data, children }: Props) => {
                 </div>
               )}
               {event.location && (
-                <div className="mb-2">
-                  <LocationSvg />
-                  <p className="inline align-middle m-0 ml-2">
+                <div className="flex flex-row gap-2 items-center mb-2">
+                  <LocationRegular className="flex-none text-primary" />
+                  <span className="inline align-middle">
                     {event.location}
-                  </p>
+                  </span>
                 </div>
               )}
               {event.links && (
-                <ul>
+                <ul className="flex flex-col gap-3">
                   {event.links.map((link, idx) => (
                     <li key={idx}>
                       <a
                         href={link.url}
+                        className="flex flex-row items-center justify-between btn-primary w-full"
                         target="_blank" rel="noopener noreferrer"
                       >
-                        {getLinkName(link.name)}
+                        <span>
+                          {getLinkName(link.name)}
+                        </span>
+                        <OpenRegular className="flex-none ml-2" />
                       </a>
                     </li>
                   ))}

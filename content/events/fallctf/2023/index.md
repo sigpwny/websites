@@ -24,8 +24,10 @@ sponsors:
   - Hak5
   - Binary Ninja
 links:
-  - url: https://fallctf.sigpwny.com/
-    name: website
+  - name: Register Now
+    url: https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform
+  # - name: CTFd Platform
+  #   url: https://fallctf.sigpwny.com/
 ---
 ## Registration
 Register now to secure your free shirt, electronic badge, and pizza at the event!
