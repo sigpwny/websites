@@ -1,25 +1,50 @@
-.md-root blockquote {
-  border-left: 4px solid var(--color-text);
-  padding: 0 15px;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+.md-root h1,
+.md-root h2,
+.md-root h3,
+.md-root h4,
+.md-root h5,
+.md-root h6 {
+  padding-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+.md-root h1:first-child,
+.md-root h2:first-child,
+.md-root h3:first-child,
+.md-root h4:first-child,
+.md-root h5:first-child,
+.md-root h6:first-child {
+  padding-top: 0;
+}
+.md-root h1,
+.md-root h2 {
+  margin-bottom: 1rem;
+  border-bottom: solid 1px var(--color-surface-300);
+}
+.md-root p,
+.md-root ul,
+.md-root ol {
+  margin-bottom: 1rem;
 }
 .md-root ul {
   list-style: disc;
-  padding-left: 2em;
-  @apply mb-2;
+  padding-left: 2rem;
 }
 .md-root ol {
   list-style: decimal;
-  padding-left: 2em;
-  @apply mb-2;
+  padding-left: 2rem;
 }
 .md-root ol ol { list-style-type: lower-alpha; }
 .md-root ol ol ol { list-style-type: lower-roman; }
 .md-root hr {
   border-color: var(--color-surface-300);
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.md-root blockquote {
+  border-left: 4px solid var(--color-text);
+  padding: 0 15px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .md-root table {
   border-collapse: separate !important;

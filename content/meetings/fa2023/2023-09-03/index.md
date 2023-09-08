@@ -22,7 +22,7 @@ tags:
   - setup
   - terminal
 ---
-# Summary
+## Summary
 Bring your laptop to this meeting and learn how to set up common security tools. We will also be covering the terminal, or command line interface! You do not need to install Linux as your main operating system - Windows laptops or Macbooks will work fine.
 
 Note: We are holding two sessions for this setup meeting, but both will cover the same things!
