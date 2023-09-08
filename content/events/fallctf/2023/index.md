@@ -28,7 +28,9 @@ links:
     name: website
 ---
 ## Registration
-Register now via our [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform) to secure your free shirt, electronic badge, and pizza at the event!
+Register now to secure your free shirt, electronic badge, and pizza at the event!
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform" class="btn-primary">Register Now</a>
 
 ## Prizes
 We are thrilled to offer prizes to the top-placing teams at Fall CTF 2023! We will be offering winning teams a selection of the following:
