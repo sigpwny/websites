@@ -12,6 +12,7 @@ image:
   path: devtools.png
   alt: A simplified graphic of browser devtools
 live_video_url: https://illinois.zoom.us/j/87459758124?pwd=TjNkdllya1ZocUtzMlZJL2JnUVo3Zz09
+slides: week-02_-web-hacking-i.pdf
 tags:
   - web
   - intro
