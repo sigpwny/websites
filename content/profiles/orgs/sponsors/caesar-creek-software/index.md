@@ -14,4 +14,5 @@ links:
     url: https://www.cc-sw.com/
   - name: linkedin
     url: https://www.linkedin.com/company/cc-sw/
+featured: true
 ---
