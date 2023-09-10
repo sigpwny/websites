@@ -8,8 +8,12 @@ credit:
   - Ronan Boyarski
 featured: true
 location: Siebel CS 1404
+image:
+  path: otw.png
+  alt: A terminal displaying OverTheWire's logo
 live_video_url: https://illinois.zoom.us/j/84293276305?pwd=cytNRDA4a2pzeGFpQ0l5Ty9aWVd4UT09
 slides: week-02_-setup-2.pdf
+recording: https://youtu.be/vS50rXWvQ0o
 tags:
   - misc
   - terminal
