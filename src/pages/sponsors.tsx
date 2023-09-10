@@ -19,6 +19,7 @@ export function Head() {
 }
 
 const SponsorsPage = ({ data }: Props) => {
+  const featured_orgs = data.allOrg.nodes;
   const events = data.allEvent.nodes;
   // Filter for events that occured in the past year or in the future
   // and are the most recent event in each series
@@ -34,7 +35,6 @@ const SponsorsPage = ({ data }: Props) => {
     uniq_series.add(event.series);
     return true;
   });
-  // TODO: Add support for meeting sponsors
   return (
     <div className="flex flex-col gap-8 mx-auto page-width-lg">
       <span>
@@ -43,6 +43,18 @@ const SponsorsPage = ({ data }: Props) => {
           Thank you to our sponsors for supporting SIGPwny!
         </p>
         <div className="flex flex-col gap-4">
+          {featured_orgs.length > 0 ? (
+            <span>
+              <h2>Workshop Sponsors</h2>
+              <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                {featured_orgs.map((sponsor, sponsor_idx) => (
+                  <div key={sponsor_idx} className="flex grow">
+                    <Card {...createCard({sponsor} as CardSponsorProps)} />
+                  </div>
+                ))}
+              </div>
+            </span>
+          ) : null}
           {recent_events.map((event, event_idx) => (
             <span key={event_idx}>
               <h2>{event.title}</h2>
@@ -73,6 +85,48 @@ export default SponsorsPage;
 
 export const query = graphql`
   query SponsorsPage {
+    allOrg(
+      sort: {weight: DESC},
+      filter: {featured: {eq: true}}
+    ) {
+      nodes {
+        name
+        profile_image {
+          childImageSharp {
+            gatsbyImageData(width: 160, aspectRatio: 1)
+          }
+        }
+        card_image {
+          foreground {
+            publicURL
+          }
+          background {
+            publicURL
+          }
+          foreground_image {
+            childImageSharp {
+              gatsbyImageData(width: 600)
+            }
+          }
+          background_image {
+            childImageSharp {
+              gatsbyImageData(width: 600, placeholder: BLURRED)
+            }
+          }
+          background_color
+          alt
+        }
+        affiliation
+        handle
+        bio
+        role
+        weight
+        links {
+          name
+          url
+        }
+      }
+    }
     allEvent(sort: {time_start: DESC}) {
       nodes {
         title

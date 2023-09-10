@@ -211,6 +211,7 @@ type Org implements Node & Profile @dontInfer {
   role: String!
   weight: Int!
   links: [Link!]
+  featured: Boolean!
 }
 
 type RedirectsJson implements Node @dontInfer {

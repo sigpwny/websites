@@ -331,6 +331,10 @@ const content_node_types: ContentNode[] = [
         resolve: ({ node }) => node.frontmatter.weight ?? 0
       },
       { name: "links" },
+      {
+        name: "featured",
+        resolve: ({ node }) => node.frontmatter.featured ?? false
+      }
     ],
   },
 ];
