@@ -1,15 +1,14 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import React from "react";
+import { Link, graphql } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 
-import Seo from "../components/Seo"
-import { CardRow, createCard } from "../components/Card"
-import { convertDate, weekNumber } from "../utils/util"
+import Seo from "../../components/Seo";
+import { CardRow, createCard } from "../../components/Card";
+import { convertDate, weekNumber } from "../../utils/util";
 
 interface Props {
   data: Queries.JoinPageQuery
-}
-
-type Meeting = Queries.JoinPageQuery["allMeeting"]["meetings"][0]
+};
 
 export function Head() {
   return (
@@ -34,7 +33,7 @@ const JoinPage = ({ data }: Props) => {
   // Reverse the order of the meetings to be in chronological order
   const get_started_meetings = filtered_meetings.reverse()
 
-  const meeting_cards = get_started_meetings.map((meeting: Meeting) => (
+  const meeting_cards = get_started_meetings.map((meeting) => (
     createCard({meeting, timezone: meeting.timezone} as CardMeetingProps)
   ))
   const socials = data.site?.siteMetadata?.socialLinks
@@ -63,7 +62,12 @@ const JoinPage = ({ data }: Props) => {
             </li>
           </ul>
         </div>
-        <div className="panel basis-1/2"></div>
+        <StaticImage
+          src="./2023-09-07-web-hacking-i.jpg"
+          alt="SIGPwny members gather for a web hacking meeting"
+          className="rounded-xl pointer-events-none select-none border-surface-100 border-2 basis-1/2"
+          placeholder="blurred"
+        />
       </section>
 
       <section id="join-involve" className="py-8">
