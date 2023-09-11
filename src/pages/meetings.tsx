@@ -62,6 +62,7 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
                 <a
                   href={meeting.recording}
                   className="px-2 link-tooltip-select"
+                  target="_blank" rel="noopener noreferrer"
                   aria-label={"Watch video"}
                   data-tooltip-content={"Watch video"}
                 >
@@ -74,6 +75,7 @@ const MeetingRow = ({ meeting }: { meeting: Meeting }) => {
                 <a
                   href={meeting.slides.publicURL}
                   className="px-2 link-tooltip-select"
+                  target="_blank" rel="noopener noreferrer"
                   aria-label={"Download slides"}
                   data-tooltip-content={"Download slides"}
                 >

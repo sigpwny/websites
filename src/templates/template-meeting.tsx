@@ -167,6 +167,7 @@ const MeetingTemplate = ({ data, children }: Props) => {
             <a
               href={meeting.slides.publicURL}
               className="btn-primary"
+              target="_blank" rel="noopener noreferrer"
             >
               <PdfSvg />
               <p className="inline align-middle m-0 ml-2">
