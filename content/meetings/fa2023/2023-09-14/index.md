@@ -10,6 +10,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/87812049937?pwd=Tm55ZEJ3N1A0cEdpNW1QZG40RXFlZz09
+slides: week-03_-web-hacking-ii.pdf
 tags:
   - web
   - sqli
