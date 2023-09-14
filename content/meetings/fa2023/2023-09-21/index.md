@@ -1,10 +1,11 @@
 ---
-title: OSINT (Open Source Intelligence)
+title: Reverse Engineering I
 time_start: 2023-09-22T00:00:00.000Z
-time_close: 2023-09-22T01:00:00.000Z
+time_close: ""
 week_number: 4
 featured: true
-location: Siebel CS 1404 + Zoom
+location: Siebel CS 1404
 tags:
-  - osint
+  - rev
+  - intro
 ---
