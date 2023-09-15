@@ -18,6 +18,11 @@ tags:
   - xss
 ---
 ## Summary
+
 Come to our second web hacking meeting to learn how to break websites on the server-side! We will be covering what happens when a client sends malicious input, causing the server to behave unexpectedly, specifically SQL injection (SQLi) and cross-site scripting (XSS)!
 
 We also will be inviting one of our Fall CTF 2023 sponsors, Battelle, to speak about their cybersecurity careers, internships, and opportunities!
+
+Bryce Duchesne - Talent Acquisition Specialist - Duchesne@Battelle.org
+
+[Battelle Careers](https://battelle.org/careers)
