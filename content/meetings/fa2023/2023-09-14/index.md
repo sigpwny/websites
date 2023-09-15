@@ -9,8 +9,12 @@ credit:
   - Battelle
 featured: true
 location: Siebel CS 1404
+image:
+  path: adobestock_308881976.jpeg
+  alt: The words "SQL injection" spelled out on Scrabble letter tiles
 live_video_url: https://illinois.zoom.us/j/87812049937?pwd=Tm55ZEJ3N1A0cEdpNW1QZG40RXFlZz09
 slides: week-03_-web-hacking-ii.pdf
+recording: https://youtu.be/jA4QtkXGqYs
 tags:
   - web
   - sqli
