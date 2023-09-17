@@ -8,7 +8,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/89924706417?pwd=RElZNW4rUzd3aUNlOVdHbG96TDA1QT09
-slides: week-03_-rev-setup-meeting.pdf
+slides: week-03-rev-setup-meeting.pdf
 tags:
   - rev
   - setup
