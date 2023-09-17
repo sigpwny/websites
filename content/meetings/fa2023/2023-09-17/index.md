@@ -4,7 +4,7 @@ time_start: 2023-09-17T19:00:00.000Z
 time_close: ""
 week_number: 3
 credit:
-  - SIGPwny
+  - Pete Stenger
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/89924706417?pwd=RElZNW4rUzd3aUNlOVdHbG96TDA1QT09
