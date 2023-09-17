@@ -12,6 +12,7 @@ image:
   alt: Ghidra logo
 live_video_url: https://illinois.zoom.us/j/89924706417?pwd=RElZNW4rUzd3aUNlOVdHbG96TDA1QT09
 slides: week-03_-rev-setup-meeting-2.pdf
+recording: https://youtu.be/60dR9ZMOHtw
 tags:
   - rev
   - setup
