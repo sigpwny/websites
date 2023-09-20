@@ -36,12 +36,30 @@ Register now to secure your free shirt, electronic badge, and pizza at the event
 
 ## Prizes
 We are thrilled to offer prizes to the top-placing teams at Fall CTF 2023! We will be offering winning teams a selection of the following:
-- Hak5 products, prize TBD (thank you to [Hak5](https://hak5.org/)!)
+- 3x [O.MG Plug + Programmer](https://hak5.org/products/omg-plug) (thank you to [Hak5](https://hak5.org/)!)
+- 1x [Bash Bunny](https://shop.hak5.org/products/bash-bunny)
+- 2x [YubiKey 5C NFC](https://www.yubico.com/product/yubikey-5-series/yubikey-5c-nfc/)
+- 2x [Pinecil Soldering Iron](https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/)
+- 4x [Sparrows Tuxedo Lock Pick Sets](https://www.sparrowslockpicks.com/products/tuxedo-lock-pick-set)
 - 6x Binary Ninja Personal licenses (thank you to [Binary Ninja](https://binary.ninja/)!)
-- 2x Sparrows Lockpick Sets
-- More prizes TBD!
+- 2x [NordVPN Standard (1 year)](https://nordvpn.com/)
 
-Prize distribution across top placing teams will be announced once all prizes have been determined.
+Additionally, all digital prizes (Binary Ninja licenses or NordVPN) will come with PWNY SOCKS!
+
+![Pwny socks](./pwny-socks.png)
+
+### Prize Distribution
+Each winning team may select two prize options with the following priority:
+- 1st place Advanced Division
+- 1st place Beginner Division
+- 2nd place Advanced Division
+- 2nd place Beginner Division
+- 3rd place Advanced Division
+- 3rd place Beginner Division
+- 4th place Advanced Division
+- 4th place Beginner Division
+- 5th place Advanced Division
+- 5th place Beginner Division
 
 **Disclaimer:** SIGPwny does not condone illegal activities by distributing these prizes. They are intended for educational purposes only.
 
