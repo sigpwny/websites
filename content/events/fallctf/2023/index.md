@@ -24,15 +24,15 @@ sponsors:
   - Hak5
   - Binary Ninja
 links:
-  - name: Register Now
-    url: https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform
-  # - name: CTFd Platform
-  #   url: https://fallctf.sigpwny.com/
+  - name: Play Challenges
+    url: https://fallctf.sigpwny.com/
 ---
 ## Registration
-Register now to secure your free shirt, electronic badge, and pizza at the event!
+Registration for the CTF competition platform is now available!
 
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSfrRkjzvBECRV8YBQ94YNLzCYLMldf7qMj-OrY_Ar9UzGcBIg/viewform" class="btn-primary">Register Now</a>
+<a href="https://fallctf.sigpwny.com/" class="btn-primary">Register on CTFd</a>
+
+Registration via Google Forms for a free shirt and electronic badge has closed. If you previously registered beforehand, please make sure to bring your iCard to the event (or show your ID on the Illinois app). If you did not register on Google Forms, we will be handing out any remaining shirts later in the event. We will also be raffling off extra electronic badges.
 
 ## Prizes
 We are thrilled to offer prizes to the top-placing teams at Fall CTF 2023! We will be offering winning teams a selection of the following:
