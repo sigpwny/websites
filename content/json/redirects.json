@@ -37,7 +37,7 @@
   },
   {
     "src": "/fallctf",
-    "dst": "/events/fallctf/2023/"
+    "dst": "https://fallctf.sigpwny.com/"
   },
   {
     "src": "/register23",
