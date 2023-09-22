@@ -10,6 +10,7 @@ image:
   alt: Gears with the words "reverse engineering"
 live_video_url: https://illinois.zoom.us/j/88225445906?pwd=aXFxemViQzdwZjg4VzllTkp5S2JLdz09
 slides: week-04_-rev-i.pdf
+recording: https://youtu.be/u6_dpbfKSU4
 tags:
   - rev
   - intro
