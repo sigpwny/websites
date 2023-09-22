@@ -30,9 +30,11 @@ links:
 ## Registration
 Registration for the CTF competition platform is now available!
 
-<a href="https://fallctf.sigpwny.com/" class="btn-primary">Register on CTFd</a>
+<a href="https://fallctf.sigpwny.com/" class="btn-primary mb-2">Register on CTFd</a>
 
+<p class="mt-4">
 Registration via Google Forms for a free shirt and electronic badge has closed. If you previously registered beforehand, please make sure to bring your iCard to the event (or show your ID on the Illinois app). If you did not register on Google Forms, we will be handing out any remaining shirts later in the event. We will also be raffling off extra electronic badges.
+</p>
 
 ## Prizes
 We are thrilled to offer prizes to the top-placing teams at Fall CTF 2023! We will be offering winning teams a selection of the following:
