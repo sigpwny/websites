@@ -1,5 +1,5 @@
 ---
-title: BuckeyeCTF 2023
+title: Double CTF! BuckeyeCTF 2023 + MapleCTF 2023
 time_start: 2023-09-30T00:00:57.507Z
 time_close: 2023-10-02T00:00:12.529Z
 week_number: 5
@@ -10,8 +10,13 @@ location: Siebel CS (Room TBA)
 tags:
   - ctf
 ---
-We will be playing BuckeyeCTF 2023, organized by The Ohio State University! We will be meeting in-person to play this CTF on Friday and the rest of the weekend.
+We will be playing **BOTH** BuckeyeCTF 2023 and MapleCTF 2023! These CTFs start and end at the same time - we will be meeting over the weekend in Siebel to play.
 
-Note: we will be participating in the undergraduate division. If you are a graduate student, you cannot play with us.
+- BuckeyeCTF 2023 is organized by The Ohio State University. We expect the difficulty to be more beginner-friendly. We will be participating in the **Undergraduate** division, so graduate students won't be able to participate in BuckeyeCTF.
+- MapleCTF 2023 is organized by the University of British Columbia. We expect the difficulty to be more advanced and invite our graduate student members to help!
 
-I﻿f you would like to participate, make sure to use the `/ctf optin` command on Discord. We will also announce the room location on Discord.
+
+
+Playing a double CTF will be a new experience for us, and we invite everyone to participate so we can learn how to organize things best. We will be using a sliding scale focus to determine which CTF to prioritize, meaning we will frequently announce which CTF needs more attention based on our performance!
+
+I﻿f you would like to participate, make sure to use the `/ctf optin` command on Discord. We will also announce Siebel room locations on Discord.
