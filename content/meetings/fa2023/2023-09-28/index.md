@@ -8,6 +8,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/87001836508?pwd=OW1FRSs2ejVvd1hNUFUxRmQraE1zUT09
+slides: week-05_-osint-i.pdf
 tags:
   - osint
   - intro
