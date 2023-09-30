@@ -4,14 +4,21 @@ time_start: 2023-09-29T00:00:00.000Z
 time_close: ""
 week_number: 5
 credit:
-  - SIGPwny
+  - Pomona Carrington Hoekstra
 featured: true
 location: Siebel CS 1404
+image:
+  path: adobestock_583605308-medium-.jpeg
+  alt: A large magnet attracting social media profile icons
 live_video_url: https://illinois.zoom.us/j/87001836508?pwd=OW1FRSs2ejVvd1hNUFUxRmQraE1zUT09
 slides: week-05_-osint-i.pdf
+recording: https://youtu.be/3a4yWSs2JNg
 tags:
   - osint
   - intro
+  - social media
+  - nmap
+  - sherlock
 ---
 ## S﻿ummary
 
