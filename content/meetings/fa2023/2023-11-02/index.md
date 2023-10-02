@@ -1,5 +1,5 @@
 ---
-title: Forensics Workshop with CrowdStrike + UIUC Technology Services
+title: Forensics Workshop with CrowdStrike
 time_start: 2023-11-03T00:00:00.000Z
 time_close: ""
 week_number: 10
