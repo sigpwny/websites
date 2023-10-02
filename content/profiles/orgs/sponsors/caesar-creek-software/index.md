@@ -7,7 +7,7 @@ card_image:
 affiliation: Caesar Creek Software
 handle: cc-sw
 bio: We perform offensive cyber research through reverse engineering, vulnerability analysis, exploit development, & network security. We void warranties!
-role: Sponsor
+role: Workshop Sponsor
 weight: 4
 links:
   - name: website
