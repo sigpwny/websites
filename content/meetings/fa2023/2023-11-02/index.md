@@ -5,12 +5,13 @@ time_close: ""
 week_number: 10
 credit:
   - CrowdStrike
+  - UIUC Technology Services
 featured: false
 location: Siebel CS 1404
 tags:
   - workshop
   - forensics
 ---
-## S﻿ummary
+## Summary
 
-W﻿e are excited to have both our sponsor CrowdStrike and UIUC's Privacy and Cybersecurity team talk about protecting networks using modern forensics tools! More information and details will be announced soon!
+We are excited to have both our sponsor CrowdStrike and UIUC's Privacy and Cybersecurity team talk about protecting networks using modern forensics tools! More information and details will be announced soon!

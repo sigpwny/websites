@@ -10,6 +10,6 @@ location: TBA
 tags:
   - workshop
 ---
-## S﻿ummary
+## Summary
 
-W﻿e will be hosting a workshop with Caesar Creek Software! More information and details will be released soon!
+We will be hosting a workshop with Caesar Creek Software! More information and details will be released soon!

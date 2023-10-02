@@ -20,6 +20,6 @@ tags:
   - nmap
   - sherlock
 ---
-## S﻿ummary
+## Summary
 
-L﻿earn how to use public resources and tools to discover valuable information about a target subject or organization! Disclaimer: we will not teach you how to stalk people, nor do we condone it.
+Learn how to use public resources and tools to discover valuable information about a target subject or organization! Disclaimer: we will not teach you how to stalk people, nor do we condone it.

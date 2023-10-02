@@ -18,6 +18,6 @@ tags:
   - rev
   - intro
 ---
-## S﻿ummary
+## Summary
 
 Come learn the methods and tools used to reverse engineer applications! We will be covering reverse engineering specifically for interpreted languages (e.g. Python and JavaScript).

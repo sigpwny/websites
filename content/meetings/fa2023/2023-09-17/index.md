@@ -20,6 +20,6 @@ tags:
   - pwntools
   - utm
 ---
-## S﻿ummary
+## Summary
 
-W﻿e will be setting up additional tools to use for reverse engineering x86 assembly code! Specifically, we will be installing Ghidra, Python + pwntools, and UTM (for Apple silicon users).
+We will be setting up additional tools to use for reverse engineering x86 assembly code! Specifically, we will be installing Ghidra, Python + pwntools, and UTM (for Apple silicon users).

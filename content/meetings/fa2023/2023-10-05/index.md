@@ -13,8 +13,8 @@ tags:
   - x86-64
   - ghidra
 ---
-## S﻿ummary
+## Summary
 
-W﻿e will discuss reverse engineering for compiled binaries! We will show how to "decompile" an x86 binary into readable code using Ghidra and other tools.
+We will discuss reverse engineering for compiled binaries! We will show how to "decompile" an x86 binary into readable code using Ghidra and other tools.
 
 Before this meeting, we highly recommend setting up your laptop with tools for reversing (see our [reverse engineering setup meeting](https://sigpwny.com/meetings/fa2023/2023-09-17/)) and checking out our previous reverse engineering meetings ([x86-64 assembly](https://sigpwny.com/meetings/fa2023/2023-10-01/) and [Reverse Engineering I](https://sigpwny.com/meetings/fa2023/2023-09-21/)).

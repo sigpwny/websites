@@ -19,6 +19,6 @@ tags:
   - assembly
   - x86-64
 ---
-## S﻿ummary
+## Summary
 
-I﻿n this meeting, we discuss the fundamentals of x86-64 assembly, including an explanation of the stack, memory, registers, instructions, and how syscalls work.
+In this meeting, we discuss the fundamentals of x86-64 assembly, including an explanation of the stack, memory, registers, instructions, and how syscalls work.
