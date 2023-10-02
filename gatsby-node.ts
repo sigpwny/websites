@@ -506,13 +506,22 @@ exports.createResolvers = ({ createResolvers }) => {
           const site_url = context.nodeModel.getNodeById({ id: "Site" }).siteMetadata.siteUrl;
           const page_url = `${site_url}${source.slug}`;
           // TODO: Migrate to card_image
+          if (source.image?.path) {
+            console.log(source.image.path.id ?? "no")
+            // context.nodeModel.findOne({
+            //   type: "File",
+              
+            // }).then((file_node) => {
+            //   console.log(file_node.absolutePath ?? "no")
+            // });
+          }
           const image_url = source.image?.path?.publicURL ? `${site_url}${source.image.path.publicURL}` : undefined;
           return {
             update_disabled: source.discord_event?.update_disabled ? source.discord_event.update_disabled : false,
             name: source.discord_event?.name ?? `Week ${weekNumber(source.week_number)}: ${source.title}`,
             location: source.discord_event?.location ?? source.location ?? "TBD",
             description: source.discord_event?.description ?? (source.description ? `${page_url}\n${source.description}` : page_url),
-            image_url: source.discord_event?.image_url ?? image_url,
+            image_url: source.discord_event?.image_url ? source.discord_event.image_url : image_url,
           };
         }
       },
