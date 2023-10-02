@@ -7,10 +7,17 @@ credit:
   - Sam Ruggerio
 featured: true
 location: Siebel CS 1404
+image:
+  path: adobestock_614840158-cropped.jpg
 live_video_url: https://illinois.zoom.us/j/86891261228?pwd=ZUN3UjQ1YlptOEFTeWRPRUVWNzZ5dz09
+slides: week_05_-x86-64-assembly.pdf
+recording: https://youtu.be/m2QRYBya72M
 tags:
   - pwn
   - rev
   - assembly
-  - x86
+  - x86-64
 ---
+## S﻿ummary
+
+I﻿n this meeting, we discuss the fundamentals of x86-64 assembly, including an explanation of the stack, memory, registers, instructions, and how syscalls work.
