@@ -10,6 +10,8 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/84469194430?pwd=d1dNOEZ0MXpmOEZwS3lOTzZQOStXdz09
+assets:
+  - gdb-refcard.pdf
 tags:
   - rev
   - x86-64
@@ -19,4 +21,4 @@ tags:
 
 We will discuss reverse engineering for compiled binaries! We will show how to "decompile" an x86 binary into readable code using Ghidra and then "step" through the program using GDB.
 
-Before this meeting, we highly recommend setting up your laptop with tools for reversing (see our [reverse engineering setup meeting](https://sigpwny.com/meetings/fa2023/2023-09-17/)) and checking out our previous reverse engineering meetings ([x86-64 assembly](https://sigpwny.com/meetings/fa2023/2023-10-01/) and [Reverse Engineering I](https://sigpwny.com/meetings/fa2023/2023-09-21/)).
+Before this meeting, we highly recommend setting up your laptop with tools for reversing (see our [reverse engineering setup meeting](https://sigpwny.com/meetings/fa2023/2023-09-17/)) and checking out our previous reverse engineering meetings ([x86-64 assembly](https://sigpwny.com/meetings/fa2023/2023-10-01/) and [Reverse Engineering I](https://sigpwny.com/meetings/fa2023/2023-09-21/)). [GDB reference](./gdb-refcard.pdf).
