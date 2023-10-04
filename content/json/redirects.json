@@ -92,6 +92,10 @@
     "dst": "/meetings/fa2022/2022-09-18/"
   },
   {
+    "src": "/rev_setup23",
+    "dst": "/meetings/fa2023/2023-09-17/"
+  },
+  {
     "src": "/sponsor",
     "dst": "/sponsors/"
   },
