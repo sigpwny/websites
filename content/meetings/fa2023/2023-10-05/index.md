@@ -10,6 +10,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/84469194430?pwd=d1dNOEZ0MXpmOEZwS3lOTzZQOStXdz09
+slides: week-06-reverse-engineering-ii.pdf
 assets:
   - gdb-refcard.pdf
 tags:
