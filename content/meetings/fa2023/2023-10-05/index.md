@@ -9,8 +9,11 @@ credit:
   - Henry Qiu
 featured: true
 location: Siebel CS 1404
+image:
+  path: adobestock_128402763-2.jpeg
+  alt: Gear with the words "reverse engineering" on them
 live_video_url: https://illinois.zoom.us/j/84469194430?pwd=d1dNOEZ0MXpmOEZwS3lOTzZQOStXdz09
-slides: week-06-reverse-engineering-ii.pdf
+slides: week-06_-reverse-engineering-ii.pdf
 assets:
   - gdb-refcard.pdf
 tags:
