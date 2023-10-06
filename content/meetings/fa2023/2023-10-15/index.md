@@ -5,7 +5,7 @@ time_close: 2023-10-14T20:00:00.000Z
 week_number: 7
 credit:
   - Anakin Dey
-featured: true
+featured: false
 tags:
   - crypto
 ---
