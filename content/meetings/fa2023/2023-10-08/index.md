@@ -5,7 +5,7 @@ time_close: 2023-10-08T20:00:02.129Z
 week_number: 6
 credit:
   - Ojas Upalekar
-featured: false
+featured: true
 location: Siebel CS 1404
 image:
   path: img_0096.jpeg
