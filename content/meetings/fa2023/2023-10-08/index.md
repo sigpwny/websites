@@ -6,7 +6,7 @@ week_number: 6
 credit:
   - Ojas Upalekar
 featured: true
-location: Siebel CS 1404
+location: Transportation Building 103
 image:
   path: img_0096.jpeg
   alt: A grid of lock emojis with a single unlock emoji in the middle
