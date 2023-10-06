@@ -6,7 +6,11 @@ week_number: 6
 credit:
   - Ojas Upalekar
 featured: false
-location: Siebel CS 1404 + Zoom
+location: Siebel CS 1404
+image:
+  path: img_0096.jpeg
+  alt: A grid of lock emojis with a single unlock emoji in the middle
+live_video_url: https://illinois.zoom.us/j/87483716667?pwd=cGxzNkRuR2pvd3hoeTJUT0ErSXM2dz09
 tags:
   - rev
   - drm
