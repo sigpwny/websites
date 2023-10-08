@@ -11,6 +11,7 @@ image:
   path: img_0096.jpeg
   alt: A grid of lock emojis with a single unlock emoji in the middle
 live_video_url: https://illinois.zoom.us/j/87483716667?pwd=cGxzNkRuR2pvd3hoeTJUT0ErSXM2dz09
+slides: week-07-drm-circumvention.pdf
 tags:
   - rev
   - drm
