@@ -14,6 +14,7 @@ const config: GatsbyConfig = {
       { name: "Publications", url: "/publications/"},
       { name: "Events", url: "/events/" },
       { name: "Sponsors", url: "/sponsors/" },
+      { name: "CMS", url: "/admin/" }
     ],
     navCallToActionLinks: [{ name: "Join", url: "/join/" }],
     socialLinks: [
@@ -127,6 +128,7 @@ const config: GatsbyConfig = {
         ignore: [`**/.*`],
       },
     },
+    "gatsby-plugin-netlify-cms",
     "gatsby-plugin-catch-links",
     "gatsby-plugin-image",
     "gatsby-plugin-netlify",
