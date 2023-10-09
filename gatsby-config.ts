@@ -127,6 +127,7 @@ const config: GatsbyConfig = {
         ignore: [`**/.*`],
       },
     },
+    "gatsby-plugin-netlify-cms",
     "gatsby-plugin-catch-links",
     "gatsby-plugin-image",
     "gatsby-plugin-netlify",
