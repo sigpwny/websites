@@ -20,3 +20,5 @@ tags:
 ## Summary
 
 This meeting covers the history of digital rights management systems, how they are implemented, and how they've been broken in the past.
+
+Note: Due to technical issues, the first 9 minutes of the recording do not have audio.
