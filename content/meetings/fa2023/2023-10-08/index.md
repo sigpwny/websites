@@ -12,7 +12,11 @@ image:
   alt: A grid of lock emojis with a single unlock emoji in the middle
 live_video_url: https://illinois.zoom.us/j/87483716667?pwd=cGxzNkRuR2pvd3hoeTJUT0ErSXM2dz09
 slides: week-07-drm-circumvention.pdf
+recording: https://youtu.be/V5NY8ykqzk0
 tags:
   - rev
   - drm
 ---
+## Summary
+
+This meeting covers the history of digital rights management systems, how they are implemented, and how they've been broken in the past.
