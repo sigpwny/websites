@@ -14,6 +14,7 @@ image:
   alt: Gear with the words "reverse engineering" on them
 live_video_url: https://illinois.zoom.us/j/84469194430?pwd=d1dNOEZ0MXpmOEZwS3lOTzZQOStXdz09
 slides: week-06_-reverse-engineering-ii.pdf
+recording: https://youtu.be/BGDSXDzf3Tk
 assets:
   - gdb-refcard.pdf
 tags:
