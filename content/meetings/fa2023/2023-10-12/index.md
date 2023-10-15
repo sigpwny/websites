@@ -14,7 +14,7 @@ image:
   alt: A diagram with Alice sending an encrypted message to Bob, and Eve listening
     for the encrypted message
 live_video_url: https://illinois.zoom.us/j/89203587835?pwd=bktBTTZzVjNTenRnQ0hEbG1HNmh1dz09
-slides: ""
+slides: crypto_i.pdf
 recording: https://youtu.be/XYAzVjOLub8
 tags:
   - crypto
