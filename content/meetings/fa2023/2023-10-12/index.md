@@ -6,6 +6,7 @@ timezone: ""
 week_number: 7
 credit:
   - Anakin Dey
+  - Sagnik Chakraborty
 featured: true
 location: Siebel CS 1404
 image:
