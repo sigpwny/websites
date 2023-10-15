@@ -149,7 +149,14 @@ const content_node_types: ContentNode[] = [
       },
       {
         name: "timezone",
-        resolve: ({ node }) => node.frontmatter.timezone ?? config.siteMetadata?.timezone ?? "Etc/UTC"
+        resolve: ({ node }) => {
+          if (node.frontmatter.timezone) {
+            return node.frontmatter.timezone;
+          } else if (config.siteMetadata?.timezone) {
+            return config.siteMetadata.timezone;
+          }
+          return "Etc/UTC";
+        },
       },
     ],
   },
