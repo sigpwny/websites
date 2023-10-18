@@ -1,6 +1,6 @@
 ---
 title: Workshop with Caesar Creek Software
-time_start: 2023-10-28T00:00:00.000Z
+time_start: 2023-10-27T23:00:00.000Z
 time_close: ""
 week_number: 9
 credit:
