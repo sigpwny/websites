@@ -4,8 +4,8 @@ time_start: 2023-10-15T19:00:00.000Z
 time_close: 2023-10-15T20:00:00.000Z
 week_number: 7
 credit:
-  - Anakin Dey
   - Sagnik Chakraborty
+  - Anakin Dey
 featured: true
 location: Siebel CS 1404
 image:
@@ -14,6 +14,7 @@ image:
     break
 live_video_url: https://illinois.zoom.us/j/82457225584?pwd=czZUZFl4aVBKN3Y4KzRvbHZOaDg4QT09
 slides: crypto_ii.pdf
+recording: https://youtu.be/o9Yp_PS-3V0
 tags:
   - crypto
   - chinese remainder theorem
