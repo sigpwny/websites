@@ -6,10 +6,12 @@ week_number: 9
 credit:
   - Caesar Creek Software
 featured: false
-location: TBA
+location: To be announced
 tags:
   - workshop
 ---
 ## Summary
 
-We will be hosting a workshop with Caesar Creek Software! More information and details will be released soon!
+We will be hosting a workshop with Caesar Creek Software! Engineers will present on the work they do in security, including reverse engineering and exploit development. They will also be hosting a panel to answer questions about the company and opportunities!
+
+There will also be free pizza!
