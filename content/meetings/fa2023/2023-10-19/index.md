@@ -8,6 +8,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/82144420187?pwd=YnpHcFdvOTNJNG1UcS92VzlrcHg0Zz09
+slides: week-08_-pwn-i.pdf
 tags:
   - pwn
   - intro
