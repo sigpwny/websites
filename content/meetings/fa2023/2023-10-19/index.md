@@ -13,7 +13,7 @@ image:
   alt: A person typing on a laptop, with a translucent popup extending from the
     laptop screen with a red malware warning
 live_video_url: https://illinois.zoom.us/j/82144420187?pwd=YnpHcFdvOTNJNG1UcS92VzlrcHg0Zz09
-slides: ""
+slides: week-08_-pwn-i.pdf
 tags:
   - pwn
   - intro
