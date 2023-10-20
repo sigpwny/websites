@@ -5,8 +5,13 @@ time_close: ""
 week_number: 8
 credit:
   - Sam Ruggerio
+  - Akhil Bharanidhar
 featured: true
 location: Siebel CS 1404
+image:
+  path: img_0103.jpeg
+  alt: A person typing on a laptop, with a translucent popup extending from the
+    laptop screen with a red malware warning
 live_video_url: https://illinois.zoom.us/j/82144420187?pwd=YnpHcFdvOTNJNG1UcS92VzlrcHg0Zz09
 slides: week-08_-pwn-i.pdf
 tags:
