@@ -4,7 +4,7 @@ time_start: 2023-10-22T19:00:00.000Z
 time_close: ""
 week_number: 8
 credit:
-  - Kevin Higgs
+  - Sam Ruggerio
   - Akhil Bharanidhar
 featured: true
 location: Siebel CS 1404
