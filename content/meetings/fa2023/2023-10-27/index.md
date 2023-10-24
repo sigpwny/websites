@@ -7,6 +7,9 @@ credit:
   - Caesar Creek Software
 featured: true
 location: Siebel CS (room TBD)
+image:
+  path: ccsw_cover.png
+  alt: Caesar Creek Software logo
 tags:
   - workshop
 ---
