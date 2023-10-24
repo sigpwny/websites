@@ -7,6 +7,10 @@ credit:
   - Emma Hartman
 featured: true
 location: MSEB 100
+image:
+  path: sigpwny_lockpicking.png
+  alt: SIGPwny members in the Siebel Center for Computer Science practicing
+    lockpicking
 live_video_url: https://illinois.zoom.us/j/84401360529?pwd=QnRWU3o2U05EUGRtaWdyM3cwZnU0QT09
 tags:
   - misc
