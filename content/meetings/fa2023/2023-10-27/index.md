@@ -16,4 +16,4 @@ We will be hosting a workshop with Caesar Creek Software! Two engineers from Cae
 
 About Caesar Creek Software: Caesar Creek Software works with various government agencies to perform cyber research into major operating system platforms, software security products, personal computers, cell phones, and networking equipment. We specialize in offensive information operations, reverse engineering, vulnerability analysis, and exploit development. We have a robust Internal Research and Development program that lets us do cool stuff on our own. If it has a processor, we love taking it apart to see what makes it tick. Our company motto: "We void warranties!"
 
-Company Website: <https://cc-sw.com/careers/>
+Company Website: [https://cc-sw.com/careers/](https://cc-sw.com/careers/)
