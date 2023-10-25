@@ -6,7 +6,7 @@ week_number: 9
 credit:
   - Caesar Creek Software
 featured: true
-location: Siebel CS (room TBD)
+location: Siebel CS 2405
 image:
   path: ccsw_cover.png
   alt: Caesar Creek Software logo
