@@ -1,10 +1,12 @@
 ---
-title: Lockpicking
+title: Physical Security and Lockpicking
 time_start: 2023-10-27T00:00:00.000Z
 time_close: ""
 week_number: 9
 credit:
   - Emma Hartman
+  - Nick Tsiones
+  - Sam Ruggerio
 featured: true
 location: MSEB 100
 image:
