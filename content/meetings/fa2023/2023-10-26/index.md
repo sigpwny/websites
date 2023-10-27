@@ -14,6 +14,7 @@ image:
   alt: SIGPwny members in the Siebel Center for Computer Science practicing
     lockpicking
 live_video_url: https://illinois.zoom.us/j/84401360529?pwd=QnRWU3o2U05EUGRtaWdyM3cwZnU0QT09
+slides: week-09_-physical-security-and-lockpicking.pdf
 tags:
   - misc
   - lockpicking
