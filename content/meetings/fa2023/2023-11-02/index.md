@@ -14,4 +14,8 @@ tags:
 ---
 ## Summary
 
-We are excited to have both our sponsor CrowdStrike and UIUC's Privacy and Cybersecurity team talk about protecting networks using modern forensics tools! More information and details will be announced soon!
+We are excited to have both our sponsor CrowdStrike and UIUC's Privacy and Cybersecurity team talk about protecting networks using modern forensics tools! Learn about forensics through CrowdStrike's live scavenger hunt and get to know about their career opportunities.
+
+Pizza will be provided!
+
+<a href="https://falcon.events/landing#c5b7" class="btn-primary">Live Scavenger Hunt</a>
