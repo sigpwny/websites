@@ -6,8 +6,11 @@ week_number: 10
 credit:
   - CrowdStrike
   - UIUC Technology Services
-featured: false
+featured: true
 location: Siebel CS 1404
+image:
+  path: crowdstrike-full.png
+  alt: CrowdStrike logo
 tags:
   - workshop
   - forensics
