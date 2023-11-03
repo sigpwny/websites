@@ -22,4 +22,4 @@ We are excited to have both our sponsor CrowdStrike and UIUC's Privacy and Cyber
 
 Pizza will be provided!
 
-<a href="https://falcon.events/landing#c5b7" class="btn-primary">Live Scavenger Hunt</a>
+<a href="https://falcon.events/landing#H5M4" class="btn-primary">Live Scavenger Hunt</a>
