@@ -7,5 +7,7 @@ bio: Freshman in CompEng, interested in hardware and embedded systems. Currently
 links:
   - name: email
     url: i@cbcicada.com
+  - name: github
+    url: https://github.com/CBCicada
 role: Helper
 ---
