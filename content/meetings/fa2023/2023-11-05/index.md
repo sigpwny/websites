@@ -8,6 +8,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/89964455004?pwd=bFVXZUlKRStTeG5ZMVhEbGwyL1hBUT09
+slides: week-10_-ethics-and-law.pdf
 tags:
   - misc
   - ethics
