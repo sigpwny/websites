@@ -15,6 +15,7 @@ image:
     lockpicking
 live_video_url: https://illinois.zoom.us/j/84401360529?pwd=QnRWU3o2U05EUGRtaWdyM3cwZnU0QT09
 slides: week-09_-physical-security-and-lockpicking.pdf
+recording: https://youtu.be/_bq4I0eNbHA
 tags:
   - misc
   - lockpicking
