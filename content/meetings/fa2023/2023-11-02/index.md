@@ -12,6 +12,7 @@ image:
   path: crowdstrike-full.png
   alt: CrowdStrike logo
 live_video_url: https://illinois.zoom.us/j/82374397681?pwd=TDVmQU5WSnZFQXhoMG9oMFpOUzRzQT09
+recording: https://youtu.be/DVTzgWuyZC0
 tags:
   - workshop
   - forensics
