@@ -7,8 +7,12 @@ credit:
   - Anusha Ghosh
 featured: true
 location: Siebel CS 1404
+image:
+  path: adobestock_358612605_resized.png
+  alt: A watercolor painting of a scale
 live_video_url: https://illinois.zoom.us/j/89964455004?pwd=bFVXZUlKRStTeG5ZMVhEbGwyL1hBUT09
 slides: week-10_-ethics-and-law.pdf
+recording: https://youtu.be/TeNd0wEvJTY
 tags:
   - misc
   - ethics
