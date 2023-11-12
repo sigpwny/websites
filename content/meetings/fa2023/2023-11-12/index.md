@@ -8,6 +8,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/89975310179?pwd=ZWtSMEVGRUhMTmpjTDB2cnhlb2VSZz09
+slides: week-11_-av-and-edr-evasion.pdf
 tags:
   - misc
   - antivirus
