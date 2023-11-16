@@ -8,6 +8,9 @@ credit:
   - Pete Stenger
 featured: true
 location: Siebel CS 1404
+image:
+  path: pyjail-bonk.png
+  alt: Doge bonking Python logo in jail cell
 live_video_url: https://illinois.zoom.us/j/86156548968?pwd=Znl4d3VzM3BrcGUyOFJEclBCa2s1Zz09
 tags:
   - jail
