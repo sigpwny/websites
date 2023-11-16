@@ -1,5 +1,5 @@
 ---
-title: AV and EDR Evasion
+title: Antivirus and EDR Evasion
 time_start: 2023-11-12T20:00:00.000Z
 time_close: ""
 week_number: 11
@@ -7,8 +7,12 @@ credit:
   - Ronan Boyarski
 featured: true
 location: Siebel CS 1404
+image:
+  path: microsoft-defender-logo_resized.png
+  alt: Microsoft Defender logo
 live_video_url: https://illinois.zoom.us/j/89975310179?pwd=ZWtSMEVGRUhMTmpjTDB2cnhlb2VSZz09
-slides: week-11_-av-and-edr-evasion.pdf
+slides: week-11_-antivirus-and-edr-evasion.pdf
+recording: https://youtu.be/TJlzfKpGhP4
 tags:
   - misc
   - antivirus
