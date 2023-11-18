@@ -13,6 +13,7 @@ image:
   alt: Doge bonking Python logo in jail cell
 live_video_url: https://illinois.zoom.us/j/86156548968?pwd=Znl4d3VzM3BrcGUyOFJEclBCa2s1Zz09
 slides: week-12_-python-jails.pdf
+recording: https://youtu.be/zUDvcQD0i7E
 tags:
   - jail
   - python
