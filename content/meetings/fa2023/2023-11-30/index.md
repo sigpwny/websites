@@ -7,4 +7,12 @@ credit:
   - Louis Asanaka
 featured: true
 location: Siebel CS 1404
+tags:
+  - web
+  - command injection
+  - ssti
+  - ssrf
 ---
+## Summary
+
+Come and learn about server-side request forgery (SSRF), template injection, and command injection attacks in websites.
