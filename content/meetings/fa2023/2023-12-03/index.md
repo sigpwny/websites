@@ -7,4 +7,8 @@ credit:
   - Sagnik Chakraborty
 featured: true
 location: Siebel CS 1404
+live_video_url: https://illinois.zoom.us/j/88675142146?pwd=RGF5Q0tKUDZxNTNBTzk3UTRRczdjUT09
+tags:
+  - misc
+  - cloud
 ---
