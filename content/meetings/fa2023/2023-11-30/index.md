@@ -6,7 +6,7 @@ week_number: 14
 credit:
   - Louis Asanaka
 featured: true
-location: Siebel CS 1404
+location: MSEB 100
 live_video_url: https://illinois.zoom.us/j/86505833780?pwd=Zy9oQURuTTdiNHl6Yy9FUzVZdGFjZz09
 tags:
   - web
