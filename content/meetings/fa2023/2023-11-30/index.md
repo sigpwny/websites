@@ -8,6 +8,7 @@ credit:
 featured: true
 location: MSEB 100
 live_video_url: https://illinois.zoom.us/j/86505833780?pwd=Zy9oQURuTTdiNHl6Yy9FUzVZdGFjZz09
+slides: week-14_-web-hacking-iii.pdf
 tags:
   - web
   - command injection
