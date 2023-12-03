@@ -8,7 +8,11 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/88675142146?pwd=RGF5Q0tKUDZxNTNBTzk3UTRRczdjUT09
+slides: week-15-cloud-security.pdf
 tags:
   - misc
   - cloud
 ---
+## Summary
+
+Learn about supply chain attacks targeting cloud deployments and CI/CD!
