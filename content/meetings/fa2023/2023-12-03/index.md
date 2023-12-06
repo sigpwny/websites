@@ -12,6 +12,7 @@ image:
   alt: A floating cloud in the sky, with a lock icon shape cut out in the middle
 live_video_url: https://illinois.zoom.us/j/88675142146?pwd=RGF5Q0tKUDZxNTNBTzk3UTRRczdjUT09
 slides: week-15-cloud-security.pdf
+recording: https://youtu.be/Zb-GkShtMkI
 tags:
   - misc
   - cloud
