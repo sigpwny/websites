@@ -12,6 +12,7 @@ image:
   alt: A server administrator with his back facing, frustrated with a server rack
 live_video_url: https://illinois.zoom.us/j/86505833780?pwd=Zy9oQURuTTdiNHl6Yy9FUzVZdGFjZz09
 slides: week-14_-web-hacking-iii.pdf
+recording: https://youtu.be/r7qdTD6T19s
 tags:
   - web
   - command injection
