@@ -7,5 +7,7 @@ bio: Sophomore in CS and Physics. Come talk to me about Emacsen, quantum
 links:
   - name: github
     url: https://github.com/Feyorsh
+  - name: website
+    url: https://feyor.sh
 role: Admin
 ---
