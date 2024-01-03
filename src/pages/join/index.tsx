@@ -44,7 +44,7 @@ const JoinPage = ({ data }: Props) => {
         <div className="flex flex-col flex-grow pb-4 basis-1/2">
           <h1>Welcome to SIGPwny!</h1>
           <p className="text-3xl mb-0">
-            Come learn cybersecurity with 2000+ students, alum, and
+            Come learn cybersecurity with 2000+ students, alumni, and
             professionals in our Discord server.
           </p>
           <a href={discord_link} target="_blank" rel="noopener noreferrer"
