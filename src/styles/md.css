@@ -18,7 +18,7 @@
 .md-root h1,
 .md-root h2 {
   margin-bottom: 1rem;
-  border-bottom: solid 1px var(--color-surface-300);
+  border-bottom: solid 1px rgb(var(--rgb-surface-300));
 }
 .md-root p,
 .md-root ul,
@@ -36,12 +36,12 @@
 .md-root ol ol { list-style-type: lower-alpha; }
 .md-root ol ol ol { list-style-type: lower-roman; }
 .md-root hr {
-  border-color: var(--color-surface-300);
+  border-color: rgb(var(--rgb-surface-300));
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 .md-root blockquote {
-  border-left: 4px solid var(--color-text);
+  border-left: 4px solid rgb(var(--rgb-text));
   padding: 0 15px;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -53,8 +53,8 @@
   width: 100%;
 }
 .md-root table th {
-  background-color: var(--color-surface-200);
-  border: 1px solid var(--color-surface-300);
+  background-color: rgb(var(--rgb-surface-200));
+  border: 1px solid rgb(var(--rgb-surface-300));
   font-weight: bold;
   padding: 6px 13px;
   text-align: left;
@@ -66,18 +66,18 @@
   border-radius: 0 0.75rem 0 0;
 }
 .md-root tbody tr:nth-child(2n) {
-  background-color: var(--color-surface-150);
+  background-color: rgb(var(--rgb-surface-150));
 }
 .md-root tbody tr:nth-child(2n+1) {
-  background-color: var(--color-surface-100);
+  background-color: rgb(var(--rgb-surface-100));
 }
 .md-root tr td {
-  border-left: 1px solid var(--color-surface-300);
-  border-right: 1px solid var(--color-surface-300);
+  border-left: 1px solid rgb(var(--rgb-surface-300));
+  border-right: 1px solid rgb(var(--rgb-surface-300));
   padding: 6px 13px;
 }
 .md-root tbody tr:last-child td {
-  border-bottom: 1px solid var(--color-surface-300);
+  border-bottom: 1px solid rgb(var(--rgb-surface-300));
 }
 .md-root tbody tr:last-child td:first-child {
   border-radius: 0 0 0 0.75rem;

@@ -11,18 +11,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
+        primary: "rgb(var(--rgb-primary) / <alpha-value>)",
+        secondary: "rgb(var(--rgb-secondary) / <alpha-value>)",
         surface: {
-          "000": "var(--color-surface-000)",
-          "050": "var(--color-surface-050)",
-          "100": "var(--color-surface-100)",
-          "150": "var(--color-surface-150)",
-          "200": "var(--color-surface-200)",
-          "250": "var(--color-surface-250)",
-          "300": "var(--color-surface-300)",
+          "000": "rgb(var(--rgb-surface-000) / <alpha-value>)",
+          "050": "rgb(var(--rgb-surface-050) / <alpha-value>)",
+          "100": "rgb(var(--rgb-surface-100) / <alpha-value>)",
+          "150": "rgb(var(--rgb-surface-150) / <alpha-value>)",
+          "200": "rgb(var(--rgb-surface-200) / <alpha-value>)",
+          "250": "rgb(var(--rgb-surface-250) / <alpha-value>)",
+          "300": "rgb(var(--rgb-surface-300) / <alpha-value>)",
         },
-        text: "var(--color-text)",
+        text: "rgb(var(--rgb-text) / <alpha-value>)",
         transparent: "transparent",
       },
     },

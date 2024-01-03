@@ -15,7 +15,7 @@
     duration-100;
 }
 .card-hover:hover .card {
-  box-shadow: 14px 14px var(--color-primary);
+  box-shadow: 14px 14px rgb(var(--rgb-primary));
   bottom: 7px;
   right: 7px;
 }
