@@ -66,7 +66,8 @@ const Seo = (props: Props) => {
       <meta name="robots" content={robots} />
       <meta name="format-detection" content="telephone=no" />
       <meta name="theme-color" content="#000000" />
-      <link rel="preload" as="font" type="font/woff2" href="/fonts/helveticaneue.woff2" crossOrigin="anonymous" />
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/HelveticaNeue-Regular.woff2" crossOrigin="anonymous" />
+      <link rel="preload" as="font" type="font/woff2" href="/fonts/HelveticaNeue-Bold.woff2" crossOrigin="anonymous" />
     </>
   )
 }

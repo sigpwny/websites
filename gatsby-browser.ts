@@ -1,3 +1,4 @@
+import "./src/styles/fonts.css"
 import "./src/styles/main.css"
 import "./src/styles/md.css"
 import "./src/styles/prism-one-dark.css";
