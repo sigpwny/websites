@@ -57,22 +57,6 @@ a:hover {
   color: rgb(var(--rgb-secondary));
   text-decoration: none;
 }
-
-@define-mixin font-face $font-family, $font-file, $weight, $style: normal {
-  @font-face {
-    font-family: $(font-family);
-    src: url($(font-file) + '.eot');
-    src: url($(font-file) + '.eot?#iefix') format("embedded-opentype");
-    src: url($(font-file) + '.woff') format("woff");
-    src: url($(font-file) + '.woff2') format("woff2");
-    src: url($(font-file) + '.ttf') format("truetype");
-    src: url($(font-file) + '.svg#' + $(font-family)) format("svg");
-    font-weight: $(weight);
-    font-style: $(style);
-  }
-}
-@add-mixin font-face "Helvetica Neue", '/fonts/helveticaneue', 400, normal;
-
 .container {
   @apply md:px-8 px-4;
 }
