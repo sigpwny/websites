@@ -1,0 +1,13 @@
+---
+name: Sam Ruggerio
+profile_image: me.png
+handle: Surg
+bio: Hi! I'm a CS PhD doing theory, but you'll find me in cybersec doing neat
+  things as well!
+links:
+  - name: website
+    url: https://surg.dev
+  - name: twitter
+    url: https://twitter.com/@Sam_Ruggerio
+role: Admin
+---
