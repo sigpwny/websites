@@ -6,8 +6,8 @@ bio: | # required
   meetings and website running :D
 profile_image: "./profile.jpg" # required, real face preferred
 handle: "WhiteHoodHacker" # optional
-role: "Admin" # optional
-weight: 0 # required, larger value is closer to top, otherwise sort by name alphabetically
+role: "President Designate" # optional
+weight: 10 # required, larger value is closer to top, otherwise sort by name alphabetically
 links: # optional
   - {name: "email", url: "hello@whitehoodhacker.net"} # optional, will be formatted with mailto:
   - {name: "website", url: "https://whitehoodhacker.net/"} # optional
