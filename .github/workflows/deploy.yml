@@ -6,6 +6,8 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      deployments: write
     env:
       CI: true
       CI_BUILD_DIR: public
