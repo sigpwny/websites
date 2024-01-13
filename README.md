@@ -31,3 +31,12 @@ This site only depends on official Gatsby plugins, so unless a plugin becomes de
 ```
 npm update
 ```
+
+## License
+> NOTICE: This is a draft license and is void. Please reference the `main` branch for the current license.
+
+SIGPwny's educational content, slides, and recordings are licensed under the [CC BY-SA 4.0 license](./LICENSE).
+
+Publication content by others are copyrighted by their respective owners unless otherwise stated.
+
+All other website code is licensed under the [BSD 3-Clause license](./LICENSE-CODE).
