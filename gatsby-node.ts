@@ -29,17 +29,22 @@ interface ContentNode {
   fields?: Field[];
 };
 
-// https://github.com/react-pdf-viewer/react-pdf-viewer/issues/497#issuecomment-812905172
-// https://github.com/wojtekmaj/react-pdf/issues/874#issuecomment-1539023628
 exports.onCreateWebpackConfig = ({
-  stage,
-  rules,
-  loaders,
-  plugins,
   actions,
+  loaders,
+  stage,
 }) => {
+  const resolve_aliases = {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
+    },
+  };
   if (stage === "build-html" || stage === "develop-html") {
     actions.setWebpackConfig({
+      // https://github.com/react-pdf-viewer/react-pdf-viewer/issues/497#issuecomment-812905172
+      // https://github.com/wojtekmaj/react-pdf/issues/874#issuecomment-1539023628
       module: {
         rules: [
           {
@@ -48,6 +53,11 @@ exports.onCreateWebpackConfig = ({
           },
         ],
       },
+      ...resolve_aliases,
+    });
+  } else {
+    actions.setWebpackConfig({
+      ...resolve_aliases,
     });
   }
 };
