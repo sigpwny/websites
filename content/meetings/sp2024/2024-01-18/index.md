@@ -6,9 +6,11 @@ week_number: 0
 credit:
   - SIGPwny
 featured: true
-location: TBA
+location: Everitt Lab 2310
 live_video_url: https://illinois.zoom.us/j/83829680259?pwd=UDhWVXlsbU80S3BOZ0FtaVJpUHpyQT09
 tags:
   - misc
   - welcome
 ---
+## Summary
+Welcome back from break! We'll be talking about our plans and new opportunities for the upcoming semester.
