@@ -113,8 +113,7 @@ const MeetingsPage = ({ data }: Props) => {
       <div className="flex flex-col mx-auto page-width-lg">
         <h1>Meetings</h1>
         <p>
-          Our meetings are on Thursdays at 7–8 PM and Sundays at 2–3 PM and are usually located in Siebel CS 1404.&nbsp;
-          <br className="hidden lg:block" />
+          For the Spring 2024 semester, our meetings are Thursdays at 7–8 PM (in Everitt Lab 2310) and on various Sundays at 2–3 PM (in Siebel CS 1404).
           We will always provide a Zoom meeting link and publish a recording on YouTube afterward.
         </p>
         <div className="panel">
