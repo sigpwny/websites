@@ -7,7 +7,11 @@ credit:
   - SIGPwny
 featured: true
 location: Everitt Lab 2310
+image:
+  path: thumbnail.png
+  alt: SIGPwny morphology
 live_video_url: https://illinois.zoom.us/j/83829680259?pwd=UDhWVXlsbU80S3BOZ0FtaVJpUHpyQT09
+slides: week-00_-welcome-back.pdf
 tags:
   - misc
   - welcome
