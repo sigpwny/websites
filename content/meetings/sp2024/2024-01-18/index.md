@@ -12,6 +12,7 @@ image:
   alt: SIGPwny morphology
 live_video_url: https://illinois.zoom.us/j/83829680259?pwd=UDhWVXlsbU80S3BOZ0FtaVJpUHpyQT09
 slides: week-00_-welcome-back.pdf
+recording: https://youtu.be/6XcxSTbP9-s
 tags:
   - misc
   - welcome
