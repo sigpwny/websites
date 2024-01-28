@@ -13,13 +13,13 @@ image:
   alt: The Emacs, vim, and nano logos
 live_video_url: https://illinois.zoom.us/j/87377093010?pwd=MTZXNzk5ZktJeXFaRXpMNXhvT2U5Zz09
 slides: week-02_-editors.pdf
+recording: https://youtu.be/aC4yKEykk_Q
 tags:
   - misc
   - editors
-  - emacs
   - vim
-  - nano
+  - emacs
 ---
 ## Summary
 
-Tired of dealing with the graphical interface for your text editor? Annoyed with the Electron bloat that is Visual Studio Code? Fear not! Come learn about editors such as Emacs, vim, and nano!
+Tired of dealing with the graphical interface for your text editor? Annoyed with the Electron bloat that is Visual Studio Code? Fear not! Come learn about editors such as vim, Emacs, and nano!
