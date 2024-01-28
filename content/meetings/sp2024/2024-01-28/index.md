@@ -12,6 +12,7 @@ image:
   path: editors.png
   alt: The Emacs, vim, and nano logos
 live_video_url: https://illinois.zoom.us/j/87377093010?pwd=MTZXNzk5ZktJeXFaRXpMNXhvT2U5Zz09
+slides: week-02_-editors.pdf
 tags:
   - misc
   - editors
