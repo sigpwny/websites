@@ -7,6 +7,9 @@ credit:
   - Ronan Boyarski
 featured: true
 location: Everitt Lab 2310
+image:
+  path: kali-wallpaper.png
+  alt: The Kali Linux logo
 live_video_url: https://illinois.zoom.us/j/85737418244?pwd=RHgyTXhCWStZOHhIenJ0NnNRNFZOUT09
 slides: week-02_-intro-to-pentesting.pdf
 recording: ""
