@@ -8,7 +8,11 @@ credit:
   - Richard Liu
 featured: true
 location: Everitt Lab 2310
+image:
+  path: arm.jpeg
+  alt: An ARM CPU on a board
 live_video_url: https://illinois.zoom.us/j/82660764090?pwd=NCt6QXBwUHJabGo2RDNveDBQRzF1QT09
+slides: week-03_-arm-assembly.pdf
 tags:
   - pwn
   - rev
