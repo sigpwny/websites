@@ -1,0 +1,20 @@
+---
+title: PWN IV - ROP
+time_start: 2024-02-16T01:00:00.000Z
+time_close: ""
+week_number: 4
+credit:
+  - Akhil Bharanidhar
+featured: true
+location: Everitt Lab 2310
+live_video_url: https://illinois.zoom.us/j/86562001687?pwd=OU0rbnkrMkVuSlRZTjJGMzM2ZTNUUT09
+tags:
+  - pwn
+  - rop
+  - gadgets
+  - PIE
+  - libc
+---
+## Summary
+
+When stack execution is disabled, learn how to achieve remote code execution with return-oriented programming!
