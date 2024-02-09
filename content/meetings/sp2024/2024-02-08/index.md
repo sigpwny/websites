@@ -13,6 +13,7 @@ image:
   alt: An ARM CPU on a board
 live_video_url: https://illinois.zoom.us/j/82660764090?pwd=NCt6QXBwUHJabGo2RDNveDBQRzF1QT09
 slides: week-03_-arm-assembly.pdf
+recording: https://youtu.be/UunI_NDZoVc
 tags:
   - pwn
   - rev
