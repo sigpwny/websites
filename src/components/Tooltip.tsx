@@ -21,7 +21,7 @@ export const Tooltip = (props: Props) => (
 Tooltip.Profile = (props: Props) => (
   <ReactTooltip
     anchorSelect=".profile-tooltip-select"
-    className="!p-0 !transition-none !bg-transparent !shadow-2xl"
+    className="!p-0 !transition-none !bg-transparent !shadow-2xl !pointer-events-none"
     opacity={1}
     place={"top-end"}
     clickable
@@ -30,7 +30,9 @@ Tooltip.Profile = (props: Props) => (
       if (!content) return null
       const profile = JSON.parse(content)
       return (
-        <ProfileCard profile={profile} />
+        <span className="pointer-events-auto">
+          <ProfileCard profile={profile} />
+        </span>
       )
     }}
     {...props}
