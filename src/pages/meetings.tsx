@@ -128,7 +128,7 @@ const MeetingsPage = ({ data }: Props) => {
               </ul>
             </div>
           ))}
-          <span>
+          <span className="pointer-events-none">
             <Tooltip.Day />
             <Tooltip />
             <Tooltip.Link />
