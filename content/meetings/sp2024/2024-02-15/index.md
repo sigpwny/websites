@@ -8,6 +8,7 @@ credit:
 featured: true
 location: Everitt Lab 2310
 live_video_url: https://illinois.zoom.us/j/86562001687?pwd=OU0rbnkrMkVuSlRZTjJGMzM2ZTNUUT09
+slides: week-04_-pwn-iv-rop.pdf
 tags:
   - pwn
   - rop
