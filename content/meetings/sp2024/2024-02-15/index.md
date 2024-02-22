@@ -7,9 +7,12 @@ credit:
   - Akhil Bharanidhar
 featured: true
 location: Everitt Lab 2310
+image:
+  path: i-heart-gadgets.jpeg
+  alt: I heart gadgets
 live_video_url: https://illinois.zoom.us/j/86562001687?pwd=OU0rbnkrMkVuSlRZTjJGMzM2ZTNUUT09
 slides: week-04_-pwn-iv-rop.pdf
-recording: ""
+recording: https://youtu.be/FIXI9fVqbb8
 tags:
   - pwn
   - rop
