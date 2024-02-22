@@ -12,7 +12,7 @@ image:
   alt: malloc()
 live_video_url: https://illinois.zoom.us/j/81816519217?pwd=cTltd3ZJWEVwa3NYb1NNNHpnUkpDQT09
 slides: week-03_-pwn-iii-heap-exploitation.pdf
-recording: ""
+recording: https://youtu.be/MkfeSQ-SQvc
 tags:
   - pwn
   - heap exploitation
