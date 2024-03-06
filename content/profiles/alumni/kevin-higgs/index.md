@@ -6,4 +6,7 @@ links:
   - name: website
     url: https://kmh.zone
 role: Helper
+period: "Class of 2024"
+work: "Trail of Bits"
+weight: 0
 ---
