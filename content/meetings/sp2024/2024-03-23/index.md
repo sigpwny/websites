@@ -12,13 +12,13 @@ tags:
   - forensics
 ---
 TracerFire has students investigate multiple advanced persistent threat (APT) adversaries in a
-simulated incident response scenario. Cyber forensic techniques/tools developed by Sandia are used
-to discover:
+simulated incident response scenario. Cyber forensic techniques/tools developed by Sandia are used to discover:
 
-• Who’s the adversary?
-• How’d they get in?
-• What did they want; did they succeed?
-• How to prevent recurring incidents?\
-\
-\
-!\[./one-page-tracer-fire-sand2017-2867-for-uiuc-students-220125.pdf](./one-page-tracer-fire-sand2017-2867-for-uiuc-students-220125.pdf)
++ Who’s the adversary?
++ How’d they get in?
++ What did they want; did they succeed?
++ How to prevent recurring incidents?
+
+[Signup Form](https://sigpwny.com/tracerfire2024)
+
+![./one-page-tracer-fire-sand2017-2867-for-uiuc-students-220125.pdf](./one-page-tracer-fire-sand2017-2867-for-uiuc-students-220125.pdf)
