@@ -1,7 +1,7 @@
 ---
 title: WiCyS Cryptography CTF
-time_start: 2024-03-07T23:00:00.000Z
-time_close: 2024-03-08T01:00:00.000Z
+time_start: 2024-03-18T22:00:00.000Z
+time_close: 2024-03-19T00:00:00.000Z
 week_number: 10
 credit:
   - WiCyS
