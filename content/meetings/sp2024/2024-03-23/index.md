@@ -21,4 +21,4 @@ simulated incident response scenario. Cyber forensic techniques/tools developed 
 
 [Signup Form](https://sigpwny.com/tracerfire2024)
 
-![./one-page-tracer-fire-sand2017-2867-for-uiuc-students-220125.pdf](./one-page-tracer-fire-sand2017-2867-for-uiuc-students-220125.pdf)
+![./flyer.png](./flyer.png)
