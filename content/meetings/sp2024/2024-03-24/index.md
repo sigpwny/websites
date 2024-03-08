@@ -5,7 +5,7 @@ week_number: 10
 credit:
   - Maxwell Bland
 featured: false
-location: Everitt Lab 2310
+location: Siebel CS 1404
 tags:
   - pwn
   - kernel
