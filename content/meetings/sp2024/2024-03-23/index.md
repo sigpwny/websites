@@ -1,7 +1,7 @@
 ---
 title: TracerFire
-time_start: 2024-03-22T22:00:00.000Z
-time_close: 2024-03-24T22:00:08.842Z
+time_start: 2024-03-23T14:00:00.000Z
+time_close: 2024-03-24T20:00:08.842Z
 week_number: 9
 credit:
   - Sandia National Laboratories
@@ -19,6 +19,12 @@ simulated incident response scenario. Cyber forensic techniques/tools developed 
 + What did they want; did they succeed?
 + How to prevent recurring incidents?
 
+The event will be in person on Saturday, March 23 from 9am-5pm and Sunday, March 24 from 9am-3pm. There will be a Sandia National Laboratory overview and Q&A on Friday March 22 from 6:30-8pm.
+
 [Signup Form](https://sigpwny.com/tracerfire2024)
 
+**Signups are limited, and will close close to Friday, March 15th**
+
 ![./flyer.png](./flyer.png)
+
+The times for the flyer are incorrect.
