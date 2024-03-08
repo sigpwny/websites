@@ -1,5 +1,5 @@
 ---
-title: Google Images OSINT (Geoguessr)
+title: Location-Based OSINT (Geoguessr)
 time_start: 2024-04-14T19:00:00.000Z
 time_close: 2024-04-14T20:00:00.000Z
 week_number: 12
