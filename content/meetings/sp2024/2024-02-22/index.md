@@ -12,6 +12,7 @@ image:
   alt: An isometric blockchain visual representation
 live_video_url: https://illinois.zoom.us/j/84626674655?pwd=UGpYaFl0ekp4bUNnYTZkbzIvSEFhZz09
 slides: week-05_-blockchain.pdf
+recording: https://youtu.be/8xNfNLUMqhQ
 tags:
   - misc
   - blockchain
