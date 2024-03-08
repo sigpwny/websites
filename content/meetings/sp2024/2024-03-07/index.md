@@ -10,8 +10,8 @@ featured: true
 location: Everett Lab 2310
 live_video_url: https://illinois.zoom.us/j/87059595799?pwd=NkwxaEtjbVBhR2d6anJIc2FDQVJQZz09
 tags:
-  - misc
-  - password cracking
+  - rev
+  - esolang
 ---
 ## Summary
 
