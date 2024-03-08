@@ -8,6 +8,9 @@ credit:
   - Emma Hartman
 featured: true
 location: Everitt Lab 2310
+image:
+  path: password-cracking.jpeg
+  alt: Post-it-notes with written "weak" and "strong" password on a laptop
 live_video_url: https://illinois.zoom.us/j/85188876374?pwd=ajFUR1RlYWFoVU83cURBSWQ2NlNMUT09
 slides: week-06-password-cracking.pdf
 recording: https://youtu.be/rgj13ckxGc0
