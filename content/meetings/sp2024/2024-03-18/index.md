@@ -7,7 +7,7 @@ credit:
   - Women in CyberSecurity
   - SIGPwny
 featured: true
-location: Everitt 1306
+location: Everitt Lab 1306
 tags:
   - ctf
   - social

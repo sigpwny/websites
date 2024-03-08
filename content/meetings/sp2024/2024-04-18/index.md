@@ -6,8 +6,8 @@ week_number: 13
 credit:
   - Emma Hartman
   - Sagnik Chakraborty
-featured: true
-location: Everitt 2310
+featured: false
+location: Everitt Lab 2310
 tags:
   - osint
   - misc

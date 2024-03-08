@@ -5,7 +5,7 @@ time_close: 2024-04-05T18:00:00.000Z
 week_number: 11
 credit:
   - SIGPwny
-featured: true
+featured: false
 location: Milwaukee, WI
 tags:
   - social

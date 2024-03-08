@@ -1,7 +1,7 @@
 ---
 title: "Jetset: Targeted Firmware Rehosting for Embedded Systems"
 credit:
-  - Max Bland
+  - Maxwell Bland
   - YiFei Zhu
 publisher: USENIX Security '21
 publication_type: paper

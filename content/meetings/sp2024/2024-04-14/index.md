@@ -5,8 +5,8 @@ time_close: 2024-04-14T20:00:00.000Z
 week_number: 12
 credit:
   - Henry Qiu
-featured: true
-location: Siebel CS 1404 + Zoom
+featured: false
+location: Siebel CS 1404
 tags:
   - osint
 ---

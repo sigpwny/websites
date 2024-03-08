@@ -1,7 +1,7 @@
 ---
 title: Breaking PDF Redactions
 credit:
-  - Max Bland
+  - Maxwell Bland
 publisher: WIRED
 publication_type: news
 date: 2022-11-25

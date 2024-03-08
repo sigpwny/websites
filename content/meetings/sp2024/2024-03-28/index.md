@@ -5,8 +5,8 @@ time_close: 2024-03-29T01:00:00.000Z
 week_number: 10
 credit:
   - Anusha Ghosh
-featured: true
-location: Everitt 2310
+featured: false
+location: Everitt Lab 2310
 tags:
   - misc
   - ai

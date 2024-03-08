@@ -3,7 +3,7 @@ title: Network and Security Research Group (NSRG)
 time_start: 2022-04-03T14:00:00.000000-05:00
 week_number: 10
 credit:
-  - Max Bland
+  - Maxwell Bland
 featured: false
 location: Siebel CS 2405 + Zoom
 tags:

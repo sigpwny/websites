@@ -5,8 +5,8 @@ time_close: 2024-03-22T01:00:00.000Z
 week_number: 9
 credit:
   - Sagnik Chakraborty
-featured: true
-location: Everett Lab 2310
+featured: false
+location: Everitt Lab 2310
 tags:
   - crypto
 ---
