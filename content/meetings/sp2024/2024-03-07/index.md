@@ -9,6 +9,7 @@ credit:
 featured: true
 location: Everett Lab 2310
 live_video_url: https://illinois.zoom.us/j/87059595799?pwd=NkwxaEtjbVBhR2d6anJIc2FDQVJQZz09
+slides: week-07_-esolangs.pdf
 tags:
   - rev
   - esolang
