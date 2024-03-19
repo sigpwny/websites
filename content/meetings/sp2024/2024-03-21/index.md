@@ -13,4 +13,4 @@ tags:
 ---
 ## Summary
 
-Come learn about various cryptographic schemes!
+We will discuss different cryptography modes and their strengths/weaknesses, such as cipher block chaining (CBC), electronic code book (ECB), counter (CTR), and output feedback (OFB).
