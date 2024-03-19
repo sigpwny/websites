@@ -1,10 +1,11 @@
 ---
 title: Linux Kernel Exploitation
 time_start: 2024-03-29T00:00:00.000Z
+time_close: ""
 week_number: 10
 credit:
   - Maxwell Bland
-featured: false
+featured: true
 location: Siebel CS 1404
 tags:
   - pwn
