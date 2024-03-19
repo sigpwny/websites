@@ -10,6 +10,7 @@ location: Everitt Lab 2310
 live_video_url: https://illinois.zoom.us/j/87048112203?pwd=M0dkMW5rQnZ2WTluMW1OekF0NGViZz09
 tags:
   - crypto
+  - cipher modes
 ---
 ## Summary
 
