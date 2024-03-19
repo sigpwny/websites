@@ -1,7 +1,7 @@
 ---
-title: AI
+title: AI Hacking
 time_start: 2024-03-29T00:00:00.000Z
-time_close: 2024-03-29T01:00:00.000Z
+time_close: ""
 week_number: 10
 credit:
   - Anusha Ghosh
