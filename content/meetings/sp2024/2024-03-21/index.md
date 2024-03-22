@@ -7,6 +7,10 @@ credit:
   - Sagnik Chakraborty
 featured: true
 location: Everitt Lab 2310
+image:
+  path: img_0160.png
+  alt: Comparison of stream mode and block mode encryption on an image of the
+    Linux penguin
 live_video_url: https://illinois.zoom.us/j/87048112203?pwd=M0dkMW5rQnZ2WTluMW1OekF0NGViZz09
 slides: week-09_-block-and-stream-ciphers.pdf
 tags:
