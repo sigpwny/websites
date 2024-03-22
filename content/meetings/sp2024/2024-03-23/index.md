@@ -6,7 +6,7 @@ week_number: 9
 credit:
   - Sandia National Laboratories
 featured: true
-location: TBD
+location: Natural History Building Room 2020
 slides: tracer-fire-overview-for-uiuc-210125.pdf
 tags:
   - forensics
