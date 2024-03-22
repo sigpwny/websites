@@ -19,7 +19,7 @@ simulated incident response scenario. Cyber forensic techniques/tools developed 
 * What did they want; did they succeed?
 * How to prevent recurring incidents?
 
-The event will be in person in the **[Natural History Building](https://maps.app.goo.gl/Rz9CTqHc6DrECHDW9)** Room 2020, on Saturday, March 23 from 9am-5pm and Sunday, March 24 from 9am-3pm. There will be a Sandia National Laboratory overview and Q&A on Friday March 22 from 6:30-8pm.
+The event will be in person in the **[Natural History Building](https://maps.app.goo.gl/Rz9CTqHc6DrECHDW9)** Room 2020, on Saturday, March 23 from 9am-5pm and Sunday, March 24 from 9am-3pm. There will be a Sandia National Laboratory overview and Q&A on Friday March 22 from 6:30-8pm in Siebel 1404.
 
 [Signup Form](https://docs.google.com/forms/d/e/1FAIpQLSfx6JvK8Vu48zfuSQP6Z8MbEg95G5BsNahhtR0Vw62eH8d2Tg/viewform?usp=sf_link)
 
