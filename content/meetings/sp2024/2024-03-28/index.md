@@ -7,6 +7,8 @@ credit:
   - Anusha Ghosh
 featured: false
 location: Everitt Lab 2310
+live_video_url: https://illinois.zoom.us/j/88986696811?pwd=clFjTVJzT1ZxZDZTSVVNMkVNdXJiQT09
+slides: week-10_-ai.pdf
 tags:
   - misc
   - ai
