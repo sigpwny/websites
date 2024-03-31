@@ -8,6 +8,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 live_video_url: https://illinois.zoom.us/j/85675793212?pwd=T3I2K3J1R0Q0aHo2UFQ2Wkk5ODNPZz09
+recording: https://youtu.be/3DBGardQsHk
 tags:
   - pwn
   - kernel
