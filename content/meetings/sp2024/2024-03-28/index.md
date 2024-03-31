@@ -7,9 +7,16 @@ credit:
   - Anusha Ghosh
 featured: true
 location: Everitt Lab 2310
+image:
+  path: car-ai.jpeg
+  alt: An elevated view of a roadway where cars are identified using a vision model
 live_video_url: https://illinois.zoom.us/j/88986696811?pwd=clFjTVJzT1ZxZDZTSVVNMkVNdXJiQT09
 slides: week-10_-ai.pdf
+recording: https://youtu.be/u_Vik8VtSGU
 tags:
   - misc
   - ai
 ---
+## Summary
+
+Learn about attacks against AI models, such as dataset poisoning and model extraction!
