@@ -13,6 +13,7 @@ image:
     Linux penguin
 live_video_url: https://illinois.zoom.us/j/87048112203?pwd=M0dkMW5rQnZ2WTluMW1OekF0NGViZz09
 slides: week-09_-block-and-stream-ciphers.pdf
+recording: https://youtu.be/W9ogG-p083I
 tags:
   - crypto
   - cipher modes
