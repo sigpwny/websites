@@ -11,6 +11,7 @@ image:
   path: screenshot-2024-03-31-020409.png
   alt: Cover slide for "ARMing Linux Kernel Exploits" presentation
 live_video_url: https://illinois.zoom.us/j/85675793212?pwd=T3I2K3J1R0Q0aHo2UFQ2Wkk5ODNPZz09
+slides: uiuc-sigpwny-03-24-24.pdf
 recording: https://youtu.be/3DBGardQsHk
 tags:
   - pwn
