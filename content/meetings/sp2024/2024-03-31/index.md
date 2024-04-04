@@ -5,7 +5,7 @@ time_close: 2024-03-31T20:00:00.000Z
 week_number: 10
 credit:
   - SIGPwny
-featured: true
+featured: false
 location: Japan House
 tags:
   - social
