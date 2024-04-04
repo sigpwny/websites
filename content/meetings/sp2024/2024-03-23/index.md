@@ -5,7 +5,7 @@ time_close: 2024-03-24T20:00:08.842Z
 week_number: 9
 credit:
   - Sandia National Laboratories
-featured: true
+featured: false
 location: Natural History Building Room 2020
 slides: tracer-fire-overview-for-uiuc-210125.pdf
 tags:
