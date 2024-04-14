@@ -5,7 +5,7 @@ time_close: 2024-04-14T20:00:00.000Z
 week_number: 12
 credit:
   - Henry Qiu
-featured: false
+featured: true
 location: Siebel CS 1404
 slides: week-12_-location-based-osint.pdf
 recording: https://illinois.zoom.us/j/87237346952?pwd=YWNuR1VaejJUN1AveWl4aUhhT2FoUT09
