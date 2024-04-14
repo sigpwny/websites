@@ -7,6 +7,7 @@ credit:
   - Henry Qiu
 featured: false
 location: Siebel CS 1404
+recording: https://illinois.zoom.us/j/87237346952?pwd=YWNuR1VaejJUN1AveWl4aUhhT2FoUT09
 tags:
   - osint
 ---
