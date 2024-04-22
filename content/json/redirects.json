@@ -134,5 +134,9 @@
 {
   "src": "/shirt2024",
   "dst": "https://forms.gle/LTdmTMkUciLV7nMZ9"
-}
+},
+{
+  "src": "/infra",
+  "dst": "https://github.com/sigpwny/infra"
+},
 ]
