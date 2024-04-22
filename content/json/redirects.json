@@ -138,5 +138,5 @@
 {
   "src": "/infra",
   "dst": "https://github.com/sigpwny/infra"
-},
+}
 ]
