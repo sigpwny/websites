@@ -13,3 +13,4 @@ tags:
   - policy
   - misc
 ---
+W﻿e will discuss the recent XZ backdoor and how government policy plays a role in the responsibilities of open source developers, corporations, and users regarding software supply chains!
