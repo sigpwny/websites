@@ -8,6 +8,7 @@ credit:
   - Pete Stenger
 featured: true
 location: Everitt 2310
+slides: week-14_-supply-chain-attacks-policy.pdf
 tags:
   - policy
   - misc
