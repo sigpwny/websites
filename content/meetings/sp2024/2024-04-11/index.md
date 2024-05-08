@@ -10,6 +10,7 @@ featured: true
 location: Everitt Lab 2310
 live_video_url: https://illinois.zoom.us/j/84253691833?pwd=bVBDNjUwSVJCdDkxOHk2MWRCcGxzdz09
 slides: week-12_-symbolic-execution.pdf
+recording: https://youtu.be/HAREk169QZY
 tags:
   - rev
   - pwn
