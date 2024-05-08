@@ -8,7 +8,7 @@ credit:
 featured: true
 location: Siebel CS 1404
 slides: week-12_-location-based-osint.pdf
-recording: https://illinois.zoom.us/j/87237346952?pwd=YWNuR1VaejJUN1AveWl4aUhhT2FoUT09
+recording: https://youtu.be/NG6qlaumCsk
 tags:
   - osint
 ---
