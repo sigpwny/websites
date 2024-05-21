@@ -104,6 +104,10 @@
     "dst": "/join/"
   },
   {
+    "src": "/uiuctf",
+    "dst": "/uiuctf24"
+  },
+  {
     "src": "/uiuctf23",
     "dst": "/SIGPwny_UIUCTF_Sponsorship_2023.pdf"
   },
