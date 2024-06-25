@@ -8,7 +8,7 @@ time_close: 2024-07-01T07:00:00.000Z
 timezone: Etc/UTC
 location: Online
 card_image:
-  background: uiuctf2024_small.png
+  background: uiuctf-2024-banner-1920x1080.png
 sponsors:
   - CrowdStrike
   - Trail of Bits
