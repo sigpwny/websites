@@ -11,7 +11,9 @@ card_image:
   background: uiuctf2024_small.png
 sponsors:
   - CrowdStrike
+  - Trail of Bits
   - Zellic
+  - REDLattice
   - Google Cloud
 links:
   - name: website
