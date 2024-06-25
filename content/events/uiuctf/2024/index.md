@@ -13,6 +13,7 @@ sponsors:
   - CrowdStrike
   - Trail of Bits
   - Zellic
+  - Battelle
   - REDLattice
   - Google Cloud
 links:
