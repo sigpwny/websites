@@ -45,7 +45,7 @@
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-pdf": "^7.0.0-beta.4",
+    "react-pdf": "^9.1.0",
     "react-tooltip": "^5.18.0",
     "uninstall": "^0.0.0"
   },
