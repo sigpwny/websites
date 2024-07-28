@@ -32,8 +32,16 @@
     "dst": "/events/"
   },
   {
-    "src": "/fall",
+    "src": "/fall23",
     "dst": "/SIGPwny_Fall_CTF_Sponsorship_2023.pdf"
+  },
+  {
+    "src": "/fall24",
+    "dst": "/SIGPwny_Fall_CTF_Sponsorship_2024.pdf"
+  },
+  {
+    "src": "/fall",
+    "dst": "/SIGPwny_Fall_CTF_Sponsorship_2024.pdf"
   },
   {
     "src": "/fallctf",
