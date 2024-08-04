@@ -6,8 +6,8 @@ description: Fall CTF is a 6-hour hacking competition for UIUC students hosted
   Work in teams of two on challenges related to web hacking, reverse
   engineering, binary exploitation, and more! Plus, free food, free swag, and
   companies! Come learn and have fun with us!
-time_start: 2024-09-23T17:00:25.668Z
-time_close: 2024-09-23T23:00:00.000Z
+time_start: 2024-09-21T17:00:25.668Z
+time_close: 2024-09-21T23:00:00.000Z
 location: TBD (CIF 3039)
 card_image:
   background: fallctf-2024.png
