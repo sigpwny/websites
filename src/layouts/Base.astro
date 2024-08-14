@@ -1,0 +1,28 @@
+---
+import '@/styles/main.css';
+import '@/styles/md.css';
+import '@/styles/prism-one-dark.css';
+
+import type { HeadProps } from '@/components/BaseHead.astro';
+import BaseHead from '@/components/BaseHead.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+const props: HeadProps = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" transition:animate="none">
+  <head>
+    <BaseHead {...props} />
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen">
+      <Header />
+      <div class="container grow">
+        <slot />
+      </div>
+    </div>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,11 @@
+---
+import Nav from '@/components/Nav';
+---
+
+<header class="sticky lg:relative top-0 z-10">
+  <Nav
+    curr_path={Astro.url.pathname}
+    client:load
+    transition:persist
+  />
+</header>

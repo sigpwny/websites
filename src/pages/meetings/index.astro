@@ -1,0 +1,68 @@
+---
+import Layout from '@/layouts/Base.astro';
+import astroConfig from 'astro.config';
+import { Picture, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import FormattedDate from '@/components/FormattedDate.astro';
+// import Tooltip from '@/components/Tooltip';
+import MeetingRow from '@/components/Meeting/Row.astro';
+
+import { weekNumber, convertDate, formatSemester } from "@/lib/meetings";
+
+const rawMeetings = (await getCollection('meetings')).map((meeting) => {
+  // Rewrite slides URL to be a direct link to the PDF
+  if (meeting.data.slides) {
+    meeting.data.slides = new URL(meeting.data.slides, `${astroConfig.site}/meeting/${meeting.id}`).pathname;
+  }
+  return meeting;
+}).sort(
+  (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
+);
+
+const meetingsBySemester = rawMeetings.reduce(
+  (acc, meeting) => {
+    const semester = meeting.id.split("/")[0].toUpperCase();
+    if (!semester) return acc;
+    if (acc[semester]) {
+      acc[semester].push(meeting);
+    } else {
+      acc[semester] = [meeting];
+    }
+    return acc;
+  }, {} as {[semester: string]: any[]}
+);
+---
+<Layout
+  title="Meetings"
+  description="Index of all SIGPwny meetings"
+>
+  <section id="meetings" class="pb-8">
+    <div class="flex flex-col mx-auto page-width-lg">
+      <h1>Meetings</h1>
+      <p>
+        Our meetings are on Thursdays at 7–8 PM and Sundays at 2–3 PM and are usually located in Siebel CS 1404.&nbsp;
+        <br class="hidden lg:block" />
+        We will always provide a Zoom meeting link and publish a recording on YouTube afterward.
+      </p>
+      <div class="panel">
+        {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
+          <div id={semester}>
+            <p class="font-bold text-2xl m-0">{formatSemester(semester)}</p>
+            <hr class="border-surface-200" />
+            <ul class="flex flex-col pb-2">
+              {meetings.map((meeting) => (
+                <MeetingRow input={meeting} />
+              ))}
+            </ul>
+          </div>
+        ))}
+        <!-- <span>
+          <Tooltip.Day client:load transition:persist />
+          <Tooltip client:load transition:persist />
+          <Tooltip.Link client:load transition:persist />
+          <Tooltip.Profile client:load transition:persist />
+        </span> -->
+      </div>
+    </div>
+  </section>
+</Layout>

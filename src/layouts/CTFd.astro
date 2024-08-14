@@ -1,0 +1,12 @@
+---
+import Layout from '@/layouts/Base.astro';
+import type { HeadProps } from '@/components/BaseHead.astro';
+
+const props: HeadProps = Astro.props;
+---
+
+<Layout {...props}>
+  <div>
+    <slot />
+  </div>
+</Layout>

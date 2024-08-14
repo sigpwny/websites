@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Element overrides */
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+body {
+  --rgb-primary: 51 204 85;       /* #33cc55 */
+  --rgb-secondary: 0 255 85;      /* #00ff55 */
+  --rgb-surface-000: 0 0 0;       /* #000000 */
+  --rgb-surface-050: 17 17 17;    /* #111111 */
+  --rgb-surface-100: 34 34 34;    /* #222222 */
+  --rgb-surface-150: 51 51 51;    /* #333333 */
+  --rgb-surface-200: 68 68 68;    /* #444444 */
+  --rgb-surface-250: 85 85 85;    /* #555555 */
+  --rgb-surface-300: 102 102 102; /* #666666 */
+  --rgb-text: 255 255 255;        /* #ffffff */
+
+  --font-size-small: 0.875rem;
+  --font-size-standard: 1rem;
+  --font-size-base: 1.125rem;
+
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-size: var(--font-size-base);
+  background-color: rgb(var(--rgb-surface-000));
+  color: rgb(var(--rgb-text));
+  height: 100%;
+  width: 100%;
+}
+h1, h2, h3 {
+  font-weight: bold;
+}
+h1 {
+  @apply text-4xl mb-2;
+}
+h2 {
+  @apply text-3xl mb-2;
+}
+h3 {
+  @apply text-2xl;
+}
+p {
+  @apply mb-2;
+}
+hr {
+  border-color: rgb(var(--rgb-text));
+}
+a,
+a:active {
+  color: rgb(var(--rgb-primary));
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(var(--rgb-secondary));
+  text-decoration: none;
+}
+.container {
+  @apply md:px-8 px-4;
+}
+.page-width {
+  @apply xl:w-2/3 lg:w-4/5;
+}
+.page-width-lg {
+  @apply 2xl:w-5/6;
+}
+.font-size-small {
+  font-size: var(--font-size-small);
+}
+.font-size-standard {
+  font-size: var(--font-size-standard);
+}
+.panel {
+  background-color: rgb(var(--rgb-surface-100));
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+.panel-p-0 {
+  background-color: rgb(var(--rgb-surface-100));
+  border-radius: 0.75rem;
+}
+.social-links p {
+  display: inline-block;
+  margin: 0;
+}
+.social-links svg {
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 0.5rem;
+  width: var(--font-size-base);
+  height: var(--font-size-base);
+}
+.social-links a,
+.social-links a:active {
+  fill: rgb(var(--rgb-primary));
+}
+.social-links a:hover {
+  fill: rgb(var(--rgb-secondary));
+}
+.btn-primary {
+  background-color: rgb(var(--rgb-primary));
+  color: rgb(var(--rgb-surface-000));
+  border: 0;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: rgb(var(--rgb-secondary));
+  color: rgb(var(--rgb-surface-000));
+}
+.button {
+  @apply flex flex-row items-center gap-1 px-3 py-1 cursor-pointer rounded-md;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--rgb-primary));
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background-color: rgb(var(--rgb-secondary));
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+}
+.custom-scrollbar {
+  -ms-overflow-style: auto;
+  scrollbar-color: rgb(var(--rgb-primary)) transparent;
+  scrollbar-width: thin;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+/* Skeleton shimmer effect */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+}
+.skeleton-shimmer::before {
+  content: "";
+  background: linear-gradient(90deg, transparent, rgb(var(--rgb-surface-250) / 10), transparent) no-repeat;
+  background-size: 100% 100%;
+  animation: shimmer 1s infinite;
+  position: absolute;
+  transform: translateX(-100%);
+  inset: 0;
+}
+.skeleton-shimmer > * {
+  position: relative;
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+/*
+Fix for Safari not rendering border-radius on overflow: hidden
+https://stackoverflow.com/questions/49066011/overflow-hidden-with-border-radius-not-working-on-safari
+*/
+.gatsby-image-wrapper {
+  z-index: 0;
+}
+/* Hide text layer of PDF */
+.react-pdf__Page__textContent  {
+  color: transparent;
+  opacity: 0.5;
+}
+.react-pdf__Page__textContent ::selection {
+  background: #0000ff;
+}
+.react-pdf__Page {
+  background-color: transparent !important;
+}
+/* Correctly scale */
+.react-pdf__Page__canvas, .react-pdf__Page__textContent, .react-pdf__Page__annotations {
+  max-width: 100%;
+  height: auto !important;
+}

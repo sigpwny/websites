@@ -1,0 +1,90 @@
+.md-root h1,
+.md-root h2,
+.md-root h3,
+.md-root h4,
+.md-root h5,
+.md-root h6 {
+  padding-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+.md-root h1:first-child,
+.md-root h2:first-child,
+.md-root h3:first-child,
+.md-root h4:first-child,
+.md-root h5:first-child,
+.md-root h6:first-child {
+  padding-top: 0;
+}
+.md-root h1,
+.md-root h2 {
+  margin-bottom: 1rem;
+  border-bottom: solid 1px rgb(var(--rgb-surface-300));
+}
+.md-root p,
+.md-root ul,
+.md-root ol {
+  margin-bottom: 1rem;
+}
+.md-root ul {
+  list-style: disc;
+  padding-left: 2rem;
+}
+.md-root ol {
+  list-style: decimal;
+  padding-left: 2rem;
+}
+.md-root ol ol { list-style-type: lower-alpha; }
+.md-root ol ol ol { list-style-type: lower-roman; }
+.md-root hr {
+  border-color: rgb(var(--rgb-surface-300));
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.md-root blockquote {
+  border-left: 4px solid rgb(var(--rgb-text));
+  padding: 0 15px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.md-root table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+.md-root table th {
+  background-color: rgb(var(--rgb-surface-200));
+  border: 1px solid rgb(var(--rgb-surface-300));
+  font-weight: bold;
+  padding: 6px 13px;
+  text-align: left;
+}
+.md-root table th:first-child {
+  border-radius: 0.75rem 0 0 0;
+}
+.md-root table th:last-child {
+  border-radius: 0 0.75rem 0 0;
+}
+.md-root tbody tr:nth-child(2n) {
+  background-color: rgb(var(--rgb-surface-150));
+}
+.md-root tbody tr:nth-child(2n+1) {
+  background-color: rgb(var(--rgb-surface-100));
+}
+.md-root tr td {
+  border-left: 1px solid rgb(var(--rgb-surface-300));
+  border-right: 1px solid rgb(var(--rgb-surface-300));
+  padding: 6px 13px;
+}
+.md-root tbody tr:last-child td {
+  border-bottom: 1px solid rgb(var(--rgb-surface-300));
+}
+.md-root tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 0.75rem;
+}
+.md-root tbody tr:last-child td:last-child {
+  border-radius: 0 0 0.75rem 0;
+}
+.md-root .gatsby-resp-image-wrapper {
+  @apply mb-2;
+}

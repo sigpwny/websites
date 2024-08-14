@@ -1,0 +1,13 @@
+---
+import { Picture } from 'astro:assets';
+
+const props = Astro.props as any;
+---
+<span class="skeleton-shimmer">
+  <Picture
+    {...props}
+    src={props.src}
+    widths={[300, 600]}
+    formats={['avif', 'webp']}
+  />
+</span>

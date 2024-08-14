@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import redirects from '@/redirects.json';
+
+type Props = HTMLAttributes<'a'>;
+
+const { ...props } = Astro.props;
+const isRedirect = props.href && props.href.toString() in redirects;
+---
+<a
+  data-astro-reload={isRedirect ? "" : undefined}
+  {...props}
+>
+  <slot />
+</a>

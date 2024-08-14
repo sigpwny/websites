@@ -1,0 +1,84 @@
+.sidebar-item {
+  @apply !text-text hover:bg-surface-100 active:bg-surface-050 rounded-lg
+    pr-2 py-1 flex flex-row items-center relative;
+}
+.sidebar-item:focus-visible {
+  @apply outline-none ring-2 ring-white ring-inset;
+}
+.sidebar-item.active {
+  @apply bg-surface-100 active:bg-surface-050;
+}
+.folder-arrow {
+  @apply flex flex-shrink-0 flex-grow-0 ml-2 rotate-0;
+  @apply transition-transform duration-200 ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .folder-arrow {
+    @apply transition-none;
+  }
+}
+.sidebar-folder-input:checked + .sidebar-folder-label > .folder-arrow {
+  @apply rotate-90;
+}
+.sidebar-item .indicator {
+  @apply h-full w-1 self-center bg-primary rounded-lg absolute;
+  @apply transition-transform duration-200 scale-y-0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-item .indicator {
+    @apply transition-none;
+  }
+}
+.sidebar-item.active .indicator {
+  @apply scale-y-[60%];
+}
+/* If the folder has an active item and the folder is closed (unchecked), then highlight the folder */
+.sidebar-folder-parent:has(.active) > .sidebar-folder-input:not(:checked) + .sidebar-folder-label {
+  @apply bg-surface-100 active:bg-surface-050;
+}
+/* If the folder has an active item and the folder is closed (unchecked), then show the indicator */
+.sidebar-folder-parent:has(.active) > .sidebar-folder-input:not(:checked) + .sidebar-folder-label > .indicator {
+  @apply scale-y-[60%];
+}
+.siderbar-folder-parent {
+  @apply relative;
+}
+.sidebar-folder-input {
+  @apply absolute opacity-0;
+}
+.sidebar-folder-label {
+  @apply cursor-pointer;
+}
+.sidebar-folder-input:focus-visible + .sidebar-folder-label {
+  @apply ring-2 ring-white ring-inset;
+}
+.sidebar-folder-input ~ .sidebar-folder {
+  @apply hidden;
+  animation: folder-unexpand 0.2s ease-in forwards;
+}
+.sidebar-folder-input:checked ~ .sidebar-folder {
+  @apply flex;
+  /* Astro TODO: View Transitions will replay CSS animations, so the rule below
+     uses a 0 second duration. Otherwise the sidebar will always play the
+     expand animation when navigating to a new page... need a better fix. */
+  animation: folder-expand 0.0s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-folder-input ~ .sidebar-folder {
+    @apply hidden;
+    animation: none;
+  }
+  .sidebar-folder-input:checked ~ .sidebar-folder {
+    @apply flex;
+    animation: none;
+  }
+}
+/* Animations for accordion effect */
+@keyframes folder-expand {
+  0% { @apply flex max-h-0 overflow-y-hidden; }
+  100% { @apply flex max-h-20 overflow-y-visible; }
+}
+@keyframes folder-unexpand {
+  0% { @apply flex max-h-20 overflow-y-hidden; }
+  100% { @apply hidden max-h-0 overflow-y-hidden; }
+}

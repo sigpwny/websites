@@ -1,0 +1,130 @@
+{
+  "/auth": {
+    "status": 302,
+    "destination": "https://shib.sigpwny.com/signup/485104508175646751"
+  },
+  "/branding": {
+    "status": 302,
+    "destination": "https://docs.google.com/document/d/1SioiiGVKlwm0sn56YOr_ESFkqx1HeAv7JfERbel_AoM/edit"
+  },
+  "/corporate": {
+    "status": 302,
+    "destination": "/sponsors/"
+  },
+  "/discord": {
+    "status": 302,
+    "destination": "https://discord.gg/cWcZ6a9"
+  },
+  "/discordqr": {
+    "status": 302,
+    "destination": "https://discord.gg/cWcZ6a9"
+  },
+  "/drive": {
+    "status": 302,
+    "destination": "https://drive.google.com/drive/u/0/folders/0B_xHmzNKe4EEb083emxTM3ItYVE"
+  },
+  "/event": {
+    "status": 302,
+    "destination": "/events/"
+  },
+  "/fall": {
+    "status": 302,
+    "destination": "/SIGPwny_Fall_CTF_Sponsorship_2023.pdf"
+  },
+  "/fallctf": {
+    "status": 302,
+    "destination": "https://fallctf.sigpwny.com/"
+  },
+  "/feedback/fa2023": {
+    "status": 302,
+    "destination": "https://forms.gle/MopguuPTjGhe8UYUA"
+  },
+  "/gcal": {
+    "status": 302,
+    "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/full.ics"
+  },
+  "/github": {
+    "status": 302,
+    "destination": "https://github.com/sigpwny"
+  },
+  "/hackathon": {
+    "status": 302,
+    "destination": "/events/"
+  },
+  "/infra": {
+    "status": 302,
+    "destination": "https://github.com/sigpwny/docs"
+  },
+  "/meeting": {
+    "status": 302,
+    "destination": "/meetings/"
+  },
+  "/newcomer": {
+    "status": 302,
+    "destination": "/join/"
+  },
+  "/newcomers": {
+    "status": 302,
+    "destination": "/join/"
+  },
+  "/old": {
+    "status": 302,
+    "destination": "https://sigpwny.github.io/"
+  },
+  "/older": {
+    "status": 302,
+    "destination": "https://sigpwny.github.io/pony-site/"
+  },
+  "/oldest": {
+    "status": 302,
+    "destination": "https://sigpwny.github.io/pony-site/old/"
+  },
+  "/pony-site": {
+    "status": 302,
+    "destination": "https://sigpwny.github.io/pony-site/"
+  },
+  "/presentation": {
+    "status": 302,
+    "destination": "/meetings/"
+  },
+  "/report": {
+    "status": 302,
+    "destination": "https://forms.gle/PGdwxrCFgDQRM9oX6"
+  },
+  "/rev_setup": {
+    "status": 302,
+    "destination": "/meetings/fa2023/2023-09-17/"
+  },
+  "/shirt2024": {
+    "status": 302,
+    "destination": "https://forms.gle/LTdmTMkUciLV7nMZ9"
+  },
+  "/sponsor": {
+    "status": 302,
+    "destination": "/sponsors/"
+  },
+  "/tutorial": {
+    "status": 302,
+    "destination": "/join/"
+  },
+  "/writups": {
+    "status": 302,
+    "destination": "/events/"
+  },
+  "/writeups/uiuctf2020": {
+    "status": 302,
+    "destination": "/events/uiuctf/2020/"
+  },
+  "/writeups/uiuctf2021": {
+    "status": 302,
+    "destination": "/events/uiuctf/2021/"
+  },
+  "/writeups/uiuctf2021_all": {
+    "status": 302,
+    "destination": "/events/uiuctf/2021/"
+  },
+  "/year": {
+    "status": 302,
+    "destination": "/SIGPwny_Year_Round_Sponsorship_2023.pdf"
+  }
+}

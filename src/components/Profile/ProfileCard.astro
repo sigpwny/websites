@@ -1,0 +1,86 @@
+---
+import Avatar from '@/components/Profile/Avatar.astro';
+import { SocialIcon, getSocialIconDisplayName } from '@/components/Icons';
+
+const { profile, showFull } = Astro.props;
+
+interface Link {
+  name: string;
+  url: string;
+}
+---
+<div class={`flex flex-col p-4 gap-2 lg:gap-4 rounded-xl isolate overflow-hidden ${showFull ? "bg-surface-100 border-surface-150" : "bg-surface-250 border-surface-300"} border-2`}>
+  <div class="flex flex-col lg:flex-row gap-2 lg:gap-4">
+    {profile?.profile_image ? (
+      <div class="w-32 h-32">
+        <Avatar profile={profile} />
+      </div>
+    ) : null}
+    <div class="lg:self-center">
+      <p class="font-mono font-bold text-primary uppercase m-0">
+        {profile?.title ? (
+          <>
+            {profile.title}
+          </>
+        ) : profile?.role ? (
+          <>
+            {
+              profile.role === "admin" ? "Admin" :
+              profile.role === "alum" ? "Alum" :
+              profile.role === "helper" ? "Helper" :
+              profile.role === "member" ? "Member" :
+              profile.role === "sponsor" ? "Sponsor" :
+              profile.role === "org" ? "Organization" :
+              profile.role
+            }
+          </>
+        ) : null}
+        {profile?.period ? (
+          <span class="inline-block align-middle font-mono font-normal text-sm text-text px-1 m-0 rounded-md bg-surface-200 max-h-fit max-w-fit select-none">
+            {profile.period}
+          </span>
+        ) : null}
+      </p>
+      {profile?.name ? (
+        <p class="2xl:text-3xl text-2xl font-bold m-0">
+          {profile.name}
+          {profile?.pronouns ? (
+            <span class="inline-block align-text-bottom font-mono font-normal text-sm px-1 m-0 rounded-md bg-surface-200 max-h-fit max-w-fit select-none">
+              {profile.pronouns}
+            </span>
+          ) : null}
+        </p>
+      ) : null}
+      {profile?.handle ? (
+        <p class="font-mono m-0">
+          @{profile.handle}
+        </p>
+      ) : null}
+      {profile?.links ? (
+        <div class="flex flex-row gap-2 select-none">
+          {profile.links.map((link: Link) => {
+            const social_name = getSocialIconDisplayName(link.name);
+            if (!social_name) return null;
+            if (link.url === "") return null;
+            const url = link.name === "email" ? `mailto:${link.url}` : link.url;
+            return (
+              <a
+                href={url}
+                title={social_name}
+                class="size-6 font-xl"
+                target="_blank" rel="noopener noreferrer"
+              >
+                <SocialIcon name={link.name} />
+              </a>
+            );
+          })}
+        </div>
+      ) : null}
+    </div>
+  </div>
+  {showFull && profile?.bio ? (
+    <span class="max-w-prose">
+      {profile.bio}
+    </span>
+  ) : null}
+</div>

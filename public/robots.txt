@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://sigpwny.com/sitemap-index.xml
+
+User-agent: nsa
+Disallow: /

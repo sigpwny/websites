@@ -1,0 +1,50 @@
+---
+import Layout from '@/layouts/Base.astro';
+---
+<Layout
+  title="Sponsors"
+  description="Thank you to our sponsors!"
+>
+  <div class="flex flex-col gap-8 mx-auto page-width-lg">
+    <span>
+      <h1>Sponsors</h1>
+      <p>
+        Thank you to our sponsors for supporting SIGPwny!
+      </p>
+      <div class="flex flex-col gap-4">
+        <!-- {featured_orgs.length > 0 ? (
+          <span>
+            <h2>Workshop Sponsors</h2>
+            <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {featured_orgs.map((sponsor, sponsor_idx) => (
+                <div key={sponsor_idx} class="flex grow">
+                  <Card {...createCard({sponsor} as CardSponsorProps)} />
+                </div>
+              ))}
+            </div>
+          </span>
+        ) : null} -->
+        <!-- {recent_events.map((event, event_idx) => (
+          <span key={event_idx}>
+            <h2>{event.title}</h2>
+            <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {event.sponsors_profiles!.map((sponsor, sponsor_idx) => (
+                <div key={sponsor_idx} class="flex grow">
+                  <Card {...createCard({sponsor} as CardSponsorProps)} />
+                </div>
+              ))}
+            </div>
+          </span>
+        ))} -->
+      </div>
+    </span>
+    <div class="panel">
+      <h2>Interested in sponsoring?</h2>
+      <p>
+        Please contact us at <a href="mailto:sponsors@sigpwny.com">sponsors@sigpwny.com</a>!
+        Sponsors can receive a variety of benefits, from resume books to 
+        recruiting events. We are happy to work with you!
+      </p>
+    </div>
+  </div>
+</Layout>

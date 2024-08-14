@@ -1,0 +1,280 @@
+---
+import {
+  getCollection,
+  getEntries,
+  type CollectionEntry
+} from 'astro:content';
+import { getImage } from 'astro:assets';
+import {
+  calculateSemester,
+  getYouTubeEmbedUrl,
+  weekNumber
+} from '@/lib/meetings';
+import {
+  CalendarRegular,
+  ChevronCircleLeftRegular,
+  ChevronCircleRightRegular,
+  ClockRegular,
+  LiveRegular,
+  LocationRegular
+} from '@/components/Icons/fluentui';
+import Avatar from '@/components/Profile/Avatar.astro';
+import Layout from '@/layouts/Meeting.astro';
+import Persona from '@/components/Profile/Persona';
+import ProfileCard from '@/components/Profile/ProfileCard.astro';
+import { PdfSvg, YouTubeSvg } from '@/components/Icons';
+import { MdxComponents } from '@/components/Mdx/index.astro';
+import { CountdownBadge } from '@/components/ReactMigration/Countdown';
+import { TagGroup } from '@/components/ReactMigration/Tag';
+// import { Tooltip } from '@/components/Tooltip';
+// import PdfViewer from '@/components/PdfViewer';
+// import AstroPicture from '@/components/AstroPicture';
+
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import utc from 'dayjs/plugin/utc';
+import advanced from 'dayjs/plugin/advancedFormat';
+dayjs.extend(duration);
+dayjs.extend(utc);
+dayjs.extend(advanced);
+
+
+type Props = CollectionEntry<'meetings'>;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('meetings');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+const meeting = Astro.props.data;
+const { Content } = await Astro.props.render();
+
+const authors = await getEntries(meeting.authors);
+const semester = calculateSemester(meeting.time_start);
+const time_start = meeting.time_start ? dayjs(meeting.time_start) : undefined;
+const time_end = meeting.time_start && meeting.duration
+  ? dayjs(meeting.time_start).add(dayjs.duration(meeting.duration))
+  : undefined;
+
+// const defaultFormats = ['avif', 'webp'];
+// const defaultFallbackFormat = 'png';
+
+// console.log(picture_props.optimizedImages);
+// const authors_picture_props = await Promise.all(
+//   authors.map(async (author) => {
+//     const { formats = defaultFormats, fallbackFormat = defaultFallbackFormat, pictureAttributes = {}, ...props } = {
+//       src: author.data.profile_image,
+//       widths: [128],
+//       formats: defaultFormats,
+//       fallbackFormat: defaultFallbackFormat,
+//       alt: author.data.name
+//     };
+//     const optimizedImages = await Promise.all(
+//       formats.map(async (format) => {
+//         const image = await getImage({
+//           ...props,
+//           src: props.src,
+//           widths: props.widths,
+//           format: format,
+//         });
+//         return image;
+//       })
+//     );
+//     const fallbackImage = await getImage({
+//       ...props,
+//       src: props.src,
+//       widths: props.widths,
+//       format: fallbackFormat,
+//     });
+//     const imgAdditionalAttributes = {
+//       srcSet: fallbackImage.srcSet.attribute,
+//     };
+//     // console.log(fallbackImage.attributes)
+//     return {
+//       optimizedImages,
+//       fallbackImage,
+//       imgAdditionalAttributes
+//     }
+//   })
+// );
+// console.log(authors_picture_props);
+---
+
+<Layout {...meeting}>
+  <article class="panel w-full self-start" itemscope itemtype="http://schema.org/Article">
+    <header>
+      <div class="flex flex-col">
+        <h1 class="mb-1" itemprop="headline">
+          {meeting.title}
+        </h1>
+        {semester && meeting.week_number ? (
+          <p class="font-mono m-0 order-first">
+            {semester} Week {weekNumber(meeting.week_number)}
+          </p>
+        ) : null}
+        {meeting.tags && meeting.tags.length > 0 ? (
+          <div class="flex flex-row mb-1">
+            <TagGroup tags={meeting.tags.concat()} />
+          </div>
+        ) : null}
+        {authors.length > 0 ? (
+          <div class="flex flex-col md:flex-row flex-shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center mb-2">
+            {authors.map((author, idx) => {
+              return (
+                <Persona profile={author.data} client:load>
+                  <span slot="avatar">
+                    <Avatar profile={author.data} />
+                  </span>
+                  <span slot="visibleInfo">
+                    <span itemprop="author">
+                      {author.data.name}{idx === authors.length - 1 ? null : (
+                        <span class="hidden md:inline-block">,</span>
+                      )}
+                    </span>
+                  </span>
+                  <span slot="hiddenInfo">
+                    <ProfileCard profile={author.data} />
+                  </span>
+                </Persona>
+              );
+            })}
+          </div>
+        ) : null}
+        <div class="flex flex-col mb-2">
+          {time_start ? (
+            <div class="flex flex-row gap-2 items-center">
+              <CalendarRegular className="flex-none text-primary" />
+              <span class="inline align-middle">
+                <time datetime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
+                  {time_start.format("dddd, MMMM Do, YYYY")}
+                </time>
+              </span>
+            </div>
+          ) : null}
+          {time_start && time_end ? (
+            <div class="flex flex-row gap-2 items-center">
+              <ClockRegular className="flex-none text-primary" />
+              <span class="inline align-middle">
+                <time datetime={meeting.duration}>
+                  {time_start.minute() == 0 ?
+                    <>{time_start.format("h")}</> :
+                    <>{time_start.format("h:mm")}</>
+                  }
+                  {time_start.format("A") !== time_end.format("A") ?
+                    <>{time_start.format(" A")}</> :
+                    null
+                  }
+                  &ndash;
+                  {time_end.minute() == 0 ?
+                    <>{time_end.format("h A")}</> :
+                    <>{time_end.format("h:mm A")}</>
+                  }
+                </time>
+              </span>
+              <CountdownBadge time_start={time_start.toDate()} time_close={time_end.toDate()} />
+            </div>
+          ) : null}
+          {meeting.location ? (
+            <div class="flex flex-row gap-2 items-center">
+              <LocationRegular className="flex-none text-primary" />
+              <span class="inline align-middle">
+                {meeting.location}
+              </span>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </header>
+    {meeting.live_video_url || meeting.recording || meeting.slides ? (
+      <div class="grid sm:flex sm:flex-row gap-2 mb-4">
+        {meeting.recording ? (
+          <a
+            href={meeting.recording}
+            class="btn-primary"
+            target="_blank" rel="noopener noreferrer"
+          >
+            <YouTubeSvg />
+            <p class="inline align-middle m-0 ml-2">
+              Watch video
+            </p>
+          </a>
+        ) : (meeting.live_video_url ? (
+          <a
+            href={meeting.live_video_url}
+            class="btn-primary flex flex-row items-center"
+            target="_blank" rel="noopener noreferrer"
+          >
+            <LiveRegular className="flex-none" />
+            <span class="m-0 ml-2">
+              Join live video
+            </span>
+          </a>
+        ) : null)}
+        {meeting.slides ? (
+          <a
+            href={meeting.slides}
+            class="btn-primary"
+            target="_blank" rel="noopener noreferrer"
+          >
+            <PdfSvg />
+            <p class="inline align-middle m-0 ml-2">
+              Download slides
+            </p>
+          </a>
+        ) : null}
+      </div>
+    ) : null}
+    <!-- {meeting.assets && meeting.assets.length > 0 ? (
+      <div>
+        <span>Additional files:</span>
+        <ul>
+          {meeting.assets.map((asset, idx) => {
+            if (!asset || !asset.base || !asset.publicURL) return null;
+            return (
+              <li key={idx}>
+                <a
+                  href={asset.publicURL}
+                  target="_blank" rel="noopener noreferrer"
+                >
+                  {asset.base}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ) : null} -->
+    {meeting.recording ? (
+      (() => {
+        const url = getYouTubeEmbedUrl(meeting.recording);
+        return url ? (
+          <iframe
+            title={meeting.title + " video"}
+            class="bg-surface-000 w-full max-w-prose aspect-video mx-auto mb-4"
+            allow="encrypted-media; fullscreen; picture-in-picture"
+            allowfullscreen={true}
+            src={url}
+            itemprop="video"
+          />
+        ) : null;
+      })()
+    ) : meeting.slides ? (
+      // <PdfViewer src={meeting.slides} client:only="react" />
+      <iframe
+        src={meeting.slides}
+        class="skeleton-shimmer w-full max-w-prose aspect-video mx-auto mb-4"
+      />
+    ) : null}
+    <section class="md-root w-full max-w-prose mx-auto" itemprop="articleBody">
+      <Content
+        components={MdxComponents}
+      />
+    </section>
+    <span class="z-50 hidden md:block">
+      <!-- <Tooltip.Profile offset={3} place="bottom-start" client:load /> -->
+    </span>
+  </article>
+</Layout>
