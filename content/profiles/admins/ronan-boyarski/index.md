@@ -1,7 +1,8 @@
 ---
 name: Ronan Boyarski
 profile_image: img_0913.jpg
-bio: UIUC CS + Philosophy. I like to write malware and other offensive tooling.
+bio: Sophomore in CS + Philosophy. I like to write malware and other offensive
+  tooling.
 links:
   - name: website
     url: https://tryhackme.com/p/ronanboyargmail
