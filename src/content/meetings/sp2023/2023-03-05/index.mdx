@@ -1,0 +1,17 @@
+---
+title: Fuzzing
+time_start: 2023-03-05T14:00:00.000-06:00
+week_number: 6
+credit:
+  - Richard Liu
+  - Jupiter Peng
+featured: true
+location: Transportation Building 103 + Zoom
+slides: ./Week 06_ Fuzzing.pdf
+tags:
+  - pwn
+  - fuzzing
+  - snapshot fuzzing
+  - mutation-based fuzzing
+  - libfuzzer
+---

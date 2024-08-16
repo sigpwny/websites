@@ -1,0 +1,14 @@
+---
+title: AI Hacking II
+time_start: 2023-03-26T14:00:00.000-05:00
+week_number: 9
+credit:
+ - Anusha Ghosh
+featured: true
+location: Transportation Building 103 + Zoom
+slides: Week 09_ AI Hacking II.pdf
+recording: "https://youtu.be/FOFT1wvde90"
+tags:
+ - misc
+ - ai
+---
