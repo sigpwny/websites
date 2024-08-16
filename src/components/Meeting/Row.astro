@@ -1,11 +1,12 @@
 ---
 import Link from '@/components/Link.astro';
 import PersonaGroup from '@/components/Profile/PersonaGroup.astro';
-import { getEntries } from 'astro:content';
+import { getCollection, getEntries } from 'astro:content';
 import { PdfSvg, YouTubeSvg } from '@/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import { convertDate, weekNumber } from '@/lib/meetings';
+import { getProfilesFromNames } from '@/lib/profiles';
 
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
@@ -16,8 +17,10 @@ dayjs.extend(utc);
 
 const { input } = Astro.props;
 const meeting = input.data;
-const authors = (await getEntries(meeting.authors)).map((author) => author.data);
 const time_close = dayjs(meeting.time_start).add(dayjs.duration(meeting.duration)).toDate();
+
+// Resolve credit names to profiles
+const profiles = await getProfilesFromNames(meeting.credit);
 ---
 
 <li>
@@ -73,7 +76,7 @@ const time_close = dayjs(meeting.time_start).add(dayjs.duration(meeting.duration
         </div>
       </div>
       <PersonaGroup
-        profiles={authors}
+        profiles={profiles}
         limit={3}
       />
     </div>

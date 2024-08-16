@@ -50,7 +50,8 @@ const meetings = defineCollection({
     duration: z.string().default("PT1H"), // ISO 8601 durations
     timezone: z.string().default("America/Chicago"), // IANA timezone to display on site (maybe remove this and show local timezone instead)
     week_number: z.optional(z.number().gte(0).lte(52)), // TODO: auto-compute this by default?
-    authors: z.array(reference('profiles')).default([]), // TODO: set default to SIGPwny
+    // authors: z.array(reference('profiles')).default(['org/sigpwny']), // TODO: set default to SIGPwny
+    credit: z.array(z.string()).default(["SIGPwny"]),
     featured: z.boolean().default(false),
     location: z.optional(z.string()),
     description: z.optional(z.string()),

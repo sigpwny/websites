@@ -6,11 +6,6 @@ import {
 } from 'astro:content';
 import { getImage } from 'astro:assets';
 import {
-  calculateSemester,
-  getYouTubeEmbedUrl,
-  weekNumber
-} from '@/lib/meetings';
-import {
   CalendarRegular,
   ChevronCircleLeftRegular,
   ChevronCircleRightRegular,
@@ -26,6 +21,12 @@ import { PdfSvg, YouTubeSvg } from '@/components/Icons';
 import { MdxComponents } from '@/components/Mdx/index.astro';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
+import {
+  calculateSemester,
+  getYouTubeEmbedUrl,
+  weekNumber
+} from '@/lib/meetings';
+import { getProfilesFromNames } from '@/lib/profiles';
 // import { Tooltip } from '@/components/Tooltip';
 // import PdfViewer from '@/components/PdfViewer';
 // import AstroPicture from '@/components/AstroPicture';
@@ -52,7 +53,7 @@ export async function getStaticPaths() {
 const meeting = Astro.props.data;
 const { Content } = await Astro.props.render();
 
-const authors = await getEntries(meeting.authors);
+const profiles = await getProfilesFromNames(meeting.credit);
 const semester = calculateSemester(meeting.time_start);
 const time_start = meeting.time_start ? dayjs(meeting.time_start) : undefined;
 const time_end = meeting.time_start && meeting.duration
@@ -120,23 +121,23 @@ const time_end = meeting.time_start && meeting.duration
             <TagGroup tags={meeting.tags.concat()} />
           </div>
         ) : null}
-        {authors.length > 0 ? (
+        {profiles.length > 0 ? (
           <div class="flex flex-col md:flex-row flex-shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center mb-2">
-            {authors.map((author, idx) => {
+            {profiles.map((profile, idx) => {
               return (
-                <Persona profile={author.data} client:load>
+                <Persona profile={profile} client:load>
                   <span slot="avatar">
-                    <Avatar profile={author.data} />
+                    <Avatar profile={profile} />
                   </span>
                   <span slot="visibleInfo">
                     <span itemprop="author">
-                      {author.data.name}{idx === authors.length - 1 ? null : (
+                      {profile.name}{idx === profiles.length - 1 ? null : (
                         <span class="hidden md:inline-block">,</span>
                       )}
                     </span>
                   </span>
                   <span slot="hiddenInfo">
-                    <ProfileCard profile={author.data} />
+                    <ProfileCard profile={profile} />
                   </span>
                 </Persona>
               );
