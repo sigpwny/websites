@@ -1,0 +1,27 @@
+---
+credit:
+- Nathan Farlow
+featured: false
+location: CIF 3025 + Zoom
+recording: 'https://youtu.be/Wu1i-AldgCo'
+slides: reverse_engineering_2.pdf
+tags:
+- rev
+- symbolic execution
+- side channels
+- instruction counting
+- self-modifying code
+- vm obfuscation
+- pin
+- valgrind
+- angr
+time_start: 2021-10-10T14:00:00.000000-05:00
+title: Reverse Engineering II
+week_number: 6
+---
+## Meeting Summary
+- Reverse engineering is the process of understanding a program's functionality and behavior
+- Symbolic analysis tools such as `angr` help determine what codepath is desired and how to reach that point
+- Self-modifying code exists as additional protections against reverse engineering
+- Side channel attacks, such as instruction counting, can be used to leak information or determine the current state of a program
+- Virtual machine obfuscation is a technique used to make reverse engineering more difficult by creating another layer of execution

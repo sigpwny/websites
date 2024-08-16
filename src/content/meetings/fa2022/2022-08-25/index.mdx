@@ -1,0 +1,14 @@
+---
+title: Introduction
+time_start: 2022-08-25T18:00:00-05:00
+week_number: 0
+credit:
+  - SIGPwny
+featured: true
+location: Siebel CS 1404 + Zoom
+slides: week_00_info.pdf
+recording: "https://youtu.be/sTjlqI7qkPA"
+tags:
+  - welcome
+  - intro
+---

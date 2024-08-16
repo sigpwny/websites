@@ -1,0 +1,18 @@
+---
+title: Operational Security
+time_start: 2022-11-03T18:00:00-05:00
+week_number: 10
+credit:
+  - Thomas Quig
+  - Nora Batko
+featured: true
+slides: Week_10_Opsec.pdf
+location: Siebel CS 1404 + Zoom
+recording: https://youtu.be/4aidc5C0VO4
+tags:
+  - osint
+  - misc
+  - opsec
+  - intro
+---
+Learn how to build your own threat model and protect yourself online by securing your digital identity.

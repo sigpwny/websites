@@ -1,0 +1,17 @@
+---
+title: Crypto II
+time_start: 2022-10-16T14:00:00-05:00
+week_number: 7
+credit:
+  - Anakin Dey
+featured: true
+location: CIF 3025 + Zoom
+slides: week_07_crypto_ii.pdf
+recording: https://www.youtube.com/watch?v=bc8L3K39Qik
+tags:
+ - crypto
+ - chinese remainder theorem
+ - ecdh
+ - rsa
+ - in-depth
+---

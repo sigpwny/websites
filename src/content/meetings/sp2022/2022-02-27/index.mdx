@@ -1,0 +1,19 @@
+---
+title: Crypto Math I
+time_start: 2022-02-27T14:00:00.000000-06:00
+week_number: 5
+credit:
+  - Nebu
+featured: false
+recording: https://youtu.be/deGvahtfR8M
+location: CIF 3025 + Zoom
+slides: ./05-intro-crypto-math.pdf
+tags:
+- crypto
+- intro
+- math
+- modular arithmetic
+- chinese remainder theorem
+- fermat's lititle theorem
+- in-depth
+---

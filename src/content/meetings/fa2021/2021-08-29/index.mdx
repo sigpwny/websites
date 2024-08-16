@@ -1,0 +1,21 @@
+---
+credit:
+- Thomas Quig
+featured: false
+location: CIF 3025 + Zoom
+recording: 'https://youtu.be/hGAn13uiCH4'
+slides: sigpwny_setting_up_meeting.pdf
+tags:
+- welcome
+- setup
+- terminal
+- wsl
+time_start: 2021-08-29T14:00:00.000000-05:00
+title: Setup
+week_number: 0
+---
+
+Additional slide deck on terminal commands [here](./important_terminal_commands.pdf).
+
+## Pictures
+![Panoramic shot of students setting up their environments](./setup.jpg)

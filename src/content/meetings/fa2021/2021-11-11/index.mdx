@@ -1,0 +1,20 @@
+---
+credit:
+- Minh Duong
+featured: false
+location: Siebel CS 2405 + Zoom
+recording: 'https://youtu.be/az12sv5HTbQ'
+slides: networking.pdf
+tags:
+- networking
+- osi model
+- tcp
+- ip
+- udp
+- mitm
+- wireshark
+- burp suite
+time_start: 2021-11-11T18:00:00.000000-06:00
+title: Networking
+week_number: 11
+---
