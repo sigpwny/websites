@@ -5,6 +5,7 @@ import {
   type CollectionEntry
 } from 'astro:content';
 import { getImage } from 'astro:assets';
+import astroConfig from 'astro.config';
 import {
   CalendarRegular,
   ChevronCircleLeftRegular,
@@ -32,11 +33,13 @@ import { getProfilesFromNames } from '@/lib/profiles';
 // import AstroPicture from '@/components/AstroPicture';
 
 import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import duration from 'dayjs/plugin/duration';
 import advanced from 'dayjs/plugin/advancedFormat';
-dayjs.extend(duration);
 dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(duration);
 dayjs.extend(advanced);
 
 
@@ -55,10 +58,17 @@ const { Content } = await Astro.props.render();
 
 const profiles = await getProfilesFromNames(meeting.credit);
 const semester = calculateSemester(meeting.time_start);
-const time_start = meeting.time_start ? dayjs(meeting.time_start) : undefined;
+const time_start = meeting.time_start ? dayjs(meeting.time_start).tz(meeting.timezone) : undefined;
 const time_end = meeting.time_start && meeting.duration
-  ? dayjs(meeting.time_start).add(dayjs.duration(meeting.duration))
+  ? dayjs(meeting.time_start).tz(meeting.timezone).add(dayjs.duration(meeting.duration))
   : undefined;
+
+const slides = meeting.slides
+  ? new URL(meeting.slides, `${astroConfig.site}/meetings/${Astro.props.id}`).pathname
+  : undefined;
+
+// Import slides/assets
+// const slides = await import(`../../../content/meetings/${Astro.props.slug}/${meeting.slides}.pdf`);
 
 // const defaultFormats = ['avif', 'webp'];
 // const defaultFallbackFormat = 'png';
@@ -189,7 +199,7 @@ const time_end = meeting.time_start && meeting.duration
         </div>
       </div>
     </header>
-    {meeting.live_video_url || meeting.recording || meeting.slides ? (
+    {meeting.live_video_url || meeting.recording || slides ? (
       <div class="grid sm:flex sm:flex-row gap-2 mb-4">
         {meeting.recording ? (
           <a
@@ -214,9 +224,9 @@ const time_end = meeting.time_start && meeting.duration
             </span>
           </a>
         ) : null)}
-        {meeting.slides ? (
+        {slides ? (
           <a
-            href={meeting.slides}
+            href={slides}
             class="btn-primary"
             target="_blank" rel="noopener noreferrer"
           >

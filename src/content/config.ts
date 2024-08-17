@@ -1,3 +1,4 @@
+import consts from '@/consts';
 import { defineCollection, reference, z, type ImageFunction } from 'astro:content';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -48,7 +49,7 @@ const meetings = defineCollection({
     // discord_event: z.object({}),
     time_start: z.coerce.date(),
     duration: z.string().default("PT1H"), // ISO 8601 durations
-    timezone: z.string().default("America/Chicago"), // IANA timezone to display on site (maybe remove this and show local timezone instead)
+    timezone: z.string().default(consts.timezone), // IANA timezone to display on site (maybe remove this and show local timezone instead)
     week_number: z.optional(z.number().gte(0).lte(52)), // TODO: auto-compute this by default?
     // authors: z.array(reference('profiles')).default(['org/sigpwny']), // TODO: set default to SIGPwny
     credit: z.array(z.string()).default(["SIGPwny"]),
