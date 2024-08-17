@@ -60,7 +60,7 @@ const meetings = defineCollection({
     live_video_url: z.optional(z.string().url()),
     slides: z.optional(z.string()), // TODO: this is a path to a file, validate it exists
     recording: z.optional(z.string().url()),
-    assets: z.optional(z.array(z.string())), // TODO: validate all file paths exist
+    // assets: z.optional(z.array(z.string())),
     tags: z.array(z.string()).default([]),
     // semester: z.optional(z.string()), // TODO: validate this is a valid semester
     // slug: z.string(),
