@@ -1,7 +1,7 @@
 ---
 title: Introduction
-time_start: 2024-08-25T18:00:00.000Z
-time_close: 2024-08-25T19:00:00.000Z
+time_start: 2024-08-29T23:00:00.000Z
+time_close: ""
 week_number: 0
 credit:
   - SIGPwny
