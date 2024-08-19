@@ -45,13 +45,6 @@ export default function Nav({ curr_path }: Props) {
     )
   };
 
-  const closeMobileNav = () => {
-    const input = document.getElementById("nav-mobile-toggle-input") as HTMLInputElement;
-    if (input) {
-      input.checked = false;
-    }
-  }
-
   return (
     <span className="has-[:checked]:bg-surface-100/70 has-[:checked]:mb-4 mb-2 flex flex-col whitespace-pre bg-surface-000/50 lg:!bg-transparent backdrop-blur-xl lg:backdrop-blur-none shadow-md lg:shadow-none shadow-surface-000">
       <div className="container px-4 md:px-8 py-4 lg:py-8 flex flex-row ">
@@ -91,16 +84,11 @@ export default function Nav({ curr_path }: Props) {
             {/* Brand */}
             <Link
               href="/"
-              className="nav-main-brand max-w-fit text-primary hover:text-secondary lg:px-4 lg:py-2"
+              className="nav-main-brand flex flex-row max-w-fit gap-2 lg:gap-1 items-center text-primary hover:text-secondary lg:px-4 lg:py-2"
             >
-              <span
-                className="flex flex-row gap-2 lg:gap-1 items-center"
-                onClick={closeMobileNav}
-              >
-                <PwnySvg className="h-12 lg:h-8" />
-                <span className="font-bold max-lg:text-2xl">
-                  {title}
-                </span>
+              <PwnySvg className="h-12 lg:h-8" />
+              <span className="font-bold max-lg:text-2xl">
+                {title}
               </span>
             </Link>
             <motion.span
@@ -119,9 +107,7 @@ export default function Nav({ curr_path }: Props) {
                       className="flex flex-row max-w-fit font-bold text-slate-300 hover:text-secondary"
                       activeClassName="!text-white"
                     >
-                      <span onClick={closeMobileNav}>
-                        {link.name}
-                      </span>
+                      {link.name}
                     </Link>
                   </li>
                 ))}
@@ -141,10 +127,8 @@ export default function Nav({ curr_path }: Props) {
                 className="nav-mobile-hide-when-unchecked flex flex-row max-w-fit gap-1 items-center text-primary hover:text-secondary lg:px-4 lg:py-2 max-lg:pt-4"
                 // activeClassName="text-surface-200"
               >
-                <span
-                  className="font-bold max-lg:text-2xl"
-                  onClick={closeMobileNav}
-                >
+                {/* <PwnySvg className="h-8" /> */}
+                <span className="font-bold max-lg:text-2xl">
                   Pwny CTF
                 </span>
               </Link>
@@ -165,9 +149,7 @@ export default function Nav({ curr_path }: Props) {
                         className="flex flex-row max-w-fit font-bold text-slate-300 hover:text-secondary"
                         activeClassName="!text-white"
                       >
-                        <span onClick={closeMobileNav}>
-                          {link.name}
-                        </span>
+                        {link.name}
                       </Link>
                     </li>
                   ))}
@@ -186,10 +168,7 @@ export default function Nav({ curr_path }: Props) {
                 className="nav-mobile-hide-when-unchecked flex flex-row max-w-fit gap-1 items-center text-primary hover:text-secondary lg:px-4 lg:py-2 max-lg:pt-4"
                 // activeClassName="text-surface-200"
               >
-                <span
-                  className="font-bold max-lg:text-2xl"
-                  onClick={closeMobileNav}
-                >
+                <span className="font-bold max-lg:text-2xl">
                   Pwny CTF
                 </span>
               </Link>
