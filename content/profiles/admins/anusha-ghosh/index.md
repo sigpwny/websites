@@ -7,6 +7,6 @@ bio: I'm an MSCS student interested in exploring AI security! Outside of school
 links:
   - name: twitter
     url: https://twitter.com/0xk4l1
-role: President Emeritus
+role: Admin
 weight: 9
 ---
