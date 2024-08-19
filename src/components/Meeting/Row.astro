@@ -32,7 +32,7 @@ const profiles = await getProfilesFromNames(meeting.credit);
       >
         {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
       </span>
-      <CountdownBadge time_start={meeting.time_start} time_close={time_close} />
+      <CountdownBadge time_start={meeting.time_start} time_close={time_close} client:load />
       <Link href={`/meetings/${input.slug}/`} class="truncate">
         <span>
           <span class="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}

@@ -52,7 +52,7 @@ export const SidebarItem = ({ item, depth, expand_all, id }: SidebarItemProps) =
           <span className="folder-arrow">
             <ChevronRightRegular width="1em" height="1em" />
           </span>
-          <span className="ml-4">
+          <span className="ml-2">
             {item.name}
           </span>
         </label>

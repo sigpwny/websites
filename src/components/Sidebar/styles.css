@@ -53,32 +53,8 @@
   @apply ring-2 ring-white ring-inset;
 }
 .sidebar-folder-input ~ .sidebar-folder {
-  @apply hidden;
-  animation: folder-unexpand 0.2s ease-in forwards;
+  @apply hidden h-0 overflow-y-hidden;
 }
 .sidebar-folder-input:checked ~ .sidebar-folder {
-  @apply flex;
-  /* Astro TODO: View Transitions will replay CSS animations, so the rule below
-     uses a 0 second duration. Otherwise the sidebar will always play the
-     expand animation when navigating to a new page... need a better fix. */
-  animation: folder-expand 0.0s ease-out forwards;
-}
-@media (prefers-reduced-motion: reduce) {
-  .sidebar-folder-input ~ .sidebar-folder {
-    @apply hidden;
-    animation: none;
-  }
-  .sidebar-folder-input:checked ~ .sidebar-folder {
-    @apply flex;
-    animation: none;
-  }
-}
-/* Animations for accordion effect */
-@keyframes folder-expand {
-  0% { @apply flex max-h-0 overflow-y-hidden; }
-  100% { @apply flex max-h-20 overflow-y-visible; }
-}
-@keyframes folder-unexpand {
-  0% { @apply flex max-h-20 overflow-y-hidden; }
-  100% { @apply hidden max-h-0 overflow-y-hidden; }
+  @apply flex h-auto overflow-y-visible;
 }
