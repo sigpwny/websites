@@ -2,8 +2,9 @@
 name: Pete Stenger
 profile_image: pfp_cherry.jpg
 handle: spicypete
-bio: Hi! I'm in my third year in CS. You can find me rock climbing or playing
-  TOTK. Ask me about Python, Ghidra, and automation.
+bio: Hi! I'm in my fourth year in CS. You can find me rock climbing or listening
+  to Daft Punk. My focus is in automation, reverse-engineering, and backend
+  systems.
 links:
   - name: email
     url: pete@stenger.io
@@ -17,6 +18,6 @@ links:
     url: https://www.linkedin.com/in/pete-stenger/
   - name: discord
     url: https://discord.com/users/191210435746201600
-role: President
+role: President Emeritus
 weight: 11
 ---
