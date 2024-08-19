@@ -6,5 +6,9 @@ week_number: 1
 credit:
   - SIGPwny
 featured: true
-location: Rec Room
+location: Illini Union Rec Room
+tags:
+  - misc
+  - social
+  - bowling
 ---
