@@ -38,15 +38,22 @@ export default function Nav({ curr_path }: Props) {
     return (
       <a
         href={href}
-        className={`${className} ${isActive ? activeClassName : ""}`}
+        className={`${className ? className : ""} ${activeClassName && isActive ? activeClassName : ""}`}
       >
         {children}
       </a>
     )
   };
 
+  const closeMobileNav = () => {
+    const input = document.getElementById("nav-mobile-toggle-input") as HTMLInputElement;
+    if (input) {
+      input.checked = false;
+    }
+  }
+
   return (
-    <span className="has-[:checked]:bg-surface-100/70 has-[:checked]:mb-4 mb-2 flex flex-col whitespace-pre bg-surface-000/50 lg:!bg-transparent backdrop-blur-xl lg:backdrop-blur-none shadow-md lg:shadow-none shadow-surface-000 transition-colors duration-200">
+    <span className="has-[:checked]:bg-surface-100/70 has-[:checked]:mb-4 mb-2 flex flex-col whitespace-pre bg-surface-000/50 lg:!bg-transparent backdrop-blur-xl lg:backdrop-blur-none shadow-md lg:shadow-none shadow-surface-000">
       <div className="container px-4 md:px-8 py-4 lg:py-8 flex flex-row ">
         {/* Mobile toggle */}
         <input
@@ -84,11 +91,16 @@ export default function Nav({ curr_path }: Props) {
             {/* Brand */}
             <Link
               href="/"
-              className="nav-main-brand flex flex-row max-w-fit gap-2 lg:gap-1 items-center text-primary hover:text-secondary lg:px-4 lg:py-2"
+              className="nav-main-brand max-w-fit text-primary hover:text-secondary lg:px-4 lg:py-2"
             >
-              <PwnySvg className="h-12 lg:h-8" />
-              <span className="font-bold max-lg:text-2xl">
-                {title}
+              <span
+                className="flex flex-row gap-2 lg:gap-1 items-center"
+                onClick={closeMobileNav}
+              >
+                <PwnySvg className="h-12 lg:h-8" />
+                <span className="font-bold max-lg:text-2xl">
+                  {title}
+                </span>
               </span>
             </Link>
             <motion.span
@@ -107,7 +119,9 @@ export default function Nav({ curr_path }: Props) {
                       className="flex flex-row max-w-fit font-bold text-slate-300 hover:text-secondary"
                       activeClassName="!text-white"
                     >
-                      {link.name}
+                      <span onClick={closeMobileNav}>
+                        {link.name}
+                      </span>
                     </Link>
                   </li>
                 ))}
@@ -127,8 +141,10 @@ export default function Nav({ curr_path }: Props) {
                 className="nav-mobile-hide-when-unchecked flex flex-row max-w-fit gap-1 items-center text-primary hover:text-secondary lg:px-4 lg:py-2 max-lg:pt-4"
                 // activeClassName="text-surface-200"
               >
-                {/* <PwnySvg className="h-8" /> */}
-                <span className="font-bold max-lg:text-2xl">
+                <span
+                  className="font-bold max-lg:text-2xl"
+                  onClick={closeMobileNav}
+                >
                   Pwny CTF
                 </span>
               </Link>
@@ -149,7 +165,9 @@ export default function Nav({ curr_path }: Props) {
                         className="flex flex-row max-w-fit font-bold text-slate-300 hover:text-secondary"
                         activeClassName="!text-white"
                       >
-                        {link.name}
+                        <span onClick={closeMobileNav}>
+                          {link.name}
+                        </span>
                       </Link>
                     </li>
                   ))}
@@ -157,7 +175,25 @@ export default function Nav({ curr_path }: Props) {
               </motion.span>
             </nav>
           ) : (
-            <p>Pwny CTF is disabled</p>
+            <nav
+              className="flex flex-col lg:flex-row item-start lg:items-center lg:rounded-full lg:bg-surface-100/70 lg:border-surface-150/90 lg:border-2 lg:backdrop-blur-xl overflow-hidden"
+              role="navigation"
+              aria-label="CTF"
+            >
+              {/* Brand */}
+              <Link
+                href="/ctf/"
+                className="nav-mobile-hide-when-unchecked flex flex-row max-w-fit gap-1 items-center text-primary hover:text-secondary lg:px-4 lg:py-2 max-lg:pt-4"
+                // activeClassName="text-surface-200"
+              >
+                <span
+                  className="font-bold max-lg:text-2xl"
+                  onClick={closeMobileNav}
+                >
+                  Pwny CTF
+                </span>
+              </Link>
+            </nav>
           )}
         </span>
       </div>
