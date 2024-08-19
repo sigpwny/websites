@@ -22,6 +22,10 @@ links:
   - name: ctftime
     url: https://ctftime.org/event/2275
 stats:
+  - name: Teams
+    value: "959"
   - name: Rating Weight
     value: "67.51"
+  - name: Cash Prizes (USD)
+    value: $6,000+
 ---
