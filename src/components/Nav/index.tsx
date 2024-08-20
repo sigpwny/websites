@@ -23,6 +23,7 @@ export default function Nav({ curr_path }: Props) {
   // Configuration constants
   const title = consts.title;
   const navLinks = consts.navLinks;
+  const navCallToActionLinks = consts.navCallToActionLinks;
   const ctfd = consts.flags.enableCtfd || false;
 
   const path_name = curr_path + '';
@@ -98,7 +99,7 @@ export default function Nav({ curr_path }: Props) {
             >
               {/* Divider/spacer */}
               <span className="hidden lg:flex h-full border-l-2 border-surface-150/90" />
-              {/* Nav links */}
+              {/* Nav and CTA links */}
               <ul className="flex flex-col grow max-lg:text-xl lg:flex-row item-start lg:items-center gap-4 lg:gap-6 lg:px-4 py-2">
                 {navLinks.map((link, idx) => (
                   <li key={idx}>
@@ -106,6 +107,17 @@ export default function Nav({ curr_path }: Props) {
                       href={link.url}
                       className="flex flex-row max-w-fit font-bold text-slate-300 hover:text-secondary"
                       activeClassName="!text-white"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+                {navCallToActionLinks.map((link, idx) => (
+                  <li key={idx}>
+                    <Link
+                      href={link.url}
+                      className="flex flex-row max-w-fit font-bold !text-surface-000 bg-primary hover:bg-secondary rounded-full px-2"
+                      // activeClassName="!text-white"
                     >
                       {link.name}
                     </Link>
