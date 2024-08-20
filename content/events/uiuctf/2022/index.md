@@ -59,7 +59,11 @@ stats:
 [Trailer](https://youtu.be/Wl8TsiUgzmk)  
 [Closing ceremony](https://youtu.be/OYjxHoWDhxE)
 
-## Writeups
+## Challenge Repository
+
+The public release for UIUCTF 2022 challenge source code and infrastructure can be found on [GitHub](https://github.com/sigpwny/UIUCTF-2022-Public).
+
+## Winning Writeups
 
 For UIUCTF 2022 we paid out $1,300 in writeup prizes. We prioritize concise technical communication and writeups that are fun to read and learn from, including those written from/for the perspective of beginners. Here are all writeups that won.
 

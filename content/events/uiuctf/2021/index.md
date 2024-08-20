@@ -57,7 +57,12 @@ stats:
   - name: Cash Prizes (USD)
     value: "$7,700+"
 ---
-## Writeups
+
+## Challenge Repository
+
+The public release for UIUCTF 2021 challenge source code and infrastructure can be found on [GitHub](https://github.com/sigpwny/UIUCTF-2021-Public).
+
+## Winning Writeups
 
 For UIUCTF 2021 we paid out $2,000 in writeup prizes. We were inspired by GoogleCTF’s writeup prizes. We prioritize concise technical communication and writeups that are fun to read and learn from, including those written from/for the perspective of beginners. Here are the writeups that won.
 

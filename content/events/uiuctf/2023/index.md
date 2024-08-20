@@ -48,6 +48,10 @@ stats:
     value: "$6,000+"
 ---
 
+## Challenge Repository
+
+The public release for UIUCTF 2023 challenge source code and infrastructure can be found on [GitHub](https://github.com/sigpwny/UIUCTF-2023-Public).
+
 ## Winning Writeups
 
 For UIUCTF 2023 we paid out $1,500 in writeup prizes. We prioritize concise technical communication and writeups that are fun to read and learn from, including those written from/for the perspective of beginners. Here are all writeups that won.

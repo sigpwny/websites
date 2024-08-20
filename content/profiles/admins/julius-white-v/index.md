@@ -1,5 +1,5 @@
 ---
-name: "Julius White V "
+name: "Julius White V"
 profile_image: headshot_outside.jpg
 bio: Hello! I am a Junior in Computer Science and Economics. I am interested in
   personal finance and entrepreneurship!
