@@ -20,7 +20,12 @@ import { name, version } from '@/../package.json';
 [    0.002645] ---[ end Kernel panic - not syncing: 404: Page not found
 </pre>
 </Layout>
-<script>
-const userAgentElement = document.getElementById('user-agent');
-if (userAgentElement) userAgentElement.textContent = navigator.userAgent;
+
+<script is:inline>
+function updateUserAgent() {
+  const userAgentElement = document.getElementById('user-agent');
+  if (userAgentElement) userAgentElement.textContent = navigator.userAgent;
+}
+document.addEventListener('astro:after-swap', updateUserAgent);
+updateUserAgent();
 </script>
