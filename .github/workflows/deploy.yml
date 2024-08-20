@@ -1,5 +1,12 @@
-name: Build and deploy site
-on: [push]
+name: Deploy (sigpwny.com)
+on:
+  push:
+    paths:
+      - _global/**
+      - sigpwny.com/**
+defaults:
+  run:
+    working-directory: sigpwny.com
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -13,14 +20,13 @@ jobs:
       CI: true
       CI_BUILD_DIR: dist
     steps:
-      - name: Check out main repository code
+      - name: Check out repository code
         uses: actions/checkout@v3
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          # Uses node version defined in engines
-          node-version-file: 'package.json'
+          node-version: latest
 
       - name: Restore cached node modules and build artifacts
         id: cache-npm
