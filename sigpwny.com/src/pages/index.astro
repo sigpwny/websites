@@ -1,0 +1,132 @@
+---
+import Layout from '@/layouts/Base.astro';
+import consts from '@/consts';
+import Link from '@/components/Link.astro';
+import { Picture } from 'astro:assets';
+import AstroLink from '@/components/Link.astro';
+
+// Pictures
+import imgHome1 from '@/assets/home-promo/home-1.jpg';
+import imgHome2 from '@/assets/home-promo/home-2.jpg';
+import imgHome3 from '@/assets/home-promo/home-3.jpg';
+import imgHome4 from '@/assets/home-promo/home-4.jpg';
+import imgHome5 from '@/assets/home-promo/home-5.jpg';
+import imgHome6 from '@/assets/home-promo/home-6.jpg';
+---
+
+<Layout title="Home">
+  <section id="welcome" class="pb-8">
+    <div class="flex flex-col">
+      <div class="lg:order-2 pb-6 lg:w-2/3 lg:p-0 xl:w-1/2 mx-auto text-center">
+        <h1 class="lg:text-6xl">Hacking @ UIUC</h1>
+        <p>
+          {consts.description}
+        </p>
+        <Link href="/about/" class="btn-primary">Learn about us</Link>
+      </div>
+      <div class="flex lg:order-1 gap-8 pr-20 sm:columns-2 sm:p-0 md:pr-20 lg:columns-3 lg:gap-12 lg:p-0 lg:pb-2 xl:gap-16 2xl:gap-16 2xl:px-28">
+        <span class="skeleton-shimmer h-fit grow-0 flex-row rounded-xl pointer-events-none select-none border-surface-100 border-2 mt-6 w-full flex">
+          <Picture
+            src={imgHome1}
+            alt="SIGPwny members concentrated on solving challenges during a CTF"
+            class="object-cover"
+            widths={[300, 600]}
+            formats={['avif', 'webp']}
+          />
+        </span>
+        <span class="skeleton-shimmer h-fit grow-0 flex-row rounded-xl pointer-events-none select-none border-surface-100 border-2 mt-0 w-full hidden sm:flex">
+          <Picture
+            src={imgHome2}
+            alt="Two SIGPwny members taking a pizza break during Fall CTF 2023"
+            class="object-cover"
+            widths={[300, 600]}
+            formats={['avif', 'webp']}
+          />
+        </span>
+        <span class="skeleton-shimmer h-fit grow-0 flex-row rounded-xl pointer-events-none select-none border-surface-100 border-2 mt-12 w-full hidden lg:flex">
+          <Picture
+            src={imgHome3}
+            alt="SIGPwny helpers present on web hacking during a weekly meeting"
+            class="object-cover"
+            widths={[300, 600]}
+            formats={['avif', 'webp']}
+          />
+        </span>
+      </div>
+      <div class="flex lg:order-3 gap-8 pl-20 pb-2 sm:columns-2 sm:p-0 md:pl-20 lg:columns-3 lg:gap-12 lg:p-0 xl:gap-16 2xl:gap-16 2xl:px-28">
+        <span class="skeleton-shimmer h-fit grow-0 flex-row rounded-xl pointer-events-none select-none border-surface-100 border-2 mt-0 w-full hidden lg:flex">
+          <Picture
+            src={imgHome4}
+            alt="A presentation on reverse engineering during Fall CTF 2023"
+            class="object-cover"
+            widths={[300, 600]}
+            formats={['avif', 'webp']}
+          />
+        </span>
+        <span class="skeleton-shimmer h-fit grow-0 flex-row rounded-xl pointer-events-none select-none border-surface-100 border-2 mt-12 w-full hidden sm:flex">
+          <Picture
+            src={imgHome5}
+            alt="SIGPwny members laughing in front of grafitti during a spray paint social event"
+            class="object-cover"
+            widths={[300, 600]}
+            formats={['avif', 'webp']}
+          />
+        </span>
+        <span class="skeleton-shimmer h-fit grow-0 flex-row rounded-xl pointer-events-none select-none border-surface-100 border-2 mt-6 w-full flex">
+          <Picture
+            src={imgHome6}
+            alt="Two SIGPwny members solving Fall CTF 2023 challenges"
+            class="object-cover"
+            widths={[300, 600]}
+            formats={['avif', 'webp']}
+          />
+        </div>
+      </span>
+    </div>
+  </section>
+
+  <!-- <section id="meetings" class="pb-8">
+    <div class="flex flex-col sm:flex-row gap-1 justify-between mb-3">
+      <h1 class="m-0">
+        Meetings
+      </h1>
+      <Link href="/meetings/" class="self-start button !text-white bg-surface-100 hover:bg-surface-150">
+        <span>
+          View all
+        </span>
+        <ChevronRightRegular class="flex-none" />
+      </Link>
+    </div>
+    <CardRow cards={meeting_cards} />
+  </section>
+
+  <section id="publications" class="pb-8">
+    <div class="flex flex-col sm:flex-row gap-1 justify-between mb-3">
+      <h1 class="m-0">
+        Publications
+      </h1>
+      <Link href="/publications/" class="self-start button !text-white bg-surface-100 hover:bg-surface-150">
+        <span>
+          View all
+        </span>
+        <ChevronRightRegular class="flex-none" />
+      </Link>
+    </div>
+    <CardRow cards={publication_cards} />
+  </section>
+
+  <section id="events" class="pb-8">
+    <div class="flex flex-col sm:flex-row gap-1 justify-between mb-3">
+      <h1 class="m-0">
+        Events
+      </h1>
+      <Link href="/events/" class="self-start button !text-white bg-surface-100 hover:bg-surface-150">
+        <span>
+          View all
+        </span>
+        <ChevronRightRegular class="flex-none" />
+      </Link>
+    </div>
+    <CardRow cards={event_cards} />
+  </section> -->
+</Layout>

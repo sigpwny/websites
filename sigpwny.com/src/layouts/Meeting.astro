@@ -1,0 +1,63 @@
+---
+import Layout from '@/layouts/Base.astro';
+import type { HeadProps } from '@/components/BaseHead.astro';
+import Sidebar from '@/components/Sidebar';
+import { getMeetings, formatSemester, weekNumber } from '@/lib/meetings';
+import 'katex/dist/katex.min.css';
+
+const props: HeadProps = Astro.props;
+
+const rawMeetings = (await getMeetings()).sort(
+  (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
+);
+
+type MeetingType = typeof rawMeetings[0];
+
+const meetingsBySemester = rawMeetings.reduce(
+  (acc, meeting) => {
+    const semester = meeting.data.semester;
+    if (acc[semester]) {
+      acc[semester].push(meeting);
+    } else {
+      acc[semester] = [meeting];
+    }
+    return acc;
+  }, {} as {[semester: string]: MeetingType[]}
+);
+
+const meetingSidebarItems = Object.keys(meetingsBySemester).map((semester) => ({
+  name: formatSemester(semester),
+  items: meetingsBySemester[semester].map((meeting) => ({
+    name: meeting.data.week_number ? `Week ${weekNumber(meeting.data.week_number)}: ${meeting.data.title}` : meeting.data.title,
+    url: meeting.slug,
+    active: meeting.slug === Astro.url.pathname,
+  })),
+  active: false
+}));
+
+// If a meeting is set as active, we also want to set the parent semester as active
+meetingSidebarItems.forEach((semester) => {
+  semester.active = semester.items.some((meeting) => meeting.active);
+});
+---
+
+<Layout {...props}>
+  <div class="flex flex-row gap-x-4">
+    <aside
+      class="xl:w-96 lg:w-80 lg:flex flex-col flex-shrink-0 hidden"
+      role="navigation"
+      aria-label="Meetings"
+    >
+      <div class="w-full border-surface-100 border-2 rounded-xl py-2 sticky top-4">
+        <div class="w-full h-fit max-h-[75vh] px-2 overflow-hidden overflow-y-auto custom-scrollbar">
+          <Sidebar
+            root_items={meetingSidebarItems}
+            client:load
+            transition:persist
+          />
+        </div>
+      </div>
+    </aside>
+    <slot />
+  </div>
+</Layout>

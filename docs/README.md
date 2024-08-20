@@ -113,8 +113,8 @@ name: "First Last" # required
 bio: | # required
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
   tempor incididunt ut labore et dolore magna aliqua.
-image:
-  path: "./profile.png" # required, headshot preferred
+card_image:
+  background: "./profile.png" # required, headshot preferred
   alt: "Name's profile picture" # required
 handle: "sigpwny" # optional
 role: "Test Dummy" # required

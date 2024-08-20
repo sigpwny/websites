@@ -1,0 +1,145 @@
+---
+import Layout from '@/layouts/Base.astro';
+import consts from '@/consts';
+import Link from '@/components/Link.astro';
+import { Picture } from 'astro:assets';
+
+import imgWebHacking from '@/assets/2023-09-07-web-hacking-i.jpg';
+
+const discordLink = consts.socialLinks.find((link) => link.name === 'Discord')?.url;
+---
+<Layout
+  title="Join"
+  description="Join SIGPwny, the hacking club at UIUC!"
+>
+  <div class="2xl:px-40">
+    <section id="join-title" class="grid gap-x-8 lg:grid-cols-2 py-8">
+      <div class="flex flex-col flex-grow pb-4 basis-1/2">
+        <h1>Welcome to SIGPwny!</h1>
+        <p class="text-3xl mb-0">
+          Come learn cybersecurity with 2000+ students, alumni, and
+          professionals in our Discord server.
+        </p>
+        <a href={discordLink} target="_blank" rel="noopener noreferrer"
+          class="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary"
+        >
+          Join Discord
+        </a>
+        <ul class="list-decimal pl-6 pt-2">
+          <li>
+            By joining, you agree to our club <Link href="/rules/">rules</Link>.
+          </li>
+          <li>
+            If you are affiliated with UIUC, make sure to <a href="https://sigpwny.com/auth" target="_blank" rel="noopener noreferrer">authenticate</a> to
+            receive the @uiuc role and access club channels.
+          </li>
+        </ul>
+      </div>
+      <Picture
+        src={imgWebHacking}
+        alt="SIGPwny members gather for a web hacking meeting"
+        class="rounded-xl pointer-events-none select-none border-surface-100 border-2 basis-1/2"
+        widths={[300, 600]}
+        formats={['avif', 'webp']}
+      />
+    </section>
+
+    <section id="join-involve" class="py-8">
+      <h1>How to Get Involved</h1>
+      <div class="grid gap-8 lg:grid-cols-3 pt-4 text-center">
+        <div class="panel">
+          <h2>Learn</h2>
+          <p>
+            Attending our weekly meetings is the easiest way to learn
+            security and meet others! Watch past meetings and find
+            upcoming meetings <Link href="/meetings/">here</Link>.
+          </p>
+        </div>
+        <div class="panel">
+          <h2>Compete</h2>
+          <p>
+            We play in cybersecurity competitions known as CTFs (capture the
+            flag). Collaborating as a team lets us learn from each other and
+            have fun!
+          </p>
+        </div>
+        <div class="panel">
+          <h2>Research</h2>
+          <p>
+            We have connections with professors and graduate students at <a href="https://spri.engr.illinois.edu/" target="_blank" rel="noopener noreferrer">SPR@I</a>.
+            We also support individual projects run by our members.
+          </p>
+        </div>
+      </div>
+      <p class="pt-4">
+        SIGPwny is open to all - there are no member applications, mandatory
+        meetings, or even prerequisite knowledge needed.
+      </p>
+      <h2>Learn</h2>
+      <ul class="flex columns-1 lg:columns-2 gap-4 lg:gap-8">
+        <li class="w-full min-h-40 bg-gradient-to-br from-surface-000 to-primary border-2 border-primary rounded-xl">
+          <Link
+            href="/meetings/"
+          >
+            <p>-&gt; Meetings</p>
+          </Link>
+        </li>
+        <li class="w-full min-h-40 bg-gradient-to-br from-surface-000 to-primary border-2 border-primary rounded-xl">
+          <Link
+            href="/ctf/"
+          >
+            <p>-&gt; Pwny CTF</p>
+          </Link>
+        </li>
+      </ul>
+      <h2>Compete</h2>
+      <ul class="flex columns-1 lg:columns-3 gap-4 lg:gap-8">
+        <li class="w-full min-h-40 bg-gradient-to-br from-red-900 to-red-500 border-2 border-red-950 rounded-xl">
+          <Link
+            href="#"
+            class="flex size-full !text-white text-3xl font-bold"
+          >
+            Capture the Flag
+          </Link>
+        </li>
+        <li class="w-full min-h-40 bg-gradient-to-br from-purple-950 to-purple-400 border-2 border-purple-900 rounded-xl">
+          <Link
+            href="#"
+            class="flex size-full !text-white text-3xl font-bold"
+          >
+            Purple Team
+          </Link>
+        </li>
+        <li class="w-full min-h-40 bg-gradient-to-br from-yellow-700 to-yellow-400 border-2 border-yellow-800 rounded-xl">
+          <Link
+            href="#"
+            class="flex size-full !text-white text-3xl font-bold"
+          >
+            Embedded Hacking
+          </Link>
+        </li>
+      </ul>
+      <h2>Create</h2>
+      <h2>Organize</h2>
+    </section>
+
+    <section id="join-beginner" class="py-8">
+      <h1>Beginner Topics</h1>
+      <p>
+        Learn the fundamental skills to quickly get into hacking and more
+        advanced topics!
+      </p>
+      <!-- <CardRow cards={meeting_cards} maxFour={true} /> -->
+    </section>
+
+    <section id="join-leadership" class="py-8">
+      <h1>FAQ / Get Involved</h1>
+      <p class="mt-4 mb-0">
+        Interested in learning more about the club? Want to get involved?
+
+        Check out our <Link href="/faq/">FAQ</Link> or reach out to a helper on
+        Discord!
+      </p>
+    </section>
+  </div>
+</Layout>
