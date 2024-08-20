@@ -3,8 +3,8 @@ title: UIUCTF 2024
 series: uiuctf
 description: UIUCTF 2024 is a transit-themed CTF; solve challenges and deliver
   as many passengers as you can!
-time_start: 2024-06-29T07:00:31.948Z
-time_close: 2024-07-01T07:00:00.000Z
+time_start: 2024-06-29T00:00:31.948Z
+time_close: 2024-07-01T00:00:00.000Z
 timezone: Etc/UTC
 credit:
   - Adarsh Krishnan
