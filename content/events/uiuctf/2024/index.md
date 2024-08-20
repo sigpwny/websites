@@ -56,7 +56,7 @@ The public release for UIUCTF 2024 challenge source code and infrastructure can 
 For UIUCTF 2024 we paid out $1,500 in writeup prizes. In total, we received 143 writeup submissions and awarded 30 writeups.
 
 ### Prize Information
-- The **top 3** writeups were awarded **$150**, **$125**, and **$100** respectively.
+- The **top 3** writeups were awarded **\$150**, **\$125**, and **\$100** respectively.
 - The remaining prize pool will be used to award quality writeups. This year, we decided to award winning writeups at least **$40** each.
 - It is possible to win multiple writeup prizes; however, there is a maximum limit of **$200 per individual**.
 
