@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import redirects from './src/redirects.json';
 
@@ -30,6 +31,16 @@ export default defineConfig({
   redirects: redirects as any,
   trailingSlash: 'always',
   vite: {
-    assetsInclude: ['**/*.pdf'],
+    // assetsInclude: ['**/*.pdf'],
+    plugins: [
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'src/content/meetings/*',
+            dest: 'meeting'
+          }
+        ]
+      })
+    ]
   },
 });
