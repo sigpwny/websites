@@ -65,4 +65,5 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
           directory: ${{ env.CI_BUILD_DIR }}
+          workingDirectory: sigpwny.com
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
