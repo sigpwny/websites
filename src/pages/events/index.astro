@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Base.astro';
 import { getCollection } from "astro:content";
+import EventCard from '@/components/Event/Card.astro';
 
 const rawEvents = await getCollection('events')
 
@@ -33,15 +34,11 @@ const groupedEvents = rawEvents.sort((a, b) => {
             <p class="font-bold text-2xl m-0">{series}</p>
             {heroText[series] && <p>{heroText[series]}</p>}
             <hr class="border-surface-200" />
-            <ul class="flex flex-col pb-2">
-              {events.map((event) => (
-                <li>
-                  <h2>{event.data.title}</h2>
-                  <p>{event.data.description}</p>
-                  <p>{event.data.time_start}</p>
-                </li>
-              ))}
-            </ul>
+            <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            {events.map((event) => (
+              <EventCard input={event} />
+            ))}
+          </div>
           </div>
         ))}
       </div>
