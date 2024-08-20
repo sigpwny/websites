@@ -1,9 +1,9 @@
 name: Deploy (sigpwny.com)
-on:
-  push:
-    paths:
-      - _global/**
-      - sigpwny.com/**
+on: [push]
+  # push:
+  #   paths:
+  #     - _global/**
+  #     - sigpwny.com/**
 defaults:
   run:
     working-directory: sigpwny.com
