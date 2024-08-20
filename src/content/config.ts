@@ -98,7 +98,49 @@ const profiles = defineCollection({
   }),
 });
 
+/*
+title: HACKathon 2019
+series: fallctf
+description: SIGPwny's first recruiting CTF
+time_start: 2019-09-08T13:00:00.000-05:00
+time_close: 2019-09-08T18:00:00.000-05:00
+credit:
+  - SIGPwny
+location: Siebel CS 1404
+card_image:
+  background: hackathon-2019-cover.png
+links:
+  - name: Writeup
+    url: https://dillonkorman.com/running-sigpwnys-first-recruiting-ctf/
+  - name: Opening Slides
+    url: https://docs.google.com/presentation/d/1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4/edit?usp=sharing
+stats: []
+*/
+
+const events = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    series: z.string(),
+    description: z.string(),
+    time_start: z.coerce.date(),
+    time_close: z.coerce.date(),
+    credit: z.optional(z.array(z.string())),
+    location: z.string(),
+    card_image: z.optional(cardImageSchema(image)),
+    links: z.array(z.object({
+      name: z.string(),
+      url: z.string(),
+    })),
+    stats: z.optional(z.array(z.object({
+      name: z.string(),
+      value: z.string(),
+    }))),
+  }),
+});
+
 export const collections = {
   'meetings': meetings,
-  'profiles': profiles
+  'profiles': profiles,
+  'events': events,
 };
