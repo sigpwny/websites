@@ -87,7 +87,7 @@ This year, we had three stages for writeup grading.
 | ----- | --------- | ------ |
 | 🥇 1st Place, **$150** | [pwn / Syscalls](https://writeups.omarsafwat.com/pwn/uiuctf-syscalls) | amoor22 (PwnSec) |
 | 🥈 2nd Place, **$125** | [misc / Picoify](https://maplebacon.org/2024/07/uiuctf-picoify/) | nneonneo (Maple Bacon) |
-| 🥉 prd Place, **$100** | [rev / Lost Canary](https://ctf0.de/posts/uiuctf2024-lost-canary) | Minei3oat (CyberTaskForce Zero) |
+| 🥉 3rd Place, **$100** | [rev / Lost Canary](https://ctf0.de/posts/uiuctf2024-lost-canary) | Minei3oat (CyberTaskForce Zero) |
 
 ### Honorable Mentions
 | Award | Writeup | Author |
