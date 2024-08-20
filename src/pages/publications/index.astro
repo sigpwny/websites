@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Base.astro';
+import { getCollection, type CollectionEntry } from "astro:content";
+
+const rawPublications = await getCollection('publications') as CollectionEntry<'publications'>[];
+
+---
+<Layout title="Publications">
+  <h1>Publications</h1>
+  <ul>
+    {rawPublications.map((publication) => (
+      <li>
+        <a href={`/publications/${publication.slug}`}>{publication.data.title}</a>
+      </li>
+    ))}
+  </ul>

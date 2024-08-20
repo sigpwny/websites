@@ -17,6 +17,7 @@ const { title, card_image } = event;
         <Picture
           src={card_image.background}
           class="row-span-full col-span-full overflow-hidden p-4 grid items-center"
+          widths={[300, 600, 900]}
           formats={['avif', 'webp']}
           alt={title ?? "Event card image"}
         />
@@ -31,6 +32,7 @@ const { title, card_image } = event;
         <Picture
           src={card_image.foreground}
           class="row-span-full col-span-full overflow-hidden p-4 grid items-center"
+          widths={[300, 600, 900]}
           formats={['avif', 'webp']}
           alt={title ?? "Event card image"}
         />

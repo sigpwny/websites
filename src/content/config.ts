@@ -98,25 +98,6 @@ const profiles = defineCollection({
   }),
 });
 
-/*
-title: HACKathon 2019
-series: fallctf
-description: SIGPwny's first recruiting CTF
-time_start: 2019-09-08T13:00:00.000-05:00
-time_close: 2019-09-08T18:00:00.000-05:00
-credit:
-  - SIGPwny
-location: Siebel CS 1404
-card_image:
-  background: hackathon-2019-cover.png
-links:
-  - name: Writeup
-    url: https://dillonkorman.com/running-sigpwnys-first-recruiting-ctf/
-  - name: Opening Slides
-    url: https://docs.google.com/presentation/d/1OQazs2_Ws2rXOn9rlmV2QxMDoxXQAtlEEiWeLienVu4/edit?usp=sharing
-stats: []
-*/
-
 const events = defineCollection({
   type: 'content',
   schema: ({ image }) => z.object({
@@ -139,8 +120,30 @@ const events = defineCollection({
   }),
 });
 
+const publications = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    credit: z.array(z.string()),
+    publisher: z.string(),
+    publication_type: z.enum(['blog', 'paper', 'talk', 'news']),
+    date: z.coerce.date(),
+    card_image: z.optional(cardImageSchema(image)),
+    primary_link: z.object({
+      name: z.string(),
+      url: z.string(),
+    }),
+    links: z.optional(z.array(z.object({
+      name: z.string(),
+      url: z.string(),
+    }))),
+    tags: z.optional(z.array(z.string())),
+  }),
+});
+
 export const collections = {
   'meetings': meetings,
   'profiles': profiles,
   'events': events,
+  'publications': publications,
 };
