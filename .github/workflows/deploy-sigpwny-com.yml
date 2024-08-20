@@ -1,5 +1,12 @@
-name: Build and deploy site
-on: [push]
+name: Deploy (sigpwny.com)
+on:
+  push:
+    paths:
+      - _global/**
+      - sigpwny.com/**
+defaults:
+  run:
+    working-directory: sigpwny.com
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
