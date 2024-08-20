@@ -12,7 +12,7 @@ import { weekNumber, convertDate, formatSemester } from "@/lib/meetings";
 const rawMeetings = (await getCollection('meetings')).map((meeting) => {
   // Rewrite slides URL to be a direct link to the PDF
   if (meeting.data.slides) {
-    meeting.data.slides = new URL(meeting.data.slides, `${astroConfig.site}/meeting/${meeting.id}`).pathname;
+    meeting.data.slides = new URL(meeting.data.slides, `${astroConfig.site}/meetings/${meeting.id}`).pathname;
   }
   return meeting;
 }).sort(

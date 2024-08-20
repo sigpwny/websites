@@ -37,7 +37,7 @@ export default defineConfig({
         targets: [
           {
             src: 'src/content/meetings/*',
-            dest: 'meeting'
+            dest: 'meetings'
           }
         ]
       })
