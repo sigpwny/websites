@@ -33,11 +33,11 @@ runs:
         cache-name: cache-build-and-modules
       with:
         path: |
-          ${{ inputs.working_directory }}/.astro
-          ${{ inputs.working_directory }}/${{ inputs.cache-directory }}
-          ${{ inputs.working_directory }}/${{ inputs.build-directory }}
-          ${{ inputs.working_directory }}/node_modules
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles(format('{0}/**/package-lock.json', inputs.working_directory)) }}
+          ${{ inputs.working-directory }}/.astro
+          ${{ inputs.working-directory }}/${{ inputs.cache-directory }}
+          ${{ inputs.working-directory }}/${{ inputs.build-directory }}
+          ${{ inputs.working-directory }}/node_modules
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles(format('{0}/**/package-lock.json', inputs.working-directory)) }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
@@ -48,16 +48,16 @@ runs:
       continue-on-error: true
       run: npm list
       shell: bash
-      working-directory: ${{ inputs.working_directory }}
+      working-directory: ${{ inputs.working-directory }}
 
     - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
       name: (On cache miss) Install node modules
       continue-on-error: true
       run: npm ci
       shell: bash
-      working-directory: ${{ inputs.working_directory }}
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Build site
       run: npm run build
       shell: bash
-      working-directory: ${{ inputs.working_directory }}
+      working-directory: ${{ inputs.working-directory }}
