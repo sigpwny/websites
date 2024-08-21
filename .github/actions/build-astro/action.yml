@@ -1,17 +1,17 @@
 name: Build Astro site
 description: Builds an Astro site with build caching
 inputs:
-  workingDirectory:
+  working-directory:
     description: Working directory to build site from
     required: false
     type: string
     default: '.'
-  buildDirectory:
+  build-directory:
     description: Output directory of built site (from working directory)
     required: false
     type: string
     default: 'dist'
-  cacheDirectory:
+  cache-directory:
     description: Cache directory (from working directory)
     required: false
     type: string

@@ -25,11 +25,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build site
-        uses: ./.github/actions/build-astro.yml
+        uses: ./.github/actions/build-astro/action.yml
         with:
-          workingDirectory: ${{ env.CI_WORKING_DIR }}
-          buildDirectory: ${{ env.CI_BUILD_DIR }}
-          cacheDirectory: ${{ env.CI_CACHE_DIR }}
+          working-directory: ${{ env.CI_WORKING_DIR }}
+          build-directory: ${{ env.CI_BUILD_DIR }}
+          cache-directory: ${{ env.CI_CACHE_DIR }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
