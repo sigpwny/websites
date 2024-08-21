@@ -1,0 +1,63 @@
+name: Build Astro site
+description: Builds an Astro site with build caching
+inputs:
+  working-directory:
+    description: Working directory to build site from
+    required: false
+    type: string
+    default: '.'
+  build-directory:
+    description: Output directory of built site (from working directory)
+    required: false
+    type: string
+    default: 'dist'
+  cache-directory:
+    description: Cache directory (from working directory)
+    required: false
+    type: string
+    default: '.cache'
+runs:
+  using: composite
+  steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: latest
+        cache: npm
+        cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
+
+    - name: Restore cached build artifacts and node modules
+      id: cache-build
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-build-and-modules
+      with:
+        path: |
+          ${{ inputs.working_directory }}/.astro
+          ${{ inputs.working_directory }}/${{ inputs.cache-directory }}
+          ${{ inputs.working_directory }}/${{ inputs.build-directory }}
+          ${{ inputs.working_directory }}/node_modules
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles(format('{0}/**/package-lock.json', inputs.working_directory)) }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+      name: (On cache miss) List the state of node modules
+      continue-on-error: true
+      run: npm list
+      working-directory: ${{ inputs.working_directory }}
+
+    - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+      name: (On cache miss) Install node modules
+      continue-on-error: true
+      run: npm ci
+      working-directory: ${{ inputs.working_directory }}
+
+    - name: Build site
+      run: npm run build
+      working-directory: ${{ inputs.working_directory }}

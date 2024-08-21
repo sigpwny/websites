@@ -1,21 +1,38 @@
-name: Deploy (sigpwny.com)
+name: CI/CD (sigpwny.com)
 on:
   push:
     paths:
       - _global/**
-      - sigpwny.com/**
       - .github/**
+      - sigpwny.com/**
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-permissions:
-  contents: read
-  deployments: write
+env:
+  CI: true
+  CI_WORKING_DIR: sigpwny.com
+  CI_BUILD_DIR: dist
+  CI_CACHE_DIR: .cache
 jobs:
-  deploy-sigpwny:
-    uses: ./.github/workflows/_deploy_astro_site.yml
-    secrets: inherit
-    with:
-      working_dir: sigpwny.com
-      build_dir: dist
-      cf_project_name: ${{ vars.CLOUDFLARE_PROJECT_NAME_SIGPWNY }}
+  deploy:
+    name: Deploy (sigpwny.com)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Build site
+        uses: ./.github/actions/build-astro.yml
+        with:
+          working-directory: ${{ env.CI_WORKING_DIR }}
+          build-directory: ${{ env.CI_BUILD_DIR }}
+          cache-directory: ${{ env.CI_CACHE_DIR }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME_SIGPWNY }}
+          workingDirectory: ${{ env.CI_WORKING_DIR }}
+          directory: ${{ env.CI_BUILD_DIR }}
