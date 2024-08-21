@@ -1,0 +1,14 @@
+name: Deploy (sigpwny.com)
+on:
+  push:
+    paths:
+      - _global/**
+      - sigpwny.com/**
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  CI: true
+  CI_WORKING_DIR: sigpwny.com
+  CI_BUILD_DIR: dist
+uses: ./.github/workflows/_deploy_astro_site.yml

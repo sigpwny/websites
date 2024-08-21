@@ -1,22 +1,13 @@
-name: Deploy (sigpwny.com)
+name: Deploy Astro Site
+
 on:
-  push:
-    paths:
-      - _global/**
-      - sigpwny.com/**
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_call:
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
-    env:
-      CI: true
-      CI_WORKING_DIR: sigpwny.com
-      CI_BUILD_DIR: dist
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
