@@ -1,10 +1,9 @@
 ---
-import '~/styles/prism-one-dark.css';
+import '$/styles/prism-one-dark.css';
 
-import type { HeadProps } from '~/components/BaseHead.astro';
-import BaseHead from '~/components/BaseHead.astro';
+import type { HeadProps } from '$/components/BaseHead.astro';
+import BaseHead from '$/components/BaseHead.astro';
 import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
 
 const props: Omit<HeadProps, "site_name"> = Astro.props;
 ---
@@ -21,6 +20,5 @@ const props: Omit<HeadProps, "site_name"> = Astro.props;
         <slot />
       </div>
     </div>
-    <Footer />
   </body>
 </html>

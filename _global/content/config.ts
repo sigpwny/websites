@@ -129,6 +129,7 @@ export const publicationsSchema = ({ image }) => z.object({
   tags: z.optional(z.array(z.string())),
 })
 
+// Export from content layer
 export const collections = {
   'meetings': defineCollection({
     type: 'content',
@@ -147,27 +148,3 @@ export const collections = {
     schema: publicationsSchema,
   }),
 };
-
-export const meetings = defineCollection({
-  type: 'content_layer',
-  loader: glob({ pattern: '**/*.mdx', base: '~/content/meetings' }),
-  schema: meetingsSchema,
-});
-
-export const profiles = defineCollection({
-  type: 'content_layer',
-  loader: glob({ pattern: '**/*.mdx', base: '~/content/profiles' }),
-  schema: profilesSchema,
-});
-
-export const events = defineCollection({
-  type: 'content_layer',
-  loader: glob({ pattern: '**/*.mdx', base: '~/content/events' }),
-  schema: eventsSchema,
-});
-
-export const publications = defineCollection({
-  type: 'content_layer',
-  loader: glob({ pattern: '**/*.mdx', base: '~/content/publications' }),
-  schema: publicationsSchema,
-});

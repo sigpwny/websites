@@ -3,7 +3,7 @@ import {
   z,
 } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { events, meetings, profiles, publications } from '~/content/config';
+import { events, meetings, profiles, publications } from '$/utils/content';
 
 
 const pages = defineCollection({
