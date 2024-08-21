@@ -1,4 +1,5 @@
 import { defineCollection, z, type ImageFunction } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const timezone = 'America/Chicago';
 
@@ -146,3 +147,27 @@ export const collections = {
     schema: publicationsSchema,
   }),
 };
+
+export const meetings = defineCollection({
+  type: 'content_layer',
+  loader: glob({ pattern: '**/*.mdx', base: '~/content/meetings' }),
+  schema: meetingsSchema,
+});
+
+export const profiles = defineCollection({
+  type: 'content_layer',
+  loader: glob({ pattern: '**/*.mdx', base: '~/content/profiles' }),
+  schema: profilesSchema,
+});
+
+export const events = defineCollection({
+  type: 'content_layer',
+  loader: glob({ pattern: '**/*.mdx', base: '~/content/events' }),
+  schema: eventsSchema,
+});
+
+export const publications = defineCollection({
+  type: 'content_layer',
+  loader: glob({ pattern: '**/*.mdx', base: '~/content/publications' }),
+  schema: publicationsSchema,
+});

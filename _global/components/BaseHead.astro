@@ -1,8 +1,9 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import consts from '@/consts';
+import { type SiteName, getSiteConfig } from '../utils/site';
 
 export interface HeadProps {
+  site_name: SiteName;
   title?: string;
   description?: string;
   image?: string;
@@ -16,11 +17,13 @@ export interface HeadProps {
 
 const props = Astro.props as HeadProps;
 
-const site_name = consts.title;
-const title = props.title ? props.title : site_name
-const description = props.description || consts.description
+const siteConfig = getSiteConfig(props.site_name);
+const { description: defaultDescription, site_name: defaultTitle, image: defaultImage, twitterUsername } = siteConfig;
+
+const title = props.title || defaultTitle;
+const description = props.description || defaultDescription;
 const twitter_card_type = props.image ? "summary_large_image" : "summary"
-const image = props.image ? new URL(props.image, Astro.url) : new URL(consts.image, Astro.url)
+const image = props.image ? new URL(props.image, Astro.url) : new URL(defaultImage, Astro.url)
 const type = props.type || "website"
 const color = props.color || "#33cc55"
 const robots = props.disable_robots ? "noindex, nofollow" : "index, follow"
@@ -70,7 +73,7 @@ const robots = props.disable_robots ? "noindex, nofollow" : "index, follow"
 
 <!-- Twitter -->
 <meta property="twitter:card" content={twitter_card_type} />
-<meta property="twitter:site" content={consts.twitterUsername} />
+<meta property="twitter:site" content={twitterUsername} />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:image" content={image} />
 {props.video ? (

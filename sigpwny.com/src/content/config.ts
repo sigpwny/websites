@@ -3,31 +3,8 @@ import {
   z,
 } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { eventsSchema, meetingsSchema, profilesSchema, publicationsSchema } from '~/content/config';
+import { events, meetings, profiles, publications } from '~/content/config';
 
-const meetings = defineCollection({
-  type: 'content_layer',
-  loader: glob({ pattern: '**/*.mdx', base: '../_global/content/meetings' }),
-  schema: meetingsSchema,
-});
-
-const profiles = defineCollection({
-  type: 'content_layer',
-  loader: glob({ pattern: '**/*.mdx', base: '../_global/content/profiles' }),
-  schema: profilesSchema,
-});
-
-const events = defineCollection({
-  type: 'content_layer',
-  loader: glob({ pattern: '**/*.mdx', base: '../_global/content/events' }),
-  schema: eventsSchema,
-});
-
-const publications = defineCollection({
-  type: 'content_layer',
-  loader: glob({ pattern: '**/*.mdx', base: '../_global/content/publications' }),
-  schema: publicationsSchema,
-});
 
 const pages = defineCollection({
   type: 'content_layer',
@@ -41,9 +18,9 @@ const pages = defineCollection({
 });
 
 export const collections = {
-  'meetings': meetings,
-  'profiles': profiles,
-  'events': events,
-  'publications': publications,
-  'pages': pages,
+  meetings,
+  profiles,
+  events,
+  publications,
+  pages,
 };
