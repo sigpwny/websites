@@ -21,8 +21,11 @@ jobs:
       contents: read
       deployments: write
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
       - name: Build site
-        uses: ./.github/actions/build-astro.yml
+        uses: ./.github/actions/build-astro
         with:
           working-directory: ${{ env.CI_WORKING_DIR }}
           build-directory: ${{ env.CI_BUILD_DIR }}

@@ -13,13 +13,13 @@ env:
   CI_WORKING_DIR: sigpwny.com
   CI_BUILD_DIR: dist
   CI_CACHE_DIR: .cache
+permissions:
+  contents: read
+  deployments: write
 jobs:
   deploy:
     name: Deploy (sigpwny.com)
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
