@@ -8,11 +8,11 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+  permissions:
+    contents: read
+    deployments: write
 jobs:
   deploy-fallctf:
-    permissions:
-      contents: read
-      deployments: write
     uses: ./.github/workflows/_deploy_astro_site.yml
     secrets: inherit
     with:
