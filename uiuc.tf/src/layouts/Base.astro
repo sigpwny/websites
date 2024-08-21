@@ -1,0 +1,24 @@
+---
+import '$/styles/prism-one-dark.css';
+
+import type { HeadProps } from '$/components/BaseHead.astro';
+import BaseHead from '$/components/BaseHead.astro';
+import Header from '@/components/Header.astro';
+
+const props: Omit<HeadProps, "site_name"> = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" transition:animate="none">
+  <head>
+    <BaseHead {...props} site_name="uiuc.tf" />
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen">
+      <Header />
+      <div class="container grow">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>

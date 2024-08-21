@@ -1,0 +1,17 @@
+---
+---
+
+<header class="sticky lg:relative top-0 z-10">
+  <div class="container px-4 md:px-8 py-4 lg:py-8 flex flex-row ">
+    <a href="/" class="flex items-center">
+      <span class="text-lg font-bold ml-2">UIUCTF</span>
+    </a>
+  </div>
+</header>
+<script>
+// Auto-close navbar on mobile when navigating to a new page using Astro's View Transitions API
+document.addEventListener('astro:after-swap', () => {
+  const navbar = document.getElementById('nav-mobile-toggle-input') as HTMLInputElement;
+  if (navbar) navbar.checked = false;
+});
+</script>

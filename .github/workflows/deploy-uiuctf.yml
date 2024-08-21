@@ -1,0 +1,38 @@
+name: CI/CD (uiuc.tf)
+on:
+  push:
+    paths:
+      - _global/**
+      - .github/**
+      - uiuc.tf/**
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  CI: true
+  CI_WORKING_DIR: uiuc.tf
+  CI_BUILD_DIR: dist
+  CI_CACHE_DIR: .cache
+jobs:
+  deploy:
+    name: Deploy (uiuc.tf)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Build site
+        uses: ./.github/actions/build-astro.yml
+        with:
+          working-directory: ${{ env.CI_WORKING_DIR }}
+          build-directory: ${{ env.CI_BUILD_DIR }}
+          cache-directory: ${{ env.CI_CACHE_DIR }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME_UIUCTF }}
+          workingDirectory: ${{ env.CI_WORKING_DIR }}
+          directory: ${{ env.CI_BUILD_DIR }}

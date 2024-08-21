@@ -44,11 +44,20 @@ const fallctfConfig: ISiteConfig = {
   timezone: `America/Chicago`,
 }
 
-export type SiteName = 'sigpwny.com' | 'fallctf.com';
+const uiuctfConfig: ISiteConfig = {
+  title: `UIUCTF`,
+  description: `SIGPwny is a student-run organization at the University of Illinois Urbana-Champaign focused on information security and privacy.`,
+  image: `https://sigpwny.com/favicons/touch-512x512.png`,
+  twitterUsername: `@sigpwny`,
+  timezone: `America/Chicago`,
+}
+
+export type SiteName = 'sigpwny.com' | 'fallctf.com' | 'uiuc.tf';
 
 const consts : Record<SiteName, ISiteConfig> = {
   'sigpwny.com': sigpwnyConfig,
   'fallctf.com': fallctfConfig,
+  'uiuc.tf': uiuctfConfig,
 };
 
 export const getSiteConfig = (site: SiteName) => consts[site];
