@@ -1,8 +1,6 @@
 # SIGPwny's Websites
-[![Production deployment build status](https://github.com/sigpwny/sigpwny.com/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/sigpwny/sigpwny.com/actions/workflows/deploy.yml)
-
-[![CI/CD (sigpwny.com)](https://github.com/sigpwny/websites/actions/workflows/deploy-sigpwny.yml/badge.svg)](https://github.com/sigpwny/websites/actions/workflows/deploy-sigpwny.yml)
-[![CI/CD (fallctf.com)](https://github.com/sigpwny/websites/actions/workflows/deploy-fallctf.yml/badge.svg)](https://github.com/sigpwny/websites/actions/workflows/deploy-fallctf.yml)
+[![CI/CD (sigpwny.com)](https://github.com/sigpwny/websites/actions/workflows/deploy-sigpwny.yml/badge.svg)](https://github.com/sigpwny/websites/actions/workflows/deploy-sigpwny.yml)  
+[![CI/CD (fallctf.com)](https://github.com/sigpwny/websites/actions/workflows/deploy-fallctf.yml/badge.svg)](https://github.com/sigpwny/websites/actions/workflows/deploy-fallctf.yml)  
 [![CI/CD (uiuc.tf)](https://github.com/sigpwny/websites/actions/workflows/deploy-uiuctf.yml/badge.svg)](https://github.com/sigpwny/websites/actions/workflows/deploy-uiuctf.yml)
 
 The SIGPwny website monorepo, built with Astro.
