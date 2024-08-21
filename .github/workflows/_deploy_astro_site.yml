@@ -9,12 +9,6 @@ on:
       build_dir:
         required: true
         type: string
-      cf_api_token:
-        required: true
-        type: string
-      cf_account_id:
-        required: true
-        type: string
       cf_project_name:
         required: true
         type: string
@@ -70,8 +64,8 @@ jobs:
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
-          apiToken: ${{ inputs.cf_api_token }}
-          accountId: ${{ inputs.cf_account_id }}
+          apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ inputs.cf_project_name }}
           workingDirectory: ${{ env.CI_WORKING_DIR }}
           directory: ${{ env.CI_BUILD_DIR }}

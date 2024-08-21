@@ -18,6 +18,4 @@ jobs:
     with:
       working_dir: sigpwny.com
       build_dir: dist
-      cf_api_token: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
-      cf_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       cf_project_name: ${{ vars.CLOUDFLARE_PROJECT_NAME_SIGPWNY }}
