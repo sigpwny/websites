@@ -1,5 +1,4 @@
 name: Deploy Astro Site
-
 on:
   workflow_call:
     inputs:
@@ -17,7 +16,10 @@ env:
   CI_WORKING_DIR: ${{ inputs.working_dir }}
   CI_BUILD_DIR: ${{ inputs.build_dir }}
 jobs:
-  deploy-astro:
+  build-astro:
+    permissions:
+      contents: read
+      deployments: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
