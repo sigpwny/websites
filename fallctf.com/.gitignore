@@ -1,5 +1,7 @@
 # build output
 dist/
+.netlify/
+.cache/
 # generated types
 .astro/
 
@@ -22,3 +24,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# vscode setting folder
+.vscode/

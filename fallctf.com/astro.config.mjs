@@ -27,6 +27,7 @@ export default defineConfig({
     react(),
   ],
   adapter: netlify(),
+  cacheDir: './.cache',
   experimental: {
     contentLayer: true,
   },

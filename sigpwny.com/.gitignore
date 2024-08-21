@@ -1,6 +1,7 @@
 # build output
 dist/
 .netlify/
+.cache/
 # generated types
 .astro/
 
@@ -17,3 +18,12 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# vscode setting folder
+.vscode/

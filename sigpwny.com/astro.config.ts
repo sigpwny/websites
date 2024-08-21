@@ -28,6 +28,7 @@ export default defineConfig({
     react(),
   ],
   adapter: netlify(),
+  cacheDir: './.cache',
   redirects: redirects as any,
   trailingSlash: 'always',
   vite: {
