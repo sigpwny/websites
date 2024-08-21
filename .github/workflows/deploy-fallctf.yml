@@ -14,6 +14,7 @@ jobs:
       contents: read
       deployments: write
     uses: ./.github/workflows/_deploy_astro_site.yml
+    secrets: inherit
     with:
       working_dir: fallctf.com
       build_dir: dist
