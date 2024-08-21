@@ -38,12 +38,13 @@ export async function getStaticPaths() {
   const meetings = await getMeetings();
   return meetings.map((meeting) => ({
     params: { slug: meeting.id },
-    props: meeting,
+    props: { page: meeting },
   }));
 }
 
-const meeting = Astro.props.data;
-const { Content } = await render(meeting);
+const { page } = Astro.props;
+const { Content } = await render(page);
+const meeting = page.data;
 
 const profiles = await getProfilesFromNames(meeting.credit);
 const semester = calculateSemester(meeting.time_start);
@@ -197,9 +198,7 @@ const time_end = meeting.time_start && meeting.duration
       />
     ) : null}
     <section class="md-root w-full max-w-prose mx-auto" itemprop="articleBody">
-      <Content
-        components={MdxComponents}
-      />
+      <Content components={MdxComponents} />
     </section>
     <span class="z-50 hidden md:block">
       <!-- <Tooltip.Profile offset={3} place="bottom-start" client:load /> -->

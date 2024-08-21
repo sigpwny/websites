@@ -149,9 +149,21 @@ const publications = defineCollection({
   }),
 });
 
+const pages = defineCollection({
+  type: 'content_layer',
+  loader: glob({ pattern: '**/*.mdx', base: 'src/pages_md' }),
+  schema: () => z.object({
+    title: z.string(),
+    description: z.string(),
+    no_background: z.optional(z.boolean()),
+    full_width: z.optional(z.boolean()),
+  }),
+});
+
 export const collections = {
   'meetings': meetings,
   'profiles': profiles,
   'events': events,
   'publications': publications,
+  'pages': pages,
 };
