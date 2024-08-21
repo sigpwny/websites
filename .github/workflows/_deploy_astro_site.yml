@@ -2,6 +2,13 @@ name: Deploy Astro Site
 
 on:
   workflow_call:
+    inputs:
+      working_dir:
+        required: true
+        type: string
+      build_dir:
+        required: true
+        type: string
 env:
   CI: true
   CI_WORKING_DIR: ${{ github.event.inputs.working_dir }}
