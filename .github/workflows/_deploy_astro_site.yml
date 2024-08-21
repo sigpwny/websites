@@ -2,9 +2,16 @@ name: Deploy Astro Site
 
 on:
   workflow_call:
+env:
+  CI: true
+  CI_WORKING_DIR: ${{ github.event.inputs.working_dir }}
+  CI_BUILD_DIR: ${{ github.event.inputs.build_dir }}
 jobs:
   deploy-astro:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
