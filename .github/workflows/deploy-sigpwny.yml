@@ -27,9 +27,9 @@ jobs:
       - name: Build site
         uses: ./.github/actions/build-astro.yml
         with:
-          working-directory: ${{ env.CI_WORKING_DIR }}
-          build-directory: ${{ env.CI_BUILD_DIR }}
-          cache-directory: ${{ env.CI_CACHE_DIR }}
+          workingDirectory: ${{ env.CI_WORKING_DIR }}
+          buildDirectory: ${{ env.CI_BUILD_DIR }}
+          cacheDirectory: ${{ env.CI_CACHE_DIR }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
