@@ -3,11 +3,8 @@ name: Deploy Astro Site
 on:
   workflow_call:
 jobs:
-  deploy:
+  deploy-astro:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3

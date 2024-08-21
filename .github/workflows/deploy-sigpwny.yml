@@ -4,6 +4,7 @@ on:
     paths:
       - _global/**
       - sigpwny.com/**
+      - .github/**
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -13,4 +14,7 @@ env:
   CI_BUILD_DIR: dist
 jobs:
   deploy:
+    permissions:
+      contents: read
+      deployments: write
     uses: ./.github/workflows/_deploy_astro_site.yml
