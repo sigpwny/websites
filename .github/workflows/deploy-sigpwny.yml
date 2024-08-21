@@ -14,6 +14,7 @@ jobs:
       contents: read
       deployments: write
     uses: ./.github/workflows/_deploy_astro_site.yml
+    secrets: [CLOUDFLARE_PAGES_API_TOKEN, CLOUDFLARE_ACCOUNT_ID]
     with:
       working_dir: sigpwny.com
       build_dir: dist
