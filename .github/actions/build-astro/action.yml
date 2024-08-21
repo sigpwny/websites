@@ -47,14 +47,17 @@ runs:
       name: (On cache miss) List the state of node modules
       continue-on-error: true
       run: npm list
+      shell: bash
       working-directory: ${{ inputs.working_directory }}
 
     - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
       name: (On cache miss) Install node modules
       continue-on-error: true
       run: npm ci
+      shell: bash
       working-directory: ${{ inputs.working_directory }}
 
     - name: Build site
       run: npm run build
+      shell: bash
       working-directory: ${{ inputs.working_directory }}
