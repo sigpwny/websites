@@ -14,7 +14,9 @@ jobs:
       contents: read
       deployments: write
     uses: ./.github/workflows/_deploy_astro_site.yml
-    secrets: inherit
     with:
       working_dir: sigpwny.com
       build_dir: dist
+      cf_api_token: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+      cf_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      cf_project_name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
