@@ -13,13 +13,13 @@ env:
   CI_WORKING_DIR: sigpwny.com
   CI_BUILD_DIR: dist
   CI_CACHE_DIR: .cache
-permissions:
-  contents: read
-  deployments: write
 jobs:
   deploy:
     name: Deploy (sigpwny.com)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -37,5 +37,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME_SIGPWNY }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           workingDirectory: ${{ env.CI_WORKING_DIR }}
           directory: ${{ env.CI_BUILD_DIR }}
