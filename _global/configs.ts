@@ -54,10 +54,10 @@ const uiuctfConfig: ISiteConfig = {
 
 export type SiteName = 'sigpwny.com' | 'fallctf.com' | 'uiuc.tf';
 
-const consts : Record<SiteName, ISiteConfig> = {
+const configs : Record<SiteName, ISiteConfig> = {
   'sigpwny.com': sigpwnyConfig,
   'fallctf.com': fallctfConfig,
   'uiuc.tf': uiuctfConfig,
 };
 
-export const getSiteConfig = (site: SiteName) => consts[site];
+export const getSiteConfig = (site: SiteName) => configs[site];

@@ -1,0 +1,23 @@
+import { z } from 'astro:content';
+import { CardImageSchema } from '.';
+
+export const ProfileSchema = ({ image }) => (
+  z.object({
+    name: z.string(),
+    profile_image: z.optional(image()),
+    handle: z.optional(z.string()),
+    bio: z.optional(z.string()),
+    pronouns: z.optional(z.string()),
+    links: z.optional(z.array(z.object({
+      name: z.string(),
+      url: z.string(),
+    }))),
+    role: z.optional(z.enum(['admin', 'alum', 'helper', 'member', 'sponsor', 'org'])),
+    title: z.optional(z.string()),
+    weight: z.number().default(0),
+    period: z.optional(z.string()),
+    // Sponsor specific fields
+    is_active_sponsor: z.optional(z.boolean()),
+    card_image: z.optional(CardImageSchema(image)),
+  })
+)
