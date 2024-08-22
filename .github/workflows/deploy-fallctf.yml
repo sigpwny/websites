@@ -2,9 +2,12 @@ name: CI/CD (fallctf.com)
 on:
   push:
     paths:
-      - _global/**
-      - .github/**
-      - fallctf.com/**
+      - '_global/**'
+      - '!_global/content/**'
+      - '_global/content/events/**'
+      - '_global/content/profiles/**'
+      - '.github/**'
+      - 'fallctf.com/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

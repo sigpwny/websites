@@ -2,9 +2,9 @@ name: CI/CD (sigpwny.com)
 on:
   push:
     paths:
-      - _global/**
-      - .github/**
-      - sigpwny.com/**
+      - '_global/**'
+      - '.github/**'
+      - 'sigpwny.com/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

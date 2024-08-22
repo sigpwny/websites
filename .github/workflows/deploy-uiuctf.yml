@@ -2,9 +2,12 @@ name: CI/CD (uiuc.tf)
 on:
   push:
     paths:
-      - _global/**
-      - .github/**
-      - uiuc.tf/**
+      - '_global/**'
+      - '!_global/content/**'
+      - '_global/content/events/**'
+      - '_global/content/profiles/**'
+      - '.github/**'
+      - 'uiuc.tf/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
