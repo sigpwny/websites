@@ -1,10 +1,8 @@
 ---
 import Layout from '@/layouts/Base.astro';
-import astroConfig from 'astro.config';
-import { Picture, getImage } from 'astro:assets';
-import { getCollection } from 'astro:content';
-// import Tooltip from '@/components/Tooltip';
+import Link from '@/components/Link.astro';
 import MeetingRow from '@/components/Meeting/Row.astro';
+import MeetingTime from '@/components/Meeting/Time.astro';
 
 import {
   convertDate,
@@ -38,10 +36,23 @@ const meetingsBySemester = rawMeetings.reduce(
   <section id="meetings" class="pb-8">
     <div class="flex flex-col mx-auto page-width-lg">
       <h1>Meetings</h1>
-      <p>
-        Our meetings are on Thursdays at 7–8 PM and Sundays at 2–3 PM and are usually located in Siebel CS 1404.&nbsp;
-        <br class="hidden lg:block" />
-        We will always provide a Zoom meeting link and publish a recording on YouTube afterward.
+      <p class="text-lg font-bold m-0">
+        For Fall 2024:
+      </p>
+      <div class="flex flex-col md:flex-row md:gap-4 pb-3">
+        <MeetingTime
+          time="Thursdays, 6–7 PM"
+          location="Siebel CS 1404"
+        />
+        <MeetingTime
+          time="Sundays, 2–3 PM"
+          location="Siebel CS 1404"
+        />
+      </div>
+      <p class="max-w-prose pb-2">
+        General meetings are held weekly in-person and online on Zoom.
+        Recordings are posted on our <Link href="https://www.youtube.com/@sigpwny">YouTube</Link>.
+        See the schedule below for specific meeting details.
       </p>
       <div class="panel">
         {Object.entries(meetingsBySemester).map(([semester, meetings]) => (

@@ -41,7 +41,7 @@ tags:
 
 This is normal text. *This is italicized*. **This is bold**. ***This is all of them***.
 
-We are only using CommonMark, which does not support ~~strikethrough text~~ or __underlined text__. It's a work in progress.
+Here is some ~~strikethrough text~~ and __underlined text__.
 
 > This is quote text
 
@@ -95,11 +95,16 @@ Here is an ordered list:
 Here is an [internal link](/meetings/). Here is an [external link](https://google.com/).
 Here is the [external link to the internal link](https://sigpwny.com/meetings/).
 
+## Testing Links
+- [This should do client-side navigation and stay in the same tab.](/meetings/)
+- [This should open in a new tab (external YouTube link).](https://youtube.com/@sigpwny)
+- [This should open in a new tab directly to Discord (internal redirect to Discord).](/discord)
+
 Dramatic...
 ***
 thematic break!
 
-Tables also aren't supported in CommonMark, but they are supported in GFM!
+Tables aren't supported in CommonMark, but they are in GitHub-flavored Markdown (GFM)!
 
 
 |Column 1|Column 2|Column 3|

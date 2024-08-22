@@ -1,4 +1,3 @@
-import Link from '@/components/Link';
 import { ChevronRightRegular } from '@/components/Icons/fluentui';
 import './styles.css';
 
@@ -66,7 +65,7 @@ export const SidebarItem = ({ item, depth, expand_all, id }: SidebarItemProps) =
   } else if (item.url) {
     return (
       <li>
-        <Link
+        <a
           href={item.url}
           style={padding}
           className={`sidebar-item ${item.active ? "active" : ""}`}
@@ -75,7 +74,7 @@ export const SidebarItem = ({ item, depth, expand_all, id }: SidebarItemProps) =
           <span className="ml-4">
             {item.name}
           </span>
-        </Link>
+        </a>
       </li>
     );
   }

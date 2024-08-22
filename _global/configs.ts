@@ -5,6 +5,9 @@ export interface ISiteConfig {
   image: string;
   twitterUsername: string;
   timezone: string;
+  navLinks?: { name: string, url: string }[];
+  navCallToActionLinks?: { name: string, url: string }[];
+  socialLinks?: { name: string, url: string }[];
   [key: string]: any;
 }
 

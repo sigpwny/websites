@@ -1,10 +1,35 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import redirects from '@/redirects.json';
+import astroConfig from 'astro.config';
 
-type Props = HTMLAttributes<'a'>;
+const { href, disableNewTab, ...props } = Astro.props;
 
-const { ...props } = Astro.props;
-const isRedirect = props.href && props.href.toString() in redirects;
+type Redirects = typeof astroConfig.redirects;
+
+// Resolve redirects to their final destination, otherwise return the original href
+function getAstroRedirectDestination(redirects: Redirects, href: string | undefined) {
+  if (href && redirects && href in redirects) {
+    const redirectConfig = redirects[href];
+    if (typeof redirectConfig === 'string') {
+      return redirectConfig;
+    }
+    if (typeof redirectConfig?.destination === 'string') {
+      return redirectConfig.destination;
+    }
+  }
+  return href;
+}
+
+// Resolve the final destination of the link
+const redirects = astroConfig.redirects;
+const resolvedHref = getAstroRedirectDestination(redirects, href);
+// Open external links in a new tab, unless disabled with `disableNewTab`
+const baseUrl = astroConfig.site ? new URL(astroConfig.site) : undefined;
+const testUrl = baseUrl && resolvedHref ? new URL(resolvedHref, baseUrl) : undefined;
+const isExternal = testUrl && baseUrl && testUrl.origin !== baseUrl.origin;
 ---
-<a data-astro-reload={isRedirect ? "" : undefined} {...props}><slot /></a>
+<a
+  {...props}
+  href={resolvedHref}
+  target={isExternal && !disableNewTab ? "_blank" : undefined}
+  rel={isExternal && !disableNewTab ? "noopener noreferrer" : undefined}
+><slot /></a>
