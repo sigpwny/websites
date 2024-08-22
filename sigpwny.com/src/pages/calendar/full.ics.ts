@@ -7,11 +7,11 @@ import {
   createICalendarDescription,
   createICalendarLocation,
   createICalendarUID
-} from '@/lib/icalendar';
+} from '@/utils/icalendar';
 import {
   calculateSemester,
   getMeetings,
-} from '@/lib/meetings';
+} from '@/utils/meetings';
 import consts from '@/consts';
 import locations from '@/locations.json';
 

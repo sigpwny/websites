@@ -1,5 +1,5 @@
 import rss from '@astrojs/rss';
-import { getMeetings } from '@/lib/meetings';
+import { getMeetings } from '@/utils/meetings';
 import consts from '@/consts';
 
 import dayjs from 'dayjs';

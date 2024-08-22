@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Base.astro';
 import type { HeadProps } from '@/components/BaseHead.astro';
 import Sidebar from '@/components/Sidebar';
-import { getMeetings, formatSemester, weekNumber } from '@/lib/meetings';
+import { getMeetings, formatSemester, weekNumber } from '@/utils/meetings';
 import 'katex/dist/katex.min.css';
 
 const props: HeadProps = Astro.props;

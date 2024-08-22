@@ -1,5 +1,5 @@
 ---
-import { getMeetings } from '@/lib/meetings';
+import { getMeetings } from '@/utils/meetings';
 
 export async function getStaticPaths() {
   const meetings = await getMeetings();
