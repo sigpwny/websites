@@ -6,7 +6,7 @@ import { Picture } from 'astro:assets';
 
 import imgWebHacking from '@/assets/2023-09-07-web-hacking-i.jpg';
 
-const discordLink = consts.socialLinks.find((link) => link.name === 'Discord')?.url;
+const discordLink = consts.socialLinks.find((link: { name: string, url: string }) => link.name === 'Discord')?.url;
 ---
 <Layout
   title="Join"
@@ -20,11 +20,9 @@ const discordLink = consts.socialLinks.find((link) => link.name === 'Discord')?.
           Come learn cybersecurity with 2000+ students, alumni, and
           professionals in our Discord server.
         </p>
-        <a href={discordLink} target="_blank" rel="noopener noreferrer"
-          class="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary"
-        >
+        <Link href={discordLink} class="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary">
           Join Discord
-        </a>
+        </Link>
         <ul class="list-decimal pl-6 pt-2">
           <li>
             By joining, you agree to our club <Link href="/rules/">rules</Link>.
@@ -44,7 +42,7 @@ const discordLink = consts.socialLinks.find((link) => link.name === 'Discord')?.
       />
     </section>
 
-    <section id="join-involve" class="py-8">
+    <section id="get-involved" class="py-8">
       <h1>How to Get Involved</h1>
       <div class="grid gap-8 lg:grid-cols-3 pt-4 text-center">
         <div class="panel">
@@ -99,7 +97,7 @@ const discordLink = consts.socialLinks.find((link) => link.name === 'Discord')?.
             href="#"
             class="flex size-full !text-white text-3xl font-bold"
           >
-            Capture the Flag
+            Capture the Flag Team
           </Link>
         </li>
         <li class="w-full min-h-40 bg-gradient-to-br from-purple-950 to-purple-400 border-2 border-purple-900 rounded-xl">
@@ -115,11 +113,29 @@ const discordLink = consts.socialLinks.find((link) => link.name === 'Discord')?.
             href="#"
             class="flex size-full !text-white text-3xl font-bold"
           >
-            Embedded Hacking
+            Embedded Team
           </Link>
         </li>
       </ul>
       <h2>Create</h2>
+      <ul class="flex columns-1 lg:columns-2 gap-4 lg:gap-8">
+        <li class="w-full min-h-40 bg-gradient-to-br from-blue-900 to-blue-400 border-2 border-blue-950 rounded-xl">
+          <Link
+            href="#"
+            class="flex size-full !text-white text-3xl font-bold"
+          >
+            UIUCTF
+          </Link>
+        </li>
+        <li class="w-full min-h-40 bg-gradient-to-br from-orange-900 to-orange-400 border-2 border-orange-950 rounded-xl">
+          <Link
+            href="#"
+            class="flex size-full !text-white text-3xl font-bold"
+          >
+            Fall CTF
+          </Link>
+        </li>
+      </ul>
       <h2>Organize</h2>
     </section>
 

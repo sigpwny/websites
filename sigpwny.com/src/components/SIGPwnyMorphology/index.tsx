@@ -71,7 +71,7 @@ export default function SIGPwnyMorphology() {
         >
           <p className="text-center">&#8595;</p>
           <p className="font-bold text-center">
-            To hack <br />or "own" <br />(slang)
+            Hack <br />or "own" <br />(slang)
           </p>
         </motion.div>
       </motion.div>
