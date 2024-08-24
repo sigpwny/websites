@@ -2,11 +2,12 @@
 import Layout from '@/layouts/Base.astro';
 import consts from '@/consts';
 import Link from '@/components/Link.astro';
+import SIGPwnyStack from '@/components/SIGPwnyStack.astro';
 import { Picture } from 'astro:assets';
 
 import imgWebHacking from '@/assets/2023-09-07-web-hacking-i.jpg';
 
-const discordLink = consts.socialLinks.find((link: { name: string, url: string }) => link.name === 'Discord')?.url;
+const discordLink = consts.socialLinks?.find((link: { name: string, url: string }) => link.name === 'Discord')?.url;
 ---
 <Layout
   title="Join"
@@ -73,70 +74,7 @@ const discordLink = consts.socialLinks.find((link: { name: string, url: string }
         SIGPwny is open to all - there are no member applications, mandatory
         meetings, or even prerequisite knowledge needed.
       </p>
-      <h2>Learn</h2>
-      <ul class="flex columns-1 lg:columns-2 gap-4 lg:gap-8">
-        <li class="w-full min-h-40 bg-gradient-to-br from-surface-000 to-primary border-2 border-primary rounded-xl">
-          <Link
-            href="/meetings/"
-          >
-            <p>-&gt; Meetings</p>
-          </Link>
-        </li>
-        <li class="w-full min-h-40 bg-gradient-to-br from-surface-000 to-primary border-2 border-primary rounded-xl">
-          <Link
-            href="/ctf/"
-          >
-            <p>-&gt; Pwny CTF</p>
-          </Link>
-        </li>
-      </ul>
-      <h2>Compete</h2>
-      <ul class="flex columns-1 lg:columns-3 gap-4 lg:gap-8">
-        <li class="w-full min-h-40 bg-gradient-to-br from-red-900 to-red-500 border-2 border-red-950 rounded-xl">
-          <Link
-            href="#"
-            class="flex size-full !text-white text-3xl font-bold"
-          >
-            Capture the Flag Team
-          </Link>
-        </li>
-        <li class="w-full min-h-40 bg-gradient-to-br from-purple-950 to-purple-400 border-2 border-purple-900 rounded-xl">
-          <Link
-            href="#"
-            class="flex size-full !text-white text-3xl font-bold"
-          >
-            Purple Team
-          </Link>
-        </li>
-        <li class="w-full min-h-40 bg-gradient-to-br from-yellow-700 to-yellow-400 border-2 border-yellow-800 rounded-xl">
-          <Link
-            href="#"
-            class="flex size-full !text-white text-3xl font-bold"
-          >
-            Embedded Team
-          </Link>
-        </li>
-      </ul>
-      <h2>Create</h2>
-      <ul class="flex columns-1 lg:columns-2 gap-4 lg:gap-8">
-        <li class="w-full min-h-40 bg-gradient-to-br from-blue-900 to-blue-400 border-2 border-blue-950 rounded-xl">
-          <Link
-            href="#"
-            class="flex size-full !text-white text-3xl font-bold"
-          >
-            UIUCTF
-          </Link>
-        </li>
-        <li class="w-full min-h-40 bg-gradient-to-br from-orange-900 to-orange-400 border-2 border-orange-950 rounded-xl">
-          <Link
-            href="#"
-            class="flex size-full !text-white text-3xl font-bold"
-          >
-            Fall CTF
-          </Link>
-        </li>
-      </ul>
-      <h2>Organize</h2>
+      <SIGPwnyStack />
     </section>
 
     <section id="join-beginner" class="py-8">

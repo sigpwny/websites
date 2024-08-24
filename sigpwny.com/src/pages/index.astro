@@ -3,6 +3,7 @@ import Layout from '@/layouts/Base.astro';
 import consts from '@/consts';
 import Link from '@/components/Link.astro';
 import { Picture } from 'astro:assets';
+import SIGPwnyStack from '@/components/SIGPwnyStack.astro';
 import SIGPwnyMorphology from '@/components/SIGPwnyMorphology';
 
 // Pictures
@@ -86,27 +87,33 @@ import imgHome6 from '@/assets/home-promo/home-6.jpg';
   </section>
 
   <section id="about">
-    <hr class="py-16" />
     <span class="flex justify-center py-16">
       <SIGPwnyMorphology client:load />
     </span>
-    <h2 class="text-3xl">
-      What We Do
-    </h2>
-    <p>
-      As the cybersecurity club at the University of Illinois Urbana-Champaign, our mission is to 
-      teach students cybersecurity through meetings, competitions, and research.
-    </p>
-    <p>
-      <Link href="/join/#get-involved">See more about how to get involved with SIGPwny</Link>
-    </p>
-    <h3>
-      We're beginner-friendly
-    </h3>
-    <p>
-      We believe cybersecurity should be accessible to all, so we teach everything from the ground up. Our 
-      club content is designed to be approached by <em>anyone</em>, regardless of skill, major, or experience.
-    </p>
+    <div class="flex flex-col gap-8">
+      <div class="panel mx-auto max-w-prose">
+        <h2 class="text-3xl text-center">
+          What We Do
+        </h2>
+        <p>
+          As the cybersecurity club at the University of Illinois Urbana-Champaign, our mission is to 
+          teach students cybersecurity through meetings, competitions, and research.
+        </p>
+        <p>
+          <Link href="/join/#get-involved">See more about how to get involved with SIGPwny</Link>
+        </p>
+      </div>
+      <div class="panel mx-auto max-w-prose">
+        <h2 class="text-3xl text-center">
+          We're Beginner-Friendly
+        </h2>
+        <p>
+          We believe cybersecurity should be accessible to all, so we teach everything from the ground up. Our 
+          club content is designed to be approached by <em>anyone</em>, regardless of skill, major, or experience.
+        </p>
+      </div>
+    </div>
+    <SIGPwnyStack />
   </section>
 
   <!-- <section id="meetings" class="pb-8">
