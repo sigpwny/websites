@@ -10,18 +10,18 @@ export const EventSchema = ({ image }) => (
     duration: z.string().default("PT48H"),
     timezone: z.string().default("Etc/UTC"),
     series: z.string(),
-    credit: z.optional(z.array(z.string())),
-    sponsors: z.optional(z.array(z.string())),
-    location: z.string(),
-    description: z.string(),
+    credit: z.array(z.string()).default(["SIGPwny"]),
+    sponsors: z.array(z.string()).default([]),
+    location: z.string().default("Online"),
+    description: z.optional(z.string()),
     card_image: z.optional(CardImageSchema(image)),
     links: z.array(z.object({
       name: z.string(),
       url: z.string(),
-    })),
-    stats: z.optional(z.array(z.object({
+    })).default([]),
+    stats: z.array(z.object({
       name: z.string(),
       value: z.string(),
-    }))),
+    })).default([]),
   })
 )

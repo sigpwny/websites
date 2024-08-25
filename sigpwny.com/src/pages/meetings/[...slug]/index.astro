@@ -16,6 +16,7 @@ import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import {
   calculateSemester,
+  convertDate,
   getMeetings,
   getYouTubeEmbedUrl,
   weekNumber
@@ -53,7 +54,13 @@ const time_end = meeting.time_start && meeting.duration
   ? dayjs(meeting.time_start).tz(meeting.timezone).add(dayjs.duration(meeting.duration))
   : undefined;
 ---
-<Layout {...meeting}>
+<Layout
+  title={meeting.title}
+  description={`${meeting.semester}${meeting.week_number ? ' Week ' + weekNumber(meeting.week_number) : ''} • ${convertDate(meeting.time_start, "MMMM DD, YYYY", meeting.timezone)}`}
+  image={meeting.card_image?.foreground?.src ?? meeting.card_image?.background?.src}
+  video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}
+  type="article"
+>
   <article class="panel w-full self-start" itemscope itemtype="http://schema.org/Article">
     <header>
       <div class="flex flex-col">
@@ -66,31 +73,29 @@ const time_end = meeting.time_start && meeting.duration
           </p>
         ) : null}
         {meeting.tags && meeting.tags.length > 0 ? (
-          <div class="flex flex-row mb-1">
+          <div class="flex flex-row mb-2">
             <TagGroup tags={meeting.tags.concat()} />
           </div>
         ) : null}
         {profiles.length > 0 ? (
           <div class="flex flex-col md:flex-row flex-shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center mb-2">
-            {profiles.map((profile, idx) => {
-              return (
-                <Persona profile={profile} client:load>
-                  <span slot="avatar">
-                    <Avatar profile={profile} />
+            {profiles.map((profile, idx) => (
+              <Persona profile={profile} client:load>
+                <span slot="avatar">
+                  <Avatar profile={profile} />
+                </span>
+                <span slot="visibleInfo">
+                  <span itemprop="author">
+                    {profile.name}{idx === profiles.length - 1 ? null : (
+                      <span class="hidden md:inline-block">,</span>
+                    )}
                   </span>
-                  <span slot="visibleInfo">
-                    <span itemprop="author">
-                      {profile.name}{idx === profiles.length - 1 ? null : (
-                        <span class="hidden md:inline-block">,</span>
-                      )}
-                    </span>
-                  </span>
-                  <span slot="hiddenInfo">
-                    <ProfileCard profile={profile} />
-                  </span>
-                </Persona>
-              );
-            })}
+                </span>
+                <span slot="hiddenInfo">
+                  <ProfileCard profile={profile} />
+                </span>
+              </Persona>
+            ))}
           </div>
         ) : null}
         <div class="flex flex-col mb-2">
@@ -201,7 +206,7 @@ const time_end = meeting.time_start && meeting.duration
       <Content components={MdxComponents} />
     </section>
     <span class="z-50 hidden md:block">
-      <!-- <Tooltip.Profile offset={3} place="bottom-start" client:load /> -->
+      {/* <Tooltip.Profile offset={3} place="bottom-start" client:load /> */}
     </span>
   </article>
 </Layout>

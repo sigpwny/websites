@@ -6,7 +6,7 @@ import Card from '@/components/Card.astro';
 import Avatar from '@/components/Profile/Avatar.astro';
 import { getProfilesFromNames } from '@/utils/profiles';
 
-const activeSponsors = (await getCollection('profiles', ({ data }) => data.is_active_sponsor)).map((x) => x.data);
+const activeSponsors = (await getCollection('profiles', ({ data }) => data.is_workshop_sponsor)).map((x) => x.data);
 const eventsData = await getCollection('events');
 const events = await Promise.all(eventsData.map(async (x) => (
   {

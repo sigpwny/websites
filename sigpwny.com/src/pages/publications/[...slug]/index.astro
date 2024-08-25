@@ -1,0 +1,133 @@
+---
+import Layout from '@/layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import Link from '@/components/Link.astro';
+import Card from '@/components/Card.astro';
+import Avatar from '@/components/Profile/Avatar.astro';
+import Persona from '@/components/Profile/Persona';
+import ProfileCard from '@/components/Profile/ProfileCard.astro';
+import { MdxComponents } from '@/components/Mdx/index.astro';
+import { TagGroup } from '@/components/ReactMigration/Tag';
+import { getProfilesFromNames } from '@/utils/profiles';
+
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import duration from 'dayjs/plugin/duration';
+import advanced from 'dayjs/plugin/advancedFormat';
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(duration);
+dayjs.extend(advanced);
+
+
+export async function getStaticPaths() {
+  const publications = await getCollection('publications');
+  return publications.map((publication) => ({
+    params: { slug: publication.id },
+    props: { input: publication },
+  }));
+}
+
+const { input } = Astro.props;
+const { Content } = await render(input);
+const p = input.data;
+
+const profiles = await getProfilesFromNames(p.credit);
+---
+<Layout
+  title={p.title}
+  description={p.description}
+  image={p.card_image?.foreground?.src ?? p.card_image?.background?.src}
+>
+  <div class="flex w-full justify-center">
+    <article class="max-w-prose w-full" itemscope itemtype="http://schema.org/Article">
+      <header>
+        <div class="flex flex-col">
+          <h1 class="mb-1" itemprop="headline">
+            {p.title}
+          </h1>
+          <span class="font-mono order-first">
+            <time datetime={dayjs(p.date).format("YYYY-MM-DD")}>
+              {`${dayjs(p.date).format("MMMM Do, YYYY")} • ${p.publication_type.toUpperCase()}${p.publisher ? ' • ' + p.publisher : null}`}
+            </time>
+          </span>
+          {p.description ? (
+            <p>
+              {p.description}
+            </p>
+          ) : null}
+          {p.tags && p.tags.length > 0 ? (
+            <div class="flex flex-row mb-2">
+              <TagGroup tags={p.tags.concat()} />
+            </div>
+          ) : null}
+          {profiles.length > 0 ? (
+            <div class="flex flex-col md:flex-row flex-shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center mb-2">
+              {profiles.map((profile, idx) => (
+                <Persona profile={profile} client:load>
+                  <span slot="avatar">
+                    <Avatar profile={profile} />
+                  </span>
+                  <span slot="visibleInfo">
+                    <span itemprop="author">
+                      {profile.name}{idx === profiles.length - 1 ? null : (
+                        <span class="hidden md:inline-block">,</span>
+                      )}
+                    </span>
+                  </span>
+                  <span slot="hiddenInfo">
+                    <ProfileCard profile={profile} />
+                  </span>
+                </Persona>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </header>
+      <div class="mb-8">
+        <Card card_image={p.card_image} />
+      </div>
+      <div class="panel flex flex-col gap-4 mb-4">
+        {p.primary_link ? (
+          <span>
+            <p class="text-2xl m-0 font-bold">
+              Primary Source
+            </p>
+            <Link href={p.primary_link.url}>
+              {p.primary_link.name}
+            </Link>
+            <p class="text-sm m-0 font-mono">
+              {p.primary_link.url}
+            </p>
+          </span>
+        ) : null}
+        {p.links?.length && p.links.length > 0 ? (
+          <span>
+            <p class="text-2xl m-0 font-bold break-words">
+              Additional Links
+            </p>
+            <ul>
+              {p.links.map((link) => (
+                <li>
+                  <Link href={link.url}>
+                    {link.name}
+                  </Link>
+                  <p class="text-sm m-0 font-mono break-words">
+                    {link.url}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </span>
+        ) : null}
+      </div>
+      <section class="md-root" itemprop="articleBody">
+        <Content components={MdxComponents} />
+      </section>
+      <span class="z-50 hidden md:block">
+        {/* <Tooltip.Profile offset={3} place="bottom-start" /> */}
+      </span>
+    </article>
+  </div>
+</Layout>
