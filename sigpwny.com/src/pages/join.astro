@@ -82,7 +82,7 @@ const getStartedMeetings = filteredMeetings.reverse();
         {getStartedMeetings[0] ?
           <Link href={getStartedMeetings[0].slug} class="grow flex">
             <Card
-              heading={`${getStartedMeetings[0].data.semester}${getStartedMeetings[0].data.week_number ? ' Week ' + weekNumber(getStartedMeetings[0].data.week_number) : ''} • ${convertDate(getStartedMeetings[0].data.time_start, "YYYY-MM-DD", getStartedMeetings[0].data.timezone)}`},
+              heading={`${getStartedMeetings[0].data.semester}${getStartedMeetings[0].data.week_number != null ? ' Week ' + weekNumber(getStartedMeetings[0].data.week_number) : ''} • ${convertDate(getStartedMeetings[0].data.time_start, "YYYY-MM-DD", getStartedMeetings[0].data.timezone)}`},
               title={getStartedMeetings[0].data.title}
               card_image={getStartedMeetings[0].data.card_image}
               hover
@@ -92,7 +92,7 @@ const getStartedMeetings = filteredMeetings.reverse();
         {getStartedMeetings[1] ?
           <Link href={getStartedMeetings[1].slug} class="grow flex">
             <Card
-              heading={`${getStartedMeetings[1].data.semester}${getStartedMeetings[1].data.week_number ? ' Week ' + weekNumber(getStartedMeetings[1].data.week_number) : ''} • ${convertDate(getStartedMeetings[1].data.time_start, "YYYY-MM-DD", getStartedMeetings[1].data.timezone)}`},
+              heading={`${getStartedMeetings[1].data.semester}${getStartedMeetings[1].data.week_number != null ? ' Week ' + weekNumber(getStartedMeetings[1].data.week_number) : ''} • ${convertDate(getStartedMeetings[1].data.time_start, "YYYY-MM-DD", getStartedMeetings[1].data.timezone)}`},
               title={getStartedMeetings[1].data.title}
               card_image={getStartedMeetings[1].data.card_image}
               hover
@@ -102,7 +102,7 @@ const getStartedMeetings = filteredMeetings.reverse();
         {getStartedMeetings[2] ?
           <Link href={getStartedMeetings[2].slug} class="grow hidden lg:flex">
             <Card
-              heading={`${getStartedMeetings[2].data.semester}${getStartedMeetings[2].data.week_number ? ' Week ' + weekNumber(getStartedMeetings[2].data.week_number) : ''} • ${convertDate(getStartedMeetings[2].data.time_start, "YYYY-MM-DD", getStartedMeetings[2].data.timezone)}`},
+              heading={`${getStartedMeetings[2].data.semester}${getStartedMeetings[2].data.week_number != null ? ' Week ' + weekNumber(getStartedMeetings[2].data.week_number) : ''} • ${convertDate(getStartedMeetings[2].data.time_start, "YYYY-MM-DD", getStartedMeetings[2].data.timezone)}`},
               title={getStartedMeetings[2].data.title}
               card_image={getStartedMeetings[2].data.card_image}
               hover
@@ -112,7 +112,7 @@ const getStartedMeetings = filteredMeetings.reverse();
         {getStartedMeetings[3] ?
           <Link href={getStartedMeetings[3].slug} class="grow hidden xl:flex">
             <Card
-              heading={`${getStartedMeetings[3].data.semester}${getStartedMeetings[3].data.week_number ? ' Week ' + weekNumber(getStartedMeetings[3].data.week_number) : ''} • ${convertDate(getStartedMeetings[3].data.time_start, "YYYY-MM-DD", getStartedMeetings[3].data.timezone)}`},
+              heading={`${getStartedMeetings[3].data.semester}${getStartedMeetings[3].data.week_number != null ? ' Week ' + weekNumber(getStartedMeetings[3].data.week_number) : ''} • ${convertDate(getStartedMeetings[3].data.time_start, "YYYY-MM-DD", getStartedMeetings[3].data.timezone)}`},
               title={getStartedMeetings[3].data.title}
               card_image={getStartedMeetings[3].data.card_image}
               hover

@@ -28,7 +28,7 @@ const meetingsBySemester = rawMeetings.reduce(
 const meetingSidebarItems = Object.keys(meetingsBySemester).map((semester) => ({
   name: formatSemester(semester),
   items: meetingsBySemester[semester].map((meeting) => ({
-    name: meeting.data.week_number ? `Week ${weekNumber(meeting.data.week_number)}: ${meeting.data.title}` : meeting.data.title,
+    name: meeting.data.week_number != null ? `Week ${weekNumber(meeting.data.week_number)}: ${meeting.data.title}` : meeting.data.title,
     url: meeting.slug,
     active: meeting.slug === Astro.url.pathname,
   })),
