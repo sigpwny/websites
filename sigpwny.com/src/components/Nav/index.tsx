@@ -100,7 +100,7 @@ export default function Nav({ curr_path }: Props) {
               <span className="hidden lg:flex h-full border-l-2 border-surface-150/90" />
               {/* Nav and CTA links */}
               <ul className="flex flex-col grow max-lg:text-xl lg:flex-row item-start lg:items-center gap-4 lg:gap-6 lg:px-4 py-2">
-                {navLinks.map((link, idx) => (
+                {navLinks?.map((link, idx) => (
                   <li key={idx}>
                     <Link
                       href={link.url}
@@ -111,7 +111,7 @@ export default function Nav({ curr_path }: Props) {
                     </Link>
                   </li>
                 ))}
-                {navCallToActionLinks.map((link, idx) => (
+                {navCallToActionLinks?.map((link, idx) => (
                   <li key={idx}>
                     <Link
                       href={link.url}
