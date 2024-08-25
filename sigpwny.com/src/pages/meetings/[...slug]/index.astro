@@ -67,9 +67,9 @@ const time_end = meeting.time_start && meeting.duration
         <h1 class="mb-1" itemprop="headline">
           {meeting.title}
         </h1>
-        {semester && meeting.week_number ? (
+        {semester ? (
           <p class="font-mono m-0 order-first">
-            {semester} Week {weekNumber(meeting.week_number)}
+            {semester}{meeting.week_number ? ` Week ${weekNumber(meeting.week_number)}` : null}
           </p>
         ) : null}
         {meeting.tags && meeting.tags.length > 0 ? (
