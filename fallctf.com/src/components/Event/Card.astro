@@ -25,8 +25,8 @@ const colRowSpan = (size: Props['size']) => {
 
 // heading, title, image, overlay_image, card_image, link
 ---
-<div class={`${colRowSpan(size)} flex mx-2`}>
-  <div class="aspect-video grid pointer-events-none select-none">
+<div class={`${colRowSpan(size)} flex mx-2 hover:brightness-50 cursor-pointer`}>
+  <div class="aspect-video grid">
       {card_image?.background && (
         <div class="p-4">
         <Picture
