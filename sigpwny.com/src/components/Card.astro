@@ -1,0 +1,99 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+import imgPlaceholder from '$/assets/placeholder.png';
+
+interface Props {
+  heading?: string;
+  title?: string;
+  card_image?: {
+    foreground?: ImageMetadata;
+    background?: ImageMetadata;
+    background_color?: string;
+    alt?: string;
+  };
+}
+
+const { heading, title, card_image } = Astro.props as Props;
+---
+<style>
+  .card {
+    @apply
+      bg-surface-100
+      border-surface-150
+      border-2
+      text-text
+      rounded-xl
+      isolate
+      overflow-hidden
+      relative
+      bottom-0
+      right-0
+      leading-5
+      grow
+      duration-100;
+  }
+  .card-hover:hover .card {
+    box-shadow: 14px 14px rgb(var(--rgb-primary));
+    bottom: 7px;
+    right: 7px;
+  }
+</style>
+
+<div class="card">
+  <div class="aspect-video flex pointer-events-none select-none relative">
+    <slot name="image">
+    {card_image ? (
+      <>
+        {card_image.background ? (
+          <Picture
+            pictureAttributes={{ class: "absolute h-full w-full overflow-hidden object-cover"}}
+            class="max-h-full max-w-full h-full w-full"
+            src={card_image.background}
+            alt={card_image.alt ?? ""}
+            widths={[300, 600]}
+            formats={["avif", "webp"]}
+          />
+        ) : card_image?.background_color ? (
+          <div
+            class="absolute h-full w-full"
+            style={{ backgroundColor: card_image.background_color }}
+          />
+        ) : null}
+        {card_image.foreground ? (
+          <Picture
+            pictureAttributes={{ class: "absolute h-full w-full object-contain p-[5%] flex items-center"}}
+            class="max-h-full max-w-full h-full w-full"
+            src={card_image.foreground}
+            alt={card_image.alt ?? ""}
+            widths={[300, 600]}
+            formats={["avif", "webp"]}
+          />
+        ) : null}
+      </>
+    ) : (
+      <Picture
+        src={imgPlaceholder}
+        alt="Placeholder image"
+        widths={[300, 600]}
+        formats={["avif", "webp"]}
+      />
+    )}
+    </slot>
+  </div>
+  {(title || heading) ? (
+    <div class="p-2">
+      {heading ? (
+        <p class="line-clamp-1 leading-4 m-0 font-mono font-size-small">
+          {heading}
+        </p>
+      ) : null}
+      {title ? (
+        <p class="line-clamp-2 leading-5 mb-1">
+          {title}
+        </p>
+      ) : null}
+    </div>
+  ) : null}
+</div>

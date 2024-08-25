@@ -1,5 +1,36 @@
 ---
 import Layout from '@/layouts/Base.astro';
+import dayjs from 'dayjs';
+import { getCollection } from 'astro:content';
+import Card from '@/components/Card.astro';
+import Avatar from '@/components/Profile/Avatar.astro';
+import { getProfilesFromNames } from '@/utils/profiles';
+
+const activeSponsors = (await getCollection('profiles', ({ data }) => data.is_active_sponsor)).map((x) => x.data);
+const eventsData = await getCollection('events');
+const events = await Promise.all(eventsData.map(async (x) => (
+  {
+    ...x.data,
+    // Add sponsor_profiles, which is a list of resolved profiles from names in sponsors
+    sponsors_profiles: x.data.sponsors ? (await getProfilesFromNames(x.data.sponsors)) : undefined,
+  }
+)));
+// Filter for events that:
+// - occured in the past year or in the future
+// - are the most recent event in each event series
+// - have sponsors
+const minDate = dayjs().subtract(1, "year");
+const uniqSeries = new Set<string>();
+const recentEvents = events.filter((event) => {
+  if (
+    dayjs(event.time_start) < minDate ||
+    uniqSeries.has(event.series) ||
+    !event.sponsors_profiles ||
+    event.sponsors_profiles.length === 0
+  ) return false;
+  uniqSeries.add(event.series);
+  return true;
+}).sort((a, b) => dayjs(b.time_start).diff(dayjs(a.time_start)));
 ---
 <Layout
   title="Sponsors"
@@ -12,30 +43,56 @@ import Layout from '@/layouts/Base.astro';
         Thank you to our sponsors for supporting SIGPwny!
       </p>
       <div class="flex flex-col gap-4">
-        <!-- {featured_orgs.length > 0 ? (
+        {activeSponsors.length > 0 ? (
           <span>
             <h2>Workshop Sponsors</h2>
             <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {featured_orgs.map((sponsor, sponsor_idx) => (
-                <div key={sponsor_idx} class="flex grow">
-                  <Card {...createCard({sponsor} as CardSponsorProps)} />
+              {activeSponsors.map((sponsor) => (
+                <div class="flex grow">
+                  <Card card_image={sponsor.card_image}>
+                    {/* If the sponsor does not have any displayable card_image, use profile picture and name instead */}
+                    <span
+                      slot={!sponsor.card_image?.foreground && !sponsor.card_image?.background ? "image" : undefined}
+                      class="absolute h-full w-full flex flex-col items-center justify-center p-[5%] font-bold text-lg md:text-2xl text-center"
+                    >
+                      {sponsor.profile_image ? (
+                        <span class="w-auto h-1/2 aspect-square">
+                          <Avatar profile={sponsor} />
+                        </span>
+                      ) : null}
+                      <span>{sponsor.name}</span>
+                    </span>
+                  </Card>
                 </div>
               ))}
             </div>
           </span>
-        ) : null} -->
-        <!-- {recent_events.map((event, event_idx) => (
-          <span key={event_idx}>
+        ) : null}
+        {recentEvents.map((event) => (
+          <span>
             <h2>{event.title}</h2>
             <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {event.sponsors_profiles!.map((sponsor, sponsor_idx) => (
-                <div key={sponsor_idx} class="flex grow">
-                  <Card {...createCard({sponsor} as CardSponsorProps)} />
+              {event.sponsors_profiles!.map((sponsor) => (
+                <div class="flex grow">
+                  <Card card_image={sponsor.card_image}>
+                    {/* If the sponsor does not have any displayable card_image, use profile picture and name instead */}
+                    <span
+                      slot={!sponsor.card_image?.foreground && !sponsor.card_image?.background ? "image" : undefined}
+                      class="absolute h-full w-full flex flex-col items-center justify-center p-[5%] font-bold text-lg md:text-2xl text-center"
+                    >
+                      {sponsor.profile_image ? (
+                        <span class="w-auto h-1/2 aspect-square">
+                          <Avatar profile={sponsor} />
+                        </span>
+                      ) : null}
+                      <span>{sponsor.name}</span>
+                    </span>
+                  </Card>
                 </div>
               ))}
             </div>
           </span>
-        ))} -->
+        ))}
       </div>
     </span>
     <div class="panel">
