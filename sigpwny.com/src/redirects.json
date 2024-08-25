@@ -29,7 +29,7 @@
   },
   "/events/*": {
     "status": 302,
-    "destination": "/events/"
+    "destination": "/events-temp/"
   },
   "/fall": {
     "status": 302,
