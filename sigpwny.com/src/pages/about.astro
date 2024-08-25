@@ -1,0 +1,75 @@
+---
+import Layout from '@/layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import ProfileCard from '@/components/Profile/ProfileCard.astro';
+
+
+async function filterByRole(role: string) {
+  return (await getCollection('profiles', ({ data }) => (
+    data.role === role
+  ))).map(
+    (x) => x.data
+  ).sort(
+    (a, b) => b.weight - a.weight
+  );
+}
+
+const admins = await filterByRole('admin');
+const helpers = await filterByRole('helper');
+const alumni = (await filterByRole('alum')).sort(
+  // Sort by period (if available)
+  (a, b) => {
+    if (a.period && b.period) {
+      return a.period.localeCompare(b.period);
+    } else if (a.period) {
+      return -1;
+    } else if (b.period) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+);
+---
+<Layout
+  title="About"
+  description="Learn about who SIGPwny is and our mission"
+>
+  <div class="flex flex-col justify-between">
+    <div class="flex flex-col gap-8">
+      <section id="who-we-are">
+        <div class="panel mx-auto max-w-prose pb-8">
+          <p class="font-bold text-4xl text-center">Who We Are</p>
+          <p class="m-0">
+            SIGPwny is completely student-run and would not be where it is today without the contributions 
+            of our admin team, helper team, and alumni.
+          </p>
+        </div>
+        <section id="admins" class="pb-8">
+          <h1>Admin Team</h1>
+          <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+            {admins.map((profile) => (
+              <ProfileCard profile={profile} showFull={true} />
+            ))}
+          </div>
+        </section>
+        <section id="helpers" class="pb-8">
+          <h1>Helper Team</h1>
+          <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+            {helpers.map((profile) => (
+              <ProfileCard profile={profile} showFull={true} />
+            ))}
+          </div>
+        </section>
+        <section id="alumni" class="pb-8">
+          <h1>Alumni</h1>
+          <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+            {alumni.map((profile) => (
+              <ProfileCard profile={profile} showFull={true} />
+            ))}
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>
+</Layout>

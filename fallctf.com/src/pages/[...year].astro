@@ -1,0 +1,24 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  input: CollectionEntry<'events'>;
+}
+
+const { input } = Astro.props;
+
+export async function getStaticPaths() {
+    const rawEvents = await getCollection('events')  as CollectionEntry<'events'>[];
+
+    const fallEvents = rawEvents
+    .filter(e => e.data.series === 'fallctf')
+
+  return fallEvents.map((event) => ({
+    params: { year: event.data.time_start.getFullYear().toString() },
+    props: { input: event },
+  }));
+}
+---
+<div>
+    {input.data.title}
+</div>

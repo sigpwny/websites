@@ -1,0 +1,107 @@
+---
+import Layout from '@/layouts/Base.astro';
+import dayjs from 'dayjs';
+import { getCollection } from 'astro:content';
+import Card from '@/components/Card.astro';
+import Avatar from '@/components/Profile/Avatar.astro';
+import { getProfilesFromNames } from '@/utils/profiles';
+
+const activeSponsors = (await getCollection('profiles', ({ data }) => data.is_workshop_sponsor)).map((x) => x.data);
+const eventsData = await getCollection('events');
+const events = await Promise.all(eventsData.map(async (x) => (
+  {
+    ...x.data,
+    // Add sponsor_profiles, which is a list of resolved profiles from names in sponsors
+    sponsors_profiles: x.data.sponsors ? (await getProfilesFromNames(x.data.sponsors)) : undefined,
+  }
+)));
+// Filter for events that:
+// - occured in the past year or in the future
+// - are the most recent event in each event series
+// - have sponsors
+const minDate = dayjs().subtract(1, "year");
+const uniqSeries = new Set<string>();
+const recentEvents = events.filter((event) => {
+  if (
+    dayjs(event.time_start) < minDate ||
+    uniqSeries.has(event.series) ||
+    !event.sponsors_profiles ||
+    event.sponsors_profiles.length === 0
+  ) return false;
+  uniqSeries.add(event.series);
+  return true;
+}).sort((a, b) => dayjs(b.time_start).diff(dayjs(a.time_start)));
+---
+<Layout
+  title="Sponsors"
+  description="Thank you to our sponsors!"
+>
+  <div class="flex flex-col gap-8 mx-auto page-width-lg">
+    <span>
+      <h1>Sponsors</h1>
+      <p>
+        Thank you to our sponsors for supporting SIGPwny!
+      </p>
+      <div class="flex flex-col gap-4">
+        {activeSponsors.length > 0 ? (
+          <span>
+            <h2>Workshop Sponsors</h2>
+            <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {activeSponsors.map((sponsor) => (
+                <div class="flex grow">
+                  <Card card_image={sponsor.card_image}>
+                    {/* If the sponsor does not have any displayable card_image, use profile picture and name instead */}
+                    <span
+                      slot={!sponsor.card_image?.foreground && !sponsor.card_image?.background ? "image" : undefined}
+                      class="absolute h-full w-full flex flex-col items-center justify-center p-[5%] font-bold text-lg md:text-2xl text-center"
+                    >
+                      {sponsor.profile_image ? (
+                        <span class="w-auto h-1/2 aspect-square">
+                          <Avatar profile={sponsor} />
+                        </span>
+                      ) : null}
+                      <span>{sponsor.name}</span>
+                    </span>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </span>
+        ) : null}
+        {recentEvents.map((event) => (
+          <span>
+            <h2>{event.title}</h2>
+            <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {event.sponsors_profiles!.map((sponsor) => (
+                <div class="flex grow">
+                  <Card card_image={sponsor.card_image}>
+                    {/* If the sponsor does not have any displayable card_image, use profile picture and name instead */}
+                    <span
+                      slot={!sponsor.card_image?.foreground && !sponsor.card_image?.background ? "image" : undefined}
+                      class="absolute h-full w-full flex flex-col items-center justify-center p-[5%] font-bold text-lg md:text-2xl text-center"
+                    >
+                      {sponsor.profile_image ? (
+                        <span class="w-auto h-1/2 aspect-square">
+                          <Avatar profile={sponsor} />
+                        </span>
+                      ) : null}
+                      <span>{sponsor.name}</span>
+                    </span>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </span>
+        ))}
+      </div>
+    </span>
+    <div class="panel max-w-prose">
+      <h2>Interested in sponsoring?</h2>
+      <p>
+        Please contact us at <a href="mailto:sponsors@sigpwny.com">sponsors@sigpwny.com</a>!
+        Sponsors can receive a variety of benefits, from resume books to 
+        recruiting workshops. We are happy to discuss what works best for you!
+      </p>
+    </div>
+  </div>
+</Layout>

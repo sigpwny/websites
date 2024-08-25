@@ -1,0 +1,88 @@
+---
+import Link from '@/components/Link.astro';
+import PersonaGroup from '@/components/Profile/PersonaGroup.astro';
+import { getCollection, getEntries } from 'astro:content';
+import { PdfSvg, YouTubeSvg } from '@/components/Icons';
+import { CountdownBadge } from '@/components/ReactMigration/Countdown';
+import { TagGroup } from '@/components/ReactMigration/Tag';
+import { convertDate, weekNumber } from '@/utils/meetings';
+import { getProfilesFromNames } from '@/utils/profiles';
+
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(duration);
+dayjs.extend(utc);
+
+const { input } = Astro.props;
+const meeting = input.data;
+const time_close = dayjs(meeting.time_start).add(dayjs.duration(meeting.duration)).toDate();
+
+// Resolve credit names to profiles
+const profiles = await getProfilesFromNames(meeting.credit);
+---
+
+<li>
+  <div class="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
+    <div class="flex flex-row flex-grow lg:flex-grow-0 min-w-0 lg:w-1/2 xl:w-3/5 gap-x-4 items-center justify-content-center">
+      <span
+        class="hidden sm:flex font-mono min-w-max cursor-default day-tooltip-select"
+        data-tooltip-content={convertDate(meeting.time_start, "ddd", meeting.timezone)}
+      >
+        {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
+      </span>
+      <CountdownBadge time_start={meeting.time_start} time_close={time_close} client:load />
+      <Link href={`/meetings/${input.id}/`} class="truncate">
+        <span>
+          {meeting.week_number != null ? (
+            <span class="font-mono">Week {weekNumber(meeting.week_number)}</span><span>:&nbsp;</span>
+          ) : null}
+          {meeting.title}
+        </span>
+      </Link>
+    </div>
+    <div class="hidden lg:flex flex-row lg:flex-grow gap-x-4 truncate">
+      {meeting.tags && meeting.tags.length > 0 && (
+        <TagGroup tags={meeting.tags.concat()} char_limit={25} tag_limit={3} />
+      )}
+    </div>
+    <div class="hidden md:flex flex-row gap-x-4 min-w-fit">
+      <div class="grid grid-cols-3" style={{gridTemplateColumns: `repeat(3, 2rem)`}}>
+        <div class="flex items-center justify-items-center">
+        </div>
+        <div class="flex items-center justify-items-center">
+          {meeting.recording ? (
+            <a
+              href={meeting.recording}
+              class="px-2 link-tooltip-select"
+              target="_blank" rel="noopener noreferrer"
+              aria-label={"Watch video"}
+              data-tooltip-content={"Watch video"}
+            >
+              <YouTubeSvg />
+            </a>
+          ) : null}
+        </div>
+        <div class="flex items-center justify-items-center">
+          {meeting.slides ? (
+            <a
+              href={meeting.slides}
+              class="px-2 link-tooltip-select"
+              target="_blank" rel="noopener noreferrer"
+              aria-label={"Download slides"}
+              data-tooltip-content={"Download slides"}
+            >
+              <PdfSvg />
+            </a>
+          ) : null}
+        </div>
+      </div>
+      <PersonaGroup
+        profiles={profiles}
+        limit={3}
+      />
+    </div>
+  </div>
+  <hr class="border-surface-200" />
+</li>

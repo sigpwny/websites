@@ -1,0 +1,87 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import { type SiteName, getSiteConfig } from '../configs';
+
+export interface HeadProps {
+  site_name: SiteName;
+  title?: string;
+  description?: string;
+  image?: string;
+  video?: string;
+  type?: string;
+  color?: string;
+  disable_robots?: boolean;
+};
+
+// const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const props = Astro.props as HeadProps;
+
+const siteConfig = getSiteConfig(props.site_name);
+const { description: defaultDescription, site_name: defaultTitle, image: defaultImage, twitterUsername } = siteConfig;
+
+const title = props.title || defaultTitle;
+const description = props.description || defaultDescription;
+const twitter_card_type = props.image ? "summary_large_image" : "summary"
+const image = props.image ? new URL(props.image, Astro.url) : new URL(defaultImage, Astro.url)
+const type = props.type || "website"
+const color = props.color || "#33cc55"
+const robots = props.disable_robots ? "noindex, nofollow" : "index, follow"
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<meta name="robots" content={robots} />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#000000" />
+
+<!-- Font preloads -->
+<link rel="stylesheet" href="/fonts/fonts.css" />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/HelveticaNeue-Regular.woff2" crossorigin="anonymous" transition:persist />
+<link rel="preload" as="font" type="font/woff2" href="/fonts/HelveticaNeue-Bold.woff2" crossorigin="anonymous" transition:persist />
+
+<!-- Favicons/PWA manifest -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="/favicons/favicon-48x48.png" />
+<link rel="apple-touch-icon" sizes="128x128" href="/favicons/touch-128x128.png" />
+<link rel="apple-touch-icon" sizes="192x192" href="/favicons/touch-192x192.png" />
+<link rel="apple-touch-icon" sizes="256x256" href="/favicons/touch-256x256.png" />
+
+<!-- Canonical URL -->
+<!-- <link rel="canonical" href={canonicalURL} /> -->
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+{props.video ? (
+  <meta property="og:video" content={props.video} />
+  <meta property="og:video:type" content="text/html" />
+  <meta property="og:video:url" content={props.video} />
+  <meta property="og:video:width" content="1280" />
+  <meta property="og:video:height" content="720" />
+) : null}
+<meta property="og:type" content={type} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content={twitter_card_type} />
+<meta property="twitter:site" content={twitterUsername} />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:image" content={image} />
+{props.video ? (
+  <meta property="twitter:player" content={props.video} />
+  <meta property="twitter:player:width" content="1280" />
+  <meta property="twitter:player:height" content="720" />
+) : null}
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+
+<ViewTransitions />

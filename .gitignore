@@ -1,8 +1,8 @@
-node_modules/
-.cache/
-public
-src/gatsby-types.d.ts
-.DS_store
-_site/
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# vscode setting folder
 .vscode/
-.prettierrc

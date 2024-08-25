@@ -1,0 +1,24 @@
+---
+import Avatar, { type ProfileProps } from './Avatar.astro';
+
+const { profiles, limit } = Astro.props;
+const show_count = limit && profiles.length > limit ? limit - 1 : profiles.length;
+const shown_profiles = profiles.slice(0, show_count);
+const nested_profiles = profiles.slice(show_count, profiles.length);
+const nested_label = `+${nested_profiles.length}`;
+
+---
+
+<div class="grid h-8 gap-1" style={{gridTemplateColumns: `repeat(${limit ?? profiles.length}, 2rem)`}}>
+  {shown_profiles.map((profile: ProfileProps) => (
+    <span
+      class="profile-tooltip-select w-full h-full"
+      data-tooltip-content={JSON.stringify(profile)}
+    >
+      <Avatar profile={profile} />
+    </span>
+  ))}
+  {nested_profiles.length > 0 && (
+    <Avatar label={nested_label} />
+  )}
+</div>

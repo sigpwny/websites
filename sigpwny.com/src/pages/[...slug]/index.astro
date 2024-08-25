@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { MdxComponents } from '@/components/Mdx/index.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+const data = page.data;
+---
+<Layout
+  title={data.title}
+  description={data.description}
+>
+  <div class={"md-root mx-auto" + (data.full_width ? "" : " page-width") + (data.no_background ? "" : " panel")}>
+    <Content components={MdxComponents} />
+  </div>
+</Layout>

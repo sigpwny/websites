@@ -1,0 +1,17 @@
+---
+import Layout from '@/layouts/Base.astro';
+import { getCollection, type CollectionEntry } from "astro:content";
+
+const rawEvents = await getCollection('events')  as CollectionEntry<'events'>[];
+---
+
+<Layout title="Home">
+	<h1>Events</h1>
+	<ul>
+		{rawEvents.map((event) => (
+			<li>
+				<p>{event.data.title}</p>
+			</li>
+		))}
+	</ul>
+</Layout>

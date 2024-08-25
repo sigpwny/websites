@@ -1,0 +1,133 @@
+---
+import Layout from '@/layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import Card from '@/components/Card.astro';
+import Link from '@/components/Link.astro';
+import { SocialIcon } from '@/components/Icons';
+import SIGPwnyStack from '@/components/SIGPwnyStack.astro';
+import {
+  convertDate,
+  getMeetings,
+  weekNumber
+} from '@/utils/meetings';
+
+import imgWebHacking from '@/assets/2023-09-07-web-hacking-i.jpg';
+
+// Find the most recent fall semester that has a beginner tag and is featured
+const meetings = (await getMeetings()).sort(
+  (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
+);
+const beginnerTags = ["welcome", "intro", "setup", "beginner"];
+const startingSemester = meetings.find((meeting) => {
+  return meeting.data.semester.toUpperCase().includes("FA") && meeting.data.featured && meeting.data.tags?.some((tag) => beginnerTags.includes(tag as string));
+})?.data.semester;
+// Filter meetings that match the start semester, have a beginner tag, and are featured
+const filteredMeetings = meetings.filter((meeting) => {
+  return meeting.data.semester.toUpperCase() === startingSemester && meeting.data.featured && meeting.data.tags?.some((tag) => beginnerTags.includes(tag as string));
+});
+// Reverse the order of the meetings to be in chronological order
+const getStartedMeetings = filteredMeetings.reverse();
+---
+<Layout
+  title="Join"
+  description="Join SIGPwny, the hacking club at UIUC!"
+>
+  <div class="2xl:px-40">
+    <section id="join-title" class="grid gap-x-8 lg:grid-cols-2 py-8">
+      <div class="flex flex-col flex-grow pb-4 basis-1/2">
+        <h1>Welcome to SIGPwny!</h1>
+        <p class="text-3xl mb-0">
+          Come learn cybersecurity with 2000+ students, alumni, and
+          professionals in our Discord server.
+        </p>
+        <Link href="/discord" class="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary flex flex-row gap-2 items-center">
+          <SocialIcon name="Discord" />
+          <span>Join Discord</span>
+        </Link>
+        <ul class="list-decimal pl-6 pt-2">
+          <li>
+            By joining, you agree to our club <Link href="/rules/">rules</Link>.
+          </li>
+          <li>
+            If you are affiliated with UIUC, make sure to <a href="https://sigpwny.com/auth" target="_blank" rel="noopener noreferrer">authenticate</a> to
+            receive the <span class="font-mono font-bold rounded-md bg-pwny-orange/15 px-1 text-pwny-orange">@UIUC</span> role and access club channels.
+          </li>
+        </ul>
+      </div>
+      <Picture
+        src={imgWebHacking}
+        alt="SIGPwny members gather for a web hacking meeting"
+        class="rounded-xl pointer-events-none select-none border-surface-100 border-2 basis-1/2"
+        widths={[300, 600]}
+        formats={['avif', 'webp']}
+      />
+    </section>
+
+    <section id="get-involved" class="py-8">
+      <h1>How to Get Involved</h1>
+      <p class="max-w-prose pb-4">
+        SIGPwny meetings are open to all and designed to be drop-in. There are no member applications, mandatory
+        meetings, or even prerequisite knowledge needed.
+      </p>
+      <SIGPwnyStack />
+    </section>
+
+    <section id="join-beginner" class="py-8">
+      <h1>Beginner Topics</h1>
+      <p>
+        Learn the fundamental skills to quickly get into hacking and more
+        advanced topics!
+      </p>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {getStartedMeetings[0] ?
+          <Link href={getStartedMeetings[0].slug} class="grow flex">
+            <Card
+              heading={`${getStartedMeetings[0].data.semester}${getStartedMeetings[0].data.week_number != null ? ' Week ' + weekNumber(getStartedMeetings[0].data.week_number) : ''} • ${convertDate(getStartedMeetings[0].data.time_start, "YYYY-MM-DD", getStartedMeetings[0].data.timezone)}`},
+              title={getStartedMeetings[0].data.title}
+              card_image={getStartedMeetings[0].data.card_image}
+              hover
+            />
+          </Link>
+        : null}
+        {getStartedMeetings[1] ?
+          <Link href={getStartedMeetings[1].slug} class="grow flex">
+            <Card
+              heading={`${getStartedMeetings[1].data.semester}${getStartedMeetings[1].data.week_number != null ? ' Week ' + weekNumber(getStartedMeetings[1].data.week_number) : ''} • ${convertDate(getStartedMeetings[1].data.time_start, "YYYY-MM-DD", getStartedMeetings[1].data.timezone)}`},
+              title={getStartedMeetings[1].data.title}
+              card_image={getStartedMeetings[1].data.card_image}
+              hover
+            />
+          </Link>
+        : null}
+        {getStartedMeetings[2] ?
+          <Link href={getStartedMeetings[2].slug} class="grow hidden lg:flex">
+            <Card
+              heading={`${getStartedMeetings[2].data.semester}${getStartedMeetings[2].data.week_number != null ? ' Week ' + weekNumber(getStartedMeetings[2].data.week_number) : ''} • ${convertDate(getStartedMeetings[2].data.time_start, "YYYY-MM-DD", getStartedMeetings[2].data.timezone)}`},
+              title={getStartedMeetings[2].data.title}
+              card_image={getStartedMeetings[2].data.card_image}
+              hover
+            />
+          </Link>
+        : null}
+        {getStartedMeetings[3] ?
+          <Link href={getStartedMeetings[3].slug} class="grow hidden xl:flex">
+            <Card
+              heading={`${getStartedMeetings[3].data.semester}${getStartedMeetings[3].data.week_number != null ? ' Week ' + weekNumber(getStartedMeetings[3].data.week_number) : ''} • ${convertDate(getStartedMeetings[3].data.time_start, "YYYY-MM-DD", getStartedMeetings[3].data.timezone)}`},
+              title={getStartedMeetings[3].data.title}
+              card_image={getStartedMeetings[3].data.card_image}
+              hover
+            />
+          </Link>
+        : null}
+      </div>
+    </section>
+
+    <section id="join-leadership" class="py-8">
+      <h1>Frequently Asked Questions</h1>
+      <p class="mt-4 mb-0">
+        Interested in learning more about the club? Check out our <Link href="/faq/">FAQ</Link>
+        or reach out to a <span class="font-mono font-bold rounded-md bg-pwny-green/15 px-1 text-pwny-green">@Helper</span> on Discord!
+      </p>
+    </section>
+  </div>
+</Layout>

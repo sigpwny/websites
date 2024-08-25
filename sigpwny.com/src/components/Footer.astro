@@ -1,0 +1,60 @@
+---
+import consts from '@/consts';
+import Link from '@/components/Link.astro';
+import { PwnyBanner, SocialIcon } from '@/components/Icons';
+---
+
+<footer>
+  <div class="container my-8">
+    <hr />
+    <div class="flex flex-col md:flex-row mt-8">
+      <div class="flex flex-row basis-1/2 max-w-md mb-8">
+        <div class="flex flex-col basis-1/2">
+          <p class="font-bold m-0">Sitemap</p>
+          {consts.navLinks ? consts.navLinks.map((link: { name: string, url: string }) => {
+            if (link?.name && link?.url) {
+              return (
+                <span class="m-0">
+                  <Link href={link.url}>
+                    <p class="inline align-middle m-0">
+                      {link.url === "/" ? "Home" : link.name}
+                    </p>
+                  </Link>
+                </span>
+              )
+            }
+          }) : null}
+        </div>
+        <div class="flex flex-col basis-1/2">
+          <p class="font-bold m-0">Connect</p>
+          {consts.socialLinks ? consts.socialLinks.map((link: { name: string, url: string }) => {
+            if (link?.name && link?.url) {
+              return (
+                <span class="m-0">
+                  <a
+                    href={link.url} class="w-full"
+                    target="_blank" rel="noopener noreferrer"
+                  >
+                    <SocialIcon name={link.name} />
+                    <p class="inline align-middle m-0 ml-2">
+                      {link.name}
+                    </p>
+                  </a>
+                </span>
+              )
+            }
+          }) : null}
+        </div>
+      </div>
+      <div class="flex flex-col basis-1/2 justify-center md:order-first">
+        <span class="w-4/5 mb-4 text-primary">
+          <PwnyBanner />
+        </span>
+      </div>
+    </div>
+    <p>
+      &copy; {new Date().getFullYear()} SIGPwny. ACM@UIUC is a 501(c)(3) non-profit organization.
+      Site source on <Link href="https://github.com/sigpwny/websites">GitHub</Link>.
+    </p>
+  </div>
+</footer>

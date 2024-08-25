@@ -1,0 +1,8 @@
+---
+const { name, time, location } = Astro.props;
+---
+<div class="border-l-4 border-primary px-4 py-2">
+  {name ? <p class="text-md font-bold leading-none">{name}</p> : null}
+  {time ? <p class="text-3xl font-bold leading-none">{time}</p> : null}
+  {location ? <p class="text-lg leading-none">{location}</p> : null}
+</div>
