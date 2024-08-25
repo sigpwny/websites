@@ -4,6 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
+        pwny: {
+          "green": "rgb(var(--rgb-pwny-green) / <alpha-value>)",
+          "lgreen": "rgb(var(--rgb-pwny-lgreen) / <alpha-value>)",
+          "dgreen": "rgb(var(--rgb-pwny-dgreen) / <alpha-value>)",
+          "red": "rgb(var(--rgb-pwny-red) / <alpha-value>)",
+          "orange": "rgb(var(--rgb-pwny-orange) / <alpha-value>)",
+          "yellow": "rgb(var(--rgb-pwny-yellow) / <alpha-value>)",
+          "blue": "rgb(var(--rgb-pwny-blue) / <alpha-value>)",
+          "purple": "rgb(var(--rgb-pwny-purple) / <alpha-value>)",
+        },
         primary: "rgb(var(--rgb-primary) / <alpha-value>)",
         secondary: "rgb(var(--rgb-secondary) / <alpha-value>)",
         surface: {

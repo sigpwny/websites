@@ -8,8 +8,17 @@ html {
   overflow-y: scroll;
 }
 body {
-  --rgb-primary: 51 204 85;       /* #33cc55 */
-  --rgb-secondary: 0 255 85;      /* #00ff55 */
+  --rgb-pwny-green: 51 204 85;    /* #33cc55 */
+  --rgb-pwny-lgreen: 0 255 85;    /* #00ff55 */
+  --rgb-pwny-dgreen: 19 113 55;   /* #137137 */
+  --rgb-pwny-red: 255 64 64;      /* #ff4040 */
+  --rgb-pwny-orange: 237 122 49;  /* #ed7a31 */
+  --rgb-pwny-yellow: 255 192 0;   /* #ffc000 */
+  --rgb-pwny-blue: 65 170 255;    /* #41aaff */
+  --rgb-pwny-purple: 204 102 238; /* #cc66ee */
+
+  --rgb-primary: var(--rgb-pwny-green);
+  --rgb-secondary: var(--rgb-pwny-lgreen);
   --rgb-surface-000: 0 0 0;       /* #000000 */
   --rgb-surface-050: 17 17 17;    /* #111111 */
   --rgb-surface-100: 34 34 34;    /* #222222 */

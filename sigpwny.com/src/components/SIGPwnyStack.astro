@@ -1,89 +1,97 @@
 ---
 import Link from '@/components/Link.astro';
 ---
-<h2>Learn</h2>
-<ul class="flex flex-col md:flex-row gap-4 lg:gap-8">
-  <li class="w-full min-h-40 bg-gradient-to-br from-surface-000 to-primary border-2 border-primary rounded-xl">
-    <Link
-      href="/meetings/"
-      class="flex flex-col size-full p-4 !text-white"
-    >
-      <p class="text-3xl font-bold">Meetings</p>
-      <p>
-        Attend our weekly meetings to learn different skills in cybersecurity, such as <b>binary exploitation</b> and <b>cryptography</b>.
-      </p>
-    </Link>
-  </li>
-  <li class="w-full min-h-40 bg-gradient-to-br from-surface-000 to-primary border-2 border-primary rounded-xl">
-    <Link
-      href="/ctf/"
-      class="flex flex-col size-full p-4 !text-white"
-    >
-      <p class="text-3xl font-bold">Pwny CTF</p>
-      <p>
-        Practice skills learned in meetings by solving challenges on our own CTF platform! Challenges award points which can be used to progress through the club.
-      </p>
-    </Link>
-  </li>
-</ul>
-<h2>Compete</h2>
-<ul class="flex flex-col lg:flex-row gap-4 lg:gap-8">
-  <li class="w-full min-h-40 bg-gradient-to-br from-red-900 to-red-500 border-2 border-red-950 rounded-xl">
-    <Link
-      href="#"
-      class="flex flex-col size-full p-4 !text-white"
-    >
-      <p class="text-3xl font-bold">Capture the Flag Team</p>
-      <p>
-        Compete in CTF events run by other teams to practice critical skills, such as <b>reverse-engineering</b> and <b>web hacking</b>.
-      </p>
-    </Link>
-  </li>
-  <li class="w-full min-h-40 bg-gradient-to-br from-purple-950 to-purple-400 border-2 border-purple-900 rounded-xl">
-    <Link
-      href="#"
-      class="flex flex-col size-full p-4 !text-white"
-    >
-      <p class="text-3xl font-bold">Purple Team <span class="inline-block align-middle text-lg uppercase px-1 m-0 rounded-md bg-surface-200/70 backdrop-blur-lg max-h-fit max-w-fit select-none">New!</span></p>
-      <p>
-        Learn <b>red team</b> (offensive) and <b>blue team</b> (defensive) skills to attack and defend systems and networks.
-      </p>
-    </Link>
-  </li>
-  <li class="w-full min-h-40 bg-gradient-to-br from-yellow-700 to-yellow-500 border-2 border-yellow-800 rounded-xl">
-    <Link
-      href="#"
-      class="flex flex-col size-full p-4 !text-white"
-    >
-      <p class="text-3xl font-bold">Embedded Team</p>
-      <p>
-        Learn about <b>embedded systems</b> and <b>hardware hacking</b> through competitions such as eCTF and CSAW ESC.
-      </p>
-    </Link>
-  </li>
-</ul>
-<h2>Build</h2>
-<ul class="flex columns-1 lg:columns-2 gap-4 lg:gap-8">
-  <li class="w-full min-h-40 bg-gradient-to-br from-blue-900 to-blue-400 border-2 border-blue-950 rounded-xl">
-    <Link
-      href="#"
-      class="flex flex-col size-full p-4 !text-white"
-    >
-      <p class="text-3xl font-bold">UIUCTF</p>
-      <p>
-        Help run our premier CTF event for the international security community, UIUCTF! Gain experience building <b>infrastructure</b> and developing <b>challenges</b>.
-      </p>
-    </Link>
-  </li>
-  <li class="w-full min-h-40 bg-gradient-to-br from-orange-900 to-orange-400 border-2 border-orange-950 rounded-xl">
-    <Link
-      href="#"
-      class="flex flex-col size-full p-4 !text-white"
-    >
-      <p class="text-3xl font-bold">Fall CTF</p>
-      <p>
-        Help create our annual Fall CTF event for UIUC students! Gain experience with <b>event management</b>, <b>challenge development</b>, and <b>infrastructure</b>.
-      </p>
-    </Link>
-  </li>
-</ul>
+<span id="sigpwny-stack" class="flex flex-col gap-2">
+  <span id="stack-learn">
+    <h2 class="leading-none">Learn</h2>
+    <ul class="flex flex-col md:flex-row gap-4 lg:gap-8">
+      <li class="w-full min-h-40 bg-gradient-to-br from-surface-000 to-primary border-2 border-primary rounded-xl">
+        <Link
+          href="/meetings/"
+          class="flex flex-col size-full p-4 !text-white"
+        >
+          <p class="text-3xl font-bold">Meetings</p>
+          <p>
+            Attend our weekly meetings to learn different skills in cybersecurity, such as <b>binary exploitation</b> and <b>cryptography</b>.
+          </p>
+        </Link>
+      </li>
+      <li class="w-full min-h-40 bg-gradient-to-br from-surface-000 to-primary border-2 border-primary rounded-xl">
+        <Link
+          href="/ctf/"
+          class="flex flex-col size-full p-4 !text-white"
+        >
+          <p class="text-3xl font-bold">Pwny CTF</p>
+          <p>
+            Practice skills learned in meetings by solving challenges on our own CTF platform! Challenges award points which can be used to progress through the club.
+          </p>
+        </Link>
+      </li>
+    </ul>
+  </span>
+  <span id="stack-compete">
+    <h2 class="leading-none">Compete</h2>
+    <ul class="flex flex-col lg:flex-row gap-4 lg:gap-8">
+      <li class="w-full min-h-40 bg-gradient-to-br from-red-900 to-red-500 border-2 border-red-950 rounded-xl">
+        <Link
+          href="#"
+          class="flex flex-col size-full p-4 !text-white"
+        >
+          <p class="text-3xl font-bold">Capture the Flag Team</p>
+          <p>
+            Compete in CTF events run by other teams to practice critical skills, such as <b>reverse-engineering</b> and <b>web hacking</b>.
+          </p>
+        </Link>
+      </li>
+      <li class="w-full min-h-40 bg-gradient-to-br from-purple-950 to-purple-400 border-2 border-purple-900 rounded-xl">
+        <Link
+          href="#"
+          class="flex flex-col size-full p-4 !text-white"
+        >
+          <p class="text-3xl font-bold">Purple Team <span class="inline-block align-middle ml-1 mb-1 text-lg uppercase px-1 m-0 rounded-md bg-white text-purple-800 max-h-fit max-w-fit select-none">New!</span></p>
+          <p>
+            Learn <b>red-teaming</b> (offensive) and <b>blue-teaming</b> (defensive) skills to secure systems and networks.
+          </p>
+        </Link>
+      </li>
+      <li class="w-full min-h-40 bg-gradient-to-br from-yellow-700 to-yellow-500 border-2 border-yellow-800 rounded-xl">
+        <Link
+          href="#"
+          class="flex flex-col size-full p-4 !text-white"
+        >
+          <p class="text-3xl font-bold">Embedded Team</p>
+          <p>
+            Learn about <b>embedded systems</b> and <b>hardware hacking</b> through competitions such as eCTF and CSAW ESC.
+          </p>
+        </Link>
+      </li>
+    </ul>
+  </span>
+  <span id="stack-build">
+    <h2 class="leading-none">Build</h2>
+    <ul class="flex flex-col md:flex-row gap-4 lg:gap-8">
+      <li class="w-full min-h-40 bg-gradient-to-br from-blue-900 to-blue-400 border-2 border-blue-950 rounded-xl">
+        <Link
+          href="#"
+          class="flex flex-col size-full p-4 !text-white"
+        >
+          <p class="text-3xl font-bold">UIUCTF</p>
+          <p>
+            Help run our premier CTF event for the international security community, UIUCTF! Gain experience building <b>infrastructure</b> and developing <b>challenges</b>.
+          </p>
+        </Link>
+      </li>
+      <li class="w-full min-h-40 bg-gradient-to-br from-orange-900 to-orange-400 border-2 border-orange-950 rounded-xl">
+        <Link
+          href="#"
+          class="flex flex-col size-full p-4 !text-white"
+        >
+          <p class="text-3xl font-bold">Fall CTF</p>
+          <p>
+            Help create our annual Fall CTF event for UIUC students! Gain experience with <b>event management</b>, <b>challenge development</b>, and <b>infrastructure</b>.
+          </p>
+        </Link>
+      </li>
+    </ul>
+  </span>
+</span>

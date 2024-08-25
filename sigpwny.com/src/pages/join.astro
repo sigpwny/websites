@@ -30,7 +30,7 @@ const discordLink = consts.socialLinks?.find((link: { name: string, url: string 
           </li>
           <li>
             If you are affiliated with UIUC, make sure to <a href="https://sigpwny.com/auth" target="_blank" rel="noopener noreferrer">authenticate</a> to
-            receive the @uiuc role and access club channels.
+            receive the <span class="font-mono font-bold rounded-md bg-pwny-orange/15 px-1 text-pwny-orange">@UIUC</span> role and access club channels.
           </li>
         </ul>
       </div>
@@ -45,33 +45,8 @@ const discordLink = consts.socialLinks?.find((link: { name: string, url: string 
 
     <section id="get-involved" class="py-8">
       <h1>How to Get Involved</h1>
-      <div class="grid gap-8 lg:grid-cols-3 pt-4 text-center">
-        <div class="panel">
-          <h2>Learn</h2>
-          <p>
-            Attending our weekly meetings is the easiest way to learn
-            security and meet others! Watch past meetings and find
-            upcoming meetings <Link href="/meetings/">here</Link>.
-          </p>
-        </div>
-        <div class="panel">
-          <h2>Compete</h2>
-          <p>
-            We play in cybersecurity competitions known as CTFs (capture the
-            flag). Collaborating as a team lets us learn from each other and
-            have fun!
-          </p>
-        </div>
-        <div class="panel">
-          <h2>Research</h2>
-          <p>
-            We have connections with professors and graduate students at <a href="https://spri.engr.illinois.edu/" target="_blank" rel="noopener noreferrer">SPR@I</a>.
-            We also support individual projects run by our members.
-          </p>
-        </div>
-      </div>
-      <p class="pt-4">
-        SIGPwny is open to all - there are no member applications, mandatory
+      <p class="max-w-prose pb-4">
+        SIGPwny meetings are open to all and designed to be drop-in. There are no member applications, mandatory
         meetings, or even prerequisite knowledge needed.
       </p>
       <SIGPwnyStack />
@@ -87,12 +62,10 @@ const discordLink = consts.socialLinks?.find((link: { name: string, url: string 
     </section>
 
     <section id="join-leadership" class="py-8">
-      <h1>FAQ / Get Involved</h1>
+      <h1>Frequently Asked Questions</h1>
       <p class="mt-4 mb-0">
-        Interested in learning more about the club? Want to get involved?
-
-        Check out our <Link href="/faq/">FAQ</Link> or reach out to a helper on
-        Discord!
+        Interested in learning more about the club? Check out our <Link href="/faq/">FAQ</Link>
+        or reach out to a <span class="font-mono font-bold rounded-md bg-pwny-green/15 px-1 text-pwny-green">@Helper</span> on Discord!
       </p>
     </section>
   </div>
