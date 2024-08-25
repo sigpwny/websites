@@ -27,6 +27,10 @@
     "status": 302,
     "destination": "/events/"
   },
+  "/events/*": {
+    "status": 302,
+    "destination": "/events/"
+  },
   "/fall": {
     "status": 302,
     "destination": "/SIGPwny_Fall_CTF_Sponsorship_2023.pdf"

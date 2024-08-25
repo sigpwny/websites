@@ -34,15 +34,14 @@ export default function Nav({ curr_path }: Props) {
     subpath[0]?.toLowerCase() === 'ctf'
   ) : false;
 
-  const Link = ({ href, className, activeClassName, children }: any) => {
+  const Link = ({ href, className, activeClassName, ...props }: any) => {
     const isActive = (href === path_name || href === '/' + subpath?.[0] + '/');
     return (
       <a
+        {...props}
         href={href}
         className={`${className ? className : ""} ${activeClassName && isActive ? activeClassName : ""}`}
-      >
-        {children}
-      </a>
+      />
     )
   };
 
@@ -176,7 +175,9 @@ export default function Nav({ curr_path }: Props) {
             >
               {/* Brand */}
               <Link
-                href="/ctf/"
+                href="https://ctf.sigpwny.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="nav-mobile-hide-when-unchecked flex flex-row max-w-fit gap-1 items-center text-primary hover:text-secondary lg:px-4 lg:py-2 max-lg:pt-4"
                 // activeClassName="text-surface-200"
               >

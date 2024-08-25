@@ -19,7 +19,7 @@ const sigpwnyConfig : ISiteConfig = {
     { name: `About`, url: `/about/` },
     { name: `Meetings`, url: `/meetings/` },
     { name: `Publications`, url: `/publications/`},
-    { name: `Events`, url: `/events/` },
+    // { name: `Events`, url: `/events/` },
     { name: `Sponsors`, url: `/sponsors/` },
   ],
   navCallToActionLinks: [
@@ -35,7 +35,7 @@ const sigpwnyConfig : ISiteConfig = {
   twitterUsername: `@sigpwny`,
   timezone: `America/Chicago`,
   flags: {
-    enableCtfd: true,
+    enableCtfd: false,
   },
 };
 
