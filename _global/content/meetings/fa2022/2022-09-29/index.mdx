@@ -4,7 +4,7 @@ time_start: 2022-09-29T18:00:00-05:00
 week_number: 5
 credit:
   - Thomas Quig
-  - Julius White
+  - Julius White V
   - Danny Poje
 featured: true
 location: Ceramics Building 218 + Zoom

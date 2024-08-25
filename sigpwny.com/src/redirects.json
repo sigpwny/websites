@@ -37,7 +37,7 @@
   },
   "/fallctf": {
     "status": 302,
-    "destination": "https://fallctf.sigpwny.com/"
+    "destination": "https://sigpwny.com/events/fallctf/2024/"
   },
   "/feedback/fa2023": {
     "status": 302,

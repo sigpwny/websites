@@ -29,6 +29,7 @@ const text_content = label ? label : (profile && profile.name ? calculateInitial
 {(profile && profile.profile_image) ? (
   <span class="skeleton-shimmer flex size-full rounded-full bg-surface-100 border-surface-200 border-2 select-none aspect-square">
     <Picture
+      pictureAttributes={{ class: "object-cover size-full" }}
       class="object-cover size-full"
       src={profile.profile_image}
       widths={[64, 300]}
