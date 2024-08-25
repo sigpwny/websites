@@ -1,13 +1,11 @@
 ---
 import Layout from '@/layouts/Base.astro';
-import consts from '@/consts';
 import Link from '@/components/Link.astro';
+import { SocialIcon } from '@/components/Icons';
 import SIGPwnyStack from '@/components/SIGPwnyStack.astro';
 import { Picture } from 'astro:assets';
 
 import imgWebHacking from '@/assets/2023-09-07-web-hacking-i.jpg';
-
-const discordLink = consts.socialLinks?.find((link: { name: string, url: string }) => link.name === 'Discord')?.url;
 ---
 <Layout
   title="Join"
@@ -21,8 +19,9 @@ const discordLink = consts.socialLinks?.find((link: { name: string, url: string 
           Come learn cybersecurity with 2000+ students, alumni, and
           professionals in our Discord server.
         </p>
-        <Link href={discordLink} class="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary">
-          Join Discord
+        <Link href="/discord" class="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary flex flex-row gap-2 items-center">
+          <SocialIcon name="Discord" />
+          <span>Join Discord</span>
         </Link>
         <ul class="list-decimal pl-6 pt-2">
           <li>

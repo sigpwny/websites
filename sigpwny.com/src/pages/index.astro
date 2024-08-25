@@ -3,6 +3,7 @@ import Layout from '@/layouts/Base.astro';
 import consts from '@/consts';
 import Link from '@/components/Link.astro';
 import { Picture } from 'astro:assets';
+import { SocialIcon } from '@/components/Icons';
 import SIGPwnyStack from '@/components/SIGPwnyStack.astro';
 import SIGPwnyMorphology from '@/components/SIGPwnyMorphology';
 
@@ -99,9 +100,6 @@ import imgHome6 from '@/assets/home-promo/home-6.jpg';
           As the cybersecurity club at the University of Illinois Urbana-Champaign, our mission is to 
           teach students cybersecurity through meetings, competitions, and research.
         </p>
-        <p>
-          <Link href="/join/#get-involved">See more about how to get involved with SIGPwny</Link>
-        </p>
       </div>
       <div class="panel mx-auto max-w-prose">
         <h2 class="text-3xl text-center">
@@ -118,48 +116,18 @@ import imgHome6 from '@/assets/home-promo/home-6.jpg';
     </div>
   </section>
 
-  <!-- <section id="meetings" class="pb-8">
-    <div class="flex flex-col sm:flex-row gap-1 justify-between mb-3">
-      <h1 class="m-0">
-        Meetings
-      </h1>
-      <Link href="/meetings/" class="self-start button !text-white bg-surface-100 hover:bg-surface-150">
-        <span>
-          View all
-        </span>
-        <ChevronRightRegular class="flex-none" />
+  <section id="join-us">
+    <div class="flex flex-col my-16">
+      <p class="text-4xl font-bold text-center">
+        Learn how to hack!
+      </p>
+      <p class="text-center">
+        Join SIGPwny on Discord today to start learning cybersecurity.
+      </p>
+      <Link href="/discord" class="btn-primary mx-auto flex flex-row gap-2 items-center">
+        <SocialIcon name="Discord" />
+        <span>Join Discord</span>
       </Link>
     </div>
-    <CardRow cards={meeting_cards} />
   </section>
-
-  <section id="publications" class="pb-8">
-    <div class="flex flex-col sm:flex-row gap-1 justify-between mb-3">
-      <h1 class="m-0">
-        Publications
-      </h1>
-      <Link href="/publications/" class="self-start button !text-white bg-surface-100 hover:bg-surface-150">
-        <span>
-          View all
-        </span>
-        <ChevronRightRegular class="flex-none" />
-      </Link>
-    </div>
-    <CardRow cards={publication_cards} />
-  </section>
-
-  <section id="events" class="pb-8">
-    <div class="flex flex-col sm:flex-row gap-1 justify-between mb-3">
-      <h1 class="m-0">
-        Events
-      </h1>
-      <Link href="/events/" class="self-start button !text-white bg-surface-100 hover:bg-surface-150">
-        <span>
-          View all
-        </span>
-        <ChevronRightRegular class="flex-none" />
-      </Link>
-    </div>
-    <CardRow cards={event_cards} />
-  </section> -->
 </Layout>
