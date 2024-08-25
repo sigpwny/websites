@@ -13,9 +13,10 @@ interface Props {
     background_color?: string;
     alt?: string;
   };
+  hover?: boolean;
 }
 
-const { heading, title, card_image } = Astro.props as Props;
+const { heading, title, card_image, hover } = Astro.props as Props;
 ---
 <style>
   .card {
@@ -34,22 +35,22 @@ const { heading, title, card_image } = Astro.props as Props;
       grow
       duration-100;
   }
-  .card-hover:hover .card {
+  :global(*:hover) > .card-hover {
     box-shadow: 14px 14px rgb(var(--rgb-primary));
     bottom: 7px;
     right: 7px;
   }
 </style>
 
-<div class="card">
+<div class:list={['card', hover ? 'card-hover' : null]}>
   <div class="aspect-video flex pointer-events-none select-none relative">
     <slot name="image">
     {card_image ? (
       <>
         {card_image.background ? (
           <Picture
-            pictureAttributes={{ class: "absolute h-full w-full overflow-hidden object-cover"}}
-            class="max-h-full max-w-full h-full w-full"
+            pictureAttributes={{ class: "absolute h-full w-full overflow-hidden"}}
+            class="object-cover h-full w-full"
             src={card_image.background}
             alt={card_image.alt ?? ""}
             widths={[300, 600]}

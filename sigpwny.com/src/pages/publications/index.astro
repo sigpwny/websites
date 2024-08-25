@@ -1,17 +1,27 @@
 ---
 import Layout from '@/layouts/Base.astro';
-import { getCollection, type CollectionEntry } from "astro:content";
-import PublicationCard from '@/components/Publication/Card.astro';
-const rawPublications = await getCollection('publications') as CollectionEntry<'publications'>[];
+import Link from '@/components/Link.astro';
+import Card from '@/components/Card.astro';
+import dayjs from 'dayjs';
+import { getCollection } from 'astro:content';
+
+const publications = (await getCollection('publications')).sort(
+  (a, b) => dayjs(b.data.date).diff(dayjs(a.data.date))
+);
 
 ---
 <Layout title="Publications">
   <h1>Publications</h1>
-  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 -ml-4">
-    {
-      rawPublications.map((publication) => (
-        <PublicationCard input={publication} />
-      ))
-    }
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+    {publications.map((p) => (
+      <Link href={`/publications/${p.id}/`} class="flex grow rounded-xl">
+        <Card
+          heading={p.data.publication_type.toUpperCase() + (p.data.publisher ? " • " + p.data.publisher : "")}
+          title={p.data.title}
+          card_image={p.data.card_image}
+          hover
+        />
+      </Link>
+    ))}
   </div>
 </Layout>
