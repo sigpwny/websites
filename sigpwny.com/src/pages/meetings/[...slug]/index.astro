@@ -56,7 +56,7 @@ const time_end = meeting.time_start && meeting.duration
 ---
 <Layout
   title={meeting.title}
-  description={`${meeting.semester}${meeting.week_number ? ' Week ' + weekNumber(meeting.week_number) : ''} • ${convertDate(meeting.time_start, "MMMM DD, YYYY", meeting.timezone)}`}
+  description={`${meeting.semester}${meeting.week_number != null ? ' Week ' + weekNumber(meeting.week_number) : ''} • ${convertDate(meeting.time_start, "MMMM DD, YYYY", meeting.timezone)}`}
   image={meeting.card_image?.foreground?.src ?? meeting.card_image?.background?.src}
   video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}
   type="article"
@@ -69,7 +69,7 @@ const time_end = meeting.time_start && meeting.duration
         </h1>
         {semester ? (
           <p class="font-mono m-0 order-first">
-            {semester}{meeting.week_number ? ` Week ${weekNumber(meeting.week_number)}` : null}
+            {semester}{meeting.week_number != null ? ` Week ${weekNumber(meeting.week_number)}` : null}
           </p>
         ) : null}
         {meeting.tags && meeting.tags.length > 0 ? (

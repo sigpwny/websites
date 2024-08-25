@@ -35,7 +35,10 @@ const profiles = await getProfilesFromNames(meeting.credit);
       <CountdownBadge time_start={meeting.time_start} time_close={time_close} client:load />
       <Link href={`/meetings/${input.id}/`} class="truncate">
         <span>
-          <span class="font-mono">Week {weekNumber(meeting.week_number)}</span>: {meeting.title}
+          {meeting.week_number != null ? (
+            <span class="font-mono">Week {weekNumber(meeting.week_number)}</span><span>:&nbsp;</span>
+          ) : null}
+          {meeting.title}
         </span>
       </Link>
     </div>
