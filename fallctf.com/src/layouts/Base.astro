@@ -14,9 +14,9 @@ const props: Omit<HeadProps, "site_name"> = Astro.props;
     <BaseHead {...props} site_name="fallctf.com" />
   </head>
   <body>
-    <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col items-center min-h-screen bg-black text-white">
       <Header />
-      <div class="container grow">
+      <div class="container">
         <slot />
       </div>
     </div>
