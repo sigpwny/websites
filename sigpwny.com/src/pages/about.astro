@@ -1,11 +1,8 @@
 ---
 import Layout from '@/layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { Picture } from 'astro:assets';
 import ProfileCard from '@/components/Profile/ProfileCard.astro';
-import SIGPwnyMorphology from '@/components/SIGPwnyMorphology';
 
-import pie_chart from '@/assets/meeting-format-chart.png';
 
 async function filterByRole(role: string) {
   return (await getCollection('profiles', ({ data }) => (
@@ -34,66 +31,12 @@ const alumni = (await filterByRole('alum')).sort(
   }
 );
 ---
-
 <Layout
   title="About"
   description="Learn about who SIGPwny is and our mission"
 >
   <div class="flex flex-col justify-between">
     <div class="flex flex-col gap-8">
-      <!-- <section id="acronym" class="py-8">
-        <div class="flex flex-col">
-          <SIGPwnyMorphology client:load />
-          <div class="flex flex-row justify-center">
-            <p>sig-<b>poh</b>-nee</p>
-          </div>
-        </div>
-      </section>
-      <section id="what-we-do">
-        <div class="text-center">
-          <div class="panel mx-auto max-w-prose">
-            <p class="font-bold text-4xl">
-              What do we do?
-            </p>
-            <p class="m-0">
-              As the cybersecurity club at the University of Illinois Urbana-Champaign, our mission is to 
-              teach students cybersecurity through meetings, competitions, and research.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section id="beginner-friendly">
-        <div class="text-center">
-          <div class="panel mx-auto max-w-prose">
-            <p class="font-bold text-4xl">
-              We're beginner-friendly
-            </p>
-            <p class="m-0">
-              We believe cybersecurity should be accessible to all, so we teach everything from the ground up. Our 
-              club content is designed to be approached by <em>anyone</em>, regardless of skill, major, or experience.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section id="philosophy">
-        <div class="text-center">
-          <div class="panel mx-auto max-w-prose">
-            <p class="font-bold text-4xl">
-              Our teaching philosophy
-            </p>
-            <p class="m-0">
-              We believe that the best way to learn is by doing &ndash; so we're not going to lecture you for an hour. 
-              Our meetings are typically 15 minutes of presentation followed by 45 minutes of hands-on hacking.
-            </p>
-            <Picture
-              class="mx-auto rounded-xl pointer-events-none w-1/2 sm:w-1/3"
-              src={pie_chart}
-              alt="A pie chart showing the 15/45 meeting time breakdown."
-            />
-          </div>
-        </div>
-      </section> -->
-
       <section id="who-we-are">
         <div class="panel mx-auto max-w-prose pb-8">
           <p class="font-bold text-4xl text-center">Who We Are</p>
