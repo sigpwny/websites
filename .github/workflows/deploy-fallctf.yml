@@ -33,10 +33,12 @@ jobs:
         uses: ./.github/actions/build-mdbook
         with:
           book-directory: fallctf-2023
+
       - name: Build 2024 mdbook
         uses: ./.github/actions/build-mdbook
         with:
           book-directory: fallctf-2024
+
       - name: Build site
         uses: ./.github/actions/build-astro
         with:

@@ -26,4 +26,4 @@ runs:
       echo "$(pwd)/bin" >> $GITHUB_PATH
   - name: Build site
     shell: bash
-    run: cd ${{ inputs.book-directory }} && mdbook build
+    run: cd guides/${{ inputs.book-directory }} && mdbook build
