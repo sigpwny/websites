@@ -5,7 +5,7 @@ on:
       - '_global/**'
       - '.github/**'
       - 'sigpwny.com/**'
-      - 'guides/pwnyctf/**'
+      - 'guides'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
