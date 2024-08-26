@@ -13,7 +13,6 @@ inputs:
     default: 'book'
 runs:
   using: composite
-  runs-on: ubuntu-latest
   steps:
   - uses: actions/checkout@master
   - name: Install Rust
