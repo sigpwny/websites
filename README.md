@@ -5,7 +5,14 @@
 
 The SIGPwny website monorepo, built with Astro.
 
+
 ## Installing and Building
+
+Clone and init submodules
+```
+git clone --recurse-submodules -j8 git@github.com:sigpwny/websites.git
+```
+
 Clean install all node packages:
 ```
 npm ci
