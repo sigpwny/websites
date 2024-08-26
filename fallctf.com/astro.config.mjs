@@ -34,6 +34,10 @@ export default defineConfig({
           {
             src: '../guides/fallctf-2024/book/*',
             dest: 'guide-2024'
+          },
+          {
+            src: '../guides/fallctf-2023/book/*',
+            dest: 'guide-2023'
           }
         ]
       })

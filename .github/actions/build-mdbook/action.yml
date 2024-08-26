@@ -1,16 +1,11 @@
 name: Build mdbook
 description: Builds an mdbook site
 inputs:
-  working-directory:
-    description: site working directory
-    required: true
-    type: string
-    default: '.'
   book-directory:
     description: Output directory of built mdbook site (from working directory)
     required: true
-    type: string
-    default: 'book'
+    type: array
+    
 runs:
   using: composite
   steps:
@@ -31,4 +26,4 @@ runs:
       echo "$(pwd)/bin" >> $GITHUB_PATH
   - name: Build site
     shell: bash
-    run: cd ${{ inputs.working-directory }}/${{ inputs.book-directory }} && mdbook build
+    run: cd ${{ inputs.book-directory }} && mdbook build

@@ -17,7 +17,7 @@ env:
   CI_WORKING_DIR: fallctf.com
   CI_BUILD_DIR: dist
   CI_CACHE_DIR: .cache
-  CI_BOOK_DIR: guide-2024
+  CI_BOOK_DIR: 
 jobs:
   deploy:
     name: Deploy (fallctf.com)
@@ -29,11 +29,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - name: Build mdbook
+      - name: Build 2023 mdbook
         uses: ./.github/actions/build-mdbook
         with:
-          working-directory: ${{ env.CI_WORKING_DIR }}
-          book-directory: ${{ env.CI_BOOK_DIR }}
+          book-directory: fallctf-2023
+      - name: Build 2024 mdbook
+        uses: ./.github/actions/build-mdbook
+        with:
+          book-directory: fallctf-2024
       - name: Build site
         uses: ./.github/actions/build-astro
         with:
