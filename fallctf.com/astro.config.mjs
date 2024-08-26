@@ -32,7 +32,7 @@ export default defineConfig({
       viteStaticCopy({
         targets: [
           {
-            src: 'guide-2024/book/*',
+            src: '../guides/fallctf-2024/book/*',
             dest: 'guide-2024'
           }
         ]

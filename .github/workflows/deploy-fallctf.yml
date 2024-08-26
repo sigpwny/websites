@@ -8,6 +8,7 @@ on:
       - '_global/content/profiles/**'
       - '.github/**'
       - 'fallctf.com/**'
+      - 'guides/fallctf-*/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
