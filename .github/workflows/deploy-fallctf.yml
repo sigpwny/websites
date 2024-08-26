@@ -8,6 +8,7 @@ on:
       - '_global/content/profiles/**'
       - '.github/**'
       - 'fallctf.com/**'
+      - 'guides/fallctf-*/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -16,6 +17,7 @@ env:
   CI_WORKING_DIR: fallctf.com
   CI_BUILD_DIR: dist
   CI_CACHE_DIR: .cache
+  CI_BOOK_DIR: 
 jobs:
   deploy:
     name: Deploy (fallctf.com)
@@ -26,6 +28,19 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Build 2023 mdbook
+        uses: ./.github/actions/build-mdbook
+        with:
+          book-directory: fallctf-2023
+
+      - name: Build 2024 mdbook
+        uses: ./.github/actions/build-mdbook
+        with:
+          book-directory: fallctf-2024
 
       - name: Build site
         uses: ./.github/actions/build-astro

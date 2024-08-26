@@ -38,6 +38,10 @@ export default defineConfig({
           {
             src: '../_global/content/meetings/*',
             dest: 'meetings'
+          },
+          {
+            src: '../guides/pwnyctf/book/*',
+            dest: 'docs'
           }
         ]
       })
