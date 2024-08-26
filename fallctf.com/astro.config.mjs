@@ -8,6 +8,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from "@astrojs/tailwind";
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,6 +27,18 @@ export default defineConfig({
     tailwind(),
     react(),
   ],
+  vite: {
+    plugins: [
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'guide-2024/book/*',
+            dest: 'guide-2024'
+          }
+        ]
+      })
+    ]
+  },
   adapter: netlify(),
   cacheDir: './.cache',
   experimental: {
