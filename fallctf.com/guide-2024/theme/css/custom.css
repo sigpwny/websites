@@ -1,0 +1,8 @@
+#back-button {
+    color: var(--icons);
+    text-decoration: none;
+}
+
+#back-button:hover {
+    color: var(--icons-hover);
+}
