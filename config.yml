@@ -14,6 +14,8 @@ collections:
     label: 'Meetings'
     label_singular: 'Meeting'
     folder: '_global/content/meetings'
+    extension: 'mdx'
+    format: 'frontmatter'
     identifier_field: 'title'
     create: true
     media_folder: ''
@@ -52,6 +54,8 @@ collections:
     label: 'Events'
     label_singular: 'Event'
     folder: '_global/content/events'
+    extension: 'mdx'
+    format: 'frontmatter'
     create: true
     media_folder: ''
     public_folder: ''
@@ -89,6 +93,8 @@ collections:
     label: 'Publications'
     label_singular: 'Publication'
     folder: '_global/content/publications'
+    extension: 'mdx'
+    format: 'frontmatter'
     create: true
     media_folder: ''
     public_folder: ''
@@ -121,6 +127,8 @@ collections:
     label: 'Members'
     label_singular: 'Member'
     folder: '_global/content/profiles/member'
+    extension: 'mdx'
+    format: 'frontmatter'
     create: true
     media_folder: ''
     public_folder: ''
@@ -147,6 +155,8 @@ collections:
     label: 'Organizations'
     label_singular: 'Organization'
     folder: '_global/content/profiles/org'
+    extension: 'mdx'
+    format: 'frontmatter'
     create: true
     media_folder: ''
     public_folder: ''
