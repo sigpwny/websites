@@ -8,7 +8,7 @@ export default function SIGPwnyMorphology() {
     setFirstRender(false)
     setTimeout(() => {
       setExpanded(true)
-    }, 200)
+    }, 1000)
   }
   const variants = {
     minimized: {
