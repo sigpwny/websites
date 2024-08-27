@@ -6,7 +6,7 @@ export const PublicationSchema = ({ image }) => (
     title: z.string(),
     date: z.coerce.date(),
     credit: z.array(z.string()).default(["SIGPwny"]),
-    publication_type: z.enum(['blog', 'paper', 'talk', 'news']).default('blog'),
+    publication_type: z.enum(['blog', 'paper', 'talk', 'news', 'writeup']).default('blog'),
     publisher: z.optional(z.string()),
     description: z.optional(z.string()),
     card_image: z.optional(CardImageSchema(image)),
