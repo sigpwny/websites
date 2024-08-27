@@ -98,6 +98,9 @@ collections:
     create: true
     media_folder: ''
     public_folder: ''
+    nested:
+      depth: 100
+      summary: '{{title}}'
     fields:
       - {label: 'Title', name: 'title', widget: 'string', hint: 'Example: "Announcing our new site!"'}
       - {label: 'Date', name: 'date', widget: 'date', format: 'YYYY-MM-DD', hint: ''}
