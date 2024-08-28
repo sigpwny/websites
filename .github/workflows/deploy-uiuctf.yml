@@ -38,6 +38,7 @@ jobs:
           cache-directory: ${{ env.CI_CACHE_DIR }}
 
       - name: Deploy to Cloudflare Pages
+        if: github.actor != 'dependabot[bot]'
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
