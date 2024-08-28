@@ -139,7 +139,7 @@ async function main() {
         console.log(snowflakeEventLookup);
 
         const meetingsToUpdate = upcomingMeetings.map((meeting: any) : Promise<GuildScheduledEvent> => {
-            const { data : { title, location, card_image, week_number, time_end, time_start }, body, filePath, slug } = meeting;
+            const { data : { title, location, card_image, week_number, time_end, time_start, description }, body, filePath, slug } = meeting;
 
             // Resolve filepath to image
             // const contentDir = path.join(__dirname, '..', '..', path.dirname(filePath));
@@ -148,10 +148,11 @@ async function main() {
             const url = `https://sigpwny.com${slug}`;
 
             const cleanedBody = body.replace('## Summary\n', '');
-            const description = url + '\n' + cleanedBody;
+            const descriptionText = description ? description : cleanedBody;
+            const fullDescription = url + '\n' + descriptionText;
 
             const metadata : GuildScheduledEventCreateOptions = {
-                description: description.length > 1000 ? description.substring(0, 997) + '...' : description,
+                description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
                     location: location,
                 },
@@ -172,7 +173,7 @@ async function main() {
         })
 
         const eventsToUpdate = upcomingEvents.map((event: any) : Promise<GuildScheduledEvent> => {
-            const { data : { title, location, card_image, links, time_end, time_start }, body, filePath } = event;
+            const { data : { title, location, card_image, links, time_end, time_start, description }, body, filePath } = event;
 
             // Resolve filepath to image
             const url = links.find((link: any) => link.name === 'website')?.url;
@@ -180,10 +181,11 @@ async function main() {
             // const contentDir = path.join(__dirname, '..', '..', path.dirname(filePath));
             const cardImageURL = (card_image && card_image.background) ? `https://sigpwny.com${card_image.background.src}` : undefined;
 
-            const description = url ? url + '\n' + body : body;
+            const descriptionText = description ? description : body;
+            const fullDescription = url ? url + '\n' + descriptionText : descriptionText;
 
             const metadata : GuildScheduledEventCreateOptions = {
-                description: description.length > 1000 ? description.substring(0, 997) + '...' : description,
+                description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
                     location: location,
                 },
