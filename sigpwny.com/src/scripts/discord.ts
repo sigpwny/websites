@@ -50,7 +50,8 @@ async function main() {
             time_end: dayjs(meeting.data.time_start).tz(meeting.data.timezone).add(dayjs.duration(meeting.data.duration)),
         }
       }  
-    }).filter((meeting: any) => meeting.data.time_start > dayjs());
+    }).filter((meeting: any) => meeting.data.time_start > dayjs())
+    .filter((meeting: any) => meeting.data.featured);
 
     const events = await fetchEvents();
 
@@ -63,7 +64,7 @@ async function main() {
                 time_end: dayjs(event.data.time_start).tz(event.data.timezone).add(dayjs.duration(event.data.duration)),
             }
         }  
-    }).filter((event: any) => event.data.time_start > dayjs());
+    }).filter((event: any) => event.data.time_start > dayjs())
     /*
     z.object({
         title: z.string(),
