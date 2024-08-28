@@ -3,7 +3,7 @@ import Layout from '@/layouts/Base.astro';
 import Link from '@/components/Link.astro';
 import MeetingRow from '@/components/Meeting/Row.astro';
 import MeetingTime from '@/components/Meeting/Time.astro';
-
+import CalendarSubscribe from '@/components/CalendarSubscribe';
 import {
   convertDate,
   getMeetings,
@@ -52,11 +52,16 @@ const meetingsBySemester = rawMeetings.reduce(
           location="Location: TBD"
         />
       </div>
-      <p class="max-w-prose pb-2">
-        General meetings are held weekly in-person and online on Zoom.
-        Recordings are posted on our <Link href="https://www.youtube.com/@sigpwny">YouTube</Link>.
-        See the schedule below for specific meeting details.
-      </p>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between">
+        <p class="max-w-prose pb-2">
+          General meetings are held weekly in-person and online on Zoom.
+          Recordings are posted on our <Link href="https://www.youtube.com/@sigpwny">YouTube</Link>.
+          See the schedule below for specific meeting details.
+        </p>
+        <div class="pb-4 flex">
+          <CalendarSubscribe client:load />
+        </div>
+      </div>
       <div class="panel">
         {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
           <div id={semester}>
