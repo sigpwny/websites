@@ -13,6 +13,7 @@ import {
 import {
   CalendarRegular,
   CalendarSyncRegular,
+  CheckmarkCircleFilled,
   LinkRegular
 } from '@/components/Icons/fluentui';
 
@@ -107,9 +108,7 @@ export default function CalendarSubscribe(props: any) {
                     Copy Link (webcal)
                   </span>
                   {copied && (
-                    <span className="inline align-middle ml-2 text-primary">
-                      &#10004;
-                    </span>
+                    <CheckmarkCircleFilled className="ml-auto inline align-middle text-primary" />
                   )}
                 </button>
               </li>

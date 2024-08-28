@@ -28,7 +28,6 @@
     "@astrojs/tailwind": "^5.1.0",
     "@floating-ui/dom": "^1.6.8",
     "@floating-ui/react": "^0.26.20",
-    "@headlessui/react": "^1.7.19",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
     "astro": "^4.14.3",
