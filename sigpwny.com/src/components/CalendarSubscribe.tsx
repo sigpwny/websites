@@ -60,7 +60,7 @@ export default function CalendarSubscribe(props: any) {
               </li>
               <li>
                 <a
-                  href="/gcal/"
+                  href="/gcal"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -72,7 +72,7 @@ export default function CalendarSubscribe(props: any) {
               </li>
               <li>
                 <a
-                  href="/outlook/"
+                  href="/outlook"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
