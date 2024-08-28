@@ -1,0 +1,12 @@
+.pwny-menu {
+  @apply isolate bg-surface-200/70 border-2 border-surface-250 backdrop-blur-xl shadow-lg rounded-lg flex flex-col;
+}
+
+.pwny-menu ul {
+  @apply p-1 flex flex-col gap-1;
+}
+
+.pwny-menu a,
+.pwny-menu button {
+  @apply w-full !text-white flex flex-row grow gap-2 items-center px-1 rounded-md hover:bg-surface-250 transition-colors;
+}

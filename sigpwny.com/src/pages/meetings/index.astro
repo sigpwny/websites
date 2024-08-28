@@ -3,9 +3,7 @@ import Layout from '@/layouts/Base.astro';
 import Link from '@/components/Link.astro';
 import MeetingRow from '@/components/Meeting/Row.astro';
 import MeetingTime from '@/components/Meeting/Time.astro';
-import {
-  CalendarRegular,
-} from '@/components/Icons/fluentui';
+import CalendarSubscribe from '@/components/CalendarSubscribe';
 import {
   convertDate,
   getMeetings,
@@ -55,20 +53,13 @@ const meetingsBySemester = rawMeetings.reduce(
         />
       </div>
       <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between">
-
         <p class="max-w-prose pb-2">
           General meetings are held weekly in-person and online on Zoom.
           Recordings are posted on our <Link href="https://www.youtube.com/@sigpwny">YouTube</Link>.
           See the schedule below for specific meeting details.
         </p>
         <div class="pb-4 flex">
-          <!-- TODO gcal/cal support -->
-          <Link href="/gcal" class="btn-primary flex flex-row gap-2 items-center">
-            <CalendarRegular className="flex-none text-black" />
-            <span class="inline align-middle">
-              Subscribe to calendar
-            </span>
-          </Link>
+          <CalendarSubscribe client:load />
         </div>
       </div>
       <div class="panel">
