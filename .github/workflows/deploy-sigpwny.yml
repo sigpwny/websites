@@ -57,6 +57,3 @@ jobs:
           working-directory: ${{ env.CI_WORKING_DIR }}
           build-directory: ${{ env.CI_BUILD_DIR }}
           cache-directory: ${{ env.CI_CACHE_DIR }}
-        secrets:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
