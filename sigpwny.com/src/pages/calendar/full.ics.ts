@@ -5,7 +5,6 @@ import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
 import {
   createICalendarDescription,
-  createICalendarDescriptionAppleCalendar,
   createICalendarLocation,
   createICalendarUID
 } from '@/utils/icalendar';
