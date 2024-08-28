@@ -21,6 +21,8 @@ import {
   getYouTubeEmbedUrl,
   weekNumber
 } from '@/utils/meetings';
+import locations from '@/locations.json';
+import { createICalendarLocation } from '@/utils/icalendar';
 import { getProfilesFromNames } from '@/utils/profiles';
 // import { Tooltip } from '@/components/Tooltip';
 
@@ -53,6 +55,7 @@ const time_start = meeting.time_start ? dayjs(meeting.time_start).tz(meeting.tim
 const time_end = meeting.time_start && meeting.duration
   ? dayjs(meeting.time_start).tz(meeting.timezone).add(dayjs.duration(meeting.duration))
   : undefined;
+const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 ---
 <Layout
   title={meeting.title}
@@ -135,9 +138,20 @@ const time_end = meeting.time_start && meeting.duration
           {meeting.location ? (
             <div class="flex flex-row gap-2 items-center">
               <LocationRegular className="flex-none text-primary" />
-              <span class="inline align-middle">
-                {meeting.location}
-              </span>
+              {iCalendarLocation?.title ? (
+                <a
+                  class="inline align-middle !underline underline-offset-2"
+                  href={`https://maps.google.com/?q=${iCalendarLocation.title}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {meeting.location}
+                </a>
+              ) : (
+                <span class="inline align-middle">
+                  {meeting.location}
+                </span>
+              )}
             </div>
           ) : null}
         </div>

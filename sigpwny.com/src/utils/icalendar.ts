@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import type { ICalLocation } from "ical-generator";
+import type { ICalLocationWithTitle } from "ical-generator";
 
 export function createICalendarUID(uniq_id: string, domain: string) {
   const hash = crypto.createHash('sha256').update(uniq_id).digest('hex');
@@ -31,10 +31,10 @@ export function createICalendarLocation(locations: any[], init_loc?: string) {
         address: full_loc.address,
         radius: full_loc.radius ?? 100.0,
         geo: full_loc.geo,
-      } as ICalLocation;
+      } as ICalLocationWithTitle;
     }
   }
   return {
     title: init_loc
-  } as ICalLocation;
+  } as ICalLocationWithTitle;
 }
