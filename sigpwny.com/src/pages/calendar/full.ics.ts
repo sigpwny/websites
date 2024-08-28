@@ -14,6 +14,7 @@ import {
 } from '@/utils/meetings';
 import consts from '@/consts';
 import locations from '@/locations.json';
+import { getCollection, type CollectionEntry } from "astro:content";
 
 dayjs.extend(duration);
 dayjs.extend(utc);
@@ -49,6 +50,32 @@ export async function GET() {
       },
     });
   });
+
+  const events = await getCollection('events')  as CollectionEntry<'events'>[];
+  events.forEach(({ data, slug }) => {
+    const { title, description, location, time_start, duration, ical, links } = data;
+
+    const primaryLink = links.find((l: { name: String, url: String }) => ['website'].includes(l.name.toLowerCase())) || null;
+    ics.createEvent({
+      id: createICalendarUID(`event-${time_start}-${title}`, site.hostname),
+      sequence: ical?.revision ?? 0,
+      start: dayjs.utc(time_start),
+      end: dayjs.utc(time_start).add(dayjs.duration(duration)),
+      summary: ical?.summary || title,
+      description: ical?.description ?? createICalendarDescription(
+        description,
+        location,
+        new URL(slug, site.href).href,
+        ical?.url ?? primaryLink
+      ),
+      location: createICalendarLocation(locations, location),
+      url: ical?.url,
+      x: {
+        // TODO: Discord event metadata
+      },
+    });
+  })
+
   return new Response(
     ics.toString(),
   );
