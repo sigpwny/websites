@@ -60,7 +60,4 @@ runs:
     - name: Create discord events
       run: npm run discord
       shell: bash
-      env:
-        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
       working-directory: ${{ inputs.working-directory }}
