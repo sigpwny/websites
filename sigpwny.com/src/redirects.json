@@ -1,4 +1,20 @@
 {
+  "/applecal": {
+    "status": 302,
+    "destination": "webcal://sigpwny.com/calendar/full/apple.ics"
+  },
+  "/cal": {
+    "status": 302,
+    "destination": "webcal://sigpwny.com/calendar/full.ics"
+  },
+  "/gcal": {
+    "status": 302,
+    "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/full.ics"
+  },
+  "/outlook": {
+    "status": 302,
+    "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/full.ics&name=SIGPwny"
+  },
   "/auth": {
     "status": 302,
     "destination": "https://shib.sigpwny.com/signup/485104508175646751"
@@ -43,14 +59,6 @@
     "status": 302,
     "destination": "https://forms.gle/MopguuPTjGhe8UYUA"
   },
-  "/cal": {
-    "status": 302,
-    "destination": "webcal://sigpwny.com/calendar/full.ics"
-  },
-  "/gcal": {
-    "status": 302,
-    "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/full.ics"
-  },
   "/github": {
     "status": 302,
     "destination": "https://github.com/sigpwny"
@@ -86,10 +94,6 @@
   "/oldest": {
     "status": 302,
     "destination": "https://sigpwny.github.io/pony-site/old/"
-  },
-  "/outlook": {
-    "status": 302,
-    "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/full.ics&name=SIGPwny"
   },
   "/pony-site": {
     "status": 302,

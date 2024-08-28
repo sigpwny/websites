@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
 import {
-  createICalendarDescription,
   createICalendarDescriptionAppleCalendar,
   createICalendarLocation,
   createICalendarUID
@@ -38,7 +37,7 @@ export async function GET() {
       start: dayjs.utc(m.time_start),
       end: dayjs.utc(m.time_start).add(dayjs.duration(m.duration)),
       summary: m.ical?.summary ?? m.title,
-      description: m.ical?.description ?? createICalendarDescription(
+      description: m.ical?.description ?? createICalendarDescriptionAppleCalendar(
         m.description,
         m.location,
         new URL(meeting.slug, site.href).href,
@@ -63,7 +62,7 @@ export async function GET() {
       start: dayjs.utc(e.time_start),
       end: dayjs.utc(e.time_start).add(dayjs.duration(e.duration)),
       summary: e.ical?.summary ?? e.title,
-      description: e.ical?.description ?? createICalendarDescription(
+      description: e.ical?.description ?? createICalendarDescriptionAppleCalendar(
         e.description,
         e.location,
         primaryLink?.url,

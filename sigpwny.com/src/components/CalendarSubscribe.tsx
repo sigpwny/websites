@@ -48,7 +48,7 @@ export default function CalendarSubscribe(props: any) {
             <ul>
               <li>
                 <a
-                  href="webcal://sigpwny.com/calendar/full.ics"
+                  href="webcal://sigpwny.com/calendar/full/apple.ics"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

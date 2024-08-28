@@ -13,6 +13,19 @@ export function createICalendarDescription(
   video_url?: string
 ) {
   const str_page_url = page_url ? `${page_url}\n\n` : "";
+  const str_location = location ? `Location: ${location}\n` : "";
+  const str_video_url = video_url ? `Video: ${video_url}\n` : "";
+  const str_description = description ? `\n${description}\n\n` : "";
+  return `${str_page_url}${str_location}${str_video_url}${str_description}`.trim();
+}
+
+export function createICalendarDescriptionAppleCalendar(
+  description?: string,
+  location?: string,
+  page_url?: string,
+  video_url?: string
+) {
+  const str_page_url = page_url ? `${page_url}\n\n` : "";
   const str_location = location ? `Location: ${location}\n\n` : "";
   const str_description = description ? `${description}\n\n` : "";
   const str_video_url = video_url ? `----( Video Call )----\n${video_url}\n---===---\n\n` : "";
