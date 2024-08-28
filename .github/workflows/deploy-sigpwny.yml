@@ -50,3 +50,12 @@ jobs:
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           workingDirectory: ${{ env.CI_WORKING_DIR }}
           directory: ${{ env.CI_BUILD_DIR }}
+
+      - name: Create discord events
+        uses: ./.github/actions/build-discord
+        with:
+          working-directory: ${{ env.CI_WORKING_DIR }}
+          build-directory: ${{ env.CI_BUILD_DIR }}
+          cache-directory: ${{ env.CI_CACHE_DIR }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
