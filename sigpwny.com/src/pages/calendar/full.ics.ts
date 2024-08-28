@@ -52,10 +52,10 @@ export async function GET() {
   });
 
   const events = await getCollection('events')  as CollectionEntry<'events'>[];
-  events.forEach(({ data, slug }) => {
+  events.forEach(({ data }) => {
     const { title, description, location, time_start, duration, ical, links } = data;
 
-    const primaryLink = links.find((l: { name: String, url: String }) => ['website'].includes(l.name.toLowerCase())) || null;
+    const primaryLink = links.find((l: { name: String, url: String }) => ['website'].includes(l.name.toLowerCase()));
     ics.createEvent({
       id: createICalendarUID(`event-${time_start}-${title}`, site.hostname),
       sequence: ical?.revision ?? 0,
@@ -65,8 +65,8 @@ export async function GET() {
       description: ical?.description ?? createICalendarDescription(
         description,
         location,
-        new URL(slug, site.href).href,
-        ical?.url ?? primaryLink
+        ical?.url ?? primaryLink?.url,
+        ical?.url ?? primaryLink?.url
       ),
       location: createICalendarLocation(locations, location),
       url: ical?.url,
