@@ -58,6 +58,7 @@ runs:
       working-directory: ${{ inputs.working-directory }}
 
     - name: Create discord events
-      run: npm run discord
+      # https://github.com/nodejs/node/issues/50993
+      run: touch .env && npm run discord
       shell: bash
       working-directory: ${{ inputs.working-directory }}
