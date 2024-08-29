@@ -25,8 +25,8 @@ async function main() {
             return JSON.parse(data);
         }
 
-        const response = await fetch('https://sigpwny.com/meetings/all.json');
-        return await response.json();
+        // const response = await fetch('https://sigpwny.com/meetings/all.json');
+        // return await response.json();
     }
     
     const fetchEvents = async () => {
@@ -36,8 +36,8 @@ async function main() {
             return JSON.parse(data);
         }
 
-        const response = await fetch('https://sigpwny.com/events/all.json');
-        return await response.json();
+        // const response = await fetch('https://sigpwny.com/events/all.json');
+        // return await response.json();
     }
 
     const meetings = await fetchMeetings();
@@ -169,13 +169,13 @@ async function main() {
             }
             if (existingMetadata) {
                 if (existingMetadata.creator?.bot !== true) {
-                    console.log('Refusing to edit non-bot event', title);
+                    console.log(`Refusing to edit non-bot meeting "${title}"`);
                     return Promise.resolve({} as GuildScheduledEvent);
                 }
-                console.log('Editing meeting', title);
+                console.log(`Editing meeting "${title}"`);
                 return guild.scheduledEvents.edit(existingMetadata.id, metadata);
             } else {
-                console.log('Creating meeting', title);
+                console.log(`Creating meeting "${title}"`);
                 return guild.scheduledEvents.create(metadata);
             }
         })
@@ -207,16 +207,18 @@ async function main() {
             }
             if (url && existingMetadata) {
                 if (existingMetadata.creator?.bot !== true) {
-                    console.log('Refusing to edit non-bot event', title);
+                    console.log(`Refusing to edit non-bot event "${title}"`);
                     return Promise.resolve({} as GuildScheduledEvent);
                 }
-                console.log('Editing event', title);
-                return guild.scheduledEvents.edit(existingMetadata.id, metadata);
+                console.log(`Editing event "${title}"`);
+                return Promise.resolve({} as GuildScheduledEvent);
+                // return guild.scheduledEvents.edit(existingMetadata.id, metadata);
             } else if (url) {
-                console.log('Creating event', title);
-                return guild.scheduledEvents.create(metadata);
+                console.log(`Creating event "${title}"`);
+                return Promise.resolve({} as GuildScheduledEvent);
+                // return guild.scheduledEvents.create(metadata);
             } else {
-                console.log('Refusing to create event without a URL', title);
+                console.log(`Refusing to create/edit event "${title}"`);
                 return Promise.resolve({} as GuildScheduledEvent);
             }
         })
