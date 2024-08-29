@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { Client, GatewayIntentBits, Events, type GuildScheduledEventCreateOptions, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEvent, type GuildScheduledEventEditOptions } from 'discord.js';
+import { Client, GatewayIntentBits, Events, type GuildScheduledEventCreateOptions, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEvent, type GuildScheduledEventEditOptions, GuildScheduledEventStatus } from 'discord.js';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
@@ -25,8 +25,8 @@ async function main() {
             return JSON.parse(data);
         }
 
-        const response = await fetch('https://sigpwny.com/meetings/all.json');
-        return response.json();
+        // const response = await fetch('https://sigpwny.com/meetings/all.json');
+        // return await response.json();
     }
     
     const fetchEvents = async () => {
@@ -36,8 +36,8 @@ async function main() {
             return JSON.parse(data);
         }
 
-        const response = await fetch('https://sigpwny.com/events/all.json');
-        return await response.json();
+        // const response = await fetch('https://sigpwny.com/events/all.json');
+        // return await response.json();
     }
 
     const meetings = await fetchMeetings();
@@ -117,24 +117,26 @@ async function main() {
         console.log(`Logged in as ${readyClient.user.tag}`);
         const guild = await client.guilds.fetch(process.env.DISCORD_SERVER_ID || '');
         const discordEvents = await guild.scheduledEvents.fetch();
-        const snowflakeMeetingLookup = discordEvents.reduce((o, { description, id }) => {
+        const snowflakeMeetingLookup = discordEvents.reduce((o, event) => {
+            const { description } = event;
             // Find url in description using regex and extract the slug
             const url = (description || '').match(/https:\/\/sigpwny.com([a-zA-Z0-9-\/]+)/);
             if (url) {
                 const slug = url[1];
-                o[slug] = id; 
+                o[slug] = event; 
             }
             return o;
-        }, {} as Record<string, string>);
+        }, {} as Record<string, GuildScheduledEvent<GuildScheduledEventStatus>>);
 
-        const snowflakeEventLookup = discordEvents.reduce((o, { description, id }) => {
+        const snowflakeEventLookup = discordEvents.reduce((o, event) => {
             // Find url in description using regex and extract the slug
+            const { description } = event;
             const url = (description || '').match(urlRegex);
             if (url) {
-                o[url[0]] = id; 
+                o[url[0]] = event; 
             }
             return o;
-        }, {} as Record<string, string>);
+        }, {} as Record<string, GuildScheduledEvent<GuildScheduledEventStatus>>);
 
         console.log(snowflakeMeetingLookup);
         console.log(snowflakeEventLookup);
@@ -152,23 +154,28 @@ async function main() {
             const descriptionText = description ? description : cleanedBody;
             const fullDescription = url + '\n' + descriptionText;
 
+            const existingMetadata = snowflakeMeetingLookup[slug];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
                     location: location,
                 },
                 entityType: GuildScheduledEventEntityType.External,
-                image: cardImageURL ? Buffer.from(cardImageURL) : undefined,
+                image: cardImageURL || existingMetadata?.coverImageURL({}) || undefined,
                 name: (week_number !== undefined) ? `Week ${zeroPad(week_number, 2)}: ${title}` : title,
                 privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly,
                 scheduledStartTime: time_start.toDate(),
-                scheduledEndTime: time_end ? time_end.toDate() : undefined,
+                scheduledEndTime: time_end ? time_end.toDate() : (existingMetadata?.scheduledEndAt || undefined),
             }
-            if (snowflakeMeetingLookup[slug]) {
-                console.log('Editing meeting', title);
-                return guild.scheduledEvents.edit(snowflakeMeetingLookup[slug], metadata);
+            if (existingMetadata) {
+                if (existingMetadata.creator?.bot !== true) {
+                    console.log(`Refusing to edit non-bot meeting "${title}"`);
+                    return Promise.resolve({} as GuildScheduledEvent);
+                }
+                console.log(`Editing meeting "${title}"`);
+                return guild.scheduledEvents.edit(existingMetadata.id, metadata);
             } else {
-                console.log('Creating meeting', title);
+                console.log(`Creating meeting "${title}"`);
                 return guild.scheduledEvents.create(metadata);
             }
         })
@@ -185,24 +192,34 @@ async function main() {
             const descriptionText = description ? description : body;
             const fullDescription = url ? url + '\n' + descriptionText : descriptionText;
 
+            const existingMetadata = snowflakeEventLookup[url];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
                     location: location,
                 },
                 entityType: GuildScheduledEventEntityType.External,
-                image: cardImageURL ? Buffer.from(cardImageURL) : undefined,
+                image: cardImageURL || existingMetadata?.coverImageURL({}) || undefined,
                 name: title,
                 privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly,
                 scheduledStartTime: time_start.toDate(),
-                scheduledEndTime: time_end ? time_end.toDate() : undefined,
+                scheduledEndTime: time_end ? time_end.toDate() : (existingMetadata?.scheduledEndAt || undefined),
             }
-            if (url && snowflakeEventLookup[url]) {
-                console.log('Editing event', title);
-                return guild.scheduledEvents.edit(snowflakeEventLookup[url], metadata);
+            if (url && existingMetadata) {
+                if (existingMetadata.creator?.bot !== true) {
+                    console.log(`Refusing to edit non-bot event "${title}"`);
+                    return Promise.resolve({} as GuildScheduledEvent);
+                }
+                console.log(`Editing event "${title}"`);
+                return Promise.resolve({} as GuildScheduledEvent);
+                // return guild.scheduledEvents.edit(existingMetadata.id, metadata);
+            } else if (url) {
+                console.log(`Creating event "${title}"`);
+                return Promise.resolve({} as GuildScheduledEvent);
+                // return guild.scheduledEvents.create(metadata);
             } else {
-                console.log('Creating event', title);
-                return guild.scheduledEvents.create(metadata);
+                console.log(`Refusing to create/edit event "${title}"`);
+                return Promise.resolve({} as GuildScheduledEvent);
             }
         })
 
