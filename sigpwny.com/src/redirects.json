@@ -119,7 +119,6 @@
     "status": 302,
     "destination": "/sponsors/"
   },
-  {
   "/survey": {
     "status": 302,
     "destination": "https://forms.gle/EMbMH9hUAGrnhBPv5"
