@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "description": "SIGPwny's website and club content",
-  "author": "WhiteHoodHacker",
+  "author": "SIGPwny",
   "keywords": [
     "astro",
     "mdx",
@@ -14,9 +14,9 @@
     "start": "astro dev",
     "check": "astro check",
     "build": "astro build",
-    "discord": "npx tsx --env-file=.env src/scripts/discord.ts",
     "preview": "astro preview",
     "serve": "astro preview",
+    "sync-discord": "npx tsx --env-file=.env src/scripts/discord.ts",
     "astro": "astro"
   },
   "dependencies": {
