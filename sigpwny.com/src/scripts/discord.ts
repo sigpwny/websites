@@ -154,22 +154,26 @@ async function main() {
             const descriptionText = description ? description : cleanedBody;
             const fullDescription = url + '\n' + descriptionText;
 
-            const existingMetadata = snowflakeMeetingLookup[url];
+            const existingMetadata = snowflakeMeetingLookup[slug];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
                     location: location,
                 },
                 entityType: GuildScheduledEventEntityType.External,
-                image: cardImageURL || existingMetadata.coverImageURL({}) || undefined,
+                image: cardImageURL || existingMetadata?.coverImageURL({}) || undefined,
                 name: (week_number !== undefined) ? `Week ${zeroPad(week_number, 2)}: ${title}` : title,
                 privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly,
                 scheduledStartTime: time_start.toDate(),
-                scheduledEndTime: time_end ? time_end.toDate() : (existingMetadata.scheduledEndAt || undefined),
+                scheduledEndTime: time_end ? time_end.toDate() : (existingMetadata?.scheduledEndAt || undefined),
             }
-            if (snowflakeMeetingLookup[slug]) {
+            if (existingMetadata) {
+                if (existingMetadata.creator?.bot !== true) {
+                    console.log('Refusing to edit non-bot event', title);
+                    return Promise.resolve({} as GuildScheduledEvent);
+                }
                 console.log('Editing meeting', title);
-                return guild.scheduledEvents.edit(snowflakeMeetingLookup[slug].id, metadata);
+                return guild.scheduledEvents.edit(existingMetadata.id, metadata);
             } else {
                 console.log('Creating meeting', title);
                 return guild.scheduledEvents.create(metadata);
@@ -195,15 +199,19 @@ async function main() {
                     location: location,
                 },
                 entityType: GuildScheduledEventEntityType.External,
-                image: cardImageURL || existingMetadata.coverImageURL({}) || undefined,
+                image: cardImageURL || existingMetadata?.coverImageURL({}) || undefined,
                 name: title,
                 privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly,
                 scheduledStartTime: time_start.toDate(),
-                scheduledEndTime: time_end ? time_end.toDate() : (existingMetadata.scheduledEndAt || undefined),
+                scheduledEndTime: time_end ? time_end.toDate() : (existingMetadata?.scheduledEndAt || undefined),
             }
-            if (url && snowflakeEventLookup[url]) {
+            if (url && existingMetadata) {
+                if (existingMetadata.creator?.bot !== true) {
+                    console.log('Refusing to edit non-bot event', title);
+                    return Promise.resolve({} as GuildScheduledEvent);
+                }
                 console.log('Editing event', title);
-                return guild.scheduledEvents.edit(snowflakeEventLookup[url].id, metadata);
+                return guild.scheduledEvents.edit(existingMetadata.id, metadata);
             } else if (url) {
                 console.log('Creating event', title);
                 return guild.scheduledEvents.create(metadata);
