@@ -14,10 +14,10 @@ export const ProfileSchema = ({ image }) => (
     })).default([]),
     role: z.optional(z.enum(['admin', 'alum', 'helper', 'member', 'sponsor', 'org'])),
     title: z.optional(z.string()),
-    weight: z.number().default(0),
+    weight: z.number().catch(0),
     period: z.optional(z.string()),
     // Sponsor specific fields
-    is_workshop_sponsor: z.boolean().default(false),
+    is_workshop_sponsor: z.boolean().catch(false),
     card_image: z.optional(CardImageSchema(image)),
   })
 )

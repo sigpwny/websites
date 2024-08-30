@@ -7,12 +7,18 @@ export const MeetingSchema = ({ image }) => (
     ical: z.optional(ICalDataSchema()),
     // discord_event: z.object({}),
     time_start: z.coerce.date(),
-    duration: z.string().default("PT1H"),
-    timezone: z.string().default("America/Chicago"),
-    week_number: z.optional(z.number().gte(0).lte(52)),
+    duration: z.string().duration().catch("PT1H"),
+    timezone: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.string().default("America/Chicago")
+    ),
+    week_number: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.optional(z.number().gte(0).lte(52))
+    ),
     // authors: z.array(reference('profiles')).default(['org/sigpwny']),
     credit: z.array(z.string()).default(["SIGPwny"]),
-    featured: z.boolean().default(false),
+    featured: z.boolean().catch(false),
     location: z.optional(z.string()),
     description: z.optional(z.string()),
     card_image: z.optional(CardImageSchema(image)),

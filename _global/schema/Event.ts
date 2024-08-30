@@ -7,12 +7,15 @@ export const EventSchema = ({ image }) => (
     ical: z.optional(ICalDataSchema()),
     // discord_event: z.object({}),
     time_start: z.coerce.date(),
-    duration: z.string().default("PT48H"),
-    timezone: z.string().default("Etc/UTC"),
+    duration: z.string().duration().catch("PT48H"),
+    timezone: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.string().default("Etc/UTC")
+    ),
     series: z.string(),
     credit: z.array(z.string()).default(["SIGPwny"]),
     sponsors: z.array(z.string()).default([]),
-    location: z.string().default("Online"),
+    location: z.optional(z.string()),
     description: z.optional(z.string()),
     card_image: z.optional(CardImageSchema(image)),
     links: z.array(z.object({
