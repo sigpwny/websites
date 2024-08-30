@@ -28,7 +28,7 @@ npm run serve
 ```
 
 ## Content Types
-Content is composed of MarkdownX and JSON files in the `content` directory. For more information about the defined content types, see the [content README](./src/content/README.md).
+Content is composed of MarkdownX and JSON files in the `content` directory. For more information about the defined content types, see the [content README](./docs/README.md).
 
 ## Goals
 1. **The site should be tenable and functional for the future of the club**.

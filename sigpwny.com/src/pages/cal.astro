@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Base.astro';
+import { CalendarSyncRegular } from '@/components/Icons/fluentui';
+
+const webcalLink = "webcal://sigpwny.com/calendar/full.ics";
+---
+<Layout
+  title="SIGPwny's Calendar"
+  description="Subscribe to SIGPwny's Calendar"
+  redirect={webcalLink}
+>
+  <div class="panel max-w-prose mx-auto text-center">
+    <h1>Subscribe to Calendar</h1>
+    <p>
+      If you are not automatically redirected, you can subscribe to SIGPwny's calendar by clicking the button below.
+    </p>
+    <div class="flex flex-col gap-2 items-center">
+      <a
+        href={webcalLink}
+        class="btn-primary flex flex-row gap-2 items-center max-w-fit"
+      >
+        <CalendarSyncRegular />
+        <span class="inline align-middle">Subscribe</span>
+      </a>
+    </div>
+  </div>
+</Layout>

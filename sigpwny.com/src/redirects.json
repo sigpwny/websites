@@ -1,12 +1,4 @@
 {
-  "/applecal": {
-    "status": 302,
-    "destination": "webcal://sigpwny.com/calendar/full/apple.ics"
-  },
-  "/cal": {
-    "status": 302,
-    "destination": "webcal://sigpwny.com/calendar/full.ics"
-  },
   "/gcal": {
     "status": 302,
     "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/full.ics"

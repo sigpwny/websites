@@ -1,20 +1,19 @@
 # Content Types
 
-There are 8 content types defined. Italicized types are not explicitly defined.
-
+There are 4 main content types.
 - [Meeting](#meeting)
 - [Event](#event)
 - [Publication](#publication)
-- [Markdown Page](#markdown-page)
-- [*Profile*](#profile)
-  - [Admin](#admin)
-  - [Alum](#alum)
-  - [Helper](#helper)
-- [*Redirect*](#redirect)
+- [Profile](#profile)
+
+There are also additional, less common content types.
+- [Redirect](#redirect)
   - [External](#external)
   - [Internal](#internal)
+- [Locations](#locations)
+- [Markdown Page](#markdown-page)
 
-The majority of these content types are defined in the frontmatter of Markdown files, with the exception of Redirects, which are defined with JSON files. These content types are stored in the `content` directory, with the exception of Markdown Pages, which are stored in `src/pages_md`.
+The majority of these content types are defined in the frontmatter of MDX files. Redirects and locations are defined with JSON files. Content is stored in the `content` directory, with the exception of Markdown Pages, which are stored in `src/pages_md`.
 
 > **Note**  
 > Current SIGPwny helpers can manage content through [Netlify CMS](https://cms.sigpwny.com/). Access to the CMS can be managed by SIGPwny admins on [Netlify](https://app.netlify.com/sites/cms-sigpwny-com/identity).
@@ -23,7 +22,7 @@ The majority of these content types are defined in the frontmatter of Markdown f
 
 Stored in `content/meetings`.
 
-Meetings are defined in MD or MDX files.
+Meetings are defined in MDX files.
 
 ```markdown
 ---
@@ -99,13 +98,11 @@ Here are some awesome events:
 <Card heading="Heading" title="Title" ... />
 ```
 
-## *Profile*
+## Profile
 
 Stored in `content/profiles`.
 
 Profiles are markdown files, with varying frontmatter schemas for Admin, Alum, and Helper types. Admins have more fields available, such as bio. Alumni also have exclusive fields, such as graduation year and current line of work.
-
-### Admin
 
 ```markdown
 ---
@@ -131,15 +128,8 @@ links: # optional
 Markdown body content on profiles are currently not displayed anywhere yet.
 ```
 
-### Alum
 
-WIP
-
-### Helper
-
-WIP
-
-## *Redirect*
+## Redirect
 
 Stored in `content/redirects`.
 
