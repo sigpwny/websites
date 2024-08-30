@@ -48,11 +48,7 @@ export default function CalendarSubscribe(props: any) {
           <Menu>
             <ul>
               <li>
-                <a
-                  href="webcal://sigpwny.com/calendar/full/apple.ics"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="webcal://sigpwny.com/calendar/full/apple.ics">
                   <AppleSvg />
                   <span className="inline align-middle">
                     Apple Calendar
@@ -87,11 +83,7 @@ export default function CalendarSubscribe(props: any) {
             <span className="border-b-2 border-surface-300" />
             <ul>
               <li>
-                <a
-                  href="webcal://sigpwny.com/calendar/full.ics"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="webcal://sigpwny.com/calendar/full.ics">
                   <CalendarRegular width="1em" height="1em" />
                   <span className="inline align-middle">
                     Other (system calendar)
