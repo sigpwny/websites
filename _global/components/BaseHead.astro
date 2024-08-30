@@ -16,14 +16,14 @@ export interface HeadProps {
 
 
 const props = Astro.props as HeadProps;
-
 const siteConfig = getSiteConfig(props.site_name);
-const { description: defaultDescription, site_name: defaultTitle, image: defaultImage, twitterUsername } = siteConfig;
 
-const title = props.title || defaultTitle;
-const description = props.description || defaultDescription;
-const twitter_card_type = props.image ? "summary_large_image" : "summary";
-const image = props.image ? new URL(props.image, Astro.url).toString() : new URL(defaultImage, Astro.url).toString();
+const siteName = siteConfig.title;
+const title = props.title || siteConfig.title;
+const description = props.description || siteConfig.description;
+const twitterCardType = props.image ? "summary_large_image" : "summary";
+const twitterUsername = siteConfig.twitterUsername;
+const image = props.image ? new URL(props.image, Astro.url).toString() : new URL(siteConfig.image, Astro.url).toString();
 const type = props.type || "website";
 const canonicalURL = Astro.url.toString();
 const color = props.color || "#33cc55";
@@ -53,6 +53,8 @@ const robots = props.disable_robots ? "noindex, nofollow" : "index, follow";
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 {/* Open Graph / Facebook */}
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -64,19 +66,18 @@ const robots = props.disable_robots ? "noindex, nofollow" : "index, follow";
   <meta property="og:video:width" content="1280" />
   <meta property="og:video:height" content="720" />
 ) : null}
-<meta property="og:type" content={type} />
 {/* Twitter */}
-<meta property="twitter:card" content={twitter_card_type} />
+<meta property="twitter:card" content={twitterCardType} />
 <meta property="twitter:site" content={twitterUsername} />
 <meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={image} />
 {props.video ? (
   <meta property="twitter:player" content={props.video} />
   <meta property="twitter:player:width" content="1280" />
   <meta property="twitter:player:height" content="720" />
 ) : null}
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
 {/* Redirect */}
 {props.redirect ? (
   <meta http-equiv="refresh" content={`0;url=${props.redirect}`} />
