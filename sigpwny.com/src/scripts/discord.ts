@@ -211,12 +211,12 @@ async function main() {
                     return Promise.resolve({} as GuildScheduledEvent);
                 }
                 console.log(`Editing event "${title}"`);
-                return Promise.resolve({} as GuildScheduledEvent);
-                // return guild.scheduledEvents.edit(existingMetadata.id, metadata);
+                // return Promise.resolve({} as GuildScheduledEvent);
+                return guild.scheduledEvents.edit(existingMetadata.id, metadata);
             } else if (url) {
                 console.log(`Creating event "${title}"`);
-                return Promise.resolve({} as GuildScheduledEvent);
-                // return guild.scheduledEvents.create(metadata);
+                // return Promise.resolve({} as GuildScheduledEvent);
+                return guild.scheduledEvents.create(metadata);
             } else {
                 console.log(`Refusing to create/edit event "${title}"`);
                 return Promise.resolve({} as GuildScheduledEvent);
