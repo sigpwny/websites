@@ -1,3 +1,6 @@
 [submodule "guides"]
 	path = guides
 	url = https://github.com/sigpwny/guides
+[submodule "sigpwny.com/src/pages/internal"]
+	path = sigpwny.com/src/pages/internal
+	url = git@github.com:sigpwny/internal.git
