@@ -1,0 +1,14 @@
+diff --git a/node_modules/astro/dist/core/routing/manifest/create.js b/node_modules/astro/dist/core/routing/manifest/create.js
+index 207b38c..1eb650e 100644
+--- a/node_modules/astro/dist/core/routing/manifest/create.js
++++ b/node_modules/astro/dist/core/routing/manifest/create.js
+@@ -93,6 +93,9 @@ function createFileBasedRoutes({ settings, cwd, fsMod }, logger) {
+       if (basename[0] === "." && basename !== ".well-known") {
+         continue;
+       }
++      if (resolved.includes('node_modules')) {
++				continue;
++			}
+       if (!isDir && !validPageExtensions.has(ext) && !validEndpointExtensions.has(ext)) {
+         logger.warn(
+           null,

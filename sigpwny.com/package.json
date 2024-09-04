@@ -17,7 +17,8 @@
     "preview": "astro preview",
     "serve": "astro preview",
     "sync-discord": "npx tsx --env-file=.env src/scripts/discord.ts",
-    "astro": "astro"
+    "astro": "astro",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
@@ -49,10 +50,12 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "patch-package": "^8.0.0",
     "postcss-nested": "^6.2.0",
     "vite-plugin-static-copy": "^1.0.6"
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

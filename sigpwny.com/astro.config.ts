@@ -11,6 +11,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import redirects from './src/redirects.json';
 
 // https://astro.build/config
+
 export default defineConfig({
   site: 'https://sigpwny.com',
   integrations: [
@@ -32,6 +33,11 @@ export default defineConfig({
   redirects: redirects as any,
   trailingSlash: 'always',
   vite: {
+    server: {
+      watch: {
+        ignored: ["**/internal/node_modules/**/*"],
+      },
+    },
     plugins: [
       viteStaticCopy({
         targets: [
