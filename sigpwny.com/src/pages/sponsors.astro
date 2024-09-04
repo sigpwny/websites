@@ -8,13 +8,13 @@ import { getProfilesFromNames } from '@/utils/profiles';
 
 const activeSponsors = (await getCollection('profiles', ({ data }) => data.is_workshop_sponsor)).map((x) => x.data);
 const eventsData = await getCollection('events');
-const events = await Promise.all(eventsData.map(async (x) => (
+const events = (await Promise.all(eventsData.map(async (x) => (
   {
     ...x.data,
     // Add sponsor_profiles, which is a list of resolved profiles from names in sponsors
     sponsors_profiles: x.data.sponsors ? (await getProfilesFromNames(x.data.sponsors)) : undefined,
   }
-)));
+)))).sort((a, b) => dayjs(b.time_start).diff(dayjs(a.time_start)));
 // Filter for events that:
 // - occured in the past year or in the future
 // - are the most recent event in each event series
@@ -30,7 +30,7 @@ const recentEvents = events.filter((event) => {
   ) return false;
   uniqSeries.add(event.series);
   return true;
-}).sort((a, b) => dayjs(b.time_start).diff(dayjs(a.time_start)));
+});
 ---
 <Layout
   title="Sponsors"
