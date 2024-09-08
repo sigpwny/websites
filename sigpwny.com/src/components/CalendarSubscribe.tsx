@@ -17,28 +17,7 @@ import {
   CheckmarkCircleFilled,
   LinkRegular
 } from '@/components/Icons/fluentui';
-
-const meetingTypes = [
-  'general',
-  'events',
-  'purple',
-  'embedded',
-];
-
-type MeetingType = typeof meetingTypes[number];
-
-interface MeetingMetadata {
-  id: MeetingType;
-  name: string;
-  calendarName: string;
-}
-
-const meetingMetadata: Record<MeetingType, MeetingMetadata> = {
-  'general': { id: 'general', name: 'General', calendarName: 'General' },
-  'events': { id: 'events', name: 'Events (Socials, CTFs, etc.)', calendarName: 'Events' },
-  'purple': { id: 'purple', name: 'Purple Team', calendarName: 'Purple' },
-  'embedded': { id: 'embedded', name: 'Embedded Team', calendarName: 'Embedded' },
-};
+import { meetingMetadata, type MeetingType } from '@/utils/meetingMetadata';
 
 export default function CalendarSubscribe(props: any) {
   const [open, setOpen] = useState(false);

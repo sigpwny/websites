@@ -11,8 +11,8 @@ import {
 import {
   calculateSemester,
   getMeetings,
-  meetingTypes
 } from '@/utils/meetings';
+import { meetingTypes } from '@/utils/meetingMetadata';
 import consts from '@/consts';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
@@ -55,7 +55,7 @@ export async function getStaticPaths() {
     return {
       params: {
         type: type.join('-'),
-        includes: JSON.stringify(type[0] === 'all' ? meetingTypes : type),
+        includes: JSON.stringify(type[0] === 'all' ? meetingTypes : type), // this allows us to pass more metadata
       },
     }
   })

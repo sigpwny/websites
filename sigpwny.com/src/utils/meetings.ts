@@ -5,28 +5,6 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import advanced from 'dayjs/plugin/advancedFormat';
 
-export const meetingTypes = [
-  'general',
-  'events',
-  'purple',
-  'embedded',
-];
-
-export type MeetingType = typeof meetingTypes[number];
-
-interface MeetingMetadata {
-  id: MeetingType;
-  name: string;
-  calendarName: string;
-}
-
-export const meetingMetadataList: MeetingMetadata[] = [
-  { id: 'general', name: 'General', calendarName: 'General' },
-  { id: 'events', name: 'Events (Socials, CTFs, etc.)', calendarName: 'Events' },
-  { id: 'purple', name: 'Purple Team', calendarName: 'Purple' },
-  { id: 'embedded', name: 'Embedded Team', calendarName: 'Embedded' },
-];
-
 export async function getMeetings() {
   const meetings = await getCollection('meetings');
   return meetings.map((meeting) => {
