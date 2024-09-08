@@ -11,22 +11,66 @@ import {
 import {
   calculateSemester,
   getMeetings,
+  meetingTypes
 } from '@/utils/meetings';
 import consts from '@/consts';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
+import type { APIRoute } from 'astro';
 
 dayjs.extend(duration);
 dayjs.extend(utc);
 
+// https://web.archive.org/web/20140418004051/http://dzone.com/snippets/calculate-all-combinations
+var combine = function(a: String[]) {
+  var fn = function(n: number, src: String[], got: String[], all: String[][]) {
+    if (n == 0) {
+      if (got.length > 0) {
+        all[all.length] = got;
+      }
+      return;
+    }
 
-export async function GET() {
+    for (var j = 0; j < src.length; j++) {
+      fn(n - 1, src.slice(j + 1), got.concat([src[j]]), all);
+    }
+  }
+  var all: String[][] = [];
+  for (var i=0; i < a.length; i++) {
+    fn(i, a, [], all);
+  }
+  all.push(a);
+  return all;
+}
+
+export async function getStaticPaths() {
+  // Generate each meeting kind, and then have an 'all' path
+  // ['general', 'events', 'purple'] should have all combinations
+  const combinations = combine(meetingTypes);
+  const urlCombinations = combinations.map(c => c.sort());
+  
+  urlCombinations.push(['all']);
+
+  return urlCombinations.map((type) => {
+    return {
+      params: {
+        type: type.join('-'),
+        includes: JSON.stringify(type[0] === 'all' ? meetingTypes : type),
+      },
+    }
+  })
+}
+
+export const GET: APIRoute = async ({params, request}) => {
+  const includes: String[] = JSON.parse(params.includes || '[]'); 
+
   const meetings = await getMeetings();
+  const filteredMeetings = meetings.filter((meeting) => includes.includes(meeting.data.type || 'general'));
   const site = astroConfig.site ? new URL(astroConfig.site) : new URL("https://sigpwny.com");
   const ics = ical({
     name: consts.title,
   });
-  meetings.forEach((meeting) => {
+  filteredMeetings.forEach((meeting) => {
     const m = meeting.data;
     ics.createEvent({
       id: m.ical?.uid ?? createICalendarUID(

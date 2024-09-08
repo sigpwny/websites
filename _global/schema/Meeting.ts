@@ -8,6 +8,7 @@ export const MeetingSchema = ({ image }) => (
     // discord_event: z.object({}),
     time_start: z.coerce.date(),
     duration: z.string().duration().catch("PT1H"),
+    type: z.enum(["general", "events", "purple", "embedded"]).default("general"),
     timezone: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
       z.string().default("America/Chicago")
