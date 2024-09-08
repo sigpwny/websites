@@ -139,4 +139,8 @@
     "status": 302,
     "destination": "/sigpwny_yearly_sponsorship.pdf"
   }
+  "/register24": {
+    "status": 302,
+    "destination": "https://forms.gle/GKLuLYoawYL4UGmP7"
+  }
 }
