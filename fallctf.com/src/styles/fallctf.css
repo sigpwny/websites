@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Element overrides */
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+body {
+  --rgb-pwny-green: 51 204 85;    /* #33cc55 */
+  --rgb-pwny-lgreen: 0 255 85;    /* #00ff55 */
+  --rgb-pwny-dgreen: 19 113 55;   /* #137137 */
+  --rgb-pwny-red: 255 64 64;      /* #ff4040 */
+  --rgb-pwny-orange: 237 122 49;  /* #ed7a31 */
+  --rgb-pwny-yellow: 255 192 0;   /* #ffc000 */
+  --rgb-pwny-blue: 65 170 255;    /* #41aaff */
+  --rgb-pwny-purple: 204 102 238; /* #cc66ee */
+
+  --rgb-primary: var(--rgb-pwny-green);
+  --rgb-secondary: var(--rgb-pwny-lgreen);
+  --rgb-surface-000: 0 0 0;       /* #000000 */
+  --rgb-surface-050: 17 17 17;    /* #111111 */
+  --rgb-surface-100: 34 34 34;    /* #222222 */
+  --rgb-surface-150: 51 51 51;    /* #333333 */
+  --rgb-surface-200: 68 68 68;    /* #444444 */
+  --rgb-surface-250: 85 85 85;    /* #555555 */
+  --rgb-surface-300: 102 102 102; /* #666666 */
+  --rgb-text: 255 255 255;        /* #ffffff */
+
+  --font-size-small: 0.875rem;
+  --font-size-standard: 1rem;
+  --font-size-base: 1.125rem;
+
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-size: var(--font-size-base);
+  background-color: rgb(var(--rgb-surface-000));
+  color: rgb(var(--rgb-text));
+  height: 100%;
+  width: 100%;
+}
