@@ -12,7 +12,7 @@ import {
   calculateSemester,
   getMeetings,
 } from '@/utils/meetings';
-import { meetingTypes } from '@/utils/meetingMetadata';
+import { meetingMetatypes } from '@/utils/meetingMetadata';
 import consts from '@/consts';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
@@ -46,7 +46,7 @@ var combine = function(a: String[]) {
 export async function getStaticPaths() {
   // Generate each meeting kind, and then have an 'all' path
   // ['general', 'events', 'purple'] should have all combinations
-  const combinations = combine(meetingTypes);
+  const combinations = combine(meetingMetatypes);
   const urlCombinations = combinations.map(c => c.sort());
   
   urlCombinations.push(['all']);
@@ -55,7 +55,7 @@ export async function getStaticPaths() {
     return {
       params: {
         type: type.join('-'),
-        includes: JSON.stringify(type[0] === 'all' ? meetingTypes : type), // this allows us to pass more metadata
+        includes: JSON.stringify(type[0] === 'all' ? meetingMetatypes : type), // this allows us to pass more metadata
       },
     }
   })
@@ -65,7 +65,7 @@ export const GET: APIRoute = async ({params, request}) => {
   const includes: String[] = JSON.parse(params.includes || '[]'); 
 
   const meetings = await getMeetings();
-  const filteredMeetings = meetings.filter((meeting) => includes.includes(meeting.data.type || 'general'));
+  const filteredMeetings = meetings.filter((meeting) => includes.includes(meeting.data.type));
   const site = astroConfig.site ? new URL(astroConfig.site) : new URL("https://sigpwny.com");
   const ics = ical({
     name: consts.title,
