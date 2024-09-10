@@ -1,11 +1,11 @@
 ---
 import Layout from '@/layouts/Base.astro';
 import Link from '$/components/Link.astro';
-import { type CollectionEntry } from 'astro:content';
 import { type HeadProps } from '$/components/BaseHead.astro';
 import FallCTFLogo from '@/components/FallCTFLogo';
+import { getFallCTFEvents } from '@/utils/fallctf-events';
 
-type Event = CollectionEntry<'events'>['data'];
+type Event = Awaited<ReturnType<typeof getFallCTFEvents>>[number]['data'];
 
 interface Props extends HeadProps {
   event: Event;
@@ -50,21 +50,24 @@ const event = props.event;
 
 <Layout {...props}>
   <section id="hero">
-    <div class="flex flex-col items-center">
-      <FallCTFLogo year={2024} />
-      <span class="flex flex-row gap-2">
-        {event.links.map((link) => (
-          <Link
-            href={link.url}
-            class="btn-primary font-bold border-2 border-surface-250"
-          >
-            {link.name}
-          </Link>
-        ))}
-      </span>
-    </div>
+    <slot name="hero" />
+      {/* Default hero element */}
+      <div class="flex flex-col items-center">
+        <FallCTFLogo year={event.year} />
+        <span class="flex flex-row gap-2">
+          {event.links.map((link) => (
+            <Link
+              href={link.url}
+              class="btn-primary font-bold border-2 border-surface-250"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </span>
+      </div>
+    </slot>
   </section>
-  <div class="flex flex-row gap-x-4">
-    <slot />
-  </div>
+  <section id="body">
+    <slot name="body" />
+  </section>
 </Layout>

@@ -1,11 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
-import dayjs from 'dayjs';
+import { getFallCTFEvents } from '@/utils/fallctf-events';
 
-const events = (await getCollection('events', (event) => event.data.series === "fallctf")).sort(
-  (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
-);
+const events = await getFallCTFEvents();
+const latestSlug = events[0].slug;
 
 // TODO: ensure that canonical URL points to year of latest event
-return Astro.rewrite(`/${dayjs(events[0].data.time_start).format('YYYY')}/`);
+return Astro.rewrite(latestSlug);
 ---

@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
-    "@astrojs/mdx": "^3.1.4",
+    "@astrojs/mdx": "^3.1.5",
     "@astrojs/netlify": "^5.5.1",
     "@astrojs/react": "^3.6.2",
     "@astrojs/rss": "^4.0.7",
@@ -26,7 +26,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@floating-ui/dom": "^1.6.10",
     "@floating-ui/react": "^0.26.23",
-    "astro": "^4.14.3",
+    "astro": "^4.15.4",
     "dayjs": "^1.11.13",
     "framer-motion": "^11.5.4",
     "rehype-katex": "^7.0.1",

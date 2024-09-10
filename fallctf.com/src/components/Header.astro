@@ -1,13 +1,25 @@
 ---
----
+import TabNav from '@/components/TabNav';
+import { getFallCTFEvents } from '@/utils/fallctf-events';
 
-<header class="sticky lg:relative top-0 z-10 w-full">
-  <div class="container px-4 md:px-8 py-4 lg:py-8 flex flex-row ">
-    <a href="/" class="flex items-center">
-      <span class="text-lg font-bold ml-2">Fall CTF</span>
-    </a>
+const events = await getFallCTFEvents();
+const links = events.map((event) => ({
+  name: event.data.year,
+  url: event.slug,
+  active: Astro.url.pathname === event.slug,
+}));
+---
+<header class="sticky top-0 z-10 w-full">
+  <div class="flex flex-col items-center px-4 py-4">
+    <TabNav
+      id="year-nav"
+      links={links}
+      client:load
+      transition:persist
+    />
   </div>
 </header>
+
 <script>
 // Auto-close navbar on mobile when navigating to a new page using Astro's View Transitions API
 document.addEventListener('astro:after-swap', () => {

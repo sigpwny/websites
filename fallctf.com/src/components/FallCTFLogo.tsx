@@ -1,5 +1,5 @@
 interface Props {
-  year?: number;
+  year?: string;
   color?: string;
 }
 

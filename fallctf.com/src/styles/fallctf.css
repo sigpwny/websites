@@ -39,15 +39,6 @@ body {
   height: 100%;
   width: 100%;
 }
-a,
-a:active {
-  color: rgb(var(--rgb-primary));
-  text-decoration: none;
-}
-a:hover {
-  color: rgb(var(--rgb-secondary));
-  text-decoration: none;
-}
 .container {
   @apply md:px-8 px-4;
 }

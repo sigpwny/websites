@@ -39,6 +39,15 @@
   margin-bottom: 1rem;
   border-bottom: solid 1px rgb(var(--rgb-surface-300));
 }
+.md-root a,
+.md-root a:active {
+  color: rgb(var(--rgb-primary));
+  text-decoration: none;
+}
+.md-root a:hover {
+  color: rgb(var(--rgb-secondary));
+  text-decoration: none;
+}
 .md-root p,
 .md-root ul,
 .md-root ol {
