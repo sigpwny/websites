@@ -6,7 +6,8 @@ import utc from 'dayjs/plugin/utc';
 import {
   createICalendarDescriptionAppleCalendar,
   createICalendarLocation,
-  createICalendarUID
+  createICalendarUID,
+  getCalendarName
 } from '@/utils/icalendar';
 import {
   calculateSemester,
@@ -16,19 +17,20 @@ import consts from '@/consts';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { APIRoute } from 'astro';
+import type { MeetingMetatype } from '@/utils/meetingMetadata';
 dayjs.extend(duration);
 dayjs.extend(utc);
 
 export { getStaticPaths } from './index.ics';
 
 export const GET: APIRoute = async ({params, request}) => {
-  const includes: String[] = JSON.parse(params.includes || '[]'); 
+  const includes: MeetingMetatype[] = JSON.parse(params.includes || '[]'); 
 
   const meetings = await getMeetings();
   const filteredMeetings = meetings.filter((meeting) => includes?.includes(meeting.data.type || 'general'));
   const site = astroConfig.site ? new URL(astroConfig.site) : new URL("https://sigpwny.com");
   const ics = ical({
-    name: consts.title,
+    name: getCalendarName(includes),
   });
   filteredMeetings.forEach((meeting) => {
     const m = meeting.data;

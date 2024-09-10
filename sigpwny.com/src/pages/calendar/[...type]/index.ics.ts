@@ -6,13 +6,14 @@ import utc from 'dayjs/plugin/utc';
 import {
   createICalendarDescription,
   createICalendarLocation,
-  createICalendarUID
+  createICalendarUID,
+  getCalendarName
 } from '@/utils/icalendar';
 import {
   calculateSemester,
   getMeetings,
 } from '@/utils/meetings';
-import { meetingMetatypes } from '@/utils/meetingMetadata';
+import { meetingMetatypes, type MeetingMetatype } from '@/utils/meetingMetadata';
 import consts from '@/consts';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
@@ -62,13 +63,13 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute = async ({params, request}) => {
-  const includes: String[] = JSON.parse(params.includes || '[]'); 
+  const includes: MeetingMetatype[] = JSON.parse(params.includes || '[]'); 
 
   const meetings = await getMeetings();
   const filteredMeetings = meetings.filter((meeting) => includes.includes(meeting.data.type));
   const site = astroConfig.site ? new URL(astroConfig.site) : new URL("https://sigpwny.com");
   const ics = ical({
-    name: consts.title,
+    name: getCalendarName(includes),
   });
   filteredMeetings.forEach((meeting) => {
     const m = meeting.data;

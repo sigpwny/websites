@@ -18,6 +18,7 @@ import {
   LinkRegular
 } from '@/components/Icons/fluentui';
 import { meetingMetadata, type MeetingMetatype } from '@/utils/meetingMetadata';
+import { getCalendarName } from '@/utils/icalendar';
 
 interface CalendarSubscribeProps {
   selected: MeetingMetatype[];
@@ -62,14 +63,14 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                 <li key={metadata.id}>
                   {selectedCalendars.includes(metadata.id) ? (
                     <button onClick={() => setSelectedCalendars(selectedCalendars.filter((id) => id !== metadata.id))}>
-                      <CheckmarkCircleFilled className="flex-none text-primary" />
+                      <CheckmarkCircleFilled className="flex-none text-primary inline -ml-0.5 -mr-1" />
                       <span className="inline align-middle">
                         {metadata.name}
                       </span>
                     </button>
                   ) : (
                     <button onClick={() => setSelectedCalendars([...selectedCalendars, metadata.id])}>
-                      <CheckmarkCircleRegular className="flex-none text-primary" />
+                      <CheckmarkCircleRegular className="flex-none text-primary inline -ml-0.5 -mr-1" />
                       <span className="inline align-middle">
                         {metadata.name}
                       </span>
@@ -103,7 +104,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
               </li>
               <li>
                 <a
-                  href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics&name=${selectedCalendars.sort().map((id) => meetingMetadata[id].shortName).join(',')}`}
+                  href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics&name=${getCalendarName(selectedCalendars)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={ (selectedCalendars.length === 0) ? {pointerEvents: 'none'} : {} }

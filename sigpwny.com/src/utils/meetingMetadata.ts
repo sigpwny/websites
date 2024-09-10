@@ -17,7 +17,7 @@ color: string;
 
 export const meetingMetadata: Record<MeetingMetatype, MeetingMetadata> = {
     'general': { id: 'general', name: 'General', shortName: 'General', color: 'pwny-green' },
-    'ctf': { id: 'ctf', name: 'CTF Team', shortName: 'CTF', color: 'pwny-ctf-team' },
-    'purple': { id: 'purple', name: 'Purple Team', shortName: 'Purple', color: 'pwny-purple-team' },
-    'embedded': { id: 'embedded', name: 'Embedded Team', shortName: 'Embedded', color: 'pwny-embedded-team' },
+    'ctf': { id: 'ctf', name: 'CTF Team', shortName: 'CTF', color: 'pwny-red' },
+    'purple': { id: 'purple', name: 'Purple Team', shortName: 'Purple', color: 'pwny-purple' },
+    'embedded': { id: 'embedded', name: 'Embedded Team', shortName: 'Embedded', color: 'pwny-yellow' },
 };

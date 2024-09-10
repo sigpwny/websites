@@ -17,11 +17,11 @@ export default function MeetingControls() {
     <div className="panel flex mb-2 justify-between">
         <div className="flex flex-row gap-2">
         {Object.values(meetingMetadata).map((metadata: MeetingMetadata) => (
-            <div key={metadata.id} className={`flex-none px-1 md:px-2 py-1 text-sm md:text-md border-2 hover:bg-${metadata.color} ${selected.includes(metadata.id) ? `bg-${metadata.color}`: `border-${metadata.color} bg-surface-200`} rounded-lg`}>
-                <button onClick={() => setSelected(selected.includes(metadata.id) ? selected.filter((id) => id !== metadata.id) : [...selected, metadata.id])}>
-                    {metadata.shortName}
-                </button>
-            </div>
+            <button className="flex-none" onClick={() => setSelected(selected.includes(metadata.id) ? selected.filter((id) => id !== metadata.id) : [...selected, metadata.id])}>
+                <div key={metadata.id} className={`px-1 md:px-2 py-1 text-sm md:text-md border-2 hover:border-${metadata.color} hover:bg-surface-300 ${selected.includes(metadata.id) ? `border-${metadata.color} bg-surface-300`: `border-surface-300 bg-surface-200`} rounded-lg`}>
+                        {metadata.shortName}
+                </div>
+            </button>
         ))}
         </div>
         <div>
