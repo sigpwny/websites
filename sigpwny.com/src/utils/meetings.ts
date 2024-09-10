@@ -8,6 +8,7 @@ import advanced from 'dayjs/plugin/advancedFormat';
 export async function getMeetings() {
   const meetings = await getCollection('meetings');
   return meetings.map((meeting) => {
+    const [_semester, type, date] = meeting.id.split('/');
     return {
       ...meeting,
       data: {
@@ -17,8 +18,9 @@ export async function getMeetings() {
         // Add semester field
         semester: calculateSemester(meeting.data.time_start),
       },
-      // Add slug field
-      slug: `/meetings/${meeting.id}/`,
+      type,
+      date,
+      slug: `/meetings/${type}/${date}/`,
     };
   })
 };

@@ -40,7 +40,7 @@ dayjs.extend(advanced);
 export async function getStaticPaths() {
   const meetings = await getMeetings();
   return meetings.map((meeting) => ({
-    params: { slug: meeting.id },
+    params: { type: meeting.type, date: meeting.date },
     props: { page: meeting },
   }));
 }

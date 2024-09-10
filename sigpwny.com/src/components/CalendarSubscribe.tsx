@@ -22,7 +22,7 @@ import { meetingMetadata, type MeetingType } from '@/utils/meetingMetadata';
 export default function CalendarSubscribe(props: any) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [selectedCalendars, setSelectedCalendars] = useState<MeetingType[]>(['general', 'events']);
+  const [selectedCalendars, setSelectedCalendars] = useState<MeetingType[]>(['general', 'ctf']);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics`);
