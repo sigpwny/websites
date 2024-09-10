@@ -16,6 +16,9 @@ body {
   --rgb-pwny-yellow: 255 192 0;   /* #ffc000 */
   --rgb-pwny-blue: 65 170 255;    /* #41aaff */
   --rgb-pwny-purple: 204 102 238; /* #cc66ee */
+  --rgb-pwny-purple-team: 141 101 197; /* #8d65c5 */
+  --rgb-pwny-embedded-team: 252 213 63; /* #fcd53f */
+  --rgb-pwny-ctf-team: 248 49 47; /* #f8312f */
 
   --rgb-primary: var(--rgb-pwny-green);
   --rgb-secondary: var(--rgb-pwny-lgreen);

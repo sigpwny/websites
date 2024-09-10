@@ -1,22 +1,23 @@
-export const meetingTypes = [
+export const meetingMetatypes = [
     'general',
     'ctf',
     'purple',
     'embedded',
   ];
   
-export type MeetingType = typeof meetingTypes[number];
+export type MeetingMetatype = typeof meetingMetatypes[number];
   
 export interface MeetingMetadata {
-id: MeetingType;
+id: MeetingMetatype;
 name: string;
-calendarName: string;
+shortName: string;
+color: string;
 }
   
 
-export const meetingMetadata: Record<MeetingType, MeetingMetadata> = {
-    'general': { id: 'general', name: 'General', calendarName: 'General' },
-    'ctf': { id: 'ctf', name: 'CTF Team', calendarName: 'CTF' },
-    'purple': { id: 'purple', name: 'Purple Team', calendarName: 'Purple' },
-    'embedded': { id: 'embedded', name: 'Embedded Team', calendarName: 'Embedded' },
+export const meetingMetadata: Record<MeetingMetatype, MeetingMetadata> = {
+    'general': { id: 'general', name: 'General', shortName: 'General', color: 'pwny-green' },
+    'ctf': { id: 'ctf', name: 'CTF Team', shortName: 'CTF', color: 'pwny-ctf-team' },
+    'purple': { id: 'purple', name: 'Purple Team', shortName: 'Purple', color: 'pwny-purple-team' },
+    'embedded': { id: 'embedded', name: 'Embedded Team', shortName: 'Embedded', color: 'pwny-embedded-team' },
 };

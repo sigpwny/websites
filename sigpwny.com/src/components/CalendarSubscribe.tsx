@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Popover,
   PopoverTrigger,
@@ -17,12 +17,21 @@ import {
   CheckmarkCircleFilled,
   LinkRegular
 } from '@/components/Icons/fluentui';
-import { meetingMetadata, type MeetingType } from '@/utils/meetingMetadata';
+import { meetingMetadata, type MeetingMetatype } from '@/utils/meetingMetadata';
 
-export default function CalendarSubscribe(props: any) {
+interface CalendarSubscribeProps {
+  selected: MeetingMetatype[];
+  placement?: 'top' | 'bottom' | 'left' | 'right';
+}
+
+export default function CalendarSubscribe({ selected, placement }: CalendarSubscribeProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [selectedCalendars, setSelectedCalendars] = useState<MeetingType[]>(['general', 'ctf']);
+  // TODO: Do we want to duplicate this instead of using the parent state?
+  const [selectedCalendars, setSelectedCalendars] = useState<MeetingMetatype[]>(['general', 'ctf']);
+  useEffect(() => {
+    setSelectedCalendars(selected);
+  }, [selected]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics`);
@@ -31,7 +40,7 @@ export default function CalendarSubscribe(props: any) {
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen} placement={props.placement}>
+    <Popover open={open} onOpenChange={setOpen} placement={placement}>
       <div className="flex flex-row gap-2 items-center">
         <div className="flex flex-shrink-0 flex-grow-0">
           <PopoverTrigger
@@ -39,7 +48,7 @@ export default function CalendarSubscribe(props: any) {
             className={`btn-primary flex flex-row gap-2 items-center ${open ? "ring-primary ring-2 ring-offset-2 ring-offset-surface-000" : ""}`}
           >
             <CalendarSyncRegular className="flex-none text-black" />
-            <span className="inline align-middle">
+            <span className="md:inline align-middle hidden">
               Subscribe to Calendar
             </span>
           </PopoverTrigger>
@@ -94,7 +103,7 @@ export default function CalendarSubscribe(props: any) {
               </li>
               <li>
                 <a
-                  href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics&name=${selectedCalendars.sort().map((id) => meetingMetadata[id].calendarName).join(',')}`}
+                  href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics&name=${selectedCalendars.sort().map((id) => meetingMetadata[id].shortName).join(',')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={ (selectedCalendars.length === 0) ? {pointerEvents: 'none'} : {} }

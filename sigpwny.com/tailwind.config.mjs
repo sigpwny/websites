@@ -13,6 +13,9 @@ export default {
           "yellow": "rgb(var(--rgb-pwny-yellow) / <alpha-value>)",
           "blue": "rgb(var(--rgb-pwny-blue) / <alpha-value>)",
           "purple": "rgb(var(--rgb-pwny-purple) / <alpha-value>)",
+          "purple-team": "rgb(var(--rgb-pwny-purple-team) / <alpha-value>)",
+          "embedded-team": "rgb(var(--rgb-pwny-embedded-team) / <alpha-value>)",
+          "ctf-team": "rgb(var(--rgb-pwny-ctf-team) / <alpha-value>)",
         },
         primary: "rgb(var(--rgb-primary) / <alpha-value>)",
         secondary: "rgb(var(--rgb-secondary) / <alpha-value>)",
@@ -59,4 +62,10 @@ export default {
     },
   },
   plugins: [],
+  safelist: [
+    {
+      pattern: /^(bg|border|text)-pwny.*/,
+      variants: ['hover']
+    }
+  ]
 }
