@@ -13,47 +13,13 @@ interface Props extends HeadProps {
 
 const props: Props = Astro.props;
 const event = props.event;
-
-// const rawMeetings = (await getMeetings()).sort(
-//   (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
-// );
-
-// type MeetingType = typeof rawMeetings[0];
-
-// const meetingsBySemester = rawMeetings.reduce(
-//   (acc, meeting) => {
-//     const semester = meeting.data.semester;
-//     if (acc[semester]) {
-//       acc[semester].push(meeting);
-//     } else {
-//       acc[semester] = [meeting];
-//     }
-//     return acc;
-//   }, {} as {[semester: string]: MeetingType[]}
-// );
-
-// const meetingSidebarItems = Object.keys(meetingsBySemester).map((semester) => ({
-//   name: formatSemester(semester),
-//   items: meetingsBySemester[semester].map((meeting) => ({
-//     name: meeting.data.week_number != null ? `Week ${weekNumber(meeting.data.week_number)}: ${meeting.data.title}` : meeting.data.title,
-//     url: meeting.slug,
-//     active: meeting.slug === Astro.url.pathname,
-//   })),
-//   active: false
-// }));
-
-// // If a meeting is set as active, we also want to set the parent semester as active
-// meetingSidebarItems.forEach((semester) => {
-//   semester.active = semester.items.some((meeting) => meeting.active);
-// });
 ---
-
 <Layout {...props}>
   <section id="hero">
-    <slot name="hero" />
+    <slot name="hero">
       {/* Default hero element */}
       <div class="flex flex-col items-center">
-        <FallCTFLogo year={event.year} />
+        <FallCTFLogo year={event.year} transition:name="fall-ctf-logo" />
         <span class="flex flex-row gap-2">
           {event.links.map((link) => (
             <Link

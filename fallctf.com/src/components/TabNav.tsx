@@ -12,7 +12,7 @@ interface Props {
 
 export default function TabNav({ id, links }: Props) {
   return (
-    <nav className="rounded-full p-1 bg-surface-100/70 backdrop-blur-xl border border-surface-150/70">
+    <nav className="rounded-full p-1 bg-surface-100/80 backdrop-blur-xl border border-surface-150/70">
       <ul className="flex flex-row gap-1">
         {links.map((link) => (
           <li
@@ -21,7 +21,7 @@ export default function TabNav({ id, links }: Props) {
           >
             {link.active ? (
               <motion.span
-                className="absolute z-0 size-full rounded-full bg-surface-150/70 backdrop-blur-xl border border-surface-200/70"
+                className="absolute z-0 size-full rounded-full bg-surface-150/90 border border-surface-200"
                 transition={{
                   ease: "easeOut",
                   duration: 0.2,
