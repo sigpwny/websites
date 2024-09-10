@@ -7,6 +7,25 @@
   padding-top: 1rem;
   padding-bottom: 0.25rem;
 }
+.md-root h1,
+.md-root h2,
+.md-root h3 {
+  font-weight: bold;
+}
+.md-root h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.md-root h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+.md-root h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .md-root h1:first-child,
 .md-root h2:first-child,
 .md-root h3:first-child,
@@ -84,7 +103,4 @@
 }
 .md-root tbody tr:last-child td:last-child {
   border-radius: 0 0 0.75rem 0;
-}
-.md-root .gatsby-resp-image-wrapper {
-  @apply mb-2;
 }

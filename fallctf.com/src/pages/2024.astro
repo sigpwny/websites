@@ -1,0 +1,34 @@
+---
+import Layout from '@/layouts/Event.astro';
+import { getCollection } from 'astro:content';
+
+const page = (await getCollection('events', (event) => event.data.title === "Fall CTF 2024"))[0];
+if (!page) {
+  return Astro.error(404, 'Event not found');
+}
+const event = page.data;
+---
+<Layout
+  event={event}
+  title={event.title}
+  description={event.description}
+>
+  <div class="flex flex-col gap-4">
+    <details>
+      <summary>What is a CTF?</summary>
+      <span>CTF is an acronym for "capture-the-flag," which in the context of the cybersecurity field are competitions where teams solve security-related challenges to find a flag (usually a string of text). The flag can then be submitted to the competition platform for points, and the teams compete against each other for the most points!</span>
+    </details>
+    <details>
+      <summary>How are tie-breakers determined?</summary>
+      <span>The leaderboard is sorted first by the team with the most points. If teams have the same number of points, then the team who submitted their most recent flag earlier wins the tie-break.</span>
+    </details>
+    <details>
+      <summary>How do I form a team?</summary>
+      <span>By the day before the competition, we will be opening team registration on our competition platform. Feel free to find your team partner beforehand. We will also have multiple opportunities before and during the event to find and form teams!</span>
+    </details>
+    <details>
+      <summary>I heard that there will be companies present. Do I need to dress up or prepare a resume?</summary>
+      <span>We do not require a dress code and the expectation is that most people will be dressed casually. We will be offering a resume book to our sponsors and a resume PDF upload form will be provided during the event. If you need help preparing a resume, feel free to ask for advice in our Discord or take advantage of campus career resources!</span>
+    </details>
+  </div>
+</Layout>

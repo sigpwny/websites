@@ -39,3 +39,86 @@ body {
   height: 100%;
   width: 100%;
 }
+a,
+a:active {
+  color: rgb(var(--rgb-primary));
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(var(--rgb-secondary));
+  text-decoration: none;
+}
+.container {
+  @apply md:px-8 px-4;
+}
+.panel {
+  @apply bg-surface-100 rounded-xl p-4;
+}
+.panel-p-0 {
+  @apply bg-surface-100 rounded-xl;
+}
+.btn-primary {
+  @apply bg-primary text-surface-000 px-3 py-1 rounded-full cursor-pointer;
+}
+.btn-primary:hover {
+  background-color: rgb(var(--rgb-secondary));
+  color: rgb(var(--rgb-surface-000));
+}
+.button {
+  @apply flex flex-row items-center gap-1 px-3 py-1 cursor-pointer rounded-md;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--rgb-primary));
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background-color: rgb(var(--rgb-secondary));
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+}
+.custom-scrollbar {
+  -ms-overflow-style: auto;
+  scrollbar-color: rgb(var(--rgb-primary)) transparent;
+  scrollbar-width: thin;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+/* Skeleton shimmer effect */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+}
+.skeleton-shimmer::before {
+  content: "";
+  background: linear-gradient(90deg, transparent, rgb(var(--rgb-surface-250) / 10), transparent) no-repeat;
+  background-size: 100% 100%;
+  animation: shimmer 1s infinite;
+  position: absolute;
+  transform: translateX(-100%);
+  inset: 0;
+}
+.skeleton-shimmer > * {
+  position: relative;
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

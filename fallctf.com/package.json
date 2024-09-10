@@ -28,6 +28,7 @@
     "@floating-ui/react": "^0.26.23",
     "astro": "^4.14.3",
     "dayjs": "^1.11.13",
+    "framer-motion": "^11.5.4",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "tailwindcss": "^3.4.10",

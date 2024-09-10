@@ -1,0 +1,49 @@
+---
+import Layout from '@/layouts/Event.astro';
+import { getCollection, render } from 'astro:content';
+import Link from '$/components/Link.astro';
+import { MdxComponents } from '$/components/Mdx/index.astro';
+import FallCTFLogo from '@/components/FallCTFLogo';
+
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import duration from 'dayjs/plugin/duration';
+import advanced from 'dayjs/plugin/advancedFormat';
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(duration);
+dayjs.extend(advanced);
+
+export async function getStaticPaths() {
+  // filter to only fallctf events
+  const events = (await getCollection('events', (event) => event.data.series === "fallctf")).sort(
+    (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
+  );
+  return events.map((event) => ({
+    params: { slug: dayjs(event.data.time_start).format('YYYY') },
+    props: { page: event },
+  }));
+};
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+const event = page.data;
+
+// const fallEvents = rawEvents
+//   .filter(e => e.data.series === 'fallctf')
+//   .sort((a, b) => new Date(b.data.time_start).getTime() - new Date(a.data.time_start).getTime());
+
+// const [latestEvent, ...previousEvents] = fallEvents;
+
+const flavor = 'Fall CTF is a beginner-friendly CTF competition for UIUC students, designed to introduce students to cybersecurity topics.'
+---
+<Layout
+  event={event}
+  title={event.title}
+  description={event.description}
+>
+  <section class="md-root w-full max-w-prose mx-auto">
+    <Content components={MdxComponents} />
+  </section>
+</Layout>
