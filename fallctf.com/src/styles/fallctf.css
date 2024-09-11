@@ -39,6 +39,18 @@ body {
   height: 100%;
   width: 100%;
 }
+h1, h2, h3 {
+  @apply font-bold;
+}
+h1 {
+  @apply text-4xl mb-2;
+}
+h2 {
+  @apply text-3xl mb-2;
+}
+h3 {
+  @apply text-2xl;
+}
 .container {
   @apply md:px-8 px-4;
 }
