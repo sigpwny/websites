@@ -1,0 +1,52 @@
+@tailwind utilities;
+@layer utilities {
+  .hide-nav {
+    --nav-hidden-width: 0;
+    --nav-hidden-opacity: 0;
+  }
+  .show-nav {
+    --nav-hidden-width: auto;
+    --nav-hidden-opacity: 1;
+  }
+}
+
+/* Nav mobile hamburger toggle */
+.icon-bar {
+	width: 22px; 
+	height: 2px;
+	background-color: currentColor;
+	display: block;
+	transition: all 0.2s;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+.nav-mobile-toggle-input {
+  @apply opacity-0 absolute h-0 w-0 -z-10;
+}
+.nav-mobile-toggle-label {
+  @apply flex lg:hidden items-center cursor-pointer;
+}
+.nav-mobile-toggle-label .top-bar {
+  transform: rotate(45deg);
+  transform-origin: 10% 10%;
+}
+.nav-mobile-toggle-label .middle-bar {
+  opacity: 0;
+}
+.nav-mobile-toggle-label .bottom-bar {
+  transform: rotate(-45deg);
+  transform-origin: 10% 90%;
+}
+.nav-mobile-toggle-input:not(:checked) ~ .nav-mobile-toggle-label .top-bar {
+  transform: rotate(0);
+}
+.nav-mobile-toggle-input:not(:checked) ~ .nav-mobile-toggle-label .middle-bar {
+  opacity: 1;
+}
+.nav-mobile-toggle-input:not(:checked) ~ .nav-mobile-toggle-label .bottom-bar {
+  transform: rotate(0);
+}
+/* Ensure hamburger toggle can be focused */
+.nav-mobile-toggle-input:focus-visible ~ .nav-mobile-toggle-label {
+  @apply ring-2 ring-white;
+}

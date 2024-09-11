@@ -24,9 +24,11 @@ export async function getStaticPaths() {
   }));
 };
 
+type Event = Awaited<ReturnType<typeof getFallCTFEvents>>[number]['data'];
+
 const { page } = Astro.props;
 const { Content } = await render(page);
-const event = page.data;
+const event: Event = page.data;
 
 // const fallEvents = rawEvents
 //   .filter(e => e.data.series === 'fallctf')
@@ -41,10 +43,31 @@ const flavor = 'Fall CTF is a beginner-friendly CTF competition for UIUC student
   title={event.title}
   description={event.description}
 >
+  {/* Default hero element */}
+  <div
+    slot="hero"
+    transition:name="hero"
+  >
+    <div class="flex flex-col items-center my-32">
+      <FallCTFLogo year={event.year} transition:name="fall-ctf-logo" />
+      <span class="flex flex-row gap-2">
+        {event.links.map((link) => (
+          <Link
+            href={link.url}
+            class="btn-primary font-bold border-2 border-surface-250"
+          >
+            {link.name}
+          </Link>
+        ))}
+      </span>
+    </div>
+  </div>
   <div
     slot="body"
-    class="md-root w-full max-w-prose mx-auto"
+    transition:name="body"
   >
-    <Content components={MdxComponents} />
+    <div class="md-root w-full max-w-prose mx-auto">
+      <Content components={MdxComponents} />
+    </div>
   </div>
 </Layout>

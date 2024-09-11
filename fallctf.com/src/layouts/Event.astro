@@ -1,8 +1,6 @@
 ---
 import Layout from '@/layouts/Base.astro';
-import Link from '$/components/Link.astro';
 import { type HeadProps } from '$/components/BaseHead.astro';
-import FallCTFLogo from '@/components/FallCTFLogo';
 import { getFallCTFEvents } from '@/utils/fallctf-events';
 
 type Event = Awaited<ReturnType<typeof getFallCTFEvents>>[number]['data'];
@@ -15,25 +13,13 @@ const props: Props = Astro.props;
 const event = props.event;
 ---
 <Layout {...props}>
-  <section id="hero">
-    <slot name="hero">
-      {/* Default hero element */}
-      <div class="flex flex-col items-center">
-        <FallCTFLogo year={event.year} transition:name="fall-ctf-logo" />
-        <span class="flex flex-row gap-2">
-          {event.links.map((link) => (
-            <Link
-              href={link.url}
-              class="btn-primary font-bold border-2 border-surface-250"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </span>
-      </div>
-    </slot>
-  </section>
-  <section id="body">
-    <slot name="body" />
-  </section>
+  <div class="z-0">
+    <section id="hero">
+      <slot name="hero" />
+    </section>
+    <section id="body" class="relative">
+      <span id="main" class="relative -top-20" />
+      <slot name="body" />
+    </section>
+  </div>
 </Layout>
