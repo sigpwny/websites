@@ -1,64 +1,68 @@
 ---
 import Layout from '@/layouts/Event.astro';
 import Link from '$/components/Link.astro';
+import Card from '$/components/Card.astro';
+import Avatar from '$/components/Profile/Avatar.astro';
 import FallCTFLogo from '@/components/FallCTFLogo';
+import { getProfilesFromNames } from '$/utils/profiles';
 import { getFallCTFEvents } from '@/utils/fallctf-events';
+
+import svg_sigpwny from '$/content/profiles/org/sigpwny/pwny8-banner-transparent.svg?raw';
+import svg_wicys from '$/content/profiles/org/wicys/wicys-illinois-single-color.svg?raw';
 
 const events = (await getFallCTFEvents()).filter((event) => event.data.year === '2024');
 if (events.length === 0) {
   return Astro.error(404, 'Event not found');
 }
-const event = events[0].data;
+const event = {
+  ...events[0].data,
+  // Add sponsor_profiles, which is a list of resolved profiles from names in sponsors
+  sponsors_profiles: events[0].data.sponsors ? (await getProfilesFromNames(events[0].data.sponsors)) : undefined,
+};
 ---
 <style>
-details {
-  @apply relative border-b border-surface-250;
-}
-details:last-child {
-  @apply border-none;
-}
-details summary {
-  @apply pl-8 pr-4 py-2 list-none cursor-pointer bg-surface-100 hover:bg-surface-150 overflow-hidden;
-}
-details div {
-  @apply pl-8 pr-4 pt-1 pb-4 bg-surface-100;
-}
-details:first-child summary {
-  @apply rounded-t-xl;
-}
-details:last-child:not([open]) summary {
-  @apply rounded-b-xl;
-}
-details:last-child[open] div {
-  @apply rounded-b-xl;
-}
-summary:focus {
-  @apply outline-none;
-}
-summary:focus-visible {
-  @apply ring-2 ring-inset ring-white;
-}
-
-summary:before {
-  content: '';
-  border-width: .4rem;
-  border-style: solid;
-  border-color: transparent transparent transparent #fff;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  transform: rotate(0);
-  transform-origin: .2rem 50%;
-  transition: 0.2s transform ease;
-}
-
-details[open] > summary:before {
-  transform: rotate(90deg);
-}
-
-details summary::-webkit-details-marker {
-  display: none;
-}
+  details {
+    @apply relative border-b border-surface-250;
+  }
+  details:last-child {
+    @apply border-none;
+  }
+  details summary {
+    @apply pl-8 pr-4 py-2 list-none cursor-pointer bg-surface-100 hover:bg-surface-150 overflow-hidden;
+  }
+  details div {
+    @apply pl-8 pr-4 pt-1 pb-4 bg-surface-100;
+  }
+  details:first-child summary {
+    @apply rounded-t-xl;
+  }
+  details:last-child:not([open]) summary {
+    @apply rounded-b-xl;
+  }
+  details:last-child[open] div {
+    @apply rounded-b-xl;
+  }
+  summary:focus {
+    @apply outline-none;
+  }
+  summary:focus-visible {
+    @apply ring-2 ring-inset ring-white;
+  }
+  summary:before {
+    content: '';
+    border-width: .4rem;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    transform: rotate(0);
+    transform-origin: .2rem 50%;
+    transition: 0.2s transform ease;
+  }
+  details[open] > summary:before {
+    transform: rotate(90deg);
+  }
 </style>
 
 <Layout
@@ -87,8 +91,32 @@ details summary::-webkit-details-marker {
   <div
     slot="body"
     transition:name="body"
+    class="container"
   >
-    <div class="container max-w-prose mx-auto">
+    <div class="pb-16">
+      <h2>Sponsored By</h2>
+      <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {event.sponsors_profiles!.map((sponsor) => (
+          <div class="flex grow">
+            <Card card_image={sponsor.card_image}>
+              {/* If the sponsor does not have any displayable card_image, use profile picture and name instead */}
+              <span
+                slot={!sponsor.card_image?.foreground && !sponsor.card_image?.background ? "image" : undefined}
+                class="absolute h-full w-full flex flex-col items-center justify-center p-[5%] font-bold text-lg md:text-2xl text-center"
+              >
+                {sponsor.profile_image ? (
+                  <span class="w-auto h-1/2 aspect-square">
+                    <Avatar profile={sponsor} />
+                  </span>
+                ) : null}
+                <span>{sponsor.name}</span>
+              </span>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="max-w-prose mx-auto">
       <h2>Frequently Asked Questions</h2>
       <div class="flex flex-col md-root rounded-xl">
         <details>
@@ -125,6 +153,17 @@ details summary::-webkit-details-marker {
             <span>Some of our sponsors will be attending in-person and will be available to talk to during the event.</span>
           </div>
         </details>
+        <details>
+          <summary>I'm not from UIUC. Can I play Fall CTF?</summary>
+          <div>Currently, Fall CTF registration is limited to UIUC students. If you are not from UIUC and wish to participate, please email <a href="mailto:hello@sigpwny.com">hello@sigpwny.com</a> for a manual review.</div>
+        </details>
+      </div>
+    </div>
+    <div class="my-20 font-bold text-center container max-w-prose">
+      <p class="mb-8">Organized By</p>
+      <div class="flex flex-col md:flex-row max-w-64 md:max-w-none gap-8 md:gap-16 mx-auto items-center pointer-events-none select-none text-white">
+        <Fragment set:html={svg_sigpwny} />
+        <Fragment set:html={svg_wicys} />
       </div>
     </div>
   </div>

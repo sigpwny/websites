@@ -9,13 +9,13 @@ import {
   AppleSvg,
   GoogleCalendarSvg,
   MicrosoftOutlookSvg
-} from '@/components/Icons';
+} from '$/components/Icons';
 import {
   CalendarRegular,
   CalendarSyncRegular,
   CheckmarkCircleFilled,
   LinkRegular
-} from '@/components/Icons/fluentui';
+} from '$/components/Icons/fluentui';
 
 
 export default function CalendarSubscribe(props: any) {

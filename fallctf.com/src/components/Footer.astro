@@ -1,3 +1,12 @@
-<div>
-  footer
-</div>
+---
+import Link from '$/components/Link.astro';
+---
+<footer>
+  <div class="flex flex-col items-center px-4 py-8">
+    <div class="flex flex-col items-center space-y-4">
+      <p class="text-sm text-center">
+        &copy; {new Date().getFullYear()} <Link href="https://sigpwny.com/">SIGPwny</Link>. ACM@UIUC is a 501(c)(3) non-profit organization.
+      </p>
+    </div>
+  </div>
+</footer>

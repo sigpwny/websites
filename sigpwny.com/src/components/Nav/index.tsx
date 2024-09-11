@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { PwnySvg } from '@/components/Icons';
+import { PwnySvg } from '$/components/Icons';
 import consts from '@/consts';
 import './styles.css';
 
