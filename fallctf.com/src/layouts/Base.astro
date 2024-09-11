@@ -20,38 +20,3 @@ const props: Omit<HeadProps, "site_name"> = Astro.props;
     <slot />
   </body>
 </html>
-
-<script>
-  function initObserver() {
-    let hero = document.getElementById('hero');
-    if (!hero) return null;
-    let observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          let navbar = document.getElementById('year-nav');
-          if (!navbar) return;
-          if (entry.isIntersecting) {
-            navbar.classList.remove('nav-show-event-links');
-            // navbar.classList.remove('border');
-            // navbar.classList.remove('border-red-400');
-          } else {
-            navbar.classList.add('nav-show-event-links');
-            // navbar.classList.add('border-red-400');
-          }
-        });
-      }
-    );
-    observer.observe(hero);
-    return observer;
-  }
-
-  let observer = initObserver();
-
-  document.addEventListener('astro:before-swap', () => {
-    if (observer) observer.disconnect();
-  });
-
-  document.addEventListener('astro:after-swap', () => {
-    observer = initObserver();
-  });
-</script>
