@@ -105,13 +105,14 @@ async function main() {
             // const contentDir = path.join(__dirname, '..', '..', path.dirname(filePath));
             const cardImageURL = (card_image && card_image.background) ? `https://sigpwny.com${card_image.background.src}` : undefined;
 
+            const noTrailingSlashSlug = slug.replace(/\/$/, '');
             const url = `https://sigpwny.com${slug}`;
 
             const cleanedBody = body.replace('## Summary\n', '');
             const descriptionText = description ? description : cleanedBody;
             const fullDescription = url + '\n' + descriptionText;
 
-            const existingMetadata = snowflakeMeetingLookup[slug];
+            const existingMetadata = snowflakeMeetingLookup[noTrailingSlashSlug];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
