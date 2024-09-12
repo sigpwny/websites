@@ -108,7 +108,7 @@ async function main() {
             const noTrailingSlashSlug = slug.replace(/\/$/, '');
             const url = `https://sigpwny.com${slug}`;
 
-            const cleanedBody = body.replace('## Summary\n', '');
+            const cleanedBody = body ? body.replace('## Summary\n', ''): '';
             const descriptionText = description ? description : cleanedBody;
             const fullDescription = url + '\n' + descriptionText;
 
