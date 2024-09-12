@@ -18,6 +18,7 @@ import consts from '@/consts';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { APIRoute } from 'astro';
+import type { InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 
 dayjs.extend(duration);
 dayjs.extend(utc);
@@ -56,14 +57,23 @@ export async function getStaticPaths() {
     return {
       params: {
         type: type.join('-'),
-        includes: JSON.stringify(type[0] === 'all' ? meetingMetatypes : type), // this allows us to pass more metadata
       },
+      props: {
+        includes: type[0] === 'all' ? meetingMetatypes : type,
+      }
     }
   })
 }
 
-export const GET: APIRoute = async ({params, request}) => {
-  const includes: MeetingMetatype[] = JSON.parse(params.includes || '[]'); 
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+export const GET = async ({ props } : {
+  params: Params,
+  props: Props,
+  request: Request,
+}) => {
+  const includes: MeetingMetatype[] = props.includes as MeetingMetatype[];
 
   const meetings = await getMeetings();
   const filteredMeetings = meetings.filter((meeting) => includes.includes(meeting.data.type));
@@ -96,30 +106,32 @@ export const GET: APIRoute = async ({params, request}) => {
     });
   });
 
-  const events = await getCollection('events') as CollectionEntry<'events'>[];
-  events.forEach((event) => {
-    const e = event.data;
-    const primaryLink = e.links.find((l: { name: String, url: String }) => ['website'].includes(l.name.toLowerCase()));
-    // TODO: Instead of linking to the website, link to the event page on the base website, e.g. https://fallctf.com/2024/
-    ics.createEvent({
-      id: e.ical?.uid ?? createICalendarUID(`event-${e.series}-${e.title}`, site.hostname),
-      sequence: e.ical?.revision ?? 0,
-      start: dayjs.utc(e.time_start),
-      end: dayjs.utc(e.time_start).add(dayjs.duration(e.duration)),
-      summary: e.ical?.summary ?? e.title,
-      description: e.ical?.description ?? createICalendarDescription(
-        e.description,
-        e.location,
-        primaryLink?.url,
-        undefined
-      ),
-      location: createICalendarLocation(locations, e.location),
-      url: e.ical?.url,
-      x: {
-        // TODO: Discord event metadata
-      },
-    });
-  })
+  if (includes.includes('general')) {
+    const events = await getCollection('events') as CollectionEntry<'events'>[];
+    events.forEach((event) => {
+      const e = event.data;
+      const primaryLink = e.links.find((l: { name: String, url: String }) => ['website'].includes(l.name.toLowerCase()));
+      // TODO: Instead of linking to the website, link to the event page on the base website, e.g. https://fallctf.com/2024/
+      ics.createEvent({
+        id: e.ical?.uid ?? createICalendarUID(`event-${e.series}-${e.title}`, site.hostname),
+        sequence: e.ical?.revision ?? 0,
+        start: dayjs.utc(e.time_start),
+        end: dayjs.utc(e.time_start).add(dayjs.duration(e.duration)),
+        summary: e.ical?.summary ?? e.title,
+        description: e.ical?.description ?? createICalendarDescription(
+          e.description,
+          e.location,
+          primaryLink?.url,
+          undefined
+        ),
+        location: createICalendarLocation(locations, e.location),
+        url: e.ical?.url,
+        x: {
+          // TODO: Discord event metadata
+        },
+      });
+    })
+  }
 
   return new Response(
     ics.toString(),
