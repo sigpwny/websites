@@ -24,7 +24,7 @@ const potentiallyUpcomingMeetings = rawMeetings.filter(({ data: { time_start, du
   const now = new Date();
   const time_close = dayjs(time_start).add(dayjs.duration(duration)).toDate();
   return time_close > now;
-}).toReversed();
+}).reverse();
 
 export type MeetingType = typeof rawMeetings[0];
 
