@@ -3,18 +3,28 @@ import Layout from '@/layouts/Base.astro';
 import Link from '@/components/Link.astro';
 import MeetingRow from '@/components/Meeting/Row.astro';
 import MeetingTime from '@/components/Meeting/Time.astro';
-import CalendarSubscribe from '@/components/CalendarSubscribe';
 import {
-  convertDate,
   getMeetings,
   formatSemester,
-  weekNumber
 } from "@/utils/meetings";
-import { meetingMetadata, type MeetingMetadata } from '@/utils/meetingMetadata';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import utc from 'dayjs/plugin/utc';
 import MeetingControls from '@/components/MeetingControls';
+
+dayjs.extend(duration);
+dayjs.extend(utc);
+
 const rawMeetings = (await getMeetings()).sort(
   (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
 );
+
+// The server build time will always be in the past, so we can filter out meetings before then.
+const potentiallyUpcomingMeetings = rawMeetings.filter(({ data: { time_start, duration }}) => {
+  const now = new Date();
+  const time_close = dayjs(time_start).add(dayjs.duration(duration)).toDate();
+  return time_close > now;
+}).reverse();
 
 export type MeetingType = typeof rawMeetings[0];
 
@@ -68,7 +78,17 @@ const Tag = ({ tag }: { tag: string }) => (
         </p>
       </div>
       <MeetingControls client:load />
-
+      <div class="panel mb-2">
+          <p class="font-bold text-2xl m-0">
+            Upcoming
+          </p>
+          <hr class="border-surface-200" />
+          <ul class="flex flex-col pb-2">
+            {potentiallyUpcomingMeetings.map((meeting) => (
+              <MeetingRow input={meeting} showUpcoming={true} />
+            ))}
+          </ul>
+      </div>
       <div class="panel">
         {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
           <div id={semester}>
@@ -78,7 +98,7 @@ const Tag = ({ tag }: { tag: string }) => (
             <hr class="border-surface-200" />
             <ul class="flex flex-col pb-2">
               {meetings.map((meeting) => (
-                <MeetingRow input={meeting} />
+                <MeetingRow input={meeting} showUpcoming={false} />
               ))}
             </ul>
           </div>
