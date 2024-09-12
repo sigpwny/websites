@@ -35,10 +35,6 @@
     "status": 302,
     "destination": "/events/"
   },
-  "/events/*": {
-    "status": 302,
-    "destination": "/events-temp/"
-  },
   "/fall": {
     "status": 302,
     "destination": "/Fall_CTF_2024_Sponsorship.pdf"
