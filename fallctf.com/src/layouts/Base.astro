@@ -1,24 +1,26 @@
 ---
+import '@/styles/fallctf.css';
+import '$/styles/md.css';
 import '$/styles/prism-one-dark.css';
+import 'katex/dist/katex.min.css';
 
 import type { HeadProps } from '$/components/BaseHead.astro';
 import BaseHead from '$/components/BaseHead.astro';
 import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
 
 const props: Omit<HeadProps, "site_name"> = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en" transition:animate="none">
   <head>
     <BaseHead {...props} site_name="fallctf.com" />
   </head>
   <body>
-    <div class="flex flex-col items-center min-h-screen bg-black text-white">
+    <div class="flex flex-col min-h-screen bg-black text-white">
       <Header />
-      <div class="container">
-        <slot />
-      </div>
+      <slot />
     </div>
+    <Footer />
   </body>
 </html>

@@ -1,12 +1,12 @@
 ---
-import Link from '@/components/Link.astro';
-import PersonaGroup from '@/components/Profile/PersonaGroup.astro';
+import Link from '$/components/Link.astro';
+import PersonaGroup from '$/components/Profile/PersonaGroup.astro';
 import { getCollection, getEntries } from 'astro:content';
-import { PdfSvg, YouTubeSvg } from '@/components/Icons';
+import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import { convertDate, weekNumber } from '@/utils/meetings';
-import { getProfilesFromNames } from '@/utils/profiles';
+import { getProfilesFromNames } from '$/utils/profiles';
 
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';

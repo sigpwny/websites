@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
-import { MdxComponents } from '@/components/Mdx/index.astro';
+import { MdxComponents } from '$/components/Mdx/index.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');

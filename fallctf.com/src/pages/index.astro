@@ -1,30 +1,9 @@
 ---
-import Layout from '@/layouts/Base.astro';
-import { getCollection, type CollectionEntry } from "astro:content";
-import EventCard from '@/components/Event/Card.astro';
+import { getFallCTFEvents } from '@/utils/fallctf-events';
 
-const rawEvents = await getCollection('events')  as CollectionEntry<'events'>[];
+const events = await getFallCTFEvents();
+const latestSlug = events[0].slug;
 
-const fallEvents = rawEvents
-.filter(e => e.data.series === 'fallctf')
-.sort((a, b) => new Date(b.data.time_start).getTime() - new Date(a.data.time_start).getTime());
-
-const [latestEvent, ...previousEvents] = fallEvents;
-
-const flavor = 'Fall CTF is a beginner-friendly CTF competition for UIUC students, designed to introduce students to cybersecurity topics.'
-
+// TODO: ensure that canonical URL points to year of latest event
+return Astro.rewrite(latestSlug);
 ---
-
-<Layout title="Home">
-	<div>
-		<p class="font-bold text-2xl m-0">Fall CTF</p>
-		<p>{flavor}</p>
-		<hr class="border-surface-200" />
-		<div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-			<EventCard input={latestEvent} size="large" />
-			{previousEvents.map((event) => (
-				<EventCard input={event} />
-			))}
-		</div>
-	</div>
-</Layout>

@@ -3,7 +3,7 @@ import { ViewTransitions } from 'astro:transitions';
 import { type SiteName, getSiteConfig } from '../configs';
 
 export interface HeadProps {
-  site_name: SiteName;
+  site_name?: SiteName;
   title?: string;
   description?: string;
   image?: string;
@@ -16,6 +16,9 @@ export interface HeadProps {
 
 
 const props = Astro.props as HeadProps;
+if (!props.site_name) {
+  throw new Error("site_name is required in BaseHead");
+}
 const siteConfig = getSiteConfig(props.site_name);
 
 const siteName = siteConfig.title;

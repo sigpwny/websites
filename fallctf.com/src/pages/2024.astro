@@ -1,0 +1,189 @@
+---
+import Layout from '@/layouts/Event.astro';
+import Link from '$/components/Link.astro';
+import Card from '$/components/Card.astro';
+import Avatar from '$/components/Profile/Avatar.astro';
+import FallCTFLogo from '@/components/FallCTFLogo';
+import { getProfilesFromNames } from '$/utils/profiles';
+import { getFallCTFEvents } from '@/utils/fallctf-events';
+import { Picture } from 'astro:assets';
+
+import jpg_cif from '@/assets/cif.jpg';
+import svg_sigpwny from '$/content/profiles/org/sigpwny/pwny8-banner-transparent.svg?raw';
+import svg_wicys from '$/content/profiles/org/wicys/wicys-illinois-single-color.svg?raw';
+
+const events = (await getFallCTFEvents()).filter((event) => event.data.year === '2024');
+if (events.length === 0) {
+  return Astro.error(404, 'Event not found');
+}
+const event = {
+  ...events[0].data,
+  // Add sponsor_profiles, which is a list of resolved profiles from names in sponsors
+  sponsors_profiles: events[0].data.sponsors ? (await getProfilesFromNames(events[0].data.sponsors)) : undefined,
+};
+---
+<style>
+  details {
+    @apply relative border-b border-surface-250;
+  }
+  details:last-child {
+    @apply border-none;
+  }
+  details summary {
+    @apply pl-8 pr-4 py-2 list-none cursor-pointer bg-surface-100 hover:bg-surface-150 overflow-hidden;
+  }
+  details div {
+    @apply pl-8 pr-4 pt-1 pb-4 bg-surface-100;
+  }
+  details:first-child summary {
+    @apply rounded-t-xl;
+  }
+  details:last-child:not([open]) summary {
+    @apply rounded-b-xl;
+  }
+  details:last-child[open] div {
+    @apply rounded-b-xl;
+  }
+  summary:focus {
+    @apply outline-none;
+  }
+  summary:focus-visible {
+    @apply ring-2 ring-inset ring-white;
+  }
+  summary:before {
+    content: '';
+    border-width: .4rem;
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    transform: rotate(0);
+    transform-origin: .2rem 50%;
+    transition: 0.2s transform ease;
+  }
+  details[open] > summary:before {
+    transform: rotate(90deg);
+  }
+</style>
+
+<Layout
+  event={event}
+  title={event.title}
+  description={event.description}
+>
+  <div
+    slot="hero"
+    transition:name="hero"
+  >
+    <div class="flex flex-col items-center h-screen max-h-[1028px] justify-center">
+      <FallCTFLogo year={event.year} transition:name="fall-ctf-logo" />
+      <span class="flex flex-row gap-2">
+        {event.links.map((link) => (
+          <Link
+            href={link.url}
+            class="btn-primary font-bold border-2 border-surface-250"
+          >
+            {link.name}
+          </Link>
+        ))}
+      </span>
+    </div>
+  </div>
+  <div
+    slot="body"
+    transition:name="body"
+    class="container anchors"
+  >
+    <div class="flex flex-row gap-4">
+      <div class="panel border-2 border-surface-150 max-w-prose">
+        <h2>What</h2>
+        <span>Fall CTF is a 6-hour hacking competition for UIUC students hosted by <Link href="https://sigpwny.com/">SIGPwny</Link> and <Link href="https://wicys.github.io/">WiCyS @ Illinois</Link>. UIUC students of all backgrounds are welcome, including beginners! There will be challenges related to web hacking, reverse engineering, binary exploitation, and more! Plus, free food, free swag, and companies! Come learn and have fun with us!</span>
+      </div>
+      <div class="panel border-2 border-surface-150 max-w-prose">
+        <h2>Where</h2>
+        <span>Campus Instructional Facility 3031/3039</span>
+        <Picture
+          class="w-full"
+          src={jpg_cif}
+          alt="Campus Instructional Facility"
+          formats={["webp", "avif"]}
+          widths={[300, 600]}
+        />
+      </div>
+    </div>
+    <div class="pb-16">
+      <h2>Sponsored By</h2>
+      <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {event.sponsors_profiles!.map((sponsor) => (
+          <div class="flex grow">
+            <Card card_image={sponsor.card_image}>
+              {/* If the sponsor does not have any displayable card_image, use profile picture and name instead */}
+              <span
+                slot={!sponsor.card_image?.foreground && !sponsor.card_image?.background ? "image" : undefined}
+                class="absolute h-full w-full flex flex-col items-center justify-center p-[5%] font-bold text-lg md:text-2xl text-center"
+              >
+                {sponsor.profile_image ? (
+                  <span class="w-auto h-1/2 aspect-square">
+                    <Avatar profile={sponsor} />
+                  </span>
+                ) : null}
+                <span>{sponsor.name}</span>
+              </span>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="max-w-prose mx-auto">
+      <h2>Frequently Asked Questions</h2>
+      <div class="flex flex-col md-root rounded-xl">
+        <details>
+          <summary>What is a "capture the flag" (CTF) competition?</summary>
+          <div>CTFs are cybersecurity competitions where teams solve hacking challenges to find a "flag," usually a formatted string. Flags can then be submitted to the competition platform for points. The more flags you capture, the more points you get!</div>
+        </details>
+        <details>
+          <summary>What if I'm new to cybersecurity?</summary>
+          <div>Fall CTF is designed for you! Specifically, Fall CTF is meant to be a fun learning experience for beginners rather than an intense competition. We provide guides for each challenge category which will teach you as you play. Additionally, we have a large number of staff to help you in-person if you feel stuck.</div>
+        </details>
+        <details>
+          <summary>Are there any practice challenges? How can I prepare?</summary>
+          <div>You can find beginner-friendly challenges similar to Fall CTF on <Link href="https://ctf.sigpwny.com/">Pwny CTF</Link>, which is SIGPwny's 24/7 internal CTF that runs alongside <Link href="https://sigpwny.com/meetings/">club meetings</Link>.</div>
+        </details>
+        <details>
+          <summary>Can I work with others?</summary>
+          <div class="flex flex-col gap-4">
+            <span>Fall CTF can only be played in teams of up to two. We keep team sizes small so that you have more opportunities to solve challenges! We also ask that teams do not share flags or solutions with each other. If you feel stuck, reach out to a staff member.</span>
+            <span>On the day before the competition, we will be open team registration on our competition platform. Feel free to find a partner beforehand; otherwise, there will be plenty of opportunities before and during the event to find and form teams!</span>
+          </div>
+        </details>
+        <details>
+          <summary>Help! How do I contact a staff member?</summary>
+          <div>Join our <Link href="https://sigpwny.com/discord">Discord</Link> to be able to ask your question online. We have a ticketing system that you can use to privately message the Fall CTF team. Additionally, you can ask anyone in-person wearing a badge with a green lanyard for help.</div>
+        </details>
+        <details>
+          <summary>How do tiebreaks work?</summary>
+          <div>The leaderboard is first sorted by points. If any teams have the same number of points, then the team who submitted their latest flag earlier wins the tiebreak.</div>
+        </details>
+        <details>
+          <summary>I heard that companies will be attending. Do I need a resume?</summary>
+          <div class="flex flex-col gap-4">
+            <span>We will be offering a resume upload form as one of the challenges during the event. Uploaded resumes will be provided to our sponsors as a resume book. If you need help preparing a resume, feel free to ask for advice in our <Link href="https://sigpwny.com/discord">Discord</Link> or take advantage of campus career resources!</span>
+            <span>Some of our sponsors will be attending in-person and will be available to talk to during the event.</span>
+          </div>
+        </details>
+        <details>
+          <summary>I'm not from UIUC. Can I play Fall CTF?</summary>
+          <div>Currently, Fall CTF registration is limited to UIUC students. If you are not from UIUC and wish to participate, please email <a href="mailto:hello@sigpwny.com">hello@sigpwny.com</a> for a manual review.</div>
+        </details>
+      </div>
+    </div>
+    <div class="my-20 font-bold text-center container max-w-prose">
+      <p class="mb-8">Organized By</p>
+      <div class="flex flex-col md:flex-row max-w-64 md:max-w-none gap-8 md:gap-16 mx-auto items-center pointer-events-none select-none text-white">
+        <Fragment set:html={svg_sigpwny} />
+        <Fragment set:html={svg_wicys} />
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,7 +1,7 @@
 ---
-import Avatar from '@/components/Profile/Avatar.astro';
-import Persona from '@/components/Profile/Persona';
-import ProfileCard from '@/components/Profile/ProfileCard.astro';
+import Avatar from './Avatar.astro';
+import Persona from './Persona';
+import ProfileCard from './ProfileCard.astro';
 
 const { profiles, limit } = Astro.props;
 const show_count = limit && profiles.length > limit ? limit - 1 : profiles.length;

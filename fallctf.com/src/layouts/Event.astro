@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/Base.astro';
+import { type HeadProps } from '$/components/BaseHead.astro';
+import { getFallCTFEvents } from '@/utils/fallctf-events';
+
+type Event = Awaited<ReturnType<typeof getFallCTFEvents>>[number]['data'];
+
+interface Props extends HeadProps {
+  event: Event;
+};
+
+const props: Props = Astro.props;
+const event = props.event;
+---
+<Layout {...props}>
+  <div class="z-0">
+    <section id="hero">
+      <slot name="hero" />
+    </section>
+    <section id="body" class="relative">
+      <span id="main" class="relative -top-20" />
+      <slot name="body" />
+    </section>
+  </div>
+</Layout>

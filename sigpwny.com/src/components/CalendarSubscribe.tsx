@@ -9,14 +9,14 @@ import {
   AppleSvg,
   GoogleCalendarSvg,
   MicrosoftOutlookSvg
-} from '@/components/Icons';
+} from '$/components/Icons';
 import {
   CalendarRegular,
   CalendarSyncRegular,
   CheckmarkCircleRegular,
   CheckmarkCircleFilled,
   LinkRegular
-} from '@/components/Icons/fluentui';
+} from '$/components/Icons/fluentui';
 import { meetingMetadata, type MeetingMetatype } from '@/utils/meetingMetadata';
 import { getCalendarName } from '@/utils/icalendar';
 

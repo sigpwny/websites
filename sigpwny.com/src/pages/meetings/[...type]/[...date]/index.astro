@@ -5,13 +5,13 @@ import {
   ClockRegular,
   LiveRegular,
   LocationRegular
-} from '@/components/Icons/fluentui';
-import Avatar from '@/components/Profile/Avatar.astro';
+} from '$/components/Icons/fluentui';
+import { MdxComponents } from '$/components/Mdx/index.astro';
+import Avatar from '$/components/Profile/Avatar.astro';
 import Layout from '@/layouts/Meeting.astro';
-import Persona from '@/components/Profile/Persona';
-import ProfileCard from '@/components/Profile/ProfileCard.astro';
-import { PdfSvg, YouTubeSvg } from '@/components/Icons';
-import { MdxComponents } from '@/components/Mdx/index.astro';
+import Persona from '$/components/Profile/Persona';
+import ProfileCard from '$/components/Profile/ProfileCard.astro';
+import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import {
@@ -23,7 +23,7 @@ import {
 } from '@/utils/meetings';
 import locations from '@/locations.json';
 import { createICalendarLocation } from '@/utils/icalendar';
-import { getProfilesFromNames } from '@/utils/profiles';
+import { getProfilesFromNames } from '$/utils/profiles';
 // import { Tooltip } from '@/components/Tooltip';
 
 import dayjs from 'dayjs';

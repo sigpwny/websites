@@ -1,6 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { EventSchema } from '$/schema';
+import { EventSchema, ProfileSchema } from '$/schema';
 
 const events = defineCollection({
   type: 'content_layer',
@@ -8,4 +8,10 @@ const events = defineCollection({
   schema: (props) => EventSchema(props),
 });
 
-export const collections = { events }
+const profiles = defineCollection({
+  type: 'content_layer',
+  loader: glob({ pattern: '**/*.mdx', base: '../_global/content/profiles' }),
+  schema: (props) => ProfileSchema(props),
+});
+
+export const collections = { events, profiles };

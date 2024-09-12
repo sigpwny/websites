@@ -1,4 +1,4 @@
-import { ChevronRightRegular } from '@/components/Icons/fluentui';
+import { ChevronRightRegular } from '$/components/Icons/fluentui';
 import './styles.css';
 
 
