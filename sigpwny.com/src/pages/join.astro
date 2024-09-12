@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Base.astro';
+import consts from '@/consts';
 import { Picture } from 'astro:assets';
 import Card from '$/components/Card.astro';
 import Link from '$/components/Link.astro';
@@ -29,7 +30,7 @@ const filteredMeetings = meetings.filter((meeting) => {
 const getStartedMeetings = filteredMeetings.reverse();
 ---
 <Layout
-  title="Join"
+  title={`Join SIGPwny!`}
   description="Join SIGPwny, the hacking club at UIUC!"
 >
   <div class="2xl:px-40">

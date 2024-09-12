@@ -1,5 +1,6 @@
 ---
 import Layout from '@/layouts/Base.astro';
+import consts from '@/consts';
 import { getCollection, render } from 'astro:content';
 import { MdxComponents } from '$/components/Mdx/index.astro';
 
@@ -16,7 +17,7 @@ const { Content } = await render(page);
 const data = page.data;
 ---
 <Layout
-  title={data.title}
+  title={`${data.title} — ${consts.title}`}
   description={data.description}
 >
   <div class={"md-root mx-auto" + (data.full_width ? "" : " page-width") + (data.no_background ? "" : " panel")}>
