@@ -10,12 +10,13 @@ import {
   formatSemester,
   weekNumber
 } from "@/utils/meetings";
-
+import { meetingMetadata, type MeetingMetadata } from '@/utils/meetingMetadata';
+import MeetingControls from '@/components/MeetingControls';
 const rawMeetings = (await getMeetings()).sort(
   (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
 );
 
-type MeetingType = typeof rawMeetings[0];
+export type MeetingType = typeof rawMeetings[0];
 
 const meetingsBySemester = rawMeetings.reduce(
   (acc, meeting) => {
@@ -28,7 +29,17 @@ const meetingsBySemester = rawMeetings.reduce(
     return acc;
   }, {} as {[semester: string]: MeetingType[]}
 );
+
+/*
+
+const Tag = ({ tag }: { tag: string }) => (
+  <div class="flex-none h-fit px-2 py-1 text-xs select-none  hover:bg-surface-300 border-2 border-surface-100 rounded-lg">
+    {tag}
+  </div>
+)
+*/
 ---
+
 <Layout
   title="Meetings"
   description="Index of all SIGPwny meetings"
@@ -58,10 +69,9 @@ const meetingsBySemester = rawMeetings.reduce(
           Recordings are posted on our <Link href="https://www.youtube.com/@sigpwny">YouTube</Link>.
           See the schedule below for specific meeting details.
         </p>
-        <div class="pb-4 flex">
-          <CalendarSubscribe client:load />
-        </div>
       </div>
+      <MeetingControls client:load />
+
       <div class="panel">
         {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
           <div id={semester}>
@@ -83,6 +93,7 @@ const meetingsBySemester = rawMeetings.reduce(
           <Tooltip.Profile client:load transition:persist />
         </span> */}
       </div>
+
     </div>
   </section>
 </Layout>

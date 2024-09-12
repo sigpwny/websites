@@ -1,10 +1,15 @@
 import crypto from 'crypto';
 import type { ICalLocationWithTitle } from "ical-generator";
+import { meetingMetadata, type MeetingMetatype } from '@/utils/meetingMetadata';
 
 export function createICalendarUID(uniq_id: string, domain: string) {
   const hash = crypto.createHash('sha256').update(uniq_id).digest('hex');
   return `${hash}@${domain}`;
 };
+
+export function getCalendarName(selectedCalendars: MeetingMetatype[]) {
+  return 'SIGPwny ' + selectedCalendars.sort().map((id) => meetingMetadata[id].shortName).join(',')
+}
 
 export function createICalendarDescription(
   description?: string,
