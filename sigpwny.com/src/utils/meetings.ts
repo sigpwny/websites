@@ -6,9 +6,12 @@ import timezone from 'dayjs/plugin/timezone';
 import advanced from 'dayjs/plugin/advancedFormat';
 
 export async function getMeetings() {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  dayjs.extend(advanced);
   const meetings = await getCollection('meetings');
   return meetings.map((meeting) => {
-    const relativeSlug = `${meeting.data.type}/${dayjs(meeting.data.time_start).format("YYYY-MM-DD")}`
+    const relativeSlug = `${meeting.data.type}/${dayjs(meeting.data.time_start).tz(meeting.data.timezone).format("YYYY-MM-DD")}`
     return {
       ...meeting,
       data: {
