@@ -4,7 +4,7 @@ import { getMeetings } from '@/utils/meetings';
 export async function getStaticPaths() {
   const meetings = await getMeetings();
   return meetings.map((meeting) => ({
-    params: { type: meeting.type, date: meeting.date },
+    params: { slug: meeting.relativeSlug },
     props: meeting,
   }));
 }

@@ -13,7 +13,8 @@ import {
 import {
   CalendarRegular,
   CalendarSyncRegular,
-  CheckmarkCircleRegular,
+  CheckboxCheckedFilled,
+  CheckboxUncheckedFilled,
   CheckmarkCircleFilled,
   LinkRegular
 } from '$/components/Icons/fluentui';
@@ -28,7 +29,6 @@ interface CalendarSubscribeProps {
 export default function CalendarSubscribe({ selected, placement }: CalendarSubscribeProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  // TODO: Do we want to duplicate this instead of using the parent state?
   const [selectedCalendars, setSelectedCalendars] = useState<MeetingMetatype[]>(['general', 'ctf']);
   useEffect(() => {
     setSelectedCalendars(selected);
@@ -51,8 +51,8 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
             onClick={() => setOpen(!open)}
             className={`btn-primary flex flex-row gap-2 items-center ${open ? "ring-primary ring-2 ring-offset-2 ring-offset-surface-000" : ""}`}
           >
-            <CalendarSyncRegular className="flex-none text-black" />
-            <span className="md:inline align-middle hidden">
+            <CalendarSyncRegular className="text-black" />
+            <span>
               Subscribe to Calendar
             </span>
           </PopoverTrigger>
@@ -63,18 +63,21 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
           <Menu>
             <ul>
               {Object.values(meetingMetadata).map((metadata) => (
-                <li key={metadata.id}>
+                <li
+                  key={metadata.id}
+                  style={{ "--color-checkbox": metadata.color } as React.CSSProperties}
+                >
                   {selectedCalendars.includes(metadata.id) ? (
                     <button onClick={() => setSelectedCalendars(selectedCalendars.filter((id) => id !== metadata.id))}>
-                      <CheckmarkCircleFilled className="flex-none text-primary inline -ml-0.5 -mr-1" />
-                      <span className="inline align-middle">
+                      <CheckboxCheckedFilled className="text-[var(--color-checkbox)]" />
+                      <span>
                         {metadata.name}
                       </span>
                     </button>
                   ) : (
                     <button onClick={() => setSelectedCalendars([...selectedCalendars, metadata.id])}>
-                      <CheckmarkCircleRegular className="flex-none text-primary inline -ml-0.5 -mr-1" />
-                      <span className="inline align-middle">
+                      <CheckboxUncheckedFilled className="brightness-50" />
+                      <span>
                         {metadata.name}
                       </span>
                     </button>
@@ -87,10 +90,10 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
               <li>
                 <a
                   href={appleWebcalUrl}
-                  style={selectedCalendars.length === 0 ? {pointerEvents: 'none'} : {}}
+                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : undefined}
                 >
-                  <AppleSvg />
-                  <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>
+                  <AppleSvg className="mx-0.5" />
+                  <span className="ml-0.5">
                     Apple Calendar
                   </span>
                 </a>
@@ -100,10 +103,10 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                   href={`https://calendar.google.com/calendar/r?cid=${genericWebcalUrl}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={ (selectedCalendars.length === 0) ? {pointerEvents: 'none'} : {} }
+                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : undefined}
                 >
-                  <GoogleCalendarSvg />
-                  <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>
+                  <GoogleCalendarSvg className="mx-0.5" />
+                  <span className="ml-0.5">
                     Google Calendar
                   </span>
                 </a>
@@ -113,10 +116,10 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                   href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=${genericWebcalUrl}&name=${getCalendarName(selectedCalendars)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={selectedCalendars.length === 0 ? {pointerEvents: 'none'} : {}}
+                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : undefined}
                 >
-                  <MicrosoftOutlookSvg />
-                  <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>
+                  <MicrosoftOutlookSvg className="mx-0.5" />
+                  <span className="ml-0.5">
                     Microsoft Outlook
                   </span>
                 </a>
@@ -125,26 +128,29 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
             <span className="border-b-2 border-surface-300" />
             <ul>
               <li>
-                <a href={genericWebcalUrl} style={selectedCalendars.length === 0 ? {pointerEvents: 'none'} : {}}>
-                  <CalendarRegular width="1em" height="1em" />
-                  <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>
+                <a
+                  href={genericWebcalUrl}
+                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : undefined}
+                >
+                  <CalendarRegular />
+                  <span>
                     Other (system calendar)
                   </span>
                 </a>
               </li>
               <li className="w-full">
                 <button
-                  className="w-full"
                   onClick={handleCopy}
-                  style={selectedCalendars.length === 0 ? {pointerEvents: 'none'} : {}}
+                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : 'w-full'}
                 >
-                  <LinkRegular width="1em" height="1em" />
-                  <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>
+                  {copied ? (
+                    <CheckmarkCircleFilled className="text-primary" />
+                  ) : (
+                    <LinkRegular />
+                  )}
+                  <span>
                     Copy Link (webcal)
                   </span>
-                  {copied && (
-                    <CheckmarkCircleFilled className="ml-auto inline align-middle text-primary" />
-                  )}
                 </button>
               </li>
             </ul>
