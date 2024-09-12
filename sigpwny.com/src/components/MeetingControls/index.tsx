@@ -9,7 +9,10 @@ export default function MeetingControls() {
     useEffect(() => {
         console.log(selected)
         meetingMetatypes.forEach((id) => {
-            document.getElementById('meetings')?.style.setProperty(`--${id}-visible`, selected.includes(id) ? 'block' : 'none');
+            const root = document.getElementById('meetings')
+            if (root) {
+                root.dataset[id] = selected.includes(id) ? 'visible' : 'hidden';
+            }
         })
     }, [selected]);
 
