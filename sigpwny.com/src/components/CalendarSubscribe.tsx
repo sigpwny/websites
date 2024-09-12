@@ -34,8 +34,11 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
     setSelectedCalendars(selected);
   }, [selected]);
 
+  const genericWebcalUrl = `webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}/generic.ics`;
+  const appleWebcalUrl = `webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}/apple.ics`;
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(`webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics`);
+    navigator.clipboard.writeText(genericWebcalUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
   }
@@ -82,7 +85,10 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
             <span className="border-b-2 border-surface-300" />
             <ul>
               <li>
-                <a href={`webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}/apple.ics`}  style={ (selectedCalendars.length === 0) ? {pointerEvents: 'none'} : {} }>
+                <a
+                  href={appleWebcalUrl}
+                  style={selectedCalendars.length === 0 ? {pointerEvents: 'none'} : {}}
+                >
                   <AppleSvg />
                   <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>
                     Apple Calendar
@@ -91,7 +97,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
               </li>
               <li>
                 <a
-                  href={`https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics`}
+                  href={`https://calendar.google.com/calendar/r?cid=${genericWebcalUrl}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={ (selectedCalendars.length === 0) ? {pointerEvents: 'none'} : {} }
@@ -104,10 +110,10 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
               </li>
               <li>
                 <a
-                  href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics&name=${getCalendarName(selectedCalendars)}`}
+                  href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=${genericWebcalUrl}&name=${getCalendarName(selectedCalendars)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={ (selectedCalendars.length === 0) ? {pointerEvents: 'none'} : {} }
+                  style={selectedCalendars.length === 0 ? {pointerEvents: 'none'} : {}}
                 >
                   <MicrosoftOutlookSvg />
                   <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>
@@ -119,7 +125,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
             <span className="border-b-2 border-surface-300" />
             <ul>
               <li>
-                <a href={`webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}.ics`} style={ (selectedCalendars.length === 0) ? {pointerEvents: 'none'} : {} }>
+                <a href={genericWebcalUrl} style={selectedCalendars.length === 0 ? {pointerEvents: 'none'} : {}}>
                   <CalendarRegular width="1em" height="1em" />
                   <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>
                     Other (system calendar)
@@ -130,7 +136,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                 <button
                   className="w-full"
                   onClick={handleCopy}
-                  style={ (selectedCalendars.length === 0) ? {pointerEvents: 'none'} : {} }
+                  style={selectedCalendars.length === 0 ? {pointerEvents: 'none'} : {}}
                 >
                   <LinkRegular width="1em" height="1em" />
                   <span className={`inline align-middle ${selectedCalendars.length === 0 ? 'text-surface-300': ''}`}>

@@ -21,8 +21,8 @@ import type { MeetingMetatype } from '@/utils/meetingMetadata';
 dayjs.extend(duration);
 dayjs.extend(utc);
 
-import { getStaticPaths } from './index.ics';
-export { getStaticPaths } from './index.ics';
+import { getStaticPaths } from './generic.ics';
+export { getStaticPaths } from './generic.ics';
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

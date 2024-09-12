@@ -50,7 +50,7 @@ export async function getStaticPaths() {
   // ['general', 'events', 'purple'] should have all combinations
   const combinations = combine(meetingMetatypes);
   const urlCombinations = combinations.map(c => c.sort());
-  
+
   urlCombinations.push(['all']);
 
   return urlCombinations.map((type) => {
