@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Event.astro';
 import Link from '$/components/Link.astro';
 import Card from '$/components/Card.astro';
-import Avatar from '$/components/Profile/Avatar.astro';
+// import Avatar from '$/components/Profile/Avatar.astro';
 import FallCTFLogo from '@/components/FallCTFLogo';
 import { getProfilesFromNames } from '$/utils/profiles';
 import { getFallCTFEvents } from '@/utils/fallctf-events';
@@ -125,7 +125,7 @@ const event = {
               >
                 {sponsor.profile_image ? (
                   <span class="w-auto h-1/2 aspect-square">
-                    <Avatar profile={sponsor} />
+                    {/* <Avatar profile={sponsor} /> */}
                   </span>
                 ) : null}
                 <span>{sponsor.name}</span>
