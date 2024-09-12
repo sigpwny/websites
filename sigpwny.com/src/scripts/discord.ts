@@ -6,7 +6,7 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import duration from 'dayjs/plugin/duration';
 import advanced from 'dayjs/plugin/advancedFormat';
-
+import { meetingMetadata } from '../utils/meetingMetadata';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(duration);
@@ -99,7 +99,7 @@ async function main() {
         console.log(snowflakeEventLookup);
 
         const meetingsToUpdate = upcomingMeetings.map((meeting: any) : Promise<GuildScheduledEvent> => {
-            const { data : { title, location, card_image, week_number, time_end, time_start, description }, body, filePath, slug } = meeting;
+            const { data : { title, type, location, card_image, week_number, time_end, time_start, description }, body, filePath, slug } = meeting;
 
             // Resolve filepath to image
             // const contentDir = path.join(__dirname, '..', '..', path.dirname(filePath));
@@ -112,6 +112,8 @@ async function main() {
             const descriptionText = description ? description : cleanedBody;
             const fullDescription = url + '\n' + descriptionText;
 
+            const titleWithCategory = meetingMetadata[type]?.shortName ? `${title} [${meetingMetadata[type]?.shortName}]` : title;
+
             const existingMetadata = snowflakeMeetingLookup[noTrailingSlashSlug];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
@@ -120,20 +122,20 @@ async function main() {
                 },
                 entityType: GuildScheduledEventEntityType.External,
                 image: cardImageURL || existingMetadata?.coverImageURL({}) || undefined,
-                name: (week_number !== undefined) ? `Week ${zeroPad(week_number, 2)}: ${title}` : title,
+                name: (week_number !== undefined) ? `Week ${zeroPad(week_number, 2)}: ${titleWithCategory}` : titleWithCategory,
                 privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly,
                 scheduledStartTime: time_start.toDate(),
                 scheduledEndTime: time_end ? time_end.toDate() : (existingMetadata?.scheduledEndAt || undefined),
             }
             if (existingMetadata) {
                 if (existingMetadata.creator?.bot !== true) {
-                    console.log(`Refusing to edit non-bot meeting "${title}"`);
+                    console.log(`Refusing to edit non-bot meeting "${titleWithCategory}"`);
                     return Promise.resolve({} as GuildScheduledEvent);
                 }
-                console.log(`Editing meeting "${title}"`);
+                console.log(`Editing meeting "${titleWithCategory}"`);
                 return guild.scheduledEvents.edit(existingMetadata.id, metadata);
             } else {
-                console.log(`Creating meeting "${title}"`);
+                console.log(`Creating meeting "${titleWithCategory}"`);
                 return guild.scheduledEvents.create(metadata);
             }
         })
@@ -149,6 +151,7 @@ async function main() {
 
             const descriptionText = description ? description : body;
             const fullDescription = url ? url + '/' + '\n' + descriptionText : descriptionText;
+
 
             const existingMetadata = snowflakeEventLookup[url];
             const metadata : GuildScheduledEventCreateOptions = {
