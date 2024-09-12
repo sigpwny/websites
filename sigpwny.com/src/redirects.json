@@ -1,11 +1,11 @@
 {
   "/gcal": {
     "status": 302,
-    "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/full.ics"
+    "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/all.ics"
   },
   "/outlook": {
     "status": 302,
-    "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/full.ics&name=SIGPwny"
+    "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/all.ics&name=SIGPwny"
   },
   "/auth": {
     "status": 302,
@@ -34,10 +34,6 @@
   "/event": {
     "status": 302,
     "destination": "/events/"
-  },
-  "/events/*": {
-    "status": 302,
-    "destination": "/events-temp/"
   },
   "/fall": {
     "status": 302,

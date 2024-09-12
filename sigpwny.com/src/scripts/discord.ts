@@ -75,8 +75,10 @@ async function main() {
             const { description } = event;
             // Find url in description using regex and extract the slug
             const url = (description || '').match(/https:\/\/sigpwny.com([a-zA-Z0-9-\/]+)/);
+            
             if (url) {
-                const slug = url[1];
+                const slug = url[1].replace(/\/$/, '');
+                // Remove trailing slash
                 o[slug] = event; 
             }
             return o;
@@ -87,7 +89,8 @@ async function main() {
             const { description } = event;
             const url = (description || '').match(urlRegex);
             if (url) {
-                o[url[0]] = event; 
+                const slug = url[0].replace(/\/$/, '');
+                o[slug] = event; 
             }
             return o;
         }, {} as Record<string, GuildScheduledEvent<GuildScheduledEventStatus>>);
@@ -102,13 +105,14 @@ async function main() {
             // const contentDir = path.join(__dirname, '..', '..', path.dirname(filePath));
             const cardImageURL = (card_image && card_image.background) ? `https://sigpwny.com${card_image.background.src}` : undefined;
 
+            const noTrailingSlashSlug = slug.replace(/\/$/, '');
             const url = `https://sigpwny.com${slug}`;
 
             const cleanedBody = body.replace('## Summary\n', '');
             const descriptionText = description ? description : cleanedBody;
             const fullDescription = url + '\n' + descriptionText;
 
-            const existingMetadata = snowflakeMeetingLookup[slug];
+            const existingMetadata = snowflakeMeetingLookup[noTrailingSlashSlug];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
@@ -138,13 +142,13 @@ async function main() {
             const { data : { title, location, card_image, links, time_end, time_start, description }, body, filePath } = event;
 
             // Resolve filepath to image
-            const url = links.find((link: any) => link.name === 'website')?.url;
+            const url = links.find((link: any) => link.name === 'website')?.url?.replace(/\/$/, '');
             
             // const contentDir = path.join(__dirname, '..', '..', path.dirname(filePath));
             const cardImageURL = (card_image && card_image.background) ? `https://sigpwny.com${card_image.background.src}` : undefined;
 
             const descriptionText = description ? description : body;
-            const fullDescription = url ? url + '\n' + descriptionText : descriptionText;
+            const fullDescription = url ? url + '/' + '\n' + descriptionText : descriptionText;
 
             const existingMetadata = snowflakeEventLookup[url];
             const metadata : GuildScheduledEventCreateOptions = {

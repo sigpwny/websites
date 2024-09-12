@@ -1,0 +1,17 @@
+---
+import { getMeetings } from '@/utils/meetings';
+
+export async function getStaticPaths() {
+  const meetings = await getMeetings();
+  return meetings.map((meeting) => ({
+    params: { type: meeting.type, date: meeting.date },
+    props: meeting,
+  }));
+}
+
+const meeting = Astro.props;
+---
+
+<div>
+  TODO: Add redirect to slides
+</div>

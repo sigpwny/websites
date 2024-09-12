@@ -11,19 +11,44 @@ import { getProfilesFromNames } from '$/utils/profiles';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
+import { UpcomingMeta } from '@/components/ReactMigration/UpcomingMeta';
+import type { MeetingType } from '@/pages/meetings/index.astro';
 
 dayjs.extend(duration);
 dayjs.extend(utc);
 
-const { input } = Astro.props;
+interface Props {
+  input: MeetingType;
+  showUpcoming: boolean;
+}
+
+const { input, showUpcoming } = Astro.props;
 const meeting = input.data;
 const time_close = dayjs(meeting.time_start).add(dayjs.duration(meeting.duration)).toDate();
 
 // Resolve credit names to profiles
 const profiles = await getProfilesFromNames(meeting.credit);
+const upcomingVisibility = showUpcoming ? 'block' : 'none';
+const notUpcomingVisibility = showUpcoming ? 'none' : 'block';
 ---
+<style define:vars={{ upcomingVisibility, notUpcomingVisibility }}>
+  /* The filters override the upcoming visibility selector */
+  :global(#meetings[data-general="hidden"] li[data-type="general"]), 
+  :global(#meetings[data-ctf="hidden"] li[data-type="ctf"]),
+  :global(#meetings[data-purple="hidden"] li[data-type="purple"]),
+  :global(#meetings[data-embedded="hidden"] li[data-type="embedded"]) {
+    display: none !important;
+  }
+  :has([data-tag="upcoming"]) {
+    display: var(--upcomingVisibility);
+  }
+  li:not(:has([data-tag="upcoming"])) {
+    display: var(--notUpcomingVisibility);
+  }
 
-<li>
+</style>
+<li data-type={meeting.type}>
+  <UpcomingMeta end={time_close} />
   <div class="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
     <div class="flex flex-row flex-grow lg:flex-grow-0 min-w-0 lg:w-1/2 xl:w-3/5 gap-x-4 items-center justify-content-center">
       <span
@@ -33,7 +58,7 @@ const profiles = await getProfilesFromNames(meeting.credit);
         {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
       </span>
       <CountdownBadge time_start={meeting.time_start} time_close={time_close} client:load />
-      <Link href={`/meetings/${input.id}/`} class="truncate">
+      <Link href={input.slug} class="truncate">
         <span>
           {meeting.week_number != null ? (
             <span class="font-mono">Week {weekNumber(meeting.week_number)}</span><span>:&nbsp;</span>

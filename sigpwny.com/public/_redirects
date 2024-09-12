@@ -1,0 +1,22 @@
+# Fix redirects for old meeting URLs
+/meetings/fa2017/* /meetings/general/:splat 302
+/meetings/fa2018/* /meetings/general/:splat 302
+/meetings/fa2019/* /meetings/general/:splat 302
+/meetings/fa2020/* /meetings/general/:splat 302
+/meetings/fa2021/* /meetings/general/:splat 302
+/meetings/fa2022/* /meetings/general/:splat 302
+/meetings/fa2023/* /meetings/general/:splat 302
+/meetings/fa2024/* /meetings/general/:splat 302
+/meetings/sp2017/* /meetings/general/:splat 302
+/meetings/sp2018/* /meetings/general/:splat 302
+/meetings/sp2019/* /meetings/general/:splat 302
+/meetings/sp2020/* /meetings/general/:splat 302
+/meetings/sp2021/* /meetings/general/:splat 302
+/meetings/sp2022/* /meetings/general/:splat 302
+/meetings/sp2023/* /meetings/general/:splat 302
+/meetings/sp2024/* /meetings/general/:splat 302
+# Fix redirects for old calendar URLs
+/calendar/full.ics /calendar/all/generic.ics 301
+/calendar/full/apple.ics /calendar/all/apple.ics 301
+# Temporary redirect while events page is down
+/events/* /events-temp/ 302

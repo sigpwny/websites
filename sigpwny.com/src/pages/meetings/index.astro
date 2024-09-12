@@ -3,19 +3,30 @@ import Layout from '@/layouts/Base.astro';
 import Link from '$/components/Link.astro';
 import MeetingRow from '@/components/Meeting/Row.astro';
 import MeetingTime from '@/components/Meeting/Time.astro';
-import CalendarSubscribe from '@/components/CalendarSubscribe';
 import {
-  convertDate,
   getMeetings,
   formatSemester,
-  weekNumber
 } from "@/utils/meetings";
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import utc from 'dayjs/plugin/utc';
+import MeetingControls from '@/components/MeetingControls';
+
+dayjs.extend(duration);
+dayjs.extend(utc);
 
 const rawMeetings = (await getMeetings()).sort(
   (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
 );
 
-type MeetingType = typeof rawMeetings[0];
+// The server build time will always be in the past, so we can filter out meetings before then.
+const potentiallyUpcomingMeetings = rawMeetings.filter(({ data: { time_start, duration }}) => {
+  const now = new Date();
+  const time_close = dayjs(time_start).add(dayjs.duration(duration)).toDate();
+  return time_close > now;
+}).reverse();
+
+export type MeetingType = typeof rawMeetings[0];
 
 const meetingsBySemester = rawMeetings.reduce(
   (acc, meeting) => {
@@ -28,7 +39,17 @@ const meetingsBySemester = rawMeetings.reduce(
     return acc;
   }, {} as {[semester: string]: MeetingType[]}
 );
+
+/*
+
+const Tag = ({ tag }: { tag: string }) => (
+  <div class="flex-none h-fit px-2 py-1 text-xs select-none  hover:bg-surface-300 border-2 border-surface-100 rounded-lg">
+    {tag}
+  </div>
+)
+*/
 ---
+
 <Layout
   title="Meetings"
   description="Index of all SIGPwny meetings"
@@ -36,31 +57,37 @@ const meetingsBySemester = rawMeetings.reduce(
   <section id="meetings" class="pb-8">
     <div class="flex flex-col mx-auto page-width-lg">
       <h1>Meetings</h1>
-      <span class="rounded-md border-2 border-red-500 bg-red-600 px-2 py-1 mb-2 max-w-fit">
-        We are still finalizing our meeting schedule and room reservations for Fall 2024. Check <Link href="/discord" class="!text-white !underline">Discord</Link> for updates!
-      </span>
       <p class="text-lg font-bold m-0">
-        For Fall 2024:
+        Fall 2024 General Meetings
       </p>
       <div class="flex flex-col md:flex-row md:gap-4 pb-3">
         <MeetingTime
           time="Thursdays, 6–7 PM"
-          location="Location: TBD"
+          location="Location varies - check schedule"
         />
         <MeetingTime
           time="Sundays, 2–3 PM"
-          location="Location: TBD"
+          location="Location varies - check schedule"
         />
       </div>
       <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between">
         <p class="max-w-prose pb-2">
-          General meetings are held weekly in-person and online on Zoom.
+          General meetings are held twice a week in-person and online on Zoom.
           Recordings are posted on our <Link href="https://www.youtube.com/@sigpwny">YouTube</Link>.
-          See the schedule below for specific meeting details.
+          See the schedule below for details.
         </p>
-        <div class="pb-4 flex">
-          <CalendarSubscribe client:load />
-        </div>
+      </div>
+      <MeetingControls client:load />
+      <div class="panel mb-2">
+          <p class="font-bold text-2xl m-0">
+            Upcoming
+          </p>
+          <hr class="border-surface-200" />
+          <ul class="flex flex-col pb-2">
+            {potentiallyUpcomingMeetings.map((meeting) => (
+              <MeetingRow input={meeting} showUpcoming={true} />
+            ))}
+          </ul>
       </div>
       <div class="panel">
         {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
@@ -71,7 +98,7 @@ const meetingsBySemester = rawMeetings.reduce(
             <hr class="border-surface-200" />
             <ul class="flex flex-col pb-2">
               {meetings.map((meeting) => (
-                <MeetingRow input={meeting} />
+                <MeetingRow input={meeting} showUpcoming={false} />
               ))}
             </ul>
           </div>
@@ -83,6 +110,7 @@ const meetingsBySemester = rawMeetings.reduce(
           <Tooltip.Profile client:load transition:persist />
         </span> */}
       </div>
+
     </div>
   </section>
 </Layout>
