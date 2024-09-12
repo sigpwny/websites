@@ -47,27 +47,24 @@ const Tag = ({ tag }: { tag: string }) => (
   <section id="meetings" class="pb-8">
     <div class="flex flex-col mx-auto page-width-lg">
       <h1>Meetings</h1>
-      <span class="rounded-md border-2 border-red-500 bg-red-600 px-2 py-1 mb-2 max-w-fit">
-        We are still finalizing our meeting schedule and room reservations for Fall 2024. Check <Link href="/discord" class="!text-white !underline">Discord</Link> for updates!
-      </span>
       <p class="text-lg font-bold m-0">
-        For Fall 2024:
+        Fall 2024 General Meetings
       </p>
       <div class="flex flex-col md:flex-row md:gap-4 pb-3">
         <MeetingTime
           time="Thursdays, 6–7 PM"
-          location="Location: TBD"
+          location="Location varies - check schedule"
         />
         <MeetingTime
           time="Sundays, 2–3 PM"
-          location="Location: TBD"
+          location="Location varies - check schedule"
         />
       </div>
       <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between">
         <p class="max-w-prose pb-2">
-          General meetings are held weekly in-person and online on Zoom.
+          General meetings are held twice a week in-person and online on Zoom.
           Recordings are posted on our <Link href="https://www.youtube.com/@sigpwny">YouTube</Link>.
-          See the schedule below for specific meeting details.
+          See the schedule below for details.
         </p>
       </div>
       <MeetingControls client:load />
