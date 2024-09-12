@@ -6,7 +6,9 @@ import Avatar from '$/components/Profile/Avatar.astro';
 import FallCTFLogo from '@/components/FallCTFLogo';
 import { getProfilesFromNames } from '$/utils/profiles';
 import { getFallCTFEvents } from '@/utils/fallctf-events';
+import { Picture } from 'astro:assets';
 
+import jpg_cif from '@/assets/cif.jpg';
 import svg_sigpwny from '$/content/profiles/org/sigpwny/pwny8-banner-transparent.svg?raw';
 import svg_wicys from '$/content/profiles/org/wicys/wicys-illinois-single-color.svg?raw';
 
@@ -91,8 +93,25 @@ const event = {
   <div
     slot="body"
     transition:name="body"
-    class="container"
+    class="container anchors"
   >
+    <div class="flex flex-row gap-4">
+      <div class="panel border-2 border-surface-150 max-w-prose">
+        <h2>What</h2>
+        <span>Fall CTF is a 6-hour hacking competition for UIUC students hosted by <Link href="https://sigpwny.com/">SIGPwny</Link> and <Link href="https://wicys.github.io/">WiCyS @ Illinois</Link>. UIUC students of all backgrounds are welcome, including beginners! There will be challenges related to web hacking, reverse engineering, binary exploitation, and more! Plus, free food, free swag, and companies! Come learn and have fun with us!</span>
+      </div>
+      <div class="panel border-2 border-surface-150 max-w-prose">
+        <h2>Where</h2>
+        <span>Campus Instructional Facility 3031/3039</span>
+        <Picture
+          class="w-full"
+          src={jpg_cif}
+          alt="Campus Instructional Facility"
+          formats={["webp", "avif"]}
+          widths={[300, 600]}
+        />
+      </div>
+    </div>
     <div class="pb-16">
       <h2>Sponsored By</h2>
       <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
@@ -124,7 +143,7 @@ const event = {
           <div>CTFs are cybersecurity competitions where teams solve hacking challenges to find a "flag," usually a formatted string. Flags can then be submitted to the competition platform for points. The more flags you capture, the more points you get!</div>
         </details>
         <details>
-          <summary>What if I don't know anything about cybersecurity?</summary>
+          <summary>What if I'm new to cybersecurity?</summary>
           <div>Fall CTF is designed for you! Specifically, Fall CTF is meant to be a fun learning experience for beginners rather than an intense competition. We provide guides for each challenge category which will teach you as you play. Additionally, we have a large number of staff to help you in-person if you feel stuck.</div>
         </details>
         <details>

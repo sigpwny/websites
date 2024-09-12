@@ -51,6 +51,13 @@ h2 {
 h3 {
   @apply text-2xl;
 }
+.anchors a,
+.anchors a:active {
+  @apply text-primary no-underline;
+}
+.anchors a:hover {
+  @apply text-secondary no-underline;
+}
 .container {
   @apply md:px-8 px-4;
 }
