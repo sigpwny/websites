@@ -21,6 +21,8 @@ const event = {
   // Add sponsor_profiles, which is a list of resolved profiles from names in sponsors
   sponsors_profiles: events[0].data.sponsors ? (await getProfilesFromNames(events[0].data.sponsors)) : undefined,
 };
+
+import '@/styles/fallctf.css';
 ---
 <style>
   details {
@@ -31,6 +33,9 @@ const event = {
   }
   details summary {
     @apply pl-8 pr-4 py-2 list-none cursor-pointer bg-surface-100 hover:bg-surface-150 overflow-hidden;
+  }
+  details summary::-webkit-details-marker {
+    display: none;
   }
   details div {
     @apply pl-8 pr-4 pt-1 pb-4 bg-surface-100;
@@ -66,75 +71,7 @@ const event = {
     transform: rotate(90deg);
   }
 </style>
-
-<Layout
-  event={event}
-  title={event.title}
-  description={event.description}
->
-  <div
-    slot="hero"
-    transition:name="hero"
-  >
-    <div class="flex flex-col items-center h-screen max-h-[1028px] justify-center">
-      <FallCTFLogo year={event.year} transition:name="fall-ctf-logo" />
-      <span class="flex flex-row gap-2">
-        {event.links.map((link) => (
-          <Link
-            href={link.url}
-            class="btn-primary font-bold border-2 border-surface-250"
-          >
-            {link.name}
-          </Link>
-        ))}
-      </span>
-    </div>
-  </div>
-  <div
-    slot="body"
-    transition:name="body"
-    class="container anchors"
-  >
-    <div class="flex flex-row gap-4">
-      <div class="panel border-2 border-surface-150 max-w-prose">
-        <h2>What</h2>
-        <span>Fall CTF is a 6-hour hacking competition for UIUC students hosted by <Link href="https://sigpwny.com/">SIGPwny</Link> and <Link href="https://wicys.github.io/">WiCyS @ Illinois</Link>. UIUC students of all backgrounds are welcome, including beginners! There will be challenges related to web hacking, reverse engineering, binary exploitation, and more! Plus, free food, free swag, and companies! Come learn and have fun with us!</span>
-      </div>
-      <div class="panel border-2 border-surface-150 max-w-prose">
-        <h2>Where</h2>
-        <span>Campus Instructional Facility 3031/3039</span>
-        <Picture
-          class="w-full"
-          src={jpg_cif}
-          alt="Campus Instructional Facility"
-          formats={["webp", "avif"]}
-          widths={[300, 600]}
-        />
-      </div>
-    </div>
-    <div class="pb-16">
-      <h2>Sponsored By</h2>
-      <div class="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {event.sponsors_profiles!.map((sponsor) => (
-          <div class="flex grow">
-            <Card card_image={sponsor.card_image}>
-              {/* If the sponsor does not have any displayable card_image, use profile picture and name instead */}
-              <span
-                slot={!sponsor.card_image?.foreground && !sponsor.card_image?.background ? "image" : undefined}
-                class="absolute h-full w-full flex flex-col items-center justify-center p-[5%] font-bold text-lg md:text-2xl text-center"
-              >
-                {sponsor.profile_image ? (
-                  <span class="w-auto h-1/2 aspect-square">
-                    {/* <Avatar profile={sponsor} /> */}
-                  </span>
-                ) : null}
-                <span>{sponsor.name}</span>
-              </span>
-            </Card>
-          </div>
-        ))}
-      </div>
-    </div>
+<div>
     <div class="max-w-prose mx-auto">
       <h2>Frequently Asked Questions</h2>
       <div class="flex flex-col md-root rounded-xl">
@@ -186,4 +123,3 @@ const event = {
       </div>
     </div>
   </div>
-</Layout>
