@@ -7,8 +7,10 @@ import tailwind from "@astrojs/tailwind";
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-
+import path from 'path';
 import redirects from './src/redirects.json';
+
+const meetingBase = path.resolve(import.meta.dirname, '../_global/content/meetings/');
 
 // https://astro.build/config
 export default defineConfig({
@@ -37,7 +39,10 @@ export default defineConfig({
         targets: [
           {
             src: '../_global/content/meetings/*',
-            dest: 'meetings'
+            dest: 'meetings',
+            rename: (_name, _ext, path) => {
+              return path.replace(meetingBase, '').replace(/(fa|sp)\d{4}/, '')
+            }
           },
           {
             src: '../guides/pwnyctf/book/*',
