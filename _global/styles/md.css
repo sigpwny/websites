@@ -48,6 +48,9 @@
   color: rgb(var(--rgb-secondary));
   text-decoration: none;
 }
+.md-root .btn-primary {
+  color: rgb(var(--rgb-surface-000)) !important;
+}
 .md-root p,
 .md-root ul,
 .md-root ol {

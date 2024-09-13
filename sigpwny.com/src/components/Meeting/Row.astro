@@ -1,7 +1,6 @@
 ---
 import Link from '$/components/Link.astro';
-import PersonaGroup from '$/components/Profile/PersonaGroup.astro';
-import { getCollection, getEntries } from 'astro:content';
+import PersonaGroup from '@/components/Profile/PersonaGroup.astro';
 import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
@@ -11,7 +10,7 @@ import { getProfilesFromNames } from '$/utils/profiles';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
-import { UpcomingMeta } from '@/components/ReactMigration/UpcomingMeta';
+import UpcomingMeta from '@/components/ReactMigration/UpcomingMeta';
 import type { MeetingType } from '@/pages/meetings/index.astro';
 
 dayjs.extend(duration);
@@ -39,6 +38,7 @@ const notUpcomingVisibility = showUpcoming ? 'none' : 'block';
   :global(#meetings[data-embedded="hidden"] li[data-type="embedded"]) {
     display: none !important;
   }
+  /* TODO: has selector doesn't have the greatest coverage currently */
   :has([data-tag="upcoming"]) {
     display: var(--upcomingVisibility);
   }
@@ -48,7 +48,7 @@ const notUpcomingVisibility = showUpcoming ? 'none' : 'block';
 
 </style>
 <li data-type={meeting.type}>
-  <UpcomingMeta end={time_close} />
+  <UpcomingMeta end={time_close} client:load />
   <div class="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
     <div class="flex flex-row flex-grow lg:flex-grow-0 min-w-0 lg:w-1/2 xl:w-3/5 gap-x-4 items-center justify-content-center">
       <span

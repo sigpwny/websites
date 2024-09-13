@@ -39,15 +39,6 @@ const meetingsBySemester = rawMeetings.reduce(
     return acc;
   }, {} as {[semester: string]: MeetingType[]}
 );
-
-/*
-
-const Tag = ({ tag }: { tag: string }) => (
-  <div class="flex-none h-fit px-2 py-1 text-xs select-none  hover:bg-surface-300 border-2 border-surface-100 rounded-lg">
-    {tag}
-  </div>
-)
-*/
 ---
 
 <Layout
@@ -78,7 +69,8 @@ const Tag = ({ tag }: { tag: string }) => (
         </p>
       </div>
       <MeetingControls client:load />
-      <div class="panel mb-2">
+      {potentiallyUpcomingMeetings.length > 0 ? (
+        <div class="panel mb-4">
           <p class="font-bold text-2xl m-0">
             Upcoming
           </p>
@@ -88,7 +80,8 @@ const Tag = ({ tag }: { tag: string }) => (
               <MeetingRow input={meeting} showUpcoming={true} />
             ))}
           </ul>
-      </div>
+        </div>
+      ) : null}
       <div class="panel">
         {Object.entries(meetingsBySemester).map(([semester, meetings]) => (
           <div id={semester}>

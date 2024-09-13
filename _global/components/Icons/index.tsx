@@ -101,13 +101,13 @@ export const MicrosoftOutlookSvg = (props: TSVGElementProps) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" {...props} style={{...icon_style, ...props.style}}>
     <defs>
       <linearGradient id="linear-gradient" x1="9.86" y1="-1481.52" x2="9.86" y2="-1474.45" gradientTransform="translate(0 1489.33)" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#35b8f1"/>
-        <stop offset="1" stop-color="#28a8ea"/>
+        <stop offset="0" stopColor="#35b8f1"/>
+        <stop offset="1" stopColor="#28a8ea"/>
       </linearGradient>
       <linearGradient id="linear-gradient-2" x1="1.42" y1="-1486.52" x2="6.76" y2="-1477.27" gradientTransform="translate(0 1489.33)" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#1784d9"/>
-        <stop offset=".5" stop-color="#107ad5"/>
-        <stop offset="1" stop-color="#0a63c9"/>
+        <stop offset="0" stopColor="#1784d9"/>
+        <stop offset=".5" stopColor="#107ad5"/>
+        <stop offset="1" stopColor="#0a63c9"/>
       </linearGradient>
     </defs>
     <path d="M16,7.81c0-.13-.06-.24-.17-.31h0s-5.54-3.29-5.54-3.29c-.02-.02-.05-.03-.07-.04-.21-.11-.47-.11-.68,0-.03.01-.05.03-.07.04l-5.54,3.28h0c-.17.11-.22.33-.12.5.03.05.07.09.12.12l5.54,3.28s.05.03.07.04c.21.11.47.11.68,0,.03-.01.05-.03.07-.04l5.54-3.28c.11-.06.18-.18.18-.31Z" fill="#0a2767"/>

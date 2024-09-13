@@ -7,10 +7,10 @@ import {
   LocationRegular
 } from '$/components/Icons/fluentui';
 import { MdxComponents } from '$/components/Mdx/index.astro';
-import Avatar from '$/components/Profile/Avatar.astro';
+import Avatar from '@/components/Profile/Avatar.astro';
 import Layout from '@/layouts/Meeting.astro';
-import Persona from '$/components/Profile/Persona';
-import ProfileCard from '$/components/Profile/ProfileCard.astro';
+import Persona from '@/components/Profile/Persona';
+import ProfileCard from '@/components/Profile/ProfileCard.astro';
 import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
@@ -21,6 +21,7 @@ import {
   getYouTubeEmbedUrl,
   weekNumber
 } from '@/utils/meetings';
+import consts from '@/consts';
 import locations from '@/locations.json';
 import { createICalendarLocation } from '@/utils/icalendar';
 import { getProfilesFromNames } from '$/utils/profiles';
@@ -40,7 +41,7 @@ dayjs.extend(advanced);
 export async function getStaticPaths() {
   const meetings = await getMeetings();
   return meetings.map((meeting) => ({
-    params: { type: meeting.type, date: meeting.date },
+    params: { slug: meeting.relativeSlug },
     props: { page: meeting },
   }));
 }
@@ -58,7 +59,7 @@ const time_end = meeting.time_start && meeting.duration
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 ---
 <Layout
-  title={meeting.title}
+  title={`${meeting.semester}${meeting.week_number != null ? ' Week ' + weekNumber(meeting.week_number) : ''}: ${meeting.title} — ${consts.title}`}
   description={`${meeting.semester}${meeting.week_number != null ? ' Week ' + weekNumber(meeting.week_number) : ''} • ${convertDate(meeting.time_start, "MMMM Do, YYYY", meeting.timezone)}${meeting.description ? ` • ${meeting.description}` : ''}`}
   image={meeting.card_image?.foreground?.src ?? meeting.card_image?.background?.src}
   video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}

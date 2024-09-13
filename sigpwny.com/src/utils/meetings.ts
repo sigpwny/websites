@@ -6,21 +6,24 @@ import timezone from 'dayjs/plugin/timezone';
 import advanced from 'dayjs/plugin/advancedFormat';
 
 export async function getMeetings() {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  dayjs.extend(advanced);
   const meetings = await getCollection('meetings');
   return meetings.map((meeting) => {
-    const [_semester, type, date] = meeting.id.split('/');
+    const relativeSlug = `${meeting.data.type}/${dayjs(meeting.data.time_start).tz(meeting.data.timezone).format("YYYY-MM-DD")}`
     return {
       ...meeting,
       data: {
         ...meeting.data,
         // Update slides URL to be a direct link to the PDF
-        slides: meeting.data.slides ? new URL(meeting.data.slides, `${astroConfig.site}/meetings/${meeting.id}/`).pathname : undefined,
+        slides: meeting.data.slides ? new URL(meeting.data.slides, `${astroConfig.site}/meetings/${relativeSlug}/`).pathname : undefined,
         // Add semester field
         semester: calculateSemester(meeting.data.time_start),
       },
-      type,
-      date,
-      slug: `/meetings/${type}/${date}/`,
+      // Add slug field
+      relativeSlug,
+      slug: `/meetings/${relativeSlug}/`,
     };
   })
 };

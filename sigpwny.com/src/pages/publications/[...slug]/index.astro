@@ -1,12 +1,13 @@
 ---
 import Layout from '@/layouts/Base.astro';
+import consts from '@/consts';
 import { getCollection, render } from 'astro:content';
 import Link from '$/components/Link.astro';
 import { MdxComponents } from '$/components/Mdx/index.astro';
 import Card from '$/components/Card.astro';
-import Avatar from '$/components/Profile/Avatar.astro';
-import Persona from '$/components/Profile/Persona';
-import ProfileCard from '$/components/Profile/ProfileCard.astro';
+import Avatar from '@/components/Profile/Avatar.astro';
+import Persona from '@/components/Profile/Persona';
+import ProfileCard from '@/components/Profile/ProfileCard.astro';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import { getProfilesFromNames } from '$/utils/profiles';
 
@@ -36,7 +37,7 @@ const p = input.data;
 const profiles = await getProfilesFromNames(p.credit);
 ---
 <Layout
-  title={p.title}
+  title={`${p.title} — ${consts.title}`}
   description={p.description}
   image={p.card_image?.foreground?.src ?? p.card_image?.background?.src}
 >

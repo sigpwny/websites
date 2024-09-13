@@ -59,10 +59,4 @@ export default {
     },
   },
   plugins: [],
-  safelist: [
-    {
-      pattern: /^(bg|border|text)-pwny.*/,
-      variants: ['hover']
-    }
-  ],
 }
