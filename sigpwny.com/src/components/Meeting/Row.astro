@@ -39,10 +39,10 @@ const notUpcomingVisibility = showUpcoming ? 'none' : 'block';
     display: none !important;
   }
   /* TODO: has selector doesn't have the greatest coverage currently */
-  :has([data-tag="upcoming"]) {
+  div:has([data-tag="upcoming"]) {
     display: var(--upcomingVisibility);
   }
-  li:not(:has([data-tag="upcoming"])) {
+  div:not(:has([data-tag="upcoming"])) {
     display: var(--notUpcomingVisibility);
   }
 
