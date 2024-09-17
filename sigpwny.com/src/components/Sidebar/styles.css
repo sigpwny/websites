@@ -21,16 +21,22 @@
   @apply rotate-90;
 }
 .sidebar-item .indicator {
-  @apply h-full w-1 self-center bg-primary rounded-lg absolute;
-  @apply transition-transform duration-200 scale-y-0;
+  @apply h-full w-1 self-center rounded-lg absolute bg-[var(--color-tag)];
 }
+
+.sidebar-folder-parent .sidebar-item .indicator {
+  @apply transition-transform duration-200 scale-y-[0%];
+}
+
+/* Individual meetings always show indicator */
+.sidebar-folder .sidebar-item > .indicator {
+  @apply scale-y-[60%];
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sidebar-item .indicator {
     @apply transition-none;
   }
-}
-.sidebar-item.active .indicator {
-  @apply scale-y-[60%];
 }
 /* If the folder has an active item and the folder is closed (unchecked), then highlight the folder */
 .sidebar-folder-parent:has(.active) > .sidebar-folder-input:not(:checked) + .sidebar-folder-label {
@@ -40,6 +46,7 @@
 .sidebar-folder-parent:has(.active) > .sidebar-folder-input:not(:checked) + .sidebar-folder-label > .indicator {
   @apply scale-y-[60%];
 }
+
 .siderbar-folder-parent {
   @apply relative;
 }
