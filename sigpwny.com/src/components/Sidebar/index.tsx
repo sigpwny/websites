@@ -1,5 +1,6 @@
 import { ChevronRightRegular } from '$/components/Icons/fluentui';
 import './styles.css';
+import type { SidebarItemProps, SidebarProps } from '@/components/Sidebar/types';
 
 
 export const Sidebar = ({ root_items, expand_all, id }: SidebarProps) => {
@@ -18,13 +19,14 @@ export const SidebarItem = ({ item, depth, expand_all, id }: SidebarItemProps) =
   const new_depth = curr_depth + 1;
   const curr_id = id || "sidebar-item";
   const padding = {paddingLeft: `${curr_depth}em`};
+  const { items, active, metadata, name, url } = item;
 
   // Expand subitems list if any subitem is active
   // const subitems_ref = useRef<HTMLUListElement>(null);
   // useEffect(() => {
   //   // if (subitems_ref.current?.querySelector(".active")) setExpanded(true);
   // }, [curr_path, item.url]);
-  if (item.items && item.items.length > 0) {
+  if (items && items.length > 0) {
     const input_id = `${curr_id}-input`;
     return (
       <li className="sidebar-folder-parent flex flex-col gap-1">
@@ -32,7 +34,7 @@ export const SidebarItem = ({ item, depth, expand_all, id }: SidebarItemProps) =
           id={input_id}
           className="sidebar-folder-input"
           type="checkbox"
-          defaultChecked={item.active}
+          defaultChecked={active}
           // Enable toggling of the checkbox using the Enter key
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -47,32 +49,32 @@ export const SidebarItem = ({ item, depth, expand_all, id }: SidebarItemProps) =
           style={padding}
           className="sidebar-item sidebar-folder-label"
         >
-          <span className="indicator" />
+          <span className="indicator" style={{ "--color-tag": metadata?.color || 'rgb(var(--rgb-pwny-green)' } as React.CSSProperties} />
           <span className="folder-arrow">
             <ChevronRightRegular width="1em" height="1em" />
           </span>
           <span className="ml-2">
-            {item.name}
+            {name}
           </span>
         </label>
         <ul className="sidebar-folder flex-col gap-1">
-          {item.items.map((subitem, idx) => (
+          {items.map((subitem, idx) => (
             <SidebarItem key={idx} id={`${curr_id}_${idx}`} item={subitem} depth={new_depth} expand_all={expand_all} />
           ))}
         </ul>
       </li>
     );
-  } else if (item.url) {
+  } else if (url) {
     return (
       <li>
         <a
-          href={item.url}
+          href={url}
           style={padding}
-          className={`sidebar-item ${item.active ? "active" : ""}`}
+          className={`sidebar-item ${active ? "active" : ""}`}
         >
-          <span className="indicator" />
+          <span className="indicator" style={{ "--color-tag": metadata?.color || 'rgb(var(--rgb-pwny-green)' } as React.CSSProperties} />
           <span className="ml-4">
-            {item.name}
+            {name}
           </span>
         </a>
       </li>

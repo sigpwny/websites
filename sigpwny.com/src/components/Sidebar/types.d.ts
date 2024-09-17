@@ -1,6 +1,9 @@
+import type { MeetingMetadata } from "@/utils/meetingMetadata";
+
 interface SidebarItem {
   name: string;
   url?: string;
+  metadata?: MeetingMetadata; /* non-generic optional field for meetings */
   active?: boolean;
   items?: SidebarItem[];
 }
