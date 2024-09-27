@@ -128,6 +128,17 @@
     ]
   },
   {
+    "title": "Lincoln Hall",
+    "address": "702 S Wright St, Urbana, IL 61801, United States",
+    "geo": {
+      "lat": "40.1068",
+      "lon": "-88.2285"
+    },
+    "matches": [
+      "Lincoln Hall"
+    ]
+  },
+  {
     "title": "Loomis Laboratory of Physics",
     "address": "1110 W Green St, Urbana, IL 61801, United States",
     "geo": {
@@ -148,6 +159,18 @@
     "matches": [
       "MSEB",
       "Material Sciences and Engineering Building"
+    ]
+  },
+  {
+    "title": "Natural History Building",
+    "address": "1301 W Green St, Urbana, IL 61801, United States",
+    "geo": {
+      "lat": "40.1094",
+      "lon": "-88.2258"
+    },
+    "matches": [
+      "NHB",
+      "Natural History"
     ]
   },
   {
