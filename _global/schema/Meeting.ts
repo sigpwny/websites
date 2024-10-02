@@ -23,9 +23,15 @@ export const MeetingSchema = ({ image }) => (
     location: z.optional(z.string()),
     description: z.optional(z.string()),
     card_image: z.optional(CardImageSchema(image)),
-    live_video_url: z.optional(z.string().url()),
+    live_video_url: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.optional(z.string().url())
+    ),
     slides: z.optional(z.string()),
-    recording: z.optional(z.string().url()),
+    recording: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.optional(z.string().url())
+    ),
     // assets: z.optional(z.array(z.string())),
     tags: z.array(z.string()).default([]),
   })
