@@ -19,7 +19,7 @@ jobs:
     name: Deploy (sigpwny.com)
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       deployments: write
     steps:
       - name: Check out repository code
