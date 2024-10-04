@@ -1,0 +1,67 @@
+name: Scheduled Jobs
+'on':
+  schedule:
+    - cron: 0 10 4 10 5
+    - cron: 0 9 5 10 6
+    - cron: 0 19 5 10 6
+    - cron: 0 18 6 10 0
+    - cron: 0 16 15 10 2
+    - cron: 0 15 16 10 3
+jobs:
+  helper-ping-BRICS+-CTF-Qualifer:
+    name: helper ping BRICS+ CTF Qualifer
+    if: github.event.schedule == '0 9 5 10 6'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: KipCUklDUysgQ1RGIFF1YWxpZmVyKiogaXMgaW4gdW5kZWZpbmVkIGRheXMgMSBob3VycyB1bmRlZmluZWQgbWludXRlcyEKICBodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2N0Zi8yMDI0LTEwLTA1LwogIA==
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-Hivestorm-2024:
+    name: helper ping Hivestorm 2024
+    if: github.event.schedule == '0 15 16 10 3'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: KipIaXZlc3Rvcm0gMjAyNCoqIGlzIGluIHVuZGVmaW5lZCBkYXlzIDEgaG91cnMgdW5kZWZpbmVkIG1pbnV0ZXMhCiAgaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0xNi8KICA=
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-x86-64-Assembly:
+    name: helper ping x86-64 Assembly
+    if: github.event.schedule == '0 18 6 10 0'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: Kip4ODYtNjQgQXNzZW1ibHkqKiBpcyBpbiB1bmRlZmluZWQgZGF5cyAxIGhvdXJzIHVuZGVmaW5lZCBtaW51dGVzIQogIGh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI0LTEwLTA2LwogIA==
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: npm run send-discord-ping
+        working-directory: sigpwny.com
