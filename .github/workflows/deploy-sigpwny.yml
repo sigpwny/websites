@@ -22,10 +22,12 @@ jobs:
     permissions:
       contents: write
       deployments: write
+      workflows: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
+          token: ${{ secrets.WORKFLOW_PAT }}
           submodules: true
           fetch-depth: 0
 
