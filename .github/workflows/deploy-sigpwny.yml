@@ -29,6 +29,8 @@ jobs:
           token: ${{ secrets.WORKFLOW_PAT }}
           submodules: true
           fetch-depth: 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_PAT }}
 
       - name: Build pwnyctf mdbook
         uses: ./.github/actions/build-mdbook
@@ -63,22 +65,23 @@ jobs:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
       
-      # - name: Schedule Discord pings
-      #   run: npm run schedule-discord-ping
-      #   if: github.ref_name == github.event.repository.default_branch
-      #   shell: bash
-      #   working-directory: ${{ env.CI_WORKING_DIR }}
-      # - name: Save scheduled discord pings
-      #   if: github.ref_name == github.event.repository.default_branch
-      #   env:
-      #     WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
-      #   run: |
-      #     git remote set-url origin "https://$WORKFLOW_PAT@github.com/sigpwny/websites.git/"
-      #     git config user.name sigpwny-uiuc
-      #     git config user.email sigpwny@gmail.com
-      #     git add .github
-      #     git commit -m "chore: update workflow schedule"
-      #     git push origin main
+      - name: Schedule Discord pings
+        run: npm run schedule-discord-ping
+        if: github.ref_name == github.event.repository.default_branch
+        shell: bash
+        working-directory: ${{ env.CI_WORKING_DIR }}
+      - name: Save scheduled discord pings
+        if: github.ref_name == github.event.repository.default_branch
+        env:
+          WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_PAT }}
+        run: |
+          git remote set-url origin "https://${{ secrets.WORKFLOW_PAT }}@github.com/sigpwny/websites.git/"
+          git config user.name sigpwny-uiuc
+          git config user.email sigpwny@gmail.com
+          git add .github
+          git commit -m "chore: update workflow schedule"
+          git push origin main
         # uses: stefanzweifel/git-auto-commit-action@v5
         # with:
         #   commit_message: "chore: update workflow schedule"
