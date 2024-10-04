@@ -19,7 +19,6 @@ import {
   LinkRegular
 } from '$/components/Icons/fluentui';
 import { meetingMetadata, type MeetingMetatype } from '@/utils/meetingMetadata';
-import { getCalendarName } from '@/utils/icalendar';
 
 interface CalendarSubscribeProps {
   selected: MeetingMetatype[];
@@ -29,13 +28,16 @@ interface CalendarSubscribeProps {
 export default function CalendarSubscribe({ selected, placement }: CalendarSubscribeProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [selectedCalendars, setSelectedCalendars] = useState<MeetingMetatype[]>(['general', 'ctf']);
+  const [selectedCalendars, setSelectedCalendars] = useState<MeetingMetatype[]>(selected);
+
   useEffect(() => {
     setSelectedCalendars(selected);
   }, [selected]);
 
+  // TODO: Don't hardcode these
   const genericWebcalUrl = `webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}/generic.ics`;
   const appleWebcalUrl = `webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}/apple.ics`;
+  const name = 'SIGPwny ' + selectedCalendars.sort().map((id) => meetingMetadata[id].shortName).join(',');
 
   const handleCopy = () => {
     navigator.clipboard.writeText(genericWebcalUrl);
@@ -113,7 +115,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
               </li>
               <li>
                 <a
-                  href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=${genericWebcalUrl}&name=${getCalendarName(selectedCalendars)}`}
+                  href={`https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=${genericWebcalUrl}&name=${name}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : undefined}

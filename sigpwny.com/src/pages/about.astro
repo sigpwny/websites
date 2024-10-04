@@ -45,30 +45,30 @@ const alumni = (await filterByRole('alum')).sort(
             of our admin team, helper team, and alumni.
           </p>
         </div>
-        <section id="admins" class="pb-8">
-          <h1>Admin Team</h1>
-          <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
-            {admins.map((profile) => (
-              <ProfileCard profile={profile} showFull={true} />
-            ))}
-          </div>
-        </section>
-        <section id="helpers" class="pb-8">
-          <h1>Helper Team</h1>
-          <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
-            {helpers.map((profile) => (
-              <ProfileCard profile={profile} showFull={true} />
-            ))}
-          </div>
-        </section>
-        <section id="alumni" class="pb-8">
-          <h1>Alumni</h1>
-          <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
-            {alumni.map((profile) => (
-              <ProfileCard profile={profile} showFull={true} />
-            ))}
-          </div>
-        </section>
+      </section>
+      <section id="admins" class="pb-8">
+        <h1>Admin Team</h1>
+        <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+          {admins.map((profile) => (
+            <ProfileCard profile={profile} showFull={true} />
+          ))}
+        </div>
+      </section>
+      <section id="helpers" class="pb-8">
+        <h1>Helper Team</h1>
+        <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+          {helpers.map((profile) => (
+            <ProfileCard profile={profile} showFull={true} />
+          ))}
+        </div>
+      </section>
+      <section id="alumni" class="pb-8">
+        <h1>Alumni</h1>
+        <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-4">
+          {alumni.map((profile) => (
+            <ProfileCard profile={profile} showFull={true} />
+          ))}
+        </div>
       </section>
     </div>
   </div>

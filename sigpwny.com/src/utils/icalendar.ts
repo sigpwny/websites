@@ -8,7 +8,7 @@ export function createICalendarUID(uniq_id: string, domain: string) {
 };
 
 export function getCalendarName(selectedCalendars: MeetingMetatype[]) {
-  return 'SIGPwny ' + selectedCalendars.sort().map((id) => meetingMetadata[id].shortName).join(',')
+  return 'SIGPwny ' + selectedCalendars.sort().map((id) => meetingMetadata[id].shortName).join(',');
 }
 
 export function createICalendarDescription(
