@@ -7,6 +7,7 @@ on:
       - '_global/content/events/**'
       - '_global/content/profiles/**'
       - '.github/**'
+      - '!.github/workflows/scheduled-pings.yml'
       - 'fallctf.com/**'
       - 'guides'
 concurrency:

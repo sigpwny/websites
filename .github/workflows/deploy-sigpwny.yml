@@ -4,6 +4,7 @@ on:
     paths:
       - '_global/**'
       - '.github/**'
+      - '!.github/workflows/scheduled-pings.yml'
       - 'sigpwny.com/**'
       - 'guides'
 concurrency:
@@ -63,9 +64,11 @@ jobs:
       
       - name: Schedule Discord pings
         run: npm run schedule-discord-ping
+        if: github.ref_name == github.event.repository.default_branch
         shell: bash
         working-directory: ${{ env.CI_WORKING_DIR }}
       - name: Save scheduled discord pings
+        if: github.ref_name == github.event.repository.default_branch
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update workflow schedule"

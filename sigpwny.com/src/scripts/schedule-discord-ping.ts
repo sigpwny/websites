@@ -4,7 +4,7 @@ import path from 'path';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import duration, { Duration } from 'dayjs/plugin/duration';
+import duration, { type Duration } from 'dayjs/plugin/duration';
 import advanced from 'dayjs/plugin/advancedFormat';
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -74,7 +74,7 @@ async function main() {
           time_start: dayjs(meeting.data.time_start).tz(meeting.data.timezone),
           time_end: dayjs(meeting.data.time_start).tz(meeting.data.timezone).add(dayjs.duration(meeting.data.duration)),
       }
-    }  
+    }
   }).filter((meeting: any) => meeting.data.time_start > dayjs());
 
   const pingNotice = [
@@ -82,13 +82,13 @@ async function main() {
     dayjs.duration({ days: 0, hours: 1, minutes: 0 })
   ]
 
-  const jobs = upcomingMeetings.flatMap((meeting) => {
+  const jobs = upcomingMeetings.flatMap((meeting: any) => {
     return pingNotice.map((notice) => makeJob(meeting, notice));
   })
 
   scheduleJobs(jobs, {
-    path: path.join(__dirname, '..', '..', '..', 'scheduled-pings.yml'),
-    check: false,
+    path: path.join(__dirname, '..', '..', '..', '.github', 'workflows', 'scheduled-pings.yml'),
+    check: true,
     merge: false  
   });
 }
