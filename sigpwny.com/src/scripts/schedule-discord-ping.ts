@@ -31,7 +31,7 @@ const makeJob = (meeting: Record<string, any>, beforeDuration: Duration) => {
 
   const runAt = time_start.subtract(beforeDuration);
   const job: Job = {
-    date: runAt.toDate(),
+    time: runAt.toDate(),
     name: `helper ping ${title}`,
     'runs-on': 'ubuntu-latest',
     steps: [
