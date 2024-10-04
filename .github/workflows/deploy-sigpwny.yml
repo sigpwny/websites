@@ -70,7 +70,10 @@ jobs:
         working-directory: ${{ env.CI_WORKING_DIR }}
       - name: Save scheduled discord pings
         if: github.ref_name == github.event.repository.default_branch
+        env:
+          WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
         run: |
+          git remote set-url origin "https://$WORKFLOW_PAT@github.com/sigpwny/websites.git/"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .github
