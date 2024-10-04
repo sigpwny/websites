@@ -62,7 +62,7 @@ jobs:
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
       
       - name: Schedule Discord pings
-        run: npm run schedule-discord-workflow
+        run: npm run schedule-discord-ping
         shell: bash
         working-directory: ${{ env.CI_WORKING_DIR }}
       - name: Save scheduled discord pings
