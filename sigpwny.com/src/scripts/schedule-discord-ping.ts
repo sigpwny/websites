@@ -24,7 +24,7 @@ const makeJob = (meeting: Record<string, any>, beforeDuration: Duration) => {
   const { data : { title, type, location, card_image, week_number, time_end, time_start, description }, body, filePath, slug } = meeting;
   const url = `https://sigpwny.com${slug}`;
 
-  const formattedDuration = beforeDuration.humanize();
+  const formattedDuration = beforeDuration.format('D[d] H[h] m[m]');
   const message = `**${title}** is in ${formattedDuration}!
   ${url}
   `;
@@ -78,8 +78,8 @@ async function main() {
   }).filter((meeting: any) => meeting.data.time_start > dayjs());
 
   const pingNotice = [
-    dayjs.duration({ days: 1 }),
-    dayjs.duration({ hours: 1 })
+    dayjs.duration({ days: 1, hours: 0, minutes: 0 }),
+    dayjs.duration({ days: 0, hours: 1, minutes: 0 })
   ]
 
   const jobs = upcomingMeetings.flatMap((meeting) => {
