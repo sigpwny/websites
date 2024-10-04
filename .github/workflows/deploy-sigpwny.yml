@@ -73,12 +73,12 @@ jobs:
         env:
           WORKFLOW_PAT: ${{ secrets.WORKFLOW_PAT }}
         run: |
-          git remote set-url origin "https://$WORKFLOW_PAT@github.com/sigpwny/websites.git/"
+          git remote set-url foo "https://$WORKFLOW_PAT@github.com/sigpwny/websites.git/"
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .github
           git commit -m "chore: update workflow schedule"
-          git push
+          git push foo main
         # uses: stefanzweifel/git-auto-commit-action@v5
         # with:
         #   commit_message: "chore: update workflow schedule"
