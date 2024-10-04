@@ -75,4 +75,5 @@ jobs:
           commit_message: "chore: update workflow schedule"
           file_pattern: "*.yml"
           commit_user_name: "sigpwny-uiuc"
-          commit_user_email: "sigpwny@gmail.com"
+          commit_user_email: "88696760+sigpwny-uiuc@users.noreply.github.com"
+          commit_author: "sigpwny-uiuc <88696760+sigpwny-uiuc@users.noreply.github.com>"
