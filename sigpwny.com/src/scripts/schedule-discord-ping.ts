@@ -89,7 +89,7 @@ async function main() {
   scheduleJobs(jobs, {
     path: path.join(__dirname, '..', '..', '..', 'scheduled-pings.yml'),
     check: false,
-    replace: true  
+    merge: false  
   });
 }
 
