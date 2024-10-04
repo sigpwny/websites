@@ -66,3 +66,7 @@ jobs:
         run: npm run schedule-discord-workflow
         shell: bash
         working-directory: ${{ env.CI_WORKING_DIR }}
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update workflow schedule"
+          file_pattern: "*.yml"

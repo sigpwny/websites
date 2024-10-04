@@ -1,13 +1,11 @@
 import { scheduleJobs, Job } from '@reteps/github-action-scheduler';
 import fs from 'fs';
 import path from 'path';
-import { Client, GatewayIntentBits, Events, type GuildScheduledEventCreateOptions, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEvent, type GuildScheduledEventEditOptions, GuildScheduledEventStatus } from 'discord.js';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import duration from 'dayjs/plugin/duration';
+import duration, { Duration } from 'dayjs/plugin/duration';
 import advanced from 'dayjs/plugin/advancedFormat';
-import { meetingMetadata } from '../utils/meetingMetadata';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(duration);
@@ -22,26 +20,11 @@ const fetchMeetings = async () => {
   }
 }
 
-const makeJob = (meeting: any, beforeDuration) => {
+const makeJob = (meeting: Record<string, any>, beforeDuration: Duration) => {
   const { data : { title, type, location, card_image, week_number, time_end, time_start, description }, body, filePath, slug } = meeting;
-
-  /*
-runs-on: ubuntu-latest
-steps:
-  - uses: actions/checkout@v4
-  - name: Use Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: latest
-  - run: npm ci
-    working-directory: sigpwny.com
-  - run: npm run send-discord-ping
-    working-directory: sigpwny.com
-  */
-
   const url = `https://sigpwny.com${slug}`;
 
-  const formattedDuration = dayjs.duration(beforeDuration).format('D [days] H [hours] m [minutes]');
+  const formattedDuration = beforeDuration.format('D [days] H [hours] m [minutes]');
   const message = `**${title}** is in ${formattedDuration}!
   ${url}
   `;
