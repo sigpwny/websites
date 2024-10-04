@@ -17,6 +17,8 @@
     "preview": "astro preview",
     "serve": "astro preview",
     "sync-discord": "npx tsx --env-file=.env src/scripts/discord.ts",
+    "send-discord-ping": "npx tsx --env-file=.env src/scripts/send-discord-ping.ts",
+    "schedule-discord-ping": "npx tsx src/scripts/schedule-discord-ping.ts",
     "astro": "astro"
   },
   "dependencies": {
@@ -29,6 +31,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@floating-ui/dom": "^1.6.8",
     "@floating-ui/react": "^0.26.20",
+    "@reteps/github-action-scheduler": "^1.0.2",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
     "astro": "^4.14.3",
