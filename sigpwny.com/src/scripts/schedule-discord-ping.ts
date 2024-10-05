@@ -50,7 +50,7 @@ const makeJob = (meeting: Record<string, any>, beforeDuration: Duration) => {
         'working-directory': 'sigpwny.com',
       },
       {
-        run: 'npm run send-discord-ping',
+        run: 'touch .env && npm run send-discord-ping',
         'working-directory': 'sigpwny.com',
         env: {
           DISCORD_TOKEN: '${{ secrets.DISCORD_TOKEN }}',
