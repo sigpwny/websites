@@ -18,7 +18,10 @@ import {
   CheckmarkCircleFilled,
   LinkRegular
 } from '$/components/Icons/fluentui';
-import { meetingMetadata, type MeetingMetatype } from '@/utils/meetingMetadata';
+import {
+  meetingMetadata,
+  type MeetingMetatype
+} from '@/utils/meetingMetadata';
 
 interface CalendarSubscribeProps {
   selected: MeetingMetatype[];
@@ -64,20 +67,20 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
         <PopoverContent>
           <Menu>
             <ul>
-              {Object.values(meetingMetadata).map((metadata) => (
+              {Object.entries(meetingMetadata).map(([meeting_type, metadata]) => (
                 <li
-                  key={metadata.id}
+                  key={meeting_type}
                   style={{ "--color-checkbox": metadata.color } as React.CSSProperties}
                 >
-                  {selectedCalendars.includes(metadata.id) ? (
-                    <button onClick={() => setSelectedCalendars(selectedCalendars.filter((id) => id !== metadata.id))}>
+                  {selectedCalendars.includes(meeting_type) ? (
+                    <button onClick={() => setSelectedCalendars(selectedCalendars.filter((id) => id !== meeting_type))}>
                       <CheckboxCheckedFilled className="text-[var(--color-checkbox)]" />
                       <span>
                         {metadata.name}
                       </span>
                     </button>
                   ) : (
-                    <button onClick={() => setSelectedCalendars([...selectedCalendars, metadata.id])}>
+                    <button onClick={() => setSelectedCalendars([...selectedCalendars, meeting_type])}>
                       <CheckboxUncheckedFilled className="brightness-50" />
                       <span>
                         {metadata.name}
