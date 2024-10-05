@@ -13,6 +13,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "check": "astro check",
+    "clean": "rimraf .astro .cache dist",
     "build": "astro build",
     "preview": "astro preview",
     "serve": "astro preview",
@@ -53,6 +54,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss-nested": "^6.2.0",
+    "rimraf": "^6.0.1",
     "vite-plugin-static-copy": "^1.0.6"
   },
   "engines": {
