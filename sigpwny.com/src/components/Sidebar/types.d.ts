@@ -1,4 +1,4 @@
-import type { MeetingMetadata } from "@/utils/meetingMetadata";
+import type { MeetingMetadata } from "@/utils/reactMeetingMetadata";
 
 interface SidebarItem {
   name: string;

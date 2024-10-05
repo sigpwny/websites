@@ -4,7 +4,7 @@ import type { HeadProps } from '$/components/BaseHead.astro';
 import Sidebar from '@/components/Sidebar';
 import { getMeetings, formatSemester, weekNumber } from '@/utils/meetings';
 import 'katex/dist/katex.min.css';
-import { meetingMetadata } from '@/utils/meetingMetadata';
+import { reactMeetingMetadata } from '@/utils/reactMeetingMetadata';
 
 const props: HeadProps = Astro.props;
 
@@ -32,7 +32,7 @@ const meetingSidebarItems = Object.keys(meetingsBySemester).map((semester) => ({
     name: meeting.data.week_number != null ? `Week ${weekNumber(meeting.data.week_number)}: ${meeting.data.title}` : meeting.data.title,
     url: meeting.slug,
     active: meeting.slug === Astro.url.pathname,
-    metadata: meetingMetadata[meeting.data.type]
+    metadata: reactMeetingMetadata[meeting.data.type]
   })),
   active: false
 }));

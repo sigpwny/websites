@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import type { ICalLocationWithTitle } from "ical-generator";
-import { meetingMetadata, type MeetingMetatype } from '@/utils/meetingMetadata';
+import { meetingMetadata, type MeetingMetatype } from '$/utils/meetingMetadata';
 
 export function createICalendarUID(uniq_id: string, domain: string) {
   const hash = crypto.createHash('sha256').update(uniq_id).digest('hex');

@@ -10,45 +10,33 @@ import {
   ShieldKeyholeFilled,
   ShieldKeyholeRegular
 } from '$/components/Icons/fluentui';
+import { type MeetingMetadata, type MeetingMetatype, meetingMetadata } from '$/utils/meetingMetadata';
 
-export const meetingMetatypes = [
-  'general',
-  'ctf',
-  'purple',
-  'embedded',
-];
-
-export type MeetingMetatype = typeof meetingMetatypes[number];
-
-export interface MeetingMetadata {
+export interface ReactMeetingMetadata extends MeetingMetadata {
   name: string;
   shortName: string;
   color: string;
   icon?: React.JSX.Element;
 }
 
-export const meetingMetadata: Record<MeetingMetatype, MeetingMetadata> = {
+export const reactMeetingMetadata: Record<MeetingMetatype, ReactMeetingMetadata> = {
   'general': {
-    name: 'General',
-    shortName: 'General',
+    ...meetingMetadata['general'],
     color: 'rgb(var(--rgb-pwny-green))',
     icon: <BookOpenFilled />
   },
   'ctf': {
-    name: 'CTF Team',
-    shortName: 'CTF',
+    ...meetingMetadata['ctf'],
     color: 'rgb(var(--rgb-pwny-red))',
     icon: <FlagFilled />
   },
   'purple': {
-    name: 'Purple Team',
-    shortName: 'Purple',
+    ...meetingMetadata['purple'],
     color: 'rgb(var(--rgb-pwny-purple))',
     icon: <ShieldKeyholeFilled />
   },
   'embedded': {
-    name: 'Embedded Team',
-    shortName: 'Embedded',
+    ...meetingMetadata['embedded'],
     color: 'rgb(var(--rgb-pwny-yellow))',
     icon: <EmbeddedChipRegularSvg />
   },

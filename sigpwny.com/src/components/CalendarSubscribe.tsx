@@ -19,9 +19,9 @@ import {
   LinkRegular
 } from '$/components/Icons/fluentui';
 import {
-  meetingMetadata,
-  type MeetingMetatype
-} from '@/utils/meetingMetadata';
+  reactMeetingMetadata,
+} from '@/utils/reactMeetingMetadata';
+import { type MeetingMetatype } from '$/utils/meetingMetadata';
 
 interface CalendarSubscribeProps {
   selected: MeetingMetatype[];
@@ -40,7 +40,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
   // TODO: Don't hardcode these
   const genericWebcalUrl = `webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}/generic.ics`;
   const appleWebcalUrl = `webcal://sigpwny.com/calendar/${selectedCalendars.sort().join('-')}/apple.ics`;
-  const name = 'SIGPwny ' + selectedCalendars.sort().map((id) => meetingMetadata[id].shortName).join(',');
+  const name = 'SIGPwny ' + selectedCalendars.sort().map((id) => reactMeetingMetadata[id].shortName).join(',');
 
   const handleCopy = () => {
     navigator.clipboard.writeText(genericWebcalUrl);
@@ -67,7 +67,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
         <PopoverContent>
           <Menu>
             <ul>
-              {Object.entries(meetingMetadata).map(([meeting_type, metadata]) => (
+              {Object.entries(reactMeetingMetadata).map(([meeting_type, metadata]) => (
                 <li
                   key={meeting_type}
                   style={{ "--color-checkbox": metadata.color } as React.CSSProperties}

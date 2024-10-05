@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import {
-  meetingMetadata,
-  meetingMetatypes,
-  type MeetingMetatype
-} from '@/utils/meetingMetadata';
+  reactMeetingMetadata,
+} from '@/utils/reactMeetingMetadata';
+import { type MeetingMetatype, meetingMetatypes } from '$/utils/meetingMetadata';
 import CalendarSubscribe from '@/components/CalendarSubscribe';
 
 export default function MeetingControls() {
@@ -23,7 +22,7 @@ export default function MeetingControls() {
     <div className="panel border border-surface-200 flex flex-col mb-4 overflow-hidden">
       <div className="flex flex-col md:flex-row gap-2 justify-between md:items-center">
         <div className="flex flex-wrap gap-2">
-          {Object.entries(meetingMetadata).map(([meeting_type, metadata]) => (
+          {Object.entries(reactMeetingMetadata).map(([meeting_type, metadata]) => (
             <button
               key={meeting_type}
               className={`flex flex-row gap-1 items-center px-2 py-1 size-fit text-sm md:text-md font-bold rounded-full border-2 hover:bg-surface-200 ${selected.includes(meeting_type) ? 'border-[var(--color-tag)] bg-surface-150': 'border-surface-300 hover:border-surface-200 bg-surface-150'}`}
