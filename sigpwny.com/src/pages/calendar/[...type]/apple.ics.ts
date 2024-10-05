@@ -13,11 +13,10 @@ import {
   calculateSemester,
   getMeetings,
 } from '@/utils/meetings';
-import consts from '@/consts';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
-import type { APIRoute, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
-import type { MeetingMetatype } from '@/utils/meetingMetadata';
+import type { InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
+import type { MeetingMetatype } from '$/utils/meetingMetadata';
 dayjs.extend(duration);
 dayjs.extend(utc);
 

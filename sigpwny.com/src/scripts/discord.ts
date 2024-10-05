@@ -6,7 +6,7 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import duration from 'dayjs/plugin/duration';
 import advanced from 'dayjs/plugin/advancedFormat';
-import { meetingMetadata } from '../utils/meetingMetadata';
+import { meetingMetadata } from '../../../_global/utils/meetingMetadata';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(duration);

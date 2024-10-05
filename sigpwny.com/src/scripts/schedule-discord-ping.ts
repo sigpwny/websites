@@ -1,4 +1,4 @@
-import { scheduleJobs, Job } from '@reteps/github-action-scheduler';
+import { scheduleJobs, type Job } from '@reteps/github-action-scheduler';
 import fs from 'fs';
 import path from 'path';
 import dayjs from 'dayjs';

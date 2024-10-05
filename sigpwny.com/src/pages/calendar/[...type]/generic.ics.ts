@@ -13,7 +13,7 @@ import {
   calculateSemester,
   getMeetings,
 } from '@/utils/meetings';
-import { meetingMetatypes, type MeetingMetatype } from '@/utils/meetingMetadata';
+import { meetingMetatypes, type MeetingMetatype } from '$/utils/meetingMetadata';
 import consts from '@/consts';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
