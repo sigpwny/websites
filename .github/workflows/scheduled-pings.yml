@@ -1,51 +1,11 @@
 name: Scheduled Jobs
 'on':
   schedule:
-    - cron: 0 10 4 10 5
-    - cron: 0 9 5 10 6
     - cron: 0 19 5 10 6
     - cron: 0 18 6 10 0
     - cron: 0 16 15 10 2
     - cron: 0 15 16 10 3
 jobs:
-  helper-ping-BRICS-CTF-Qualiferat-2024-10-04T100000000Z:
-    name: helper ping BRICS+ CTF Qualiferat 2024-10-04T10:00:00.000Z
-    if: github.event.schedule == '0 10 4 10 5'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: KipCUklDUysgQ1RGIFF1YWxpZmVyKiogaXMgaW4gMWQgMGggMG0hCiAgaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9jdGYvMjAyNC0xMC0wNS8KICA=
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-BRICS-CTF-Qualiferat-2024-10-05T090000000Z:
-    name: helper ping BRICS+ CTF Qualiferat 2024-10-05T09:00:00.000Z
-    if: github.event.schedule == '0 9 5 10 6'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: KipCUklDUysgQ1RGIFF1YWxpZmVyKiogaXMgaW4gMGQgMWggMG0hCiAgaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9jdGYvMjAyNC0xMC0wNS8KICA=
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: npm run send-discord-ping
-        working-directory: sigpwny.com
   helper-ping-Hivestorm-2024at-2024-10-15T160000000Z:
     name: helper ping Hivestorm 2024at 2024-10-15T16:00:00.000Z
     if: github.event.schedule == '0 16 15 10 2'
@@ -63,7 +23,7 @@ jobs:
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: npm run send-discord-ping
+        run: touch .env && npm run send-discord-ping
         working-directory: sigpwny.com
   helper-ping-Hivestorm-2024at-2024-10-16T150000000Z:
     name: helper ping Hivestorm 2024at 2024-10-16T15:00:00.000Z
@@ -82,7 +42,7 @@ jobs:
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: npm run send-discord-ping
+        run: touch .env && npm run send-discord-ping
         working-directory: sigpwny.com
   helper-ping-x86-64-Assemblyat-2024-10-05T190000000Z:
     name: helper ping x86-64 Assemblyat 2024-10-05T19:00:00.000Z
@@ -101,7 +61,7 @@ jobs:
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: npm run send-discord-ping
+        run: touch .env && npm run send-discord-ping
         working-directory: sigpwny.com
   helper-ping-x86-64-Assemblyat-2024-10-06T180000000Z:
     name: helper ping x86-64 Assemblyat 2024-10-06T18:00:00.000Z
@@ -120,5 +80,5 @@ jobs:
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: npm run send-discord-ping
+        run: touch .env && npm run send-discord-ping
         working-directory: sigpwny.com
