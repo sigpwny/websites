@@ -3,7 +3,7 @@ import { Client, GatewayIntentBits, TextChannel } from 'discord.js';
 async function sendDiscordPing() {
   // Retrieve environment variables
   const b64Message = process.env.DISCORD_B64_MESSAGE;
-  const channelId = process.env.DISCORD_CONTENT_CHANNEL_ID;
+  const channelId = process.env.DISCORD_CHANNEL_ID;
   const serverId = process.env.DISCORD_SERVER_ID;
   const token = process.env.DISCORD_TOKEN;
 
