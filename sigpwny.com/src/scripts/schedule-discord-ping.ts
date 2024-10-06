@@ -24,10 +24,8 @@ const makeJob = (meeting: Record<string, any>, beforeDuration: Duration) => {
   const { data : { title, type, location, card_image, week_number, time_end, time_start, description }, body, filePath, slug } = meeting;
   const url = `https://sigpwny.com${slug}`;
 
-  const formattedDuration = beforeDuration.format('D[d] H[h] m[m]');
-  const message = `**${title}** is in ${formattedDuration}!
-  ${url}
-  `;
+  const formattedStart = `<t:${time_start.unix()}:R>`;
+  const message = `<@683449724241575951>\n**${title}** is ${formattedStart}!\n${url}`;
 
   const runAt = time_start.subtract(beforeDuration);
   const job: Job = {
