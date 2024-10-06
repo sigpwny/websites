@@ -60,7 +60,7 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 ---
 <Layout
   title={`${meeting.semester}${meeting.week_number != null ? ' Week ' + weekNumber(meeting.week_number) : ''}: ${meeting.title} — ${consts.title}`}
-  description={`${meeting.semester}${meeting.week_number != null ? ' Week ' + weekNumber(meeting.week_number) : ''} • ${convertDate(meeting.time_start, "MMMM Do, YYYY", meeting.timezone)}${meeting.description ? ` • ${meeting.description}` : ''}`}
+  description={`${convertDate(meeting.time_start, "MMMM Do, YYYY", meeting.timezone)}${meeting.description ? ` — ${meeting.description}` : ''}`}
   image={meeting.card_image?.foreground?.src ?? meeting.card_image?.background?.src}
   video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}
   type="article"
