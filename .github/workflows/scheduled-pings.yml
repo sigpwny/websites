@@ -19,7 +19,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: KipIaXZlc3Rvcm0gMjAyNCoqIGlzIGluIDFkIDBoIDBtIQogIGh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvcHVycGxlLzIwMjQtMTAtMTYvCiAg
+          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqSGl2ZXN0b3JtIDIwMjQqKiBpcyA8dDoxNzI5MDk0NDAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL3B1cnBsZS8yMDI0LTEwLTE2Lw==
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -38,7 +38,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: KipIaXZlc3Rvcm0gMjAyNCoqIGlzIGluIDBkIDFoIDBtIQogIGh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvcHVycGxlLzIwMjQtMTAtMTYvCiAg
+          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqSGl2ZXN0b3JtIDIwMjQqKiBpcyA8dDoxNzI5MDk0NDAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL3B1cnBsZS8yMDI0LTEwLTE2Lw==
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -57,7 +57,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: Kip4ODYtNjQgQXNzZW1ibHkqKiBpcyBpbiAxZCAwaCAwbSEKICBodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2dlbmVyYWwvMjAyNC0xMC0wNi8KICA=
+          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqeDg2LTY0IEFzc2VtYmx5KiogaXMgPHQ6MTcyODI0MTIwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9nZW5lcmFsLzIwMjQtMTAtMDYv
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -76,7 +76,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: Kip4ODYtNjQgQXNzZW1ibHkqKiBpcyBpbiAwZCAxaCAwbSEKICBodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2dlbmVyYWwvMjAyNC0xMC0wNi8KICA=
+          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqeDg2LTY0IEFzc2VtYmx5KiogaXMgPHQ6MTcyODI0MTIwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9nZW5lcmFsLzIwMjQtMTAtMDYv
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
