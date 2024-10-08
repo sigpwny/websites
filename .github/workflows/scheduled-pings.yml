@@ -21,7 +21,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqSGl2ZXN0b3JtIDIwMjQqKiBpcyA8dDoxNzI5MDk0NDAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL3B1cnBsZS8yMDI0LTEwLTE2Lw==
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkhpdmVzdG9ybSAyMDI0KiogaXMgPHQ6MTcyOTA5NDQwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0xNi8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -40,7 +40,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqSGl2ZXN0b3JtIDIwMjQqKiBpcyA8dDoxNzI5MDk0NDAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL3B1cnBsZS8yMDI0LTEwLTE2Lw==
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkhpdmVzdG9ybSAyMDI0KiogaXMgPHQ6MTcyOTA5NDQwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0xNi8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -59,7 +59,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqUmV2ZXJzZSBFbmdpbmVlcmluZyBJSSoqIGlzIDx0OjE3Mjg2MDEyMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI0LTEwLTEwLw==
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlJldmVyc2UgRW5naW5lZXJpbmcgSUkqKiBpcyA8dDoxNzI4NjAxMjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2dlbmVyYWwvMjAyNC0xMC0xMC8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -78,7 +78,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqUmV2ZXJzZSBFbmdpbmVlcmluZyBJSSoqIGlzIDx0OjE3Mjg2MDEyMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI0LTEwLTEwLw==
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlJldmVyc2UgRW5naW5lZXJpbmcgSUkqKiBpcyA8dDoxNzI4NjAxMjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2dlbmVyYWwvMjAyNC0xMC0xMC8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -97,7 +97,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqV2luZG93cyAmIFdpbmRvd3MgUHJpdmlsZWdlIEVzY2FsYXRpb24qKiBpcyA8dDoxNzI4NDMyMDAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL3B1cnBsZS8yMDI0LTEwLTA4Lw==
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKldpbmRvd3MgJiBXaW5kb3dzIFByaXZpbGVnZSBFc2NhbGF0aW9uKiogaXMgPHQ6MTcyODQzMjAwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0wOC8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -116,7 +116,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEA2ODM0NDk3MjQyNDE1NzU5NTE+CioqV2luZG93cyAmIFdpbmRvd3MgUHJpdmlsZWdlIEVzY2FsYXRpb24qKiBpcyA8dDoxNzI4NDMyMDAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL3B1cnBsZS8yMDI0LTEwLTA4Lw==
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKldpbmRvd3MgJiBXaW5kb3dzIFByaXZpbGVnZSBFc2NhbGF0aW9uKiogaXMgPHQ6MTcyODQzMjAwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0wOC8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
