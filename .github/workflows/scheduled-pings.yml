@@ -5,6 +5,8 @@ name: Scheduled Jobs
     - cron: 0 15 16 10 3
     - cron: 0 23 9 10 3
     - cron: 0 22 10 10 4
+    - cron: 0 19 12 10 6
+    - cron: 0 18 13 10 0
 jobs:
   helper-ping-Hivestorm-2024at-2024-10-15T160000000Z:
     name: helper ping Hivestorm 2024at 2024-10-15T16:00:00.000Z
@@ -39,6 +41,44 @@ jobs:
         working-directory: sigpwny.com
       - env:
           DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkhpdmVzdG9ybSAyMDI0KiogaXMgPHQ6MTcyOTA5NDQwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0xNi8=
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-Operational-Securityat-2024-10-12T190000000Z:
+    name: helper ping Operational Securityat 2024-10-12T19:00:00.000Z
+    if: github.event.schedule == '0 19 12 10 6'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKk9wZXJhdGlvbmFsIFNlY3VyaXR5KiogaXMgPHQ6MTcyODg0NjAwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9nZW5lcmFsLzIwMjQtMTAtMTMv
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-Operational-Securityat-2024-10-13T180000000Z:
+    name: helper ping Operational Securityat 2024-10-13T18:00:00.000Z
+    if: github.event.schedule == '0 18 13 10 0'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKk9wZXJhdGlvbmFsIFNlY3VyaXR5KiogaXMgPHQ6MTcyODg0NjAwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9nZW5lcmFsLzIwMjQtMTAtMTMv
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
