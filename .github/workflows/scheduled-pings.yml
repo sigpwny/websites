@@ -7,7 +7,47 @@ name: Scheduled Jobs
     - cron: 0 22 10 10 4
     - cron: 0 19 12 10 6
     - cron: 0 18 13 10 0
+    - cron: 0 0 10 10 4
+    - cron: 0 23 10 10 4
 jobs:
+  helper-ping-Hardening-Default-Windows-Installations-and-Process-Isolationat-2024-10-10T000031123Z:
+    name: helper ping Hardening Default Windows Installations & Process Isolationat 2024-10-10T00:00:31.123Z
+    if: github.event.schedule == '0 0 10 10 4'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkhhcmRlbmluZyBEZWZhdWx0IFdpbmRvd3MgSW5zdGFsbGF0aW9ucyAmIFByb2Nlc3MgSXNvbGF0aW9uKiogaXMgPHQ6MTcyODYwNDgzMTpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0xMC8=
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-Hardening-Default-Windows-Installations-and-Process-Isolationat-2024-10-10T230031123Z:
+    name: helper ping Hardening Default Windows Installations & Process Isolationat 2024-10-10T23:00:31.123Z
+    if: github.event.schedule == '0 23 10 10 4'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkhhcmRlbmluZyBEZWZhdWx0IFdpbmRvd3MgSW5zdGFsbGF0aW9ucyAmIFByb2Nlc3MgSXNvbGF0aW9uKiogaXMgPHQ6MTcyODYwNDgzMTpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0xMC8=
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
   helper-ping-Hivestorm-2024at-2024-10-15T160000000Z:
     name: helper ping Hivestorm 2024at 2024-10-15T16:00:00.000Z
     if: github.event.schedule == '0 16 15 10 2'
