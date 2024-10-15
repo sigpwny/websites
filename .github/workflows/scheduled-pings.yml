@@ -3,7 +3,47 @@ name: Scheduled Jobs
   schedule:
     - cron: 0 16 15 10 2
     - cron: 0 15 16 10 3
+    - cron: 0 0 15 10 2
+    - cron: 0 23 15 10 2
 jobs:
+  helper-ping-Active-Directory-1at-2024-10-15T000000000Z:
+    name: helper ping Active Directory 1at 2024-10-15T00:00:00.000Z
+    if: github.event.schedule == '0 0 15 10 2'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkFjdGl2ZSBEaXJlY3RvcnkgMSoqIGlzIDx0OjE3MjkwMzY4MDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvcHVycGxlLzIwMjQtMTAtMTUv
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-Active-Directory-1at-2024-10-15T230000000Z:
+    name: helper ping Active Directory 1at 2024-10-15T23:00:00.000Z
+    if: github.event.schedule == '0 23 15 10 2'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkFjdGl2ZSBEaXJlY3RvcnkgMSoqIGlzIDx0OjE3MjkwMzY4MDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvcHVycGxlLzIwMjQtMTAtMTUv
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
   helper-ping-Hivestorm-2024at-2024-10-15T160000000Z:
     name: helper ping Hivestorm 2024at 2024-10-15T16:00:00.000Z
     if: github.event.schedule == '0 16 15 10 2'
