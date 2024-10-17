@@ -1,4 +1,44 @@
 name: Scheduled Jobs
 'on':
-  schedule: []
-jobs: {}
+  schedule:
+    - cron: 0 0 17 10 4
+    - cron: 0 23 17 10 4
+jobs:
+  helper-ping-System-Administration-Active-Directoryat-2024-10-17T000000000Z:
+    name: helper ping System Administration Active Directoryat 2024-10-17T00:00:00.000Z
+    if: github.event.schedule == '0 0 17 10 4'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlN5c3RlbSBBZG1pbmlzdHJhdGlvbiBBY3RpdmUgRGlyZWN0b3J5KiogaXMgPHQ6MTcyOTIwOTYwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0xNy8=
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-System-Administration-Active-Directoryat-2024-10-17T230000000Z:
+    name: helper ping System Administration Active Directoryat 2024-10-17T23:00:00.000Z
+    if: github.event.schedule == '0 23 17 10 4'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlN5c3RlbSBBZG1pbmlzdHJhdGlvbiBBY3RpdmUgRGlyZWN0b3J5KiogaXMgPHQ6MTcyOTIwOTYwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0xNy8=
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
