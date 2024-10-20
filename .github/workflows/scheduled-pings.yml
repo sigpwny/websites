@@ -3,7 +3,47 @@ name: Scheduled Jobs
   schedule:
     - cron: 0 19 19 10 6
     - cron: 0 18 20 10 0
+    - cron: 0 23 23 10 3
+    - cron: 0 22 24 10 4
 jobs:
+  helper-ping-Cryptography-Iat-2024-10-23T230000000Z:
+    name: helper ping Cryptography Iat 2024-10-23T23:00:00.000Z
+    if: github.event.schedule == '0 23 23 10 3'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkNyeXB0b2dyYXBoeSBJKiogaXMgPHQ6MTcyOTgxMDgwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9nZW5lcmFsLzIwMjQtMTAtMjQv
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-Cryptography-Iat-2024-10-24T220000000Z:
+    name: helper ping Cryptography Iat 2024-10-24T22:00:00.000Z
+    if: github.event.schedule == '0 22 24 10 4'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkNyeXB0b2dyYXBoeSBJKiogaXMgPHQ6MTcyOTgxMDgwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9nZW5lcmFsLzIwMjQtMTAtMjQv
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
   helper-ping-PWN-Iat-2024-10-19T190000000Z:
     name: helper ping PWN Iat 2024-10-19T19:00:00.000Z
     if: github.event.schedule == '0 19 19 10 6'
