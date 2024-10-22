@@ -22,10 +22,11 @@ collections:
     extension: 'json'
     format: 'flat-json'
     create: false
+    identifier_field: 'title'
     media_folder: ''
     public_folder: ''
     fields:
-      # must be named items for our custom formatter to work
+      # must be have a title named 'Items'
       - {label: 'Redirects', name: 'title', widget: 'select', options: ['Items']}
       - {label: 'Links', name: 'items', widget: 'list', fields: [
           # must be named 'key' for our custom formatter to work
