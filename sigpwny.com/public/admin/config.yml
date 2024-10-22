@@ -26,6 +26,7 @@ collections:
     public_folder: ''
     fields:
       # must be named items for our custom formatter to work
+      - {label: 'Redirects', name: 'title', widget: 'select', options: ['Items']}
       - {label: 'Links', name: 'items', widget: 'list', fields: [
           # must be named 'key' for our custom formatter to work
           {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
