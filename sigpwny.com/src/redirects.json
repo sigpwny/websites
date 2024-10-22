@@ -138,9 +138,5 @@
   "/outlook": {
     "status": 302,
     "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/all/generic.ics&name=SIGPwny"
-  },
-  "/foo": {
-    "status": "302",
-    "destination": "/bar"
   }
 }
