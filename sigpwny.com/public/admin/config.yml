@@ -1,6 +1,6 @@
 backend:
     name: github
-    branch: reteps/links
+    branch: main
     repo: sigpwny/websites
     site_domain: sigpwny.com
     base_url: https://cms-auth.sigpwny.com
