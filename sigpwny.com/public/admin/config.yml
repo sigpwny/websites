@@ -27,7 +27,7 @@ collections:
             # must be named 'key' for our custom formatter to work
             {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
             {label: 'To', name: 'destination', widget: 'string', hint: 'Example: "myurl.com/foo"'},
-            {label: 'Status Code', name: 'status', widget: 'hidden', default: '302'}
+            {label: 'Status Code', name: 'status', widget: 'hidden', default: 302}
           ]}
   - name: 'meetings'
     label: 'Meetings'
