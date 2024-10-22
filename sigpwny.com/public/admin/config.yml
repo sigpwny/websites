@@ -21,7 +21,8 @@ collections:
     - label: 'All Redirects'
       file: 'sigpwny.com/src/redirects.json'
       name: 'redirects'
-      format: 'flat-json-redirects'
+      format: 'flat-json'
+      extension: 'json'
       fields:
         - {label: 'Links', name: 'items', widget: 'list', fields: [
             # must be named 'key' for our custom formatter to work

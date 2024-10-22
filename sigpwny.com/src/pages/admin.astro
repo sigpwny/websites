@@ -18,18 +18,17 @@
             import CMS from "decap-cms-app";
             CMS.init();
 
-            CMS.registerCustomFormat('flat-json-redirects', 'json', {
+            CMS.registerCustomFormat('flat-json', 'json', {
                 fromFile: text => {
                     const body = JSON.parse(text) as Record<string, Record<string, string>>;
                     // Now we want to transform this object into a flat object with a 'key' field
-                    const value = { title: 'redirects', items: Object.entries(body).reduce((acc, [key, value] : [
+                    const value = { items: Object.entries(body).reduce((acc, [key, value] : [
                         string,
                         Record<string, string>
                     ]) => {
                         acc.push({ key, ...value });
                         return acc;
                     }, [] as Record<string, string>[]) };
-                    console.dir(value);
                     return value;
                 },
                 toFile: (value : { items: Record<string, string>[] }) => {
@@ -37,7 +36,6 @@
                         acc[key] = rest;
                         return acc;
                     }, {} as Record<string, Record<string, string>>);
-                    console.dir(body);
                     return JSON.stringify(body, null, 2);
                 }
             });
