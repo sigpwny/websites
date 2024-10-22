@@ -1,0 +1,6 @@
+{
+  "/foo": {
+    "destination": "/bar",
+    "status": "302"
+  }
+}
