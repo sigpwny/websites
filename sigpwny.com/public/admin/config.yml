@@ -21,18 +21,18 @@ collections:
     folder: 'sigpwny.com/src'
     extension: 'json'
     format: 'flat-json-redirects'
-    create: true
+    create: false
     identifier_field: 'title'
     media_folder: ''
     public_folder: ''
     fields:
       # must be have a title named 'redirects.json'
-      - {label: 'Redirects', name: 'title', widget: 'string'}
+      - {label: 'Redirects', name: 'title', widget: 'hidden', default: 'redirects'}
       - {label: 'Links', name: 'items', widget: 'list', fields: [
           # must be named 'key' for our custom formatter to work
           {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
           {label: 'To', name: 'destination', widget: 'string', hint: 'Example: "myurl.com/foo"'},
-          {label: 'Status Code', name: 'status', widget: 'select', options: ['302']}
+          {label: 'Status Code', name: 'status', widget: 'hidden', default: '302'}
         ]}
   - name: 'meetings'
     label: 'Meetings'
