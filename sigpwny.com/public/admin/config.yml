@@ -17,12 +17,11 @@ media_folder: media
 collections:
   - name: 'redirects-collection'
     label: 'Redirects'
+    format: 'flat-json'
     files:
     - label: 'All Redirects'
       file: 'sigpwny.com/src/redirects.json'
       name: 'redirects'
-      format: 'flat-json'
-      extension: 'json'
       fields:
         - {label: 'Links', name: 'items', widget: 'list', fields: [
             # must be named 'key' for our custom formatter to work

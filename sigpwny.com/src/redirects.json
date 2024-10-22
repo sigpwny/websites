@@ -1,11 +1,4 @@
 {
-  "items": [
-    {
-      "status": "302",
-      "key": "/foo",
-      "destination": "/bar"
-    }
-  ],
   "/infra": {
     "status": 302,
     "destination": "https://github.com/sigpwny/docs"
