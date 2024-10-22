@@ -18,7 +18,7 @@ collections:
   - name: 'redirects'
     label: 'Redirects'
     label_singular: 'Redirect'
-    folder: 'sigpwny.com/content'
+    folder: 'sigpwny.com/src'
     extension: 'json'
     format: 'flat-json-redirects'
     create: true
