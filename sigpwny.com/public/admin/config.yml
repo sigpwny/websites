@@ -20,14 +20,14 @@ collections:
     label_singular: 'Redirect'
     folder: 'sigpwny.com/content'
     extension: 'json'
-    format: 'flat-json'
-    create: false
+    format: 'flat-json-redirects'
+    create: true
     identifier_field: 'title'
     media_folder: ''
     public_folder: ''
     fields:
-      # must be have a title named 'Items'
-      - {label: 'Redirects', name: 'title', widget: 'select', options: ['Items']}
+      # must be have a title named 'redirects.json'
+      - {label: 'Redirects', name: 'title', widget: 'string'}
       - {label: 'Links', name: 'items', widget: 'list', fields: [
           # must be named 'key' for our custom formatter to work
           {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
