@@ -1,123 +1,103 @@
 {
-  "/gcal": {
-    "status": 302,
-    "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/all/generic.ics"
-  },
-  "/outlook": {
-    "status": 302,
-    "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/all/generic.ics&name=SIGPwny"
-  },
-  "/auth": {
-    "status": 302,
-    "destination": "https://shib.sigpwny.com/signup/485104508175646751"
-  },
-  "/branding": {
-    "status": 302,
-    "destination": "https://docs.google.com/document/d/1SioiiGVKlwm0sn56YOr_ESFkqx1HeAv7JfERbel_AoM/edit"
-  },
-  "/corporate": {
-    "status": 302,
-    "destination": "/sponsors/"
-  },
-  "/discord": {
-    "status": 302,
-    "destination": "https://discord.gg/cWcZ6a9"
-  },
-  "/discordqr": {
-    "status": 302,
-    "destination": "https://discord.gg/cWcZ6a9"
-  },
-  "/drive": {
-    "status": 302,
-    "destination": "https://drive.google.com/drive/u/0/folders/0B_xHmzNKe4EEb083emxTM3ItYVE"
-  },
-  "/event": {
-    "status": 302,
-    "destination": "/events/"
-  },
-  "/fall": {
-    "status": 302,
-    "destination": "/Fall_CTF_2024_Sponsorship.pdf"
-  },
-  "/fallctf": {
-    "status": 302,
-    "destination": "https://2024.fallctf.com/"
-  },
-  "/feedback/fa2023": {
-    "status": 302,
-    "destination": "https://forms.gle/MopguuPTjGhe8UYUA"
-  },
-  "/github": {
-    "status": 302,
-    "destination": "https://github.com/sigpwny"
-  },
-  "/hackathon": {
-    "status": 302,
-    "destination": "/events/"
-  },
   "/infra": {
     "status": 302,
     "destination": "https://github.com/sigpwny/docs"
-  },
-  "/meeting": {
-    "status": 302,
-    "destination": "/meetings/"
-  },
-  "/newcomer": {
-    "status": 302,
-    "destination": "/join/"
-  },
-  "/newcomers": {
-    "status": 302,
-    "destination": "/join/"
-  },
-  "/old": {
-    "status": 302,
-    "destination": "https://sigpwny.github.io/"
-  },
-  "/older": {
-    "status": 302,
-    "destination": "https://sigpwny.github.io/pony-site/"
-  },
-  "/oldest": {
-    "status": 302,
-    "destination": "https://sigpwny.github.io/pony-site/old/"
-  },
-  "/pony-site": {
-    "status": 302,
-    "destination": "https://sigpwny.github.io/pony-site/"
-  },
-  "/presentation": {
-    "status": 302,
-    "destination": "/meetings/"
   },
   "/report": {
     "status": 302,
     "destination": "https://forms.gle/PGdwxrCFgDQRM9oX6"
   },
-  "/rev_setup": {
+  "/writups": {
     "status": 302,
-    "destination": "/meetings/fa2023/2023-09-17/"
+    "destination": "/events/"
+  },
+  "/hackathon": {
+    "status": 302,
+    "destination": "/events/"
+  },
+  "/older": {
+    "status": 302,
+    "destination": "https://sigpwny.github.io/pony-site/"
   },
   "/shirt2024": {
     "status": 302,
     "destination": "https://forms.gle/LTdmTMkUciLV7nMZ9"
   },
+  "/survey": {
+    "status": 302,
+    "destination": "https://forms.gle/EMbMH9hUAGrnhBPv5"
+  },
+  "/presentation": {
+    "status": 302,
+    "destination": "/meetings/"
+  },
+  "/fall": {
+    "status": 302,
+    "destination": "/Fall_CTF_2024_Sponsorship.pdf"
+  },
+  "/branding": {
+    "status": 302,
+    "destination": "https://docs.google.com/document/d/1SioiiGVKlwm0sn56YOr_ESFkqx1HeAv7JfERbel_AoM/edit"
+  },
   "/sponsor": {
     "status": 302,
     "destination": "/sponsors/"
   },
-  "/survey": {
+  "/fallctf": {
     "status": 302,
-    "destination": "https://forms.gle/EMbMH9hUAGrnhBPv5"
+    "destination": "https://2024.fallctf.com/"
+  },
+  "/event": {
+    "status": 302,
+    "destination": "/events/"
+  },
+  "/year": {
+    "status": 302,
+    "destination": "/sigpwny_yearly_sponsorship.pdf"
+  },
+  "/meeting": {
+    "status": 302,
+    "destination": "/meetings/"
   },
   "/tutorial": {
     "status": 302,
     "destination": "/join/"
   },
-  "/writups": {
+  "/oldest": {
     "status": 302,
-    "destination": "/events/"
+    "destination": "https://sigpwny.github.io/pony-site/old/"
+  },
+  "/rev_setup": {
+    "status": 302,
+    "destination": "/meetings/fa2023/2023-09-17/"
+  },
+  "/github": {
+    "status": 302,
+    "destination": "https://github.com/sigpwny"
+  },
+  "/register24": {
+    "status": 302,
+    "destination": "https://forms.gle/GKLuLYoawYL4UGmP7"
+  },
+  "/feedback/fa2023": {
+    "status": 302,
+    "destination": "https://forms.gle/MopguuPTjGhe8UYUA"
+  },
+  "/corporate": {
+    "status": 302,
+    "destination": "/sponsors/"
+  },
+  "/newcomers": {
+    "status": 302,
+    "destination": "/join/"
+  },
+  "/gcal": {
+    "status": 302,
+    "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/all/generic.ics"
+  },
+  "/auth": {
+    "status": 302,
+    "destination": "https://shib.sigpwny.com/signup/485104508175646751"
   },
   "/writeups/uiuctf2020": {
     "status": 302,
@@ -127,16 +107,36 @@
     "status": 302,
     "destination": "/events/uiuctf/2021/"
   },
+  "/old": {
+    "status": 302,
+    "destination": "https://sigpwny.github.io/"
+  },
   "/writeups/uiuctf2021_all": {
     "status": 302,
     "destination": "/events/uiuctf/2021/"
   },
-  "/year": {
+  "/drive": {
     "status": 302,
-    "destination": "/sigpwny_yearly_sponsorship.pdf"
+    "destination": "https://drive.google.com/drive/u/0/folders/0B_xHmzNKe4EEb083emxTM3ItYVE"
   },
-  "/register24": {
+  "/pony-site": {
     "status": 302,
-    "destination": "https://forms.gle/GKLuLYoawYL4UGmP7"
+    "destination": "https://sigpwny.github.io/pony-site/"
+  },
+  "/newcomer": {
+    "status": 302,
+    "destination": "/join/"
+  },
+  "/discord": {
+    "status": 302,
+    "destination": "https://discord.gg/cWcZ6a9"
+  },
+  "/discordqr": {
+    "status": 302,
+    "destination": "https://discord.gg/cWcZ6a9"
+  },
+  "/outlook": {
+    "status": 302,
+    "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/all/generic.ics&name=SIGPwny"
   }
 }
