@@ -1,5 +1,7 @@
 ---
-const version = "3.3.3";
+// const version = "3.3.3";
+
+// Initialize the CMS object
 ---
 <!doctype html>
 <html>
@@ -12,7 +14,36 @@ const version = "3.3.3";
         <!-- Include the script that builds the page and powers Decap CMS -->
     </head>
     <body>
-        <script is:inline src={`https://unpkg.com/decap-cms@${version}/dist/decap-cms.js`}></script>
+        <script>
+            import CMS from "decap-cms-app";
+            CMS.init();
+
+            CMS.registerCustomFormat('flat-json', 'json', {
+                fromFile: text => {
+                    const body = JSON.parse(text) as Record<string, Record<string, string>>;
+                    // Now we want to transform this object into a flat object with a 'key' field
+                    const value = { items: Object.entries(body).reduce((acc, [key, value] : [
+                        string,
+                        Record<string, string>
+                    ]) => {
+                        acc.push({ key, ...value });
+                        return acc;
+                    }, [] as Record<string, string>[]) };
+                    console.dir(value);
+                    return value;
+                },
+                toFile: (value : { items: Record<string, string>[] }) => {
+                    const body = value.items.reduce((acc, { key, ...rest }) => {
+                        acc[key] = rest;
+                        return acc;
+                    }, {} as Record<string, Record<string, string>>);
+                    console.dir(body);
+                    return JSON.stringify(body, null, 2);
+                }
+            });
+        </script>
+
+        <!-- <script is:inline src={`https://unpkg.com/decap-cms@${version}/dist/decap-cms.js`}></script> -->
         <!-- <script is:inline src="https://unpkg.com/@sveltia/cms@0.42.0/dist/sveltia-cms.js"></script> -->
     </body>
 </html>

@@ -1,6 +1,6 @@
 backend:
     name: github
-    branch: main
+    branch: reteps/links
     repo: sigpwny/websites
     site_domain: sigpwny.com
     base_url: https://cms-auth.sigpwny.com
@@ -15,6 +15,23 @@ slug:
 media_folder: media
 
 collections:
+  - name: 'redirects'
+    label: 'Redirects'
+    label_singular: 'Redirect'
+    folder: 'sigpwny.com/content'
+    extension: 'json'
+    format: 'flat-json'
+    create: false
+    media_folder: ''
+    public_folder: ''
+    fields:
+      # must be named items for our custom formatter to work
+      - {label: 'Links', name: 'items', widget: 'list', fields: [
+          # must be named 'key' for our custom formatter to work
+          {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
+          {label: 'To', name: 'destination', widget: 'string', hint: 'Example: "myurl.com/foo"'},
+          {label: 'Status Code', name: 'status', widget: 'select', options: ['302']}
+        ]}
   - name: 'meetings'
     label: 'Meetings'
     label_singular: 'Meeting'
