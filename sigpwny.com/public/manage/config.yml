@@ -15,20 +15,6 @@ slug:
 media_folder: media
 
 collections:
-  - name: 'redirects-collection'
-    label: 'Redirects'
-    format: 'flat-json'
-    files:
-    - label: 'All Redirects'
-      file: 'sigpwny.com/src/redirects.json'
-      name: 'redirects'
-      fields:
-        - {label: 'Links', name: 'items', widget: 'list', fields: [
-            # must be named 'key' for our custom formatter to work
-            {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
-            {label: 'To', name: 'destination', widget: 'string', hint: 'Example: "myurl.com/foo"'},
-            {label: 'Status Code', name: 'status', widget: 'hidden', default: 302}
-          ]}
   - name: 'meetings'
     label: 'Meetings'
     label_singular: 'Meeting'
@@ -85,7 +71,7 @@ collections:
     fields:
       - {label: 'Title', name: 'title', widget: 'string', hint: 'Examples: "UIUCTF 2022" or "Fall CTF 2022"'}
       - {label: 'Series', name: 'series', widget: 'select', options: ['uiuctf', 'fallctf']}
-      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm', hint: 'Make sure to use UTC time!'}
+      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm:ssZ', picker_utc: false, hint: 'Ensure date matches date in path. Input time is based on the timezone of YOUR COMPUTER. Display timezone is an option below.'}
       - {label: 'Duration', name: 'duration', widget: 'string', default: 'PT48H', hint: 'Leave blank to default to 48-hour duration. Use ISO 8601 duration format - P(n)Y(n)M(n)DT(n)H(n)M(n)S. Example: "PT6H" is 6 hours.', required: false}
       - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: 'Credit', name: 'credit', widget: 'list', hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
@@ -200,3 +186,18 @@ collections:
     sortable_fields: ['weight', 'name', 'handle']
     slug: '{{name}}'
     path: '{{slug}}/index'
+
+  - name: 'redirects-collection'
+    label: 'Redirects'
+    format: 'flat-json'
+    files:
+    - label: 'sigpwny.com'
+      file: 'sigpwny.com/src/redirects.json'
+      name: 'redirects'
+      fields:
+        - {label: 'Links', name: 'items', widget: 'list', fields: [
+            # must be named 'key' for our custom formatter to work
+            {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
+            {label: 'To', name: 'destination', widget: 'string', hint: 'Example: "myurl.com/foo"'},
+            {label: 'Status Code', name: 'status', widget: 'hidden', default: 302}
+          ]}
