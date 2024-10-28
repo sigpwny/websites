@@ -1,44 +1,4 @@
 name: Scheduled Jobs
 'on':
-  schedule:
-    - cron: 0 19 26 10 6
-    - cron: 0 18 27 10 0
-jobs:
-  helper-ping-Cryptography-IIat-2024-10-26T190000000Z:
-    name: helper ping Cryptography IIat 2024-10-26T19:00:00.000Z
-    if: github.event.schedule == '0 19 26 10 6'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkNyeXB0b2dyYXBoeSBJSSoqIGlzIDx0OjE3MzAwNTU2MDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI0LTEwLTI3Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-Cryptography-IIat-2024-10-27T180000000Z:
-    name: helper ping Cryptography IIat 2024-10-27T18:00:00.000Z
-    if: github.event.schedule == '0 18 27 10 0'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkNyeXB0b2dyYXBoeSBJSSoqIGlzIDx0OjE3MzAwNTU2MDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI0LTEwLTI3Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
+  schedule: []
+jobs: {}
