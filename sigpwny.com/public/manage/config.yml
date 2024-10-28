@@ -45,7 +45,7 @@ collections:
     fields:
       - {label: 'Title', name: 'title', hint: 'Example: "PWN II"', widget: 'string'}
       - {label: 'Meeting Type', name: 'type', widget: 'select', options: ['general', 'purple', 'ctf', 'embedded']}
-      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm', hint: 'Ensure date matches date in path.'}
+      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm:ssZ', picker_utc: false, hint: 'Ensure date matches date in path. Input time is based on the timezone of YOUR COMPUTER. Display timezone is an option below.'}
       - {label: 'Duration', name: 'duration', widget: 'string', default: '', hint: 'Leave blank to default to 1-hour duration. Use ISO 8601 duration format - P(n)Y(n)M(n)DT(n)H(n)M(n)S. Example: "PT48H" is 48 hours.', required: false}
       - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: 'Week Number', name: 'week_number', hint: 'Current week number in the semester, 0-indexed. Do not specify week numbers for events, such as CTFs (only for meetings).', widget: 'number', value_type: 'int', min: 0, max: 52, step: 1, required: false}
