@@ -1,4 +1,44 @@
 name: Scheduled Jobs
 'on':
-  schedule: []
-jobs: {}
+  schedule:
+    - cron: 30 23 27 10 0
+    - cron: 30 22 28 10 1
+jobs:
+  helper-ping-Timing-Side-Channel-Labat-2024-10-27T233000000Z:
+    name: helper ping Timing Side Channel Labat 2024-10-27T23:30:00.000Z
+    if: github.event.schedule == '30 23 27 10 0'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlRpbWluZyBTaWRlIENoYW5uZWwgTGFiKiogaXMgPHQ6MTczMDE1ODIwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9lbWJlZGRlZC8yMDI0LTEwLTI4Lw==
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-Timing-Side-Channel-Labat-2024-10-28T223000000Z:
+    name: helper ping Timing Side Channel Labat 2024-10-28T22:30:00.000Z
+    if: github.event.schedule == '30 22 28 10 1'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlRpbWluZyBTaWRlIENoYW5uZWwgTGFiKiogaXMgPHQ6MTczMDE1ODIwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9lbWJlZGRlZC8yMDI0LTEwLTI4Lw==
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
