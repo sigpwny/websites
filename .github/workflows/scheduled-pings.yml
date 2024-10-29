@@ -1,12 +1,12 @@
 name: Scheduled Jobs
 'on':
   schedule:
-    - cron: 30 23 27 10 0
-    - cron: 30 22 28 10 1
+    - cron: 0 0 29 10 2
+    - cron: 0 23 29 10 2
 jobs:
-  helper-ping-Timing-Side-Channel-Labat-2024-10-27T233000000Z:
-    name: helper ping Timing Side Channel Labat 2024-10-27T23:30:00.000Z
-    if: github.event.schedule == '30 23 27 10 0'
+  helper-ping-Live-Active-Directory-Attacksat-2024-10-29T000000000Z:
+    name: helper ping Live Active Directory Attacksat 2024-10-29T00:00:00.000Z
+    if: github.event.schedule == '0 0 29 10 2'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,15 +17,15 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlRpbWluZyBTaWRlIENoYW5uZWwgTGFiKiogaXMgPHQ6MTczMDE1ODIwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9lbWJlZGRlZC8yMDI0LTEwLTI4Lw==
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkxpdmUgQWN0aXZlIERpcmVjdG9yeSBBdHRhY2tzKiogaXMgPHQ6MTczMDI0NjQwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0yOS8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: touch .env && npm run send-discord-ping
         working-directory: sigpwny.com
-  helper-ping-Timing-Side-Channel-Labat-2024-10-28T223000000Z:
-    name: helper ping Timing Side Channel Labat 2024-10-28T22:30:00.000Z
-    if: github.event.schedule == '30 22 28 10 1'
+  helper-ping-Live-Active-Directory-Attacksat-2024-10-29T230000000Z:
+    name: helper ping Live Active Directory Attacksat 2024-10-29T23:00:00.000Z
+    if: github.event.schedule == '0 23 29 10 2'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlRpbWluZyBTaWRlIENoYW5uZWwgTGFiKiogaXMgPHQ6MTczMDE1ODIwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9lbWJlZGRlZC8yMDI0LTEwLTI4Lw==
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkxpdmUgQWN0aXZlIERpcmVjdG9yeSBBdHRhY2tzKiogaXMgPHQ6MTczMDI0NjQwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0yOS8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
