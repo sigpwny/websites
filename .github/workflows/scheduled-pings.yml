@@ -1,12 +1,12 @@
 name: Scheduled Jobs
 'on':
   schedule:
-    - cron: 0 0 29 10 2
-    - cron: 0 23 29 10 2
+    - cron: 0 0 31 10 4
+    - cron: 0 23 31 10 4
 jobs:
-  helper-ping-Live-Active-Directory-Attacksat-2024-10-29T000000000Z:
-    name: helper ping Live Active Directory Attacksat 2024-10-29T00:00:00.000Z
-    if: github.event.schedule == '0 0 29 10 2'
+  helper-ping-Snort-Installation-and-Configuration,-Overview-and-Strategyat-2024-10-31T000000000Z:
+    name: 'helper ping Snort: Installation & Configuration, Overview & Strategyat 2024-10-31T00:00:00.000Z'
+    if: github.event.schedule == '0 0 31 10 4'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,15 +17,15 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkxpdmUgQWN0aXZlIERpcmVjdG9yeSBBdHRhY2tzKiogaXMgPHQ6MTczMDI0NjQwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0yOS8=
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlNub3J0OiBJbnN0YWxsYXRpb24gJiBDb25maWd1cmF0aW9uLCBPdmVydmlldyAmIFN0cmF0ZWd5KiogaXMgPHQ6MTczMDQxOTIwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0zMS8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: touch .env && npm run send-discord-ping
         working-directory: sigpwny.com
-  helper-ping-Live-Active-Directory-Attacksat-2024-10-29T230000000Z:
-    name: helper ping Live Active Directory Attacksat 2024-10-29T23:00:00.000Z
-    if: github.event.schedule == '0 23 29 10 2'
+  helper-ping-Snort-Installation-and-Configuration,-Overview-and-Strategyat-2024-10-31T230000000Z:
+    name: 'helper ping Snort: Installation & Configuration, Overview & Strategyat 2024-10-31T23:00:00.000Z'
+    if: github.event.schedule == '0 23 31 10 4'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
       - run: npm ci
         working-directory: sigpwny.com
       - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkxpdmUgQWN0aXZlIERpcmVjdG9yeSBBdHRhY2tzKiogaXMgPHQ6MTczMDI0NjQwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0yOS8=
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlNub3J0OiBJbnN0YWxsYXRpb24gJiBDb25maWd1cmF0aW9uLCBPdmVydmlldyAmIFN0cmF0ZWd5KiogaXMgPHQ6MTczMDQxOTIwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9wdXJwbGUvMjAyNC0xMC0zMS8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
