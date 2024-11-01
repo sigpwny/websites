@@ -10,3 +10,5 @@ updates:
       - "/uiuc.tf"
     schedule:
       interval: "weekly"
+    # Only security updates
+    open-pull-requests-limit: 0
