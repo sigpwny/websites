@@ -31,7 +31,7 @@
     "framer-motion": "^11.5.4",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "tailwindcss": "^3.4.10",
+    "tailwindcss": "^3.4.14",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
