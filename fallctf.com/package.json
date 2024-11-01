@@ -22,7 +22,7 @@
     "@astrojs/netlify": "^5.5.1",
     "@astrojs/react": "^3.6.2",
     "@astrojs/rss": "^4.0.7",
-    "@astrojs/sitemap": "^3.1.6",
+    "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.0",
     "@floating-ui/dom": "^1.6.10",
     "@floating-ui/react": "^0.26.23",
