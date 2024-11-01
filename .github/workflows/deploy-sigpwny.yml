@@ -20,28 +20,24 @@ jobs:
     name: Deploy (sigpwny.com)
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       deployments: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.WORKFLOW_PAT }}
           submodules: true
           fetch-depth: 0
-
       - name: Build pwnyctf mdbook
         uses: ./.github/actions/build-mdbook
         with:
           book-directory: pwnyctf
-
       - name: Build site
         uses: ./.github/actions/build-astro
         with:
           working-directory: ${{ env.CI_WORKING_DIR }}
           build-directory: ${{ env.CI_BUILD_DIR }}
           cache-directory: ${{ env.CI_CACHE_DIR }}
-
       - name: Deploy to Cloudflare Pages
         if: github.actor != 'dependabot[bot]'
         uses: cloudflare/pages-action@v1
@@ -52,7 +48,6 @@ jobs:
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           workingDirectory: ${{ env.CI_WORKING_DIR }}
           directory: ${{ env.CI_BUILD_DIR }}
-
       - name: (On main) Sync Discord events
         if: github.ref_name == github.event.repository.default_branch
         # https://github.com/nodejs/node/issues/50993
@@ -62,14 +57,37 @@ jobs:
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: ${{ env.CI_WORKING_DIR }}/${{ env.CI_BUILD_DIR }}
+  schedule-notify:
+    name: Schedule notifications (sigpwny.com)
+    if: github.ref_name == github.event.repository.default_branch
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.WORKFLOW_PAT }}
+          submodules: true
+          fetch-depth: 0
+      - name: Initialize Astro and dependencies
+        uses: ./.github/actions/build-astro
+        with:
+          working-directory: ${{ env.CI_WORKING_DIR }}
+          build-directory: ${{ env.CI_BUILD_DIR }}
+          cache-directory: ${{ env.CI_CACHE_DIR }}
+          skip-build: true
       - name: Schedule Discord pings
         run: npm run schedule-discord-ping
-        if: github.ref_name == github.event.repository.default_branch
         shell: bash
         working-directory: ${{ env.CI_WORKING_DIR }}
-      - name: Save scheduled discord pings
-        if: github.ref_name == github.event.repository.default_branch
+      - name: Save scheduled Discord pings
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update workflow schedule"
