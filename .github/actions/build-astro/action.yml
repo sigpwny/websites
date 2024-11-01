@@ -31,16 +31,13 @@ runs:
         cache: npm
         cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
 
-    - name: Restore cached build artifacts and node modules
-      id: cache-build
+    - name: Restore cached node modules
+      id: cache-modules
       uses: actions/cache@v4
       env:
-        cache-name: cache-build-and-modules
+        cache-name: cache-modules
       with:
         path: |
-          ${{ inputs.working-directory }}/.astro
-          ${{ inputs.working-directory }}/${{ inputs.cache-directory }}
-          ${{ inputs.working-directory }}/${{ inputs.build-directory }}
           ${{ inputs.working-directory }}/node_modules
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles(format('{0}/**/package-lock.json', inputs.working-directory)) }}
         restore-keys: |
@@ -48,14 +45,30 @@ runs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+    - name: Restore cached build artifacts
+      id: cache-build
+      uses: actions/cache@v4
+      env:
+        cache-name: cache-build
+      with:
+        path: |
+          ${{ inputs.working-directory }}/.astro
+          ${{ inputs.working-directory }}/${{ inputs.cache-directory }}
+          ${{ inputs.working-directory }}/${{ inputs.build-directory }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles(format('{0}/**/package-lock.json', inputs.working-directory)) }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - if: ${{ steps.cache-modules.outputs.cache-hit != 'true' }}
       name: (On cache miss) List the state of node modules
       continue-on-error: true
       run: npm list
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
-    - if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+    - if: ${{ steps.cache-modules.outputs.cache-hit != 'true' }}
       name: (On cache miss) Install node modules
       continue-on-error: true
       run: npm ci
