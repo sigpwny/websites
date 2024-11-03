@@ -1,4 +1,5 @@
 name: Scheduled Jobs
 'on':
+  workflow_dispatch: {}
   schedule: []
 jobs: {}
