@@ -32,7 +32,6 @@
     "@astrojs/tailwind": "^5.1.1",
     "@floating-ui/dom": "^1.6.8",
     "@floating-ui/react": "^0.26.20",
-    "@reteps/github-action-scheduler": "^1.0.2",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
     "astro": "^4.16.8",
@@ -53,6 +52,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@reteps/github-action-scheduler": "^1.0.4",
     "autoprefixer": "^10.4.20",
     "postcss-nested": "^7.0.2",
     "rimraf": "^6.0.1",
