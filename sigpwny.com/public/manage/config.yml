@@ -37,7 +37,7 @@ collections:
       - {label: 'Week Number', name: 'week_number', hint: 'Current week number in the semester, 0-indexed. Do not specify week numbers for events, such as CTFs (only for meetings).', widget: 'number', value_type: 'int', min: 0, max: 52, step: 1, required: false}
       - {label: 'Credit', name: 'credit', widget: 'list', hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces. Also works with organization names.'}
       - {label: 'Featured', name: 'featured', widget: 'boolean', default: true, hint: 'The meeting will be shown on the home page if set to true.', required: false}
-      - {label: 'Location', name: 'location', widget: 'string', hint: 'Example: "Siebel CS 1404 + Zoom"', required: false}
+      - {label: 'Location', name: 'location', widget: 'string', hint: 'Example: "Siebel CS 1404" or "Illini Union"', required: false}
       - {label: 'Description', name: 'description', widget: 'string', hint: 'A brief call-to-action/one-liner for the meeting.', required: false}
       - {label: 'Card Image', name: 'card_image', widget: 'object', required: false, fields: [
           # {label: 'Foreground Image', name: 'foreground', widget: 'image', hint: 'You usually do not need to set this for meetings.', choose_url: false, required: false},
