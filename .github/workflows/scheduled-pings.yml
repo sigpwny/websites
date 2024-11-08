@@ -1,44 +1,4 @@
 name: Scheduled Jobs
 'on':
-  schedule:
-    - cron: 0 0 7 11 4
-    - cron: 0 23 7 11 4
-jobs:
-  helper-ping-Python-Jails-at-2024-11-07T000000000Z:
-    name: helper ping Python Jails at 2024-11-07T00:00:00.000Z
-    if: github.event.schedule == '0 0 7 11 4'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlB5dGhvbiBKYWlscyoqIGlzIDx0OjE3MzEwMjQwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI0LTExLTA3Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-Python-Jails-at-2024-11-07T230000000Z:
-    name: helper ping Python Jails at 2024-11-07T23:00:00.000Z
-    if: github.event.schedule == '0 23 7 11 4'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlB5dGhvbiBKYWlscyoqIGlzIDx0OjE3MzEwMjQwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI0LTExLTA3Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
+  schedule: []
+jobs: {}
