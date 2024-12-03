@@ -16,7 +16,7 @@ from typing import List, Optional
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from apiclient.http import MediaFileUpload
-from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import flow_from_clientsecrets, Credentials
 from oauth2client.file import Storage
 from oauth2client.tools import argparser, run_flow
 from dataclasses import dataclass
@@ -173,13 +173,18 @@ def fetch_media(username, password):
     return entries
 
 def get_authenticated_service():
-    flow = flow_from_clientsecrets(CLIENT_SECRETS_FILE, scope=YOUTUBE_UPLOAD_SCOPE)
+    # Check for cached credentials
+    youtube_oauth_creds = os.getenv('YOUTUBE_OAUTH_CREDS')
+    if youtube_oauth_creds:
+        # https://oauth2client.readthedocs.io/en/latest/_modules/oauth2client/file.html#Storage.locked_get
+        credentials = Credentials.new_from_json(json.loads(youtube_oauth_creds))
+    else:
+        storage = Storage("%s-oauth2.json" % sys.argv[0])
+        credentials = storage.get()
 
-    storage = Storage("%s-oauth2.json" % sys.argv[0])
-    credentials = storage.get()
-
-    # This is an interactive flow
+    # Try an interactive flow
     if credentials is None or credentials.invalid:
+        flow = flow_from_clientsecrets(CLIENT_SECRETS_FILE, scope=YOUTUBE_UPLOAD_SCOPE)
         credentials = run_flow(flow, storage)
 
     return build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
@@ -209,10 +214,40 @@ def do_upload(youtube, options):
 
     video_id = resumable_upload(insert_request)
 
+    print("Video id '%s' was successfully uploaded." % video_id)
     if options.caption:
         upload_caption(youtube, video_id, 'en', 'English', MediaFileUpload(options.caption, chunksize=-1, resumable=True))
+        print("Captions for video id '%s' were successfully uploaded." % video_id)
 
-    print("Video id '%s' was successfully uploaded." % video_id)
+    return video_id
+def fetch_all_videos(youtube):
+    # Every YouTube channel has a special playlist that contains all uploaded videos.
+    response = youtube.channels().list(part='contentDetails', mine=True).execute()
+    uploads_playlist_id = response['items'][0]['contentDetails']['relatedPlaylists']['uploads']
+
+    # use the youtube.playlistItems().list method to fetch the videos
+    videos = {}
+    next_page_token = None
+    while True:
+        request = youtube.playlistItems().list(
+            part="snippet",
+            playlistId=uploads_playlist_id,
+            maxResults=50,
+            pageToken=next_page_token
+        )
+        response = request.execute()
+        print(response['items'])
+        for video in response['items']:
+            title = video['snippet']['title']
+            video_id = video['snippet']['contentDetails']['videoId']
+            videos[title] = video_id
+        
+        next_page_token = response.get('nextPageToken')
+        if not next_page_token:
+            break
+    
+    return videos
+
 def upload_caption(youtube, video_id, language, name, caption_file):
     request = youtube.captions().insert(
         part="snippet",
@@ -284,7 +319,7 @@ def get_description(meeting):
 
 if __name__ == '__main__':
     load_dotenv()
-    metadata = fetch_media(os.getenv('USERNAME'), os.getenv('PASSWORD'))
+    metadata = fetch_media(os.getenv('KALTURA_USERNAME'), os.getenv('KALTURA_PASSWORD'))
     metadata_lookup = {}
     for entry in metadata:
         zoom_id = re.search(r'Zoom Recording ID: (\d+)', entry['description'])
@@ -294,6 +329,8 @@ if __name__ == '__main__':
     youtube = get_authenticated_service()
 
     meetings = json.load(Path('../../dist/meetings/all.json').open())
+    youtube_videos = fetch_all_videos(youtube)
+
     for meeting in meetings:
         try:
             meeting_id = re.search(r'illinois.zoom.us/j/(\d+)', meeting['data']['live_video_url']).group(1) 
@@ -308,30 +345,34 @@ if __name__ == '__main__':
         tags = meeting['data']['tags']
         entry = metadata_lookup.get(meeting_id)
         description = get_description(meeting)
-        if meeting['data'].get('recording') is None and entry is not None:
-            print(f'{title}\n{"=" * len(title)}')
+        
+        has_recording = meeting['data'].get('recording') is None
+        has_kaltura = entry is not None
+        has_youtube = any([meeting['data']['title'] in title for title in youtube_videos])
+        print(f'{title}\n{"=" * len(title)}')
+        print(f'{has_recording=}, {has_kaltura=}, {has_youtube=}')
+
+        if not has_recording and has_kaltura and not has_youtube:
             print(description)
-            print('=' * len(title))
             print(f'Meeting URL: https://sigpwny.com{meeting["slug"]}')
             video_location = Path('download.mp4')
-            print(f'Downloading video from {entry["fullResDownloadUrl"]}')
+            print(f'mp4 download: {entry["fullResDownloadUrl"]}')
             resp = requests.get(entry['fullResDownloadUrl'])
             with open(video_location, 'wb') as f:
                 f.write(resp.content)
             
             caption_location = None
+            print(f'vtt download: {entry["zoomTranscript"]}')
             if entry['zoomTranscript']:
-                print(f'Downloading captions from {entry["zoomTranscript"]}')
                 caption_location = Path('download.vtt')
                 resp = requests.get(entry['zoomTranscript'])
                 with open(caption_location, 'wb') as f:
                     f.write(resp.content)
-            else:
-                print('No captions available')
             
             print('Uploading to YouTube')
+            video_id = None
             try:
-                do_upload(youtube,
+                video_id = do_upload(youtube,
                     UploadOptions(
                     file=video_location.absolute().as_posix(),
                     caption=caption_location.absolute().as_posix() if caption_location else None,
@@ -342,4 +383,6 @@ if __name__ == '__main__':
                 )
             except HttpError as e:
                 print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
+            
+            print('Video available at https://www.youtube.com/watch?v=' + video_id)
     

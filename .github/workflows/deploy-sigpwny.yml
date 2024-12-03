@@ -124,6 +124,10 @@ jobs:
         run: python3 kaltura2youtube.py
         shell: bash
         working-directory: ${{ env.CI_WORKING_DIR }}/src/scripts
+        env:
+          KALTURA_USERNAME: ${{ secrets.KALTURA_USERNAME }}
+          KALTURA_PASSWORD: ${{ secrets.KALTURA_PASSWORD }}
+          YOUTUBE_OAUTH_CREDS: ${{ secrets.YOUTUBE_OAUTH_CREDS }}
       - name: Save scheduled Discord pings
         uses: stefanzweifel/git-auto-commit-action@v5
         with:

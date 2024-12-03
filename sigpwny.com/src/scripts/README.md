@@ -12,8 +12,9 @@ DISCORD_SERVER_ID=YYY
 Requires
 
 ```
-USERNAME
-PASSWORD
+KALTURA_USERNAME
+KALTURA_PASSWORD
+YOUTUBE_OAUTH_CREDS
 ```
 
-parameters to login to Kaltura.
+parameters to work.
