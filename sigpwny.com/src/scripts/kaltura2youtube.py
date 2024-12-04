@@ -183,15 +183,19 @@ def fetch_media(username, password):
 def get_authenticated_service():
     # Check for cached credentials
     youtube_oauth_creds = os.getenv('YOUTUBE_OAUTH_CREDS')
+    headless = youtube_oauth_creds is not None
     if youtube_oauth_creds:
         # https://oauth2client.readthedocs.io/en/latest/_modules/oauth2client/file.html#Storage.locked_get
-        credentials = Credentials.new_from_json(json.loads(youtube_oauth_creds))
+        credentials = Credentials.new_from_json(youtube_oauth_creds)
     else:
         storage = Storage("%s-oauth2.json" % sys.argv[0])
         credentials = storage.get()
 
     # Try an interactive flow
     if credentials is None or credentials.invalid:
+        if headless:
+            raise Exception('No credentials found, please run this script interactively first')
+        
         flow = flow_from_clientsecrets(CLIENT_SECRETS_FILE, scope=SCOPES)
         credentials = run_flow(flow, storage)
 
@@ -222,7 +226,7 @@ def do_upload(youtube, options):
 
     print('Uploading video (this may take a while)...')
     response = insert_request.execute()
-    print(response)
+    # print(response)
     video_id = response['id']
     print("Video id '%s' was successfully uploaded." % video_id)
     if options.caption:
@@ -378,6 +382,5 @@ if __name__ == '__main__':
                 print('Video available at https://www.youtube.com/watch?v=' + video_id)
             except HttpError as e:
                 print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
-            print()
-            
+
     
