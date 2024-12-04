@@ -119,7 +119,7 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r src/scripts/requirements.txt
-        working-directory: ${{ CI_WORKING_DIR }}
+        working-directory: ${{ env.CI_WORKING_DIR }}
       - name: Run Kaltura
         run: python3 kaltura2youtube.py
         shell: bash
