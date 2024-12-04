@@ -92,3 +92,44 @@ jobs:
         with:
           commit_message: "chore: update workflow schedule"
           file_pattern: "*.yml"
+  kaltura-upload:
+    name: Upload to YouTube from Kaltura
+    if: github.ref_name == github.event.repository.default_branch
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.WORKFLOW_PAT }}
+          submodules: true
+          fetch-depth: 0
+      - name: Initialize Astro and dependencies
+        uses: ./.github/actions/build-astro
+        with:
+          working-directory: ${{ env.CI_WORKING_DIR }}
+          build-directory: ${{ env.CI_BUILD_DIR }}
+          cache-directory: ${{ env.CI_CACHE_DIR }}
+          skip-build: true
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install -r src/scripts/requirements.txt
+        working-directory: ${{ CI_WORKING_DIR }}
+      - name: Run Kaltura
+        run: python3 kaltura2youtube.py
+        shell: bash
+        working-directory: ${{ env.CI_WORKING_DIR }}/src/scripts
+        env:
+          KALTURA_USERNAME: ${{ secrets.KALTURA_USERNAME }}
+          KALTURA_PASSWORD: ${{ secrets.KALTURA_PASSWORD }}
+          YOUTUBE_OAUTH_CREDS: ${{ secrets.YOUTUBE_OAUTH_CREDS }}
+      - name: Save scheduled Discord pings
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update workflow schedule"
+          file_pattern: "*.yml"
