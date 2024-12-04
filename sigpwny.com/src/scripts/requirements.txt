@@ -1,5 +1,7 @@
-google-api-python-client
+google-auth-httplib2==0.1.0
+google-api-python-client==1.7.8
+google-auth==1.12.0
 python-dotenv
 google-auth-oauthlib
-google-auth-httplib2
 oauth2client
+httplib2==0.15.0

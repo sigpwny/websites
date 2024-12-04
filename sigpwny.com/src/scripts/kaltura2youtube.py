@@ -54,7 +54,12 @@ CLIENT_SECRETS_FILE = "client_secrets.json"
 
 # This OAuth 2.0 access scope allows an application to upload files to the
 # authenticated user's YouTube channel, but doesn't allow other types of access.
-YOUTUBE_UPLOAD_SCOPE = "https://www.googleapis.com/auth/youtube.upload"
+SCOPES = [
+    "https://www.googleapis.com/auth/youtube.upload",
+    "https://www.googleapis.com/auth/youtube.force-ssl",
+    "https://www.googleapis.com/auth/youtube",
+]
+
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
@@ -75,7 +80,7 @@ def fetch_media(username, password):
 
     s = requests.Session()
     
-    print('Signing into Kaltura')
+    print(f'Signing into Kaltura as {username}...')
 
     response = s.get(f'{KALTURA_BASE}/user/login', headers=headers)
     config = json.loads(re.search(r'Config=({.*})', response.text).group(1))
@@ -98,12 +103,15 @@ def fetch_media(username, password):
 
     # for debugging, uncomment this
     s = requests.Session()
-    s.cookies.set('kms_ctamuls', "2g4jot6n0pm52febdk12e7d4ei")
+    s.cookies.set('kms_ctamuls', "75br1kn1n7ctjs7siqj2moolbm")
 
     body = {"controller": "user", "action": "user-media", "page": "1"}
     res = s.post(f'{KALTURA_BASE}/my-media', json=body)
-
-    info, = re.search(r'MyMediaPage,\s+({.*?})\)', res.text).groups()
+    try:
+        info, = re.search(r'MyMediaPage,\s+({.*?})\)', res.text).groups()
+    except AttributeError:
+        print('Failed to get info -- sign in most likely failed')
+        os.exit(1)
     info = json.loads(info)
 
     print('Getting a valid session')
@@ -184,7 +192,7 @@ def get_authenticated_service():
 
     # Try an interactive flow
     if credentials is None or credentials.invalid:
-        flow = flow_from_clientsecrets(CLIENT_SECRETS_FILE, scope=YOUTUBE_UPLOAD_SCOPE)
+        flow = flow_from_clientsecrets(CLIENT_SECRETS_FILE, scope=SCOPES)
         credentials = run_flow(flow, storage)
 
     return build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
@@ -209,11 +217,13 @@ def do_upload(youtube, options):
     insert_request = youtube.videos().insert(
         part=",".join(body.keys()),
         body=body,
-        media_body=MediaFileUpload(options.file, chunksize=-1, resumable=True)
+        media_body=MediaFileUpload(options.file, resumable=True)
     )
 
-    video_id = resumable_upload(insert_request)
-
+    print('Uploading video (this may take a while)...')
+    response = insert_request.execute()
+    print(response)
+    video_id = response['id']
     print("Video id '%s' was successfully uploaded." % video_id)
     if options.caption:
         upload_caption(youtube, video_id, 'en', 'English', MediaFileUpload(options.caption, chunksize=-1, resumable=True))
@@ -236,16 +246,23 @@ def fetch_all_videos(youtube):
             pageToken=next_page_token
         )
         response = request.execute()
-        print(response['items'])
         for video in response['items']:
             title = video['snippet']['title']
-            video_id = video['snippet']['contentDetails']['videoId']
+            video_id = video['snippet']['resourceId']['videoId']
+            url = re.search(r'https:\/\/sigpwny\.com[\S]*\/', video['snippet']['description'])
+            if url:
+                full_url = url.group(0)
+                # Minh will love this workaround!
+                full_url = full_url.replace('/meetings/fa2023', '/meetings/general')\
+                .replace('/meetings/sp2023', '/meetings/general')
+                videos[full_url] = video_id
             videos[title] = video_id
         
         next_page_token = response.get('nextPageToken')
         if not next_page_token:
             break
     
+    # print(videos)
     return videos
 
 def upload_caption(youtube, video_id, language, name, caption_file):
@@ -264,41 +281,6 @@ def upload_caption(youtube, video_id, language, name, caption_file):
     response = request.execute()
     return response
 
-# This method implements an exponential backoff strategy to resume a
-# failed upload.
-def resumable_upload(insert_request):
-    response = None
-    error = None
-    retry = 0
-    while response is None:
-        try:
-            print("Uploading file...")
-            status, response = insert_request.next_chunk()
-            if response is not None:
-                if 'id' in response:
-                    return response['id']
-                else:
-                    exit("The upload failed with an unexpected response: %s" % response)
-        except HttpError as e:
-            if e.resp.status in RETRIABLE_STATUS_CODES:
-                error = "A retriable HTTP error %d occurred:\n%s" % (e.resp.status,
-                                                                     e.content)
-            else:
-                raise
-        except RETRIABLE_EXCEPTIONS as e:
-            error = "A retriable error occurred: %s" % e
-
-        if error is not None:
-            print(error)
-            retry += 1
-            if retry > MAX_RETRIES:
-                exit("No longer attempting to retry.")
-
-            max_sleep = 2 ** retry
-            sleep_seconds = random.random() * max_sleep
-            print("Sleeping %f seconds and then retrying..." % sleep_seconds)
-            time.sleep(sleep_seconds)
-
 def get_description(meeting):
     credit_fmt = meeting['data']['credit']
     if len(credit_fmt) <= 2:
@@ -307,18 +289,27 @@ def get_description(meeting):
         credit_fmt = ', '.join(credit_fmt[:-1]) + ', and ' + credit_fmt[-1]
     
     start = meeting['data']['time_start'].split('T')[0]
-    description = meeting['data'].get('description') or meeting['body'].replace('## Summary', '').strip()
+    description = meeting['data'].get('description') or meeting.get('body', '')
+    # https://stackoverflow.com/a/20078869/5684541
+    description = ''.join([i if ord(i) < 128 else ' ' for i in description])
+    description = re.sub(r'##\s+Summary', '', description).strip()
 
     return f'''
-    {description} Recorded on {start}.
+{description} Recorded on {start}.
 
-    This meeting was run by {credit_fmt}.
+This meeting was run by {credit_fmt}.
 
-    Meeting slides: https://sigpwny.com{meeting['slug']}
-    '''
+Meeting slides: https://sigpwny.com{meeting['slug']}
+    '''.strip()
 
 if __name__ == '__main__':
     load_dotenv()
+    
+    youtube = get_authenticated_service()
+
+    meetings = json.load(Path('../../dist/meetings/all.json').open())
+    youtube_videos = fetch_all_videos(youtube)
+
     metadata = fetch_media(os.getenv('KALTURA_USERNAME'), os.getenv('KALTURA_PASSWORD'))
     metadata_lookup = {}
     for entry in metadata:
@@ -326,11 +317,6 @@ if __name__ == '__main__':
         if zoom_id:
             metadata_lookup[zoom_id.group(1)] = entry
     
-    youtube = get_authenticated_service()
-
-    meetings = json.load(Path('../../dist/meetings/all.json').open())
-    youtube_videos = fetch_all_videos(youtube)
-
     for meeting in meetings:
         try:
             meeting_id = re.search(r'illinois.zoom.us/j/(\d+)', meeting['data']['live_video_url']).group(1) 
@@ -340,49 +326,58 @@ if __name__ == '__main__':
         title = meeting['data']['title']
         start = meeting['data']['time_start'].split('T')[0]
         if 'week_number' in meeting['data']:
-            title = f'Week {str(meeting["data"]["week_number"]).zfill(2)}: {title}'
+            title = f'{meeting["data"]["semester"]} Week {str(meeting["data"]["week_number"]).zfill(2)}: {title}'
         title = f'{title} ({start})'
         tags = meeting['data']['tags']
         entry = metadata_lookup.get(meeting_id)
         description = get_description(meeting)
         
-        has_recording = meeting['data'].get('recording') is None
+        has_recording = meeting['data'].get('recording') is not None and 'illinois.zoom.us' not in meeting['data']['recording']
         has_kaltura = entry is not None
-        has_youtube = any([meeting['data']['title'] in title for title in youtube_videos])
-        print(f'{title}\n{"=" * len(title)}')
-        print(f'{has_recording=}, {has_kaltura=}, {has_youtube=}')
-
+        has_youtube = any([meeting['data']['title'] in yt_entry for yt_entry in youtube_videos]) or any([
+            'https://sigpwny.com' + meeting['slug'] in yt_entry for yt_entry in youtube_videos
+        ])
+        if has_recording != has_youtube:
+            print(f'{"=" * len(title)}\n{title}')
+            print('[!!] Recording / YouTube mismatch')
+            print(f'{has_recording=}, {has_kaltura=}, {has_youtube=}')
+        
         if not has_recording and has_kaltura and not has_youtube:
-            print(description)
-            print(f'Meeting URL: https://sigpwny.com{meeting["slug"]}')
+            print(f'{"=" * len(title)}\n{title}')
+            print(f'[U] Kaltura / YouTube mismatch (https://sigpwny.com{meeting["slug"]})')
+            print(f'{has_recording=}, {has_kaltura=}, {has_youtube=}')
+
             video_location = Path('download.mp4')
-            print(f'mp4 download: {entry["fullResDownloadUrl"]}')
+            print()
+            print(f'downloading mp4 from {entry["fullResDownloadUrl"]}')
             resp = requests.get(entry['fullResDownloadUrl'])
             with open(video_location, 'wb') as f:
                 f.write(resp.content)
             
             caption_location = None
-            print(f'vtt download: {entry["zoomTranscript"]}')
             if entry['zoomTranscript']:
+                print(f'downloading vtt from {entry["zoomTranscript"]}')
                 caption_location = Path('download.vtt')
                 resp = requests.get(entry['zoomTranscript'])
                 with open(caption_location, 'wb') as f:
                     f.write(resp.content)
             
-            print('Uploading to YouTube')
             video_id = None
             try:
-                video_id = do_upload(youtube,
-                    UploadOptions(
+                print()
+                upload = UploadOptions(
                     file=video_location.absolute().as_posix(),
                     caption=caption_location.absolute().as_posix() if caption_location else None,
                     title=title,
                     description=get_description(meeting),
                     category='22',
                     tags=tags)
-                )
+                
+                print(upload)
+                video_id = do_upload(youtube, upload)
+                print('Video available at https://www.youtube.com/watch?v=' + video_id)
             except HttpError as e:
                 print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
+            print()
             
-            print('Video available at https://www.youtube.com/watch?v=' + video_id)
     
