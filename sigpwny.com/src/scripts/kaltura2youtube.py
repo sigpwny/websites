@@ -2,15 +2,12 @@ import requests
 import json
 import re
 import html
-from slugify import slugify
 from dotenv import load_dotenv
 import os
 from pathlib import Path
 import httplib2
 import os
-import random
 import sys
-import time
 from typing import List, Optional
 
 from apiclient.discovery import build
@@ -18,7 +15,7 @@ from apiclient.errors import HttpError
 from apiclient.http import MediaFileUpload
 from oauth2client.client import flow_from_clientsecrets, Credentials
 from oauth2client.file import Storage
-from oauth2client.tools import argparser, run_flow
+from oauth2client.tools import run_flow
 from dataclasses import dataclass
 
 KALTURA_BASE = 'https://mediaspace.illinois.edu/'
