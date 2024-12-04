@@ -101,9 +101,9 @@ def fetch_media(username, password):
 
     s.post(html.unescape(url), data={'SAMLResponse': body, "RelayState": html.unescape(relay)})
 
-    # for debugging, uncomment this
-    s = requests.Session()
-    s.cookies.set('kms_ctamuls', "75br1kn1n7ctjs7siqj2moolbm")
+    # for debugging, uncomment this and use a valid Kaltura cookie.
+    # s = requests.Session()
+    # s.cookies.set('kms_ctamuls', "75br1kn1n7ctjs7siqj2moolbm")
 
     body = {"controller": "user", "action": "user-media", "page": "1"}
     res = s.post(f'{KALTURA_BASE}/my-media', json=body)
