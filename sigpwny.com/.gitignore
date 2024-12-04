@@ -27,3 +27,5 @@ pnpm-debug.log*
 
 # vscode setting folder
 .vscode/
+
+client_secret*.json
