@@ -109,21 +109,11 @@ a:hover {
 .social-links a:hover {
   fill: rgb(var(--rgb-secondary));
 }
-.btn-primary {
-  background-color: rgb(var(--rgb-primary));
-  color: rgb(var(--rgb-surface-000));
-  border: 0;
-  border-radius: 0.375rem;
-  padding: 0.25rem 0.75rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-.btn-primary:hover {
-  background-color: rgb(var(--rgb-secondary));
-  color: rgb(var(--rgb-surface-000));
-}
 .button {
-  @apply flex flex-row items-center gap-1 px-3 py-1 cursor-pointer rounded-md;
+  @apply border-0 rounded-md px-3 py-1 cursor-pointer select-none;
+}
+.btn-primary {
+  @apply bg-primary hover:bg-secondary text-surface-000 hover:text-surface-000;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: rgb(var(--rgb-primary));

@@ -1,0 +1,43 @@
+[
+  {
+    "semester": "SP2025",
+    "schedule": [
+      {
+        "meetingType": "general",
+        "meetingInfo": [
+          {
+            "time": "Thurdays, 6-7 PM",
+            "location": "Location TBD"
+          }
+        ]
+      },
+      {
+        "meetingType": "seminar",
+        "meetingInfo": [
+          {
+            "time": "Sundays, 2-3 PM",
+            "location": "Location TBD"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "semester": "FA2024",
+    "schedule": [
+      {
+        "meetingType": "general",
+        "meetingInfo": [
+          {
+            "time": "Thurdays, 6-7 PM",
+            "location": "Siebel CS 1404"
+          },
+          {
+            "time": "Sundays, 2-3 PM",
+            "location": "Siebel CS 1404"
+          }
+        ]
+      }
+    ]
+  }
+]

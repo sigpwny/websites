@@ -1,5 +1,5 @@
 .pwny-menu {
-  @apply isolate bg-surface-200/70 border-2 border-surface-250 backdrop-blur-xl shadow-lg rounded-lg flex flex-col;
+  @apply isolate bg-surface-200/70 border-2 border-surface-250 backdrop-blur-xl shadow-lg rounded-lg flex flex-col max-h-screen overflow-y-auto;
 }
 
 .pwny-menu ul {

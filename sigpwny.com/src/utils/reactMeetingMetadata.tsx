@@ -25,6 +25,11 @@ export const reactMeetingMetadata: Record<MeetingMetatype, ReactMeetingMetadata>
     color: 'rgb(var(--rgb-pwny-green))',
     icon: <BookOpenFilled />
   },
+  'seminar': {
+    ...meetingMetadata['seminar'],
+    color: 'rgb(var(--rgb-pwny-blue))',
+    icon: <BookOpenFilled />
+  },
   'ctf': {
     ...meetingMetadata['ctf'],
     color: 'rgb(var(--rgb-pwny-red))',
