@@ -2,33 +2,21 @@
 import Layout from '@/layouts/Base.astro';
 import type { HeadProps } from '$/components/BaseHead.astro';
 import Sidebar from '@/components/Sidebar';
-import { getMeetings, formatSemester, weekNumber } from '@/utils/meetings';
+import {
+  getSemesterToMeetingsMap,
+  formatSemester,
+  weekNumber,
+} from '@/utils/meetings';
 import 'katex/dist/katex.min.css';
 import { reactMeetingMetadata } from '@/utils/reactMeetingMetadata';
 
 const props: HeadProps = Astro.props;
 
-const rawMeetings = (await getMeetings()).sort(
-  (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
-);
+const semesterToMeetingsMap = await getSemesterToMeetingsMap();
 
-type MeetingType = typeof rawMeetings[0];
-
-const meetingsBySemester = rawMeetings.reduce(
-  (acc, meeting) => {
-    const semester = meeting.data.semester;
-    if (acc[semester]) {
-      acc[semester].push(meeting);
-    } else {
-      acc[semester] = [meeting];
-    }
-    return acc;
-  }, {} as {[semester: string]: MeetingType[]}
-);
-
-const meetingSidebarItems = Object.keys(meetingsBySemester).map((semester) => ({
+const meetingSidebarItems = Array.from(semesterToMeetingsMap.entries()).map(([semester, meetings]) => ({
   name: formatSemester(semester),
-  items: meetingsBySemester[semester].map((meeting) => ({
+  items: meetings.map((meeting) => ({
     name: meeting.data.week_number != null ? `Week ${weekNumber(meeting.data.week_number)}: ${meeting.data.title}` : meeting.data.title,
     url: meeting.slug,
     active: meeting.slug === Astro.url.pathname,

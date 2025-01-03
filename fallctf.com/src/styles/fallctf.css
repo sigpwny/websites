@@ -67,12 +67,11 @@ h3 {
 .panel-p-0 {
   @apply bg-surface-100 rounded-xl;
 }
-.btn-primary {
-  @apply bg-primary text-surface-000 px-3 py-1 rounded-full cursor-pointer;
+.button {
+  @apply border-0 rounded-md px-3 py-1 cursor-pointer select-none;
 }
-.btn-primary:hover {
-  background-color: rgb(var(--rgb-secondary));
-  color: rgb(var(--rgb-surface-000));
+.btn-primary {
+  @apply bg-primary hover:bg-secondary text-surface-000 hover:text-surface-000;
 }
 .button {
   @apply flex flex-row items-center gap-1 px-3 py-1 cursor-pointer rounded-md;

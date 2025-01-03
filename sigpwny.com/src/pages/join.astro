@@ -24,7 +24,7 @@ const startingSemester = meetings.find((meeting) => {
 })?.data.semester;
 // Filter meetings that match the start semester, have a beginner tag, and are featured
 const filteredMeetings = meetings.filter((meeting) => {
-  return meeting.data.semester.toUpperCase() === startingSemester && meeting.data.featured && meeting.data.tags?.some((tag) => beginnerTags.includes(tag as string));
+  return meeting.data.semester.toUpperCase() === startingSemester?.toUpperCase() && meeting.data.featured && meeting.data.tags?.some((tag) => beginnerTags.includes(tag as string));
 });
 // Reverse the order of the meetings to be in chronological order
 const getStartedMeetings = filteredMeetings.reverse();
@@ -41,7 +41,7 @@ const getStartedMeetings = filteredMeetings.reverse();
           Come learn cybersecurity with 2000+ students, alumni, and
           professionals in our Discord server.
         </p>
-        <Link href="/discord" class="place-self-start font-bold text-xl lg:text-2xl my-3 leading-normal btn-primary flex flex-row gap-2 items-center">
+        <Link href="/discord" class="place-self-start text-xl lg:text-2xl my-3 leading-normal button btn-primary flex flex-row gap-2 items-center">
           <SocialIcon name="Discord" />
           <span>Join Discord</span>
         </Link>

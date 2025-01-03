@@ -28,6 +28,39 @@ export async function getMeetings() {
   })
 };
 
+export type Meeting = Awaited<ReturnType<typeof getMeetings>>[0];
+
+export async function getSemesterToMeetingsMap() {
+  // Sort by most recent meetings first
+  const sortedMeetings = (await getMeetings()).sort(
+    (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
+  );
+  // Reduce the sorted meetings into a map of semesters to meetings
+  return sortedMeetings.reduce((acc, meeting) => {
+    const semester = meeting.data.semester;
+    if (!acc.has(semester)) {
+      acc.set(semester, []);
+    }
+    acc.get(semester)?.push(meeting);
+    return acc;
+  }, new Map<string, Meeting[]>());
+};
+
+export function getSemesters(meetings: Meeting[]): string[] {
+  // Sort by most recent meetings first
+  const sortedMeetings = meetings.sort(
+    (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
+  );
+  // Reduce the sorted meetings into a list of unique semesters
+  return sortedMeetings.reduce((acc, meeting) => {
+    const semester = meeting.data.semester;
+    if (!acc.includes(semester)) {
+      acc.push(semester);
+    }
+    return acc;
+  }, [] as string[]);
+}
+
 export function weekNumber(week_number: number): string {
   return (week_number).toLocaleString(undefined, {minimumIntegerDigits: 2});
 };

@@ -6,29 +6,29 @@ import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import { convertDate, weekNumber } from '@/utils/meetings';
 import { getProfilesFromNames } from '$/utils/profiles';
+import type { Meeting } from '@/utils/meetings';
 
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
 import UpcomingMeta from '@/components/ReactMigration/UpcomingMeta';
-import type { MeetingType } from '@/pages/meetings/index.astro';
 
 dayjs.extend(duration);
 dayjs.extend(utc);
 
 interface Props {
-  input: MeetingType;
-  showUpcoming: boolean;
+  input: Meeting;
+  hideUpcoming?: boolean;
 }
 
-const { input, showUpcoming } = Astro.props;
+const { input, hideUpcoming } = Astro.props;
 const meeting = input.data;
 const time_close = dayjs(meeting.time_start).add(dayjs.duration(meeting.duration)).toDate();
 
 // Resolve credit names to profiles
 const profiles = await getProfilesFromNames(meeting.credit);
-const upcomingVisibility = showUpcoming ? 'block' : 'none';
-const notUpcomingVisibility = showUpcoming ? 'none' : 'block';
+const upcomingVisibility = hideUpcoming ? 'none' : 'block';
+const notUpcomingVisibility = hideUpcoming ? 'none' : 'block';
 ---
 <style define:vars={{ upcomingVisibility, notUpcomingVisibility }}>
   /* The filters override the upcoming visibility selector */
