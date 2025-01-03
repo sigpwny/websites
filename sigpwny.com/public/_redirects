@@ -1,20 +1,20 @@
 # Fix redirects for old meeting URLs
-/meetings/fa2017/* /meetings/general/:splat 302
-/meetings/fa2018/* /meetings/general/:splat 302
-/meetings/fa2019/* /meetings/general/:splat 302
-/meetings/fa2020/* /meetings/general/:splat 302
-/meetings/fa2021/* /meetings/general/:splat 302
-/meetings/fa2022/* /meetings/general/:splat 302
-/meetings/fa2023/* /meetings/general/:splat 302
-/meetings/fa2024/* /meetings/general/:splat 302
-/meetings/sp2017/* /meetings/general/:splat 302
-/meetings/sp2018/* /meetings/general/:splat 302
-/meetings/sp2019/* /meetings/general/:splat 302
-/meetings/sp2020/* /meetings/general/:splat 302
-/meetings/sp2021/* /meetings/general/:splat 302
-/meetings/sp2022/* /meetings/general/:splat 302
-/meetings/sp2023/* /meetings/general/:splat 302
-/meetings/sp2024/* /meetings/general/:splat 302
+/meetings/fa2017/2017* /meetings/general/2017:splat 302
+/meetings/fa2018/2018* /meetings/general/2018:splat 302
+/meetings/fa2019/2019* /meetings/general/2019:splat 302
+/meetings/fa2020/2020* /meetings/general/2020:splat 302
+/meetings/fa2021/2021* /meetings/general/2021:splat 302
+/meetings/fa2022/2022* /meetings/general/2022:splat 302
+/meetings/fa2023/2023* /meetings/general/2023:splat 302
+/meetings/fa2024/2024* /meetings/general/2024:splat 302
+/meetings/sp2017/2017* /meetings/general/2017:splat 302
+/meetings/sp2018/2018* /meetings/general/2018:splat 302
+/meetings/sp2019/2019* /meetings/general/2019:splat 302
+/meetings/sp2020/2020* /meetings/general/2020:splat 302
+/meetings/sp2021/2021* /meetings/general/2021:splat 302
+/meetings/sp2022/2022* /meetings/general/2022:splat 302
+/meetings/sp2023/2023* /meetings/general/2023:splat 302
+/meetings/sp2024/2024* /meetings/general/2024:splat 302
 # Fix redirects for old calendar URLs
 /calendar/full.ics /calendar/all/generic.ics 301
 /calendar/full/apple.ics /calendar/all/apple.ics 301
