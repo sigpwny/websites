@@ -4,6 +4,7 @@ import PersonaGroup from '@/components/Profile/PersonaGroup.astro';
 import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
+import MeetingTypeBadge from '@/components/Meeting/TypeBadge';
 import { convertDate, weekNumber } from '@/utils/meetings';
 import { getProfilesFromNames } from '$/utils/profiles';
 import type { Meeting } from '@/utils/meetings';
@@ -67,10 +68,11 @@ const notUpcomingVisibility = hideUpcoming ? 'none' : 'block';
         </span>
       </Link>
     </div>
-    <div class="hidden lg:flex flex-row lg:flex-grow gap-x-4 truncate">
-      {meeting.tags && meeting.tags.length > 0 && (
+    <div class="hidden lg:flex flex-row items-center lg:flex-grow gap-x-4 truncate">
+      <!-- {meeting.tags && meeting.tags.length > 0 && (
         <TagGroup tags={meeting.tags.concat()} char_limit={25} tag_limit={3} />
-      )}
+      )} -->
+      <MeetingTypeBadge type={meeting.type} />
     </div>
     <div class="hidden md:flex flex-row gap-x-4 min-w-fit">
       <div class="grid grid-cols-3" style={{gridTemplateColumns: `repeat(3, 2rem)`}}>

@@ -1,0 +1,147 @@
+---
+import Layout, {
+  type SemesterLinkProps,
+  type MeetingIndexPageProps,
+} from '@/layouts/MeetingIndex.astro';
+import MeetingRow from '@/components/Meeting/Row.astro';
+import MeetingTime from '@/components/Meeting/Time.astro';
+import MeetingControls from '@/components/Meeting/Controls';
+import MeetingTypeBadge from '@/components/Meeting/TypeBadge';
+import { InfoRegular } from '$/components/Icons/fluentui';
+import {
+  getMeetings,
+  getSemesterToMeetingsMap,
+  formatSemester,
+} from '@/utils/meetings';
+import semestersMetadata from '@/semesters.json';
+
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(duration);
+dayjs.extend(utc);
+
+export async function getStaticPaths() {
+  const semesterToMeetingsMap = await getSemesterToMeetingsMap();
+  const semesters = Array.from(semesterToMeetingsMap.keys());
+  const allIndexLink = {
+    name: 'All Meetings',
+    url: '/meetings/all/',
+    semester: 'all',
+  } as SemesterLinkProps;
+  const allSemesterLinks = [allIndexLink];
+  semesters.forEach((semester) => {
+    allSemesterLinks.push({
+      name: formatSemester(semester),
+      url: `/meetings/${semester.toLowerCase()}/`,
+      semester,
+    });
+  });
+  // Add an index page for each semester index link
+  return allSemesterLinks.map((semesterLink, idx) => {
+    if (semesterLink.semester === 'all') {
+      return {
+        params: {
+          indexSlug: 'all',
+        },
+        props: {
+          meetings: semesterToMeetingsMap,
+          allLinks: allSemesterLinks,
+          currLink: allIndexLink,
+        } as MeetingIndexPageProps,
+      };
+    } else {
+      const meetings = new Map([[semesterLink.semester, semesterToMeetingsMap.get(semesterLink.semester)]]);
+      // Skip the first link since it's the all meetings link
+      const newerLink = idx !== 1 ? (allSemesterLinks[idx - 1] || undefined) : undefined;
+      const olderLink = allSemesterLinks[idx + 1] || undefined;
+      return {
+        params: {
+          indexSlug: semesterLink.semester.toLowerCase(),
+        },
+        props: {
+          meetings,
+          allLinks: allSemesterLinks,
+          currLink: semesterLink,
+          newerLink,
+          olderLink,
+        } as MeetingIndexPageProps,
+      };
+    }
+  });
+}
+
+const props = Astro.props as MeetingIndexPageProps;
+let semesterMetadata = semestersMetadata.find(entry => entry.semester === props.currLink.semester);
+
+const rawMeetings = (await getMeetings()).sort(
+  (a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf()
+);
+
+// The server build time will always be in the past, so we can filter out meetings before then.
+const potentiallyUpcomingMeetings = rawMeetings.filter((meeting) => {
+  const now = new Date();
+  const time_close = dayjs(meeting.data.time_start).add(dayjs.duration(meeting.data.duration)).toDate();
+  return time_close > now && meeting.data.semester === props.currLink.semester;
+}).reverse();
+---
+<Layout
+  {...props}
+>
+  {semesterMetadata?.schedule ? (
+    <section id="schedule" class="flex flex-col gap-2 mb-4">
+      <div class="flex flex-row gap-2 items-center rounded-lg text-sm bg-blue-950 w-fit px-2 py-1">
+        <InfoRegular />
+        <span>
+          Specific meeting times and locations may vary. Make sure to check individual meeting details.
+          {/* All meeting times are listed in U.S. Central Time unless otherwise specified. */}
+        </span>
+      </div>
+      <div class="flex flex-col md:flex-row md:gap-4">
+        {semesterMetadata.schedule.map((entry) => (
+          <div class="flex flex-col gap-2 border-2 border-surface-200 rounded-xl px-3 py-2">
+            <MeetingTypeBadge type={entry.meetingType} />
+            <div class="flex flex-row">
+              {entry.meetingInfo.map((info) => (
+                <MeetingTime
+                  time={info.time}
+                  location={info.location}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  ) : null}
+  <MeetingControls client:load />
+  {potentiallyUpcomingMeetings.length > 0 ? (
+    <div class="panel mb-4">
+      <p class="font-bold text-2xl m-0">
+        Upcoming
+      </p>
+      <hr class="border-surface-200" />
+      <ul class="flex flex-col pb-2">
+        {potentiallyUpcomingMeetings.map((meeting) => (
+          <MeetingRow input={meeting} hideUpcoming={true} />
+        ))}
+      </ul>
+    </div>
+  ) : null}
+  <div class="panel">
+    {Array.from(props.meetings.entries()).map(([semester, meetings]) => (
+      <div id={semester}>
+        <p class="font-bold text-2xl m-0">
+          {formatSemester(semester)}
+        </p>
+        <hr class="border-surface-200" />
+        <ul class="flex flex-col pb-2">
+          {meetings.map((meeting) => (
+            <MeetingRow input={meeting} />
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Layout>

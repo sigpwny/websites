@@ -109,6 +109,9 @@ a:hover {
 .social-links a:hover {
   fill: rgb(var(--rgb-secondary));
 }
+.badge {
+  @apply rounded-full px-3 py-1 select-none size-fit;
+}
 .button {
   @apply border-0 rounded-md px-3 py-1 cursor-pointer select-none;
 }
