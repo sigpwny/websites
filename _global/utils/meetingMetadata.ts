@@ -2,8 +2,8 @@ export const meetingMetatypes = [
   'general',
   'seminar',
   'ctf',
-  'purple',
   'embedded',
+  'purple',
 ];
 
 export type MeetingMetatype = typeof meetingMetatypes[number];
@@ -18,26 +18,26 @@ export const meetingMetadata: Record<MeetingMetatype, MeetingMetadata> = {
   'general': {
     name: 'General Meetings',
     shortName: 'General',
-    description: 'Attend our weekly general meetings to learn fundamental skills in cybersecurity.',
+    description: 'Attend our weekly general meetings to learn the fundamental of cybersecurity.',
   },
   'seminar': {
     name: 'Seminar Meetings',
     shortName: 'Seminar',
-    description: 'Attend our seminars to discuss advanced and novel research topics in cybersecurity.',
+    description: 'Discuss interesting, novel, and advanced research topics in security.',
   },
   'ctf': {
     name: 'CTF Team',
     shortName: 'CTF',
-    description: 'Compete in "Capture the Flag" events to hone your cybersecurity skills.',
-  },
-  'purple': {
-    name: 'Purple Team',
-    shortName: 'Purple',
-    description: 'Learn red-teaming (offensive) and blue-teaming (defensive) skills to secure systems and networks.',
+    description: 'Compete in Capture-the-Flag events to practice your cybersecurity skills.',
   },
   'embedded': {
     name: 'Embedded Team',
     shortName: 'Embedded',
-    description: 'Build secure embedded systems and learn about hardware hacking!',
+    description: 'Build secure embedded systems and learn about hardware hacking.',
+  },
+  'purple': {
+    name: 'Purple Team',
+    shortName: 'Purple',
+    description: 'Learn red-teaming and blue-teaming skills to secure systems and networks.',
   },
 };

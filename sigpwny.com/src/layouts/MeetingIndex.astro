@@ -34,7 +34,7 @@ const ButtonElementOlder = olderLink ? Link : 'span';
   title="Meetings"
   description="Index of SIGPwny meetings"
 >
-  <div class="flex flex-col mx-auto page-width-lg pb-8">
+  <div class="flex flex-col mx-auto pb-8">
     <h1>Meetings</h1>
     <nav aria-label="Meetings by semester" class="w-full max-w-40 mb-4">
       <DropdownSelect
@@ -48,7 +48,7 @@ const ButtonElementOlder = olderLink ? Link : 'span';
               <li>
                 <Link
                   href={link.url}
-                  class="!px-2 !py-1"
+                  class:list={["!px-2 !py-1", { '!bg-primary hover:!bg-secondary !text-surface-000': link.semester === props.currLink.semester }]}
                 >
                   {link.name}
                 </Link>
@@ -78,7 +78,7 @@ const ButtonElementOlder = olderLink ? Link : 'span';
                   <li>
                     <Link
                       href={link.url}
-                      class="!px-2 !py-1"
+                      class:list={["!px-2 !py-1", { '!bg-primary hover:!bg-secondary !text-surface-000': link.semester === props.currLink.semester }]}
                     >
                       {link.name}
                     </Link>

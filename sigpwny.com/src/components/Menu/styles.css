@@ -8,5 +8,5 @@
 
 .pwny-menu a,
 .pwny-menu button {
-  @apply w-full !text-white flex flex-row grow gap-2 items-center px-1 rounded-md ring-2 ring-transparent ring-offset-0 hover:bg-surface-250 focus:outline-none focus-visible:ring-white transition-colors;
+  @apply drag-none w-full text-white flex flex-row grow gap-2 items-center px-1 rounded-md ring-2 ring-transparent ring-offset-0 hover:bg-surface-250 focus:outline-none focus-visible:ring-white transition-colors;
 }

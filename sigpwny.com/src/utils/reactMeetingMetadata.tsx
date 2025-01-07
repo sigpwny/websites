@@ -1,20 +1,20 @@
 import React from 'react';
-import {
-  EmbeddedChipFilledSvg,
-  EmbeddedChipRegularSvg
-} from '$/components/Icons';
+import { EmbeddedChipRegularSvg } from '$/components/Icons';
 import {
   BookOpenFilled,
   FlagFilled,
-  FlagRegular,
   ShieldKeyholeFilled,
-  ShieldKeyholeRegular
 } from '$/components/Icons/fluentui';
-import { type MeetingMetadata, type MeetingMetatype, meetingMetadata } from '$/utils/meetingMetadata';
+import {
+  meetingMetadata,
+  type MeetingMetadata,
+  type MeetingMetatype,
+} from '$/utils/meetingMetadata';
 
 export interface ReactMeetingMetadata extends MeetingMetadata {
   name: string;
   shortName: string;
+  description?: string;
   color: string;
   icon?: React.JSX.Element;
 }
@@ -35,14 +35,14 @@ export const reactMeetingMetadata: Record<MeetingMetatype, ReactMeetingMetadata>
     color: 'rgb(var(--rgb-pwny-red))',
     icon: <FlagFilled />
   },
-  'purple': {
-    ...meetingMetadata['purple'],
-    color: 'rgb(var(--rgb-pwny-purple))',
-    icon: <ShieldKeyholeFilled />
-  },
   'embedded': {
     ...meetingMetadata['embedded'],
     color: 'rgb(var(--rgb-pwny-yellow))',
     icon: <EmbeddedChipRegularSvg />
+  },
+  'purple': {
+    ...meetingMetadata['purple'],
+    color: 'rgb(var(--rgb-pwny-purple))',
+    icon: <ShieldKeyholeFilled />
   },
 };

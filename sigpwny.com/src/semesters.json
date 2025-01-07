@@ -1,22 +1,53 @@
 [
   {
     "semester": "SP2025",
-    "schedule": [
+    "activeMeetings": [
       {
         "meetingType": "general",
-        "meetingInfo": [
+        "schedule": [
           {
             "time": "Thurdays, 6-7 PM",
-            "location": "Location TBD"
+            "location": "DCL 1310"
           }
         ]
       },
       {
         "meetingType": "seminar",
-        "meetingInfo": [
+        "schedule": [
           {
             "time": "Sundays, 2-3 PM",
-            "location": "Location TBD"
+            "location": "DCL 1310"
+          }
+        ]
+      },
+      {
+        "meetingType": "ctf",
+        "schedule": [
+          {
+            "time": "About once a month",
+            "location": "Join Discord for updates"
+          }
+        ]
+      },
+      {
+        "meetingType": "embedded",
+        "schedule": [
+          {
+            "time": "Saturdays, 3-4 PM",
+            "location": "Siebel CS 1302 and ACM Office; Subteams will also meet weekly at various times"
+          }
+        ]
+      },
+      {
+        "meetingType": "purple",
+        "schedule": [
+          {
+            "time": "Tuesdays, 7-8 PM",
+            "location": "Siebel CS 1302"
+          },
+          {
+            "time": "Thursdays, 7-8 PM",
+            "location": "DCL 1310"
           }
         ]
       }
@@ -24,10 +55,10 @@
   },
   {
     "semester": "FA2024",
-    "schedule": [
+    "activeMeetings": [
       {
         "meetingType": "general",
-        "meetingInfo": [
+        "schedule": [
           {
             "time": "Thurdays, 6-7 PM",
             "location": "Siebel CS 1404"
@@ -35,6 +66,37 @@
           {
             "time": "Sundays, 2-3 PM",
             "location": "Siebel CS 1404"
+          }
+        ]
+      },
+      {
+        "meetingType": "embedded",
+        "schedule": [
+          {
+            "time": "Wednesdays*, 7-8 PM",
+            "location": "*Every other week; Location varies"
+          }
+        ]
+      },
+      {
+        "meetingType": "purple",
+        "schedule": [
+          {
+            "time": "Tuesdays, 7-8 PM",
+            "location": "Location varies"
+          },
+          {
+            "time": "Thursdays, 7-8 PM",
+            "location": "Siebel CS 1404"
+          }
+        ]
+      },
+      {
+        "meetingType": "ctf",
+        "schedule": [
+          {
+            "time": "About once a month",
+            "location": "Join Discord for updates"
           }
         ]
       }
