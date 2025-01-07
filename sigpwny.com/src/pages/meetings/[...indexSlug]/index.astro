@@ -111,8 +111,7 @@ const isAllIndex = props.currLink.semester === 'all';
       }
     }
   };
-  document.addEventListener('DOMContentLoaded', initMeetingsIndex);
-  document.addEventListener('astro:after-swap', initMeetingsIndex);
+  document.addEventListener('astro:page-load', initMeetingsIndex);
 </script>
 
 <style>
