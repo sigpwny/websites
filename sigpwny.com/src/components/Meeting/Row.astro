@@ -71,7 +71,7 @@ const profiles = await getProfilesFromNames(meeting.credit);
         </span>
       </Link>
     </div>
-    <div class="flex flex-row grow-0 shrink-0 gap-x-4 items-center min-w-fit">
+    <div class="hidden sm:flex flex-row grow-0 shrink-0 gap-x-4 items-center min-w-fit">
       <div class="flex flex-row gap-x-2 items-center">
         <MeetingCountdown time_start={meeting.time_start} time_close={time_close} />
         {meeting.recording ? (
