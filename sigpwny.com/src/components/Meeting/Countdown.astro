@@ -1,0 +1,201 @@
+---
+export interface CountdownBadgeProps {
+  time_start: Date;
+  time_close: Date;
+}
+
+const props = Astro.props as CountdownBadgeProps;
+---
+<script>
+  // function initCountdownBadges() {
+  //   const countdownBadges = document.querySelectorAll('.astro-countdown-badge');
+  //   for (let i = 0; i < countdownBadges.length; i++) {
+  //     const countdownBadge = countdownBadges[i];
+  //     const timeStartStr = countdownBadge.getAttribute('data-time-start');
+  //     const timeCloseStr = countdownBadge.getAttribute('data-time-close');
+  //     if (!timeStartStr || !timeCloseStr) {
+  //       continue;
+  //     }
+  //     const timeStart = parseInt(timeStartStr);
+  //     const timeClose = parseInt(timeCloseStr);
+  //     // updateCountdown(new Date(timeStart), new Date(timeClose));
+  //   }
+  // }
+
+  // function getCountdownStatusType(start_date: Date, close_date: Date, now: Date) {
+  //   if (now >= close_date) {
+  //     return null;
+  //   } else if (now >= start_date) {
+  //     return {
+  //       status: {
+  //         type: 'Live',
+  //         message: 'LIVE',
+  //       },
+  //       interval: 1000,
+  //     };
+  //   }
+
+  //   const diff = start_date.getTime() - now.getTime();
+  //   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  //   const hours = Math.floor(diff / (1000 * 60 * 60));
+  //   const minutes = Math.floor(diff / (1000 * 60));
+
+  //   const result = {
+  //     status: {
+  //       type: 'Complete',
+  //       message: '',
+  //     },
+  //     interval: 1000,
+  //   };
+
+  //   if (days > 7) {
+  //     result.status.type = 'Upcoming';
+  //     result.status.message = 'SCHEDULED';
+  //     result.interval = 1000 * 60 * 60; // Every hour
+  //   } else if (days > 0) {
+  //     result.status.type = 'Upcoming';
+  //     result.status.message = `in ${days} day${days === 1 ? '' : 's'}`;
+  //     result.interval = 1000 * 60 * 60; // Every hour
+  //   } else if (hours > 0) {
+  //     result.status.type = 'Upcoming';
+  //     result.status.message = `in ${hours} hour${hours === 1 ? '' : 's'}`;
+  //     result.interval = 1000 * 60; // Every minute
+  //   } else if (minutes > 0) {
+  //     result.status.type = 'Upcoming';
+  //     result.status.message = `in ${minutes} min`;
+  //     result.interval = 1000; // Every second
+  //   } else {
+  //     result.status.type = 'Upcoming';
+  //     result.status.message = 'in <1 min';
+  //     result.interval = 1000; // Every second
+  //   }
+  //   return result;
+  // }
+
+  // function updateCountdown(start_date: Date, close_date: Date) {
+  //   const now = new Date();
+  //   const result = getCountdownStatusType(start_date, close_date, now);
+  //   const countdownElement = document.getElementById('countdown-badge');
+
+  //   if (!result || !countdownElement) {
+  //     countdownElement.style.display = 'none';
+  //     return;
+  //   }
+
+  //   countdownElement.textContent = result.status.message;
+  //   countdownElement.className = `inline-flex self-center px-1 text-sm font-mono select-none whitespace-nowrap rounded-md ${(() => {
+  //     switch (result.status.type) {
+  //       case 'Upcoming':
+  //         return 'bg-gradient-to-r from-purple-500 to-blue-500';
+  //       case 'Live':
+  //         return 'bg-red-600';
+  //       default:
+  //         return 'hidden';
+  //     }
+  //   })()}`;
+
+  //   setTimeout(() => updateCountdown(start_date, close_date), result.interval);
+  // }
+
+  class CountdownManager {
+    private timers: Map<Element, number>;
+
+    constructor() {
+      this.timers = new Map();
+      this.initialize();
+    }
+
+    initialize() {
+      const countdowns = document.querySelectorAll('.astro-countdown-badge') as NodeListOf<HTMLDivElement>;
+      countdowns.forEach(element => {
+        const timeStartStr = element.getAttribute('data-time-start');
+        const timeCloseStr = element.getAttribute('data-time-close');
+        if (!timeStartStr || !timeCloseStr) {
+          return;
+        }
+        const timeStart = parseInt(timeStartStr);
+        const timeClose = parseInt(timeCloseStr);
+        this.setupTimer(element, timeStart, timeClose);
+      });
+    }
+
+    setupTimer(element: HTMLDivElement, timeStart: number, timeClose: number) {
+      const updateDisplay = () => {
+        const now = Date.now();
+
+        let baseClasses = 'astro-countdown-badge inline-flex self-center px-2 text-sm lg:text-base font-mono select-none whitespace-nowrap rounded-md ';
+
+        // Handle closed state
+        if (now >= timeClose) {
+          baseClasses += 'hidden';
+          element.className = baseClasses;
+          element.style.display = 'none';
+          this.clearTimer(element);
+          return null;
+        }
+
+        // Handle live state
+        if (now >= timeStart) {
+          baseClasses += 'bg-red-600';
+          element.className = baseClasses;
+          element.textContent = 'LIVE';
+          return 60000; // Update every minute
+        }
+
+        const diff = timeStart - now;
+        const weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        // Handle countdown state
+        baseClasses += 'bg-gradient-to-r from-purple-500 to-blue-500';
+        element.className = baseClasses;
+        // Determine display format and next update interval
+        if (weeks > 0) {
+          element.textContent = `in ${weeks} wk${weeks > 1 ? 's' : ''}`;
+          return 86400000; // Update every day
+        } else if (days > 0) {
+          element.textContent = `in ${days} day${days > 1 ? 's' : ''}`;
+          return 3600000; // Update every hour
+        } else if (hours > 0) {
+          element.textContent = `in ${hours} hr${hours > 1 ? 's' : ''}`;
+          return 60000; // Update every minute
+        } else {
+          element.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          return 1000; // Update every second
+        }
+      };
+
+      const scheduleNextUpdate = () => {
+        const interval = updateDisplay();
+        if (interval === null) return;
+        const timerId = window.setTimeout(() => {
+          scheduleNextUpdate();
+        }, interval);
+        this.timers.set(element, timerId);
+      };
+
+      scheduleNextUpdate();
+    }
+
+    clearTimer(element: HTMLDivElement) {
+      const timerId = this.timers.get(element);
+      if (timerId) {
+        clearTimeout(timerId);
+        this.timers.delete(element);
+      }
+    }
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    new CountdownManager();
+  });
+</script>
+
+<div
+  class="astro-countdown-badge"
+  data-time-start={props.time_start.getTime()}
+  data-time-close={props.time_close.getTime()}
+/>

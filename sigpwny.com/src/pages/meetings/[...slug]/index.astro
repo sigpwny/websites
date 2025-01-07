@@ -15,7 +15,6 @@ import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import {
-  calculateSemester,
   convertDate,
   getMeetings,
   getYouTubeEmbedUrl,
@@ -51,7 +50,6 @@ const { Content } = await render(page);
 const meeting = page.data;
 
 const profiles = await getProfilesFromNames(meeting.credit);
-const semester = calculateSemester(meeting.time_start);
 const time_start = meeting.time_start ? dayjs(meeting.time_start).tz(meeting.timezone) : undefined;
 const time_end = meeting.time_start && meeting.duration
   ? dayjs(meeting.time_start).tz(meeting.timezone).add(dayjs.duration(meeting.duration))
@@ -71,9 +69,9 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
         <h1 class="mb-1" itemprop="headline">
           {meeting.title}
         </h1>
-        {semester ? (
+        {meeting.semester ? (
           <p class="font-mono m-0 order-first">
-            {semester}{meeting.week_number != null ? ` Week ${weekNumber(meeting.week_number)}` : null}
+            {meeting.semester}{meeting.week_number != null ? ` Week ${weekNumber(meeting.week_number)}` : null}
           </p>
         ) : null}
         {meeting.tags && meeting.tags.length > 0 ? (
@@ -163,7 +161,7 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
         {meeting.recording ? (
           <a
             href={meeting.recording}
-            class="btn-primary"
+            class="button btn-primary"
             target="_blank" rel="noopener noreferrer"
           >
             <YouTubeSvg />
@@ -174,7 +172,7 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
         ) : (meeting.live_video_url ? (
           <a
             href={meeting.live_video_url}
-            class="btn-primary flex flex-row items-center"
+            class="button btn-primary flex flex-row items-center"
             target="_blank" rel="noopener noreferrer"
           >
             <LiveRegular className="flex-none" />
@@ -186,7 +184,7 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
         {meeting.slides ? (
           <a
             href={meeting.slides}
-            class="btn-primary"
+            class="button btn-primary"
             target="_blank" rel="noopener noreferrer"
           >
             <PdfSvg />

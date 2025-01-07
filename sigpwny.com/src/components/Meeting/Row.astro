@@ -1,112 +1,138 @@
 ---
 import Link from '$/components/Link.astro';
 import PersonaGroup from '@/components/Profile/PersonaGroup.astro';
-import { PdfSvg, YouTubeSvg } from '$/components/Icons';
-import { CountdownBadge } from '@/components/ReactMigration/Countdown';
-import { TagGroup } from '@/components/ReactMigration/Tag';
+import {
+  DocumentPdfFilled,
+  VideoClipFilled,
+  VideoFilled,
+} from '$/components/Icons/fluentui';
+import MeetingCountdown from '@/components/Meeting/Countdown.astro';
+import MeetingTypeBadge from '@/components/Meeting/TypeBadge';
 import { convertDate, weekNumber } from '@/utils/meetings';
 import { getProfilesFromNames } from '$/utils/profiles';
+import type { Meeting } from '@/utils/meetings';
 
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import utc from 'dayjs/plugin/utc';
-import UpcomingMeta from '@/components/ReactMigration/UpcomingMeta';
-import type { MeetingType } from '@/pages/meetings/index.astro';
 
 dayjs.extend(duration);
 dayjs.extend(utc);
 
 interface Props {
-  input: MeetingType;
-  showUpcoming: boolean;
-}
+  input: Meeting;
+  dateFormat?: string;
+};
 
-const { input, showUpcoming } = Astro.props;
+const { input, dateFormat } = Astro.props;
 const meeting = input.data;
+const dateFormatString = dateFormat || "ddd, MMM DD";
 const time_close = dayjs(meeting.time_start).add(dayjs.duration(meeting.duration)).toDate();
+const isMaybeUpcoming = dayjs().isBefore(time_close);
 
 // Resolve credit names to profiles
 const profiles = await getProfilesFromNames(meeting.credit);
-const upcomingVisibility = showUpcoming ? 'block' : 'none';
-const notUpcomingVisibility = showUpcoming ? 'none' : 'block';
 ---
-<style define:vars={{ upcomingVisibility, notUpcomingVisibility }}>
-  /* The filters override the upcoming visibility selector */
-  :global(#meetings[data-general="hidden"] li[data-type="general"]), 
-  :global(#meetings[data-ctf="hidden"] li[data-type="ctf"]),
-  :global(#meetings[data-purple="hidden"] li[data-type="purple"]),
-  :global(#meetings[data-embedded="hidden"] li[data-type="embedded"]) {
-    display: none !important;
+<style is:global>
+  [data-is-upcoming="true"] .meeting-live-video-button {
+    display: flex;
   }
-  /* TODO: has selector doesn't have the greatest coverage currently */
-  li:has(div[data-tag="upcoming"]) {
-    display: var(--upcomingVisibility);
+  [data-is-upcoming="true"] .meeting-video-unavailable-button {
+    display: none;
   }
-  li:not(:has(div[data-tag="upcoming"])) {
-    display: var(--notUpcomingVisibility);
-  }
-
 </style>
-<li data-type={meeting.type}>
-  <UpcomingMeta end={time_close} client:load />
-  <div class="flex flex-row px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
-    <div class="flex flex-row flex-grow lg:flex-grow-0 min-w-0 lg:w-1/2 xl:w-3/5 gap-x-4 items-center justify-content-center">
-      <span
-        class="hidden sm:flex font-mono min-w-max cursor-default day-tooltip-select"
-        data-tooltip-content={convertDate(meeting.time_start, "ddd", meeting.timezone)}
-      >
-        {convertDate(meeting.time_start, "YYYY-MM-DD", meeting.timezone)}
-      </span>
-      <CountdownBadge time_start={meeting.time_start} time_close={time_close} client:load />
+
+<li
+  class:list={[{ 'maybe-upcoming': isMaybeUpcoming }]}
+  data-time-start={isMaybeUpcoming ? meeting.time_start.getTime() : undefined}
+  data-time-close={isMaybeUpcoming ? time_close.getTime() : undefined}
+>
+  <div class="group grid grid-cols-[1fr_max-content] px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
+    <div class="flex flex-col lg:flex-row grow shrink min-w-0 gap-x-4 lg:items-center">
+      <div class="flex flex-row grow-0 shrink-0 gap-x-4 items-center">
+        <time
+          class="font-mono cursor-default"
+          datetime={convertDate(meeting.time_start, "YYYY-MM-DDTHH:mm:ssZ", meeting.timezone)}
+          aria-label={convertDate(meeting.time_start, "dddd, MMMM D, YYYY h:mm A zzz", meeting.timezone)}
+        >
+          {convertDate(meeting.time_start, dateFormatString, meeting.timezone)}
+        </time>
+        <MeetingTypeBadge type={meeting.type} consistentWidth={true} />
+      </div>
       <Link href={input.slug} class="truncate">
         <span>
           {meeting.week_number != null ? (
-            <span class="font-mono">Week {weekNumber(meeting.week_number)}</span><span>:&nbsp;</span>
+            <span
+              aria-hidden="true"
+              title={`Week ${weekNumber(meeting.week_number)}`}
+              class="px-1 font-mono rounded-lg border-2 border-surface-150 select-none">Wk {weekNumber(meeting.week_number)}</span>
           ) : null}
           {meeting.title}
         </span>
       </Link>
     </div>
-    <div class="hidden lg:flex flex-row lg:flex-grow gap-x-4 truncate">
-      {meeting.tags && meeting.tags.length > 0 && (
-        <TagGroup tags={meeting.tags.concat()} char_limit={25} tag_limit={3} />
-      )}
-    </div>
-    <div class="hidden md:flex flex-row gap-x-4 min-w-fit">
-      <div class="grid grid-cols-3" style={{gridTemplateColumns: `repeat(3, 2rem)`}}>
-        <div class="flex items-center justify-items-center">
-        </div>
-        <div class="flex items-center justify-items-center">
-          {meeting.recording ? (
-            <a
-              href={meeting.recording}
-              class="px-2 link-tooltip-select"
-              target="_blank" rel="noopener noreferrer"
-              aria-label={"Watch video"}
-              data-tooltip-content={"Watch video"}
+    <div class="flex flex-row grow-0 shrink-0 gap-x-4 items-center min-w-fit">
+      <div class="flex flex-row gap-x-2 items-center">
+        <MeetingCountdown time_start={meeting.time_start} time_close={time_close} />
+        {meeting.recording ? (
+          <Link
+            href={meeting.recording}
+            class="rounded-lg p-1 size-8 flex items-center justify-items-center bg-surface-150 border-2 border-surface-200 group-hover:bg-surface-200 group-hover:border-surface-150 hover:!border-primary"
+            title="Watch video"
+            aria-label="Watch video"
+          >
+            <VideoClipFilled />
+          </Link>
+        ) : isMaybeUpcoming && meeting.live_video_url ? (
+          <span>
+            <Link
+              href={meeting.live_video_url}
+              class="meeting-live-video-button hidden rounded-lg p-1 size-8 items-center justify-items-center !text-white bg-gradient-to-tr from-blue-800 to-blue-500 border-2 border-surface-200 group-hover:bg-surface-200 group-hover:border-surface-150 hover:!border-primary"
+              title="Join live video"
+              aria-label="Join live video"
             >
-              <YouTubeSvg />
-            </a>
-          ) : null}
-        </div>
-        <div class="flex items-center justify-items-center">
-          {meeting.slides ? (
-            <a
-              href={meeting.slides}
-              class="px-2 link-tooltip-select"
-              target="_blank" rel="noopener noreferrer"
-              aria-label={"Download slides"}
-              data-tooltip-content={"Download slides"}
+              <VideoFilled />
+            </Link>
+            <span
+              class="meeting-video-unavailable-button flex cursor-not-allowed rounded-lg p-1 size-8 items-center justify-items-center border-2 border-surface-150 text-surface-150 group-hover:border-surface-250 group-hover:text-surface-250 border-dashed"
+              title="Video unavailable"
             >
-              <PdfSvg />
-            </a>
-          ) : null}
-        </div>
+              <VideoClipFilled />
+            </span>
+          </span>
+        ) : (
+          <span
+            class="cursor-not-allowed rounded-lg p-1 size-8 flex items-center justify-items-center border-2 border-surface-150 text-surface-150 group-hover:border-surface-250 group-hover:text-surface-250 border-dashed"
+            title="Video unavailable"
+          >
+            <VideoClipFilled />
+          </span>
+        )}
+        {meeting.slides ? (
+          <Link
+            href={meeting.slides}
+            class="rounded-lg p-1 size-8 flex items-center justify-items-center bg-surface-150 border-2 border-surface-200 group-hover:bg-surface-200 group-hover:border-surface-150 hover:!border-primary"
+            target="_blank" rel="noopener noreferrer"
+            title="Download slides"
+            aria-label="Download slides"
+          >
+            <DocumentPdfFilled />
+          </Link>
+        ) : (
+          <span
+            class="cursor-not-allowed rounded-lg p-1 size-8 flex items-center justify-items-center border-2 border-surface-150 text-surface-150 group-hover:border-surface-250 group-hover:text-surface-250 border-dashed"
+            title="Slides unavailable"
+          >
+            <DocumentPdfFilled />
+          </span>
+        )}
       </div>
-      <PersonaGroup
-        profiles={profiles}
-        limit={3}
-      />
+      <span class="hidden md:block">
+        <PersonaGroup
+          profiles={profiles}
+          limit={3}
+        />
+      </span>
     </div>
   </div>
   <hr class="border-surface-200" />

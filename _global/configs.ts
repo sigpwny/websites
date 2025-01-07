@@ -21,9 +21,9 @@ const sigpwnyConfig : ISiteConfig = {
     { name: `Publications`, url: `/publications/`},
     // { name: `Events`, url: `/events/` },
     { name: `Sponsors`, url: `/sponsors/` },
+    { name: `Join`, url: `/join/` },
   ],
   navCallToActionLinks: [
-    { name: `Join`, url: `/join/` }
   ],
   socialLinks: [
     { name: `Discord`, url: `https://discord.gg/cWcZ6a9` },

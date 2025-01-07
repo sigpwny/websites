@@ -9,10 +9,7 @@ import {
   createICalendarUID,
   getCalendarName
 } from '@/utils/icalendar';
-import {
-  calculateSemester,
-  getMeetings,
-} from '@/utils/meetings';
+import { getMeetings } from '@/utils/meetings';
 import { meetingMetatypes, type MeetingMetatype } from '$/utils/meetingMetadata';
 import consts from '@/consts';
 import locations from '@/locations.json';
@@ -85,7 +82,7 @@ export const GET = async ({ props } : {
     const m = meeting.data;
     ics.createEvent({
       id: m.ical?.uid ?? createICalendarUID(
-        `meeting-${calculateSemester(m.time_start.toISOString())}-${m.title}`,
+        `meeting-${m.semester}-${m.title}`,
         site.hostname
       ),
       sequence: m.ical?.revision ?? 0,

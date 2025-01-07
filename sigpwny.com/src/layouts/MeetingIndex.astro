@@ -1,0 +1,103 @@
+---
+import Layout from '@/layouts/Base.astro';
+import Link from '$/components/Link.astro';
+import DropdownSelect from '@/components/DropdownSelect';
+import Menu from '@/components/Menu';
+import {
+  ChevronLeftFilled,
+  ChevronRightFilled,
+} from '$/components/Icons/fluentui';
+import { type Meeting } from '@/utils/meetings';
+
+export interface SemesterLinkProps {
+  name: string;
+  url: string;
+  semester: string;
+};
+
+export interface MeetingIndexPageProps {
+  meetings: Map<string, Meeting[]>;
+  allLinks: SemesterLinkProps[];
+  currLink: SemesterLinkProps;
+  newerLink?: SemesterLinkProps;
+  olderLink?: SemesterLinkProps;
+};
+
+const props = Astro.props as MeetingIndexPageProps;
+
+const newerLink = props.newerLink?.url;
+const olderLink = props.olderLink?.url;
+const ButtonElementNewer = newerLink ? Link : 'span';
+const ButtonElementOlder = olderLink ? Link : 'span';
+---
+<Layout
+  title="Meetings"
+  description="Index of SIGPwny meetings"
+>
+  <div class="flex flex-col mx-auto pb-8">
+    <h1>Meetings</h1>
+    <nav aria-label="Meetings by semester" class="w-full max-w-40 mb-4">
+      <DropdownSelect
+        displayText={props.currLink.name}
+        contentRootClassName="w-full max-w-40"
+        client:load
+      >
+        <Menu className="custom-scrollbar !max-h-80">
+          <ul class="!gap-0">
+            {props.allLinks.map((link) => (
+              <li>
+                <Link
+                  href={link.url}
+                  class:list={["!px-2 !py-1", { '!bg-primary hover:!bg-secondary !text-surface-000': link.semester === props.currLink.semester }]}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Menu>
+      </DropdownSelect>
+    </nav>
+    <slot />
+    <nav aria-label="Meetings by semester" class="flex flex-col gap-2 items-center mt-8">
+      <div class="flex flex-row gap-2 justify-center w-full">
+        <ButtonElementNewer {...{"href": newerLink}} class:list={["button flex flex-row gap-2 items-center bg-surface-100 hover:bg-surface-150 text-white", { 'opacity-0 pointer-events-none': !newerLink }]}>
+          <ChevronLeftFilled />
+          <span>Newer</span>
+        </ButtonElementNewer>
+        <span class="w-full max-w-40">
+          <DropdownSelect
+            displayText={props.currLink.name}
+            contentRootClassName="w-full max-w-40"
+            placement="top-start"
+            client:load
+          >
+            <Menu className="custom-scrollbar !max-h-80">
+              <ul class="!gap-0">
+                {props.allLinks.map((link) => (
+                  <li>
+                    <Link
+                      href={link.url}
+                      class:list={["!px-2 !py-1", { '!bg-primary hover:!bg-secondary !text-surface-000': link.semester === props.currLink.semester }]}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Menu>
+          </DropdownSelect>
+        </span>
+        <ButtonElementOlder {...{"href": olderLink}} class:list={["button flex flex-row gap-2 items-center bg-surface-100 hover:bg-surface-150 text-white", { 'opacity-0 pointer-events-none': !olderLink }]}>
+          <span>Older</span>
+          <ChevronRightFilled />
+        </ButtonElementOlder>
+      </div>
+      {props.currLink.semester !== 'all' ? (
+        <Link href="/meetings/all/" class="text-center text-primary !underline">
+          Load all meetings
+        </Link>
+      ) : null}
+    </nav>
+  </div>
+</Layout>

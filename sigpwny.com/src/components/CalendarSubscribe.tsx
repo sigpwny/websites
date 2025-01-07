@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { Placement } from '@floating-ui/react';
 import {
   Popover,
   PopoverTrigger,
@@ -25,7 +26,7 @@ import { type MeetingMetatype } from '$/utils/meetingMetadata';
 
 interface CalendarSubscribeProps {
   selected: MeetingMetatype[];
-  placement?: 'top' | 'bottom' | 'left' | 'right';
+  placement?: Placement;
 }
 
 export default function CalendarSubscribe({ selected, placement }: CalendarSubscribeProps) {
@@ -54,7 +55,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
         <div className="flex flex-shrink-0 flex-grow-0">
           <PopoverTrigger
             onClick={() => setOpen(!open)}
-            className={`btn-primary flex flex-row gap-2 items-center ${open ? "ring-primary ring-2 ring-offset-2 ring-offset-surface-000" : ""}`}
+            className={`button btn-primary flex flex-row gap-2 items-center ${open ? "ring-primary ring-2 ring-offset-2 ring-offset-surface-000" : ""}`}
           >
             <CalendarSyncRegular className="text-black" />
             <span>
@@ -65,7 +66,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
       </div>
       <div className="absolute top-full mt-2 left-0">
         <PopoverContent>
-          <Menu>
+          <Menu className="custom-scrollbar">
             <ul>
               {Object.entries(reactMeetingMetadata).map(([meeting_type, metadata]) => (
                 <li

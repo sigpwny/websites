@@ -9,10 +9,7 @@ import {
   createICalendarUID,
   getCalendarName
 } from '@/utils/icalendar';
-import {
-  calculateSemester,
-  getMeetings,
-} from '@/utils/meetings';
+import { getMeetings } from '@/utils/meetings';
 import locations from '@/locations.json';
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
@@ -43,7 +40,7 @@ export const GET = async ({ props } : {
     const m = meeting.data;
     ics.createEvent({
       id: m.ical?.uid ?? createICalendarUID(
-        `meeting-${calculateSemester(m.time_start.toISOString())}-${m.title}`,
+        `meeting-${m.semester}-${m.title}`,
         site.hostname
       ),
       sequence: m.ical?.revision ?? 0,
