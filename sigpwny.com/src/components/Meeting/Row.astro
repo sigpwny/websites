@@ -26,7 +26,6 @@ interface Props {
 
 const { input, dateFormat } = Astro.props;
 const meeting = input.data;
-const dateFormatString = dateFormat || "ddd, MMM DD";
 const time_close = dayjs(meeting.time_start).add(dayjs.duration(meeting.duration)).toDate();
 const isMaybeUpcoming = dayjs().isBefore(time_close);
 
@@ -49,17 +48,28 @@ const profiles = await getProfilesFromNames(meeting.credit);
 >
   <div class="group grid grid-cols-[1fr_max-content] px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
     <div class="flex flex-col lg:flex-row grow shrink min-w-0 gap-x-4 lg:items-center">
-      <div class="flex flex-row grow-0 shrink-0 gap-x-4 items-center">
+      <div class="flex flex-col-reverse lg:flex-row grow-0 shrink-0 gap-x-4 lg:items-center">
         <time
-          class="font-mono cursor-default"
+          class:list={["font-mono cursor-default", { "min-w-[20ch]": !dateFormat }]}
           datetime={convertDate(meeting.time_start, "YYYY-MM-DDTHH:mm:ssZ", meeting.timezone)}
-          aria-label={convertDate(meeting.time_start, "dddd, MMMM D, YYYY h:mm A zzz", meeting.timezone)}
+          title={convertDate(meeting.time_start, "dddd, MMMM Do, YYYY, h:mm A (zzz)", meeting.timezone)}
+          aria-label={convertDate(meeting.time_start, "dddd, MMMM Do, YYYY, h:mm A (zzz)", meeting.timezone)}
         >
-          {convertDate(meeting.time_start, dateFormatString, meeting.timezone)}
+          {dateFormat
+            ? convertDate(meeting.time_start, dateFormat, meeting.timezone)
+            : (
+              convertDate(meeting.time_start, "ddd MMM DD", meeting.timezone) +
+              ", " +
+              (meeting.time_start.getMinutes() == 0
+                ? convertDate(meeting.time_start, "h A", meeting.timezone)
+                : convertDate(meeting.time_start, "h:mm A", meeting.timezone)
+              )
+            )
+          }
         </time>
         <MeetingTypeBadge type={meeting.type} consistentWidth={true} />
       </div>
-      <Link href={input.slug} class="truncate">
+      <Link href={input.slug} class="lg:truncate w-full">
         <span>
           {meeting.week_number != null ? (
             <span
@@ -70,6 +80,11 @@ const profiles = await getProfilesFromNames(meeting.credit);
           {meeting.title}
         </span>
       </Link>
+      {meeting.location ? (
+        <span class="flex grow-0 shrink-0 w-fit">
+          {meeting.location}
+        </span>
+      ) : null}
     </div>
     <div class="hidden sm:flex flex-row grow-0 shrink-0 gap-x-4 items-center min-w-fit">
       <div class="flex flex-row gap-x-2 items-center">
@@ -127,7 +142,7 @@ const profiles = await getProfilesFromNames(meeting.credit);
           </span>
         )}
       </div>
-      <span class="hidden md:block">
+      <span class="hidden xl:block">
         <PersonaGroup
           profiles={profiles}
           limit={3}

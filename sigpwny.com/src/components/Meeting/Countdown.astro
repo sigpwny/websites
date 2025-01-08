@@ -7,96 +7,6 @@ export interface CountdownBadgeProps {
 const props = Astro.props as CountdownBadgeProps;
 ---
 <script>
-  // function initCountdownBadges() {
-  //   const countdownBadges = document.querySelectorAll('.astro-countdown-badge');
-  //   for (let i = 0; i < countdownBadges.length; i++) {
-  //     const countdownBadge = countdownBadges[i];
-  //     const timeStartStr = countdownBadge.getAttribute('data-time-start');
-  //     const timeCloseStr = countdownBadge.getAttribute('data-time-close');
-  //     if (!timeStartStr || !timeCloseStr) {
-  //       continue;
-  //     }
-  //     const timeStart = parseInt(timeStartStr);
-  //     const timeClose = parseInt(timeCloseStr);
-  //     // updateCountdown(new Date(timeStart), new Date(timeClose));
-  //   }
-  // }
-
-  // function getCountdownStatusType(start_date: Date, close_date: Date, now: Date) {
-  //   if (now >= close_date) {
-  //     return null;
-  //   } else if (now >= start_date) {
-  //     return {
-  //       status: {
-  //         type: 'Live',
-  //         message: 'LIVE',
-  //       },
-  //       interval: 1000,
-  //     };
-  //   }
-
-  //   const diff = start_date.getTime() - now.getTime();
-  //   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  //   const hours = Math.floor(diff / (1000 * 60 * 60));
-  //   const minutes = Math.floor(diff / (1000 * 60));
-
-  //   const result = {
-  //     status: {
-  //       type: 'Complete',
-  //       message: '',
-  //     },
-  //     interval: 1000,
-  //   };
-
-  //   if (days > 7) {
-  //     result.status.type = 'Upcoming';
-  //     result.status.message = 'SCHEDULED';
-  //     result.interval = 1000 * 60 * 60; // Every hour
-  //   } else if (days > 0) {
-  //     result.status.type = 'Upcoming';
-  //     result.status.message = `in ${days} day${days === 1 ? '' : 's'}`;
-  //     result.interval = 1000 * 60 * 60; // Every hour
-  //   } else if (hours > 0) {
-  //     result.status.type = 'Upcoming';
-  //     result.status.message = `in ${hours} hour${hours === 1 ? '' : 's'}`;
-  //     result.interval = 1000 * 60; // Every minute
-  //   } else if (minutes > 0) {
-  //     result.status.type = 'Upcoming';
-  //     result.status.message = `in ${minutes} min`;
-  //     result.interval = 1000; // Every second
-  //   } else {
-  //     result.status.type = 'Upcoming';
-  //     result.status.message = 'in <1 min';
-  //     result.interval = 1000; // Every second
-  //   }
-  //   return result;
-  // }
-
-  // function updateCountdown(start_date: Date, close_date: Date) {
-  //   const now = new Date();
-  //   const result = getCountdownStatusType(start_date, close_date, now);
-  //   const countdownElement = document.getElementById('countdown-badge');
-
-  //   if (!result || !countdownElement) {
-  //     countdownElement.style.display = 'none';
-  //     return;
-  //   }
-
-  //   countdownElement.textContent = result.status.message;
-  //   countdownElement.className = `inline-flex self-center px-1 text-sm font-mono select-none whitespace-nowrap rounded-md ${(() => {
-  //     switch (result.status.type) {
-  //       case 'Upcoming':
-  //         return 'bg-gradient-to-r from-purple-500 to-blue-500';
-  //       case 'Live':
-  //         return 'bg-red-600';
-  //       default:
-  //         return 'hidden';
-  //     }
-  //   })()}`;
-
-  //   setTimeout(() => updateCountdown(start_date, close_date), result.interval);
-  // }
-
   class CountdownManager {
     private timers: Map<Element, number>;
 
@@ -123,16 +33,17 @@ const props = Astro.props as CountdownBadgeProps;
       const updateDisplay = () => {
         const now = Date.now();
 
-        let baseClasses = 'astro-countdown-badge inline-flex self-center px-2 text-sm lg:text-base font-mono select-none whitespace-nowrap rounded-md ';
+        let baseClasses = 'astro-countdown-badge self-center px-2 text-sm lg:text-base font-mono select-none whitespace-nowrap rounded-md ';
 
         // Handle closed state
         if (now >= timeClose) {
-          baseClasses += 'hidden';
           element.className = baseClasses;
           element.style.display = 'none';
           this.clearTimer(element);
           return null;
         }
+
+        element.style.display = 'inline-flex';
 
         // Handle live state
         if (now >= timeStart) {
@@ -196,6 +107,7 @@ const props = Astro.props as CountdownBadgeProps;
 
 <div
   class="astro-countdown-badge"
+  style={{display: 'none'}}
   data-time-start={props.time_start.getTime()}
   data-time-close={props.time_close.getTime()}
 />
