@@ -27,24 +27,24 @@ interface Props {
 const { input, dateFormat } = Astro.props;
 const meeting = input.data;
 const time_close = dayjs(meeting.time_start).add(dayjs.duration(meeting.duration)).toDate();
-const isMaybeUpcoming = dayjs().isBefore(time_close);
+const isMaybeActive = dayjs().isBefore(time_close);
 
 // Resolve credit names to profiles
 const profiles = await getProfilesFromNames(meeting.credit);
 ---
 <style is:global>
-  [data-is-upcoming="true"] .meeting-live-video-button {
+  [data-is-active="true"] .meeting-live-video-button {
     display: flex;
   }
-  [data-is-upcoming="true"] .meeting-video-unavailable-button {
+  [data-is-active="true"] .meeting-video-unavailable-button {
     display: none;
   }
 </style>
 
 <li
-  class:list={[{ 'maybe-upcoming': isMaybeUpcoming }]}
-  data-time-start={isMaybeUpcoming ? meeting.time_start.getTime() : undefined}
-  data-time-close={isMaybeUpcoming ? time_close.getTime() : undefined}
+  data-maybe-active={isMaybeActive ? "true" : undefined}
+  data-time-start={isMaybeActive ? meeting.time_start.getTime() : undefined}
+  data-time-close={isMaybeActive ? time_close.getTime() : undefined}
 >
   <div class="group grid grid-cols-[1fr_max-content] px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
     <div class="flex flex-col lg:flex-row grow shrink min-w-0 gap-x-4 lg:items-center">
@@ -98,7 +98,7 @@ const profiles = await getProfilesFromNames(meeting.credit);
           >
             <VideoClipFilled />
           </Link>
-        ) : isMaybeUpcoming && meeting.live_video_url ? (
+        ) : isMaybeActive && meeting.live_video_url ? (
           <span>
             <Link
               href={meeting.live_video_url}

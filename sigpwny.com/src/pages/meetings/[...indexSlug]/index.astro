@@ -89,33 +89,73 @@ const isAllIndex = props.currLink.semester === 'all';
     if (!meetingsIndex) {
       return;
     }
-    const upcomingMeetingsSection = document.getElementById('upcoming-meetings-section');
+    const activeMeetingsSection = document.getElementById('active-meetings-section');
+    const liveMeetingsList = document.getElementById('live-meetings-list');
     const upcomingMeetingsList = document.getElementById('upcoming-meetings-list');
-    const maybeUpcomingMeetings = meetingsIndex.querySelectorAll('.maybe-upcoming');
-    for (let i = maybeUpcomingMeetings.length - 1; i >= 0; i--) {
-      const maybeUpcomingMeeting = maybeUpcomingMeetings[i];
-      const timeCloseStr = maybeUpcomingMeeting.getAttribute('data-time-close');
-      if (!timeCloseStr) {
+    const allMaybeActive = meetingsIndex.querySelectorAll('[data-maybe-active="true"]');
+    var countLive = 0;
+    var countUpcoming = 0;
+    for (let i = allMaybeActive.length - 1; i >= 0; i--) {
+      const maybeActive = allMaybeActive[i];
+      const timeStartStr = maybeActive.getAttribute('data-time-start');
+      const timeCloseStr = maybeActive.getAttribute('data-time-close');
+      if (!timeStartStr || !timeCloseStr) {
         continue;
       }
+      const timeStart = parseInt(timeStartStr);
       const timeClose = parseInt(timeCloseStr);
       const now = Date.now();
-      if (now < timeClose) {
-        maybeUpcomingMeeting.setAttribute('data-is-upcoming', 'true');
-        if (upcomingMeetingsList) {
-          upcomingMeetingsList.appendChild(maybeUpcomingMeeting);
-        }
-        if (upcomingMeetingsSection) {
-          upcomingMeetingsSection.classList.remove('hidden');
+      if (now >= timeClose) {
+        continue;
+      }
+      maybeActive.setAttribute('data-is-active', 'true');
+      if (now >= timeStart && liveMeetingsList) {
+        countLive++;
+        liveMeetingsList.appendChild(maybeActive);
+      } else if (upcomingMeetingsList) {
+        countUpcoming++;
+        upcomingMeetingsList.appendChild(maybeActive);
+      }
+    }
+    if (activeMeetingsSection && (countLive || countUpcoming)) {
+      const activeMeetingsTitle = document.getElementById('active-meetings-title');
+      if (activeMeetingsTitle) {
+        activeMeetingsTitle.textContent = countLive && countUpcoming
+        ? 'Live & Upcoming'
+        : countLive
+        ? 'Live'
+        : 'Upcoming';
+      }
+      if (countUpcoming > 3) {
+        const label = document.getElementById('upcoming-visibility-toggle-label');
+        const input = document.getElementById('upcoming-visibility-toggle-input');
+        if (label && input) {
+          label.style.display = 'block';
+          input.style.display = 'block';
         }
       }
+      activeMeetingsSection.classList.remove('hidden');
     }
   };
   document.addEventListener('astro:page-load', initMeetingsIndex);
 </script>
 
-<style>
-
+<style is:global>
+  #upcoming-meetings-list li {
+    display: none;
+  }
+  #upcoming-meetings-list li:nth-child(-n+3) {
+    display: list-item;
+  }
+  #upcoming-visibility-toggle-input:checked ~ #upcoming-meetings-list li {
+    display: list-item;
+  }
+  #upcoming-visibility-toggle-label:after {
+    content: 'Show more';
+  }
+  #upcoming-visibility-toggle-input:checked ~ #upcoming-visibility-toggle-label:after {
+    content: 'Show less';
+  }
 </style>
 
 <Layout
@@ -123,12 +163,6 @@ const isAllIndex = props.currLink.semester === 'all';
 >
   {semesterMetadata?.activeMeetings ? (
     <section id="schedule" class="flex flex-col gap-2 mb-4">
-      {/* <div class="flex flex-row gap-2 items-center rounded-lg text-sm bg-blue-950 w-fit px-2 py-1">
-        <InfoRegular />
-        <span>
-          Specific meeting times and locations may vary. Make sure to check individual meeting details.
-        </span>
-      </div> */}
       <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4">
         {semesterMetadata.activeMeetings.map((activeMeeting) => (
           <div class="flex flex-col gap-2 border-2 border-surface-200 rounded-xl px-3 py-2">
@@ -159,17 +193,36 @@ const isAllIndex = props.currLink.semester === 'all';
   )}
   {!isAllIndex ? (
     <section
-      id="upcoming-meetings-section"
+      id="active-meetings-section"
       class="panel mb-4 hidden"
     >
-      <p class="font-bold text-2xl m-0">
-        Upcoming
+      <p
+        id="active-meetings-title"
+        class="font-bold text-2xl m-0"
+      >
+        Live & Upcoming
       </p>
       <hr class="border-surface-200" />
+      <input
+        type="checkbox"
+        id="upcoming-visibility-toggle-input"
+        class="peer sr-only"
+        style={{display: 'none'}}
+      />
+      <ul
+        id="live-meetings-list"
+        class="flex flex-col"
+      ></ul>
       <ul
         id="upcoming-meetings-list"
         class="flex flex-col pb-2"
       ></ul>
+      <label
+        id="upcoming-visibility-toggle-label"
+        for="upcoming-visibility-toggle-input"
+        class="peer-focus-visible:ring-2 ring-white ring-offset-2 rounded-md text-primary cursor-pointer"
+        style={{display: 'none'}}
+      />
     </section>
   ) : null}
   <section id="meetings-index" class="panel">
