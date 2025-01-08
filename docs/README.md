@@ -34,7 +34,7 @@ credit: # required (must contain 1 or more names)
   - Author 1
   - Author 2
 featured: true # optional: determines whether a meeting is shown as a card on the home page
-location: Siebel CS 1404 + Zoom # optional
+location: Siebel CS 1404 # optional
 slides: ./Template_Meeting.pdf # optional: slides should be located relative to the markdown file
 assets: # optional: files should be located relative to the markdown file
   - "file1"
