@@ -3,6 +3,7 @@ import { EmbeddedChipRegularSvg } from '$/components/Icons';
 import {
   BookOpenFilled,
   FlagFilled,
+  HatGraduationRegular,
   ShieldKeyholeFilled,
 } from '$/components/Icons/fluentui';
 import {
@@ -28,7 +29,7 @@ export const reactMeetingMetadata: Record<MeetingMetatype, ReactMeetingMetadata>
   'seminar': {
     ...meetingMetadata['seminar'],
     color: 'rgb(var(--rgb-pwny-blue))',
-    icon: <BookOpenFilled />
+    icon: <HatGraduationRegular />
   },
   'ctf': {
     ...meetingMetadata['ctf'],

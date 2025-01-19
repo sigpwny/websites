@@ -1,7 +1,7 @@
 ---
 import Avatar from './Avatar.astro';
 import { SocialIcon, getSocialIconDisplayName } from '$/components/Icons';
-import { HatGraduationRegular } from '$/components/Icons/fluentui';
+import { HatGraduationFilled } from '$/components/Icons/fluentui';
 
 const { profile, showFull } = Astro.props;
 
@@ -38,7 +38,7 @@ interface Link {
         ) : null}
         {profile?.period ? (
           <span class="inline-flex flex-row gap-1 align-middle font-mono font-normal text-sm text-text px-1 m-0 rounded-md bg-surface-200 max-h-fit max-w-fit select-none">
-            <HatGraduationRegular />
+            <HatGraduationFilled />
             {profile.period}
           </span>
         ) : null}
