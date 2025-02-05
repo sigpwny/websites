@@ -8,6 +8,10 @@
           {
             "time": "Thurdays, 6-7 PM",
             "location": "DCL 1310"
+          },
+          {
+            "time": "Sundays*, 2-3 PM",
+            "location": "DCL 1310"
           }
         ]
       },
@@ -15,7 +19,7 @@
         "meetingType": "seminar",
         "schedule": [
           {
-            "time": "Sundays, 2-3 PM",
+            "time": "Sundays*, 2-3 PM",
             "location": "DCL 1310"
           }
         ]
