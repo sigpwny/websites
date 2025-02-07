@@ -137,6 +137,7 @@ const isAllIndex = props.currLink.semester === 'all';
       activeMeetingsSection.classList.remove('hidden');
     }
   };
+  document.addEventListener('astro:after-swap', initMeetingsIndex);
   document.addEventListener('astro:page-load', initMeetingsIndex);
 </script>
 
