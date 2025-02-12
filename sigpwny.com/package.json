@@ -37,7 +37,7 @@
     "astro": "^4.16.8",
     "dayjs": "^1.11.11",
     "decap-cms-app": "^3.3.3",
-    "discord.js": "^14.15.3",
+    "discord.js": "^14.18.0",
     "framer-motion": "^11.1.7",
     "ical-generator": "^7.1.0",
     "katex": "^0.16.11",
