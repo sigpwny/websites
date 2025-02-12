@@ -21,8 +21,6 @@ name: Scheduled Jobs
     - cron: 0 18 9 3 0
     - cron: 0 23 12 3 3
     - cron: 0 22 13 3 4
-    - cron: 0 1 11 2 2
-    - cron: 0 0 12 2 3
 jobs:
   helper-ping-Cryptography-III-Block-and-Stream-Ciphers-at-2025-02-13T000000000Z:
     name: 'helper ping Cryptography III: Block and Stream Ciphers at 2025-02-13T00:00:00.000Z'
@@ -399,44 +397,6 @@ jobs:
         working-directory: sigpwny.com
       - env:
           DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlNJR1B3bnkgeCBTSUdQb2xpY3k6IEN5YmVyd2FyZmFyZSoqIGlzIDx0OjE3Mzk3MzYwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTAyLTE2Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-Windows-and-Windows-Privilege-Escalation-Review-at-2025-02-11T010000000Z:
-    name: helper ping Windows & Windows Privilege Escalation Review at 2025-02-11T01:00:00.000Z
-    if: github.event.schedule == '0 1 11 2 2'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKldpbmRvd3MgJiBXaW5kb3dzIFByaXZpbGVnZSBFc2NhbGF0aW9uIFJldmlldyoqIGlzIDx0OjE3MzkzMjIwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvcHVycGxlLzIwMjUtMDItMTEv
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-Windows-and-Windows-Privilege-Escalation-Review-at-2025-02-12T000000000Z:
-    name: helper ping Windows & Windows Privilege Escalation Review at 2025-02-12T00:00:00.000Z
-    if: github.event.schedule == '0 0 12 2 3'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKldpbmRvd3MgJiBXaW5kb3dzIFByaXZpbGVnZSBFc2NhbGF0aW9uIFJldmlldyoqIGlzIDx0OjE3MzkzMjIwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvcHVycGxlLzIwMjUtMDItMTEv
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
