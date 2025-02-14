@@ -5,8 +5,6 @@ name: Scheduled Jobs
     - cron: 0 20 15 2 6
     - cron: 0 21 21 2 5
     - cron: 0 20 22 2 6
-    - cron: 0 0 13 2 4
-    - cron: 0 23 13 2 4
     - cron: 0 20 15 2 6
     - cron: 0 19 16 2 0
     - cron: 0 0 27 2 4
@@ -22,44 +20,6 @@ name: Scheduled Jobs
     - cron: 0 23 12 3 3
     - cron: 0 22 13 3 4
 jobs:
-  helper-ping-Cryptography-III-Block-and-Stream-Ciphers-at-2025-02-13T000000000Z:
-    name: 'helper ping Cryptography III: Block and Stream Ciphers at 2025-02-13T00:00:00.000Z'
-    if: github.event.schedule == '0 0 13 2 4'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkNyeXB0b2dyYXBoeSBJSUk6IEJsb2NrIGFuZCBTdHJlYW0gQ2lwaGVycyoqIGlzIDx0OjE3Mzk0OTEyMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTAyLTEzLw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-Cryptography-III-Block-and-Stream-Ciphers-at-2025-02-13T230000000Z:
-    name: 'helper ping Cryptography III: Block and Stream Ciphers at 2025-02-13T23:00:00.000Z'
-    if: github.event.schedule == '0 23 13 2 4'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkNyeXB0b2dyYXBoeSBJSUk6IEJsb2NrIGFuZCBTdHJlYW0gQ2lwaGVycyoqIGlzIDx0OjE3Mzk0OTEyMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTAyLTEzLw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
   helper-ping-Cryptography-IV-Elliptic-Curve-Cryptography-at-2025-02-27T000000000Z:
     name: 'helper ping Cryptography IV: Elliptic Curve Cryptography at 2025-02-27T00:00:00.000Z'
     if: github.event.schedule == '0 0 27 2 4'
