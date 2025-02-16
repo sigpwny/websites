@@ -1,12 +1,8 @@
 name: Scheduled Jobs
 'on':
   schedule:
-    - cron: 0 21 14 2 5
-    - cron: 0 20 15 2 6
     - cron: 0 21 21 2 5
     - cron: 0 20 22 2 6
-    - cron: 0 20 15 2 6
-    - cron: 0 19 16 2 0
     - cron: 0 0 27 2 4
     - cron: 0 23 27 2 4
     - cron: 0 0 20 2 4
@@ -53,44 +49,6 @@ jobs:
         working-directory: sigpwny.com
       - env:
           DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkNyeXB0b2dyYXBoeSBJVjogRWxsaXB0aWMgQ3VydmUgQ3J5cHRvZ3JhcGh5KiogaXMgPHQ6MTc0MDcwMDgwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9nZW5lcmFsLzIwMjUtMDItMjcv
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-eCTF-2025-All-Team-Design-Week-5-at-2025-02-14T210000000Z:
-    name: helper ping eCTF 2025 All-Team (Design Week 5) at 2025-02-14T21:00:00.000Z
-    if: github.event.schedule == '0 21 14 2 5'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKmVDVEYgMjAyNSBBbGwtVGVhbSAoRGVzaWduIFdlZWsgNSkqKiBpcyA8dDoxNzM5NjUzMjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2VtYmVkZGVkLzIwMjUtMDItMTUv
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-eCTF-2025-All-Team-Design-Week-5-at-2025-02-15T200000000Z:
-    name: helper ping eCTF 2025 All-Team (Design Week 5) at 2025-02-15T20:00:00.000Z
-    if: github.event.schedule == '0 20 15 2 6'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKmVDVEYgMjAyNSBBbGwtVGVhbSAoRGVzaWduIFdlZWsgNSkqKiBpcyA8dDoxNzM5NjUzMjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2VtYmVkZGVkLzIwMjUtMDItMTUv
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
@@ -319,44 +277,6 @@ jobs:
         working-directory: sigpwny.com
       - env:
           DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlNlY3VyaXR5IENhcmVlcnMqKiBpcyA8dDoxNzQwOTQ1NjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2dlbmVyYWwvMjAyNS0wMy0wMi8=
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-SIGPwny-x-SIGPolicy-Cyberwarfare-at-2025-02-15T200000000Z:
-    name: 'helper ping SIGPwny x SIGPolicy: Cyberwarfare at 2025-02-15T20:00:00.000Z'
-    if: github.event.schedule == '0 20 15 2 6'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlNJR1B3bnkgeCBTSUdQb2xpY3k6IEN5YmVyd2FyZmFyZSoqIGlzIDx0OjE3Mzk3MzYwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTAyLTE2Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-SIGPwny-x-SIGPolicy-Cyberwarfare-at-2025-02-16T190000000Z:
-    name: 'helper ping SIGPwny x SIGPolicy: Cyberwarfare at 2025-02-16T19:00:00.000Z'
-    if: github.event.schedule == '0 19 16 2 0'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlNJR1B3bnkgeCBTSUdQb2xpY3k6IEN5YmVyd2FyZmFyZSoqIGlzIDx0OjE3Mzk3MzYwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTAyLTE2Lw==
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
