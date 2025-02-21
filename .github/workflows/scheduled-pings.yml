@@ -5,8 +5,6 @@ name: Scheduled Jobs
     - cron: 0 20 22 2 6
     - cron: 0 0 27 2 4
     - cron: 0 23 27 2 4
-    - cron: 0 0 20 2 4
-    - cron: 0 23 20 2 4
     - cron: 0 20 1 3 6
     - cron: 0 19 2 3 0
     - cron: 0 0 6 3 4
@@ -163,44 +161,6 @@ jobs:
         working-directory: sigpwny.com
       - env:
           DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlBhc3N3b3JkIENyYWNraW5nKiogaXMgPHQ6MTc0MTMwNTYwMDpSPiEKaHR0cHM6Ly9zaWdwd255LmNvbS9tZWV0aW5ncy9nZW5lcmFsLzIwMjUtMDMtMDYv
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-PWN-III-ROP-at-2025-02-20T000000000Z:
-    name: 'helper ping PWN III: ROP at 2025-02-20T00:00:00.000Z'
-    if: github.event.schedule == '0 0 20 2 4'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlBXTiBJSUk6IFJPUCoqIGlzIDx0OjE3NDAwOTYwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTAyLTIwLw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-PWN-III-ROP-at-2025-02-20T230000000Z:
-    name: 'helper ping PWN III: ROP at 2025-02-20T23:00:00.000Z'
-    if: github.event.schedule == '0 23 20 2 4'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlBXTiBJSUk6IFJPUCoqIGlzIDx0OjE3NDAwOTYwMDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTAyLTIwLw==
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
