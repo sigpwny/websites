@@ -1,14 +1,14 @@
 name: Scheduled Jobs
 'on':
   schedule:
-    - cron: 0 19 8 3 6
-    - cron: 0 18 9 3 0
-    - cron: 0 23 12 3 3
-    - cron: 0 22 13 3 4
+    - cron: 0 19 8 3 *
+    - cron: 0 18 9 3 *
+    - cron: 0 23 12 3 *
+    - cron: 0 22 13 3 *
 jobs:
   helper-ping-LAN-Party-at-2025-03-12T230000000Z:
     name: helper ping LAN Party at 2025-03-12T23:00:00.000Z
-    if: github.event.schedule == '0 23 12 3 3'
+    if: github.event.schedule == '0 23 12 3 *'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
         working-directory: sigpwny.com
   helper-ping-LAN-Party-at-2025-03-13T220000000Z:
     name: helper ping LAN Party at 2025-03-13T22:00:00.000Z
-    if: github.event.schedule == '0 22 13 3 4'
+    if: github.event.schedule == '0 22 13 3 *'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
         working-directory: sigpwny.com
   helper-ping-PWN-IV-Heap-Exploitation-at-2025-03-08T190000000Z:
     name: 'helper ping PWN IV: Heap Exploitation at 2025-03-08T19:00:00.000Z'
-    if: github.event.schedule == '0 19 8 3 6'
+    if: github.event.schedule == '0 19 8 3 *'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -65,7 +65,7 @@ jobs:
         working-directory: sigpwny.com
   helper-ping-PWN-IV-Heap-Exploitation-at-2025-03-09T180000000Z:
     name: 'helper ping PWN IV: Heap Exploitation at 2025-03-09T18:00:00.000Z'
-    if: github.event.schedule == '0 18 9 3 0'
+    if: github.event.schedule == '0 18 9 3 *'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
