@@ -1,14 +1,12 @@
 name: Scheduled Jobs
 'on':
   schedule:
-    - cron: 0 19 8 3 *
-    - cron: 0 18 9 3 *
-    - cron: 0 23 12 3 *
-    - cron: 0 22 13 3 *
+    - cron: 0 23 12 3 3
+    - cron: 0 22 13 3 4
 jobs:
   helper-ping-LAN-Party-at-2025-03-12T230000000Z:
     name: helper ping LAN Party at 2025-03-12T23:00:00.000Z
-    if: github.event.schedule == '0 23 12 3 *'
+    if: github.event.schedule == '0 23 12 3 3'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +25,7 @@ jobs:
         working-directory: sigpwny.com
   helper-ping-LAN-Party-at-2025-03-13T220000000Z:
     name: helper ping LAN Party at 2025-03-13T22:00:00.000Z
-    if: github.event.schedule == '0 22 13 3 *'
+    if: github.event.schedule == '0 22 13 3 4'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,44 +37,6 @@ jobs:
         working-directory: sigpwny.com
       - env:
           DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkxBTiBQYXJ0eSoqIGlzIDx0OjE3NDE5MDY4MDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTAzLTEzLw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-PWN-IV-Heap-Exploitation-at-2025-03-08T190000000Z:
-    name: 'helper ping PWN IV: Heap Exploitation at 2025-03-08T19:00:00.000Z'
-    if: github.event.schedule == '0 19 8 3 *'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlBXTiBJVjogSGVhcCBFeHBsb2l0YXRpb24qKiBpcyA8dDoxNzQxNTQ2ODAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2dlbmVyYWwvMjAyNS0wMy0wOS8=
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-PWN-IV-Heap-Exploitation-at-2025-03-09T180000000Z:
-    name: 'helper ping PWN IV: Heap Exploitation at 2025-03-09T18:00:00.000Z'
-    if: github.event.schedule == '0 18 9 3 *'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlBXTiBJVjogSGVhcCBFeHBsb2l0YXRpb24qKiBpcyA8dDoxNzQxNTQ2ODAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2dlbmVyYWwvMjAyNS0wMy0wOS8=
           DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
