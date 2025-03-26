@@ -3,47 +3,7 @@ name: Scheduled Jobs
   schedule:
     - cron: 0 14 4 4 5
     - cron: 0 13 5 4 6
-    - cron: 0 0 25 3 2
-    - cron: 0 23 25 3 2
 jobs:
-  helper-ping-Hands-On-Intro-to-Metasploit-at-2025-03-25T000000000Z:
-    name: helper ping Hands-On Intro to Metasploit at 2025-03-25T00:00:00.000Z
-    if: github.event.schedule == '0 0 25 3 2'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkhhbmRzLU9uIEludHJvIHRvIE1ldGFzcGxvaXQqKiBpcyA8dDoxNzQyOTQ3MjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL3B1cnBsZS8yMDI1LTAzLTI1Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-Hands-On-Intro-to-Metasploit-at-2025-03-25T230000000Z:
-    name: helper ping Hands-On Intro to Metasploit at 2025-03-25T23:00:00.000Z
-    if: github.event.schedule == '0 23 25 3 2'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkhhbmRzLU9uIEludHJvIHRvIE1ldGFzcGxvaXQqKiBpcyA8dDoxNzQyOTQ3MjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL3B1cnBsZS8yMDI1LTAzLTI1Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
   helper-ping-Tracer-FIRE-2025-at-2025-04-04T140000000Z:
     name: helper ping Tracer FIRE 2025 at 2025-04-04T14:00:00.000Z
     if: github.event.schedule == '0 14 4 4 5'
