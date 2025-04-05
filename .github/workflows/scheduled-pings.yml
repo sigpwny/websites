@@ -1,44 +1,4 @@
 name: Scheduled Jobs
 'on':
-  schedule:
-    - cron: 0 14 4 4 5
-    - cron: 0 13 5 4 6
-jobs:
-  helper-ping-Tracer-FIRE-2025-at-2025-04-04T140000000Z:
-    name: helper ping Tracer FIRE 2025 at 2025-04-04T14:00:00.000Z
-    if: github.event.schedule == '0 14 4 4 5'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlRyYWNlciBGSVJFIDIwMjUqKiBpcyA8dDoxNzQzODYxNjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2N0Zi8yMDI1LTA0LTA1Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-Tracer-FIRE-2025-at-2025-04-05T130000000Z:
-    name: helper ping Tracer FIRE 2025 at 2025-04-05T13:00:00.000Z
-    if: github.event.schedule == '0 13 5 4 6'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKlRyYWNlciBGSVJFIDIwMjUqKiBpcyA8dDoxNzQzODYxNjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2N0Zi8yMDI1LTA0LTA1Lw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
+  schedule: []
+jobs: {}
