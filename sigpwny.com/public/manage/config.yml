@@ -141,6 +141,7 @@ collections:
     create: true
     media_folder: ''
     public_folder: ''
+    identifier_field: name
     fields:
       - {label: 'Name', name: 'name', hint: 'Use real name if possible.', widget: 'string'}
       - {label: 'Profile Image', name: 'profile_image', widget: 'image', hint: 'Profile image should be 1:1 aspect ratio with a minimum width of 128px.', choose_url: false, required: false}
