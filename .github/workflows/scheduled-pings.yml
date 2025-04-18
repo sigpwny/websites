@@ -1,4 +1,44 @@
 name: Scheduled Jobs
 'on':
-  schedule: []
-jobs: {}
+  schedule:
+    - cron: 0 23 17 4 4
+    - cron: 0 22 18 4 5
+jobs:
+  helper-ping-b01lers-CTF-2025-at-2025-04-17T230000000Z:
+    name: helper ping b01lers CTF 2025 at 2025-04-17T23:00:00.000Z
+    if: github.event.schedule == '0 23 17 4 4'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKmIwMWxlcnMgQ1RGIDIwMjUqKiBpcyA8dDoxNzQ1MDE3MjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2N0Zi8yMDI1LTA0LTE4Lw==
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
+  helper-ping-b01lers-CTF-2025-at-2025-04-18T220000000Z:
+    name: helper ping b01lers CTF 2025 at 2025-04-18T22:00:00.000Z
+    if: github.event.schedule == '0 22 18 4 5'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      - run: npm ci
+        working-directory: sigpwny.com
+      - env:
+          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKmIwMWxlcnMgQ1RGIDIwMjUqKiBpcyA8dDoxNzQ1MDE3MjAwOlI+IQpodHRwczovL3NpZ3B3bnkuY29tL21lZXRpbmdzL2N0Zi8yMDI1LTA0LTE4Lw==
+          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
+          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: touch .env && npm run send-discord-ping
+        working-directory: sigpwny.com
