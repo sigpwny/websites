@@ -50,13 +50,12 @@ jobs:
           build-directory: ${{ env.CI_BUILD_DIR }}
           cache-directory: ${{ env.CI_CACHE_DIR }}
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy to Cloudflare
         if: github.actor != 'dependabot[bot]'
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME_FALLCTF }}
+          command: pages deploy ${{ env.CI_BUILD_DIR }} --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME_FALLCTF }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           workingDirectory: ${{ env.CI_WORKING_DIR }}
-          directory: ${{ env.CI_BUILD_DIR }}
