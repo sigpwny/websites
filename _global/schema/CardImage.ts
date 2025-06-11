@@ -12,7 +12,7 @@ export const CardImageSchema = (image: ImageFunction) => (
       foreground: z.optional(image()),
       background: z.optional(image()),
       background_color: z.optional(z.string().regex(/^#[0-9A-F]{6}$/i)),
-      alt: z.optional(z.string()),
+      alt: z.optional(z.coerce.string()),
     })
   )
 )
