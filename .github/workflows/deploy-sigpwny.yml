@@ -38,16 +38,15 @@ jobs:
           working-directory: ${{ env.CI_WORKING_DIR }}
           build-directory: ${{ env.CI_BUILD_DIR }}
           cache-directory: ${{ env.CI_CACHE_DIR }}
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy to Cloudflare
         if: github.actor != 'dependabot[bot]'
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME_SIGPWNY }}
+          command: pages deploy ${{ env.CI_BUILD_DIR }} --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME_SIGPWNY }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           workingDirectory: ${{ env.CI_WORKING_DIR }}
-          directory: ${{ env.CI_BUILD_DIR }}
       - name: (On main) Sync Discord events
         if: github.ref_name == github.event.repository.default_branch
         # https://github.com/nodejs/node/issues/50993
