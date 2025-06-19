@@ -8,6 +8,7 @@ import {
   ProfileSchema,
   EventSchema,
   PublicationSchema,
+  AlbumSchema,
 } from '$/schema';
 
 const meetings = defineCollection({
@@ -34,6 +35,12 @@ const publications = defineCollection({
   schema: (props) => PublicationSchema(props),
 });
 
+const albums = defineCollection({
+  type: 'content_layer',
+  loader: glob({ pattern: '**/*.mdx', base: '../_global/content/albums' }),
+  schema: (props) => AlbumSchema(props),
+});
+
 const pages = defineCollection({
   type: 'content_layer',
   loader: glob({ pattern: '**/*.mdx', base: 'src/pages_md' }),
@@ -50,5 +57,6 @@ export const collections = {
   profiles,
   events,
   publications,
+  albums,
   pages,
 };

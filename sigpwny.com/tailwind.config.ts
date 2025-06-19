@@ -9,17 +9,25 @@ export default {
     extend: {
       colors: {
         pwny: {
-          'green': 'rgb(var(--rgb-pwny-green) / <alpha-value>)',
-          'lgreen': 'rgb(var(--rgb-pwny-lgreen) / <alpha-value>)',
-          'dgreen': 'rgb(var(--rgb-pwny-dgreen) / <alpha-value>)',
-          'red': 'rgb(var(--rgb-pwny-red) / <alpha-value>)',
-          'orange': 'rgb(var(--rgb-pwny-orange) / <alpha-value>)',
-          'yellow': 'rgb(var(--rgb-pwny-yellow) / <alpha-value>)',
-          'blue': 'rgb(var(--rgb-pwny-blue) / <alpha-value>)',
-          'purple': 'rgb(var(--rgb-pwny-purple) / <alpha-value>)',
+          green: 'rgb(var(--rgb-pwny-green) / <alpha-value>)',
+          lgreen: 'rgb(var(--rgb-pwny-lgreen) / <alpha-value>)',
+          dgreen: 'rgb(var(--rgb-pwny-dgreen) / <alpha-value>)',
+          red: 'rgb(var(--rgb-pwny-red) / <alpha-value>)',
+          orange: 'rgb(var(--rgb-pwny-orange) / <alpha-value>)',
+          yellow: 'rgb(var(--rgb-pwny-yellow) / <alpha-value>)',
+          blue: 'rgb(var(--rgb-pwny-blue) / <alpha-value>)',
+          purple: 'rgb(var(--rgb-pwny-purple) / <alpha-value>)'
         },
-        primary: 'rgb(var(--rgb-primary) / <alpha-value>)',
-        secondary: 'rgb(var(--rgb-secondary) / <alpha-value>)',
+        primary: {
+					DEFAULT: 'rgb(var(--rgb-primary) / <alpha-value>)',
+          // DEFAULT: 'hsl(var(--hsl-primary))',
+          foreground: 'hsl(var(--primary-foreground))'
+        },
+        secondary: {
+					DEFAULT: 'rgb(var(--rgb-secondary) / <alpha-value>)',
+          // DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))'
+        },
         surface: {
           '000': 'rgb(var(--rgb-surface-000) / <alpha-value>)',
           '050': 'rgb(var(--rgb-surface-050) / <alpha-value>)',
@@ -65,15 +73,15 @@ export default {
   plugins: [
     // https://github.com/tailwindlabs/tailwindcss/discussions/8733
     plugin(function ({ addUtilities }) {
-			addUtilities({
-				'.drag-none': {
-					'-webkit-user-drag': 'none',
-					'-khtml-user-drag': 'none',
-					'-moz-user-drag': 'none',
-					'-o-user-drag': 'none',
-					'user-drag': 'none'
-				}
-			});
-		})
-  ],
+      addUtilities({
+        '.drag-none': {
+          '-webkit-user-drag': 'none',
+          '-khtml-user-drag': 'none',
+          '-moz-user-drag': 'none',
+          '-o-user-drag': 'none',
+          'user-drag': 'none'
+        }
+      });
+    }),
+	],
 }

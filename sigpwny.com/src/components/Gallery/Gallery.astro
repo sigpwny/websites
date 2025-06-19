@@ -1,0 +1,77 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import { GalleryViewer, ViewerTrigger } from "./Viewer";
+
+const { id, photos } = Astro.props;
+
+if (!id) {
+  throw new Error("Gallery component requires an id prop.");
+}
+
+const optimizedPhotos = await Promise.all(
+  photos.map(async (photo: string) => {
+    const image = await getImage({
+      src: photo,
+      widths: [300, 600],
+      formats: ['avif', 'webp'],
+      loading: 'lazy',
+    });
+    return image;
+  })
+)
+console.log(JSON.stringify(optimizedPhotos[0], null, 2))
+          // <Picture
+          //   src={photo}
+          //   alt="Photo"
+          //   class="object-cover h-full w-full"
+          //   pictureAttributes={{
+          //     class: 'object-cover',
+          //     "data-photo-idx": idx,
+          //   }}
+          //   widths={[300, 600]}
+          //   formats={['avif', 'webp']}
+          //   loading="lazy"
+          // />
+---
+<GalleryViewer photos={optimizedPhotos} client:load>
+  <div id={id} class="grid gap-1 lg:gap-2 grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-9">
+    {photos.map((photo: any, idx: number) => (
+      <ViewerTrigger photoIndex={idx} client:load>
+        <div data-photo-index={idx} class="flex grow rounded-xl aspect-square">
+          <Picture
+            src={photo}
+            alt="Photo"
+            class="object-cover h-full w-full"
+            pictureAttributes={{
+              class: 'object-cover',
+              "data-photo-idx": idx,
+            }}
+            widths={[300, 600]}
+            formats={['avif', 'webp']}
+            loading="lazy"
+          />
+        </div>
+      </ViewerTrigger>
+    ))}
+  </div>
+  <div class="grid gap-1 lg:gap-2 grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-9">
+    {optimizedPhotos.map((photo: any, idx: number) => (
+      <div data-photo-index={idx} class="flex grow rounded-xl aspect-square">
+        <picture class="object-cover">
+          {photo.srcSet.values.map((srcSet: any) => (
+            <source
+              srcset={srcSet.attribute}
+              sizes="(max-width: 600px) 100vw, 50vw"
+              type={srcSet.type}
+            />
+          ))}
+          <img
+            src={photo.src}
+            srcset={photo.srcSet.attribute}
+            {...photo.attributes}
+            class="object-cover h-full w-full"
+          />
+        </picture>
+      </div>
+    ))}
+</GalleryViewer>

@@ -1,0 +1,53 @@
+---
+import Layout from '@/layouts/Base.astro';
+import Link from '$/components/Link.astro';
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Gallery from '@/components/Gallery/Gallery.astro';
+import { getPhotosByAlbum } from '$/utils/albums';
+
+const albums = await getCollection('albums');
+
+console.log(albums)
+
+// const photosPromises = import.meta.glob('/../_global/content/albums/**/*.png',
+//   // {
+//   //   eager: true,
+//   //   // import: 'default',
+//   // }
+// );
+// console.log(photosPromises)
+// const photos = await Promise.all(
+//   Object.values(photosPromises).map((image) => image().then((mod: any) => mod.default))
+// );
+// console.log(photos)
+
+const photosByAlbum = await Promise.all(albums.map((album) => {
+  return getPhotosByAlbum(album).then((photos) => {
+    return {
+      data: album,
+      photos: photos,
+    };
+  });
+}));
+
+console.log("Loaded photos!")
+---
+<Layout
+  title="Gallery"
+  description="Photos and memories from SIGPwny"
+>
+  <h1>Gallery</h1>
+  <section id="albums">
+    <h2>Albums</h2>
+    {photosByAlbum.map(({data: album, photos}) => (
+      <div class="flex flex-col gap-4 mb-8">
+        <p>{album.data.title}</p>
+        <Gallery id={`gallery-${album.id}`} photos={photos} />
+      </div>
+    ))}
+  </section>
+  <section id="all-photos">
+    <h2>All Photos</h2>
+  </section>
+</Layout>
