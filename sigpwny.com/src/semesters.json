@@ -10,7 +10,7 @@
             "location": "DCL 1310"
           },
           {
-            "time": "Sundays*, 5-6 PM",
+            "time": "Sundays, 5-6 PM",
             "location": "Siebel CS 1404"
           }
         ]
@@ -19,7 +19,7 @@
         "meetingType": "seminar",
         "schedule": [
           {
-            "time": "Sundays*, 5-6 PM",
+            "time": "Sundays, 5-6 PM",
             "location": "Siebel CS 1404"
           }
         ]
@@ -37,8 +37,7 @@
         "meetingType": "embedded",
         "schedule": [
           {
-            "time": "TBD",
-            "location": "TBD; Subteams will also meet weekly at various times"
+            "time": "Schedule to be announced"
           }
         ]
       },
@@ -46,12 +45,7 @@
         "meetingType": "purple",
         "schedule": [
           {
-            "time": "TBD",
-            "location": "TBD"
-          },
-          {
-            "time": "TBD",
-            "location": "TBD"
+            "time": "Schedule to be announced"
           }
         ]
       }
