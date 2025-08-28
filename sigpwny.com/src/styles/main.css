@@ -1,13 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Element overrides */
-html {
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-body {
+:root {
   --rgb-pwny-green: 51 204 85;    /* #33cc55 */
   --rgb-pwny-lgreen: 0 255 85;    /* #00ff55 */
   --rgb-pwny-dgreen: 19 113 55;   /* #137137 */
@@ -26,49 +19,94 @@ body {
   --rgb-surface-200: 68 68 68;    /* #444444 */
   --rgb-surface-250: 85 85 85;    /* #555555 */
   --rgb-surface-300: 102 102 102; /* #666666 */
-  --rgb-text: 255 255 255;        /* #ffffff */
+  --rgb-content: 255 255 255;        /* #ffffff */
+}
 
-  --font-size-small: 0.875rem;
-  --font-size-standard: 1rem;
-  --font-size-base: 1.125rem;
+@theme {
+  --color-pwny-green: rgb(var(--rgb-pwny-green));
+  --color-pwny-lgreen: rgb(var(--rgb-pwny-lgreen));
+  --color-pwny-dgreen: rgb(var(--rgb-pwny-dgreen));
+  --color-pwny-red: rgb(var(--rgb-pwny-red));
+  --color-pwny-orange: rgb(var(--rgb-pwny-orange));
+  --color-pwny-yellow: rgb(var(--rgb-pwny-yellow));
+  --color-pwny-blue: rgb(var(--rgb-pwny-blue));
+  --color-pwny-purple: rgb(var(--rgb-pwny-purple));
 
-  font-family: "Helvetica Neue", Helvetica, Arial;
-  font-size: var(--font-size-base);
-  background-color: rgb(var(--rgb-surface-000));
-  color: rgb(var(--rgb-text));
-  height: 100%;
-  width: 100%;
+  --color-primary: rgb(var(--rgb-primary));
+  --color-secondary: rgb(var(--rgb-secondary));
+  --color-surface-000: rgb(var(--rgb-surface-000));
+  --color-surface-050: rgb(var(--rgb-surface-050));
+  --color-surface-100: rgb(var(--rgb-surface-100));
+  --color-surface-150: rgb(var(--rgb-surface-150));
+  --color-surface-200: rgb(var(--rgb-surface-200));
+  --color-surface-250: rgb(var(--rgb-surface-250));
+  --color-surface-300: rgb(var(--rgb-surface-300));
+  --color-content: rgb(var(--rgb-content));
+  --color-transparent: transparent;
+
+  --font-mono: Consolas, Monaco, "Lucida Console", ui-monospace, "SF Mono", SFMono-Regular, Menlo, "DejaVu Sans Mono", monospace;
+  --font-vga: "IBM VGA 8x16", Consolas, Monaco, "Lucida Console", ui-monospace, "SF Mono", SFMono-Regular, Menlo, "DejaVu Sans Mono", monospace;
 }
-h1, h2, h3 {
-  font-weight: bold;
+
+@layer base {
+  /* Element overrides */
+  html {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  body {
+    --font-size-small: 0.875rem;
+    --font-size-standard: 1rem;
+    --font-size-base: 1.125rem;
+
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    font-size: var(--font-size-base);
+    background-color: rgb(var(--rgb-surface-000));
+    color: rgb(var(--rgb-content));
+    height: 100%;
+    width: 100%;
+  }
+  h1, h2, h3 {
+    font-weight: bold;
+  }
+  h1 {
+    @apply text-4xl mb-2;
+  }
+  h2 {
+    @apply text-3xl mb-2;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  p {
+    @apply mb-2;
+  }
+  hr {
+    border-color: rgb(var(--rgb-content));
+  }
+  a,
+  a:active {
+    color: rgb(var(--rgb-primary));
+    text-decoration: none;
+  }
+  a:hover {
+    color: rgb(var(--rgb-secondary));
+    text-decoration: none;
+  }
 }
-h1 {
-  @apply text-4xl mb-2;
+
+@utility container {
+  @apply mx-auto px-4 md:px-8; 
 }
-h2 {
-  @apply text-3xl mb-2;
+
+@utility drag-none {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
 }
-h3 {
-  @apply text-2xl;
-}
-p {
-  @apply mb-2;
-}
-hr {
-  border-color: rgb(var(--rgb-text));
-}
-a,
-a:active {
-  color: rgb(var(--rgb-primary));
-  text-decoration: none;
-}
-a:hover {
-  color: rgb(var(--rgb-secondary));
-  text-decoration: none;
-}
-.container {
-  @apply md:px-8 px-4;
-}
+
 .page-width {
   @apply xl:w-2/3 lg:w-4/5;
 }

@@ -1,5 +1,7 @@
+@reference "@/styles/main.css";
+
 .sidebar-item {
-  @apply !text-text hover:bg-surface-100 active:bg-surface-050 rounded-lg
+  @apply !text-content hover:bg-surface-100 active:bg-surface-050 rounded-lg
     pr-2 py-1 flex flex-row items-center relative;
 }
 .sidebar-item:focus-visible {
@@ -9,7 +11,7 @@
   @apply bg-surface-100 active:bg-surface-050;
 }
 .folder-arrow {
-  @apply flex flex-shrink-0 flex-grow-0 ml-2 rotate-0;
+  @apply flex shrink-0 grow-0 ml-2 rotate-0;
   @apply transition-transform duration-200 ease-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -60,7 +62,7 @@
   @apply ring-2 ring-white ring-inset;
 }
 .sidebar-folder-input ~ .sidebar-folder {
-  @apply hidden h-0 overflow-y-hidden;
+  @apply hidden h-[0] overflow-y-hidden;
 }
 .sidebar-folder-input:checked ~ .sidebar-folder {
   @apply flex h-auto overflow-y-visible;

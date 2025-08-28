@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Base.astro';
 import consts from '@/consts';
 import { Picture } from 'astro:assets';
-import Card from '$/components/Card.astro';
+import Card from '@/components/Card.astro';
 import Link from '$/components/Link.astro';
 import { SocialIcon } from '$/components/Icons';
 import SIGPwnyStack from '@/components/SIGPwnyStack.astro';
@@ -35,7 +35,7 @@ const getStartedMeetings = filteredMeetings.reverse();
 >
   <div class="2xl:px-40">
     <section id="join-title" class="grid gap-x-8 lg:grid-cols-2 py-8">
-      <div class="flex flex-col flex-grow pb-4 basis-1/2">
+      <div class="flex flex-col grow pb-4 basis-1/2">
         <h1>Welcome to SIGPwny!</h1>
         <p class="text-3xl mb-0">
           Come learn cybersecurity with 2000+ students, alumni, and

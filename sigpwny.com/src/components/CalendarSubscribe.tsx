@@ -52,7 +52,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
   return (
     <Popover open={open} onOpenChange={setOpen} placement={placement}>
       <div className="flex flex-row gap-2 items-center">
-        <div className="flex flex-shrink-0 flex-grow-0">
+        <div className="flex shrink-0 grow-0">
           <PopoverTrigger
             onClick={() => setOpen(!open)}
             className={`button btn-primary flex flex-row gap-2 items-center ${open ? "ring-primary ring-2 ring-offset-2 ring-offset-surface-000" : ""}`}

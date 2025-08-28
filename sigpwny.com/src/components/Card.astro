@@ -19,6 +19,8 @@ interface Props {
 const { heading, title, card_image, hover } = Astro.props as Props;
 ---
 <style>
+  @reference "../styles/main.css";
+
   .card {
     @apply
       bg-surface-100
