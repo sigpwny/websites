@@ -1,17 +1,20 @@
 backend:
-    name: github
-    branch: main
-    repo: sigpwny/websites
-    site_domain: sigpwny.com
-    base_url: https://cms-auth.sigpwny.com
-    auth_endpoint: auth
-    skip_ci: false
+  name: github
+  branch: main
+  repo: sigpwny/websites
+  site_domain: sigpwny.com
+  base_url: https://cms-auth.sigpwny.com
+  auth_endpoint: auth
+  skip_ci: false
 slug:
   encoding: 'ascii'
   clean_accents: true
 output:
   # do not implicitly create every field, even if not filled
   omit_empty_optional_fields: true
+site_url: "https://sigpwny.com"
+display_url: "https://sigpwny.com"
+logo_url: "https://sigpwny.com/pwny8.svg"
 
 # These fields are not used since they are overwritten in each collection, but are required.
 media_folder: media
