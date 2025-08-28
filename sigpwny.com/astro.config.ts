@@ -6,9 +6,14 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
-import { viteStaticCopy } from 'vite-plugin-static-copy'
-import path from 'path';
+import path from 'node:path';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { normalizePath } from 'vite';
 import redirects from './src/redirects.json';
+
+function normalize(filePath: string) {
+  return normalizePath(path.resolve(import.meta.dirname, filePath));
+}
 
 const meetingBase = path.resolve(import.meta.dirname, '../_global/content/meetings/');
 
@@ -37,14 +42,14 @@ export default defineConfig({
       viteStaticCopy({
         targets: [
           {
-            src: '../_global/content/meetings/*',
+            src: normalize('../_global/content/meetings/*'),
             dest: 'meetings',
             rename: (_name, _ext, path) => {
-              return path.replace(meetingBase, '').replace(/(fa|sp)\d{4}/, '')
+              return normalizePath(path.replace(meetingBase, '').replace(/(fa|sp)\d{4}/, ''))
             }
           },
           {
-            src: '../guides/pwnyctf/book/*',
+            src: normalize('../guides/pwnyctf/book/*'),
             dest: 'docs'
           }
         ]

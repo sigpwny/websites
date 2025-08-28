@@ -2,39 +2,14 @@
 ---
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="noindex" />
-        <link href="/manage/config.yml" type="text/yaml" rel="cms-config-url" />
-        <title>sigpwny.com CMS</title>
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link href="/manage/config.yml" type="text/yaml" rel="cms-config-url" />
+    <title>sigpwny.com CMS</title>
+  </head>
     <body>
-        <script>
-            import CMS from "decap-cms-app";
-            CMS.init();
-
-            CMS.registerCustomFormat('flat-json', 'json', {
-                fromFile: text => {
-                    const body = JSON.parse(text) as Record<string, Record<string, string>>;
-                    // Now we want to transform this object into a flat object with a 'key' field
-                    const value = { items: Object.entries(body).reduce((acc, [key, value] : [
-                        string,
-                        Record<string, string>
-                    ]) => {
-                        acc.push({ key, ...value });
-                        return acc;
-                    }, [] as Record<string, string>[]) };
-                    return value;
-                },
-                toFile: (value : { items: Record<string, string>[] }) => {
-                    const body = value.items.reduce((acc, { key, ...rest }) => {
-                        acc[key] = rest;
-                        return acc;
-                    }, {} as Record<string, Record<string, string>>);
-                    return JSON.stringify(body, null, 2);
-                }
-            });
-        </script>
+      <script is:inline src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
     </body>
 </html>
