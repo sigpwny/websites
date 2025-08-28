@@ -33,17 +33,16 @@
     "@floating-ui/react": "^0.26.20",
     "@tailwindcss/postcss": "^4.1.12",
     "@tailwindcss/vite": "^4.1.12",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "astro": "^5.7.4",
     "dayjs": "^1.11.11",
-    "decap-cms-app": "^3.3.3",
-    "discord.js": "^14.15.3",
+    "discord.js": "^14.22.1",
     "framer-motion": "^11.1.7",
     "ical-generator": "^7.1.0",
-    "katex": "^0.16.11",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "katex": "^0.16.22",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-pdf": "^9.1.0",
     "react-tooltip": "^5.27.1",
     "rehype-katex": "^7.0.0",
@@ -54,12 +53,11 @@
   },
   "devDependencies": {
     "@reteps/github-action-scheduler": "^1.0.5",
-    "autoprefixer": "^10.4.20",
     "postcss-nested": "^7.0.2",
     "rimraf": "^6.0.1",
-    "vite-plugin-static-copy": "^2.0.0"
+    "vite-plugin-static-copy": "^3.1.2"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }

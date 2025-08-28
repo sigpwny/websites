@@ -5,148 +5,207 @@ backend:
     site_domain: sigpwny.com
     base_url: https://cms-auth.sigpwny.com
     auth_endpoint: auth
-    automatic_deployments: true
+    skip_ci: false
 slug:
   encoding: 'ascii'
   clean_accents: true
+output:
+  # do not implicitly create every field, even if not filled
+  omit_empty_optional_fields: true
 
-# These fields are not used since they are overwritten in each collection,
-# but are required.
+# These fields are not used since they are overwritten in each collection, but are required.
 media_folder: media
 
 collections:
   - name: 'meetings'
     label: 'Meetings'
     label_singular: 'Meeting'
-    folder: '_global/content/meetings'
-    extension: 'mdx'
-    format: 'yaml-frontmatter'
-    identifier_field: 'title'
+    icon: 'co_present'
     create: true
     media_folder: ''
     public_folder: ''
+    folder: '_global/content/meetings'
+    path: "{{fields.semester | lower}}/{{fields.type | lower}}/{{fields.time_start | date('YYYY-MM-DD')}}/index"
+    extension: 'mdx'
+    format: 'yaml-frontmatter'
+    identifier_field: 'title'
+    summary: "{{fields.type}} / `{{fields.time_start | date('YYYY-MM-DD')}}` / {{fields.title}}"
+    sortable_fields:
+      fields: ['time_start', 'title']
+      default:
+        field: 'time_start'
+        direction: 'descending'
+    view_filters:
+      - {label: '🟢 General', field: 'type', pattern: 'general'}
+      - {label: '🔵 Seminar', field: 'type', pattern: 'seminar'}
+      - {label: '🔴 CTF Team', field: 'type', pattern: 'ctf'}
+      - {label: '🟡 Embedded Team', field: 'type', pattern: 'embedded'}
+      - {label: '🟣 Purple Team', field: 'type', pattern: 'purple'}
     nested:
       depth: 100
-      summary: '{{time_start}} - Week {{week_number}}: {{title}}'
     fields:
-      - {label: 'Title', name: 'title', hint: 'Example: "PWN II"', widget: 'string'}
-      - {label: 'Meeting Type', name: 'type', widget: 'select', options: ['general', 'seminar', 'ctf', 'embedded', 'purple']}
-      - {label: 'Difficulty', name: 'difficulty', widget: 'select', options: ['beginner', 'intermediate', 'advanced'], required: false, hint: 'Optional. Use to indicate the expected difficulty level of the meeting.'}
-      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm:ssZ', picker_utc: false, hint: 'Ensure date matches date in path. Input time is based on the timezone of YOUR COMPUTER. Display timezone is an option below.'}
-      - {label: 'Duration', name: 'duration', widget: 'string', default: '', hint: 'Leave blank to default to 1-hour duration. Use ISO 8601 duration format - P(n)Y(n)M(n)DT(n)H(n)M(n)S. Example: "PT48H" is 48 hours.', required: false}
-      - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
-      - {label: 'Week Number', name: 'week_number', hint: 'Current week number in the semester, 0-indexed. Do not specify week numbers for events, such as CTFs (only for meetings).', widget: 'number', value_type: 'int', min: 0, max: 52, step: 1, required: false}
-      - {label: 'Credit', name: 'credit', widget: 'list', hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces. Also works with organization names.'}
-      - {label: 'Featured', name: 'featured', widget: 'boolean', default: true, hint: 'The meeting will be shown on the home page if set to true.', required: false}
-      - {label: 'Location', name: 'location', widget: 'string', hint: 'Example: "Siebel CS 1404" or "Illini Union"', required: false}
-      - {label: 'Description', name: 'description', widget: 'string', hint: 'A brief call-to-action/one-liner for the meeting.', required: false}
-      - {label: 'Card Image', name: 'card_image', widget: 'object', required: false, fields: [
+      - {label: 'Title', name: 'title', hint: 'e.g. `Introduction`, `PWN II`', widget: 'string'}
+      - {label: 'Semester', name: 'semester', hint: 'e.g. `sp2025`, `fa2025`', widget: 'string'}
+      - {label: 'Meeting Type', name: 'type', widget: 'select', dropdown_threshold: 1, options: [
+          {label: '🟢 General', value: 'general'},
+          {label: '🔵 Seminar', value: 'seminar'},
+          {label: '🔴 CTF Team', value: 'ctf'},
+          {label: '🟡 Embedded Team', value: 'embedded'},
+          {label: '🟣 Purple Team', value: 'purple'}
+        ]}
+      - {label: 'Difficulty', name: 'difficulty', widget: 'select', dropdown_threshold: 1, required: false, options: [
+          {label: '🐛 Beginner', value: 'beginner'},
+          {label: '🦋 Intermediate', value: 'intermediate'},
+          {label: '🐦‍🔥 Advanced', value: 'advanced'}
+        ]}
+      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm:ssZ', picker_utc: false, hint: "Based on __**your device's timezone**__. Display timezone is an option below."}
+      - {label: 'Duration', name: 'duration', widget: 'string', default: '', hint: 'Leave blank to default to `PT1H` (1 hour). Use ISO 8601 duration format: `P(n)Y(n)M(n)DT(n)H(n)M(n)S`, e.g. `PT48H` is 48 hours.', required: false}
+      - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: "Leave blank for `America/Chicago`. Use identifiers from the [IANA tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones), e.g. `America/Chicago` or `Etc/UTC`.", required: false}
+      - {label: 'Credit (Authors, Presenters, and Sponsors)', name: 'credit', widget: 'list', hint: 'Add each name on a new line (commas will not work). Full profile information is referenced from the names defined in the **Members** and **Organizations** collections.'}
+      # - {label: 'Credit (Authors, Presenters, and Sponsors)', name: 'credit', widget: 'relation', collection: 'members', value_field: 'name', search_fields: ['name', 'handle'], display_fields: ['{{name}} (@{{handle}})'], multiple: true, hint: 'It is possible to add names from both the **Members** and **Organizations** collections, however, the UI will only let you search through the **Members** collection.'}
+      - {label: 'Featured', name: 'featured', widget: 'boolean', default: true, hint: 'The meeting will be shown on the home page and Discord events if set to true.', required: false}
+      - {label: 'Location', name: 'location', widget: 'string', hint: 'e.g. `Siebel CS 1404` or `Illini Union`. See the **Locations** collection to add full location metadata (e.g. coordinates) to calendar events.', required: false}
+      - {label: 'Description (for link preview)', name: 'description', widget: 'markdown', hint: 'Add a short call-to-action or one-liner description for the meeting. This will be shown as the description in link previews. Avoid using markdown or styling for best results.', required: false}
+      - {label: 'Card Image', name: 'card_image', widget: 'object', hint: 'Adds an image to be associated with the meeting, which will be shown across the site and in social link previews.', required: false, fields: [
           # {label: 'Foreground Image', name: 'foreground', widget: 'image', hint: 'You usually do not need to set this for meetings.', choose_url: false, required: false},
           {label: 'Background Image', name: 'background', widget: 'image', hint: 'Image should be 16:9 aspect ratio with a minimum width of 512px.', choose_url: false, required: false},
           # {label: 'Background Color', name: 'background_color', widget: 'string', hint: 'Overridden by background image. Include the hashtag. Example: "#33cc55"', required: false},
           {label: 'Alt Text', name: 'alt', widget: 'string', hint: 'Provide a description of the image for accessibility purposes.', required: false}
         ]}
-      - {label: 'Zoom (Live Video) URL', name: 'live_video_url', widget: 'string', hint: 'STRONGLY recommend setting this beforehand by scheduling the Zoom meeting so people can access the meeting before the event starts.', required: false}
+      - {label: 'Live Video URL (Zoom)', name: 'live_video_url', widget: 'string', hint: 'It is **strongly recommended** to schedule the Zoom meeting in advance so people can find the link before the meeting starts.', required: false}
+      - {label: 'Recording URL (YouTube)', name: 'recording', widget: 'string', required: false}
       - {label: 'Slides', name: 'slides', widget: 'file', choose_url: false, hint: 'Please upload PDFs instead of PPTX files. If downloading from Google Slides, ensure that skipped slides are not present.', required: false}
-      - {label: 'Recording URL', name: 'recording', widget: 'string', required: false}
       - {label: 'Additional Assets', name: 'assets', widget: 'list', field: {label: File, name: file, widget: 'file', choose_url: false}, hint: 'Zip or compress files together when possible.', required: false}
-      - {label: 'Tags', name: 'tags', widget: 'list', hint: 'Separate tags with commas. Add a main topic tag: "web", "pwn", "rev", "crypto", "forensics", "jail", "osint", "misc". Plus, add tags for specific topics, such as "xss", "rsa", or "lockpicking". Try to re-use tags from past meetings.', max: 5, required: false}
+      - {label: 'Tags', name: 'tags', widget: 'list', hint: 'Add each tag on a new line (commas will not work). Add a main topic tag: `web`, `pwn`, `rev`, `crypto`, `forensics`, `jail`, `osint`, `misc`. Plus, add tags for specific topics, such as `xss`, `rsa`, or `lockpicking`. Try to re-use tags from past meetings. Avoid adding tags for meeting types since those are already visually highlighted (e.g. no adding `general` or `purple`).', max: 5, required: false}
+      - {label: 'Week Number (Deprecated)', name: 'week_number', hint: 'Current week number in the semester, 0-indexed. Do not specify week numbers for events, such as CTFs (only for meetings).', widget: 'number', value_type: 'int', min: 0, max: 52, step: 1, required: false}
       - {label: 'Body', name: 'body', widget: 'markdown', mode: 'raw', required: false}
-    sortable_fields: ['date', 'title']
     # adding a meta object with a path property allows editing the path of entries
     # moving an existing entry will move the entire sub tree of the entry to the new location
-    meta: { path: { widget: string, label: 'Path', index_file: 'index', hint: 'Examples: "sp2023/general/2023-01-01" or "fa2023/ctf/2023-08-01". All characters must be lowercase.', pattern: ['^(fa|sp)[0-9]{4}/(general|seminar|ctf|purple|embedded)/[0-9]{4}-[0-9]{2}-[0-9]{2}$', 'Refer to example path'] } }
+    # meta: { path: { widget: string, label: 'Path', index_file: 'index', hint: 'Examples: "sp2023/general/2023-01-01" or "fa2023/ctf/2023-08-01". All characters must be lowercase.', pattern: ['^(fa|sp)[0-9]{4}/(general|seminar|ctf|purple|embedded)/[0-9]{4}-[0-9]{2}-[0-9]{2}$', 'Refer to example path'] } }
 
   - name: 'events'
     label: 'Events'
     label_singular: 'Event'
-    folder: '_global/content/events'
-    extension: 'mdx'
-    format: 'yaml-frontmatter'
+    icon: 'event'
     create: true
     media_folder: ''
     public_folder: ''
+    folder: '_global/content/events'
+    path: "{{fields.series | lower}}/{{fields.time_start | date('YYYY')}}/index"
+    extension: 'mdx'
+    format: 'yaml-frontmatter'
+    identifier_field: 'title'
+    summary: "{{fields.series}} / {{fields.title}}"
+    sortable_fields:
+      fields: ['title', 'time_start']
+      default:
+        field: 'title'
+        direction: 'ascending'
+    view_filters:
+      - {label: '🔷 UIUCTF', field: 'series', pattern: 'uiuctf'}
+      - {label: '🔶 Fall CTF', field: 'series', pattern: 'fallctf'}
     nested:
       depth: 100
-      summary: '{{time_start}} {{title}}'
     fields:
-      - {label: 'Title', name: 'title', widget: 'string', hint: 'Examples: "UIUCTF 2022" or "Fall CTF 2022"'}
-      - {label: 'Series', name: 'series', widget: 'select', options: ['uiuctf', 'fallctf']}
-      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm:ssZ', picker_utc: false, hint: 'Ensure date matches date in path. Input time is based on the timezone of YOUR COMPUTER. Display timezone is an option below.'}
+      - {label: 'Title', name: 'title', widget: 'string', hint: 'e.g. `UIUCTF 2022` or `Fall CTF 2022`'}
+      - {label: 'Series', name: 'series', widget: 'select', options: [
+          {label: '🔷 UIUCTF', value: 'uiuctf'},
+          {label: '🔶 Fall CTF', value: 'fallctf'}
+        ]}
+      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm:ssZ', picker_utc: false, hint: "Based on __**your device's timezone**__. Display timezone is an option below."}
       - {label: 'Duration', name: 'duration', widget: 'string', default: 'PT48H', hint: 'Leave blank to default to 48-hour duration. Use ISO 8601 duration format - P(n)Y(n)M(n)DT(n)H(n)M(n)S. Example: "PT6H" is 6 hours.', required: false}
       - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: 'Credit', name: 'credit', widget: 'list', hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
       - {label: 'Sponsors', name: 'sponsors', widget: 'list', hint: 'Be sure to create sponsor profiles first. Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
       - {label: 'Location', name: 'location', widget: 'string', hint: 'Examples: "Online" or "CIF 3039"', required: false}
-      - {label: 'Description', name: 'description', widget: 'string', required: false}
-      - {label: 'Card Image', name: 'card_image', widget: 'object', required: false, fields: [
-          {label: 'Foreground Image', name: 'foreground', widget: 'image', hint: 'You usually do not need to set this for meetings.', choose_url: false, required: false},
+      - {label: 'Description (for link preview)', name: 'description', widget: 'markdown', hint: 'Add a short call-to-action or one-liner description for the meeting. This will be shown as the description in link previews. Avoid using markdown or styling for best results.', required: false}
+      - {label: 'Card Image', name: 'card_image', widget: 'object', hint: 'Adds an image to be associated with the event, which will be shown across the site and in social link previews.', required: false, fields: [
+          {label: 'Foreground Image', name: 'foreground', widget: 'image', hint: 'Foreground image is transparently overlaid on the background image or color with padding.', choose_url: false, required: false},
           {label: 'Background Image', name: 'background', widget: 'image', hint: 'Image should be 16:9 aspect ratio with a minimum width of 512px.', choose_url: false, required: false},
-          {label: 'Background Color', name: 'background_color', widget: 'string', hint: 'Overridden by background image. Include the hashtag. Example: "#33cc55"', required: false},
+          {label: 'Background Color', name: 'background_color', widget: 'string', hint: 'Background color as a hex color code, e.g. `#33cc55`. Ignored if background image is set. Be sure to include the hash symbol.', required: false},
           {label: 'Alt Text', name: 'alt', widget: 'string', hint: 'Provide a description of the image for accessibility purposes.', required: false}
         ]}
       - {label: 'Links', name: 'links', widget: 'list', required: false, fields: [
           {label: 'Name', name: 'name', widget: 'select', options: ['website', 'ctftime'], hint: ''},
           {label: 'URL', name: 'url', widget: 'string', hint: ''}
         ]}
-      - {label: 'Stats', name: 'stats', widget: 'list', hint: 'Examples: Participants, Teams, Solves, Rating Weight', required: false, fields: [
+      - {label: 'Stats', name: 'stats', widget: 'list', hint: 'e.g. Participants, Teams, Solves, Rating Weight', required: false, fields: [
           {label: 'Name', name: 'name', widget: 'string'},
           {label: 'Value', name: 'value', widget: 'string'}
         ]}
       - {label: 'Body', name: 'body', widget: 'markdown', mode: 'raw', required: false}
-    meta: { path: { widget: string, label: 'Path', index_file: 'index', hint: 'Examples: "uiuctf/2022" or "fallctf/2022"' } }
+    # meta: { path: { widget: string, label: 'Path', index_file: 'index', hint: 'Examples: "uiuctf/2022" or "fallctf/2022"' } }
 
   - name: 'publications'
     label: 'Publications'
     label_singular: 'Publication'
-    folder: '_global/content/publications'
-    extension: 'mdx'
-    format: 'yaml-frontmatter'
+    icon: 'book_2'
     create: true
     media_folder: ''
     public_folder: ''
+    folder: '_global/content/publications'
+    slug: 'title'
+    path: "{{fields.date | date('YYYY-MM-DD')}}_{{slug}}/index"
+    extension: 'mdx'
+    format: 'yaml-frontmatter'
+    identifier_field: 'title'
+    summary: "`{{fields.date | date('YYYY-MM-DD')}}` / `{{fields.publication_type}}` / {{fields.title}}"
+    sortable_fields:
+      fields: ['date', 'title']
+      default:
+        field: 'date'
+        direction: 'descending'
     nested:
       depth: 100
-      summary: '{{title}}'
     fields:
-      - {label: 'Title', name: 'title', widget: 'string', hint: 'Example: "Announcing our new site!"'}
-      - {label: 'Date', name: 'date', widget: 'date', format: 'YYYY-MM-DD', hint: ''}
-      - {label: 'Credit', name: 'credit', widget: "list", hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.'}
-      - {label: 'Publication Type', name: 'publication_type', widget: 'select', options: ['talk', 'blog', 'paper', 'news', 'writeup'], hint: ''}
+      - {label: 'Title', name: 'title', widget: 'string', hint: 'e.g. `Announcing our new site!` or `CTF Writeup`'}
+      - {label: 'Date', name: 'date', widget: 'datetime', date_format: 'YYYY-MM-DD', time_format: false, hint: 'Use the date of publication, rather than the current date.'}
+      - {label: 'Credit', name: 'credit', widget: "list", hint: 'Add each name on a new line (commas will not work). Full profile information is referenced from the names defined in the **Members** and **Organizations** collections.'}
+      - {label: 'Publication Type', name: 'publication_type', widget: 'select', dropdown_threshold: 1, options: ['talk', 'blog', 'paper', 'news', 'writeup'], hint: ''}
       - {label: 'Publisher', name: 'publisher', widget: 'string', hint: 'Changes meaning depending on publication type. For talks: conferences and events. For blogs and news: the primary site source. For papers: journals/conferences.', required: false}
-      - {label: 'Description', name: 'description', widget: 'string', hint: 'Describe the content.', required: false}
-      - {label: 'Card Image', name: 'card_image', widget: 'object', required: false, fields: [
-          {label: 'Foreground Image', name: 'foreground', widget: 'image', hint: 'You usually do not need to set this for meetings.', choose_url: false, required: false},
+      - {label: 'Description (for link preview)', name: 'description', widget: 'markdown', hint: 'Add a short call-to-action or one-liner description for the meeting. This will be shown as the description in link previews. Avoid using markdown or styling for best results.', required: false}
+      - {label: 'Card Image', name: 'card_image', widget: 'object', hint: 'Adds an image to be associated with the publication, which will be shown across the site and in social link previews.', required: false, fields: [
+          {label: 'Foreground Image', name: 'foreground', widget: 'image', hint: 'Foreground image is transparently overlaid on the background image or color with padding.', choose_url: false, required: false},
           {label: 'Background Image', name: 'background', widget: 'image', hint: 'Image should be 16:9 aspect ratio with a minimum width of 512px.', choose_url: false, required: false},
-          {label: 'Background Color', name: 'background_color', widget: 'string', hint: 'Overridden by background image. Include the hashtag. Example: "#33cc55"', required: false},
+          {label: 'Background Color', name: 'background_color', widget: 'string', hint: 'Background color as a hex color code, e.g. `#33cc55`. Ignored if background image is set. Be sure to include the hash symbol.', required: false},
           {label: 'Alt Text', name: 'alt', widget: 'string', hint: 'Provide a description of the image for accessibility purposes.', required: false}
         ]}
       - {label: 'Primary Link', name: 'primary_link', widget: 'object', hint: 'This is the primary source which represents the publication.', required: false, fields: [
-          {label: 'Name', name: 'name', widget: 'string', hint: 'Example: "Recording (YouTube)" or "Paper Download (Google Scholar)"', required: false},
+          {label: 'Name', name: 'name', widget: 'string', hint: 'e.g. `Recording (YouTube)` or `Paper Download (Google Scholar)`', required: false},
           {label: 'URL', name: 'url', widget: 'string', hint: '', required: false}
         ]}
       - {label: 'Links', name: 'links', widget: 'list', required: false, fields: [
-          {label: 'Name', name: 'name', widget: 'string', hint: 'Example: "Recording (YouTube)" or "Paper Download (Google Scholar)"'},
+          {label: 'Name', name: 'name', widget: 'string', hint: 'e.g. `Recording (YouTube)` or `Paper Download (Google Scholar)`'},
           {label: 'URL', name: 'url', widget: 'string', hint: ''}
         ]}
-      - {label: 'Tags', name: 'tags', widget: 'list', hint: 'Separate tags with commas.', required: false}
+      - {label: 'Tags', name: 'tags', widget: 'list', hint: 'Add each tag on a new line (commas will not work).', required: false}
       - {label: 'Body', name: 'body', widget: 'markdown', mode: 'raw', required: false}
-    meta: { path: { widget: string, label: 'Path', index_file: 'index', hint: 'Examples: "2022-02-20_new_site"' } }
+    # meta: { path: { widget: string, label: 'Path', index_file: 'index', hint: 'Examples: "2022-02-20_new_site"' } }
+
+  - divider: true
 
   - name: 'members'
     label: 'Members'
     label_singular: 'Member'
-    folder: '_global/content/profiles/member'
-    extension: 'mdx'
-    format: 'yaml-frontmatter'
+    icon: 'account_circle'
     create: true
     media_folder: ''
     public_folder: ''
+    folder: '_global/content/profiles/member'
+    slug: '{{name}}'
+    path: '{{slug}}/index'
+    extension: 'mdx'
+    format: 'yaml-frontmatter'
     identifier_field: name
+    sortable_fields:
+      fields: ['name', 'weight', 'handle']
+      default:
+        field: 'name'
+        direction: 'ascending'
     fields:
       - {label: 'Name', name: 'name', hint: 'Use real name if possible.', widget: 'string'}
       - {label: 'Profile Image', name: 'profile_image', widget: 'image', hint: 'Profile image should be 1:1 aspect ratio with a minimum width of 128px.', choose_url: false, required: false}
-      - {label: 'Handle', name: 'handle', hint: 'Do not prepend with `@` since it is done automatically.', required: false}
+      - {label: 'Handle', name: 'handle', hint: 'Do not prepend with `@` since this is done automatically.', required: false}
       - {label: 'Bio', name: 'bio', hint: 'Limit to 128 characters.', widget: 'string', pattern: ['^.{0,128}', '128 character limit exceeded'], required: false}
       - {label: 'Pronouns', name: 'pronouns', hint: 'Specify your preferred pronouns.', widget: 'string', required: false}
       - {label: 'Links', name: 'links', widget: 'list', required: false, fields: [
@@ -155,26 +214,32 @@ collections:
           ]},
           {label: 'URL', name: 'url', widget: 'string', hint: ''}
         ]}
-      - {label: 'Role', name: 'role', widget: 'select', options: ['admin', 'alum', 'helper', 'member'], required: false}
-      - {label: 'Title', name: 'title', widget: 'string', hint: 'This overrides the display title shown by your selected role. Example: "President"', required: false}
-      - {label: 'Weight', name: 'weight', hint: 'Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as president or co-president.', widget: 'number', required: false}
-    sortable_fields: ['weight', 'name', 'handle']
-    slug: '{{name}}'
-    path: '{{slug}}/index'
+      - {label: 'Role', name: 'role', widget: 'select', dropdown_threshold: 1, options: ['admin', 'alum', 'helper', 'member'], required: false}
+      - {label: 'Title', name: 'title', widget: 'string', hint: 'This overrides your displayed role from above with a custom title, e.g. `President` or `Embedded Lead`', required: false}
+      - {label: 'Weight', name: 'weight', hint: 'Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as President or Co-President.', widget: 'number', required: false}
 
   - name: 'organizations'
     label: 'Organizations'
     label_singular: 'Organization'
-    folder: '_global/content/profiles/org'
-    extension: 'mdx'
-    format: 'yaml-frontmatter'
+    icon: 'domain'
     create: true
     media_folder: ''
     public_folder: ''
+    folder: '_global/content/profiles/org'
+    slug: '{{name}}'
+    path: '{{slug}}/index'
+    extension: 'mdx'
+    format: 'yaml-frontmatter'
+    sortable_fields:
+      fields: ['name', 'weight', 'handle']
+      default:
+        field: 'name'
+        direction: 'ascending'
+    identifier_field: 'name'
     fields:
       - {label: 'Name', name: 'name', widget: 'string'}
       - {label: 'Profile Image', name: 'profile_image', widget: 'image', hint: 'Profile image should be 1:1 aspect ratio with a minimum width of 128px.', choose_url: false, required: false}
-      - {label: 'Handle', name: 'handle', hint: 'Do not prepend with `@` since it is done automatically.', required: false}
+      - {label: 'Handle', name: 'handle', hint: 'Do not prepend with `@` since this is done automatically.', required: false}
       - {label: 'Bio', name: 'bio', hint: 'Limit to 128 characters.', widget: 'string', pattern: ['^.{0,128}', '128 character limit exceeded'], required: false}
       - {label: 'Links', name: 'links', widget: 'list', required: false, fields: [
           {label: 'Name', name: 'name', widget: 'select', hint: 'Try to limit to 6 links or less.', options: [
@@ -185,21 +250,20 @@ collections:
       - {label: 'Role', name: 'role', widget: 'select', options: ['sponsor', 'org'], required: false}
       - {label: 'Title', name: 'title', widget: 'string', hint: 'This overrides the display title shown by the selected role. For example, you could use this to show a parent organization name.', required: false}
       - {label: 'Weight', name: 'weight', hint: 'Set to a higher value to sort this profile closer to the top, otherwise sort by name. For sponsors, we generally want to set higher values based on the amount they are sponsoring.', widget: 'number', required: false}
-    sortable_fields: ['weight', 'name', 'handle']
-    slug: '{{name}}'
-    path: '{{slug}}/index'
 
-  - name: 'redirects-collection'
-    label: 'Redirects'
-    format: 'flat-json'
-    files:
-    - label: 'sigpwny.com'
-      file: 'sigpwny.com/src/redirects.json'
-      name: 'redirects'
-      fields:
-        - {label: 'Links', name: 'items', widget: 'list', fields: [
-            # must be named 'key' for our custom formatter to work
-            {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
-            {label: 'To', name: 'destination', widget: 'string', hint: 'Example: "myurl.com/foo"'},
-            {label: 'Status Code', name: 'status', widget: 'hidden', default: 302}
-          ]}
+  - divider: true
+
+  # - name: 'redirects-collection'
+  #   label: 'Redirects'
+  #   format: 'flat-json'
+  #   files:
+  #   - label: 'sigpwny.com'
+  #     file: 'sigpwny.com/src/redirects.json'
+  #     name: 'redirects'
+  #     fields:
+  #       - {label: 'Links', name: 'items', widget: 'list', fields: [
+  #           # must be named 'key' for our custom formatter to work
+  #           {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
+  #           {label: 'To', name: 'destination', widget: 'string', hint: 'Example: "myurl.com/foo"'},
+  #           {label: 'Status Code', name: 'status', widget: 'hidden', default: 302}
+  #         ]}
