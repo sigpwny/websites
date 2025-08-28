@@ -80,7 +80,7 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
           </div>
         ) : null}
         {profiles.length > 0 ? (
-          <div class="flex flex-col md:flex-row flex-shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center mb-2">
+          <div class="flex flex-col md:flex-row shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center mb-2">
             {profiles.map((profile, idx) => (
               <Persona profile={profile} client:load>
                 <span slot="avatar">

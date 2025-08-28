@@ -28,7 +28,7 @@ export default {
           '250': 'rgb(var(--rgb-surface-250) / <alpha-value>)',
           '300': 'rgb(var(--rgb-surface-300) / <alpha-value>)',
         },
-        text: 'rgb(var(--rgb-text) / <alpha-value>)',
+        content: 'rgb(var(--rgb-content) / <alpha-value>)',
         transparent: 'transparent',
       },
     },

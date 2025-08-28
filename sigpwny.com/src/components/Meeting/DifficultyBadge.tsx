@@ -19,7 +19,7 @@ export default function MeetingDifficultyBadge({ difficulty }: Props) {
   return (
     <span
       aria-hidden="true"
-      className="badge flex flex-row gap-1 items-center text-sm md:text-md font-bold bg-surface-150 text-text"
+      className="badge flex flex-row gap-1 items-center text-sm md:text-md font-bold bg-surface-150 text-content"
     >
       {icon}
       <span>{difficultyString}</span>
