@@ -1,0 +1,237 @@
+---
+import Layout from '@/layouts/Base.astro';
+---
+<Layout
+  title="Branding Guidelines"
+  description="SIGPwny's branding guidelines"
+>
+  <h1>Branding Guidelines</h1>
+  <div class="md-root max-w-prose">
+    <section id="logo">
+      <h2>Logo and Wordmark</h2>
+      <!-- TODO -->
+      <p>
+        In copy or in text, SIGPwny should only be written as <code>SIGPwny</code>. If this capitalization is not possible,
+        then either all lowercase or all uppercase is sufficient.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2">
+        <span>
+          <span class="font-bold">OK ✅</span>
+          <ul>
+            <li>SIGPwny</li>
+            <li>sigpwny</li>
+            <li>SIGPWNY</li>
+          </ul>
+        </span>
+        <span>
+          <span class="font-bold">Bad ❌</span>
+          <ul>
+            <li>SigPwny</li>
+            <li>SIGpwny</li>
+            <li>sigPWNY</li>
+          </ul>
+        </span>
+      </div>
+    </section>
+    <section id="color">
+      <h2>Color</h2>
+      <p>
+        SIGPwny is "dark mode first" and most colors are designed to be used on black for sufficient contrast.
+        Combined with the primary green on black, this color scheme imitates a terminal, creating the traditional "hacker" feeling.
+      </p>
+      <p>
+        In cases where light mode or brighter backgrounds need to be used, we provide limited guidance on alternative colors.
+      </p>
+      <h3>Accessibility</h3>
+      <p>
+        As part of the inclusive nature of SIGPwny, it is critical that colors are used in a way which is accessible for everyone.
+      </p>
+      <ul>
+        <li>Primary colors must have a contrast ratio of at least 7:1 in order to fulfill WCAG 2.1 Level AAA.</li>
+        <li>Secondary colors must have a contrast ratio of at least 4.5:1 in order to fulfill WCAG 2.1 Level AA.</li>
+        <li>
+          Using color to distinguish two or more elements should be avoided at all cost. Other distinguishing features,
+          such as text, icons, shapes, or patterns should be used in conjunction with color to assist color-blind users.
+        </li>
+      </ul>
+      <h3>Neutral Colors (Surface and Content)</h3>
+      <p>
+        Surface colors are used to establish a background and build hierarchy. Half steps (-050) are used as hover or active colors.
+      </p>
+      <p>
+        Content color for text is generally either pure white (<code>#ffffff</code>) or pure black (<code>#000000</code>).
+        We provide the WCAG contrast ratios for brand colors based on these colors. However, content color can be
+        any color as long as the accessibility guidelines are followed. 
+      </p>
+      <div class="font-mono border-2 border-surface-100 bg-surface-000 p-4 mt-2 rounded-xl">
+        <span>surface-000: #000000</span>
+        <div class="bg-surface-100 p-4 mt-2 rounded-xl">
+          <span>surface-100: #222222</span>
+          <div class="bg-surface-200 p-4 mt-2 rounded-xl">
+            <span>surface-200: #444444</span>
+          </div>
+        </div>
+      </div>
+      <h3>Brand Colors</h3>
+      <div class="flex flex-col gap-6">
+        <div id="color-pwny-green">
+          <p class="font-bold text-6xl text-pwny-green">General</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex flex-col font-mono bg-pwny-green text-black rounded-xl p-4">
+              <span>pwny-green: #33cc55</span>
+              <span class="text-sm">9.9:1 (WCAG AAA)</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 font-mono">
+              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
+                <span>pwny-green-light: #00ff55</span>
+                <span class="text-sm">15.43:1 (WCAG AAA)</span>
+              </div>
+              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
+                <span>pwny-green-dark: #137137</span>
+                <span class="text-sm">6.09:1 (WCAG AA)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="color-pwny-blue">
+          <p class="font-bold text-6xl text-pwny-blue">Seminar</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex flex-col font-mono bg-pwny-blue text-black rounded-xl p-4">
+              <span>pwny-blue: #41aaff</span>
+              <span class="text-sm">8.41:1 (WCAG AAA)</span>
+            </div>
+            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
+              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
+                <span>pwny-green-light: #00ff55</span>
+                <span class="text-sm">15.43:1 (WCAG AAA)</span>
+              </div>
+              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
+                <span>pwny-green-dark: #137137</span>
+                <span class="text-sm">6.09:1 (WCAG AA)</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div id="color-pwny-red">
+          <p class="font-bold text-6xl text-pwny-red">Capture-the-Flag</p>
+          <p>Warning: pwny-red is not WCAG AAA compliant and will be changed in the future.</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex flex-col font-mono bg-pwny-red text-black rounded-xl p-4">
+              <span>pwny-red: #ff4040</span>
+              <span class="text-sm">⚠️ 6.05:1 (WCAG AA)</span>
+            </div>
+            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
+              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
+                <span>pwny-green-light: #00ff55</span>
+                <span class="text-sm">15.43:1 (WCAG AAA)</span>
+              </div>
+              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
+                <span>pwny-green-dark: #137137</span>
+                <span class="text-sm">6.09:1 (WCAG AA)</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div id="color-pwny-yellow">
+          <p class="font-bold text-6xl text-pwny-yellow">Embedded Team</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex flex-col font-mono bg-pwny-yellow text-black rounded-xl p-4">
+              <span>pwny-yellow: #ffc000</span>
+              <span class="text-sm">12.79:1 (WCAG AAA)</span>
+            </div>
+            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
+              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
+                <span>pwny-green-light: #00ff55</span>
+                <span class="text-sm">15.43:1 (WCAG AAA)</span>
+              </div>
+              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
+                <span>pwny-green-dark: #137137</span>
+                <span class="text-sm">6.09:1 (WCAG AA)</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div id="color-pwny-purple">
+          <p class="font-bold text-6xl text-pwny-purple">Purple Team</p>
+          <p>Warning: pwny-purple is not WCAG AAA compliant and will be changed in the future.</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex flex-col font-mono bg-pwny-purple text-black rounded-xl p-4">
+              <span>pwny-purple: #cc66ee</span>
+              <span class="text-sm">⚠️ 6.7:1 (WCAG AA)</span>
+            </div>
+            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
+              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
+                <span>pwny-green-light: #00ff55</span>
+                <span class="text-sm">15.43:1 (WCAG AAA)</span>
+              </div>
+              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
+                <span>pwny-green-dark: #137137</span>
+                <span class="text-sm">6.09:1 (WCAG AA)</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div id="color-pwny-orange">
+          <p class="font-bold text-6xl text-pwny-orange">Orange</p>
+          <div class="flex flex-col gap-2">
+            <div class="flex flex-col font-mono bg-pwny-orange text-black rounded-xl p-4">
+              <span>pwny-orange: #ed7a31</span>
+              <span class="text-sm">7.42:1 (WCAG AA)</span>
+            </div>
+            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
+              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
+                <span>pwny-green-light: #00ff55</span>
+                <span class="text-sm">15.43:1 (WCAG AAA)</span>
+              </div>
+              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
+                <span>pwny-green-dark: #137137</span>
+                <span class="text-sm">6.09:1 (WCAG AA)</span>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <h3>Printing Colors (CMYK)</h3>
+      <p>
+        When creating printed materials, such as shirts or posters, CMYK color mode is used instead of RGB.
+        Please ensure that your graphics software is set to use CMYK. We also provide the corresponding RGB value
+        based on an algorithmic CMYK to RGB conversion - however this may not be accurate.
+      </p>
+      <!-- TODO -->
+    </section>
+    <section id="typography">
+      <h2>Typography</h2>
+      <p>
+        Presently, Helvetica Neue is used as our primary font for just about everything. Helvetica Neue Bold is used for
+        logo wordmarks and headers, while Helvetica Neue Regular is used for body text.
+      </p>
+      <p>
+        Consolas is used as the font for code and monospace purposes.
+      </p>
+    </section>
+    <section id="user-interface">
+      <h2>User Interface</h2>
+      <p>
+        <a href="https://fluent2.microsoft.design/" target="_blank" rel="noopener noreferrer">Microsoft Fluent 2</a> is
+        the basis for most of our user interface design. For iconography,
+        <a href="https://github.com/microsoft/fluentui-system-icons" target="_blank" rel="noopener noreferrer">Fluent Icons</a> are
+        primarily used, along with <a href="https://github.com/microsoft/fluentui-emoji" target="_blank" rel="noopener noreferrer">Fluent Emoji</a>.
+      </p>
+    </section>
+    <section id="misc">
+      <h2>Miscellaneous</h2>
+      <ul>
+        <li>
+          Unless being written out, dates should be written in <code>YYYY-MM-DD</code> format rather than ambiguous
+          formats such as <code>MM-DD-YYYY</code> or <code>DD-MM-YYYY</code>
+        </li>
+        <li>
+          Prioritize the usage of left-aligned content over center-aligned content. Avoid right-aligned content as much as possible.
+        </li>
+        <li>
+          When using quotes, ensure that "straight quotes" are used instead of 	&#8220;smart quotes&#8221; in content.
+        </li>
+      </ul>
+    </section>
+  </div>
+</Layout>

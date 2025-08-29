@@ -43,10 +43,6 @@
     "status": 302,
     "destination": "/Fall_CTF_2025_Sponsorship.pdf"
   },
-  "/branding": {
-    "status": 302,
-    "destination": "https://docs.google.com/document/d/1SioiiGVKlwm0sn56YOr_ESFkqx1HeAv7JfERbel_AoM/edit"
-  },
   "/sponsor": {
     "status": 302,
     "destination": "/sponsors/"
