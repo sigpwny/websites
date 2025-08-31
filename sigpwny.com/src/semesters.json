@@ -37,7 +37,8 @@
         "meetingType": "embedded",
         "schedule": [
           {
-            "time": "Schedule to be announced"
+            "time": "Mondays, 6-7 PM",
+            "location": "Location to be announced"
           }
         ]
       },
@@ -45,7 +46,12 @@
         "meetingType": "purple",
         "schedule": [
           {
-            "time": "Schedule to be announced"
+            "time": "Tuesdays, 7-8 PM",
+            "location": "Location to be announced"
+          },
+          {
+            "time": "Thursdays, 7-8 PM",
+            "location": "Location to be announced"
           }
         ]
       }
