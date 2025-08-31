@@ -1,44 +1,4 @@
 name: Scheduled Jobs
 'on':
-  schedule:
-    - cron: 0 22 30 8 6
-    - cron: 0 21 31 8 0
-jobs:
-  helper-ping-Introduction-at-2025-08-30T220000000Z:
-    name: helper ping Introduction at 2025-08-30T22:00:00.000Z
-    if: github.event.schedule == '0 22 30 8 6'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkludHJvZHVjdGlvbioqIGlzIDx0OjE3NTY2Nzc2MDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTA4LTMxLw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
-  helper-ping-Introduction-at-2025-08-31T210000000Z:
-    name: helper ping Introduction at 2025-08-31T21:00:00.000Z
-    if: github.event.schedule == '0 21 31 8 0'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: npm ci
-        working-directory: sigpwny.com
-      - env:
-          DISCORD_B64_MESSAGE: PEAmNjgzNDQ5NzI0MjQxNTc1OTUxPgoqKkludHJvZHVjdGlvbioqIGlzIDx0OjE3NTY2Nzc2MDA6Uj4hCmh0dHBzOi8vc2lncHdueS5jb20vbWVldGluZ3MvZ2VuZXJhbC8yMDI1LTA4LTMxLw==
-          DISCORD_CHANNEL_ID: ${{ vars.DISCORD_CONTENT_CHANNEL_ID }}
-          DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: touch .env && npm run send-discord-ping
-        working-directory: sigpwny.com
+  schedule: []
+jobs: {}
