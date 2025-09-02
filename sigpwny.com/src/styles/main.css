@@ -8,7 +8,7 @@
   --rgb-pwny-orange: 237 122 49;  /* #ed7a31 */
   --rgb-pwny-yellow: 255 192 0;   /* #ffc000 */
   --rgb-pwny-blue: 65 170 255;    /* #41aaff */
-  --rgb-pwny-purple: 204 102 238; /* #cc66ee */
+  --rgb-pwny-purple: 221 95 255;  /* #dd5fff */
 
   --rgb-primary: var(--rgb-pwny-green);
   --rgb-secondary: var(--rgb-pwny-lgreen);

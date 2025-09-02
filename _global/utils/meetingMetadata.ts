@@ -18,7 +18,7 @@ export const meetingMetadata: Record<MeetingMetatype, MeetingMetadata> = {
   'general': {
     name: 'General Meetings',
     shortName: 'General',
-    description: 'Attend our weekly general meetings to learn the fundamental of cybersecurity.',
+    description: 'Attend our weekly general meetings to learn the fundamentals of cybersecurity.',
   },
   'seminar': {
     name: 'Seminar Meetings',
