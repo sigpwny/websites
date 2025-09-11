@@ -61,36 +61,36 @@ jobs:
         with:
           name: dist
           path: ${{ env.CI_WORKING_DIR }}/${{ env.CI_BUILD_DIR }}
-  schedule-notify:
-    name: Schedule notifications (sigpwny.com)
-    if: github.ref_name == github.event.repository.default_branch
-    needs: deploy
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.WORKFLOW_PAT }}
-          submodules: true
-          fetch-depth: 0
-      - name: Initialize Astro and dependencies
-        uses: ./.github/actions/build-astro
-        with:
-          working-directory: ${{ env.CI_WORKING_DIR }}
-          build-directory: ${{ env.CI_BUILD_DIR }}
-          cache-directory: ${{ env.CI_CACHE_DIR }}
-          skip-build: true
-      - name: Schedule Discord pings
-        run: npm run schedule-discord-ping
-        shell: bash
-        working-directory: ${{ env.CI_WORKING_DIR }}
-      - name: Save scheduled Discord pings
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: update workflow schedule"
-          file_pattern: "*.yml"
+  # schedule-notify:
+  #   name: Schedule notifications (sigpwny.com)
+  #   if: github.ref_name == github.event.repository.default_branch
+  #   needs: deploy
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         token: ${{ secrets.WORKFLOW_PAT }}
+  #         submodules: true
+  #         fetch-depth: 0
+  #     - name: Initialize Astro and dependencies
+  #       uses: ./.github/actions/build-astro
+  #       with:
+  #         working-directory: ${{ env.CI_WORKING_DIR }}
+  #         build-directory: ${{ env.CI_BUILD_DIR }}
+  #         cache-directory: ${{ env.CI_CACHE_DIR }}
+  #         skip-build: true
+  #     - name: Schedule Discord pings
+  #       run: npm run schedule-discord-ping
+  #       shell: bash
+  #       working-directory: ${{ env.CI_WORKING_DIR }}
+  #     - name: Save scheduled Discord pings
+  #       uses: stefanzweifel/git-auto-commit-action@v5
+  #       with:
+  #         commit_message: "chore: update workflow schedule"
+  #         file_pattern: "*.yml"
   # kaltura-upload:
   #   name: Upload to YouTube from Kaltura
   #   if: github.ref_name == github.event.repository.default_branch
