@@ -3,6 +3,14 @@
     "status": 302,
     "destination": "https://docs.sigpwny.com"
   },
+  "/notes": {
+    "status": 302,
+    "destination": "https://notes.sigpwny.com"
+  },
+  "/guides": {
+    "status": 302,
+    "destination": "https://notes.sigpwny.com"
+  },
   "/infra": {
     "status": 302,
     "destination": "https://github.com/sigpwny/docs"
