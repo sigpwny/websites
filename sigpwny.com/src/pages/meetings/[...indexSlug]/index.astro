@@ -4,18 +4,12 @@ import Layout, {
   type MeetingIndexPageProps,
 } from '@/layouts/MeetingIndex.astro';
 import MeetingRow from '@/components/Meeting/Row.astro';
-import MeetingTime from '@/components/Meeting/Time.astro';
 import MeetingTypeBadge from '@/components/Meeting/TypeBadge';
-import CalendarSubscribe from '@/components/CalendarSubscribe';
-import { InfoRegular } from '$/components/Icons/fluentui';
 import {
   getSemesterToMeetingsMap,
   formatSemester,
 } from '@/utils/meetings';
-import {
-  meetingMetadata,
-  meetingMetatypes,
-} from '$/utils/meetingMetadata';
+import { meetingMetadata } from '$/utils/meetingMetadata';
 import semestersMetadata from '@/semesters.json';
 
 import dayjs from 'dayjs';
@@ -59,6 +53,7 @@ export async function getStaticPaths() {
       // Skip the first link since it's the all meetings link
       const newerLink = idx !== 1 ? (allSemesterLinks[idx - 1] || undefined) : undefined;
       const olderLink = allSemesterLinks[idx + 1] || undefined;
+      const semesterMetadata = semestersMetadata.find(entry => entry.semester === semesterLink.semester);
       return {
         params: {
           indexSlug: semesterLink.semester.toLowerCase(),
@@ -69,6 +64,7 @@ export async function getStaticPaths() {
           currLink: semesterLink,
           newerLink,
           olderLink,
+          semesterMetadata,
         } as MeetingIndexPageProps,
       };
     }
@@ -76,7 +72,6 @@ export async function getStaticPaths() {
 }
 
 const props = Astro.props as MeetingIndexPageProps;
-let semesterMetadata = semestersMetadata.find(entry => entry.semester === props.currLink.semester);
 const isAllIndex = props.currLink.semester === 'all';
 ---
 <script>
@@ -95,6 +90,8 @@ const isAllIndex = props.currLink.semester === 'all';
     const allMaybeActive = meetingsIndex.querySelectorAll('[data-maybe-active="true"]');
     var countLive = 0;
     var countUpcoming = 0;
+    var prevLiveNode = null;
+    var prevUpcomingNode = null;
     for (let i = allMaybeActive.length - 1; i >= 0; i--) {
       const maybeActive = allMaybeActive[i];
       const timeStartStr = maybeActive.getAttribute('data-time-start');
@@ -111,10 +108,12 @@ const isAllIndex = props.currLink.semester === 'all';
       maybeActive.setAttribute('data-is-active', 'true');
       if (now >= timeStart && liveMeetingsList) {
         countLive++;
-        liveMeetingsList.appendChild(maybeActive);
+        liveMeetingsList.insertBefore(maybeActive, prevLiveNode);
+        prevLiveNode = maybeActive;
       } else if (upcomingMeetingsList) {
         countUpcoming++;
-        upcomingMeetingsList.appendChild(maybeActive);
+        upcomingMeetingsList.insertBefore(maybeActive, prevUpcomingNode);
+        prevUpcomingNode = maybeActive;
       }
     }
     if (activeMeetingsSection && (countLive || countUpcoming)) {
@@ -162,36 +161,31 @@ const isAllIndex = props.currLink.semester === 'all';
 <Layout
   {...props}
 >
-  {semesterMetadata?.activeMeetings ? (
+  {props.semesterMetadata?.activeMeetings ? (
     <section id="schedule" class="flex flex-col gap-2 mb-4">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-4">
-        {semesterMetadata.activeMeetings.map((activeMeeting) => (
-          <div class="flex flex-col gap-2 border-2 border-surface-200 rounded-xl px-3 py-2">
-            <MeetingTypeBadge type={activeMeeting.meetingType} fullName={true} />
-            {meetingMetadata[activeMeeting.meetingType]?.description ? (
-              <p class="text-sm">
-                {meetingMetadata[activeMeeting.meetingType].description}
-              </p>
-            ) : null}
-            {activeMeeting.schedule?.map((info) => (
-              <div class="flex flex-col">
-                  <span class="font-bold">{info.time}</span>
-                  <span class="text-sm">{info.location}</span>
-              </div>
-            ))}
+        {props.semesterMetadata.activeMeetings.map((activeMeeting) => (
+          <div class="flex flex-col justify-between h-full gap-2 border-2 border-surface-200 rounded-2xl overflow-hidden">
+            <div class="flex flex-col gap-2 p-3">
+              <MeetingTypeBadge type={activeMeeting.meetingType} fullName={true} />
+              {meetingMetadata[activeMeeting.meetingType]?.description ? (
+                <p class="text-sm">
+                  {meetingMetadata[activeMeeting.meetingType].description}
+                </p>
+              ) : null}
+              {activeMeeting.schedule?.map((info) => (
+                <div class="flex flex-col">
+                    <span class="font-bold">{info.time}</span>
+                    <span class="text-sm">{info.location}</span>
+                </div>
+              ))}
+            </div>
+            {/* <MeetingUpcomingCard /> */}
           </div>
         ))}
       </div>
-      <CalendarSubscribe
-        selected={Array.from(semesterMetadata.activeMeetings).map((activeMeeting) => activeMeeting.meetingType)}
-        client:load
-      />
     </section>
-  ) : (
-    <span class="mb-4">
-      <CalendarSubscribe selected={meetingMetatypes} client:load />
-    </span>
-  )}
+  ) : null}
   {!isAllIndex ? (
     <section
       id="active-meetings-section"
@@ -234,7 +228,7 @@ const isAllIndex = props.currLink.semester === 'all';
         </p>
         <hr class="border-surface-200" />
         <ul class="flex flex-col pb-2">
-          {meetings.map((meeting) => (
+          {(isAllIndex ? meetings : [...meetings].reverse()).map((meeting) => (
             <MeetingRow
               input={meeting}
               dateFormat={isAllIndex ? "YYYY-MM-DD" : undefined}

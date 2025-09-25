@@ -74,14 +74,14 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                   style={{ "--color-checkbox": metadata.color } as React.CSSProperties}
                 >
                   {selectedCalendars.includes(meeting_type) ? (
-                    <button onClick={() => setSelectedCalendars(selectedCalendars.filter((id) => id !== meeting_type))}>
+                    <button className="cursor-pointer" onClick={() => setSelectedCalendars(selectedCalendars.filter((id) => id !== meeting_type))}>
                       <CheckboxCheckedFilled className="text-[var(--color-checkbox)]" />
                       <span>
                         {metadata.name}
                       </span>
                     </button>
                   ) : (
-                    <button onClick={() => setSelectedCalendars([...selectedCalendars, meeting_type])}>
+                    <button className="cursor-pointer" onClick={() => setSelectedCalendars([...selectedCalendars, meeting_type])}>
                       <CheckboxUncheckedFilled className="brightness-50" />
                       <span>
                         {metadata.name}
@@ -147,7 +147,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
               <li className="w-full">
                 <button
                   onClick={handleCopy}
-                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : 'w-full'}
+                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : 'cursor-pointer w-full'}
                 >
                   {copied ? (
                     <CheckmarkCircleFilled className="text-primary" />
