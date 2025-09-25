@@ -47,11 +47,11 @@ const profiles = await getProfilesFromNames(meeting.credit);
   data-time-start={isMaybeActive ? meeting.time_start.getTime() : undefined}
   data-time-close={isMaybeActive ? time_close.getTime() : undefined}
 >
-  <div class="group grid grid-cols-[1fr_max-content] px-2 py-1 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
-    <div class="flex flex-col lg:flex-row grow shrink min-w-0 gap-x-4 lg:items-center">
+  <div class="group grid grid-cols-[1fr_max-content] px-2 -mx-2 gap-x-4 rounded-lg hover:bg-surface-200">
+    <Link href={input.slug} class="!text-content py-1 m-0 flex flex-col lg:flex-row grow shrink min-w-0 gap-x-4 gap-y-1 lg:items-center">
       <div class="flex flex-col-reverse lg:flex-row grow-0 shrink-0 gap-x-4 lg:items-center">
         <time
-          class:list={["font-mono cursor-default", { "min-w-[20ch]": !dateFormat }]}
+          class:list={["font-mono", { "min-w-[20ch]": !dateFormat }]}
           datetime={convertDate(meeting.time_start, "YYYY-MM-DDTHH:mm:ssZ", meeting.timezone)}
           title={convertDate(meeting.time_start, "dddd, MMMM Do, YYYY, h:mm A (zzz)", meeting.timezone)}
           aria-label={convertDate(meeting.time_start, "dddd, MMMM Do, YYYY, h:mm A (zzz)", meeting.timezone)}
@@ -70,33 +70,31 @@ const profiles = await getProfilesFromNames(meeting.credit);
         </time>
         <MeetingTypeBadge type={meeting.type} consistentWidth={true} />
       </div>
-      <Link href={input.slug} class="lg:truncate w-full">
-        <span>
-          <span class="align-middle">
-            {meeting.week_number != null ? (
-              <span
-                aria-hidden="true"
-                title={`Week ${weekNumber(meeting.week_number)}`}
-                class="px-1 font-mono rounded-lg border-2 border-surface-150 select-none">Wk {weekNumber(meeting.week_number)}</span>
-            ) : null}
-            {meeting.title}
-          </span>
-          <span class="inline-block align-middle">
-            {meeting.difficulty ? (
-              <MeetingDifficultyBadge difficulty={meeting.difficulty} />
-            ) : null}
-          </span>
+      <div class="lg:truncate w-full">
+        <span class="align-middle">
+          {meeting.week_number != null ? (
+            <span
+              aria-hidden="true"
+              title={`Week ${weekNumber(meeting.week_number)}`}
+              class="px-1 font-mono rounded-lg border-2 border-surface-150 select-none">Wk {weekNumber(meeting.week_number)}</span>
+          ) : null}
+          {meeting.title}
         </span>
-      </Link>
-      {meeting.location ? (
-        <span class="flex grow-0 shrink-0 w-fit">
-          {meeting.location}
+        <span class="inline-block align-middle">
+          {meeting.difficulty ? (
+            <MeetingDifficultyBadge difficulty={meeting.difficulty} />
+          ) : null}
         </span>
-      ) : null}
-    </div>
-    <div class="hidden sm:flex flex-row grow-0 shrink-0 gap-x-4 items-center min-w-fit">
-      <div class="flex flex-row gap-x-2 items-center">
+      </div>
+      <span class="w-fit flex flex-row grow-0 shrink-0 gap-x-2 text-base">
+        {meeting.location ? (
+          <span class="opacity-90 italic">{meeting.location}</span>
+        ) : null}
         <MeetingCountdown time_start={meeting.time_start} time_close={time_close} />
+      </span>
+    </Link>
+    <div class="hidden sm:flex flex-row grow-0 shrink-0 gap-x-4 py-1 items-center min-w-fit">
+      <div class="flex flex-row gap-x-2 items-center">
         {meeting.recording ? (
           <Link
             href={meeting.recording}

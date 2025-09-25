@@ -14,7 +14,7 @@ export default function Persona(props: any) {
         <div className="flex shrink-0 grow-0">
           <PopoverTrigger
             onClick={() => setOpen(!open)}
-            className={`rounded-full ring-2 ring-transparent ring-offset-0 size-8 hover:ring-primary active:ring-primary focus:outline-none focus:ring-white ${open ? "ring-primary" : ""}`}
+            className={`cursor-pointer rounded-full ring-2 ring-transparent ring-offset-0 size-8 hover:ring-primary active:ring-primary focus:outline-none focus:ring-white ${open ? "ring-primary" : ""}`}
           >
             {props.avatar}
           </PopoverTrigger>
