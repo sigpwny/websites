@@ -28,10 +28,6 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
-      - name: Build pwnyctf mdbook
-        uses: ./.github/actions/build-mdbook
-        with:
-          book-directory: pwnyctf
       - name: Build site
         uses: ./.github/actions/build-astro
         with:
