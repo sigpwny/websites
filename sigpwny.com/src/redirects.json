@@ -79,9 +79,17 @@
     "status": 302,
     "destination": "https://sigpwny.github.io/pony-site/old/"
   },
+  "/rev_setup23": {
+    "status": 302,
+    "destination": "/meetings/general/2023-09-17/"
+  },
+  "/rev_setup25": {
+    "status": 302,
+    "destination": "/meetings/general/2025-09-18/"
+  },
   "/rev_setup": {
     "status": 302,
-    "destination": "/meetings/fa2023/2023-09-17/"
+    "destination": "/meetings/general/2025-09-18/"
   },
   "/github": {
     "status": 302,
