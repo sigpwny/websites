@@ -30,7 +30,7 @@ collections:
     folder: '_global/content/meetings'
     path: "{{fields.semester | lower}}/{{fields.type | lower}}/{{fields.time_start | date('YYYY-MM-DD')}}/index"
     extension: 'mdx'
-    format: 'yaml-frontmatter'
+    format: 'frontmatter'
     identifier_field: 'title'
     summary: "{{fields.type}} / `{{fields.time_start | date('YYYY-MM-DD')}}` / {{fields.title}}"
     sortable_fields:
@@ -116,7 +116,7 @@ collections:
     folder: '_global/content/events'
     path: "{{fields.series | lower}}/{{fields.time_start | date('YYYY')}}/index"
     extension: 'mdx'
-    format: 'yaml-frontmatter'
+    format: 'frontmatter'
     identifier_field: 'title'
     summary: "{{fields.series}} / {{fields.title}}"
     sortable_fields:
@@ -170,7 +170,7 @@ collections:
     slug: 'title'
     path: "{{fields.date | date('YYYY-MM-DD')}}_{{slug}}/index"
     extension: 'mdx'
-    format: 'yaml-frontmatter'
+    format: 'frontmatter'
     identifier_field: 'title'
     summary: "`{{fields.date | date('YYYY-MM-DD')}}` / `{{fields.publication_type}}` / {{fields.title}}"
     sortable_fields:
@@ -218,7 +218,7 @@ collections:
     slug: '{{name}}'
     path: '{{slug}}/index'
     extension: 'mdx'
-    format: 'yaml-frontmatter'
+    format: 'frontmatter'
     identifier_field: name
     sortable_fields:
       fields: ['name', 'weight', 'handle']
@@ -252,7 +252,7 @@ collections:
     slug: '{{name}}'
     path: '{{slug}}/index'
     extension: 'mdx'
-    format: 'yaml-frontmatter'
+    format: 'frontmatter'
     sortable_fields:
       fields: ['name', 'weight', 'handle']
       default:
