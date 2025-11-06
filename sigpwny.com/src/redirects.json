@@ -163,6 +163,10 @@
     "status": 302,
     "destination": "https://docs.google.com/document/d/1SGUgNQDu29ntW3nxFWXFY5ldo6TWg8v-CwvJ5zvLKP8/edit?usp=sharing"
   },
+  "/2025-csaw-esc": {
+    "status": 302,
+    "destination": "https://github.com/WhiteHoodHacker/2025-csaw-esc"
+  },
   "/tracerfire2025": {
     "status": 302,
     "destination": "https://docs.google.com/forms/d/e/1FAIpQLSeMT5Raw_xpZzSfo7l8Pazr0TAP5nJLy0As-4ccHUq9JPsaxw/viewform?usp=header"
