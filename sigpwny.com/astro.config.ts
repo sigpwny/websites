@@ -47,10 +47,6 @@ export default defineConfig({
             rename: (_name, _ext, path) => {
               return normalizePath(path.replace(meetingBase, '').replace(/(fa|sp)\d{4}/, ''))
             }
-          },
-          {
-            src: normalize('../guides/pwnyctf/book/*'),
-            dest: 'docs'
           }
         ]
       }),

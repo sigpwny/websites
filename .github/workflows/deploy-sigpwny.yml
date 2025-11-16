@@ -4,9 +4,7 @@ on:
     paths:
       - '_global/**'
       - '.github/**'
-      - '!.github/workflows/scheduled-pings.yml'
       - 'sigpwny.com/**'
-      - 'guides'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
