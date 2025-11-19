@@ -17,7 +17,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "serve": "astro preview",
-    "sync-discord": "npx tsx --env-file=.env src/scripts/discord.ts",
+    "sync-discord": "npx tsx --env-file=.env src/scripts/sync-discord-events.ts",
     "send-discord-ping": "npx tsx --env-file=.env src/scripts/send-discord-ping.ts",
     "schedule-discord-ping": "npx tsx src/scripts/schedule-discord-ping.ts",
     "astro": "astro"
