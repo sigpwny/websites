@@ -113,12 +113,13 @@ async function main() {
             const fullDescription = url + '\n' + descriptionText;
 
             const titleWithCategory = meetingMetadata[type]?.shortName ? `${title} [${meetingMetadata[type]?.shortName}]` : title;
+            const optionalLocation = location || 'Location TBD';
 
             const existingMetadata = snowflakeMeetingLookup[noTrailingSlashSlug];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
-                    location: location,
+                    location: optionalLocation,
                 },
                 entityType: GuildScheduledEventEntityType.External,
                 image: cardImageURL || existingMetadata?.coverImageURL({}) || undefined,
@@ -151,13 +152,14 @@ async function main() {
 
             const descriptionText = description ? description : body;
             const fullDescription = url ? url + '/' + '\n' + descriptionText : descriptionText;
+            const optionalLocation = location || 'Location TBD';
 
 
             const existingMetadata = snowflakeEventLookup[url];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
                 entityMetadata: {
-                    location: location,
+                    location: optionalLocation,
                 },
                 entityType: GuildScheduledEventEntityType.External,
                 image: cardImageURL || existingMetadata?.coverImageURL({}) || undefined,
