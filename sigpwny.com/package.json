@@ -23,19 +23,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.2.4",
-    "@astrojs/netlify": "^6.3.0",
-    "@astrojs/react": "^4.2.4",
-    "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.3.0",
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/mdx": "^4.3.11",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/rss": "^4.0.13",
+    "@astrojs/sitemap": "^3.6.0",
     "@floating-ui/dom": "^1.6.8",
     "@floating-ui/react": "^0.26.20",
     "@tailwindcss/postcss": "^4.1.12",
     "@tailwindcss/vite": "^4.1.12",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "astro": "^5.7.4",
+    "astro": "^5.15.9",
     "dayjs": "^1.11.11",
     "discord.js": "^14.22.1",
     "framer-motion": "^11.1.7",
@@ -54,7 +53,7 @@
   "devDependencies": {
     "@reteps/github-action-scheduler": "^1.0.5",
     "postcss-nested": "^7.0.2",
-    "rimraf": "^6.0.1",
+    "rimraf": "^6.1.2",
     "vite-plugin-static-copy": "^3.1.2"
   },
   "engines": {
