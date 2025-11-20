@@ -6,6 +6,7 @@
     "jsxImportSource": "react",
     "forceConsistentCasingInFileNames": true,
     "paths": {
+      "~/*": ["./*"],
       "@/*": ["./src/*"],
       "$/*": ["../_global/*"]
     },

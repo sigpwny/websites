@@ -1,4 +1,4 @@
-import astroConfig from 'astro.config';
+import astroConfig from '~/astro.config';
 import { getCollection } from 'astro:content';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';

@@ -1,4 +1,4 @@
-import astroConfig from 'astro.config';
+import astroConfig from '~/astro.config';
 
 const plaintextRedirects = `
 /calendar/full.ics /calendar/all/generic.ics 301
