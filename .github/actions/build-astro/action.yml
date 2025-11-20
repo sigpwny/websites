@@ -56,10 +56,10 @@ runs:
           ${{ inputs.working-directory }}/${{ inputs.cache-directory }}
           ${{ inputs.working-directory }}/${{ inputs.build-directory }}
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles(format('{0}/**/package-lock.json', inputs.working-directory)) }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+        # restore-keys: |
+        #   ${{ runner.os }}-build-${{ env.cache-name }}-
+        #   ${{ runner.os }}-build-
+        #   ${{ runner.os }}-
 
     - if: ${{ steps.cache-modules.outputs.cache-hit != 'true' }}
       name: (On cache miss) List the state of node modules
