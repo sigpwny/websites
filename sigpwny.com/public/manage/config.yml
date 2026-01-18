@@ -239,6 +239,7 @@ collections:
         ]}
       - {label: 'Role', name: 'role', widget: 'select', dropdown_threshold: 1, options: ['admin', 'alum', 'helper', 'member'], required: false}
       - {label: 'Title', name: 'title', widget: 'string', hint: 'This overrides your displayed role from above with a custom title, e.g. `President` or `Embedded Lead`', required: false}
+      - {label: 'Period', name: 'period', widget: 'string', hint: 'Adds a graduation year', required: false}
       - {label: 'Weight', name: 'weight', hint: 'Set to a higher value to sort this profile closer to the top, otherwise sort by name. Reserved for administrative roles, such as President or Co-President.', widget: 'number', required: false}
 
   - name: 'organizations'
