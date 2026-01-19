@@ -50,6 +50,7 @@ collections:
       - {label: 'Title', name: 'title', hint: 'e.g. `Introduction`, `PWN II`', widget: 'string'}
       # - {label: 'Semester', name: 'semester', hint: 'e.g. `sp2025`, `fa2025`', widget: 'string'}
       - {label: 'Semester', name: 'semester', widget: 'select', dropdown_threshold: 1, options: [
+          {label: 'Spring 2026', value: 'sp2026'},
           {label: 'Fall 2025', value: 'fa2025'},
           {label: 'Spring 2025', value: 'sp2025'},
           {label: 'Fall 2024', value: 'fa2024'},
