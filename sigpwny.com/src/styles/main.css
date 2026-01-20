@@ -60,7 +60,7 @@
     --font-size-base: 1.125rem;
 
     font-family: "Helvetica Neue", Helvetica, Arial;
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-standard);
     background-color: rgb(var(--rgb-surface-000));
     color: rgb(var(--rgb-content));
     height: 100%;
@@ -137,8 +137,8 @@
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 0.5rem;
-  width: var(--font-size-base);
-  height: var(--font-size-base);
+  width: 1.125rem;
+  height: 1.125rem;
 }
 .social-links a,
 .social-links a:active {
