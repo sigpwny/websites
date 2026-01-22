@@ -163,6 +163,10 @@
     "status": 302,
     "destination": "https://docs.google.com/document/d/1SGUgNQDu29ntW3nxFWXFY5ldo6TWg8v-CwvJ5zvLKP8/edit?usp=sharing"
   },
+  "/2026-ectf-syllabus": {
+    "status": 302,
+    "destination": "https://docs.google.com/document/d/1xz8nB8e_-jzlmbIiFx_GVUj72PGaDgvcQ4WbFiM7tA4/edit?usp=sharing"
+  },
   "/2025-csaw-esc": {
     "status": 302,
     "destination": "https://github.com/WhiteHoodHacker/2025-csaw-esc"
