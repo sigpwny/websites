@@ -174,5 +174,9 @@
   "/tracerfire2025": {
     "status": 302,
     "destination": "https://docs.google.com/forms/d/e/1FAIpQLSeMT5Raw_xpZzSfo7l8Pazr0TAP5nJLy0As-4ccHUq9JPsaxw/viewform?usp=header"
+  },
+  "/tracerfire2026": {
+    "status": 302,
+    "destination": "https://docs.google.com/forms/d/e/1FAIpQLSerXz-JYOg80_KiYV3AUnxPzgwZTcUAJ4ZX5grJ8GtuD4zQ2A/viewform?usp=header"
   }
 }
