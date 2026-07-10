@@ -4,4 +4,4 @@ google-auth==1.12.0
 python-dotenv
 google-auth-oauthlib
 oauth2client
-httplib2==0.15.0
+httplib2==0.19.0
