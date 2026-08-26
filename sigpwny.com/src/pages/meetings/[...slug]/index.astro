@@ -52,6 +52,7 @@ const time_end = meeting.time_start && meeting.duration
   ? dayjs(meeting.time_start).tz(meeting.timezone).add(dayjs.duration(meeting.duration))
   : undefined;
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
+const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(meeting.location?.trim() ?? '');
 ---
 <Layout
   title={`${meeting.semester}${meeting.week_number != null ? ' Week ' + weekNumber(meeting.week_number) : ''}: ${meeting.title} — ${consts.title}`}
@@ -126,10 +127,10 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
           {meeting.location ? (
             <div class="flex flex-row gap-2 items-center">
               <LocationRegular className="flex-none text-primary" />
-              {iCalendarLocation?.title ? (
+              {iCalendarLocation?.title && !isVirtualLocation ? (
                 <a
                   class="inline align-middle !underline underline-offset-2"
-                  href={`https://maps.google.com/?q=${iCalendarLocation.title}`}
+                  href={`https://maps.google.com/?q=${encodeURIComponent(iCalendarLocation.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
