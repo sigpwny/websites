@@ -3,7 +3,6 @@ import Link from '$/components/Link.astro';
 import PersonaGroup from '@/components/Profile/PersonaGroup.astro';
 import {
   DocumentPdfFilled,
-  OpenRegular,
   VideoClipFilled,
   VideoFilled,
 } from '$/components/Icons/fluentui';
@@ -98,18 +97,7 @@ const profiles = await getProfilesFromNames(entry.credit);
     </Link>
     <div class="hidden sm:flex flex-row grow-0 shrink-0 gap-x-4 py-1 items-center min-w-fit">
       <div class="flex flex-row gap-x-2 items-center">
-        {isEvent ? (
-          input.slug ? (
-            <Link
-              href={input.slug}
-              class="rounded-lg p-1 size-8 flex items-center justify-items-center bg-surface-150 border-2 border-surface-200 group-hover:bg-surface-200 group-hover:border-surface-150 hover:!border-primary"
-              title="Open event website"
-              aria-label="Open event website"
-            >
-              <OpenRegular />
-            </Link>
-          ) : null
-        ) : meeting?.recording ? (
+        {meeting?.recording ? (
           <Link
             href={meeting.recording}
             class="rounded-lg p-1 size-8 flex items-center justify-items-center bg-surface-150 border-2 border-surface-200 group-hover:bg-surface-200 group-hover:border-surface-150 hover:!border-primary"
@@ -143,7 +131,7 @@ const profiles = await getProfilesFromNames(entry.credit);
             <VideoClipFilled />
           </span>
         )}
-        {!isEvent && meeting?.slides ? (
+        {meeting?.slides ? (
           <Link
             href={meeting.slides}
             class="rounded-lg p-1 size-8 flex items-center justify-items-center bg-surface-150 border-2 border-surface-200 group-hover:bg-surface-200 group-hover:border-surface-150 hover:!border-primary"
@@ -153,14 +141,14 @@ const profiles = await getProfilesFromNames(entry.credit);
           >
             <DocumentPdfFilled />
           </Link>
-        ) : !isEvent ? (
+        ) : (
           <span
             class="cursor-not-allowed rounded-lg p-1 size-8 flex items-center justify-items-center border-2 border-surface-150 text-surface-150 group-hover:border-surface-250 group-hover:text-surface-250 border-dashed"
             title="Slides unavailable"
           >
             <DocumentPdfFilled />
           </span>
-        ) : null}
+        )}
       </div>
       <span class="hidden xl:block">
         <PersonaGroup
