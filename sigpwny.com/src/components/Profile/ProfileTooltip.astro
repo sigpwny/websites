@@ -12,11 +12,37 @@
 <script>
   let activeTrigger: HTMLElement | null = null;
 
+  const supportsPopover =
+    typeof HTMLElement !== 'undefined' && 'showPopover' in HTMLElement.prototype;
+
   function getTooltip() {
     return document.querySelector<HTMLElement>('#profile-tooltip');
   }
 
+  function isPopoverOpen(tooltip: HTMLElement) {
+    if (supportsPopover) return tooltip.matches(':popover-open');
+    return tooltip.classList.contains('is-open');
+  }
+
+  function showTooltip(tooltip: HTMLElement) {
+    if (supportsPopover) {
+      tooltip.showPopover();
+    } else {
+      tooltip.classList.add('is-open');
+    }
+  }
+
+  function hideTooltip(tooltip: HTMLElement) {
+    if (supportsPopover) {
+      tooltip.hidePopover();
+    } else {
+      tooltip.classList.remove('is-open');
+    }
+  }
+
   function positionTooltip(trigger: HTMLElement, tooltip: HTMLElement) {
+    if (!supportsPopover) return;
+
     const gap = 8;
     const triggerRect = trigger.getBoundingClientRect();
     const tooltipRect = tooltip.getBoundingClientRect();
@@ -43,13 +69,16 @@
     if (!tooltip || tooltip.dataset.bound === 'true') return;
 
     tooltip.dataset.bound = 'true';
-    tooltip.addEventListener('toggle', () => {
-      if (tooltip.matches(':popover-open')) return;
 
-      activeTrigger?.setAttribute('aria-expanded', 'false');
-      activeTrigger = null;
-      tooltip.querySelector('[data-profile-tooltip-body]')?.replaceChildren();
-    });
+    if (supportsPopover) {
+      tooltip.addEventListener('toggle', () => {
+        if (isPopoverOpen(tooltip)) return;
+
+        activeTrigger?.setAttribute('aria-expanded', 'false');
+        activeTrigger = null;
+        tooltip.querySelector('[data-profile-tooltip-body]')?.replaceChildren();
+      });
+    }
   }
 
   document.addEventListener('click', (event) => {
@@ -58,8 +87,8 @@
     const trigger = event.target.closest<HTMLElement>('[data-profile-tooltip-trigger]');
     if (!trigger) {
       const tooltip = getTooltip();
-      if (activeTrigger && tooltip?.matches(':popover-open') && !event.target.closest('#profile-tooltip')) {
-        tooltip.hidePopover();
+      if (activeTrigger && tooltip && isPopoverOpen(tooltip) && !event.target.closest('#profile-tooltip')) {
+        hideTooltip(tooltip);
       }
       return;
     }
@@ -69,9 +98,11 @@
     const body = tooltip?.querySelector('[data-profile-tooltip-body]');
     if (!tooltip || !(template instanceof HTMLTemplateElement) || !body) return;
 
-    if (activeTrigger === trigger && tooltip.matches(':popover-open')) {
-      tooltip.hidePopover();
-      return;
+    if (activeTrigger === trigger && isPopoverOpen(tooltip)) {
+      if (supportsPopover) {
+        hideTooltip(tooltip);
+        return;
+      }
     }
 
     activeTrigger?.setAttribute('aria-expanded', 'false');
@@ -79,28 +110,67 @@
     trigger.setAttribute('aria-expanded', 'true');
     body.replaceChildren(template.content.cloneNode(true));
 
-    if (!tooltip.matches(':popover-open')) tooltip.showPopover();
+    if (!isPopoverOpen(tooltip)) showTooltip(tooltip);
     positionTooltip(trigger, tooltip);
   });
 
   window.addEventListener('resize', () => {
     const tooltip = getTooltip();
-    if (activeTrigger && tooltip?.matches(':popover-open')) {
+    if (activeTrigger && tooltip && isPopoverOpen(tooltip)) {
       positionTooltip(activeTrigger, tooltip);
     }
   });
 
   document.addEventListener('scroll', () => {
     const tooltip = getTooltip();
-    if (activeTrigger && tooltip?.matches(':popover-open')) {
+    if (activeTrigger && tooltip && isPopoverOpen(tooltip)) {
       positionTooltip(activeTrigger, tooltip);
     }
   }, true);
 
   document.addEventListener('astro:before-swap', () => {
     const tooltip = getTooltip();
-    if (tooltip?.matches(':popover-open')) tooltip.hidePopover();
+    if (tooltip && isPopoverOpen(tooltip)) hideTooltip(tooltip);
   });
+  if (!supportsPopover) {
+    let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    document.addEventListener('mouseover', (event) => {
+      const trigger = event.target instanceof Element
+        ? event.target.closest<HTMLElement>('[data-profile-tooltip-trigger]')
+        : null;
+      if (!trigger) return;
+
+      const tooltip = getTooltip();
+      const template = trigger.nextElementSibling;
+      const body = tooltip?.querySelector('[data-profile-tooltip-body]');
+      if (!tooltip || !(template instanceof HTMLTemplateElement) || !body) return;
+
+      if (hoverTimeout) clearTimeout(hoverTimeout);
+      body.replaceChildren(template.content.cloneNode(true));
+      tooltip.style.left = '0';
+      tooltip.style.top = '0';
+      showTooltip(tooltip);
+    });
+
+    document.addEventListener('mouseout', (event) => {
+      const related = event.relatedTarget instanceof Element
+        ? event.relatedTarget.closest<HTMLElement>('[data-profile-tooltip-trigger]')
+        : null;
+      if (related) return;
+
+      const tooltip = getTooltip();
+      if (!tooltip) return;
+
+      if (event.relatedTarget instanceof Element && event.relatedTarget.closest('#profile-tooltip')) return;
+
+      hoverTimeout = setTimeout(() => {
+        hideTooltip(tooltip);
+        tooltip.querySelector('[data-profile-tooltip-body]')?.replaceChildren();
+      }, 100);
+    });
+  }
+
   document.addEventListener('astro:page-load', bindTooltip);
   bindTooltip();
 </script>
@@ -114,5 +184,13 @@
 
   #profile-tooltip::backdrop {
     background: transparent;
+  }
+
+  :where(#profile-tooltip:not(:popover-open)) {
+    display: none;
+  }
+
+  #profile-tooltip.is-open {
+    display: block;
   }
 </style>
