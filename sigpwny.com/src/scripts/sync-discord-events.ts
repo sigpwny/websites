@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { Client, GatewayIntentBits, Events, type GuildScheduledEventCreateOptions, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEvent, type GuildScheduledEventEditOptions, GuildScheduledEventStatus } from 'discord.js';
+import { Client, GatewayIntentBits, Events, type GuildScheduledEventCreateOptions, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, GuildScheduledEvent, GuildScheduledEventStatus } from 'discord.js';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
@@ -16,6 +16,11 @@ const zeroPad = (num: any, places: number) => String(num).padStart(places, '0')
 
 // https://stackoverflow.com/a/3809435/5684541
 const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi;
+
+const getDiscordVoiceChannelId = (url: string | undefined, guildId: string) => {
+    const match = url?.match(/^https:\/\/(?:www\.)?discord\.com\/channels\/(\d+)\/(\d+)\/?$/);
+    return match?.[1] === guildId ? match[2] : undefined;
+};
 
 async function main() {
     const fetchMeetings = async () => {
@@ -99,7 +104,7 @@ async function main() {
         console.log(snowflakeEventLookup);
 
         const meetingsToUpdate = upcomingMeetings.map((meeting: any) : Promise<GuildScheduledEvent> => {
-            const { data : { title, type, location, card_image, week_number, time_end, time_start, description }, body, filePath, slug } = meeting;
+            const { data : { title, type, location, card_image, week_number, time_end, time_start, description, live_video_url }, body, filePath, slug } = meeting;
 
             // Resolve filepath to image
             // const contentDir = path.join(__dirname, '..', '..', path.dirname(filePath));
@@ -114,14 +119,20 @@ async function main() {
 
             const titleWithCategory = meetingMetadata[type]?.shortName ? `${title} [${meetingMetadata[type]?.shortName}]` : title;
             const optionalLocation = location || 'Location TBD';
+            const discordVoiceChannelId = getDiscordVoiceChannelId(live_video_url, guild.id);
 
             const existingMetadata = snowflakeMeetingLookup[noTrailingSlashSlug];
             const metadata : GuildScheduledEventCreateOptions = {
                 description: fullDescription.length > 1000 ? fullDescription.substring(0, 997) + '...' : fullDescription,
-                entityMetadata: {
-                    location: optionalLocation,
-                },
-                entityType: GuildScheduledEventEntityType.External,
+                ...(discordVoiceChannelId ? {
+                    channel: discordVoiceChannelId,
+                    entityType: GuildScheduledEventEntityType.Voice,
+                } : {
+                    entityMetadata: {
+                        location: optionalLocation,
+                    },
+                    entityType: GuildScheduledEventEntityType.External,
+                }),
                 image: cardImageURL || existingMetadata?.coverImageURL({}) || undefined,
                 name: (week_number !== undefined) ? `Week ${zeroPad(week_number, 2)}: ${titleWithCategory}` : titleWithCategory,
                 privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly,
@@ -134,7 +145,10 @@ async function main() {
                     return Promise.resolve({} as GuildScheduledEvent);
                 }
                 console.log(`Editing meeting "${titleWithCategory}"`);
-                return guild.scheduledEvents.edit(existingMetadata.id, metadata);
+                return guild.scheduledEvents.edit(existingMetadata.id, {
+                    ...metadata,
+                    channel: discordVoiceChannelId ?? null,
+                });
             } else {
                 console.log(`Creating meeting "${titleWithCategory}"`);
                 return guild.scheduledEvents.create(metadata);

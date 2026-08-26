@@ -26,7 +26,7 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
     card_image: z.optional(CardImageSchema(image)).describe('An image representing the meeting.'),
     live_video_url: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
-      z.optional(z.string().url()).describe('A URL to the live video of the meeting (e.g. Zoom).')
+      z.optional(z.string().url()).describe('A URL for joining the meeting live (e.g. Zoom or a Discord voice channel).')
     ),
     slides: z.optional(z.coerce.string()).describe('Relative file path to the slides for the meeting.'),
     recording: z.preprocess(
