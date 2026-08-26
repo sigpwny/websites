@@ -8,8 +8,6 @@ backend:
   base_url: https://cms-auth.sigpwny.com
   auth_endpoint: auth
   skip_ci: false
-  squash_merges: true
-publish_mode: editorial_workflow
 slug:
   encoding: 'ascii'
   clean_accents: true
