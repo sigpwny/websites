@@ -30,6 +30,24 @@ export async function getMeetings() {
 
 export type Meeting = Awaited<ReturnType<typeof getMeetings>>[0];
 
+async function getMeetingIndexEvents() {
+  const events = await getCollection('events');
+  return events.map((event) => {
+    const year = dayjs(event.data.time_start).format('YYYY');
+    const website = event.data.links.find((link) => link.name.toLowerCase() === 'website')?.url;
+    return {
+      ...event,
+      data: {
+        ...event.data,
+        semester: calculateSemester(event.data.time_start),
+      },
+      slug: website ?? (event.data.series === 'fallctf' ? `https://fallctf.com/${year}/` : undefined),
+    };
+  });
+}
+
+export type MeetingIndexEntry = Meeting | Awaited<ReturnType<typeof getMeetingIndexEvents>>[0];
+
 export async function getSemesterToMeetingsMap() {
   // Sort by most recent meetings first
   const sortedMeetings = (await getMeetings()).sort(
@@ -44,6 +62,23 @@ export async function getSemesterToMeetingsMap() {
     acc.get(semester)?.push(meeting);
     return acc;
   }, new Map<string, Meeting[]>());
+};
+
+export async function getSemesterToMeetingIndexMap() {
+  const entries: MeetingIndexEntry[] = [
+    ...await getMeetings(),
+    ...await getMeetingIndexEvents(),
+  ];
+  entries.sort((a, b) => b.data.time_start.valueOf() - a.data.time_start.valueOf());
+
+  return entries.reduce((acc, entry) => {
+    const semester = entry.data.semester;
+    if (!acc.has(semester)) {
+      acc.set(semester, []);
+    }
+    acc.get(semester)?.push(entry);
+    return acc;
+  }, new Map<string, MeetingIndexEntry[]>());
 };
 
 export function getSemesters(meetings: Meeting[]): string[] {

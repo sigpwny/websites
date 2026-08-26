@@ -6,7 +6,7 @@ import Layout, {
 import MeetingRow from '@/components/Meeting/Row.astro';
 import MeetingTypeBadge from '@/components/Meeting/TypeBadge';
 import {
-  getSemesterToMeetingsMap,
+  getSemesterToMeetingIndexMap,
   formatSemester,
 } from '@/utils/meetings';
 import { meetingMetadata } from '$/utils/meetingMetadata';
@@ -20,7 +20,7 @@ dayjs.extend(duration);
 dayjs.extend(utc);
 
 export async function getStaticPaths() {
-  const semesterToMeetingsMap = await getSemesterToMeetingsMap();
+  const semesterToMeetingsMap = await getSemesterToMeetingIndexMap();
   const semesters = Array.from(semesterToMeetingsMap.keys());
   const allIndexLink = {
     name: 'All Meetings',

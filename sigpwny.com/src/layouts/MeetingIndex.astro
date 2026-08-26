@@ -7,7 +7,7 @@ import {
   ChevronLeftFilled,
   ChevronRightFilled,
 } from '$/components/Icons/fluentui';
-import { type Meeting } from '@/utils/meetings';
+import { type MeetingIndexEntry } from '@/utils/meetings';
 import { meetingMetatypes } from '$/utils/meetingMetadata';
 import CalendarSubscribe from '@/components/CalendarSubscribe';
 
@@ -18,7 +18,7 @@ export interface SemesterLinkProps {
 };
 
 export interface MeetingIndexPageProps {
-  meetings: Map<string, Meeting[]>;
+  meetings: Map<string, MeetingIndexEntry[]>;
   allLinks: SemesterLinkProps[];
   currLink: SemesterLinkProps;
   newerLink?: SemesterLinkProps;
