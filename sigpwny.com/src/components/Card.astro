@@ -17,6 +17,7 @@ interface Props {
 }
 
 const { heading, title, card_image, hover } = Astro.props as Props;
+const formats = (image: ImageMetadata): string[] => image.format === 'svg' ? ['svg'] : ['avif', 'webp'];
 ---
 <style>
   @reference "../styles/main.css";
@@ -56,7 +57,7 @@ const { heading, title, card_image, hover } = Astro.props as Props;
             src={card_image.background}
             alt={card_image.alt ?? ""}
             widths={[300, 600]}
-            formats={["avif", "webp"]}
+            formats={formats(card_image.background)}
           />
         ) : card_image?.background_color ? (
           <div
@@ -71,7 +72,7 @@ const { heading, title, card_image, hover } = Astro.props as Props;
             src={card_image.foreground}
             alt={card_image.alt ?? ""}
             widths={[300, 600]}
-            formats={["avif", "webp"]}
+            formats={formats(card_image.foreground)}
           />
         ) : null}
       </>

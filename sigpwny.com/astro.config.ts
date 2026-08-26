@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import { unified } from '@astrojs/markdown-remark';
 import react from "@astrojs/react";
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -19,16 +20,16 @@ const meetingBase = path.resolve(import.meta.dirname, '../_global/content/meetin
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sigpwny.com',
-  integrations: [
-    mdx({
+  compressHTML: true,
+  markdown: {
+    processor: unified({
       gfm: true,
-      rehypePlugins: [
-        rehypeKatex
-      ],
-      remarkPlugins: [
-        remarkMath
-      ],
+      rehypePlugins: [rehypeKatex],
+      remarkPlugins: [remarkMath],
     }),
+  },
+  integrations: [
+    mdx(),
     sitemap(),
     react(),
   ],
@@ -41,7 +42,7 @@ export default defineConfig({
       viteStaticCopy({
         targets: [
           {
-            src: normalize('../_global/content/meetings/*'),
+            src: normalize('../_global/content/meetings/**/*'),
             dest: 'meetings',
             rename: (_name, _ext, path) => {
               return normalizePath(path.replace(meetingBase, '').replace(/(fa|sp)\d{4}/, ''))

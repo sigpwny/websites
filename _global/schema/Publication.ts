@@ -1,7 +1,7 @@
-import { z } from 'astro:content';
-import { CardImageSchema } from '.';
+import { z, type SchemaContext } from 'astro:content';
+import { CardImageSchema } from './CardImage';
 
-export const PublicationSchema = ({ image }) => (
+export const PublicationSchema = ({ image }: SchemaContext) => (
   z.object({
     title: z.coerce.string(),
     date: z.coerce.date(),

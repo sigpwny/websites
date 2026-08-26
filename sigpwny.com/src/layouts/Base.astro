@@ -3,6 +3,7 @@ import '@/styles/main.css';
 import '$/styles/md.css';
 import '$/styles/prism-one-dark.css';
 
+import { ClientRouter } from 'astro:transitions';
 import type { HeadProps } from '$/components/BaseHead.astro';
 import BaseHead from '$/components/BaseHead.astro';
 import Header from '@/components/Header.astro';
@@ -15,6 +16,7 @@ const props: Omit<HeadProps, "site_name"> = Astro.props;
 <html lang="en" transition:animate="none">
   <head>
     <BaseHead {...props} site_name="sigpwny.com" />
+    <ClientRouter />
   </head>
   <body>
     <div class="flex flex-col min-h-screen">

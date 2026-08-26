@@ -1,4 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
+import type { ReactElement } from 'react';
 import { BugFlat, ButterflyFlat, PhoenixFlat } from '$/components/Icons/fluentemojis';
 
 type MeetingDifficulty = Exclude<CollectionEntry<'meetings'>['data']['difficulty'], undefined>;
@@ -7,7 +8,7 @@ interface Props {
   difficulty: MeetingDifficulty;
 };
 
-const icons: Partial<Record<MeetingDifficulty, JSX.Element | null>> = {
+const icons: Partial<Record<MeetingDifficulty, ReactElement | null>> = {
   beginner: <BugFlat />,
   intermediate: <ButterflyFlat />,
   advanced: <PhoenixFlat />,

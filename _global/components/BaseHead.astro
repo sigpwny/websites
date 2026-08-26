@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
 import { type SiteName, getSiteConfig } from '../configs';
 
 export interface HeadProps {
@@ -85,4 +84,3 @@ const robots = props.disable_robots ? "noindex, nofollow" : "index, follow";
 {props.redirect ? (
   <meta http-equiv="refresh" content={`0;url=${props.redirect}`} />
 ) : null}
-<ViewTransitions />
