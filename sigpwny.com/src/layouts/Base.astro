@@ -9,6 +9,7 @@ import type { HeadProps } from '$/components/BaseHead.astro';
 import BaseHead from '$/components/BaseHead.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import ProfileTooltip from '@/components/Profile/ProfileTooltip.astro';
 
 const props: Omit<HeadProps, "site_name"> = Astro.props;
 ---
@@ -34,5 +35,6 @@ const props: Omit<HeadProps, "site_name"> = Astro.props;
       </div>
     </div>
     <Footer />
+    <ProfileTooltip />
   </body>
 </html>

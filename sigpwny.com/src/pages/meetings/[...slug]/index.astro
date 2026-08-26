@@ -7,10 +7,8 @@ import {
   LocationRegular
 } from '$/components/Icons/fluentui';
 import { MdxComponents } from '$/components/Mdx/index.astro';
-import Avatar from '@/components/Profile/Avatar.astro';
 import Layout from '@/layouts/Meeting.astro';
-import Persona from '@/components/Profile/Persona';
-import ProfileCard from '@/components/Profile/ProfileCard.astro';
+import Persona from '@/components/Profile/Persona.astro';
 import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
@@ -24,7 +22,6 @@ import consts from '@/consts';
 import locations from '@/locations.json';
 import { createICalendarLocation } from '@/utils/icalendar';
 import { getProfilesFromNames } from '$/utils/profiles';
-// import { Tooltip } from '@/components/Tooltip';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -82,19 +79,11 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
         {profiles.length > 0 ? (
           <div class="flex flex-col md:flex-row shrink-0 flex-wrap gap-x-2 gap-y-1 md:items-center mb-2">
             {profiles.map((profile, idx) => (
-              <Persona profile={profile} client:load>
-                <span slot="avatar">
-                  <Avatar profile={profile} />
-                </span>
-                <span slot="visibleInfo">
-                  <span itemprop="author">
-                    {profile.name}{idx === profiles.length - 1 ? null : (
-                      <span class="hidden md:inline-block">,</span>
-                    )}
-                  </span>
-                </span>
-                <span slot="hiddenInfo">
-                  <ProfileCard profile={profile} />
+              <Persona profile={profile}>
+                <span itemprop="author">
+                  {profile.name}{idx === profiles.length - 1 ? null : (
+                    <span class="hidden md:inline-block">,</span>
+                  )}
                 </span>
               </Persona>
             ))}
@@ -218,8 +207,5 @@ const iCalendarLocation = createICalendarLocation(locations, meeting.location);
     <section class="md-root w-full max-w-prose mx-auto" itemprop="articleBody">
       <Content components={MdxComponents} />
     </section>
-    <span class="z-50 hidden md:block">
-      {/* <Tooltip.Profile offset={3} place="bottom-start" client:load /> */}
-    </span>
   </article>
 </Layout>
