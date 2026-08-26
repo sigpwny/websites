@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
 backend:
   name: github
   branch: main
@@ -6,6 +8,8 @@ backend:
   base_url: https://cms-auth.sigpwny.com
   auth_endpoint: auth
   skip_ci: false
+  squash_merges: true
+publish_mode: editorial_workflow
 slug:
   encoding: 'ascii'
   clean_accents: true
@@ -14,7 +18,8 @@ output:
   omit_empty_optional_fields: true
 site_url: "https://sigpwny.com"
 display_url: "https://sigpwny.com"
-logo_url: "https://sigpwny.com/pwny8.svg"
+logo:
+  src: "https://sigpwny.com/pwny8.svg"
 
 # These fields are not used since they are overwritten in each collection, but are required.
 media_folder: media
@@ -32,6 +37,8 @@ collections:
     extension: 'mdx'
     format: 'frontmatter'
     identifier_field: 'title'
+    preview_path: 'meetings{{dirname}}'
+    aliases_field: false
     summary: "{{fields.type}} / `{{fields.time_start | date('YYYY-MM-DD')}}` / {{fields.title}}"
     sortable_fields:
       fields: ['time_start', 'title']
@@ -44,8 +51,6 @@ collections:
       - {label: '🔴 CTF Team', field: 'type', pattern: 'ctf'}
       - {label: '🟡 Embedded Team', field: 'type', pattern: 'embedded'}
       - {label: '🟣 Purple Team', field: 'type', pattern: 'purple'}
-    nested:
-      depth: 100
     fields:
       - {label: 'Title', name: 'title', hint: 'e.g. `Introduction`, `PWN II`', widget: 'string'}
       # - {label: 'Semester', name: 'semester', hint: 'e.g. `sp2025`, `fa2025`', widget: 'string'}
@@ -83,7 +88,7 @@ collections:
           {label: '🦋 Intermediate', value: 'intermediate'},
           {label: '🐦‍🔥 Advanced', value: 'advanced'}
         ]}
-      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm:ssZ', picker_utc: false, hint: "Based on __**your device's timezone**__. Display timezone is an option below."}
+      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', format: 'YYYY-MM-DDTHH:mm:ssZ', input_timezone: 'local', output_utc: false, hint: "Based on __**your device's timezone**__. Display timezone is an option below."}
       - {label: 'Duration', name: 'duration', widget: 'string', default: '', hint: 'Leave blank to default to `PT1H` (1 hour). Use ISO 8601 duration format: `P(n)Y(n)M(n)DT(n)H(n)M(n)S`, e.g. `PT48H` is 48 hours.', required: false}
       - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: "Leave blank for `America/Chicago`. Use identifiers from the [IANA tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones), e.g. `America/Chicago` or `Etc/UTC`.", required: false}
       - {label: 'Credit (Authors, Presenters, and Sponsors)', name: 'credit', widget: 'list', hint: 'Add each name on a new line (commas will not work). Full profile information is referenced from the names defined in the **Members** and **Organizations** collections.'}
@@ -100,7 +105,7 @@ collections:
       - {label: 'Live Meeting URL', name: 'live_video_url', widget: 'string', hint: 'Use a scheduled Zoom meeting or Discord voice channel URL so people can find the link before the meeting starts.', required: false}
       - {label: 'Recording URL (YouTube)', name: 'recording', widget: 'string', required: false}
       - {label: 'Slides', name: 'slides', widget: 'file', choose_url: false, hint: 'Please upload PDFs instead of PPTX files. If downloading from Google Slides, ensure that skipped slides are not present.', required: false}
-      - {label: 'Additional Assets', name: 'assets', widget: 'list', field: {label: File, name: file, widget: 'file', choose_url: false}, hint: 'Zip or compress files together when possible.', required: false}
+      - {label: 'Additional Assets', name: 'assets', widget: 'file', multiple: true, choose_url: false, hint: 'Zip or compress files together when possible.', required: false}
       - {label: 'Tags', name: 'tags', widget: 'list', hint: 'Add each tag on a new line (commas will not work). Add a main topic tag: `web`, `pwn`, `rev`, `crypto`, `forensics`, `jail`, `osint`, `misc`. Plus, add tags for specific topics, such as `xss`, `rsa`, or `lockpicking`. Try to re-use tags from past meetings. Avoid adding tags for meeting types since those are already visually highlighted (e.g. no adding `general` or `purple`).', max: 5, required: false}
       - {label: 'Week Number (Deprecated)', name: 'week_number', hint: 'Current week number in the semester, 0-indexed. Do not specify week numbers for events, such as CTFs (only for meetings).', widget: 'number', value_type: 'int', min: 0, max: 52, step: 1, required: false}
       - {label: 'Body', name: 'body', widget: 'markdown', modes: [raw, rich_text], required: false}
@@ -129,15 +134,13 @@ collections:
     view_filters:
       - {label: '🔷 UIUCTF', field: 'series', pattern: 'uiuctf'}
       - {label: '🔶 Fall CTF', field: 'series', pattern: 'fallctf'}
-    nested:
-      depth: 100
     fields:
       - {label: 'Title', name: 'title', widget: 'string', hint: 'e.g. `UIUCTF 2022` or `Fall CTF 2022`'}
       - {label: 'Series', name: 'series', widget: 'select', options: [
           {label: '🔷 UIUCTF', value: 'uiuctf'},
           {label: '🔶 Fall CTF', value: 'fallctf'}
         ]}
-      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', date_format: 'YYYY-MM-DD', time_format: 'HH:mm:ssZ', picker_utc: false, hint: "Based on __**your device's timezone**__. Display timezone is an option below."}
+      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', format: 'YYYY-MM-DDTHH:mm:ssZ', input_timezone: 'local', output_utc: false, hint: "Based on __**your device's timezone**__. Display timezone is an option below."}
       - {label: 'Duration', name: 'duration', widget: 'string', default: 'PT48H', hint: 'Leave blank to default to 48-hour duration. Use ISO 8601 duration format - P(n)Y(n)M(n)DT(n)H(n)M(n)S. Example: "PT6H" is 6 hours.', required: false}
       - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: 'Leave blank for "America/Chicago." Examples: "America/Chicago" or "Etc/UTC"', required: false}
       - {label: 'Credit', name: 'credit', widget: 'list', hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
@@ -174,17 +177,17 @@ collections:
     extension: 'mdx'
     format: 'frontmatter'
     identifier_field: 'title'
+    preview_path: 'publications{{dirname}}'
+    aliases_field: false
     summary: "`{{fields.date | date('YYYY-MM-DD')}}` / `{{fields.publication_type}}` / {{fields.title}}"
     sortable_fields:
       fields: ['date', 'title']
       default:
         field: 'date'
         direction: 'descending'
-    nested:
-      depth: 100
     fields:
       - {label: 'Title', name: 'title', widget: 'string', hint: 'e.g. `Announcing our new site!` or `CTF Writeup`'}
-      - {label: 'Date', name: 'date', widget: 'datetime', date_format: 'YYYY-MM-DD', time_format: false, hint: 'Use the date of publication, rather than the current date.'}
+      - {label: 'Date', name: 'date', widget: 'datetime', type: 'date', hint: 'Use the date of publication, rather than the current date.'}
       - {label: 'Credit', name: 'credit', widget: "list", hint: 'Add each name on a new line (commas will not work). Full profile information is referenced from the names defined in the **Members** and **Organizations** collections.'}
       - {label: 'Publication Type', name: 'publication_type', widget: 'select', dropdown_threshold: 1, options: ['talk', 'blog', 'paper', 'news', 'writeup'], hint: ''}
       - {label: 'Publisher', name: 'publisher', widget: 'string', hint: 'Changes meaning depending on publication type. For talks: conferences and events. For blogs and news: the primary site source. For papers: journals/conferences.', required: false}
@@ -279,17 +282,52 @@ collections:
 
   - divider: true
 
-  # - name: 'redirects-collection'
-  #   label: 'Redirects'
-  #   format: 'flat-json'
-  #   files:
-  #   - label: 'sigpwny.com'
-  #     file: 'sigpwny.com/src/redirects.json'
-  #     name: 'redirects'
-  #     fields:
-  #       - {label: 'Links', name: 'items', widget: 'list', fields: [
-  #           # must be named 'key' for our custom formatter to work
-  #           {label: 'From', name: 'key', widget: 'string', hint: 'Example: "/qrcode"'},
-  #           {label: 'To', name: 'destination', widget: 'string', hint: 'Example: "myurl.com/foo"'},
-  #           {label: 'Status Code', name: 'status', widget: 'hidden', default: 302}
-  #         ]}
+  - name: 'site-data'
+    label: 'Site Data'
+    icon: 'database'
+    files:
+      - name: 'redirects'
+        label: 'Redirects'
+        icon: 'move_up'
+        file: 'sigpwny.com/src/redirects.json'
+        format: 'json'
+        fields:
+          - label: 'Redirects'
+            label_singular: 'Redirect'
+            name: 'redirects'
+            widget: 'list'
+            summary: '{{fields.from}} → {{fields.destination}}'
+            collapsed: true
+            fields:
+              - {label: 'From', name: 'from', widget: 'string', hint: 'A site path beginning with `/`, e.g. `/discord`.', pattern: ['^/.*$', 'Must begin with /']}
+              - {label: 'Destination', name: 'destination', widget: 'string', hint: 'An absolute URL or site path beginning with `/`.'}
+              - {label: 'Status Code', name: 'status', widget: 'select', default: 302, options: [
+                  {label: '301 — Permanent', value: 301},
+                  {label: '302 — Temporary', value: 302},
+                  {label: '307 — Temporary (preserve method)', value: 307},
+                  {label: '308 — Permanent (preserve method)', value: 308}
+                ]}
+      - name: 'locations'
+        label: 'Locations'
+        icon: 'location_on'
+        file: 'sigpwny.com/src/locations.json'
+        format: 'json'
+        fields:
+          - label: 'Locations'
+            label_singular: 'Location'
+            name: 'locations'
+            widget: 'list'
+            root: true
+            summary: '{{fields.title}}'
+            collapsed: true
+            fields:
+              - {label: 'Title', name: 'title', widget: 'string'}
+              - {label: 'Address', name: 'address', widget: 'string'}
+              - {label: 'Radius (meters)', name: 'radius', widget: 'number', value_type: 'float', min: 0, required: false, hint: 'Defaults to 100 meters.'}
+              - label: 'Coordinates'
+                name: 'geo'
+                widget: 'object'
+                fields:
+                  - {label: 'Latitude', name: 'lat', widget: 'string', pattern: ['^-?[0-9]+(?:\.[0-9]+)?$', 'Enter a decimal latitude']}
+                  - {label: 'Longitude', name: 'lon', widget: 'string', pattern: ['^-?[0-9]+(?:\.[0-9]+)?$', 'Enter a decimal longitude']}
+              - {label: 'Matches', label_singular: 'Match', name: 'matches', widget: 'list', hint: 'Regular expressions matched against meeting location names.'}
