@@ -1,7 +1,6 @@
 ---
 import Avatar from './Avatar.astro';
-import Persona from './Persona';
-import ProfileCard from './ProfileCard.astro';
+import ProfileTooltipTrigger from './ProfileTooltipTrigger.astro';
 
 const { profiles, limit } = Astro.props;
 const show_count = limit && profiles.length > limit ? limit - 1 : profiles.length;
@@ -12,16 +11,9 @@ const nested_label = `+${nested_profiles.length}`;
 
 <div class="grid h-8 gap-1" style={{gridTemplateColumns: `repeat(${limit ?? profiles.length}, 2rem)`}}>
   {shown_profiles.map((profile: ProfileBasicProps) => (
-    <span class="profile-tooltip-select w-full h-full">
-      <Persona profile={profile} placement="bottom-end" client:load>
-        <span slot="avatar">
-          <Avatar profile={profile} />
-        </span>
-        <span slot="hiddenInfo">
-          <ProfileCard profile={profile} />
-        </span>
-      </Persona>
-    </span>
+    <ProfileTooltipTrigger profile={profile} placement="bottom-end" class="size-8">
+      <Avatar profile={profile} />
+    </ProfileTooltipTrigger>
   ))}
   {nested_profiles.length > 0 && (
     <Avatar label={nested_label} />

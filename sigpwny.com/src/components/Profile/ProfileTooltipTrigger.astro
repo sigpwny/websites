@@ -1,0 +1,45 @@
+---
+import ProfileCard from './ProfileCard.astro';
+import type { ProfileProps } from './Avatar.astro';
+
+interface TooltipProfile extends ProfileProps {
+  handle?: string;
+  bio?: string;
+  pronouns?: string;
+  links?: Array<{ name: string; url: string }>;
+  role?: string;
+  title?: string;
+  period?: string;
+}
+
+interface Props {
+  profile: TooltipProfile;
+  placement?: 'bottom-start' | 'bottom-end';
+  class?: string;
+}
+
+const {
+  profile,
+  placement = 'bottom-start',
+  class: className,
+} = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={[
+    'cursor-pointer rounded-full ring-2 ring-transparent ring-offset-0 hover:ring-primary active:ring-primary focus:outline-none focus:ring-white aria-expanded:ring-primary',
+    className,
+  ]}
+  data-profile-tooltip-trigger
+  data-profile-tooltip-placement={placement}
+  aria-controls="profile-tooltip"
+  aria-expanded="false"
+  aria-haspopup="dialog"
+  aria-label={`Show profile for ${profile.name ?? 'user'}`}
+>
+  <slot />
+</button>
+<template data-profile-tooltip-content>
+  <ProfileCard profile={profile} />
+</template>

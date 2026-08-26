@@ -1,0 +1,118 @@
+<div
+  id="profile-tooltip"
+  class="z-50 m-0 border-0 bg-transparent p-0 text-content"
+  popover="auto"
+  role="dialog"
+  aria-label="Profile details"
+  tabindex="-1"
+>
+  <div data-profile-tooltip-body></div>
+</div>
+
+<script>
+  let activeTrigger: HTMLElement | null = null;
+
+  function getTooltip() {
+    return document.querySelector<HTMLElement>('#profile-tooltip');
+  }
+
+  function positionTooltip(trigger: HTMLElement, tooltip: HTMLElement) {
+    const gap = 8;
+    const triggerRect = trigger.getBoundingClientRect();
+    const tooltipRect = tooltip.getBoundingClientRect();
+    const placement = trigger.dataset.profileTooltipPlacement ?? 'bottom-start';
+
+    let left = placement.endsWith('end')
+      ? triggerRect.right - tooltipRect.width
+      : triggerRect.left;
+    let top = triggerRect.bottom + gap;
+
+    if (top + tooltipRect.height > window.innerHeight - gap) {
+      top = triggerRect.top - tooltipRect.height - gap;
+    }
+
+    left = Math.max(gap, Math.min(left, window.innerWidth - tooltipRect.width - gap));
+    top = Math.max(gap, Math.min(top, window.innerHeight - tooltipRect.height - gap));
+
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+  }
+
+  function bindTooltip() {
+    const tooltip = getTooltip();
+    if (!tooltip || tooltip.dataset.bound === 'true') return;
+
+    tooltip.dataset.bound = 'true';
+    tooltip.addEventListener('toggle', () => {
+      if (tooltip.matches(':popover-open')) return;
+
+      activeTrigger?.setAttribute('aria-expanded', 'false');
+      activeTrigger = null;
+      tooltip.querySelector('[data-profile-tooltip-body]')?.replaceChildren();
+    });
+  }
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+
+    const trigger = event.target.closest<HTMLElement>('[data-profile-tooltip-trigger]');
+    if (!trigger) {
+      const tooltip = getTooltip();
+      if (activeTrigger && tooltip?.matches(':popover-open') && !event.target.closest('#profile-tooltip')) {
+        tooltip.hidePopover();
+      }
+      return;
+    }
+
+    const tooltip = getTooltip();
+    const template = trigger.nextElementSibling;
+    const body = tooltip?.querySelector('[data-profile-tooltip-body]');
+    if (!tooltip || !(template instanceof HTMLTemplateElement) || !body) return;
+
+    if (activeTrigger === trigger && tooltip.matches(':popover-open')) {
+      tooltip.hidePopover();
+      return;
+    }
+
+    activeTrigger?.setAttribute('aria-expanded', 'false');
+    activeTrigger = trigger;
+    trigger.setAttribute('aria-expanded', 'true');
+    body.replaceChildren(template.content.cloneNode(true));
+
+    if (!tooltip.matches(':popover-open')) tooltip.showPopover();
+    positionTooltip(trigger, tooltip);
+  });
+
+  window.addEventListener('resize', () => {
+    const tooltip = getTooltip();
+    if (activeTrigger && tooltip?.matches(':popover-open')) {
+      positionTooltip(activeTrigger, tooltip);
+    }
+  });
+
+  document.addEventListener('scroll', () => {
+    const tooltip = getTooltip();
+    if (activeTrigger && tooltip?.matches(':popover-open')) {
+      positionTooltip(activeTrigger, tooltip);
+    }
+  }, true);
+
+  document.addEventListener('astro:before-swap', () => {
+    const tooltip = getTooltip();
+    if (tooltip?.matches(':popover-open')) tooltip.hidePopover();
+  });
+  document.addEventListener('astro:page-load', bindTooltip);
+  bindTooltip();
+</script>
+
+<style>
+  #profile-tooltip {
+    inset: unset;
+    position: fixed;
+    width: min(28rem, calc(100vw - 1rem));
+  }
+
+  #profile-tooltip::backdrop {
+    background: transparent;
+  }
+</style>
