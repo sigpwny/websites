@@ -1,7 +1,8 @@
-import { z } from 'astro:content';
-import { CardImageSchema, ICalDataSchema } from '.';
+import { z, type SchemaContext } from 'astro:content';
+import { CardImageSchema } from './CardImage';
+import { ICalDataSchema } from './ICalData';
 
-export const EventSchema = ({ image }) => (
+export const EventSchema = ({ image }: SchemaContext) => (
   z.object({
     title: z.coerce.string(),
     ical: z.optional(ICalDataSchema()),
