@@ -16,6 +16,9 @@ const props: Omit<HeadProps, "site_name"> = Astro.props;
 <html lang="en" transition:animate="none">
   <head>
     <BaseHead {...props} site_name="fallctf.com" />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/HelveticaNeue-Regular.woff2" crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/HelveticaNeue-Bold.woff2" crossorigin="anonymous" />
     <ViewTransitions />
   </head>
   <body>

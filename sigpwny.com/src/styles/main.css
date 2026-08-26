@@ -59,7 +59,7 @@
     --font-size-standard: 1rem;
     --font-size-base: 1.125rem;
 
-    font-family: "Helvetica Neue", Helvetica, Arial;
+    font-family: var(--font-helvetica-neue);
     font-size: var(--font-size-standard);
     background-color: rgb(var(--rgb-surface-000));
     color: rgb(var(--rgb-content));
