@@ -21,12 +21,12 @@ type RedirectStatus = 301 | 302 | 307 | 308;
 const redirects = redirectData.redirects.reduce<Record<string, {
   destination: string;
   status: RedirectStatus;
-}>>((redirectMap, { from, destination, status }) => {
-  if (from in redirectMap) {
-    throw new Error(`Duplicate redirect source: ${from}`);
+}>>((redirectMap, { source, destination, status }) => {
+  if (source in redirectMap) {
+    throw new Error(`Duplicate redirect source: ${source}`);
   }
 
-  redirectMap[from] = { destination, status: status as RedirectStatus };
+  redirectMap[source] = { destination, status: status as RedirectStatus };
   return redirectMap;
 }, {});
 

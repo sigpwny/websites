@@ -1,227 +1,227 @@
 {
   "redirects": [
     {
-      "from": "/docs",
+      "source": "/docs",
       "destination": "https://docs.sigpwny.com",
       "status": 302
     },
     {
-      "from": "/notes",
+      "source": "/notes",
       "destination": "https://notes.sigpwny.com",
       "status": 302
     },
     {
-      "from": "/guides",
+      "source": "/guides",
       "destination": "https://notes.sigpwny.com",
       "status": 302
     },
     {
-      "from": "/infra",
+      "source": "/infra",
       "destination": "https://github.com/sigpwny/docs",
       "status": 302
     },
     {
-      "from": "/report",
+      "source": "/report",
       "destination": "https://forms.gle/PGdwxrCFgDQRM9oX6",
       "status": 302
     },
     {
-      "from": "/writups",
+      "source": "/writups",
       "destination": "/events/",
       "status": 302
     },
     {
-      "from": "/hackathon",
+      "source": "/hackathon",
       "destination": "/events/",
       "status": 302
     },
     {
-      "from": "/uiuctf-2025-interest",
+      "source": "/uiuctf-2025-interest",
       "destination": "https://forms.gle/3JZUDisGmfyNjvT29",
       "status": 302
     },
     {
-      "from": "/older",
+      "source": "/older",
       "destination": "https://sigpwny.github.io/pony-site/",
       "status": 302
     },
     {
-      "from": "/shirt2024",
+      "source": "/shirt2024",
       "destination": "https://forms.gle/LTdmTMkUciLV7nMZ9",
       "status": 302
     },
     {
-      "from": "/survey",
+      "source": "/survey",
       "destination": "https://forms.gle/h9JwmKZfEsAJyhZn8",
       "status": 302
     },
     {
-      "from": "/presentation",
+      "source": "/presentation",
       "destination": "/meetings/",
       "status": 302
     },
     {
-      "from": "/fall",
+      "source": "/fall",
       "destination": "/Fall_CTF_2025_Sponsorship.pdf",
       "status": 302
     },
     {
-      "from": "/sponsor",
+      "source": "/sponsor",
       "destination": "/sponsors/",
       "status": 302
     },
     {
-      "from": "/fallctf",
+      "source": "/fallctf",
       "destination": "https://2025.fallctf.com",
       "status": 302
     },
     {
-      "from": "/event",
+      "source": "/event",
       "destination": "/events/",
       "status": 302
     },
     {
-      "from": "/year",
+      "source": "/year",
       "destination": "/sigpwny_yearly_sponsorship.pdf",
       "status": 302
     },
     {
-      "from": "/meeting",
+      "source": "/meeting",
       "destination": "/meetings/",
       "status": 302
     },
     {
-      "from": "/tutorial",
+      "source": "/tutorial",
       "destination": "/join/",
       "status": 302
     },
     {
-      "from": "/oldest",
+      "source": "/oldest",
       "destination": "https://sigpwny.github.io/pony-site/old/",
       "status": 302
     },
     {
-      "from": "/rev_setup23",
+      "source": "/rev_setup23",
       "destination": "/meetings/general/2023-09-17/",
       "status": 302
     },
     {
-      "from": "/rev_setup25",
+      "source": "/rev_setup25",
       "destination": "/meetings/general/2025-09-18/",
       "status": 302
     },
     {
-      "from": "/rev_setup",
+      "source": "/rev_setup",
       "destination": "/meetings/general/2025-09-18/",
       "status": 302
     },
     {
-      "from": "/github",
+      "source": "/github",
       "destination": "https://github.com/sigpwny",
       "status": 302
     },
     {
-      "from": "/register24",
+      "source": "/register24",
       "destination": "https://forms.gle/GKLuLYoawYL4UGmP7",
       "status": 302
     },
     {
-      "from": "/feedback/fa2023",
+      "source": "/feedback/fa2023",
       "destination": "https://forms.gle/MopguuPTjGhe8UYUA",
       "status": 302
     },
     {
-      "from": "/corporate",
+      "source": "/corporate",
       "destination": "/sponsors/",
       "status": 302
     },
     {
-      "from": "/newcomers",
+      "source": "/newcomers",
       "destination": "/join/",
       "status": 302
     },
     {
-      "from": "/gcal",
+      "source": "/gcal",
       "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/all/generic.ics",
       "status": 302
     },
     {
-      "from": "/auth",
+      "source": "/auth",
       "destination": "https://shib.sigpwny.com/signup/485104508175646751",
       "status": 302
     },
     {
-      "from": "/writeups/uiuctf2020",
+      "source": "/writeups/uiuctf2020",
       "destination": "/events/uiuctf/2020/",
       "status": 302
     },
     {
-      "from": "/writeups/uiuctf2021",
+      "source": "/writeups/uiuctf2021",
       "destination": "/events/uiuctf/2021/",
       "status": 302
     },
     {
-      "from": "/old",
+      "source": "/old",
       "destination": "https://sigpwny.github.io/",
       "status": 302
     },
     {
-      "from": "/writeups/uiuctf2021_all",
+      "source": "/writeups/uiuctf2021_all",
       "destination": "/events/uiuctf/2021/",
       "status": 302
     },
     {
-      "from": "/drive",
+      "source": "/drive",
       "destination": "https://drive.google.com/drive/u/0/folders/0B_xHmzNKe4EEb083emxTM3ItYVE",
       "status": 302
     },
     {
-      "from": "/pony-site",
+      "source": "/pony-site",
       "destination": "https://sigpwny.github.io/pony-site/",
       "status": 302
     },
     {
-      "from": "/newcomer",
+      "source": "/newcomer",
       "destination": "/join/",
       "status": 302
     },
     {
-      "from": "/discord",
+      "source": "/discord",
       "destination": "https://discord.gg/cWcZ6a9",
       "status": 302
     },
     {
-      "from": "/discordqr",
+      "source": "/discordqr",
       "destination": "https://discord.gg/cWcZ6a9",
       "status": 302
     },
     {
-      "from": "/outlook",
+      "source": "/outlook",
       "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/all/generic.ics&name=SIGPwny",
       "status": 302
     },
     {
-      "from": "/2025-ectf-syllabus",
+      "source": "/2025-ectf-syllabus",
       "destination": "https://docs.google.com/document/d/1SGUgNQDu29ntW3nxFWXFY5ldo6TWg8v-CwvJ5zvLKP8/edit?usp=sharing",
       "status": 302
     },
     {
-      "from": "/2026-ectf-syllabus",
+      "source": "/2026-ectf-syllabus",
       "destination": "https://docs.google.com/document/d/1xz8nB8e_-jzlmbIiFx_GVUj72PGaDgvcQ4WbFiM7tA4/edit?usp=sharing",
       "status": 302
     },
     {
-      "from": "/2025-csaw-esc",
+      "source": "/2025-csaw-esc",
       "destination": "https://github.com/WhiteHoodHacker/2025-csaw-esc",
       "status": 302
     },
     {
-      "from": "/tracerfire2025",
+      "source": "/tracerfire2025",
       "destination": "https://docs.google.com/forms/d/e/1FAIpQLSeMT5Raw_xpZzSfo7l8Pazr0TAP5nJLy0As-4ccHUq9JPsaxw/viewform?usp=header",
       "status": 302
     },
     {
-      "from": "/tracerfire2026",
+      "source": "/tracerfire2026",
       "destination": "https://docs.google.com/forms/d/e/1FAIpQLSerXz-JYOg80_KiYV3AUnxPzgwZTcUAJ4ZX5grJ8GtuD4zQ2A/viewform?usp=header",
       "status": 302
     }
