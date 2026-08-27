@@ -1,182 +1,229 @@
 {
-  "/docs": {
-    "status": 302,
-    "destination": "https://docs.sigpwny.com"
-  },
-  "/notes": {
-    "status": 302,
-    "destination": "https://notes.sigpwny.com"
-  },
-  "/guides": {
-    "status": 302,
-    "destination": "https://notes.sigpwny.com"
-  },
-  "/infra": {
-    "status": 302,
-    "destination": "https://github.com/sigpwny/docs"
-  },
-  "/report": {
-    "status": 302,
-    "destination": "https://forms.gle/PGdwxrCFgDQRM9oX6"
-  },
-  "/writups": {
-    "status": 302,
-    "destination": "/events/"
-  },
-  "/hackathon": {
-    "status": 302,
-    "destination": "/events/"
-  },
-  "/uiuctf-2025-interest": {
-    "status": 302,
-    "destination": "https://forms.gle/3JZUDisGmfyNjvT29"
-  },
-  "/older": {
-    "status": 302,
-    "destination": "https://sigpwny.github.io/pony-site/"
-  },
-  "/shirt2024": {
-    "status": 302,
-    "destination": "https://forms.gle/LTdmTMkUciLV7nMZ9"
-  },
-  "/survey": {
-    "status": 302,
-    "destination": "https://forms.gle/h9JwmKZfEsAJyhZn8"
-  },
-  "/presentation": {
-    "status": 302,
-    "destination": "/meetings/"
-  },
-  "/fall": {
-    "status": 302,
-    "destination": "/Fall_CTF_2025_Sponsorship.pdf"
-  },
-  "/sponsor": {
-    "status": 302,
-    "destination": "/sponsors/"
-  },
-  "/fallctf": {
-    "status": 302,
-    "destination": "https://2025.fallctf.com"
-  },
-  "/event": {
-    "status": 302,
-    "destination": "/events/"
-  },
-  "/year": {
-    "status": 302,
-    "destination": "/sigpwny_yearly_sponsorship.pdf"
-  },
-  "/meeting": {
-    "status": 302,
-    "destination": "/meetings/"
-  },
-  "/tutorial": {
-    "status": 302,
-    "destination": "/join/"
-  },
-  "/oldest": {
-    "status": 302,
-    "destination": "https://sigpwny.github.io/pony-site/old/"
-  },
-  "/rev_setup23": {
-    "status": 302,
-    "destination": "/meetings/general/2023-09-17/"
-  },
-  "/rev_setup25": {
-    "status": 302,
-    "destination": "/meetings/general/2025-09-18/"
-  },
-  "/rev_setup": {
-    "status": 302,
-    "destination": "/meetings/general/2025-09-18/"
-  },
-  "/github": {
-    "status": 302,
-    "destination": "https://github.com/sigpwny"
-  },
-  "/register24": {
-    "status": 302,
-    "destination": "https://forms.gle/GKLuLYoawYL4UGmP7"
-  },
-  "/feedback/fa2023": {
-    "status": 302,
-    "destination": "https://forms.gle/MopguuPTjGhe8UYUA"
-  },
-  "/corporate": {
-    "status": 302,
-    "destination": "/sponsors/"
-  },
-  "/newcomers": {
-    "status": 302,
-    "destination": "/join/"
-  },
-  "/gcal": {
-    "status": 302,
-    "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/all/generic.ics"
-  },
-  "/auth": {
-    "status": 302,
-    "destination": "https://shib.sigpwny.com/signup/485104508175646751"
-  },
-  "/writeups/uiuctf2020": {
-    "status": 302,
-    "destination": "/events/uiuctf/2020/"
-  },
-  "/writeups/uiuctf2021": {
-    "status": 302,
-    "destination": "/events/uiuctf/2021/"
-  },
-  "/old": {
-    "status": 302,
-    "destination": "https://sigpwny.github.io/"
-  },
-  "/writeups/uiuctf2021_all": {
-    "status": 302,
-    "destination": "/events/uiuctf/2021/"
-  },
-  "/drive": {
-    "status": 302,
-    "destination": "https://drive.google.com/drive/u/0/folders/0B_xHmzNKe4EEb083emxTM3ItYVE"
-  },
-  "/pony-site": {
-    "status": 302,
-    "destination": "https://sigpwny.github.io/pony-site/"
-  },
-  "/newcomer": {
-    "status": 302,
-    "destination": "/join/"
-  },
-  "/discord": {
-    "status": 302,
-    "destination": "https://discord.gg/cWcZ6a9"
-  },
-  "/discordqr": {
-    "status": 302,
-    "destination": "https://discord.gg/cWcZ6a9"
-  },
-  "/outlook": {
-    "status": 302,
-    "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/all/generic.ics&name=SIGPwny"
-  },
-  "/2025-ectf-syllabus": {
-    "status": 302,
-    "destination": "https://docs.google.com/document/d/1SGUgNQDu29ntW3nxFWXFY5ldo6TWg8v-CwvJ5zvLKP8/edit?usp=sharing"
-  },
-  "/2026-ectf-syllabus": {
-    "status": 302,
-    "destination": "https://docs.google.com/document/d/1xz8nB8e_-jzlmbIiFx_GVUj72PGaDgvcQ4WbFiM7tA4/edit?usp=sharing"
-  },
-  "/2025-csaw-esc": {
-    "status": 302,
-    "destination": "https://github.com/WhiteHoodHacker/2025-csaw-esc"
-  },
-  "/tracerfire2025": {
-    "status": 302,
-    "destination": "https://docs.google.com/forms/d/e/1FAIpQLSeMT5Raw_xpZzSfo7l8Pazr0TAP5nJLy0As-4ccHUq9JPsaxw/viewform?usp=header"
-  },
-  "/tracerfire2026": {
-    "status": 302,
-    "destination": "https://docs.google.com/forms/d/e/1FAIpQLSerXz-JYOg80_KiYV3AUnxPzgwZTcUAJ4ZX5grJ8GtuD4zQ2A/viewform?usp=header"
-  }
+  "redirects": [
+    {
+      "source": "/docs",
+      "destination": "https://docs.sigpwny.com",
+      "status": 302
+    },
+    {
+      "source": "/notes",
+      "destination": "https://notes.sigpwny.com",
+      "status": 302
+    },
+    {
+      "source": "/guides",
+      "destination": "https://notes.sigpwny.com",
+      "status": 302
+    },
+    {
+      "source": "/infra",
+      "destination": "https://github.com/sigpwny/docs",
+      "status": 302
+    },
+    {
+      "source": "/report",
+      "destination": "https://forms.gle/PGdwxrCFgDQRM9oX6",
+      "status": 302
+    },
+    {
+      "source": "/writups",
+      "destination": "/events/",
+      "status": 302
+    },
+    {
+      "source": "/hackathon",
+      "destination": "/events/",
+      "status": 302
+    },
+    {
+      "source": "/uiuctf-2025-interest",
+      "destination": "https://forms.gle/3JZUDisGmfyNjvT29",
+      "status": 302
+    },
+    {
+      "source": "/older",
+      "destination": "https://sigpwny.github.io/pony-site/",
+      "status": 302
+    },
+    {
+      "source": "/shirt2024",
+      "destination": "https://forms.gle/LTdmTMkUciLV7nMZ9",
+      "status": 302
+    },
+    {
+      "source": "/survey",
+      "destination": "https://forms.gle/h9JwmKZfEsAJyhZn8",
+      "status": 302
+    },
+    {
+      "source": "/presentation",
+      "destination": "/meetings/",
+      "status": 302
+    },
+    {
+      "source": "/fall",
+      "destination": "/Fall_CTF_2025_Sponsorship.pdf",
+      "status": 302
+    },
+    {
+      "source": "/sponsor",
+      "destination": "/sponsors/",
+      "status": 302
+    },
+    {
+      "source": "/fallctf",
+      "destination": "https://2025.fallctf.com",
+      "status": 302
+    },
+    {
+      "source": "/event",
+      "destination": "/events/",
+      "status": 302
+    },
+    {
+      "source": "/year",
+      "destination": "/sigpwny_yearly_sponsorship.pdf",
+      "status": 302
+    },
+    {
+      "source": "/meeting",
+      "destination": "/meetings/",
+      "status": 302
+    },
+    {
+      "source": "/tutorial",
+      "destination": "/join/",
+      "status": 302
+    },
+    {
+      "source": "/oldest",
+      "destination": "https://sigpwny.github.io/pony-site/old/",
+      "status": 302
+    },
+    {
+      "source": "/rev_setup23",
+      "destination": "/meetings/general/2023-09-17/",
+      "status": 302
+    },
+    {
+      "source": "/rev_setup25",
+      "destination": "/meetings/general/2025-09-18/",
+      "status": 302
+    },
+    {
+      "source": "/rev_setup",
+      "destination": "/meetings/general/2025-09-18/",
+      "status": 302
+    },
+    {
+      "source": "/github",
+      "destination": "https://github.com/sigpwny",
+      "status": 302
+    },
+    {
+      "source": "/register24",
+      "destination": "https://forms.gle/GKLuLYoawYL4UGmP7",
+      "status": 302
+    },
+    {
+      "source": "/feedback/fa2023",
+      "destination": "https://forms.gle/MopguuPTjGhe8UYUA",
+      "status": 302
+    },
+    {
+      "source": "/corporate",
+      "destination": "/sponsors/",
+      "status": 302
+    },
+    {
+      "source": "/newcomers",
+      "destination": "/join/",
+      "status": 302
+    },
+    {
+      "source": "/gcal",
+      "destination": "https://calendar.google.com/calendar/r?cid=webcal://sigpwny.com/calendar/all/generic.ics",
+      "status": 302
+    },
+    {
+      "source": "/auth",
+      "destination": "https://shib.sigpwny.com/signup/485104508175646751",
+      "status": 302
+    },
+    {
+      "source": "/writeups/uiuctf2020",
+      "destination": "/events/uiuctf/2020/",
+      "status": 302
+    },
+    {
+      "source": "/writeups/uiuctf2021",
+      "destination": "/events/uiuctf/2021/",
+      "status": 302
+    },
+    {
+      "source": "/old",
+      "destination": "https://sigpwny.github.io/",
+      "status": 302
+    },
+    {
+      "source": "/writeups/uiuctf2021_all",
+      "destination": "/events/uiuctf/2021/",
+      "status": 302
+    },
+    {
+      "source": "/drive",
+      "destination": "https://drive.google.com/drive/u/0/folders/0B_xHmzNKe4EEb083emxTM3ItYVE",
+      "status": 302
+    },
+    {
+      "source": "/pony-site",
+      "destination": "https://sigpwny.github.io/pony-site/",
+      "status": 302
+    },
+    {
+      "source": "/newcomer",
+      "destination": "/join/",
+      "status": 302
+    },
+    {
+      "source": "/discord",
+      "destination": "https://discord.gg/cWcZ6a9",
+      "status": 302
+    },
+    {
+      "source": "/discordqr",
+      "destination": "https://discord.gg/cWcZ6a9",
+      "status": 302
+    },
+    {
+      "source": "/outlook",
+      "destination": "https://outlook.office.com/owa?path=/calendar/action/compose&rru=addsubscription&url=https://sigpwny.com/calendar/all/generic.ics&name=SIGPwny",
+      "status": 302
+    },
+    {
+      "source": "/2025-ectf-syllabus",
+      "destination": "https://docs.google.com/document/d/1SGUgNQDu29ntW3nxFWXFY5ldo6TWg8v-CwvJ5zvLKP8/edit?usp=sharing",
+      "status": 302
+    },
+    {
+      "source": "/2026-ectf-syllabus",
+      "destination": "https://docs.google.com/document/d/1xz8nB8e_-jzlmbIiFx_GVUj72PGaDgvcQ4WbFiM7tA4/edit?usp=sharing",
+      "status": 302
+    },
+    {
+      "source": "/2025-csaw-esc",
+      "destination": "https://github.com/WhiteHoodHacker/2025-csaw-esc",
+      "status": 302
+    },
+    {
+      "source": "/tracerfire2025",
+      "destination": "https://docs.google.com/forms/d/e/1FAIpQLSeMT5Raw_xpZzSfo7l8Pazr0TAP5nJLy0As-4ccHUq9JPsaxw/viewform?usp=header",
+      "status": 302
+    },
+    {
+      "source": "/tracerfire2026",
+      "destination": "https://docs.google.com/forms/d/e/1FAIpQLSerXz-JYOg80_KiYV3AUnxPzgwZTcUAJ4ZX5grJ8GtuD4zQ2A/viewform?usp=header",
+      "status": 302
+    }
+  ]
 }

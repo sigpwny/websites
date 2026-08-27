@@ -9,13 +9,26 @@ import remarkMath from 'remark-math';
 import path from 'node:path';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { normalizePath } from 'vite';
-import redirects from './src/redirects.json';
+import redirectData from './src/redirects.json';
 
 function normalize(filePath: string) {
   return normalizePath(path.resolve(import.meta.dirname, filePath));
 }
 
 const meetingBase = path.resolve(import.meta.dirname, '../_global/content/meetings/');
+type RedirectStatus = 301 | 302 | 307 | 308;
+
+const redirects = redirectData.redirects.reduce<Record<string, {
+  destination: string;
+  status: RedirectStatus;
+}>>((redirectMap, { source, destination, status }) => {
+  if (source in redirectMap) {
+    throw new Error(`Duplicate redirect source: ${source}`);
+  }
+
+  redirectMap[source] = { destination, status: status as RedirectStatus };
+  return redirectMap;
+}, {});
 
 // https://astro.build/config
 export default defineConfig({
@@ -72,7 +85,7 @@ export default defineConfig({
       },
     },
   ],
-  redirects: redirects as any,
+  redirects,
   trailingSlash: 'always',
   vite: {
     plugins: [

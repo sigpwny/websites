@@ -3,6 +3,7 @@ import astroConfig from '~/astro.config';
 const plaintextRedirects = `
 /calendar/full.ics /calendar/all/generic.ics 301
 /calendar/full/apple.ics /calendar/all/apple.ics 301
+/meetings/:semester/:type/:date /meetings/:type/:date 302
 /meetings/fa2017/2017* /meetings/general/2017:splat 302
 /meetings/fa2018/2018* /meetings/general/2018:splat 302
 /meetings/fa2019/2019* /meetings/general/2019:splat 302
