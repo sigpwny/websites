@@ -8,6 +8,14 @@
     <meta name="robots" content="noindex" />
     <link href="/manage/config.yml" type="text/yaml" rel="cms-config-url" />
     <title>sigpwny.com CMS</title>
+    <style is:inline>
+      ::view-transition-group(*),
+      ::view-transition-image-pair(*),
+      ::view-transition-old(*),
+      ::view-transition-new(*) {
+        animation: none !important;
+      }
+    </style>
   </head>
     <body>
       <script is:inline src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
