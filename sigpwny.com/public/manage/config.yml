@@ -22,6 +22,53 @@ logo:
 # These fields are not used since they are overwritten in each collection, but are required.
 media_folder: media
 
+singletons:
+  - name: 'redirects'
+    label: 'Redirects'
+    icon: 'move_up'
+    file: 'sigpwny.com/src/redirects.json'
+    format: 'json'
+    fields:
+      - label: 'Redirects'
+        label_singular: 'Redirect'
+        name: 'redirects'
+        widget: 'list'
+        summary: '{{fields.source}} → {{fields.destination}}'
+        collapsed: true
+        fields:
+          - {label: 'Source', name: 'source', widget: 'string', hint: 'The site path to match, beginning with `/`, e.g. `/discord`.', pattern: ['^/.*$', 'Must begin with /']}
+          - {label: 'Destination', name: 'destination', widget: 'string', hint: 'An absolute URL or site path beginning with `/`.'}
+          - {label: 'Status Code', name: 'status', widget: 'select', default: 302, options: [
+              {label: '301 — Permanent', value: 301},
+              {label: '302 — Temporary', value: 302},
+              {label: '307 — Temporary (preserve method)', value: 307},
+              {label: '308 — Permanent (preserve method)', value: 308}
+            ]}
+  - name: 'locations'
+    label: 'Locations'
+    icon: 'location_on'
+    file: 'sigpwny.com/src/locations.json'
+    format: 'json'
+    fields:
+      - label: 'Locations'
+        label_singular: 'Location'
+        name: 'locations'
+        widget: 'list'
+        root: true
+        summary: '{{fields.title}}'
+        collapsed: true
+        fields:
+          - {label: 'Title', name: 'title', widget: 'string'}
+          - {label: 'Address', name: 'address', widget: 'string'}
+          - {label: 'Radius (meters)', name: 'radius', widget: 'number', value_type: 'float', min: 0, required: false, hint: 'Defaults to 100 meters.'}
+          - label: 'Coordinates'
+            name: 'geo'
+            widget: 'object'
+            fields:
+              - {label: 'Latitude', name: 'lat', widget: 'string', pattern: ['^-?[0-9]+(?:\.[0-9]+)?$', 'Enter a decimal latitude']}
+              - {label: 'Longitude', name: 'lon', widget: 'string', pattern: ['^-?[0-9]+(?:\.[0-9]+)?$', 'Enter a decimal longitude']}
+          - {label: 'Matches', label_singular: 'Match', name: 'matches', widget: 'list', hint: 'Regular expressions matched against meeting location names.'}
+
 collections:
   - name: 'meetings'
     label: 'Meetings'
@@ -277,58 +324,3 @@ collections:
       - {label: 'Role', name: 'role', widget: 'select', options: ['sponsor', 'org'], required: false}
       - {label: 'Title', name: 'title', widget: 'string', hint: 'This overrides the display title shown by the selected role. For example, you could use this to show a parent organization name.', required: false}
       - {label: 'Weight', name: 'weight', hint: 'Set to a higher value to sort this profile closer to the top, otherwise sort by name. For sponsors, we generally want to set higher values based on the amount they are sponsoring.', widget: 'number', required: false}
-
-  - divider: true
-
-  - name: 'redirects'
-    label: 'Redirects'
-    icon: 'move_up'
-    files:
-      - name: 'redirects'
-        label: 'Redirects'
-        file: 'sigpwny.com/src/redirects.json'
-        format: 'json'
-        fields:
-          - label: 'Redirects'
-            label_singular: 'Redirect'
-            name: 'redirects'
-            widget: 'list'
-            summary: '{{fields.source}} → {{fields.destination}}'
-            collapsed: true
-            fields:
-              - {label: 'Source', name: 'source', widget: 'string', hint: 'The site path to match, beginning with `/`, e.g. `/discord`.', pattern: ['^/.*$', 'Must begin with /']}
-              - {label: 'Destination', name: 'destination', widget: 'string', hint: 'An absolute URL or site path beginning with `/`.'}
-              - {label: 'Status Code', name: 'status', widget: 'select', default: 302, options: [
-                  {label: '301 — Permanent', value: 301},
-                  {label: '302 — Temporary', value: 302},
-                  {label: '307 — Temporary (preserve method)', value: 307},
-                  {label: '308 — Permanent (preserve method)', value: 308}
-                ]}
-
-  - name: 'locations'
-    label: 'Locations'
-    icon: 'location_on'
-    files:
-      - name: 'locations'
-        label: 'Locations'
-        file: 'sigpwny.com/src/locations.json'
-        format: 'json'
-        fields:
-          - label: 'Locations'
-            label_singular: 'Location'
-            name: 'locations'
-            widget: 'list'
-            root: true
-            summary: '{{fields.title}}'
-            collapsed: true
-            fields:
-              - {label: 'Title', name: 'title', widget: 'string'}
-              - {label: 'Address', name: 'address', widget: 'string'}
-              - {label: 'Radius (meters)', name: 'radius', widget: 'number', value_type: 'float', min: 0, required: false, hint: 'Defaults to 100 meters.'}
-              - label: 'Coordinates'
-                name: 'geo'
-                widget: 'object'
-                fields:
-                  - {label: 'Latitude', name: 'lat', widget: 'string', pattern: ['^-?[0-9]+(?:\.[0-9]+)?$', 'Enter a decimal latitude']}
-                  - {label: 'Longitude', name: 'lon', widget: 'string', pattern: ['^-?[0-9]+(?:\.[0-9]+)?$', 'Enter a decimal longitude']}
-              - {label: 'Matches', label_singular: 'Match', name: 'matches', widget: 'list', hint: 'Regular expressions matched against meeting location names.'}
