@@ -280,13 +280,12 @@ collections:
 
   - divider: true
 
-  - name: 'site-data'
-    label: 'Site Data'
-    icon: 'database'
+  - name: 'redirects'
+    label: 'Redirects'
+    icon: 'move_up'
     files:
       - name: 'redirects'
         label: 'Redirects'
-        icon: 'move_up'
         file: 'sigpwny.com/src/redirects.json'
         format: 'json'
         fields:
@@ -305,9 +304,13 @@ collections:
                   {label: '307 — Temporary (preserve method)', value: 307},
                   {label: '308 — Permanent (preserve method)', value: 308}
                 ]}
+
+  - name: 'locations'
+    label: 'Locations'
+    icon: 'location_on'
+    files:
       - name: 'locations'
         label: 'Locations'
-        icon: 'location_on'
         file: 'sigpwny.com/src/locations.json'
         format: 'json'
         fields:
