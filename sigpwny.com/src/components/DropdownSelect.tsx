@@ -5,6 +5,7 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from '@/components/Popover';
+import { handleMenuKeyDown } from '@/components/Menu';
 import { ChevronUpDownFilled } from '$/components/Icons/fluentui';
 
 interface DropdownSelectProps {
@@ -28,7 +29,10 @@ export default function DropdownSelect(props: DropdownSelectProps) {
         </span>
         <ChevronUpDownFilled />
       </PopoverTrigger>
-      <PopoverContent className={props.contentRootClassName}>
+      <PopoverContent
+        className={props.contentRootClassName}
+        onKeyDown={handleMenuKeyDown}
+      >
         {props.children}
       </PopoverContent>
     </Popover>
