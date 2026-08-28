@@ -8,6 +8,7 @@ import {
 } from '$/components/Icons/fluentui';
 import { MdxComponents } from '$/components/Mdx/index.astro';
 import Layout from '@/layouts/Meeting.astro';
+import MeetingLicense from '@/components/Meeting/License.astro';
 import Persona from '@/components/Profile/Persona.astro';
 import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
@@ -208,5 +209,6 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
     <section class="md-root w-full max-w-prose mx-auto" itemprop="articleBody">
       <Content components={MdxComponents} />
     </section>
+    <MeetingLicense license={meeting.license} copyright={meeting.copyright} />
   </article>
 </Layout>

@@ -43,6 +43,8 @@ image: # optional: if none is provided, a placeholder image will be used
   path: ./image.png # optional: image should be located relative to the markdown file, 16:9 aspect ratio, minimum width: 512px
   alt: SIGPwny template image # optional
 recording: https://youtu.be/dQw4w9WgXcQ # optional: if there are multiple videos, link a playlist instead
+license: CC-BY-SA-4.0 # optional: see supported values below; use `none` for copyright-only content
+copyright: Copyright 2026 Example Author # optional: displayed instead of or above the license
 
 # Add a main topic tag: "web", "pwn", "rev", "crypto", "forensics", "jail", "osint", "misc".
 # Plus, add tags for specific topics, such as "xss", "rsa", or "lockpicking".
@@ -56,6 +58,8 @@ Put a few sentences here describing your topic! This can be treated as an abstra
 
 *Note: You can use markdown/HTML here!*
 ```
+
+Supported meeting licenses are `CC-BY-4.0`, `CC-BY-SA-4.0` (default), `CC-BY-ND-4.0`, `CC-BY-NC-4.0`, `CC-BY-NC-SA-4.0`, `CC-BY-NC-ND-4.0`, and `CC0-1.0`. Set `license` to `none` and provide `copyright` for content that is not offered under one of these licenses.
 
 ## Event
 

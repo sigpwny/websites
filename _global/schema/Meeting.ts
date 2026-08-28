@@ -2,6 +2,20 @@ import { z, type SchemaContext } from 'astro:content';
 import { CardImageSchema } from './CardImage';
 import { ICalDataSchema } from './ICalData';
 
+export const CreativeCommonsLicenseIds = [
+  'CC-BY-4.0',
+  'CC-BY-SA-4.0',
+  'CC-BY-ND-4.0',
+  'CC-BY-NC-4.0',
+  'CC-BY-NC-SA-4.0',
+  'CC-BY-NC-ND-4.0',
+  'CC0-1.0',
+] as const;
+
+export const MeetingLicenseIds = [...CreativeCommonsLicenseIds, 'none'] as const;
+export type CreativeCommonsLicenseId = typeof CreativeCommonsLicenseIds[number];
+export type MeetingLicenseId = typeof MeetingLicenseIds[number];
+
 export const MeetingSchema = ({ image }: SchemaContext) => (
   z.object({
     title: z.coerce.string().describe('The title of the meeting.'),
@@ -33,6 +47,10 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
       (arg) => arg === '' ? undefined : arg,
       z.optional(z.string().url()).describe('A URL to the recording of the meeting (e.g. YouTube).')
     ),
+    license: z.enum(MeetingLicenseIds).default('CC-BY-SA-4.0')
+      .describe('The license covering the meeting content, or "none" for copyright-only content.'),
+    copyright: z.optional(z.coerce.string())
+      .describe('Copyright text displayed before the license, or by itself when license is "none".'),
     // assets: z.optional(z.array(z.string())),
     tags: z.array(z.coerce.string()).default([]).describe('Tags associated with the meeting.'),
     difficulty: z.optional(z.enum(["beginner", "intermediate", "advanced"])).describe('The difficulty level of the meeting.')
