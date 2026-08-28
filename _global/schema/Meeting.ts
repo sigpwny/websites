@@ -12,7 +12,7 @@ export const CreativeCommonsLicenseIds = [
   'CC0-1.0',
 ] as const;
 
-export const MeetingLicenseIds = [...CreativeCommonsLicenseIds, 'none'] as const;
+export const MeetingLicenseIds = [...CreativeCommonsLicenseIds, 'copyright-only'] as const;
 export type CreativeCommonsLicenseId = typeof CreativeCommonsLicenseIds[number];
 export type MeetingLicenseId = typeof MeetingLicenseIds[number];
 
@@ -48,9 +48,9 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
       z.optional(z.string().url()).describe('A URL to the recording of the meeting (e.g. YouTube).')
     ),
     license: z.enum(MeetingLicenseIds).default('CC-BY-SA-4.0')
-      .describe('The license covering the meeting content, or "none" for copyright-only content.'),
+      .describe('The license covering the meeting content, or "copyright-only" for content not offered under a license.'),
     copyright: z.optional(z.coerce.string())
-      .describe('Copyright text displayed before the license, or by itself when license is "none".'),
+      .describe('Copyright text displayed before the license, or by itself when license is "copyright-only".'),
     lesson_id: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
       z.optional(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/))

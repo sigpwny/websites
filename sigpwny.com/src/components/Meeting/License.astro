@@ -62,7 +62,7 @@ const licenses: Record<CreativeCommonsLicenseId, LicenseMetadata> = {
 };
 
 const { license, copyright: copyrightText } = Astro.props as Props;
-const licenseMetadata = license === 'none' ? undefined : licenses[license];
+const licenseMetadata = license === 'copyright-only' ? undefined : licenses[license];
 ---
 
 {licenseMetadata || copyrightText ? (
