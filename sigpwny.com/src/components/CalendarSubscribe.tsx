@@ -67,6 +67,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
       <div className="absolute top-full mt-2 left-0">
         <PopoverContent>
           <Menu className="custom-scrollbar">
+            <p className="m-0 select-none px-2 pt-1 text-sm text-content/60">Step 1: Pick meetings</p>
             <ul>
               {Object.entries(reactMeetingMetadata).map(([meeting_type, metadata]) => (
                 <li
@@ -92,6 +93,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
               ))}
             </ul>
             <span className="border-b-2 border-surface-300" />
+            <p className="m-0 select-none px-2 pt-1 text-sm text-content/60">Step 2: Add to calendar</p>
             <ul>
               <li>
                 <a
@@ -130,9 +132,6 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                   </span>
                 </a>
               </li>
-            </ul>
-            <span className="border-b-2 border-surface-300" />
-            <ul>
               <li>
                 <a
                   href={genericWebcalUrl}
@@ -140,7 +139,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                 >
                   <CalendarRegular />
                   <span>
-                    Other (system calendar)
+                    Other calendar
                   </span>
                 </a>
               </li>
@@ -155,7 +154,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                     <LinkRegular />
                   )}
                   <span>
-                    Copy Link (webcal)
+                    Copy link (<span className="font-mono">webcal://</span>)
                   </span>
                 </button>
               </li>
