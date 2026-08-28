@@ -3,15 +3,18 @@ import { render } from 'astro:content';
 import {
   CalendarRegular,
   ClockRegular,
-  LiveRegular,
-  LocationRegular
+  DocumentPdfFilled,
+  LocationRegular,
+  VideoClipFilled,
+  VideoFilled,
 } from '$/components/Icons/fluentui';
 import Link from '$/components/Link.astro';
 import { MdxComponents } from '$/components/Mdx/index.astro';
 import Layout from '@/layouts/Meeting.astro';
+import MeetingDifficultyBadge from '@/components/Meeting/DifficultyBadge';
+import MeetingTypeBadge from '@/components/Meeting/TypeBadge';
 import MeetingLicense from '@/components/Meeting/License.astro';
 import Persona from '@/components/Profile/Persona.astro';
-import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import {
@@ -92,17 +95,26 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
   video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}
   type="article"
 >
-  <article class="panel w-full self-start" itemscope itemtype="http://schema.org/Article">
+  <article class="panel w-full" itemscope itemtype="http://schema.org/Article">
     <header>
       <div class="flex flex-col">
         <h1 class="mb-1" itemprop="headline">
           {meeting.title}
         </h1>
-        {meeting.semester ? (
-          <p class="font-mono m-0 order-first">
-            {meeting.semester}{meeting.week_number != null ? ` Week ${weekNumber(meeting.week_number)}` : null}
-          </p>
-        ) : null}
+        <div class="flex flex-row flex-wrap gap-2 mb-2 order-first">
+          <MeetingTypeBadge type={meeting.type} />
+          {meeting.difficulty ? (
+            <MeetingDifficultyBadge difficulty={meeting.difficulty} />
+          ) : null}
+          {meeting.week_number != null ? (
+            <span
+              title={`Week ${weekNumber(meeting.week_number)}`}
+              class="px-2 py-1 font-mono text-sm md:text-md rounded-lg border-2 border-surface-150 select-none"
+            >
+              Wk {weekNumber(meeting.week_number)}
+            </span>
+          ) : null}
+        </div>
         {meeting.tags && meeting.tags.length > 0 ? (
           <div class="flex flex-row mb-2">
             <TagGroup tags={meeting.tags.concat()} />
@@ -197,38 +209,30 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
     {meeting.live_video_url || meeting.recording || meeting.slides ? (
       <div class="grid sm:flex sm:flex-row gap-2 mb-4">
         {meeting.recording ? (
-          <a
+          <Link
             href={meeting.recording}
-            class="button btn-primary"
-            target="_blank" rel="noopener noreferrer"
+            class="button btn-action flex flex-row gap-2 items-center justify-center"
           >
-            <YouTubeSvg />
-            <p class="inline align-middle m-0 ml-2">
-              Watch video
-            </p>
-          </a>
+            <VideoClipFilled />
+            <span>Watch video</span>
+          </Link>
         ) : (meeting.live_video_url ? (
-          <a
+          <Link
             href={meeting.live_video_url}
-            class="button btn-primary flex flex-row items-center"
-            target="_blank" rel="noopener noreferrer"
+            class="button flex flex-row gap-2 items-center justify-center bg-gradient-to-tr from-pwny-blue-dark to-pwny-blue border-2 border-surface-200 hover:brightness-125 active:brightness-75 hover:!text-content focus-visible:ring-white !text-content"
           >
-            <LiveRegular className="flex-none" />
-            <span class="m-0 ml-2">
-              Join live video
-            </span>
-          </a>
+            <VideoFilled />
+            <span>Join live video</span>
+          </Link>
         ) : null)}
         {meeting.slides ? (
           <a
             href={meeting.slides}
-            class="button btn-primary"
+            class="button btn-action flex flex-row gap-2 items-center justify-center"
             target="_blank" rel="noopener noreferrer"
           >
-            <PdfSvg />
-            <p class="inline align-middle m-0 ml-2">
-              Download slides
-            </p>
+            <DocumentPdfFilled />
+            <span>Download slides</span>
           </a>
         ) : null}
       </div>
@@ -239,7 +243,7 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
         return url ? (
           <iframe
             title={meeting.title + " video"}
-            class="bg-surface-000 w-full max-w-prose aspect-video mx-auto mb-4"
+            class="bg-surface-000 w-full max-w-prose aspect-video mx-auto mb-4 rounded-xl border-2 border-surface-200"
             allow="encrypted-media; fullscreen; picture-in-picture"
             allowfullscreen={true}
             src={url}
@@ -250,7 +254,8 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
     ) : meeting.slides ? (
       <iframe
         src={meeting.slides}
-        class="skeleton-shimmer w-full max-w-prose aspect-video mx-auto mb-4"
+        title={meeting.title + " slides"}
+        class="skeleton-shimmer w-full max-w-prose aspect-video mx-auto mb-4 rounded-xl border-2 border-surface-200"
       />
     ) : null}
     <section class="md-root w-full max-w-prose mx-auto" itemprop="articleBody">

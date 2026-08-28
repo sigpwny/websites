@@ -181,10 +181,19 @@
   @apply rounded-full px-2 py-1 select-none size-fit min-w-fit;
 }
 .button {
-  @apply border-0 rounded-md px-3 py-1 cursor-pointer select-none;
+  @apply border-0 rounded-md px-3 py-1 cursor-pointer select-none
+    focus:outline-none active:translate-y-px;
+}
+.button:focus-visible {
+  outline: 2px solid rgb(var(--rgb-content));
+  outline-offset: 2px;
 }
 .btn-primary {
-  @apply bg-primary hover:bg-secondary text-surface-000 hover:text-surface-000;
+  @apply bg-primary hover:bg-secondary active:bg-primary-dark text-surface-000 hover:text-surface-000;
+}
+.btn-action {
+  @apply bg-surface-150 border-2 border-surface-200 hover:bg-surface-200 hover:border-primary
+    active:bg-surface-100 active:border-secondary text-content hover:text-content;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: rgb(var(--rgb-primary));
