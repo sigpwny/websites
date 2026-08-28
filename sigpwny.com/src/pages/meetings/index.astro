@@ -1,7 +1,7 @@
 ---
-import { getSemesterToMeetingIndexMap } from '@/utils/meetings';
+import { getSemesterToMeetingEventMap } from '@/utils/meetings';
 
-const semesters = Array.from((await getSemesterToMeetingIndexMap()).keys());
+const semesters = Array.from((await getSemesterToMeetingEventMap()).keys());
 const latestSemester = semesters[0];
 
 return Astro.rewrite(`/meetings/${latestSemester.toLowerCase()}/`);

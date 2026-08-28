@@ -64,7 +64,7 @@ export async function getSemesterToMeetingsMap() {
   }, new Map<string, Meeting[]>());
 };
 
-export async function getSemesterToMeetingIndexMap() {
+export async function getSemesterToMeetingEventMap() {
   const entries: MeetingIndexEntry[] = [
     ...await getMeetings(),
     ...await getMeetingIndexEvents(),
