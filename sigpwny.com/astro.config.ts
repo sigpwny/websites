@@ -15,7 +15,6 @@ function normalize(filePath: string) {
   return normalizePath(path.resolve(import.meta.dirname, filePath));
 }
 
-const meetingBase = path.resolve(import.meta.dirname, '../_global/content/meetings/');
 type RedirectStatus = 301 | 302 | 307 | 308;
 
 const redirects = redirectData.redirects.reduce<Record<string, {
@@ -94,9 +93,7 @@ export default defineConfig({
           {
             src: normalize('../_global/content/meetings/**/*'),
             dest: 'meetings',
-            rename: (_name, _ext, path) => {
-              return normalizePath(path.replace(meetingBase, '').replace(/(fa|sp)\d{4}/, ''))
-            }
+            rename: { stripBase: 4 },
           }
         ]
       }),
