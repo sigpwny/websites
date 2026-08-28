@@ -258,7 +258,7 @@ export default function MeetingSidebar({
                   ) : (
                     <RadioButtonRegular className="size-5 shrink-0 text-content/60" />
                   )}
-                  <span>All Meetings</span>
+                  <span className="flex h-7 items-center">All Meetings</span>
                   <span className="ml-auto shrink-0 font-mono text-xs">{meetings.length}</span>
                 </button>
               </li>
