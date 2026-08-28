@@ -52,6 +52,7 @@ const time_start = meeting.time_start ? dayjs(meeting.time_start).tz(meeting.tim
 const time_end = meeting.time_start && meeting.duration
   ? dayjs(meeting.time_start).tz(meeting.timezone).add(dayjs.duration(meeting.duration))
   : undefined;
+const isMultiDay = time_start && time_end ? !time_start.isSame(time_end, 'day') : false;
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(meeting.location?.trim() ?? '');
 ---
@@ -99,6 +100,14 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
                 <time datetime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
                   {time_start.format("dddd, MMMM Do, YYYY")}
                 </time>
+                {isMultiDay && time_end ? (
+                  <>
+                    &ndash;
+                    <time datetime={time_end.format("YYYY-MM-DDTHH:mmZ")}>
+                      {time_end.format("dddd, MMMM Do, YYYY")}
+                    </time>
+                  </>
+                ) : null}
               </span>
             </div>
           ) : null}
@@ -106,20 +115,18 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
             <div class="flex flex-row gap-2 items-center">
               <ClockRegular className="flex-none text-primary" />
               <span class="inline align-middle">
-                <time datetime={meeting.duration}>
-                  {time_start.minute() == 0 ?
-                    <>{time_start.format("h")}</> :
-                    <>{time_start.format("h:mm")}</>
-                  }
-                  {time_start.format("A") !== time_end.format("A") ?
-                    <>{time_start.format(" A")}</> :
-                    null
-                  }
-                  &ndash;
-                  {time_end.minute() == 0 ?
-                    <>{time_end.format("h A (z)")}</> :
-                    <>{time_end.format("h:mm A (z)")}</>
-                  }
+                <time datetime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
+                  {isMultiDay ? time_start.format(time_start.minute() == 0 ? "ddd, h A" : "ddd, h:mm A") : (
+                    <>
+                      {time_start.format(time_start.minute() == 0 ? "h" : "h:mm")}
+                      {time_start.format("A") !== time_end.format("A") ? time_start.format(" A") : null}
+                    </>
+                  )}
+                </time>
+                &ndash;
+                <time datetime={time_end.format("YYYY-MM-DDTHH:mmZ")}>
+                  {isMultiDay ? time_end.format(time_end.minute() == 0 ? "ddd, h A (z)" : "ddd, h:mm A (z)") :
+                    time_end.format(time_end.minute() == 0 ? "h A (z)" : "h:mm A (z)")}
                 </time>
               </span>
               <CountdownBadge time_start={time_start.toDate()} time_close={time_end.toDate()} />
