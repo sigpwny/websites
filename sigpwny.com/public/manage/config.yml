@@ -133,7 +133,8 @@ collections:
           {label: '🦋 Intermediate', value: 'intermediate'},
           {label: '🐦‍🔥 Advanced', value: 'advanced'}
         ]}
-      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', format: 'YYYY-MM-DDTHH:mm:ssZ', input_timezone: 'America/Chicago', output_utc: false, hint: 'Enter the meeting time in `America/Chicago` (Central Time). The saved UTC offset adjusts automatically for daylight saving time.'}
+      # Sveltia's custom format path corrupts values when combined with an IANA input timezone.
+      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', input_timezone: 'America/Chicago', output_utc: false, hint: 'Enter the meeting time in `America/Chicago` (Central Time). The saved UTC offset adjusts automatically for daylight saving time.'}
       - {label: 'Duration', name: 'duration', widget: 'string', default: '', hint: 'Leave blank to default to `PT1H` (1 hour). Use ISO 8601 duration format: `P(n)Y(n)M(n)DT(n)H(n)M(n)S`, e.g. `PT48H` is 48 hours.', required: false}
       - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: 'Controls how the meeting time appears on the site and in calendar data. Leave blank for `America/Chicago`; otherwise, use an [IANA timezone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones), e.g. `Etc/UTC`.', required: false}
       - {label: 'Credit (Authors, Presenters, and Sponsors)', name: 'credit', widget: 'list', hint: 'Add each name on a new line (commas will not work). Full profile information is referenced from the names defined in the **Members** and **Organizations** collections.'}
@@ -196,7 +197,8 @@ collections:
           {label: '🔷 UIUCTF', value: 'uiuctf'},
           {label: '🔶 Fall CTF', value: 'fallctf'}
         ]}
-      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', format: 'YYYY-MM-DDTHH:mm:ssZ', input_timezone: 'America/Chicago', output_utc: false, hint: 'Enter the event time in `America/Chicago` (Central Time). The saved UTC offset adjusts automatically for daylight saving time.'}
+      # Sveltia's custom format path corrupts values when combined with an IANA input timezone.
+      - {label: 'Start Time', name: 'time_start', widget: 'datetime', default: '', input_timezone: 'America/Chicago', output_utc: false, hint: 'Enter the event time in `America/Chicago` (Central Time). The saved UTC offset adjusts automatically for daylight saving time.'}
       - {label: 'Duration', name: 'duration', widget: 'string', default: 'PT48H', hint: 'Leave blank to default to 48-hour duration. Use ISO 8601 duration format - P(n)Y(n)M(n)DT(n)H(n)M(n)S. Example: "PT6H" is 6 hours.', required: false}
       - {label: 'Display Timezone', name: 'timezone', widget: 'string', hint: 'Controls how the event time appears on the site and in calendar data. Leave blank for `Etc/UTC`; use `America/Chicago` for local events or another IANA timezone identifier when needed.', required: false}
       - {label: 'Credit', name: 'credit', widget: 'list', hint: 'Separate names with commas. To add a name with whitespace, type without spaces first, then insert spaces.', required: false}
