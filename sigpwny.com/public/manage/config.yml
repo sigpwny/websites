@@ -82,7 +82,6 @@ collections:
     extension: 'mdx'
     format: 'frontmatter'
     identifier_field: 'title'
-    preview_path: "meetings/{{fields.type | lower}}/{{fields.time_start | date('YYYY-MM-DD')}}/"
     aliases_field: false
     summary: "{{fields.type}} / `{{fields.time_start | date('YYYY-MM-DD')}}` / {{fields.title}}"
     sortable_fields:
