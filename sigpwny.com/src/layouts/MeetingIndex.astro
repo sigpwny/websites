@@ -56,27 +56,29 @@ const calendarSubscribeMeetingOptions = !isAllIndex && (props.semesterMetadata &
     <h1>
       {isAllIndex ? 'Meetings' : `${props.currLink.name} Meetings`}
     </h1>
-    <nav aria-label="Meetings by semester" class="flex flex-col sm:flex-row gap-x-4 gap-y-2 w-full max-w-40 mb-4">
-      <DropdownSelect
-        displayText={props.currLink.name}
-        contentRootClassName="w-full max-w-40"
-        client:load
-      >
-        <Menu className="custom-scrollbar !max-h-80">
-          <ul class="!gap-0">
-            {props.allLinks.map((link) => (
-              <li>
-                <Link
-                  href={link.url}
-                  class:list={["!px-2 !py-1", { '!bg-primary hover:!bg-secondary !text-surface-000': link.semester === props.currLink.semester }]}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Menu>
-      </DropdownSelect>
+    <nav aria-label="Meetings by semester" class="flex flex-col sm:flex-row gap-x-4 gap-y-2 w-full mb-4">
+      <span class="w-full max-w-40">
+        <DropdownSelect
+          displayText={props.currLink.name}
+          contentRootClassName="w-full max-w-40"
+          client:load
+        >
+          <Menu className="custom-scrollbar !max-h-80">
+            <ul class="!gap-0">
+              {props.allLinks.map((link) => (
+                <li>
+                  <Link
+                    href={link.url}
+                    class:list={["!px-2 !py-1", { '!bg-primary hover:!bg-secondary !text-surface-000': link.semester === props.currLink.semester }]}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Menu>
+        </DropdownSelect>
+      </span>
       <CalendarSubscribe selected={calendarSubscribeMeetingOptions} client:load />
     </nav>
     <slot />

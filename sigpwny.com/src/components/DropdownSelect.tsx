@@ -9,11 +9,14 @@ import { handleMenuKeyDown } from '@/components/Menu';
 import { ChevronUpDownFilled } from '$/components/Icons/fluentui';
 
 interface DropdownSelectProps {
-  displayText: string;
+  displayText: React.ReactNode;
   children?: React.ReactNode;
   contentRootClassName?: string;
+  triggerClassName?: string;
+  triggerStyle?: React.CSSProperties;
   onSelect?: (selected: string) => void;
   placement?: Placement;
+  closeOnSelect?: boolean;
 }
 
 export default function DropdownSelect(props: DropdownSelectProps) {
@@ -22,7 +25,8 @@ export default function DropdownSelect(props: DropdownSelectProps) {
     <Popover open={open} onOpenChange={setOpen} placement={props.placement ?? "bottom-start"}>
       <PopoverTrigger
         onClick={() => setOpen(!open)}
-        className={`button flex flex-row gap-2 items-center justify-between bg-surface-100 hover:bg-surface-150 text-white w-full border border-surface-200 pr-1 ${open ? "ring-primary ring-2 ring-offset-2 ring-offset-surface-000" : ""}`}
+        className={`button flex flex-row gap-2 items-center justify-between bg-surface-100 hover:bg-surface-150 text-white w-full border border-surface-200 pr-1 ${open ? "ring-primary ring-2 ring-offset-2 ring-offset-surface-000" : ""} ${props.triggerClassName ?? ""}`}
+        style={props.triggerStyle}
       >
         <span className="truncate">
           {props.displayText}
@@ -32,6 +36,11 @@ export default function DropdownSelect(props: DropdownSelectProps) {
       <PopoverContent
         className={props.contentRootClassName}
         onKeyDown={handleMenuKeyDown}
+        onClick={(event) => {
+          if (props.closeOnSelect && (event.target as HTMLElement).closest('a, button')) {
+            setOpen(false);
+          }
+        }}
       >
         {props.children}
       </PopoverContent>

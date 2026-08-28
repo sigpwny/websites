@@ -1,34 +1,56 @@
 ---
 import Layout from '@/layouts/Base.astro';
 import type { HeadProps } from '$/components/BaseHead.astro';
-import Sidebar from '@/components/Sidebar';
+import MeetingSidebar, {
+  type MeetingSidebarEntry,
+  type MeetingSidebarSemester,
+} from '@/components/Meeting/Sidebar';
 import {
   getSemesterToMeetingsMap,
   formatSemester,
-  weekNumber,
+  type Meeting,
 } from '@/utils/meetings';
 import 'katex/dist/katex.min.css';
-import { reactMeetingMetadata } from '@/utils/reactMeetingMetadata';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 
-const props: HeadProps = Astro.props;
+dayjs.extend(duration);
+
+interface Props extends HeadProps {
+  meeting: Meeting;
+}
+
+const { meeting, ...props } = Astro.props as Props;
 
 const semesterToMeetingsMap = await getSemesterToMeetingsMap();
-
-const meetingSidebarItems = Array.from(semesterToMeetingsMap.entries()).map(([semester, meetings]) => ({
-  name: formatSemester(semester),
-  items: meetings.map((meeting) => ({
-    name: meeting.data.week_number != null ? `Week ${weekNumber(meeting.data.week_number)}: ${meeting.data.title}` : meeting.data.title,
-    url: meeting.slug,
-    active: meeting.slug === Astro.url.pathname,
-    metadata: reactMeetingMetadata[meeting.data.type]
-  })),
-  active: false
-}));
-
-// If a meeting is set as active, we also want to set the parent semester as active
-meetingSidebarItems.forEach((semester) => {
-  semester.active = semester.items.some((meeting) => meeting.active);
+const sidebarSemesters = Array.from(semesterToMeetingsMap.entries()).map(([semester, meetings]) => {
+  const chronologicalMeetings = [...meetings].sort(
+    (a, b) => a.data.time_start.valueOf() - b.data.time_start.valueOf()
+  );
+  return {
+    id: semester,
+    name: formatSemester(semester),
+    firstMeetingUrl: chronologicalMeetings[0].slug,
+    firstMeetingByType: Object.fromEntries(
+      chronologicalMeetings
+        .filter((entry, index, entries) =>
+          entries.findIndex((candidate) => candidate.data.type === entry.data.type) === index
+        )
+        .map((entry) => [entry.data.type, entry.slug])
+    ),
+  } satisfies MeetingSidebarSemester;
 });
+const semesterMeetings = [...(semesterToMeetingsMap.get(meeting.data.semester) ?? [])].sort(
+  (a, b) => a.data.time_start.valueOf() - b.data.time_start.valueOf()
+);
+const sidebarMeetings = semesterMeetings.map((entry) => ({
+  title: entry.data.title,
+  slug: entry.slug,
+  type: entry.data.type,
+  timeStart: entry.data.time_start.valueOf(),
+  timeClose: entry.data.time_start.valueOf() + dayjs.duration(entry.data.duration).asMilliseconds(),
+  timezone: entry.data.timezone,
+} satisfies MeetingSidebarEntry));
 ---
 
 <Layout {...props}>
@@ -38,16 +60,19 @@ meetingSidebarItems.forEach((semester) => {
       role="navigation"
       aria-label="Meetings"
     >
-      <div class="w-full border-surface-100 border-2 rounded-xl py-2 sticky top-4">
-        <div class="w-full h-fit max-h-[75vh] px-2 overflow-hidden overflow-y-auto custom-scrollbar">
-          <Sidebar
-            root_items={meetingSidebarItems}
-            client:load
-            transition:persist
-          />
-        </div>
+      <div class="w-full border-surface-100 border-2 rounded-xl sticky top-4">
+        <MeetingSidebar
+          activeSlug={meeting.slug}
+          currentSemester={meeting.data.semester}
+          meetings={sidebarMeetings}
+          semesters={sidebarSemesters}
+          client:load
+          transition:persist="meeting-sidebar"
+        />
       </div>
     </aside>
-    <slot />
+    <div class="w-full min-w-0 pb-8">
+      <slot />
+    </div>
   </div>
 </Layout>

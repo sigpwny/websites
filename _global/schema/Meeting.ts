@@ -2,6 +2,20 @@ import { z, type SchemaContext } from 'astro:content';
 import { CardImageSchema } from './CardImage';
 import { ICalDataSchema } from './ICalData';
 
+export const CreativeCommonsLicenseIds = [
+  'CC-BY-4.0',
+  'CC-BY-SA-4.0',
+  'CC-BY-ND-4.0',
+  'CC-BY-NC-4.0',
+  'CC-BY-NC-SA-4.0',
+  'CC-BY-NC-ND-4.0',
+  'CC0-1.0',
+] as const;
+
+export const MeetingLicenseIds = [...CreativeCommonsLicenseIds, 'copyright-only'] as const;
+export type CreativeCommonsLicenseId = typeof CreativeCommonsLicenseIds[number];
+export type MeetingLicenseId = typeof MeetingLicenseIds[number];
+
 export const MeetingSchema = ({ image }: SchemaContext) => (
   z.object({
     title: z.coerce.string().describe('The title of the meeting.'),
@@ -32,6 +46,15 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
     recording: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
       z.optional(z.string().url()).describe('A URL to the recording of the meeting (e.g. YouTube).')
+    ),
+    license: z.enum(MeetingLicenseIds).default('CC-BY-SA-4.0')
+      .describe('The license covering the meeting content, or "copyright-only" for content not offered under a license.'),
+    copyright: z.optional(z.coerce.string())
+      .describe('Copyright text displayed before the license, or by itself when license is "copyright-only".'),
+    lesson_id: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.optional(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/))
+        .describe('A topic-based ID shared by presentations of substantially the same lesson, independent of title or sequence number.')
     ),
     // assets: z.optional(z.array(z.string())),
     tags: z.array(z.coerce.string()).default([]).describe('Tags associated with the meeting.'),

@@ -1,0 +1,96 @@
+---
+import type {
+  CreativeCommonsLicenseId,
+  MeetingLicenseId,
+} from '$/schema/Meeting';
+
+interface LicenseMetadata {
+  name: string;
+  url: string;
+  badgeUrl: string;
+  badgeAlt: string;
+}
+
+interface Props {
+  license: MeetingLicenseId;
+  copyright?: string;
+}
+
+const licenses: Record<CreativeCommonsLicenseId, LicenseMetadata> = {
+  'CC-BY-4.0': {
+    name: 'Creative Commons Attribution 4.0 International',
+    url: 'https://creativecommons.org/licenses/by/4.0/',
+    badgeUrl: '/images/licenses/cc-by-4.0.png',
+    badgeAlt: 'CC BY',
+  },
+  'CC-BY-SA-4.0': {
+    name: 'Creative Commons Attribution-ShareAlike 4.0 International',
+    url: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    badgeUrl: '/images/licenses/cc-by-sa-4.0.png',
+    badgeAlt: 'CC BY-SA',
+  },
+  'CC-BY-ND-4.0': {
+    name: 'Creative Commons Attribution-NoDerivatives 4.0 International',
+    url: 'https://creativecommons.org/licenses/by-nd/4.0/',
+    badgeUrl: '/images/licenses/cc-by-nd-4.0.png',
+    badgeAlt: 'CC BY-ND',
+  },
+  'CC-BY-NC-4.0': {
+    name: 'Creative Commons Attribution-NonCommercial 4.0 International',
+    url: 'https://creativecommons.org/licenses/by-nc/4.0/',
+    badgeUrl: '/images/licenses/cc-by-nc-4.0.png',
+    badgeAlt: 'CC BY-NC',
+  },
+  'CC-BY-NC-SA-4.0': {
+    name: 'Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International',
+    url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
+    badgeUrl: '/images/licenses/cc-by-nc-sa-4.0.png',
+    badgeAlt: 'CC BY-NC-SA',
+  },
+  'CC-BY-NC-ND-4.0': {
+    name: 'Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International',
+    url: 'https://creativecommons.org/licenses/by-nc-nd/4.0/',
+    badgeUrl: '/images/licenses/cc-by-nc-nd-4.0.png',
+    badgeAlt: 'CC BY-NC-ND',
+  },
+  'CC0-1.0': {
+    name: 'CC0 1.0 Universal',
+    url: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    badgeUrl: '/images/licenses/cc0-1.0.png',
+    badgeAlt: 'CC0 Public Domain Dedication',
+  },
+};
+
+const { license, copyright: copyrightText } = Astro.props as Props;
+const licenseMetadata = license === 'copyright-only' ? undefined : licenses[license];
+---
+
+{licenseMetadata || copyrightText ? (
+  <footer class="w-full max-w-prose mx-auto mt-8 pt-4 border-t-2 border-surface-200">
+    <div class="flex flex-row items-start gap-3 text-sm">
+      {licenseMetadata ? (
+        <img
+          src={licenseMetadata.badgeUrl}
+          alt={licenseMetadata.badgeAlt}
+          width="88"
+          height="31"
+          loading="lazy"
+          class="w-[88px] h-[31px] shrink-0"
+        />
+      ) : null}
+      <div class="min-w-0">
+        {copyrightText ? <p class="m-0">{copyrightText}</p> : null}
+        {licenseMetadata ? (
+          <p class="m-0">This meeting is licensed under <a href={licenseMetadata.url} target="_blank" rel="license noopener noreferrer" itemprop="license" class="license-link rounded-sm !underline underline-offset-2">{licenseMetadata.name}</a>.</p>
+        ) : null}
+      </div>
+    </div>
+  </footer>
+) : null}
+
+<style>
+  .license-link:focus-visible {
+    outline: 2px solid rgb(var(--rgb-content));
+    outline-offset: 2px;
+  }
+</style>

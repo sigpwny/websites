@@ -97,6 +97,7 @@ collections:
       - {label: '🟣 Purple Team', field: 'type', pattern: 'purple'}
     fields:
       - {label: 'Title', name: 'title', hint: 'e.g. `Introduction`, `PWN II`', widget: 'string'}
+      - {label: 'Lesson ID', name: 'lesson_id', widget: 'string', pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens.'], hint: 'Topic-based ID shared by presentations of substantially the same lesson, independent of its title or series number, e.g. `pwn-rop`.', required: false}
       # - {label: 'Semester', name: 'semester', hint: 'e.g. `sp2025`, `fa2025`', widget: 'string'}
       - {label: 'Semester', name: 'semester', widget: 'select', dropdown_threshold: 1, options: [
           {label: 'Fall 2026', value: 'fa2026'},
@@ -150,6 +151,17 @@ collections:
       - {label: 'Recording URL (YouTube)', name: 'recording', widget: 'string', required: false}
       - {label: 'Slides', name: 'slides', widget: 'file', choose_url: false, hint: 'Please upload PDFs instead of PPTX files. If downloading from Google Slides, ensure that skipped slides are not present.', required: false}
       - {label: 'Additional Assets', name: 'assets', widget: 'file', multiple: true, choose_url: false, hint: 'Zip or compress files together when possible.', required: false}
+      - {label: 'License', name: 'license', widget: 'select', required: false, hint: 'Leave `(None)` selected to use the site default, CC BY-SA 4.0, without adding a license field. Select `Copyright only (all rights reserved)` to opt out of Creative Commons licensing.', options: [
+          {label: 'CC BY 4.0', value: 'CC-BY-4.0'},
+          {label: 'CC BY-SA 4.0', value: 'CC-BY-SA-4.0'},
+          {label: 'CC BY-ND 4.0', value: 'CC-BY-ND-4.0'},
+          {label: 'CC BY-NC 4.0', value: 'CC-BY-NC-4.0'},
+          {label: 'CC BY-NC-SA 4.0', value: 'CC-BY-NC-SA-4.0'},
+          {label: 'CC BY-NC-ND 4.0', value: 'CC-BY-NC-ND-4.0'},
+          {label: 'CC0 1.0', value: 'CC0-1.0'},
+          {label: 'Copyright only (all rights reserved)', value: 'copyright-only'}
+        ]}
+      - {label: 'Copyright', name: 'copyright', widget: 'string', hint: 'Optional copyright notice shown before the license, e.g. `Copyright 2026 Example Author`.', required: false}
       - {label: 'Tags', name: 'tags', widget: 'list', hint: 'Add each tag on a new line (commas will not work). Add a main topic tag: `web`, `pwn`, `rev`, `crypto`, `forensics`, `jail`, `osint`, `misc`. Plus, add tags for specific topics, such as `xss`, `rsa`, or `lockpicking`. Try to re-use tags from past meetings. Avoid adding tags for meeting types since those are already visually highlighted (e.g. no adding `general` or `purple`).', max: 5, required: false}
       - {label: 'Week Number (Deprecated)', name: 'week_number', hint: 'Current week number in the semester, 0-indexed. Do not specify week numbers for events, such as CTFs (only for meetings).', widget: 'number', value_type: 'int', min: 0, max: 52, step: 1, required: false}
       - {label: 'Body', name: 'body', widget: 'markdown', modes: [raw, rich_text], required: false}

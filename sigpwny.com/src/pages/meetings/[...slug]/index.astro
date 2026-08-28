@@ -3,17 +3,23 @@ import { render } from 'astro:content';
 import {
   CalendarRegular,
   ClockRegular,
-  LiveRegular,
-  LocationRegular
+  DocumentPdfFilled,
+  LocationRegular,
+  VideoClipFilled,
+  VideoFilled,
 } from '$/components/Icons/fluentui';
+import Link from '$/components/Link.astro';
 import { MdxComponents } from '$/components/Mdx/index.astro';
 import Layout from '@/layouts/Meeting.astro';
+import MeetingDifficultyBadge from '@/components/Meeting/DifficultyBadge';
+import MeetingTypeBadge from '@/components/Meeting/TypeBadge';
+import MeetingLicense from '@/components/Meeting/License.astro';
 import Persona from '@/components/Profile/Persona.astro';
-import { PdfSvg, YouTubeSvg } from '$/components/Icons';
 import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import {
   convertDate,
+  formatSemester,
   getMeetings,
   getYouTubeEmbedUrl,
   weekNumber
@@ -36,21 +42,49 @@ dayjs.extend(advanced);
 
 export async function getStaticPaths() {
   const meetings = await getMeetings();
+  const lessons = meetings.reduce((map, meeting) => {
+    if (meeting.data.lesson_id) {
+      const presentations = map.get(meeting.data.lesson_id) ?? [];
+      presentations.push(meeting);
+      map.set(meeting.data.lesson_id, presentations);
+    }
+    return map;
+  }, new Map<string, typeof meetings>());
+  lessons.forEach((presentations) => {
+    presentations.sort((a, b) =>
+      b.data.time_start.valueOf() - a.data.time_start.valueOf() || a.id.localeCompare(b.id)
+    );
+  });
   return meetings.map((meeting) => ({
     params: { slug: meeting.relativeSlug },
-    props: { page: meeting },
+    props: {
+      page: meeting,
+      lessonPresentations: meeting.data.lesson_id
+        ? lessons.get(meeting.data.lesson_id) ?? []
+        : [],
+    },
   }));
 }
 
-const { page } = Astro.props;
+const { page, lessonPresentations } = Astro.props;
 const { Content } = await render(page);
 const meeting = page.data;
+const latestPresentation = lessonPresentations[0];
+const presentationCountBySemester = lessonPresentations.reduce((counts, presentation) => {
+  counts.set(presentation.data.semester, (counts.get(presentation.data.semester) ?? 0) + 1);
+  return counts;
+}, new Map<string, number>());
+const presentationDateLabel = (presentation: (typeof lessonPresentations)[number]) =>
+  (presentationCountBySemester.get(presentation.data.semester) ?? 0) > 1
+    ? convertDate(presentation.data.time_start, "MMMM Do, YYYY", presentation.data.timezone)
+    : formatSemester(presentation.data.semester);
 
 const profiles = await getProfilesFromNames(meeting.credit);
 const time_start = meeting.time_start ? dayjs(meeting.time_start).tz(meeting.timezone) : undefined;
 const time_end = meeting.time_start && meeting.duration
   ? dayjs(meeting.time_start).tz(meeting.timezone).add(dayjs.duration(meeting.duration))
   : undefined;
+const isMultiDay = time_start && time_end ? !time_start.isSame(time_end, 'day') : false;
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(meeting.location?.trim() ?? '');
 ---
@@ -60,18 +94,28 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
   image={meeting.card_image?.foreground?.src ?? meeting.card_image?.background?.src}
   video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}
   type="article"
+  meeting={page}
 >
-  <article class="panel w-full self-start" itemscope itemtype="http://schema.org/Article">
+  <article class="panel w-full" itemscope itemtype="http://schema.org/Article">
     <header>
       <div class="flex flex-col">
         <h1 class="mb-1" itemprop="headline">
           {meeting.title}
         </h1>
-        {meeting.semester ? (
-          <p class="font-mono m-0 order-first">
-            {meeting.semester}{meeting.week_number != null ? ` Week ${weekNumber(meeting.week_number)}` : null}
-          </p>
-        ) : null}
+        <div class="flex flex-row flex-wrap gap-2 mb-2 order-first">
+          <MeetingTypeBadge type={meeting.type} />
+          {meeting.difficulty ? (
+            <MeetingDifficultyBadge difficulty={meeting.difficulty} />
+          ) : null}
+          {meeting.week_number != null ? (
+            <span
+              title={`Week ${weekNumber(meeting.week_number)}`}
+              class="px-2 py-1 font-mono text-sm md:text-md rounded-lg border-2 border-surface-150 select-none"
+            >
+              Wk {weekNumber(meeting.week_number)}
+            </span>
+          ) : null}
+        </div>
         {meeting.tags && meeting.tags.length > 0 ? (
           <div class="flex flex-row mb-2">
             <TagGroup tags={meeting.tags.concat()} />
@@ -98,6 +142,14 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
                 <time datetime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
                   {time_start.format("dddd, MMMM Do, YYYY")}
                 </time>
+                {isMultiDay && time_end ? (
+                  <>
+                    &ndash;
+                    <time datetime={time_end.format("YYYY-MM-DDTHH:mmZ")}>
+                      {time_end.format("dddd, MMMM Do, YYYY")}
+                    </time>
+                  </>
+                ) : null}
               </span>
             </div>
           ) : null}
@@ -105,20 +157,18 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
             <div class="flex flex-row gap-2 items-center">
               <ClockRegular className="flex-none text-primary" />
               <span class="inline align-middle">
-                <time datetime={meeting.duration}>
-                  {time_start.minute() == 0 ?
-                    <>{time_start.format("h")}</> :
-                    <>{time_start.format("h:mm")}</>
-                  }
-                  {time_start.format("A") !== time_end.format("A") ?
-                    <>{time_start.format(" A")}</> :
-                    null
-                  }
-                  &ndash;
-                  {time_end.minute() == 0 ?
-                    <>{time_end.format("h A (z)")}</> :
-                    <>{time_end.format("h:mm A (z)")}</>
-                  }
+                <time datetime={time_start.format("YYYY-MM-DDTHH:mmZ")}>
+                  {isMultiDay ? time_start.format(time_start.minute() == 0 ? "ddd, h A" : "ddd, h:mm A") : (
+                    <>
+                      {time_start.format(time_start.minute() == 0 ? "h" : "h:mm")}
+                      {time_start.format("A") !== time_end.format("A") ? time_start.format(" A") : null}
+                    </>
+                  )}
+                </time>
+                &ndash;
+                <time datetime={time_end.format("YYYY-MM-DDTHH:mmZ")}>
+                  {isMultiDay ? time_end.format(time_end.minute() == 0 ? "ddd, h A (z)" : "ddd, h:mm A (z)") :
+                    time_end.format(time_end.minute() == 0 ? "h A (z)" : "h:mm A (z)")}
                 </time>
               </span>
               <CountdownBadge time_start={time_start.toDate()} time_close={time_end.toDate()} />
@@ -146,41 +196,44 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
         </div>
       </div>
     </header>
+    {latestPresentation && latestPresentation.slug !== page.slug ? (
+      <aside class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 mb-4 rounded-xl border-2 border-primary bg-surface-150">
+        <div>
+          <p class="m-0 font-bold">A newer version of this meeting is available!</p>
+          <p class="m-0 text-sm">Presented {convertDate(latestPresentation.data.time_start, "MMMM Do, YYYY", latestPresentation.data.timezone)}</p>
+        </div>
+        <Link href={latestPresentation.slug} class="button btn-primary shrink-0 text-center">
+          View latest
+        </Link>
+      </aside>
+    ) : null}
     {meeting.live_video_url || meeting.recording || meeting.slides ? (
       <div class="grid sm:flex sm:flex-row gap-2 mb-4">
         {meeting.recording ? (
-          <a
+          <Link
             href={meeting.recording}
-            class="button btn-primary"
-            target="_blank" rel="noopener noreferrer"
+            class="button btn-action flex flex-row gap-2 items-center justify-center"
           >
-            <YouTubeSvg />
-            <p class="inline align-middle m-0 ml-2">
-              Watch video
-            </p>
-          </a>
+            <VideoClipFilled />
+            <span>Watch video</span>
+          </Link>
         ) : (meeting.live_video_url ? (
-          <a
+          <Link
             href={meeting.live_video_url}
-            class="button btn-primary flex flex-row items-center"
-            target="_blank" rel="noopener noreferrer"
+            class="button flex flex-row gap-2 items-center justify-center bg-gradient-to-tr from-pwny-blue-dark to-pwny-blue border-2 border-surface-200 hover:brightness-125 active:brightness-75 hover:!text-content focus-visible:ring-white !text-content"
           >
-            <LiveRegular className="flex-none" />
-            <span class="m-0 ml-2">
-              Join live video
-            </span>
-          </a>
+            <VideoFilled />
+            <span>Join live video</span>
+          </Link>
         ) : null)}
         {meeting.slides ? (
           <a
             href={meeting.slides}
-            class="button btn-primary"
+            class="button btn-action flex flex-row gap-2 items-center justify-center"
             target="_blank" rel="noopener noreferrer"
           >
-            <PdfSvg />
-            <p class="inline align-middle m-0 ml-2">
-              Download slides
-            </p>
+            <DocumentPdfFilled />
+            <span>Download slides</span>
           </a>
         ) : null}
       </div>
@@ -191,7 +244,7 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
         return url ? (
           <iframe
             title={meeting.title + " video"}
-            class="bg-surface-000 w-full max-w-prose aspect-video mx-auto mb-4"
+            class="bg-surface-000 w-full max-w-prose aspect-video mx-auto mb-4 rounded-xl border-2 border-surface-200"
             allow="encrypted-media; fullscreen; picture-in-picture"
             allowfullscreen={true}
             src={url}
@@ -202,11 +255,36 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
     ) : meeting.slides ? (
       <iframe
         src={meeting.slides}
-        class="skeleton-shimmer w-full max-w-prose aspect-video mx-auto mb-4"
+        title={meeting.title + " slides"}
+        class="skeleton-shimmer w-full max-w-prose aspect-video mx-auto mb-4 rounded-xl border-2 border-surface-200"
       />
     ) : null}
     <section class="md-root w-full max-w-prose mx-auto" itemprop="articleBody">
       <Content components={MdxComponents} />
     </section>
+    {lessonPresentations.length > 1 ? (
+      <section class="w-full max-w-prose mx-auto mt-8" aria-labelledby="lesson-history-heading">
+        <h2 id="lesson-history-heading" class="text-2xl">Lesson history</h2>
+        <ul class="flex flex-col gap-1">
+          {lessonPresentations.map((presentation) => presentation.slug === page.slug ? (
+            <li>
+              <span class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-4 px-2 py-1 rounded-lg bg-surface-200 relative" aria-current="page">
+                <span class="absolute left-0 top-1/2 h-[60%] w-1 -translate-y-1/2 rounded-lg bg-primary"></span>
+                <span>{presentation.data.title}</span>
+                <span class="font-mono text-sm shrink-0">{presentationDateLabel(presentation)}</span>
+              </span>
+            </li>
+          ) : (
+            <li>
+              <Link href={presentation.slug} class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-4 px-2 py-1 rounded-lg hover:bg-surface-200 active:bg-surface-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-white !text-content">
+                <span>{presentation.data.title}</span>
+                <span class="font-mono text-sm shrink-0">{presentationDateLabel(presentation)}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null}
+    <MeetingLicense license={meeting.license} copyright={meeting.copyright} />
   </article>
 </Layout>
