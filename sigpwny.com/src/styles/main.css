@@ -1,17 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --rgb-pwny-green: 51 204 85;    /* #33cc55 */
-  --rgb-pwny-lgreen: 0 255 85;    /* #00ff55 */
-  --rgb-pwny-dgreen: 19 113 55;   /* #137137 */
-  --rgb-pwny-red: 255 64 64;      /* #ff4040 */
-  --rgb-pwny-orange: 237 122 49;  /* #ed7a31 */
-  --rgb-pwny-yellow: 255 192 0;   /* #ffc000 */
-  --rgb-pwny-blue: 65 170 255;    /* #41aaff */
-  --rgb-pwny-purple: 221 95 255;  /* #dd5fff */
+  --rgb-pwny-green: 51 204 85;         /* #33cc55 */
+  --rgb-pwny-green-light: 0 255 85;    /* #00ff55 */
+  --rgb-pwny-green-dark: 19 113 55;    /* #137137 */
+  --rgb-pwny-red: 255 64 64;           /* #ff4040 */
+  --rgb-pwny-red-light: 255 122 122;   /* #ff7a7a */
+  --rgb-pwny-red-dark: 158 27 27;      /* #9e1b1b */
+  --rgb-pwny-orange: 237 122 49;       /* #ed7a31 */
+  --rgb-pwny-orange-light: 255 173 102; /* #ffad66 */
+  --rgb-pwny-orange-dark: 132 61 12;   /* #843d0c */
+  --rgb-pwny-yellow: 255 192 0;        /* #ffc000 */
+  --rgb-pwny-yellow-light: 255 213 74; /* #ffd54a */
+  --rgb-pwny-yellow-dark: 116 87 0;    /* #745700 */
+  --rgb-pwny-blue: 65 170 255;         /* #41aaff */
+  --rgb-pwny-blue-light: 118 199 255;  /* #76c7ff */
+  --rgb-pwny-blue-dark: 0 90 158;      /* #005a9e */
+  --rgb-pwny-purple: 221 95 255;       /* #dd5fff */
+  --rgb-pwny-purple-light: 236 157 255; /* #ec9dff */
+  --rgb-pwny-purple-dark: 122 39 143;  /* #7a278f */
+
+  /* Legacy aliases. */
+  --rgb-pwny-lgreen: var(--rgb-pwny-green-light);
+  --rgb-pwny-dgreen: var(--rgb-pwny-green-dark);
 
   --rgb-primary: var(--rgb-pwny-green);
-  --rgb-secondary: var(--rgb-pwny-lgreen);
+  --rgb-secondary: var(--rgb-pwny-green-light);
+  --rgb-primary-dark: var(--rgb-pwny-green-dark);
   --rgb-surface-000: 0 0 0;       /* #000000 */
   --rgb-surface-050: 17 17 17;    /* #111111 */
   --rgb-surface-100: 34 34 34;    /* #222222 */
@@ -22,18 +37,33 @@
   --rgb-content: 255 255 255;        /* #ffffff */
 }
 
-@theme {
+@theme static {
   --color-pwny-green: rgb(var(--rgb-pwny-green));
-  --color-pwny-lgreen: rgb(var(--rgb-pwny-lgreen));
-  --color-pwny-dgreen: rgb(var(--rgb-pwny-dgreen));
+  --color-pwny-green-light: rgb(var(--rgb-pwny-green-light));
+  --color-pwny-green-dark: rgb(var(--rgb-pwny-green-dark));
   --color-pwny-red: rgb(var(--rgb-pwny-red));
+  --color-pwny-red-light: rgb(var(--rgb-pwny-red-light));
+  --color-pwny-red-dark: rgb(var(--rgb-pwny-red-dark));
   --color-pwny-orange: rgb(var(--rgb-pwny-orange));
+  --color-pwny-orange-light: rgb(var(--rgb-pwny-orange-light));
+  --color-pwny-orange-dark: rgb(var(--rgb-pwny-orange-dark));
   --color-pwny-yellow: rgb(var(--rgb-pwny-yellow));
+  --color-pwny-yellow-light: rgb(var(--rgb-pwny-yellow-light));
+  --color-pwny-yellow-dark: rgb(var(--rgb-pwny-yellow-dark));
   --color-pwny-blue: rgb(var(--rgb-pwny-blue));
+  --color-pwny-blue-light: rgb(var(--rgb-pwny-blue-light));
+  --color-pwny-blue-dark: rgb(var(--rgb-pwny-blue-dark));
   --color-pwny-purple: rgb(var(--rgb-pwny-purple));
+  --color-pwny-purple-light: rgb(var(--rgb-pwny-purple-light));
+  --color-pwny-purple-dark: rgb(var(--rgb-pwny-purple-dark));
+
+  /* Legacy aliases. */
+  --color-pwny-lgreen: var(--color-pwny-green-light);
+  --color-pwny-dgreen: var(--color-pwny-green-dark);
 
   --color-primary: rgb(var(--rgb-primary));
   --color-secondary: rgb(var(--rgb-secondary));
+  --color-primary-dark: rgb(var(--rgb-primary-dark));
   --color-surface-000: rgb(var(--rgb-surface-000));
   --color-surface-050: rgb(var(--rgb-surface-050));
   --color-surface-100: rgb(var(--rgb-surface-100));

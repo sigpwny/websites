@@ -1,5 +1,69 @@
 ---
 import Layout from '@/layouts/Base.astro';
+
+const brandColors = [
+  {
+    id: 'green',
+    label: 'General',
+    base: '#33cc55',
+    light: '#00ff55',
+    dark: '#137137',
+    baseContrast: '9.91:1 (WCAG AAA)',
+    lightContrast: '15.44:1 (WCAG AAA)',
+    darkContrast: '6.10:1 (WCAG AA)',
+  },
+  {
+    id: 'blue',
+    label: 'Seminar',
+    base: '#41aaff',
+    light: '#76c7ff',
+    dark: '#005a9e',
+    baseContrast: '8.42:1 (WCAG AAA)',
+    lightContrast: '11.38:1 (WCAG AAA)',
+    darkContrast: '7.10:1 (WCAG AAA)',
+  },
+  {
+    id: 'red',
+    label: 'Capture-the-Flag',
+    base: '#ff4040',
+    light: '#ff7a7a',
+    dark: '#9e1b1b',
+    baseContrast: '6.06:1 (WCAG AA)',
+    lightContrast: '8.32:1 (WCAG AAA)',
+    darkContrast: '8.00:1 (WCAG AAA)',
+    warning: 'pwny-red is not WCAG AAA compliant; use pwny-red-light when AAA contrast is required on black.',
+  },
+  {
+    id: 'yellow',
+    label: 'Embedded Team',
+    base: '#ffc000',
+    light: '#ffd54a',
+    dark: '#745700',
+    baseContrast: '12.79:1 (WCAG AAA)',
+    lightContrast: '14.87:1 (WCAG AAA)',
+    darkContrast: '6.76:1 (WCAG AA)',
+  },
+  {
+    id: 'purple',
+    label: 'Purple Team',
+    base: '#dd5fff',
+    light: '#ec9dff',
+    dark: '#7a278f',
+    baseContrast: '7.16:1 (WCAG AAA)',
+    lightContrast: '10.83:1 (WCAG AAA)',
+    darkContrast: '8.35:1 (WCAG AAA)',
+  },
+  {
+    id: 'orange',
+    label: 'Orange',
+    base: '#ed7a31',
+    light: '#ffad66',
+    dark: '#843d0c',
+    baseContrast: '7.43:1 (WCAG AAA)',
+    lightContrast: '11.42:1 (WCAG AAA)',
+    darkContrast: '7.91:1 (WCAG AAA)',
+  },
+];
 ---
 <Layout
   title="Branding Guidelines"
@@ -74,111 +138,42 @@ import Layout from '@/layouts/Base.astro';
       </div>
       <h3>Brand Colors</h3>
       <div class="flex flex-col gap-6">
-        <div id="color-pwny-green">
-          <p class="font-bold text-6xl text-pwny-green">General</p>
-          <div class="flex flex-col gap-2">
-            <div class="flex flex-col font-mono bg-pwny-green text-black rounded-xl p-4">
-              <span>pwny-green: #33cc55</span>
-              <span class="text-sm">9.9:1 (WCAG AAA)</span>
-            </div>
-            <div class="grid grid-cols-2 gap-2 font-mono">
-              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
-                <span>pwny-green-light: #00ff55</span>
-                <span class="text-sm">15.43:1 (WCAG AAA)</span>
+        {brandColors.map((color) => (
+          <div id={`color-pwny-${color.id}`}>
+            <p
+              class="font-bold text-5xl sm:text-6xl break-words"
+              style={{ color: `var(--color-pwny-${color.id})` }}
+            >
+              {color.label}
+            </p>
+            {color.warning ? <p>Warning: {color.warning}</p> : null}
+            <div class="flex flex-col gap-2 font-mono">
+              <div
+                class="flex flex-col text-black rounded-xl p-4"
+                style={{ backgroundColor: `var(--color-pwny-${color.id})` }}
+              >
+                <span>{`pwny-${color.id}: ${color.base}`}</span>
+                <span class="text-sm">{color.baseContrast} on black</span>
               </div>
-              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
-                <span>pwny-green-dark: #137137</span>
-                <span class="text-sm">6.09:1 (WCAG AA)</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div
+                  class="flex flex-col text-black rounded-xl p-4"
+                  style={{ backgroundColor: `var(--color-pwny-${color.id}-light)` }}
+                >
+                  <span>{`pwny-${color.id}-light: ${color.light}`}</span>
+                  <span class="text-sm">{color.lightContrast} on black</span>
+                </div>
+                <div
+                  class="flex flex-col text-white rounded-xl p-4"
+                  style={{ backgroundColor: `var(--color-pwny-${color.id}-dark)` }}
+                >
+                  <span>{`pwny-${color.id}-dark: ${color.dark}`}</span>
+                  <span class="text-sm">{color.darkContrast} on white</span>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div id="color-pwny-blue">
-          <p class="font-bold text-6xl text-pwny-blue">Seminar</p>
-          <div class="flex flex-col gap-2">
-            <div class="flex flex-col font-mono bg-pwny-blue text-black rounded-xl p-4">
-              <span>pwny-blue: #41aaff</span>
-              <span class="text-sm">8.41:1 (WCAG AAA)</span>
-            </div>
-            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
-              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
-                <span>pwny-green-light: #00ff55</span>
-                <span class="text-sm">15.43:1 (WCAG AAA)</span>
-              </div>
-              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
-                <span>pwny-green-dark: #137137</span>
-                <span class="text-sm">6.09:1 (WCAG AA)</span>
-              </div>
-            </div> -->
-          </div>
-        </div>
-        <div id="color-pwny-red">
-          <p class="font-bold text-6xl text-pwny-red">Capture-the-Flag</p>
-          <p>Warning: pwny-red is not WCAG AAA compliant and will be changed in the future.</p>
-          <div class="flex flex-col gap-2">
-            <div class="flex flex-col font-mono bg-pwny-red text-black rounded-xl p-4">
-              <span>pwny-red: #ff4040</span>
-              <span class="text-sm">⚠️ 6.05:1 (WCAG AA)</span>
-            </div>
-            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
-              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
-                <span>pwny-green-light: #00ff55</span>
-                <span class="text-sm">15.43:1 (WCAG AAA)</span>
-              </div>
-              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
-                <span>pwny-green-dark: #137137</span>
-                <span class="text-sm">6.09:1 (WCAG AA)</span>
-              </div>
-            </div> -->
-          </div>
-        </div>
-        <div id="color-pwny-yellow">
-          <p class="font-bold text-6xl text-pwny-yellow">Embedded Team</p>
-          <div class="flex flex-col gap-2">
-            <div class="flex flex-col font-mono bg-pwny-yellow text-black rounded-xl p-4">
-              <span>pwny-yellow: #ffc000</span>
-              <span class="text-sm">12.79:1 (WCAG AAA)</span>
-            </div>
-            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
-              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
-                <span>pwny-green-light: #00ff55</span>
-                <span class="text-sm">15.43:1 (WCAG AAA)</span>
-              </div>
-              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
-                <span>pwny-green-dark: #137137</span>
-                <span class="text-sm">6.09:1 (WCAG AA)</span>
-              </div>
-            </div> -->
-          </div>
-        </div>
-        <div id="color-pwny-purple">
-          <p class="font-bold text-6xl text-pwny-purple">Purple Team</p>
-          <div class="flex flex-col gap-2">
-            <div class="flex flex-col font-mono bg-pwny-purple text-black rounded-xl p-4">
-              <span>pwny-purple: #dd5fff</span>
-              <span class="text-sm">7.15:1 (WCAG AAA)</span>
             </div>
           </div>
-        </div>
-        <div id="color-pwny-orange">
-          <p class="font-bold text-6xl text-pwny-orange">Orange</p>
-          <div class="flex flex-col gap-2">
-            <div class="flex flex-col font-mono bg-pwny-orange text-black rounded-xl p-4">
-              <span>pwny-orange: #ed7a31</span>
-              <span class="text-sm">7.42:1 (WCAG AA)</span>
-            </div>
-            <!-- <div class="grid grid-cols-2 gap-2 font-mono">
-              <div class="bg-pwny-lgreen text-black rounded-xl p-4">
-                <span>pwny-green-light: #00ff55</span>
-                <span class="text-sm">15.43:1 (WCAG AAA)</span>
-              </div>
-              <div class="bg-pwny-dgreen text-white rounded-xl p-4">
-                <span>pwny-green-dark: #137137</span>
-                <span class="text-sm">6.09:1 (WCAG AA)</span>
-              </div>
-            </div> -->
-          </div>
-        </div>
+        ))}
       </div>
       <h3>Printing Colors (CMYK)</h3>
       <p>
