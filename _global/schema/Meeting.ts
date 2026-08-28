@@ -51,6 +51,11 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
       .describe('The license covering the meeting content, or "none" for copyright-only content.'),
     copyright: z.optional(z.coerce.string())
       .describe('Copyright text displayed before the license, or by itself when license is "none".'),
+    lesson_id: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.optional(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/))
+        .describe('A topic-based ID shared by presentations of substantially the same lesson, independent of title or sequence number.')
+    ),
     // assets: z.optional(z.array(z.string())),
     tags: z.array(z.coerce.string()).default([]).describe('Tags associated with the meeting.'),
     difficulty: z.optional(z.enum(["beginner", "intermediate", "advanced"])).describe('The difficulty level of the meeting.')

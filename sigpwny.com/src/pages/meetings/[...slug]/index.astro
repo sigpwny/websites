@@ -6,6 +6,7 @@ import {
   LiveRegular,
   LocationRegular
 } from '$/components/Icons/fluentui';
+import Link from '$/components/Link.astro';
 import { MdxComponents } from '$/components/Mdx/index.astro';
 import Layout from '@/layouts/Meeting.astro';
 import MeetingLicense from '@/components/Meeting/License.astro';
@@ -15,6 +16,7 @@ import { CountdownBadge } from '@/components/ReactMigration/Countdown';
 import { TagGroup } from '@/components/ReactMigration/Tag';
 import {
   convertDate,
+  formatSemester,
   getMeetings,
   getYouTubeEmbedUrl,
   weekNumber
@@ -37,15 +39,42 @@ dayjs.extend(advanced);
 
 export async function getStaticPaths() {
   const meetings = await getMeetings();
+  const lessons = meetings.reduce((map, meeting) => {
+    if (meeting.data.lesson_id) {
+      const presentations = map.get(meeting.data.lesson_id) ?? [];
+      presentations.push(meeting);
+      map.set(meeting.data.lesson_id, presentations);
+    }
+    return map;
+  }, new Map<string, typeof meetings>());
+  lessons.forEach((presentations) => {
+    presentations.sort((a, b) =>
+      b.data.time_start.valueOf() - a.data.time_start.valueOf() || a.id.localeCompare(b.id)
+    );
+  });
   return meetings.map((meeting) => ({
     params: { slug: meeting.relativeSlug },
-    props: { page: meeting },
+    props: {
+      page: meeting,
+      lessonPresentations: meeting.data.lesson_id
+        ? lessons.get(meeting.data.lesson_id) ?? []
+        : [],
+    },
   }));
 }
 
-const { page } = Astro.props;
+const { page, lessonPresentations } = Astro.props;
 const { Content } = await render(page);
 const meeting = page.data;
+const latestPresentation = lessonPresentations[0];
+const presentationCountBySemester = lessonPresentations.reduce((counts, presentation) => {
+  counts.set(presentation.data.semester, (counts.get(presentation.data.semester) ?? 0) + 1);
+  return counts;
+}, new Map<string, number>());
+const presentationDateLabel = (presentation: (typeof lessonPresentations)[number]) =>
+  (presentationCountBySemester.get(presentation.data.semester) ?? 0) > 1
+    ? convertDate(presentation.data.time_start, "MMMM Do, YYYY", presentation.data.timezone)
+    : formatSemester(presentation.data.semester);
 
 const profiles = await getProfilesFromNames(meeting.credit);
 const time_start = meeting.time_start ? dayjs(meeting.time_start).tz(meeting.timezone) : undefined;
@@ -154,6 +183,17 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
         </div>
       </div>
     </header>
+    {latestPresentation && latestPresentation.slug !== page.slug ? (
+      <aside class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 mb-4 rounded-xl border-2 border-primary bg-surface-150">
+        <div>
+          <p class="m-0 font-bold">A newer version of this meeting is available!</p>
+          <p class="m-0 text-sm">Presented {convertDate(latestPresentation.data.time_start, "MMMM Do, YYYY", latestPresentation.data.timezone)}</p>
+        </div>
+        <Link href={latestPresentation.slug} class="button btn-primary shrink-0 text-center">
+          View latest
+        </Link>
+      </aside>
+    ) : null}
     {meeting.live_video_url || meeting.recording || meeting.slides ? (
       <div class="grid sm:flex sm:flex-row gap-2 mb-4">
         {meeting.recording ? (
@@ -216,6 +256,29 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
     <section class="md-root w-full max-w-prose mx-auto" itemprop="articleBody">
       <Content components={MdxComponents} />
     </section>
+    {lessonPresentations.length > 1 ? (
+      <section class="w-full max-w-prose mx-auto mt-8" aria-labelledby="lesson-history-heading">
+        <h2 id="lesson-history-heading" class="text-2xl">Lesson history</h2>
+        <ul class="flex flex-col gap-1">
+          {lessonPresentations.map((presentation) => presentation.slug === page.slug ? (
+            <li>
+              <span class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-4 px-2 py-1 rounded-lg bg-surface-200 relative" aria-current="page">
+                <span class="absolute left-0 top-1/2 h-[60%] w-1 -translate-y-1/2 rounded-lg bg-primary"></span>
+                <span>{presentation.data.title}</span>
+                <span class="font-mono text-sm shrink-0">{presentationDateLabel(presentation)}</span>
+              </span>
+            </li>
+          ) : (
+            <li>
+              <Link href={presentation.slug} class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-4 px-2 py-1 rounded-lg hover:bg-surface-200 active:bg-surface-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-white !text-content">
+                <span>{presentation.data.title}</span>
+                <span class="font-mono text-sm shrink-0">{presentationDateLabel(presentation)}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null}
     <MeetingLicense license={meeting.license} copyright={meeting.copyright} />
   </article>
 </Layout>
