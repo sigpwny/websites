@@ -94,6 +94,7 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
   image={meeting.card_image?.foreground?.src ?? meeting.card_image?.background?.src}
   video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}
   type="article"
+  meeting={page}
 >
   <article class="panel w-full" itemscope itemtype="http://schema.org/Article">
     <header>

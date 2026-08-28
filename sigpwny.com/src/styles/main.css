@@ -78,6 +78,42 @@
   --font-vga: "IBM VGA 8x16", Consolas, Monaco, "Lucida Console", ui-monospace, "SF Mono", SFMono-Regular, Menlo, "DejaVu Sans Mono", monospace;
 }
 
+body[data-color-palette="red"] {
+  --rgb-primary: var(--rgb-pwny-red);
+  --rgb-secondary: var(--rgb-pwny-red-light);
+  --rgb-primary-dark: var(--rgb-pwny-red-dark);
+  --color-primary: rgb(var(--rgb-pwny-red));
+  --color-secondary: rgb(var(--rgb-pwny-red-light));
+  --color-primary-dark: rgb(var(--rgb-pwny-red-dark));
+}
+
+body[data-color-palette="yellow"] {
+  --rgb-primary: var(--rgb-pwny-yellow);
+  --rgb-secondary: var(--rgb-pwny-yellow-light);
+  --rgb-primary-dark: var(--rgb-pwny-yellow-dark);
+  --color-primary: rgb(var(--rgb-pwny-yellow));
+  --color-secondary: rgb(var(--rgb-pwny-yellow-light));
+  --color-primary-dark: rgb(var(--rgb-pwny-yellow-dark));
+}
+
+body[data-color-palette="blue"] {
+  --rgb-primary: var(--rgb-pwny-blue);
+  --rgb-secondary: var(--rgb-pwny-blue-light);
+  --rgb-primary-dark: var(--rgb-pwny-blue-dark);
+  --color-primary: rgb(var(--rgb-pwny-blue));
+  --color-secondary: rgb(var(--rgb-pwny-blue-light));
+  --color-primary-dark: rgb(var(--rgb-pwny-blue-dark));
+}
+
+body[data-color-palette="purple"] {
+  --rgb-primary: var(--rgb-pwny-purple);
+  --rgb-secondary: var(--rgb-pwny-purple-light);
+  --rgb-primary-dark: var(--rgb-pwny-purple-dark);
+  --color-primary: rgb(var(--rgb-pwny-purple));
+  --color-secondary: rgb(var(--rgb-pwny-purple-light));
+  --color-primary-dark: rgb(var(--rgb-pwny-purple-dark));
+}
+
 @layer base {
   /* Element overrides */
   html {
