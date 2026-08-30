@@ -43,6 +43,10 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
       z.optional(z.string().url()).describe('A URL for joining the meeting live (e.g. Zoom or a Discord voice channel).')
     ),
     slides: z.optional(z.coerce.string()).describe('Relative file path to the slides for the meeting.'),
+    slides_link: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.optional(z.string().url()).describe('A URL to the slides for the meeting.')
+    ),
     recording: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
       z.optional(z.string().url()).describe('A URL to the recording of the meeting (e.g. YouTube).')
@@ -59,5 +63,13 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
     // assets: z.optional(z.array(z.string())),
     tags: z.array(z.coerce.string()).default([]).describe('Tags associated with the meeting.'),
     difficulty: z.optional(z.enum(["beginner", "intermediate", "advanced"])).describe('The difficulty level of the meeting.')
+  }).superRefine((data, ctx) => {
+    if (data.slides && data.slides_link) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['slides_link'],
+        message: 'slides and slides_link are mutually exclusive.'
+      });
+    }
   })
 )

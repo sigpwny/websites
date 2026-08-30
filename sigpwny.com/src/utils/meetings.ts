@@ -18,6 +18,8 @@ export async function getMeetings() {
         ...meeting.data,
         // Update slides URL to be a direct link to the PDF
         slides: meeting.data.slides ? new URL(meeting.data.slides, `${astroConfig.site}/meetings/${relativeSlug}/`).pathname : undefined,
+        // slides_link will propagate the undefined
+        slides_link: meeting.data.slides_link,
         // Add semester field
         semester: calculateSemester(meeting.data.time_start),
       },
