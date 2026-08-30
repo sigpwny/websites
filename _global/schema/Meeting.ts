@@ -65,11 +65,7 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
     difficulty: z.optional(z.enum(["beginner", "intermediate", "advanced"])).describe('The difficulty level of the meeting.')
   }).superRefine((data, ctx) => {
     if (data.slides && data.slides_link) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ['slides_link'],
-        message: 'slides and slides_link are mutually exclusive.'
-      });
+      data.slides_link = undefined;
     }
   })
 )
