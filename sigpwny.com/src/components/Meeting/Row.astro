@@ -28,6 +28,7 @@ interface Props {
 const { input, dateFormat } = Astro.props;
 const entry = input.data;
 const meeting = input.collection === 'meetings' ? input.data : undefined;
+const slidesUrl = meeting?.slides ?? meeting?.slides_link;
 const isEvent = input.collection === 'events';
 const time_close = dayjs(entry.time_start).add(dayjs.duration(entry.duration)).toDate();
 const isMaybeActive = dayjs().isBefore(time_close);
@@ -131,13 +132,13 @@ const profiles = await getProfilesFromNames(entry.credit);
             <VideoClipFilled />
           </span>
         )}
-        {meeting?.slides ? (
+        {slidesUrl ? (
           <Link
-            href={meeting.slides}
+            href={slidesUrl}
             class="rounded-lg p-1 size-8 flex items-center justify-items-center bg-surface-150 border-2 border-surface-200 group-hover:bg-surface-200 group-hover:border-surface-150 hover:!border-primary"
             target="_blank" rel="noopener noreferrer"
-            title="Download slides"
-            aria-label="Download slides"
+            title={meeting?.slides ? "Download slides" : "View slides"}
+            aria-label={meeting?.slides ? "Download slides" : "View slides"}
           >
             <DocumentPdfFilled />
           </Link>
