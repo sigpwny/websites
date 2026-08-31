@@ -28,7 +28,7 @@ interface Props {
 const { input, dateFormat } = Astro.props;
 const entry = input.data;
 const meeting = input.collection === 'meetings' ? input.data : undefined;
-const slidesUrl = meeting?.slides ?? meeting?.slides_link;
+const slidesUrl = meeting?.slides ?? meeting?.slides_url;
 const isEvent = input.collection === 'events';
 const time_close = dayjs(entry.time_start).add(dayjs.duration(entry.duration)).toDate();
 const isMaybeActive = dayjs().isBefore(time_close);

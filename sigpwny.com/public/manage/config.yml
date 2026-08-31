@@ -151,7 +151,7 @@ collections:
       - {label: 'Live Meeting URL', name: 'live_video_url', widget: 'string', hint: 'Use a scheduled Zoom meeting or Discord voice channel URL so people can find the link before the meeting starts.', required: false}
       - {label: 'Recording URL (YouTube)', name: 'recording', widget: 'string', required: false}
       - {label: 'Slides', name: 'slides', widget: 'file', choose_url: false, hint: 'Please upload PDFs instead of PPTX files. If downloading from Google Slides, ensure that skipped slides are not present.', required: false}
-      - {label: 'Slides Link', name: 'slides_link', widget: 'string', hint: 'Prefer uploading the slides as PDF, but use this to restrict slides to just UIUC people using Google Drive', required: false}
+      - {label: 'Slides URL', name: 'slides_url', widget: 'string', hint: 'Prefer uploading the slides as PDF, but use this to restrict slides to just UIUC people using Google Drive', required: false}
       - {label: 'Additional Assets', name: 'assets', widget: 'file', multiple: true, choose_url: false, hint: 'Zip or compress files together when possible.', required: false}
       - {label: 'License', name: 'license', widget: 'select', required: false, hint: 'Leave `(None)` selected to use the site default, CC BY-SA 4.0, without adding a license field. Select `Copyright only (all rights reserved)` to opt out of Creative Commons licensing.', options: [
           {label: 'CC BY 4.0', value: 'CC-BY-4.0'},

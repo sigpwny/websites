@@ -43,7 +43,7 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
       z.optional(z.string().url()).describe('A URL for joining the meeting live (e.g. Zoom or a Discord voice channel).')
     ),
     slides: z.optional(z.coerce.string()).describe('Relative file path to the slides for the meeting.'),
-    slides_link: z.preprocess(
+    slides_url: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
       z.optional(z.string().url()).describe('A URL to the slides for the meeting.')
     ),
