@@ -235,13 +235,13 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
             <DocumentPdfFilled />
             <span>Download slides</span>
           </a>
-        ) : null}
-        {meeting.slides_link ? (
+        ) : meeting.slides_link ? (
           <a
             href={meeting.slides_link}
             class="button btn-action flex flex-row gap-2 items-center justify-center"
             target="_blank" rel="noopener noreferrer"
           >
+            <DocumentPdfFilled />
             <span>View slides</span>
           </a>
         ) : null}

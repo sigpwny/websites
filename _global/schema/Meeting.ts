@@ -63,8 +63,5 @@ export const MeetingSchema = ({ image }: SchemaContext) => (
     // assets: z.optional(z.array(z.string())),
     tags: z.array(z.coerce.string()).default([]).describe('Tags associated with the meeting.'),
     difficulty: z.optional(z.enum(["beginner", "intermediate", "advanced"])).describe('The difficulty level of the meeting.')
-  }).transform((data) => (
-    // Slides as a file take priority over slides_link
-    data.slides ? { ...data, slides_link: undefined } : data
-  ))
+  })
 )
