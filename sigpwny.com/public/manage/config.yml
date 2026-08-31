@@ -97,7 +97,7 @@ collections:
       - {label: '🟣 Purple Team', field: 'type', pattern: 'purple'}
     fields:
       - {label: 'Title', name: 'title', hint: 'e.g. `Introduction`, `PWN II`', widget: 'string'}
-      - {label: 'Lesson ID', name: 'lesson_id', widget: 'string', pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase letters, numbers, and single hyphens.'], hint: 'Topic-based ID shared by presentations of substantially the same lesson, independent of its title or series number, e.g. `pwn-rop`.', required: false}
+      - {label: 'Lesson ID', name: 'lesson_id', widget: 'string', pattern: ['^(?:[a-z0-9]+(?:-[a-z0-9]+)*)?$', 'Use lowercase letters, numbers, and single hyphens.'], hint: 'Topic-based ID shared by presentations of substantially the same lesson, independent of its title or series number, e.g. `pwn-rop`.', required: false}
       # - {label: 'Semester', name: 'semester', hint: 'e.g. `sp2025`, `fa2025`', widget: 'string'}
       - {label: 'Semester', name: 'semester', widget: 'select', dropdown_threshold: 1, options: [
           {label: 'Fall 2026', value: 'fa2026'},
