@@ -43,13 +43,21 @@ jobs:
           workingDirectory: ${{ env.CI_WORKING_DIR }}
       - name: (On main) Sync Discord events
         if: github.ref_name == github.event.repository.default_branch
-        # https://github.com/nodejs/node/issues/50993
+        continue-on-error: true
         run: touch .env && npm run sync-discord
         shell: bash
         working-directory: ${{ env.CI_WORKING_DIR }}
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+      - name: (On main) Sync ACM events
+        if: github.ref_name == github.event.repository.default_branch
+        continue-on-error: true
+        run: touch .env && npm run sync-acm
+        shell: bash
+        working-directory: ${{ env.CI_WORKING_DIR }}
+        env:
+          ACM_CORE_API_KEY: ${{ secrets.ACM_CORE_API_KEY }}
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
