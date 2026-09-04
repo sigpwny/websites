@@ -1,38 +1,67 @@
-import { z } from 'astro:content';
-import { CardImageSchema, ICalDataSchema } from '.';
+import { z, type SchemaContext } from 'astro:content';
+import { CardImageSchema } from './CardImage';
+import { ICalDataSchema } from './ICalData';
 
-export const MeetingSchema = ({ image }) => (
+export const CreativeCommonsLicenseIds = [
+  'CC-BY-4.0',
+  'CC-BY-SA-4.0',
+  'CC-BY-ND-4.0',
+  'CC-BY-NC-4.0',
+  'CC-BY-NC-SA-4.0',
+  'CC-BY-NC-ND-4.0',
+  'CC0-1.0',
+] as const;
+
+export const MeetingLicenseIds = [...CreativeCommonsLicenseIds, 'copyright-only'] as const;
+export type CreativeCommonsLicenseId = typeof CreativeCommonsLicenseIds[number];
+export type MeetingLicenseId = typeof MeetingLicenseIds[number];
+
+export const MeetingSchema = ({ image }: SchemaContext) => (
   z.object({
-    title: z.coerce.string(),
-    ical: z.optional(ICalDataSchema()),
+    title: z.coerce.string().describe('The title of the meeting.'),
+    ical: z.optional(ICalDataSchema()).describe('iCalendar data for the meeting.'),
     // discord_event: z.object({}),
-    time_start: z.coerce.date(),
-    duration: z.string().duration().catch("PT1H"),
-    type: z.enum(["general", "seminar", "ctf", "purple", "embedded"]).default("general"),
+    time_start: z.coerce.date().describe('The date and time the meeting starts.'),
+    duration: z.string().duration().catch("PT1H").describe('The duration of the meeting.'),
+    type: z.enum(["general", "seminar", "ctf", "purple", "embedded"]).default("general").describe('The type of the meeting.'),
     timezone: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
-      z.string().default("America/Chicago")
+      z.string().default("America/Chicago").describe('The timezone of the meeting.')
     ),
     week_number: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
-      z.optional(z.number().gte(0).lte(52))
+      z.optional(z.number().gte(0).lte(52)).describe('The week number of the year.')
     ),
-    // authors: z.array(reference('profiles')).default(['org/sigpwny']),
-    credit: z.array(z.coerce.string()).default(["SIGPwny"]),
-    featured: z.boolean().catch(false),
-    location: z.optional(z.coerce.string()),
-    description: z.optional(z.coerce.string()),
-    card_image: z.optional(CardImageSchema(image)),
+    // authors: z.array(reference('profiles')).default(["org/sigpwny"]),
+    credit: z.array(z.coerce.string()).default(["SIGPwny"]).describe('The credits or authors of the meeting.'),
+    featured: z.boolean().catch(false).describe('Whether the meeting is featured or not.'),
+    location: z.optional(z.coerce.string()).describe('The location of the meeting.'),
+    description: z.optional(z.coerce.string()).describe('A brief description of the meeting.'),
+    card_image: z.optional(CardImageSchema(image)).describe('An image representing the meeting.'),
     live_video_url: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
-      z.optional(z.string().url())
+      z.optional(z.string().url()).describe('A URL for joining the meeting live (e.g. Zoom or a Discord voice channel).')
     ),
-    slides: z.optional(z.coerce.string()),
+    slides: z.optional(z.coerce.string()).describe('Relative file path to the slides for the meeting.'),
+    slides_url: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.optional(z.string().url()).describe('A URL to the slides for the meeting.')
+    ),
     recording: z.preprocess(
       (arg) => arg === '' ? undefined : arg,
-      z.optional(z.string().url())
+      z.optional(z.string().url()).describe('A URL to the recording of the meeting (e.g. YouTube).')
+    ),
+    license: z.enum(MeetingLicenseIds).default('CC-BY-SA-4.0')
+      .describe('The license covering the meeting content, or "copyright-only" for content not offered under a license.'),
+    copyright: z.optional(z.coerce.string())
+      .describe('Copyright text displayed before the license, or by itself when license is "copyright-only".'),
+    lesson_id: z.preprocess(
+      (arg) => arg === '' ? undefined : arg,
+      z.optional(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/))
+        .describe('A topic-based ID shared by presentations of substantially the same lesson, independent of title or sequence number.')
     ),
     // assets: z.optional(z.array(z.string())),
-    tags: z.array(z.coerce.string()).default([]),
+    tags: z.array(z.coerce.string()).default([]).describe('Tags associated with the meeting.'),
+    difficulty: z.optional(z.enum(["beginner", "intermediate", "advanced"])).describe('The difficulty level of the meeting.')
   })
 )

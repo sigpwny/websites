@@ -48,7 +48,10 @@ export function createICalendarLocation(locations: any[], init_loc?: string) {
         title: full_loc.title,
         address: full_loc.address,
         radius: full_loc.radius ?? 100.0,
-        geo: full_loc.geo,
+        geo: full_loc.geo ? {
+          lat: Number(full_loc.geo.lat),
+          lon: Number(full_loc.geo.lon),
+        } : undefined,
       } as ICalLocationWithTitle;
     }
   }

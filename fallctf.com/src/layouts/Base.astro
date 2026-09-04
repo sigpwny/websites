@@ -4,6 +4,7 @@ import '$/styles/md.css';
 import '$/styles/prism-one-dark.css';
 import 'katex/dist/katex.min.css';
 
+import { ViewTransitions } from 'astro:transitions';
 import type { HeadProps } from '$/components/BaseHead.astro';
 import BaseHead from '$/components/BaseHead.astro';
 import Header from '@/components/Header.astro';
@@ -15,6 +16,10 @@ const props: Omit<HeadProps, "site_name"> = Astro.props;
 <html lang="en" transition:animate="none">
   <head>
     <BaseHead {...props} site_name="fallctf.com" />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/HelveticaNeue-Regular.woff2" crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/HelveticaNeue-Bold.woff2" crossorigin="anonymous" />
+    <ViewTransitions />
   </head>
   <body>
     <div class="flex flex-col min-h-screen bg-black text-white">

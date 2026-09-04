@@ -7,7 +7,6 @@ on:
       - '_global/content/events/**'
       - '_global/content/profiles/**'
       - '.github/**'
-      - '!.github/workflows/scheduled-pings.yml'
       - 'uiuc.tf/**'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -1,55 +1,103 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import netlify from '@astrojs/netlify';
+import { unified } from '@astrojs/markdown-remark';
 import react from "@astrojs/react";
 import sitemap from '@astrojs/sitemap';
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from '@tailwindcss/vite';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
-import { viteStaticCopy } from 'vite-plugin-static-copy'
-import path from 'path';
-import redirects from './src/redirects.json';
+import path from 'node:path';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { normalizePath } from 'vite';
+import redirectData from './src/redirects.json';
 
-const meetingBase = path.resolve(import.meta.dirname, '../_global/content/meetings/');
+function normalize(filePath: string) {
+  return normalizePath(path.resolve(import.meta.dirname, filePath));
+}
+
+type RedirectStatus = 301 | 302 | 307 | 308;
+
+const redirects = redirectData.redirects.reduce<Record<string, {
+  destination: string;
+  status: RedirectStatus;
+}>>((redirectMap, { source, destination, status }) => {
+  if (source in redirectMap) {
+    throw new Error(`Duplicate redirect source: ${source}`);
+  }
+
+  redirectMap[source] = { destination, status: status as RedirectStatus };
+  return redirectMap;
+}, {});
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sigpwny.com',
-  integrations: [
-    mdx({
+  compressHTML: true,
+  markdown: {
+    processor: unified({
       gfm: true,
-      rehypePlugins: [
-        rehypeKatex
-      ],
-      remarkPlugins: [
-        remarkMath
-      ],
+      rehypePlugins: [rehypeKatex],
+      remarkPlugins: [remarkMath],
     }),
+  },
+  integrations: [
+    mdx(),
     sitemap(),
-    tailwind(),
     react(),
   ],
-  adapter: netlify(),
+  output: 'static',
   cacheDir: './.cache',
-  redirects: redirects as any,
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: 'Helvetica Neue',
+      cssVariable: '--font-helvetica-neue',
+      fallbacks: ['Helvetica', 'Arial', 'sans-serif'],
+      options: {
+        variants: [
+          {
+            src: ['./src/assets/fonts/HelveticaNeue-Light.woff2'],
+            weight: 300,
+            style: 'normal',
+          },
+          {
+            src: ['./src/assets/fonts/HelveticaNeue-Regular.woff2'],
+            weight: 400,
+            style: 'normal',
+          },
+          {
+            src: ['./src/assets/fonts/HelveticaNeue-RegularItalic.woff2'],
+            weight: 400,
+            style: 'italic',
+          },
+          {
+            src: ['./src/assets/fonts/HelveticaNeue-Medium.woff2'],
+            weight: 500,
+            style: 'normal',
+          },
+          {
+            src: ['./src/assets/fonts/HelveticaNeue-Bold.woff2'],
+            weight: 700,
+            style: 'normal',
+          },
+        ],
+      },
+    },
+  ],
+  redirects,
   trailingSlash: 'always',
   vite: {
     plugins: [
       viteStaticCopy({
         targets: [
           {
-            src: '../_global/content/meetings/*',
+            src: normalize('../_global/content/meetings/**/*'),
             dest: 'meetings',
-            rename: (_name, _ext, path) => {
-              return path.replace(meetingBase, '').replace(/(fa|sp)\d{4}/, '')
-            }
-          },
-          {
-            src: '../guides/pwnyctf/book/*',
-            dest: 'docs'
+            rename: { stripBase: 4 },
           }
         ]
-      })
+      }),
+      tailwindcss()
     ]
   },
 });

@@ -7,7 +7,9 @@ import {
   ChevronLeftFilled,
   ChevronRightFilled,
 } from '$/components/Icons/fluentui';
-import { type Meeting } from '@/utils/meetings';
+import { type MeetingIndexEntry } from '@/utils/meetings';
+import { meetingMetatypes } from '$/utils/meetingMetadata';
+import CalendarSubscribe from '@/components/CalendarSubscribe';
 
 export interface SemesterLinkProps {
   name: string;
@@ -16,11 +18,23 @@ export interface SemesterLinkProps {
 };
 
 export interface MeetingIndexPageProps {
-  meetings: Map<string, Meeting[]>;
+  meetings: Map<string, MeetingIndexEntry[]>;
   allLinks: SemesterLinkProps[];
   currLink: SemesterLinkProps;
   newerLink?: SemesterLinkProps;
   olderLink?: SemesterLinkProps;
+  semesterMetadata?: SemesterMetadata;
+};
+
+export interface SemesterMetadata {
+  semester: string;
+  activeMeetings: Array<{
+    meetingType: string;
+    schedule?: Array<{
+      time?: string;
+      location?: string;
+    }>;
+  }>;
 };
 
 const props = Astro.props as MeetingIndexPageProps;
@@ -29,34 +43,43 @@ const newerLink = props.newerLink?.url;
 const olderLink = props.olderLink?.url;
 const ButtonElementNewer = newerLink ? Link : 'span';
 const ButtonElementOlder = olderLink ? Link : 'span';
+const isAllIndex = props.currLink.semester === 'all';
+const calendarSubscribeMeetingOptions = !isAllIndex && (props.semesterMetadata && props.semesterMetadata.activeMeetings.length > 0)
+  ? Array.from(new Set(props.semesterMetadata.activeMeetings.map((activeMeeting) => activeMeeting.meetingType)))
+  : meetingMetatypes;
 ---
 <Layout
   title="Meetings"
   description="Index of SIGPwny meetings"
 >
   <div class="flex flex-col mx-auto pb-8">
-    <h1>Meetings</h1>
-    <nav aria-label="Meetings by semester" class="w-full max-w-40 mb-4">
-      <DropdownSelect
-        displayText={props.currLink.name}
-        contentRootClassName="w-full max-w-40"
-        client:load
-      >
-        <Menu className="custom-scrollbar !max-h-80">
-          <ul class="!gap-0">
-            {props.allLinks.map((link) => (
-              <li>
-                <Link
-                  href={link.url}
-                  class:list={["!px-2 !py-1", { '!bg-primary hover:!bg-secondary !text-surface-000': link.semester === props.currLink.semester }]}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Menu>
-      </DropdownSelect>
+    <h1>
+      {isAllIndex ? 'Meetings' : `${props.currLink.name} Meetings`}
+    </h1>
+    <nav aria-label="Meetings by semester" class="flex flex-col sm:flex-row gap-x-4 gap-y-2 w-full mb-4">
+      <span class="w-full max-w-40">
+        <DropdownSelect
+          displayText={props.currLink.name}
+          contentRootClassName="w-full max-w-40"
+          client:load
+        >
+          <Menu className="custom-scrollbar !max-h-80">
+            <ul class="!gap-0">
+              {props.allLinks.map((link) => (
+                <li>
+                  <Link
+                    href={link.url}
+                    class:list={["!px-2 !py-1", { '!bg-primary hover:!bg-secondary !text-surface-000': link.semester === props.currLink.semester }]}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Menu>
+        </DropdownSelect>
+      </span>
+      <CalendarSubscribe selected={calendarSubscribeMeetingOptions} client:load />
     </nav>
     <slot />
     <nav aria-label="Meetings by semester" class="flex flex-col gap-2 items-center mt-8">
@@ -93,7 +116,7 @@ const ButtonElementOlder = olderLink ? Link : 'span';
           <ChevronRightFilled />
         </ButtonElementOlder>
       </div>
-      {props.currLink.semester !== 'all' ? (
+      {!isAllIndex ? (
         <Link href="/meetings/all/" class="text-center text-primary !underline">
           Load all meetings
         </Link>

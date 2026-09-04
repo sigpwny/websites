@@ -5,9 +5,9 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
+      "~/*": ["./*"],
+      "@/*": ["./src/*"],
       "$/*": ["../_global/*"]
     },
     "target": "es2022"

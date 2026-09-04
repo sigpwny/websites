@@ -21,7 +21,7 @@
 	margin-bottom: 4px;
 }
 .nav-mobile-toggle-input {
-  @apply opacity-0 absolute h-0 w-0 -z-10;
+  @apply opacity-0 absolute h-[0] w-[0] -z-10;
 }
 .nav-mobile-toggle-label {
   @apply flex lg:hidden items-center cursor-pointer;

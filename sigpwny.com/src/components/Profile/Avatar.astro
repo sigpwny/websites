@@ -13,6 +13,7 @@ export interface ProfileProps {
 }
 
 const { profile, label }: AvatarProps = Astro.props;
+const formats = profile?.profile_image?.format === 'svg' ? ['svg'] : ['avif', 'webp'];
 
 function calculateInitials(name: string) {
   const names = name.split(" ");
@@ -33,12 +34,12 @@ const text_content = label ? label : (profile && profile.name ? calculateInitial
       class="object-cover size-full"
       src={profile.profile_image}
       widths={[64, 300]}
-      formats={['avif', 'webp']}
+      formats={formats}
       alt={profile.name ?? "Profile image"}
     />
   </span>
 ) : text_content ? (
-  <div class="flex size-full flex-shrink-0 flex-grow-0 rounded-full overflow-hidden bg-surface-100 border-surface-200 border-2 select-none items-center justify-center text-sm">
+  <div class="flex size-full shrink-0 grow-0 rounded-full overflow-hidden bg-surface-100 border-surface-200 border-2 select-none items-center justify-center text-sm">
     {text_content}
   </div>
 ) : null}

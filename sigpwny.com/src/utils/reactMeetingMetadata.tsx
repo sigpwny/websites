@@ -2,6 +2,7 @@ import React from 'react';
 import { EmbeddedChipRegularSvg } from '$/components/Icons';
 import {
   BookOpenFilled,
+  CalendarRegular,
   FlagFilled,
   HatGraduationRegular,
   ShieldKeyholeFilled,
@@ -46,4 +47,11 @@ export const reactMeetingMetadata: Record<MeetingMetatype, ReactMeetingMetadata>
     color: 'rgb(var(--rgb-pwny-purple))',
     icon: <ShieldKeyholeFilled />
   },
+};
+
+export const eventMetadata: ReactMeetingMetadata = {
+  name: 'Event',
+  shortName: 'Event',
+  color: 'rgb(var(--rgb-pwny-green))',
+  icon: <CalendarRegular />
 };

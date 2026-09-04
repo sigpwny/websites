@@ -26,7 +26,7 @@ body {
   --rgb-surface-200: 68 68 68;    /* #444444 */
   --rgb-surface-250: 85 85 85;    /* #555555 */
   --rgb-surface-300: 102 102 102; /* #666666 */
-  --rgb-text: 255 255 255;        /* #ffffff */
+  --rgb-content: 255 255 255;        /* #ffffff */
 
   --font-size-small: 0.875rem;
   --font-size-standard: 1rem;
@@ -35,7 +35,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial;
   font-size: var(--font-size-base);
   background-color: rgb(var(--rgb-surface-000));
-  color: rgb(var(--rgb-text));
+  color: rgb(var(--rgb-content));
   height: 100%;
   width: 100%;
 }

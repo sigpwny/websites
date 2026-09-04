@@ -1,4 +1,4 @@
-import astroConfig from 'astro.config';
+import astroConfig from '~/astro.config';
 import ical from 'ical-generator';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';

@@ -1,6 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { EventSchema } from '$/schema';
+import { EventSchema } from '../../../_global/schema';
 
 const events = defineCollection({
   type: 'content_layer',

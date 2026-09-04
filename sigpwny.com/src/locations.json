@@ -195,5 +195,17 @@
     "matches": [
       "Transportation Building"
     ]
+  },
+  {
+    "title": "Sidney Lu Mechanical Engineering Building",
+    "address": "1206 W Green St, Urbana, IL 61801, United States",
+    "geo": {
+      "lat": "40.1109",
+      "lon": "-88.2248"
+    },
+    "matches": [
+      "Mechanical Engineering Building",
+      "MEB"
+    ]
   }
 ]

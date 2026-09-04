@@ -33,7 +33,7 @@ const props = Astro.props as CountdownBadgeProps;
       const updateDisplay = () => {
         const now = Date.now();
 
-        let baseClasses = 'astro-countdown-badge self-center px-2 text-sm lg:text-base font-mono select-none whitespace-nowrap rounded-md ';
+        let baseClasses = 'astro-countdown-badge max-w-fit px-2 font-mono select-none whitespace-nowrap rounded-md ';
 
         // Handle closed state
         if (now >= timeClose) {

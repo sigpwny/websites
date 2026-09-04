@@ -1,7 +1,7 @@
-import { z } from 'astro:content';
-import { CardImageSchema } from '.';
+import { z, type SchemaContext } from 'astro:content';
+import { CardImageSchema } from './CardImage';
 
-export const ProfileSchema = ({ image }) => (
+export const ProfileSchema = ({ image }: SchemaContext) => (
   z.object({
     name: z.coerce.string(),
     profile_image: z.optional(image()),

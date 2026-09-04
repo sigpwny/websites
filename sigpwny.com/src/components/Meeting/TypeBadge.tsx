@@ -1,17 +1,18 @@
 import { type MeetingMetatype } from '$/utils/meetingMetadata';
 import {
+  eventMetadata,
   reactMeetingMetadata,
   type ReactMeetingMetadata,
 } from '@/utils/reactMeetingMetadata';
 
 interface Props {
-  type: MeetingMetatype;
+  type: MeetingMetatype | 'event';
   fullName?: boolean;
   consistentWidth?: boolean;
 };
 
 export default function MeetingTypeBadge({ type, fullName, consistentWidth }: Props) {
-  const metadata = reactMeetingMetadata[type] ?? {
+  const metadata = type === 'event' ? eventMetadata : reactMeetingMetadata[type] ?? {
     name: type,
     shortName: type,
     color: 'rgb(var(--rgb-pwny-green))',
@@ -22,7 +23,7 @@ export default function MeetingTypeBadge({ type, fullName, consistentWidth }: Pr
   // It's not the most elegant solution and doesn't scale well with longer names... but it works
   const maxNameLength = Math.max(
     metadata[nameToUse].length,
-    ...[...Object.values(reactMeetingMetadata)].map((metadata) => metadata[nameToUse].length)
+    ...[...Object.values(reactMeetingMetadata), eventMetadata].map((metadata) => metadata[nameToUse].length)
   );
   const badge = (
     <div

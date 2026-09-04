@@ -4,9 +4,7 @@ on:
     paths:
       - '_global/**'
       - '.github/**'
-      - '!.github/workflows/scheduled-pings.yml'
       - 'sigpwny.com/**'
-      - 'guides'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -28,10 +26,6 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
-      - name: Build pwnyctf mdbook
-        uses: ./.github/actions/build-mdbook
-        with:
-          book-directory: pwnyctf
       - name: Build site
         uses: ./.github/actions/build-astro
         with:
@@ -49,48 +43,56 @@ jobs:
           workingDirectory: ${{ env.CI_WORKING_DIR }}
       - name: (On main) Sync Discord events
         if: github.ref_name == github.event.repository.default_branch
-        # https://github.com/nodejs/node/issues/50993
+        continue-on-error: true
         run: touch .env && npm run sync-discord
         shell: bash
         working-directory: ${{ env.CI_WORKING_DIR }}
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
           DISCORD_SERVER_ID: ${{ secrets.DISCORD_SERVER_ID }}
+      - name: (On main) Sync ACM events
+        if: github.ref_name == github.event.repository.default_branch
+        continue-on-error: true
+        run: touch .env && npm run sync-acm
+        shell: bash
+        working-directory: ${{ env.CI_WORKING_DIR }}
+        env:
+          ACM_CORE_API_KEY: ${{ secrets.ACM_CORE_API_KEY }}
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: dist
           path: ${{ env.CI_WORKING_DIR }}/${{ env.CI_BUILD_DIR }}
-  schedule-notify:
-    name: Schedule notifications (sigpwny.com)
-    if: github.ref_name == github.event.repository.default_branch
-    needs: deploy
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.WORKFLOW_PAT }}
-          submodules: true
-          fetch-depth: 0
-      - name: Initialize Astro and dependencies
-        uses: ./.github/actions/build-astro
-        with:
-          working-directory: ${{ env.CI_WORKING_DIR }}
-          build-directory: ${{ env.CI_BUILD_DIR }}
-          cache-directory: ${{ env.CI_CACHE_DIR }}
-          skip-build: true
-      - name: Schedule Discord pings
-        run: npm run schedule-discord-ping
-        shell: bash
-        working-directory: ${{ env.CI_WORKING_DIR }}
-      - name: Save scheduled Discord pings
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: update workflow schedule"
-          file_pattern: "*.yml"
+  # schedule-notify:
+  #   name: Schedule notifications (sigpwny.com)
+  #   if: github.ref_name == github.event.repository.default_branch
+  #   needs: deploy
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: write
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         token: ${{ secrets.WORKFLOW_PAT }}
+  #         submodules: true
+  #         fetch-depth: 0
+  #     - name: Initialize Astro and dependencies
+  #       uses: ./.github/actions/build-astro
+  #       with:
+  #         working-directory: ${{ env.CI_WORKING_DIR }}
+  #         build-directory: ${{ env.CI_BUILD_DIR }}
+  #         cache-directory: ${{ env.CI_CACHE_DIR }}
+  #         skip-build: true
+  #     - name: Schedule Discord pings
+  #       run: npm run schedule-discord-ping
+  #       shell: bash
+  #       working-directory: ${{ env.CI_WORKING_DIR }}
+  #     - name: Save scheduled Discord pings
+  #       uses: stefanzweifel/git-auto-commit-action@v5
+  #       with:
+  #         commit_message: "chore: update workflow schedule"
+  #         file_pattern: "*.yml"
   # kaltura-upload:
   #   name: Upload to YouTube from Kaltura
   #   if: github.ref_name == github.event.repository.default_branch

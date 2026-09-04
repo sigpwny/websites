@@ -52,7 +52,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
   return (
     <Popover open={open} onOpenChange={setOpen} placement={placement}>
       <div className="flex flex-row gap-2 items-center">
-        <div className="flex flex-shrink-0 flex-grow-0">
+        <div className="flex shrink-0 grow-0">
           <PopoverTrigger
             onClick={() => setOpen(!open)}
             className={`button btn-primary flex flex-row gap-2 items-center ${open ? "ring-primary ring-2 ring-offset-2 ring-offset-surface-000" : ""}`}
@@ -67,6 +67,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
       <div className="absolute top-full mt-2 left-0">
         <PopoverContent>
           <Menu className="custom-scrollbar">
+            <p className="m-0 select-none px-2 pt-1 text-sm text-content/60">Step 1: Pick meetings</p>
             <ul>
               {Object.entries(reactMeetingMetadata).map(([meeting_type, metadata]) => (
                 <li
@@ -74,14 +75,14 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                   style={{ "--color-checkbox": metadata.color } as React.CSSProperties}
                 >
                   {selectedCalendars.includes(meeting_type) ? (
-                    <button onClick={() => setSelectedCalendars(selectedCalendars.filter((id) => id !== meeting_type))}>
+                    <button className="cursor-pointer" onClick={() => setSelectedCalendars(selectedCalendars.filter((id) => id !== meeting_type))}>
                       <CheckboxCheckedFilled className="text-[var(--color-checkbox)]" />
                       <span>
                         {metadata.name}
                       </span>
                     </button>
                   ) : (
-                    <button onClick={() => setSelectedCalendars([...selectedCalendars, meeting_type])}>
+                    <button className="cursor-pointer" onClick={() => setSelectedCalendars([...selectedCalendars, meeting_type])}>
                       <CheckboxUncheckedFilled className="brightness-50" />
                       <span>
                         {metadata.name}
@@ -92,6 +93,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
               ))}
             </ul>
             <span className="border-b-2 border-surface-300" />
+            <p className="m-0 select-none px-2 pt-1 text-sm text-content/60">Step 2: Add to calendar</p>
             <ul>
               <li>
                 <a
@@ -130,9 +132,6 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                   </span>
                 </a>
               </li>
-            </ul>
-            <span className="border-b-2 border-surface-300" />
-            <ul>
               <li>
                 <a
                   href={genericWebcalUrl}
@@ -140,14 +139,14 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                 >
                   <CalendarRegular />
                   <span>
-                    Other (system calendar)
+                    Other calendar
                   </span>
                 </a>
               </li>
               <li className="w-full">
                 <button
                   onClick={handleCopy}
-                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : 'w-full'}
+                  className={selectedCalendars.length === 0 ? 'pointer-events-none brightness-50' : 'cursor-pointer w-full'}
                 >
                   {copied ? (
                     <CheckmarkCircleFilled className="text-primary" />
@@ -155,7 +154,7 @@ export default function CalendarSubscribe({ selected, placement }: CalendarSubsc
                     <LinkRegular />
                   )}
                   <span>
-                    Copy Link (webcal)
+                    Copy link (<span className="font-mono">webcal://</span>)
                   </span>
                 </button>
               </li>

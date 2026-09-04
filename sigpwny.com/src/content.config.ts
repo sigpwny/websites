@@ -1,8 +1,6 @@
-import {
-  defineCollection,
-  z,
-} from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 import {
   MeetingSchema,
   ProfileSchema,
@@ -14,25 +12,25 @@ import {
 const meetings = defineCollection({
   type: 'content_layer',
   loader: glob({ pattern: '**/*.mdx', base: '../_global/content/meetings' }),
-  schema: (props) => MeetingSchema(props),
+  schema: MeetingSchema,
 });
 
 const profiles = defineCollection({
   type: 'content_layer',
   loader: glob({ pattern: '**/*.mdx', base: '../_global/content/profiles' }),
-  schema: (props) => ProfileSchema(props),
+  schema: ProfileSchema,
 });
 
 const events = defineCollection({
   type: 'content_layer',
   loader: glob({ pattern: '**/*.mdx', base: '../_global/content/events' }),
-  schema: (props) => EventSchema(props),
+  schema: EventSchema,
 });
 
 const publications = defineCollection({
   type: 'content_layer',
   loader: glob({ pattern: '**/*.mdx', base: '../_global/content/publications' }),
-  schema: (props) => PublicationSchema(props),
+  schema: PublicationSchema,
 });
 
 const albums = defineCollection({
@@ -44,7 +42,7 @@ const albums = defineCollection({
 const pages = defineCollection({
   type: 'content_layer',
   loader: glob({ pattern: '**/*.mdx', base: 'src/pages_md' }),
-  schema: () => z.object({
+  schema: z.object({
     title: z.string(),
     description: z.string(),
     no_background: z.optional(z.boolean()),
