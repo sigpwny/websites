@@ -35,7 +35,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
-    "astro": "^7.2.7",
+    "astro": "^7.3.2",
     "dayjs": "^1.11.23",
     "discord.js": "^14.27.0",
     "framer-motion": "^13.1.1",
