@@ -99,7 +99,7 @@ const semesterUrl = new URL(`/meetings/${meeting.semester.toLowerCase()}/`, Astr
 const thumbnail = meeting.card_image?.foreground ?? meeting.card_image?.background;
 const embed = discordEmbed([
   `## ${discordText(meeting.title)}`,
-  `**${discordText(meetingMetadata[meeting.type]?.name ?? meeting.type)}** · [${formatSemester(meeting.semester)}](${semesterUrl})${meeting.week_number != null ? ` · Week ${weekNumber(meeting.week_number)}` : ''}`,
+  `**${discordText(meetingMetadata[meeting.type]?.name ?? meeting.type)}** · [${formatSemester(meeting.semester)}](${semesterUrl})`,
   time_start ? `<t:${time_start.unix()}:R>` : '',
 ].filter(Boolean).join('\n'), [
   { label: 'Join live', url: `${meetingUrl}?redirect=live` },
