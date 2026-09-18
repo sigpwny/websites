@@ -90,18 +90,16 @@ const time_end = meeting.time_start && meeting.duration
 const isMultiDay = time_start && time_end ? !time_start.isSame(time_end, 'day') : false;
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(meeting.location?.trim() ?? '');
-const locationUrl = iCalendarLocation?.title && !isVirtualLocation
+// Unmatched calendar locations retain their text as a title, but have no physical metadata.
+const locationUrl = iCalendarLocation?.title && (iCalendarLocation.address || iCalendarLocation.geo) && !isVirtualLocation
   ? `https://maps.google.com/?q=${encodeURIComponent(iCalendarLocation.title)}`
   : undefined;
 const meetingUrl = new URL(page.slug, Astro.site).href;
 const semesterUrl = new URL(`/meetings/${meeting.semester.toLowerCase()}/`, Astro.site).href;
-const difficulty = meeting.difficulty
-  ? meeting.difficulty.charAt(0).toUpperCase() + meeting.difficulty.slice(1)
-  : undefined;
 const thumbnail = meeting.card_image?.foreground ?? meeting.card_image?.background;
 const embed = discordEmbed([
   `## ${discordText(meeting.title)}`,
-  `**${discordText(meetingMetadata[meeting.type]?.name ?? meeting.type)}** · [${formatSemester(meeting.semester)}](${semesterUrl})${meeting.week_number != null ? ` · Week ${weekNumber(meeting.week_number)}` : ''}${difficulty ? ` · ${difficulty}` : ''}`,
+  `**${discordText(meetingMetadata[meeting.type]?.name ?? meeting.type)}** · [${formatSemester(meeting.semester)}](${semesterUrl})${meeting.week_number != null ? ` · Week ${weekNumber(meeting.week_number)}` : ''}`,
   time_start ? `<t:${time_start.unix()}:R>` : '',
 ].filter(Boolean).join('\n'), [
   { label: 'Join live', url: `${meetingUrl}?redirect=live` },
@@ -111,8 +109,8 @@ const embed = discordEmbed([
   thumbnail: thumbnail ? new URL(thumbnail.src, Astro.site).href : consts.image,
   thumbnailAlt: thumbnail ? (meeting.card_image?.alt || meeting.title) : undefined,
   details: [
-    time_start ? `🕒 <t:${time_start.unix()}:F>${time_end ? ` – <t:${time_end.unix()}:${isMultiDay ? 'F' : 't'}>` : ''}` : '',
-    meeting.location ? `📍 ${locationUrl ? `[${discordText(meeting.location)}](<${locationUrl}>)` : discordText(meeting.location)}` : '',
+    time_start ? `**When:** <t:${time_start.unix()}:F>${time_end ? ` – <t:${time_end.unix()}:${isMultiDay ? 'F' : 't'}>` : ''}` : '',
+    meeting.location ? `**Where:** ${locationUrl ? `[${discordText(meeting.location)}](<${locationUrl}>)` : discordText(meeting.location)}` : '',
     profiles.length ? `**Presenters:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
   ].filter(Boolean).join('\n'),
   description: meeting.description ? discordText(meeting.description) : undefined,
