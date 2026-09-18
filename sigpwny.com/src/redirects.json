@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/publications/2026-05-12_title",
+      "destination": "/publications/2026-05-12_overridefuzz/",
+      "status": 301
+    },
+    {
+      "source": "/publications/2026-05-12_title/",
+      "destination": "/publications/2026-05-12_overridefuzz/",
+      "status": 301
+    },
+    {
       "source": "/docs",
       "destination": "https://docs.sigpwny.com",
       "status": 302
