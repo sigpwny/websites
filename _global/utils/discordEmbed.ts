@@ -45,9 +45,9 @@ export function discordEmbed(
 
 export type DiscordEmbed = ReturnType<typeof discordEmbed>;
 
-/** Keep authored text from turning into headings, mentions, or unexpected links. */
+/** Escape Markdown punctuation and break literal @ mention syntax; not a URL sanitizer. */
 export function discordText(value: string) {
-  return value.replace(/([\\`*_{}\[\]()<>#|~])/g, '\\$1').replace(/@/g, '@\u200b');
+  return value.replace(/([\\`*_{}\[\]()<>#|~+.!-])/g, '\\$1').replace(/@/g, '@\u200b');
 }
 
 /** JSON in an HTML script must not contain a literal closing script tag. */

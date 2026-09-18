@@ -15,7 +15,6 @@ const { live, slides, recording } = Astro.props;
     const key = url.searchParams.get('redirect');
     if (key === null) return;
 
-    // Consume even missing/unknown assets, preserving other parameters and the hash.
     url.searchParams.delete('redirect');
     window.history.replaceState(window.history.state, '', url);
     if (key !== 'live' && key !== 'slides' && key !== 'recording') return;
@@ -26,6 +25,5 @@ const { live, slides, recording } = Astro.props;
     window.location.assign(target.href);
   }
 
-  // Runs on initial load and subsequent Astro ClientRouter navigations.
   document.addEventListener('astro:page-load', openMeetingAsset);
 </script>
