@@ -12,7 +12,6 @@ export interface MeetingMetadata {
   name: string;
   shortName: string;
   description?: string;
-  /** Numeric brand color for previews; matches the meeting badge palette. */
   accentColor?: number;
 };
 

@@ -1,4 +1,3 @@
-/** The read-only component subset documented in discord-api-docs PR #8606. */
 export interface DiscordLink {
   label: string;
   url: string;

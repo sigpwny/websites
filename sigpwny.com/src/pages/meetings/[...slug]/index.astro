@@ -90,7 +90,6 @@ const time_end = meeting.time_start && meeting.duration
 const isMultiDay = time_start && time_end ? !time_start.isSame(time_end, 'day') : false;
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(meeting.location?.trim() ?? '');
-// Unmatched calendar locations retain their text as a title, but have no physical metadata.
 const locationUrl = iCalendarLocation?.title && (iCalendarLocation.address || iCalendarLocation.geo) && !isVirtualLocation
   ? `https://maps.google.com/?q=${encodeURIComponent(iCalendarLocation.title)}`
   : undefined;

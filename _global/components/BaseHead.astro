@@ -66,7 +66,6 @@ const robots = props.disable_robots ? "noindex, nofollow" : "index, follow";
   <meta property="og:video:width" content="1280" />
   <meta property="og:video:height" content="720" />
 ) : null}
-{/* Keep Open Graph as the fallback for clients without component embeds. */}
 {props.discord_embed && (
   <script is:inline id="discord:component-embed" type="application/json" set:html={serializeDiscordEmbed(props.discord_embed)} />
 )}
