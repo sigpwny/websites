@@ -6,7 +6,8 @@ export interface DiscordLink {
 
 interface DiscordEmbedOptions {
   thumbnail?: string;
-  above?: string;
+  thumbnailAlt?: string;
+  footer?: string;
   details?: string;
   description?: string;
 }
@@ -22,13 +23,13 @@ export function discordEmbed(
       type: 17,
       accent_color: accentColor,
       components: [
-        ...(options.above ? [{ type: 10, content: options.above }] : []),
         options.thumbnail ? {
           type: 9,
           components: [{ type: 10, content }],
           accessory: {
             type: 11,
             media: { url: options.thumbnail },
+            ...(options.thumbnailAlt ? { description: options.thumbnailAlt } : {}),
           },
         } : { type: 10, content },
         ...(options.details ? [{ type: 10, content: options.details }] : []),
@@ -39,6 +40,7 @@ export function discordEmbed(
             type: 2, style: 5, label: label.slice(0, 80), url,
           })),
         }] : []),
+        ...(options.footer ? [{ type: 10, content: options.footer }] : []),
       ],
     },
   };

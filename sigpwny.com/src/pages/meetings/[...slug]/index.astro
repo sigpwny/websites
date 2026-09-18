@@ -97,19 +97,21 @@ const meetingUrl = new URL(page.slug, Astro.site).href;
 const difficulty = meeting.difficulty
   ? meeting.difficulty.charAt(0).toUpperCase() + meeting.difficulty.slice(1)
   : undefined;
+const thumbnail = meeting.card_image?.foreground ?? meeting.card_image?.background;
 const embed = discordEmbed([
-  '-# SIGPwny',
   `## ${discordText(meeting.title)}`,
+  `**${discordText(meetingMetadata[meeting.type]?.name ?? meeting.type)}** · ${formatSemester(meeting.semester)}${meeting.week_number != null ? ` · Week ${meeting.week_number}` : ''}${difficulty ? ` · ${difficulty}` : ''}`,
 ].filter(Boolean).join('\n'), [
   { label: 'Join live', url: `${meetingUrl}?redirect=live` },
   { label: 'Slides', url: `${meetingUrl}?redirect=slides` },
   { label: 'Recording', url: `${meetingUrl}?redirect=recording` },
 ], meetingMetadata[meeting.type]?.accentColor, {
-  thumbnail: consts.image,
-  above: `**${discordText(meetingMetadata[meeting.type]?.shortName ?? meeting.type)}** · ${formatSemester(meeting.semester)}${meeting.week_number != null ? ` · Week ${meeting.week_number}` : ''}${difficulty ? ` · ${difficulty}` : ''}`,
+  thumbnail: thumbnail ? new URL(thumbnail.src, Astro.site).href : consts.image,
+  thumbnailAlt: thumbnail ? (meeting.card_image?.alt || meeting.title) : undefined,
+  footer: '-# SIGPwny',
   details: [
-    time_start ? `**When:** <t:${time_start.unix()}:F>${time_end ? ` – <t:${time_end.unix()}:${isMultiDay ? 'F' : 't'}>` : ''}` : '',
-    meeting.location ? `**Where:** ${locationUrl ? `[${discordText(meeting.location)}](<${locationUrl}>)` : discordText(meeting.location)}` : '',
+    time_start ? `🕒 <t:${time_start.unix()}:F>${time_end ? ` – <t:${time_end.unix()}:${isMultiDay ? 'F' : 't'}>` : ''} (<t:${time_start.unix()}:R>)` : '',
+    meeting.location ? `📍 ${locationUrl ? `[${discordText(meeting.location)}](<${locationUrl}>)` : discordText(meeting.location)}` : '',
     profiles.length ? `**Presenters:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
   ].filter(Boolean).join('\n'),
   description: meeting.description ? discordText(meeting.description) : undefined,
