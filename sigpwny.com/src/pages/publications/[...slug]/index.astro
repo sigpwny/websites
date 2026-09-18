@@ -1,4 +1,5 @@
 ---
+import { discordEmbed, discordText } from '$/utils/discordEmbed';
 import Layout from '@/layouts/Base.astro';
 import consts from '@/consts';
 import { getCollection, render } from 'astro:content';
@@ -33,8 +34,22 @@ const { Content } = await render(input);
 const p = input.data;
 
 const profiles = await getProfilesFromNames(p.credit);
+const thumbnail = p.card_image?.foreground ?? p.card_image?.background;
+const publicationType = p.publication_type.charAt(0).toUpperCase() + p.publication_type.slice(1);
 ---
 <Layout
+  discord_embed={discordEmbed([
+    `## ${discordText(p.title)}`,
+    `${discordText(publicationType)} · ${dayjs(p.date).format('MMMM D, YYYY')}${p.publisher ? ` · ${discordText(p.publisher)}` : ''}`,
+    profiles.length ? `**By:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
+  ].filter(Boolean).join('\n'), [
+    ...(p.primary_link ? [{ label: p.primary_link.name, url: new URL(p.primary_link.url, Astro.site).href }] : []),
+    ...(p.links ?? []).map((link) => ({ label: link.name, url: new URL(link.url, Astro.site).href })),
+  ], undefined, {
+    thumbnail: thumbnail ? new URL(thumbnail.src, Astro.site).href : consts.image,
+    thumbnailAlt: thumbnail ? (p.card_image?.alt || p.title) : undefined,
+    description: p.description ? discordText(p.description) : undefined,
+  })}
   title={`${p.title} — ${consts.title}`}
   description={p.description}
   image={p.card_image?.foreground?.src ?? p.card_image?.background?.src}

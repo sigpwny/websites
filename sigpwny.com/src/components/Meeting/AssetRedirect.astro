@@ -1,0 +1,29 @@
+---
+interface Props {
+  live?: string;
+  slides?: string;
+  recording?: string;
+}
+const { live, slides, recording } = Astro.props;
+---
+<div id="meeting-asset-redirect" hidden data-live={live} data-slides={slides} data-recording={recording}></div>
+<script>
+  function openMeetingAsset() {
+    const assets = document.getElementById('meeting-asset-redirect');
+    if (!assets) return;
+    const url = new URL(window.location.href);
+    const key = url.searchParams.get('redirect');
+    if (key === null) return;
+
+    url.searchParams.delete('redirect');
+    window.history.replaceState(window.history.state, '', url);
+    if (key !== 'live' && key !== 'slides' && key !== 'recording') return;
+    const asset = assets.dataset[key];
+    if (!asset) return;
+    const target = new URL(asset, url);
+    if (target.protocol !== 'https:' && target.protocol !== 'http:') return;
+    window.location.assign(target.href);
+  }
+
+  document.addEventListener('astro:page-load', openMeetingAsset);
+</script>
