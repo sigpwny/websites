@@ -1,8 +1,10 @@
 ---
+import { serializeDiscordEmbed, type DiscordEmbed } from '../utils/discordEmbed';
 import { type SiteName, getSiteConfig } from '../configs';
 
 export interface HeadProps {
   site_name?: SiteName;
+  discord_embed?: DiscordEmbed;
   title?: string;
   description?: string;
   image?: string;
@@ -64,6 +66,10 @@ const robots = props.disable_robots ? "noindex, nofollow" : "index, follow";
   <meta property="og:video:width" content="1280" />
   <meta property="og:video:height" content="720" />
 ) : null}
+{/* Keep Open Graph as the fallback for clients without component embeds. */}
+{props.discord_embed && (
+  <script is:inline id="discord:component-embed" type="application/json" set:html={serializeDiscordEmbed(props.discord_embed)} />
+)}
 {/* Twitter */}
 <meta property="twitter:card" content={twitterCardType} />
 <meta property="twitter:site" content={twitterUsername} />

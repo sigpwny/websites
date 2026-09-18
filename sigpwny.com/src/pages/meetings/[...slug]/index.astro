@@ -1,4 +1,7 @@
 ---
+import AssetRedirect from '@/components/Meeting/AssetRedirect.astro';
+import { discordEmbed, discordText } from '$/utils/discordEmbed';
+import { meetingMetadata } from '$/utils/meetingMetadata';
 import { render } from 'astro:content';
 import {
   CalendarRegular,
@@ -87,6 +90,20 @@ const time_end = meeting.time_start && meeting.duration
 const isMultiDay = time_start && time_end ? !time_start.isSame(time_end, 'day') : false;
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(meeting.location?.trim() ?? '');
+const meetingUrl = new URL(page.slug, Astro.site).href;
+const embed = discordEmbed([
+  `## ${discordText(meeting.title)}`,
+  `**${discordText(meetingMetadata[meeting.type]?.shortName ?? meeting.type)}** · ${formatSemester(meeting.semester)}${meeting.week_number != null ? ` · Week ${meeting.week_number}` : ''}${meeting.difficulty ? ` · ${meeting.difficulty}` : ''}`,
+  time_start ? `**When:** <t:${time_start.unix()}:F>${time_end ? ` – <t:${time_end.unix()}:${isMultiDay ? 'F' : 't'}>` : ''}` : '',
+  meeting.location ? `**Where:** ${discordText(meeting.location)}` : '',
+  profiles.length ? `**Presented by:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
+  meeting.description ? `\n${discordText(meeting.description)}` : '',
+].filter(Boolean).join('\n'), [
+  { label: 'Join live', url: `${meetingUrl}?redirect=live` },
+  { label: 'Slides', url: `${meetingUrl}?redirect=slides` },
+  { label: 'Recording', url: `${meetingUrl}?redirect=recording` },
+]);
+
 ---
 <Layout
   title={`${meeting.semester}${meeting.week_number != null ? ' Week ' + weekNumber(meeting.week_number) : ''}: ${meeting.title} — ${consts.title}`}
@@ -95,7 +112,9 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
   video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}
   type="article"
   meeting={page}
+  discord_embed={embed}
 >
+  <AssetRedirect live={meeting.live_video_url} slides={meeting.slides || meeting.slides_url} recording={meeting.recording} />
   <article class="panel w-full" itemscope itemtype="http://schema.org/Article">
     <header>
       <div class="flex flex-col">

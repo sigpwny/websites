@@ -1,4 +1,5 @@
 ---
+import { discordEmbed } from '$/utils/discordEmbed';
 import Layout from '@/layouts/Base.astro';
 import { Picture } from 'astro:assets';
 import Card from '@/components/Card.astro';
@@ -29,6 +30,14 @@ const filteredMeetings = meetings.filter((meeting) => {
 const getStartedMeetings = filteredMeetings.reverse();
 ---
 <Layout
+  discord_embed={discordEmbed(
+    '## Join SIGPwny!\nLearn cybersecurity with the hacking club at UIUC.\n\nMeetings are open to everyone: no applications, prerequisites, or mandatory attendance. Join our Discord to get involved!',
+    [
+      { label: 'Join Discord', url: new URL('/discord', Astro.site).href },
+      { label: 'Meetings', url: new URL('/meetings/', Astro.site).href },
+      { label: 'FAQ', url: new URL('/faq/', Astro.site).href },
+    ],
+  )}
   title={`Join SIGPwny!`}
   description="Join SIGPwny, the hacking club at UIUC!"
 >

@@ -1,4 +1,5 @@
 ---
+import { discordEmbed, discordText } from '$/utils/discordEmbed';
 import Layout from '@/layouts/Base.astro';
 import consts from '@/consts';
 import { getCollection, render } from 'astro:content';
@@ -35,6 +36,15 @@ const p = input.data;
 const profiles = await getProfilesFromNames(p.credit);
 ---
 <Layout
+  discord_embed={discordEmbed([
+    `## ${discordText(p.title)}`,
+    `${discordText(p.publication_type.toUpperCase())} · ${dayjs(p.date).format('MMMM D, YYYY')}${p.publisher ? ` · ${discordText(p.publisher)}` : ''}`,
+    profiles.length ? `**By:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
+    p.description ? `\n${discordText(p.description)}` : '',
+  ].filter(Boolean).join('\n'), [
+    ...(p.primary_link ? [{ label: p.primary_link.name, url: new URL(p.primary_link.url, Astro.site).href }] : []),
+    ...(p.links ?? []).map((link) => ({ label: link.name, url: new URL(link.url, Astro.site).href })),
+  ])}
   title={`${p.title} — ${consts.title}`}
   description={p.description}
   image={p.card_image?.foreground?.src ?? p.card_image?.background?.src}

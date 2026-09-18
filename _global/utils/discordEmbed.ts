@@ -1,0 +1,35 @@
+/** The read-only component subset documented in discord-api-docs PR #8606. */
+export interface DiscordLink {
+  label: string;
+  url: string;
+}
+
+export function discordEmbed(content: string, links: DiscordLink[]) {
+  return {
+    component: {
+      type: 17,
+      accent_color: 0x33cc55,
+      components: [
+        { type: 10, content },
+        ...(links.length ? [{
+          type: 1,
+          components: links.slice(0, 5).map(({ label, url }) => ({
+            type: 2, style: 5, label: label.slice(0, 80), url,
+          })),
+        }] : []),
+      ],
+    },
+  };
+}
+
+export type DiscordEmbed = ReturnType<typeof discordEmbed>;
+
+/** Keep authored text from turning into headings, mentions, or unexpected links. */
+export function discordText(value: string) {
+  return value.replace(/([\\`*_{}\[\]()<>#|~])/g, '\\$1').replace(/@/g, '@\u200b');
+}
+
+/** JSON in an HTML script must not contain a literal closing script tag. */
+export function serializeDiscordEmbed(embed: DiscordEmbed) {
+  return JSON.stringify(embed).replace(/</g, '\\u003c');
+}
