@@ -1,77 +1,81 @@
 ---
-import { Picture, getImage } from 'astro:assets';
-import { GalleryViewer, ViewerTrigger } from "./Viewer";
+import { GalleryViewer, type GalleryAlbum } from './Viewer';
 
-const { id, photos } = Astro.props;
-
-if (!id) {
-  throw new Error("Gallery component requires an id prop.");
+interface Props {
+  albums: GalleryAlbum[];
 }
 
-const optimizedPhotos = await Promise.all(
-  photos.map(async (photo: string) => {
-    const image = await getImage({
-      src: photo,
-      widths: [300, 600],
-      formats: ['avif', 'webp'],
-      loading: 'lazy',
-    });
-    return image;
-  })
-)
-console.log(JSON.stringify(optimizedPhotos[0], null, 2))
-          // <Picture
-          //   src={photo}
-          //   alt="Photo"
-          //   class="object-cover h-full w-full"
-          //   pictureAttributes={{
-          //     class: 'object-cover',
-          //     "data-photo-idx": idx,
-          //   }}
-          //   widths={[300, 600]}
-          //   formats={['avif', 'webp']}
-          //   loading="lazy"
-          // />
+const { albums } = Astro.props;
 ---
-<GalleryViewer photos={optimizedPhotos} client:load>
-  <div id={id} class="grid gap-1 lg:gap-2 grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-9">
-    {photos.map((photo: any, idx: number) => (
-      <ViewerTrigger photoIndex={idx} client:load>
-        <div data-photo-index={idx} class="flex grow rounded-xl aspect-square">
-          <Picture
-            src={photo}
-            alt="Photo"
-            class="object-cover h-full w-full"
-            pictureAttributes={{
-              class: 'object-cover',
-              "data-photo-idx": idx,
-            }}
-            widths={[300, 600]}
-            formats={['avif', 'webp']}
-            loading="lazy"
-          />
-        </div>
-      </ViewerTrigger>
-    ))}
-  </div>
-  <div class="grid gap-1 lg:gap-2 grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-9">
-    {optimizedPhotos.map((photo: any, idx: number) => (
-      <div data-photo-index={idx} class="flex grow rounded-xl aspect-square">
-        <picture class="object-cover">
-          {photo.srcSet.values.map((srcSet: any) => (
-            <source
-              srcset={srcSet.attribute}
-              sizes="(max-width: 600px) 100vw, 50vw"
-              type={srcSet.type}
-            />
-          ))}
-          <img
-            src={photo.src}
-            srcset={photo.srcSet.attribute}
-            {...photo.attributes}
-            class="object-cover h-full w-full"
-          />
-        </picture>
-      </div>
-    ))}
-</GalleryViewer>
+<GalleryViewer albums={albums} client:load />
+
+<style is:global>
+  :root[data-gallery-open] {
+    overflow-y: hidden;
+    scrollbar-gutter: stable;
+  }
+
+  /* Keep the live page and sticky navbar beneath the scrim, not a page-sized snapshot. */
+  :root[data-gallery-transition] {
+    view-transition-name: none;
+  }
+
+  /* Let Close and newly revealed album buttons interrupt an animation. */
+  :root[data-gallery-transition]::view-transition { pointer-events: none; }
+
+  [data-animating] [data-gallery-photo] { visibility: hidden; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ::view-transition-group(gallery-photo) {
+      animation-duration: 250ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    ::view-transition-image-pair(gallery-photo) {
+      overflow: hidden;
+      animation-duration: 250ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    ::view-transition-old(gallery-photo),
+    ::view-transition-new(gallery-photo) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: var(--gallery-thumbnail-position, 50% 50%);
+      animation: none;
+      mix-blend-mode: normal;
+    }
+
+    :root[data-gallery-morph]::view-transition-group(gallery-photo) {
+      width: var(--gallery-morph-width);
+      height: var(--gallery-morph-height);
+      transform-origin: 0 0;
+      animation-name: gallery-photo-morph;
+      animation-fill-mode: both;
+      will-change: transform, clip-path;
+    }
+
+    :root[data-gallery-transition='open']::view-transition-old(gallery-photo),
+    :root[data-gallery-transition='close']::view-transition-new(gallery-photo) {
+      opacity: 0;
+    }
+
+    :root[data-gallery-transition='open']::view-transition-new(gallery-photo),
+    :root[data-gallery-transition='close']::view-transition-old(gallery-photo) {
+      opacity: 1;
+    }
+
+  }
+
+  @keyframes gallery-photo-morph {
+    from {
+      transform: var(--gallery-morph-from-transform);
+      clip-path: var(--gallery-morph-from-clip);
+    }
+    to {
+      transform: var(--gallery-morph-to-transform);
+      clip-path: var(--gallery-morph-to-clip);
+    }
+  }
+</style>

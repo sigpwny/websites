@@ -2,7 +2,7 @@
 import Nav from '@/components/Nav';
 ---
 
-<header class="sticky lg:relative top-0 z-10">
+<header data-site-header class="sticky lg:relative top-0 z-10">
   <Nav
     curr_path={Astro.url.pathname}
     client:load
@@ -10,6 +10,19 @@ import Nav from '@/components/Nav';
   />
 </header>
 <script>
+const siteHeader = document.querySelector<HTMLElement>('[data-site-header]');
+if (siteHeader && !siteHeader.dataset.scrollOffsetObserved) {
+  siteHeader.dataset.scrollOffsetObserved = 'true';
+  const updateHeaderHeight = () => {
+    document.documentElement.style.setProperty(
+      '--site-header-height',
+      `${siteHeader.offsetHeight}px`,
+    );
+  };
+  new ResizeObserver(updateHeaderHeight).observe(siteHeader);
+  updateHeaderHeight();
+}
+
 // Auto-close navbar on mobile when navigating to a new page using Astro's View Transitions API
 document.addEventListener('astro:after-swap', () => {
   const navbar = document.getElementById('nav-mobile-toggle-input') as HTMLInputElement;

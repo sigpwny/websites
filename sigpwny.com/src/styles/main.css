@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  --site-header-height: 5rem;
+  --sticky-site-header-height: var(--site-header-height);
+  --page-scroll-clearance: 1rem;
+
   --rgb-pwny-green: 51 204 85;         /* #33cc55 */
   --rgb-pwny-green-light: 0 255 85;    /* #00ff55 */
   --rgb-pwny-green-dark: 19 113 55;    /* #137137 */
@@ -35,6 +39,18 @@
   --rgb-surface-250: 85 85 85;    /* #555555 */
   --rgb-surface-300: 102 102 102; /* #666666 */
   --rgb-content: 255 255 255;        /* #ffffff */
+
+  scroll-padding-block-start: var(--sticky-site-header-height);
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --sticky-site-header-height: 0rem;
+  }
+}
+
+:where(:target, .page-scroll-target) {
+  scroll-margin-block-start: var(--page-scroll-clearance);
 }
 
 @theme static {

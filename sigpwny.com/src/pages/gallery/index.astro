@@ -1,53 +1,120 @@
 ---
 import Layout from '@/layouts/Base.astro';
-import Link from '$/components/Link.astro';
-import { getCollection } from 'astro:content';
-import { Picture } from 'astro:assets';
 import Gallery from '@/components/Gallery/Gallery.astro';
-import { getPhotosByAlbum } from '$/utils/albums';
+import type { GalleryAlbum, GalleryPhoto } from '@/components/Gallery/Viewer';
 
-const albums = await getCollection('albums');
+type LanguageMap = Record<string, string[]>;
 
-console.log(albums)
+interface IiifImage {
+  id: string;
+  type: 'Image';
+  width: number;
+  height: number;
+  label?: LanguageMap;
+  'sigpwny:byteSize'?: number;
+  'sigpwny:objectPosition'?: {
+    'sigpwny:x'?: number;
+    'sigpwny:y'?: number;
+  };
+}
 
-// const photosPromises = import.meta.glob('/../_global/content/albums/**/*.png',
-//   // {
-//   //   eager: true,
-//   //   // import: 'default',
-//   // }
-// );
-// console.log(photosPromises)
-// const photos = await Promise.all(
-//   Object.values(photosPromises).map((image) => image().then((mod: any) => mod.default))
-// );
-// console.log(photos)
+interface IiifCanvas {
+  id: string;
+  label?: LanguageMap;
+  metadata?: Array<{ label: LanguageMap; value: LanguageMap }>;
+  rendering?: Array<IiifImage & { format?: string }>;
+  thumbnail?: IiifImage[];
+  items: Array<{
+    items: Array<{
+      body: {
+        type: 'Choice';
+        items: IiifImage[];
+      };
+    }>;
+  }>;
+}
 
-const photosByAlbum = await Promise.all(albums.map((album) => {
-  return getPhotosByAlbum(album).then((photos) => {
-    return {
-      data: album,
-      photos: photos,
-    };
-  });
+interface IiifManifest {
+  id: string;
+  label?: LanguageMap;
+  summary?: LanguageMap;
+  items: IiifCanvas[];
+}
+
+interface IiifCollection {
+  items: Array<{ id: string }>;
+}
+
+const manifestUrl = import.meta.env.PHOTOS_MANIFEST_URL
+  ?? 'https://media.sigpwny.com/manifest.json';
+
+function languageText(value?: LanguageMap) {
+  return value?.en?.[0] ?? Object.values(value ?? {})[0]?.[0] ?? '';
+}
+
+function normalizedCoordinate(value: number | undefined) {
+  return typeof value === 'number' ? Math.min(1, Math.max(0, value)) : 0.5;
+}
+
+async function fetchIiif<T>(url: string): Promise<T> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Unable to load photos from ${url}: ${response.status} ${response.statusText}`);
+  }
+  return response.json() as Promise<T>;
+}
+
+function canvasToPhoto(canvas: IiifCanvas): GalleryPhoto | undefined {
+  const images = canvas.items[0]?.items[0]?.body.items
+    .filter((image) => image.type === 'Image')
+    .sort((left, right) => left.width - right.width);
+  const fullImage = images?.at(-1);
+  if (!fullImage) return undefined;
+
+  const thumbnail = canvas.thumbnail?.[0] ?? images[0] ?? fullImage;
+  const position = thumbnail['sigpwny:objectPosition'];
+  return {
+    id: canvas.id,
+    src: fullImage.id,
+    thumbnail: thumbnail.id,
+    srcSet: images.map((image) => `${image.id} ${image.width}w`).join(', '),
+    width: fullImage.width,
+    height: fullImage.height,
+    alt: languageText(fullImage.label) || languageText(canvas.label) || 'SIGPwny photo',
+    sources: [thumbnail, ...images].map(({ id, width, height }) => ({ src: id, width, height })),
+    metadata: (canvas.metadata ?? []).map(({ label, value }) => ({
+      label: languageText(label),
+      value: languageText(value),
+    })),
+    downloads: (canvas.rendering ?? []).map((image) => ({
+      src: image.id,
+      label: languageText(image.label).replace(/^(Download original) .+$/, '$1') || 'Download image',
+      width: image.width,
+      height: image.height,
+      bytes: image['sigpwny:byteSize'],
+    })),
+    thumbnailPosition: {
+      x: normalizedCoordinate(position?.['sigpwny:x']),
+      y: normalizedCoordinate(position?.['sigpwny:y']),
+    },
+  };
+}
+
+const collection = await fetchIiif<IiifCollection>(manifestUrl);
+const albums: GalleryAlbum[] = await Promise.all(collection.items.map(async ({ id }) => {
+  const manifest = await fetchIiif<IiifManifest>(id);
+  return {
+    id: new URL(manifest.id).pathname.split('/').at(-2) ?? manifest.id,
+    title: languageText(manifest.label) || 'Untitled album',
+    description: languageText(manifest.summary),
+    photos: manifest.items.map(canvasToPhoto).filter((photo) => photo !== undefined),
+  };
 }));
-
-console.log("Loaded photos!")
 ---
 <Layout
   title="Gallery"
   description="Photos and memories from SIGPwny"
 >
-  <h1>Gallery</h1>
-  <section id="albums">
-    <h2>Albums</h2>
-    {photosByAlbum.map(({data: album, photos}) => (
-      <div class="flex flex-col gap-4 mb-8">
-        <p>{album.data.title}</p>
-        <Gallery id={`gallery-${album.id}`} photos={photos} />
-      </div>
-    ))}
-  </section>
-  <section id="all-photos">
-    <h2>All Photos</h2>
-  </section>
+  <h1>Albums</h1>
+  <Gallery albums={albums} />
 </Layout>
