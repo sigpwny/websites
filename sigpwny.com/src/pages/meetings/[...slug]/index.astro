@@ -1,4 +1,7 @@
 ---
+import AssetRedirect from '@/components/Meeting/AssetRedirect.astro';
+import { discordEmbed, discordText } from '$/utils/discordEmbed';
+import { meetingMetadata } from '$/utils/meetingMetadata';
 import { render } from 'astro:content';
 import {
   CalendarRegular,
@@ -87,6 +90,31 @@ const time_end = meeting.time_start && meeting.duration
 const isMultiDay = time_start && time_end ? !time_start.isSame(time_end, 'day') : false;
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(meeting.location?.trim() ?? '');
+const locationUrl = iCalendarLocation?.title && (iCalendarLocation.address || iCalendarLocation.geo) && !isVirtualLocation
+  ? `https://maps.google.com/?q=${encodeURIComponent(iCalendarLocation.title)}`
+  : undefined;
+const meetingUrl = new URL(page.slug, Astro.site).href;
+const semesterUrl = new URL(`/meetings/${meeting.semester.toLowerCase()}/`, Astro.site).href;
+const thumbnail = meeting.card_image?.foreground ?? meeting.card_image?.background;
+const embed = discordEmbed([
+  `## [${discordText(meeting.title)}](<${meetingUrl}>)`,
+  `**${discordText(meetingMetadata[meeting.type]?.name ?? meeting.type)}** · [${formatSemester(meeting.semester)}](${semesterUrl})`,
+  time_start ? `<t:${time_start.unix()}:R>` : '',
+].filter(Boolean).join('\n'), [
+  { label: 'Join live', url: `${meetingUrl}?redirect=live` },
+  { label: 'Slides', url: `${meetingUrl}?redirect=slides` },
+  { label: 'Recording', url: `${meetingUrl}?redirect=recording` },
+], meetingMetadata[meeting.type]?.accentColor, {
+  thumbnail: thumbnail ? new URL(thumbnail.src, Astro.site).href : consts.image,
+  thumbnailAlt: thumbnail ? (meeting.card_image?.alt || meeting.title) : undefined,
+  details: [
+    time_start ? `**When:** <t:${time_start.unix()}:F>${time_end ? ` – <t:${time_end.unix()}:${isMultiDay ? 'F' : 't'}>` : ''}` : '',
+    meeting.location ? `**Where:** ${locationUrl ? `[${discordText(meeting.location)}](<${locationUrl}>)` : discordText(meeting.location)}` : '',
+    profiles.length ? `**Presenters:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
+  ].filter(Boolean).join('\n'),
+  description: meeting.description ? discordText(meeting.description) : undefined,
+});
+
 ---
 <Layout
   title={`${meeting.semester}${meeting.week_number != null ? ' Week ' + weekNumber(meeting.week_number) : ''}: ${meeting.title} — ${consts.title}`}
@@ -95,7 +123,9 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
   video={meeting.recording ? getYouTubeEmbedUrl(meeting.recording) : undefined}
   type="article"
   meeting={page}
+  discord_embed={embed}
 >
+  <AssetRedirect live={meeting.live_video_url} slides={meeting.slides || meeting.slides_url} recording={meeting.recording} />
   <article class="panel w-full" itemscope itemtype="http://schema.org/Article">
     <header>
       <div class="flex flex-col">
@@ -177,10 +207,10 @@ const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(
           {meeting.location ? (
             <div class="flex flex-row gap-2 items-center">
               <LocationRegular className="flex-none text-primary" />
-              {iCalendarLocation?.title && !isVirtualLocation ? (
+              {locationUrl ? (
                 <a
                   class="inline align-middle !underline underline-offset-2"
-                  href={`https://maps.google.com/?q=${encodeURIComponent(iCalendarLocation.title)}`}
+                  href={locationUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

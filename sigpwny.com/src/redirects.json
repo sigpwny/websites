@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/publications/2026-05-12_title",
+      "destination": "/publications/2026-05-12_overridefuzz/",
+      "status": 301
+    },
+    {
+      "source": "/publications/2026-05-12_title/",
+      "destination": "/publications/2026-05-12_overridefuzz/",
+      "status": 301
+    },
+    {
       "source": "/docs",
       "destination": "https://docs.sigpwny.com",
       "status": 302
@@ -223,6 +233,11 @@
     {
       "source": "/tracerfire2026",
       "destination": "https://docs.google.com/forms/d/e/1FAIpQLSerXz-JYOg80_KiYV3AUnxPzgwZTcUAJ4ZX5grJ8GtuD4zQ2A/viewform?usp=header",
+      "status": 302
+    },
+    {
+      "source": "/youtube",
+      "destination": "https://youtube.com/@sigpwny",
       "status": 302
     }
   ]
