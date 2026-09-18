@@ -6,6 +6,8 @@ export interface DiscordLink {
 
 interface DiscordEmbedOptions {
   thumbnail?: string;
+  above?: string;
+  details?: string;
   description?: string;
 }
 
@@ -20,15 +22,16 @@ export function discordEmbed(
       type: 17,
       accent_color: accentColor,
       components: [
+        ...(options.above ? [{ type: 10, content: options.above }] : []),
         options.thumbnail ? {
           type: 9,
           components: [{ type: 10, content }],
           accessory: {
             type: 11,
             media: { url: options.thumbnail },
-            description: 'SIGPwny pwny icon',
           },
         } : { type: 10, content },
+        ...(options.details ? [{ type: 10, content: options.details }] : []),
         ...(options.description ? [{ type: 10, content: options.description }] : []),
         ...(links.length ? [{
           type: 1,
