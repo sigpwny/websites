@@ -7,7 +7,6 @@ export interface DiscordLink {
 interface DiscordEmbedOptions {
   thumbnail?: string;
   thumbnailAlt?: string;
-  footer?: string;
   details?: string;
   description?: string;
 }
@@ -40,7 +39,6 @@ export function discordEmbed(
             type: 2, style: 5, label: label.slice(0, 80), url,
           })),
         }] : []),
-        ...(options.footer ? [{ type: 10, content: options.footer }] : []),
       ],
     },
   };
