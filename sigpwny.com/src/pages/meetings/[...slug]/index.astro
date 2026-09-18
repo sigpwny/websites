@@ -90,19 +90,28 @@ const time_end = meeting.time_start && meeting.duration
 const isMultiDay = time_start && time_end ? !time_start.isSame(time_end, 'day') : false;
 const iCalendarLocation = createICalendarLocation(locations, meeting.location);
 const isVirtualLocation = /^(?:discord|online|virtual|zoom)(?:\s+only)?$/i.test(meeting.location?.trim() ?? '');
+const locationUrl = iCalendarLocation?.title && !isVirtualLocation
+  ? `https://maps.google.com/?q=${encodeURIComponent(iCalendarLocation.title)}`
+  : undefined;
 const meetingUrl = new URL(page.slug, Astro.site).href;
+const difficulty = meeting.difficulty
+  ? meeting.difficulty.charAt(0).toUpperCase() + meeting.difficulty.slice(1)
+  : undefined;
 const embed = discordEmbed([
+  '-# SIGPwny',
   `## ${discordText(meeting.title)}`,
-  `**${discordText(meetingMetadata[meeting.type]?.shortName ?? meeting.type)}** · ${formatSemester(meeting.semester)}${meeting.week_number != null ? ` · Week ${meeting.week_number}` : ''}${meeting.difficulty ? ` · ${meeting.difficulty}` : ''}`,
+  `**${discordText(meetingMetadata[meeting.type]?.shortName ?? meeting.type)}** · ${formatSemester(meeting.semester)}${meeting.week_number != null ? ` · Week ${meeting.week_number}` : ''}${difficulty ? ` · ${difficulty}` : ''}`,
   time_start ? `**When:** <t:${time_start.unix()}:F>${time_end ? ` – <t:${time_end.unix()}:${isMultiDay ? 'F' : 't'}>` : ''}` : '',
-  meeting.location ? `**Where:** ${discordText(meeting.location)}` : '',
-  profiles.length ? `**Presented by:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
-  meeting.description ? `\n${discordText(meeting.description)}` : '',
+  meeting.location ? `**Where:** ${locationUrl ? `[${discordText(meeting.location)}](<${locationUrl}>)` : discordText(meeting.location)}` : '',
+  profiles.length ? `**Presenters:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
 ].filter(Boolean).join('\n'), [
   { label: 'Join live', url: `${meetingUrl}?redirect=live` },
   { label: 'Slides', url: `${meetingUrl}?redirect=slides` },
   { label: 'Recording', url: `${meetingUrl}?redirect=recording` },
-]);
+], meetingMetadata[meeting.type]?.accentColor, {
+  thumbnail: consts.image,
+  description: meeting.description ? discordText(meeting.description) : undefined,
+});
 
 ---
 <Layout
@@ -196,10 +205,10 @@ const embed = discordEmbed([
           {meeting.location ? (
             <div class="flex flex-row gap-2 items-center">
               <LocationRegular className="flex-none text-primary" />
-              {iCalendarLocation?.title && !isVirtualLocation ? (
+              {locationUrl ? (
                 <a
                   class="inline align-middle !underline underline-offset-2"
-                  href={`https://maps.google.com/?q=${encodeURIComponent(iCalendarLocation.title)}`}
+                  href={locationUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

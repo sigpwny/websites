@@ -37,6 +37,7 @@ const profiles = await getProfilesFromNames(p.credit);
 ---
 <Layout
   discord_embed={discordEmbed([
+    '-# SIGPwny',
     `## ${discordText(p.title)}`,
     `${discordText(p.publication_type.toUpperCase())} · ${dayjs(p.date).format('MMMM D, YYYY')}${p.publisher ? ` · ${discordText(p.publisher)}` : ''}`,
     profiles.length ? `**By:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',

@@ -4,13 +4,32 @@ export interface DiscordLink {
   url: string;
 }
 
-export function discordEmbed(content: string, links: DiscordLink[]) {
+interface DiscordEmbedOptions {
+  thumbnail?: string;
+  description?: string;
+}
+
+export function discordEmbed(
+  content: string,
+  links: DiscordLink[],
+  accentColor = 0x33cc55,
+  options: DiscordEmbedOptions = {},
+) {
   return {
     component: {
       type: 17,
-      accent_color: 0x33cc55,
+      accent_color: accentColor,
       components: [
-        { type: 10, content },
+        options.thumbnail ? {
+          type: 9,
+          components: [{ type: 10, content }],
+          accessory: {
+            type: 11,
+            media: { url: options.thumbnail },
+            description: 'SIGPwny pwny icon',
+          },
+        } : { type: 10, content },
+        ...(options.description ? [{ type: 10, content: options.description }] : []),
         ...(links.length ? [{
           type: 1,
           components: links.slice(0, 5).map(({ label, url }) => ({
