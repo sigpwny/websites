@@ -97,7 +97,7 @@ const meetingUrl = new URL(page.slug, Astro.site).href;
 const semesterUrl = new URL(`/meetings/${meeting.semester.toLowerCase()}/`, Astro.site).href;
 const thumbnail = meeting.card_image?.foreground ?? meeting.card_image?.background;
 const embed = discordEmbed([
-  `## ${discordText(meeting.title)}`,
+  `## [${discordText(meeting.title)}](<${meetingUrl}>)`,
   `**${discordText(meetingMetadata[meeting.type]?.name ?? meeting.type)}** · [${formatSemester(meeting.semester)}](${semesterUrl})`,
   time_start ? `<t:${time_start.unix()}:R>` : '',
 ].filter(Boolean).join('\n'), [

@@ -32,6 +32,7 @@ export async function getStaticPaths() {
 const { input } = Astro.props;
 const { Content } = await render(input);
 const p = input.data;
+const publicationUrl = new URL(Astro.url.pathname, Astro.site).href;
 
 const profiles = await getProfilesFromNames(p.credit);
 const thumbnail = p.card_image?.foreground ?? p.card_image?.background;
@@ -39,7 +40,7 @@ const publicationType = p.publication_type.charAt(0).toUpperCase() + p.publicati
 ---
 <Layout
   discord_embed={discordEmbed([
-    `## ${discordText(p.title)}`,
+    `## [${discordText(p.title)}](<${publicationUrl}>)`,
     `${discordText(publicationType)} · ${dayjs(p.date).format('MMMM D, YYYY')}${p.publisher ? ` · ${discordText(p.publisher)}` : ''}`,
     profiles.length ? `**By:** ${profiles.map((profile) => discordText(profile.name)).join(', ')}` : '',
   ].filter(Boolean).join('\n'), [
