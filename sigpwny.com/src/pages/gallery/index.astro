@@ -1,0 +1,12 @@
+---
+import Layout from '@/layouts/Base.astro';
+import Gallery from '@/components/Gallery/Gallery.astro';
+
+// This URL is passed to the browser; no gallery JSON is fetched during a build.
+const manifestUrl = import.meta.env.PHOTOS_MANIFEST_URL
+  ?? 'https://media.sigpwny.com/manifest.json';
+---
+<Layout title="Gallery" description="Photos and memories from SIGPwny">
+  <h1>Albums</h1>
+  <Gallery manifestUrl={manifestUrl} />
+</Layout>

@@ -44,3 +44,23 @@ SIGPwny's educational content, slides, and recordings are licensed under the [CC
 Published content that is not SIGPwny branded are copyrighted by their respective owners unless otherwise stated.
 
 All other website code is licensed under the [BSD 3-Clause license](./LICENSE-CODE).
+
+### Gallery media updates
+
+The `sigpwny.com/gallery/` page fetches the IIIF collection and album manifests in
+its browser-side `GalleryLoader`. The initial HTML contains album skeletons;
+they are replaced once the JSON loads, without waiting for thumbnail images.
+Failed manifest requests show a retry button. Media-only deployments are picked
+up on a subsequent page visit or reload without rebuilding this website.
+Manifest requests revalidate browser caches; upstream/CDN caching still applies.
+
+`PHOTOS_MANIFEST_URL` configures the collection URL passed to the browser and
+must be publicly reachable with CORS enabled. Production defaults to
+`https://media.sigpwny.com/manifest.json`. For the local shared preview, use
+`https://ai-agent.squirrel-porgy.ts.net:4322/manifest.json`, not a localhost URL.
+
+Album manifests fetch concurrently with a 15-second timeout per JSON request.
+The full initial skeleton remains until every album succeeds, fails, or times out;
+then all results appear together. A failed album keeps its position in the list
+and offers its own retry button; retrying it does not refetch the collection
+or other albums. Successfully loaded albums remain interactive.
