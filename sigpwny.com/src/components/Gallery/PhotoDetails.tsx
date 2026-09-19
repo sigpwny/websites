@@ -1,9 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import type { GalleryPhoto } from './Viewer';
 
-export function PhotoDetails({ photo, displayed }: {
+export function PhotoDetails({ photo }: {
   photo: GalleryPhoto;
-  displayed: { width: number; height: number; sourceWidth: number; sourceHeight: number };
 }) {
   const scroller = useRef<HTMLElement>(null);
   const [moreBelow, setMoreBelow] = useState(false);
@@ -24,8 +23,6 @@ export function PhotoDetails({ photo, displayed }: {
       value: /resolution|size/i.test(label)
         ? value.replace(/(\d+)\s*[x×]\s*(\d+)\s*(?:CSS\s+)?pixels\b/gi, '$1x$2') : value,
     })),
-    { label: 'Preview resolution', value: `${displayed.sourceWidth || '…'}x${displayed.sourceHeight || '…'}` },
-    { label: 'Displayed size (CSS)', value: `${displayed.width}x${displayed.height}` },
   ];
   return (
     <div className="relative mx-auto mt-2 max-w-prose overflow-hidden rounded-xl border-2 border-surface-150 bg-surface-100 text-sm">

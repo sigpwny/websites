@@ -1,13 +1,14 @@
 ---
-import { GalleryViewer, type GalleryAlbum } from './Viewer';
+import { GalleryLoader } from './GalleryLoader';
 
 interface Props {
-  albums: GalleryAlbum[];
+  manifestUrl: string;
 }
 
-const { albums } = Astro.props;
+const { manifestUrl } = Astro.props;
 ---
-<GalleryViewer albums={albums} client:load />
+<GalleryLoader manifestUrl={manifestUrl} client:load />
+<noscript>Enable JavaScript to load the photo albums.</noscript>
 
 <style is:global>
   :root[data-gallery-open] {
@@ -25,6 +26,12 @@ const { albums } = Astro.props;
 
   [data-animating] [data-gallery-photo] { visibility: hidden; }
 
+  /* Keep the snapshot transparent so its clipped, moving pair can animate the
+     placeholder color without tinting the photo or painting a full-size frame. */
+  :root[data-gallery-transition] button[aria-pressed] [data-gallery-photo] {
+    background-color: transparent;
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     ::view-transition-group(gallery-photo) {
       animation-duration: 250ms;
@@ -33,8 +40,14 @@ const { albums } = Astro.props;
 
     ::view-transition-image-pair(gallery-photo) {
       overflow: hidden;
+      animation-name: gallery-placeholder-color;
       animation-duration: 250ms;
       animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+    }
+
+    :root[data-gallery-transition='close']::view-transition-image-pair(gallery-photo) {
+      animation-direction: reverse;
     }
 
     ::view-transition-old(gallery-photo),
@@ -66,6 +79,11 @@ const { albums } = Astro.props;
       opacity: 1;
     }
 
+  }
+
+  @keyframes gallery-placeholder-color {
+    from { background-color: rgb(var(--rgb-surface-200)); }
+    to { background-color: rgb(var(--rgb-surface-150)); }
   }
 
   @keyframes gallery-photo-morph {

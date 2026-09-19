@@ -1,9 +1,10 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import type { GalleryPhoto } from './Viewer';
+import { PhotoLayers } from './PhotoLayers';
 
 export interface ZoomablePhotoProps {
   photo: GalleryPhoto;
-  showFullResolution: boolean;
+  thumbnailSizes: string;
   transitionName: 'gallery-photo' | 'none';
   onImageRef: (image: HTMLImageElement | null) => void;
   onZoomChange?: (zoomed: boolean) => void;
@@ -16,7 +17,7 @@ const dragThreshold = 5;
 
 export function ZoomablePhoto({
   photo,
-  showFullResolution,
+  thumbnailSizes,
   transitionName,
   onImageRef,
   onZoomChange,
@@ -163,24 +164,18 @@ export function ZoomablePhoto({
         onZoomChange?.(!zoomed);
       }}
     >
-      <img
+      <span
         data-gallery-photo={photo.id}
-        ref={onImageRef}
-        src={showFullResolution ? photo.src : photo.thumbnail}
-        srcSet={showFullResolution ? photo.srcSet : undefined}
-        sizes={showFullResolution
-          ? (zoomed ? '(max-width: 864px) calc(250vw - 15rem), 1920px' : '(max-width: 864px) calc(100vw - 6rem), 768px')
-          : undefined}
-        width={photo.width}
-        height={photo.height}
-        alt={photo.alt}
-        draggable={false}
-        className={`pointer-events-none max-h-full w-full object-contain motion-reduce:transition-none ${expandedViewport ? 'h-full' : 'h-auto'} ${dragging || transitionName !== 'none' ? 'transition-none' : 'transition-transform duration-200 ease-out'}`}
+        className={`pointer-events-none relative block max-h-full w-full bg-surface-150 motion-reduce:transition-none ${expandedViewport ? 'h-full' : ''} ${dragging || transitionName !== 'none' ? 'transition-none' : 'transition-transform duration-200 ease-out'}`}
         style={{
+          aspectRatio: `${photo.width} / ${photo.height}`,
           transform: `translate(${showZoom ? pan.x : 0}px, ${showZoom ? pan.y : 0}px) scale(${showZoom ? zoomScale : 1})`,
           viewTransitionName: transitionName,
         }}
-      />
+      >
+        <PhotoLayers photo={photo} thumbnailSizes={thumbnailSizes} onImageRef={onImageRef} contain
+          sizes={zoomed ? '(max-width: 864px) calc(250vw - 15rem), 1920px' : '(max-width: 864px) calc(100vw - 6rem), 768px'} />
+      </span>
 
     </button>
   );

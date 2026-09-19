@@ -9,9 +9,10 @@ import {
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDownloadRegular, ChevronRightRegular, DismissRegular, InfoFilled, InfoRegular, ZoomInRegular, ZoomOutRegular } from '$/components/Icons/fluentui';
 import { ZoomablePhoto } from './ZoomablePhoto';
-import { AlbumSkeletons } from './AlbumSkeletons';
 import { animateNavigation } from './animateNavigation';
 import { PhotoDetails } from './PhotoDetails';
+import { PhotoLayers } from './PhotoLayers';
+import type { AlbumSlot } from './loadAlbums';
 import DropdownSelect from '@/components/DropdownSelect';
 import Menu from '@/components/Menu';
 
@@ -23,7 +24,6 @@ export interface GalleryPhoto {
   width: number;
   height: number;
   alt: string;
-  sources: Array<{ src: string; width: number; height: number }>;
   metadata: Array<{ label: string; value: string }>;
   downloads: Array<{ src: string; label: string; width: number; height: number; bytes?: number }>;
   thumbnailPosition: {
@@ -41,6 +41,8 @@ export interface GalleryAlbum {
 
 interface ViewerProps {
   albums: GalleryAlbum[];
+  slots: AlbumSlot[];
+  onRetryAlbum: (url: string) => void;
 }
 
 interface AlbumBlockProps {
@@ -69,7 +71,6 @@ type TransitionDocument = Document & {
 
 type TransitionDirection = 'open' | 'close';
 
-const fullImageSizes = '(max-width: 864px) calc(100vw - 6rem), 768px';
 const previewMediaQuery = '(min-width: 64rem) and (width < 96rem), (min-width: 40rem) and (width < 48rem)';
 let transitionStyleRequest = 0;
 let cancelActiveViewTransition: (() => void) | undefined;
@@ -147,7 +148,7 @@ async function runViewTransition(
   // selection, scroll lock, or transition names active indefinitely.
   const deadline = window.setTimeout(() => { applyUpdate(); cancel(); }, 1000);
 
-  const transitionImage = () => Array.from(document.querySelectorAll<HTMLImageElement>('img'))
+  const transitionImage = () => Array.from(document.querySelectorAll<HTMLElement>('img, [data-gallery-photo]'))
     .find((image) => image.style.viewTransitionName === 'gallery-photo');
   const from = transitionImage()?.getBoundingClientRect();
   try {
@@ -193,24 +194,15 @@ async function runViewTransition(
   }
 }
 
-async function decodeImage(image: HTMLImageElement): Promise<boolean> {
-  let timer: number | undefined;
-  const timeout = new Promise<boolean>((resolve) => {
-    timer = window.setTimeout(() => resolve(false), 3000);
-  });
-  try {
-    return await Promise.race([image.decode().then(() => true, () => false), timeout]);
-  } finally {
-    window.clearTimeout(timer);
-  }
-}
-
-function preloadFullImage(photo: GalleryPhoto) {
-  const image = new Image();
-  image.srcset = photo.srcSet;
-  image.sizes = fullImageSizes;
-  image.src = photo.src;
-  return { image, ready: decodeImage(image) };
+// Square object-cover tiles need enough source width for both crop dimensions.
+function thumbnailSizes(photo: GalleryPhoto, expanded: boolean) {
+  const crop = Math.max(1, photo.width / photo.height);
+  const pixels = (size: number) => `${Math.ceil(size * crop)}px`;
+  return `(min-width: 1536px) ${pixels(expanded ? 155 : 150)}, `
+    + `(min-width: 1280px) ${pixels(expanded ? 143 : 140)}, `
+    + `(min-width: 1024px) ${pixels(expanded ? 111 : 108)}, `
+    + `(min-width: 768px) ${pixels(expanded ? 111 : 107)}, `
+    + `(min-width: 640px) ${pixels(144)}, calc((100vw - 60px) / 3 * ${crop})`;
 }
 
 function PhotoButton({
@@ -220,6 +212,7 @@ function PhotoButton({
   activePhotoKey,
   transitionPhotoKey,
   newlyRevealed,
+  expanded,
   reducedMotion,
   onOpenPhoto,
   onPhotoButtonRef,
@@ -230,6 +223,7 @@ function PhotoButton({
   activePhotoKey: string | null;
   transitionPhotoKey: string | null;
   newlyRevealed: boolean;
+  expanded: boolean;
   reducedMotion: boolean;
   onOpenPhoto: (albumId: string, photo: GalleryPhoto) => void;
   onPhotoButtonRef: (photoKey: string, element: HTMLButtonElement | null) => void;
@@ -248,6 +242,8 @@ function PhotoButton({
     >
       <img
         src={photo.thumbnail}
+        srcSet={photo.srcSet}
+        sizes={thumbnailSizes(photo, expanded)}
         width={photo.width}
         height={photo.height}
         alt={photo.alt}
@@ -304,7 +300,15 @@ const AlbumBlock = memo(function AlbumBlock({
       <header className="flex items-start justify-between gap-2 p-2">
         <div className={expanded ? 'max-w-prose' : undefined}>
           <h2 className="m-0 text-xl">{album.title}</h2>
-          {expanded && album.description && <p className="mb-0 mt-1">{album.description}</p>}
+          {expanded && album.description && (
+            <p className="mb-0 mt-1">
+              {album.description.split(/(https?:\/\/[^\s]+)/g).map((part, index) =>
+                index % 2 === 1
+                  ? <a key={index} href={part} className="underline underline-offset-2">{part}</a>
+                  : part,
+              )}
+            </p>
+          )}
         </div>
         <button
           type="button"
@@ -339,6 +343,7 @@ const AlbumBlock = memo(function AlbumBlock({
             index={index}
             activePhotoKey={activePhotoKey}
             transitionPhotoKey={transitionPhotoKey}
+            expanded={expanded}
             newlyRevealed={expanded && index >= previewPhotoCount}
             reducedMotion={reducedMotion}
             onOpenPhoto={onOpenPhoto}
@@ -349,7 +354,7 @@ const AlbumBlock = memo(function AlbumBlock({
         {!expanded && hasHiddenPhotos && (
           <button
             type="button"
-            className="group relative aspect-square cursor-pointer overflow-hidden rounded-xl"
+            className="group relative aspect-square cursor-pointer overflow-hidden rounded-xl bg-surface-200"
             aria-label={`Show all ${album.photos.length} photos in ${album.title}`}
             aria-expanded="false"
             aria-controls={contentId}
@@ -357,6 +362,8 @@ const AlbumBlock = memo(function AlbumBlock({
           >
             <img
               src={album.photos[previewPhotoCount].thumbnail}
+              srcSet={album.photos[previewPhotoCount].srcSet}
+              sizes={thumbnailSizes(album.photos[previewPhotoCount], false)}
               width={album.photos[previewPhotoCount].width}
               height={album.photos[previewPhotoCount].height}
               alt=""
@@ -368,7 +375,7 @@ const AlbumBlock = memo(function AlbumBlock({
                 objectPosition: `${album.photos[previewPhotoCount].thumbnailPosition.x * 100}% ${album.photos[previewPhotoCount].thumbnailPosition.y * 100}%`,
               }}
             />
-            <span className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-white">
+            <span className="absolute inset-0 flex items-center justify-center text-3xl font-normal text-white">
               +{hiddenPhotoCount}
             </span>
           </button>
@@ -378,7 +385,7 @@ const AlbumBlock = memo(function AlbumBlock({
   );
 });
 
-export function GalleryViewer({ albums }: ViewerProps) {
+export function GalleryViewer({ albums, slots, onRetryAlbum }: ViewerProps) {
   const previewCapacity = usePreviewCapacity();
   const reducedMotion = useReducedMotion() ?? false;
   const [expandedAlbumIds, setExpandedAlbumIds] = useState<Set<string>>(() => new Set());
@@ -387,20 +394,16 @@ export function GalleryViewer({ albums }: ViewerProps) {
     photoId: string;
   } | null>(null);
   const [transitionPhotoKey, setTransitionPhotoKey] = useState<string | null>(null);
-  const [showFullResolution, setShowFullResolution] = useState(false);
   const [showMetadata, setShowMetadata] = useState(false);
-  const [albumsLoading, setAlbumsLoading] = useState(true);
   const photoStage = useRef<HTMLDivElement>(null);
   const navigationAnimation = useRef<AbortController | null>(null);
   const navigating = useRef(false);
   const [isZoomed, setIsZoomed] = useState(false);
-  const preloadedPhotos = useRef(new Map<string, ReturnType<typeof preloadFullImage>>());
-  const [displayedImage, setDisplayedImage] = useState({ width: 0, height: 0, sourceWidth: 0, sourceHeight: 0 });
   const [viewerImage, setViewerImage] = useState<HTMLImageElement | null>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
   const [downloadsOpen, setDownloadsOpen] = useState(false);
   const openingPhotoButton = useRef<HTMLButtonElement | null>(null);
-  const imageRequest = useRef(0);
+  const operationVersion = useRef(0);
   const albumElements = useRef(new Map<string, HTMLElement>());
   const headerButtons = useRef(new Map<string, HTMLButtonElement>());
   const photoButtons = useRef(new Map<string, HTMLButtonElement>());
@@ -415,58 +418,19 @@ export function GalleryViewer({ albums }: ViewerProps) {
     ? galleryPhotoKey(currentPhotoSelection.albumId, currentPhoto.id)
     : null;
   const albumIds = albums.map((album) => album.id);
-  const allExpanded = albumIds.length > 0
-    && albumIds.every((albumId) => expandedAlbumIds.has(albumId));
+  const anyExpanded = albumIds.some((albumId) => expandedAlbumIds.has(albumId));
   const floating = useFloating({ open: currentPhoto !== undefined });
   const isOpen = currentPhoto !== undefined;
   const currentPhotoIndex = currentAlbum?.photos.findIndex((photo) => photo.id === currentPhoto?.id) ?? -1;
   const previousPhoto = currentAlbum?.photos[currentPhotoIndex - 1];
   const nextPhoto = currentAlbum?.photos[currentPhotoIndex + 1];
 
-  function preparePhoto(photo: GalleryPhoto) {
-    let ready = preloadedPhotos.current.get(photo.id);
-    if (!ready) {
-      ready = preloadFullImage(photo);
-      preloadedPhotos.current.set(photo.id, ready);
-      void ready.ready.then((success) => {
-        if (!success && preloadedPhotos.current.get(photo.id) === ready) preloadedPhotos.current.delete(photo.id);
-      });
-    }
-    return ready.ready;
-  }
-
-  useEffect(() => {
-    let cancelled = false;
-    const columns = window.matchMedia('(min-width: 96rem)').matches ? 3
-      : window.matchMedia('(min-width: 48rem)').matches ? 2 : 1;
-    const previews = albums.slice(0, columns * 2).flatMap((album) => album.photos.slice(0, getPreviewCapacity()));
-    const loading = Promise.all(previews.map((photo) => {
-      const image = new Image();
-      image.src = photo.thumbnail;
-      return decodeImage(image);
-    }));
-    // Failed or stalled thumbnails must not leave the controls disabled indefinitely.
-    const timeout = window.setTimeout(() => { if (!cancelled) setAlbumsLoading(false); }, 5000);
-    void loading.then(() => { if (!cancelled) setAlbumsLoading(false); window.clearTimeout(timeout); });
-    return () => { cancelled = true; window.clearTimeout(timeout); };
-  }, [albums]);
-
-  useEffect(() => {
-    if (!currentAlbum) { preloadedPhotos.current.clear(); return; }
-    // Don't compete with native snapshot capture and animation for decoding.
-    if (transitionPhotoKey) return;
-    const windowPhotos = currentAlbum.photos.slice(Math.max(0, currentPhotoIndex - 2), currentPhotoIndex + 3);
-    const ids = new Set(windowPhotos.map((photo) => photo.id));
-    for (const id of preloadedPhotos.current.keys()) if (!ids.has(id)) preloadedPhotos.current.delete(id);
-    windowPhotos.forEach((photo) => { void preparePhoto(photo); });
-  }, [currentAlbum, currentPhotoIndex, transitionPhotoKey]);
-
   function photoTransitionName(photoId: string): 'gallery-photo' | 'none' {
     return transitionPhotoKey && currentPhoto?.id === photoId ? 'gallery-photo' : 'none';
   }
 
   useEffect(() => () => {
-    ++imageRequest.current;
+    ++operationVersion.current;
     navigationAnimation.current?.abort();
     cancelActiveViewTransition?.();
   }, []);
@@ -477,25 +441,6 @@ export function GalleryViewer({ albums }: ViewerProps) {
     document.documentElement.dataset.galleryOpen = 'true';
     return () => { delete document.documentElement.dataset.galleryOpen; };
   }, [isOpen]);
-
-
-  useLayoutEffect(() => {
-    const image = viewerImage;
-    if (!image || !currentPhoto) return;
-    const updateDimensions = () => {
-      const source = currentPhoto.sources.find((source) => source.src === image.currentSrc);
-      const rect = image.getBoundingClientRect();
-      setDisplayedImage({
-        width: Math.round(rect.width), height: Math.round(rect.height),
-        sourceWidth: source?.width ?? 0, sourceHeight: source?.height ?? 0,
-      });
-    };
-    const observer = new ResizeObserver(updateDimensions);
-    observer.observe(image);
-    image.addEventListener('load', updateDimensions);
-    updateDimensions();
-    return () => { observer.disconnect(); image.removeEventListener('load', updateDimensions); };
-  }, [viewerImage, currentPhoto, showFullResolution]);
 
   function setMapElement<T extends HTMLElement>(
     map: Map<string, T>,
@@ -538,7 +483,7 @@ export function GalleryViewer({ albums }: ViewerProps) {
   function toggleAllAlbums() {
     pendingScrollAlbumId.current = null;
     setExpandedAlbumIds((current) => {
-      if (allExpanded) return new Set();
+      if (albumIds.some((albumId) => current.has(albumId))) return new Set();
       const next = new Set(current);
       albumIds.forEach((albumId) => next.add(albumId));
       return next;
@@ -548,29 +493,27 @@ export function GalleryViewer({ albums }: ViewerProps) {
   function openPhoto(albumId: string, photo: GalleryPhoto) {
     if (currentPhoto) return;
     pendingScrollAlbumId.current = null;
-    const request = ++imageRequest.current;
+    const request = ++operationVersion.current;
     cancelActiveViewTransition?.();
     const photoKey = galleryPhotoKey(albumId, photo.id);
     openingPhotoButton.current = photoButtons.current.get(photoKey) ?? null;
     setShowMetadata(false);
     setIsZoomed(false);
     flushSync(() => setTransitionPhotoKey(photoKey));
-    const fullImageReady = preparePhoto(photo);
     const transitionFinished = runViewTransition(
       () => {
-        if (imageRequest.current !== request) return;
-        setShowFullResolution(false);
+        if (operationVersion.current !== request) return;
         setCurrentPhotoSelection({ albumId, photoId: photo.id });
       },
       'open',
       photo.thumbnailPosition,
     );
     void transitionFinished.then(() => {
-      if (imageRequest.current === request) setTransitionPhotoKey(null);
+      if (operationVersion.current === request) {
+        setTransitionPhotoKey(null);
+      }
     });
-    void Promise.all([fullImageReady, transitionFinished]).then(([imageReady]) => {
-      if (imageRequest.current === request && imageReady) setShowFullResolution(true);
-    });
+
   }
 
   function closePhoto() {
@@ -579,7 +522,7 @@ export function GalleryViewer({ albums }: ViewerProps) {
     navigating.current = false;
     if (!currentPhoto || !activePhotoKey) return;
     const closingPhotoKey = activePhotoKey;
-    const request = ++imageRequest.current;
+    const request = ++operationVersion.current;
     cancelActiveViewTransition?.();
     const thumbnail = photoButtons.current.get(closingPhotoKey);
     const rect = thumbnail?.getBoundingClientRect();
@@ -588,9 +531,8 @@ export function GalleryViewer({ albums }: ViewerProps) {
       setTransitionPhotoKey(thumbnailVisible ? closingPhotoKey : null);
     });
     const close = () => {
-      if (imageRequest.current !== request) return;
+      if (operationVersion.current !== request) return;
       setCurrentPhotoSelection(null);
-      setShowFullResolution(false);
       setIsZoomed(false);
     };
     let transitionFinished: Promise<void>;
@@ -601,7 +543,7 @@ export function GalleryViewer({ albums }: ViewerProps) {
       transitionFinished = Promise.resolve();
     }
     void transitionFinished.then(() => {
-      if (imageRequest.current !== request) return;
+      if (operationVersion.current !== request) return;
       setTransitionPhotoKey(null);
       const albumButton = currentAlbum && headerButtons.current.get(currentAlbum.id);
       const focusTarget = [thumbnail, openingPhotoButton.current, albumButton].find((button) => {
@@ -613,27 +555,22 @@ export function GalleryViewer({ albums }: ViewerProps) {
     });
   }
 
-  async function navigatePhoto(direction: number) {
+  function navigatePhoto(direction: number) {
     const photo = currentAlbum?.photos[currentPhotoIndex + direction];
     if (!photo || !currentAlbum || !currentPhoto || navigating.current || isZoomed || transitionPhotoKey || !photoStage.current) return;
     setDownloadsOpen(false);
-    const request = ++imageRequest.current;
+    const request = ++operationVersion.current;
     navigating.current = true;
-    const restoreImageFocus = document.activeElement === viewerImage?.parentElement;
-    const ready = await preparePhoto(photo);
-    if (imageRequest.current !== request) return;
-    if (!ready) { navigating.current = false; return; }
+    const restoreImageFocus = document.activeElement === viewerImage?.closest('button');
     const controller = new AbortController();
     navigationAnimation.current = controller;
     const update = () => {
-      if (imageRequest.current !== request) return;
-      setShowFullResolution(ready);
+      if (operationVersion.current !== request) return;
       setCurrentPhotoSelection({ albumId: currentAlbum.id, photoId: photo.id });
     };
-    const finished = animateNavigation(photoStage.current, update, controller.signal, photo.id,
-      new Map(Array.from(preloadedPhotos.current, ([id, entry]) => [id, entry.image])));
+    const finished = animateNavigation(photoStage.current, update, controller.signal);
     void finished.catch(() => undefined).then(() => {
-      if (imageRequest.current !== request) return;
+      if (operationVersion.current !== request) return;
       navigating.current = false;
       navigationAnimation.current = null;
       if (restoreImageFocus) {
@@ -671,7 +608,6 @@ export function GalleryViewer({ albums }: ViewerProps) {
 
   return (
     <>
-      {albumsLoading ? <AlbumSkeletons /> : <>
       {albumIds.length > 0 && (
         <div className="mb-4">
           <button
@@ -679,13 +615,25 @@ export function GalleryViewer({ albums }: ViewerProps) {
             className="button btn-action"
             onClick={toggleAllAlbums}
           >
-            {allExpanded ? 'Minimize all' : 'Expand all'}
+            {anyExpanded ? 'Minimize all' : 'Expand all'}
           </button>
         </div>
       )}
 
       <div className="grid grid-cols-1 gap-2 overflow-x-clip md:grid-cols-2 2xl:grid-cols-3">
-        {albums.map((album) => {
+        {slots.map((slot) => {
+          if (slot.status !== 'ready') return (
+            <article key={slot.url} className="min-h-64 rounded-xl border-2 border-surface-150 bg-surface-100 p-2">
+              <h2 className="m-0 text-xl">{slot.title}</h2>
+              {slot.status === 'error' ? <div role="alert">
+                <p>Couldn’t load this album.</p>
+                <button type="button" className="button btn-action" aria-label={`Try again: ${slot.title}`} onClick={() => onRetryAlbum(slot.url)}>Try again</button>
+              </div> : <div role="status" aria-label={`Loading ${slot.title}`} className="mt-2 grid grid-cols-3 grid-rows-2 gap-1 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-2 2xl:grid-cols-3">
+                {Array.from({ length: 8 }, (_, index) => <div key={index} className={`aspect-square animate-pulse rounded-xl bg-surface-200 motion-reduce:animate-none ${index >= 6 ? 'hidden sm:block md:hidden lg:block 2xl:hidden' : ''}`} />)}
+              </div>}
+            </article>
+          );
+          const album = slot.album;
           const expanded = expandedAlbumIds.has(album.id);
           return (
             <AlbumBlock
@@ -708,7 +656,6 @@ export function GalleryViewer({ albums }: ViewerProps) {
         })}
       </div>
 
-      </>}
       {currentPhoto && (
         <FloatingPortal>
           <FloatingFocusManager context={floating.context} modal initialFocus={closeButton} returnFocus={false}>
@@ -730,13 +677,13 @@ export function GalleryViewer({ albums }: ViewerProps) {
                 <div className="col-start-3 row-start-1 flex items-center gap-4 justify-self-end">
                   <div role="group" aria-label="Photo actions" className="fixed inset-x-0 bottom-[max(0.5rem,env(safe-area-inset-bottom))] flex items-center justify-center gap-1 lg:static">
                     <button type="button" aria-label={isZoomed ? 'Zoom out' : 'Zoom in'} title={isZoomed ? 'Zoom out' : 'Zoom in'}
-                      onClick={() => viewerImage?.parentElement?.click()}
+                      onClick={() => viewerImage?.closest('button')?.click()}
                       className="flex size-11 cursor-pointer items-center justify-center rounded-xl border-2 border-surface-150 bg-surface-100/80 backdrop-blur-xl hover:bg-surface-200 focus-visible:outline-2 focus-visible:outline-white">
                       {isZoomed ? <ZoomOutRegular aria-hidden="true" width="24" height="24" /> : <ZoomInRegular aria-hidden="true" width="24" height="24" />}
                     </button>
                     <button type="button" aria-label="Toggle photo info" title="Toggle photo info" aria-expanded={showMetadata && !isZoomed} aria-controls="gallery-photo-details"
                       onClick={() => {
-                        if (isZoomed) viewerImage?.parentElement?.click();
+                        if (isZoomed) viewerImage?.closest('button')?.click();
                         setShowMetadata(isZoomed || !showMetadata);
                       }}
                       className="flex size-11 cursor-pointer items-center justify-center rounded-xl border-2 border-surface-150 bg-surface-100/80 backdrop-blur-xl hover:bg-surface-200 focus-visible:outline-2 focus-visible:outline-white">
@@ -778,20 +725,20 @@ export function GalleryViewer({ albums }: ViewerProps) {
                 }}>
                  <button hidden={isZoomed} type="button" aria-label="Previous photo" aria-disabled={!previousPhoto} tabIndex={previousPhoto && !isZoomed ? 0 : -1}
                    onClick={() => navigatePhoto(-1)} className={`group relative h-full w-full overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 ${previousPhoto ? 'cursor-pointer' : 'cursor-default'}`}>
-                   {!isZoomed && previousPhoto && <span className="pointer-events-none absolute top-1/2 right-2 w-3/4 max-w-40 -translate-y-1/2 overflow-hidden rounded-lg"
+                   {!isZoomed && previousPhoto && <span data-gallery-photo={previousPhoto.id} className="pointer-events-none absolute top-1/2 right-2 w-3/4 max-w-40 -translate-y-1/2 overflow-hidden rounded-lg bg-surface-200"
                      style={{ height: `min(80cqh, ${(previousPhoto.height / previousPhoto.width) * 38.4}rem, calc((100cqw - 6rem) * ${0.8 * previousPhoto.height / previousPhoto.width}))` }}>
-                     <img data-gallery-photo={previousPhoto.id} src={previousPhoto.src} srcSet={previousPhoto.srcSet} sizes={fullImageSizes} alt="" aria-hidden="true" draggable={false} className="h-full w-full object-cover opacity-50"
-                       style={{ viewTransitionName: photoTransitionName(previousPhoto.id) }} />
+                     <PhotoLayers photo={previousPhoto} thumbnailSizes={thumbnailSizes(previousPhoto, expandedAlbumIds.has(currentAlbum!.id))}
+                       sizes="(max-width: 864px) calc((100vw - 6rem) * 0.8), 614.4px" decorative />
                    </span>}
                  </button>
                 <div className="col-start-2 flex h-full min-h-0 items-center justify-center" onClick={(event) => { if (!isZoomed && event.target === event.currentTarget) closePhoto(); }}>
-                   <ZoomablePhoto key={currentPhoto.id} photo={currentPhoto} showFullResolution={showFullResolution}
+                   <ZoomablePhoto key={currentPhoto.id} photo={currentPhoto} thumbnailSizes={thumbnailSizes(currentPhoto, expandedAlbumIds.has(currentAlbum!.id))}
                      onNavigate={navigatePhoto}
                     transitionName={photoTransitionName(currentPhoto.id)} onImageRef={setViewerImage}
                     expandedViewport={isZoomed} onZoomChange={(value) => {
                       if (value && navigating.current) {
                         navigationAnimation.current?.abort();
-                        ++imageRequest.current;
+                        ++operationVersion.current;
                         navigating.current = false;
                       }
                       setIsZoomed(value);
@@ -799,17 +746,17 @@ export function GalleryViewer({ albums }: ViewerProps) {
                 </div>
                  <button hidden={isZoomed} type="button" aria-label="Next photo" aria-disabled={!nextPhoto} tabIndex={nextPhoto && !isZoomed ? 0 : -1}
                    onClick={() => navigatePhoto(1)} className={`group relative h-full w-full overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 ${nextPhoto ? 'cursor-pointer' : 'cursor-default'}`}>
-                   {!isZoomed && nextPhoto && <span className="pointer-events-none absolute top-1/2 left-2 w-3/4 max-w-40 -translate-y-1/2 overflow-hidden rounded-lg"
+                   {!isZoomed && nextPhoto && <span data-gallery-photo={nextPhoto.id} className="pointer-events-none absolute top-1/2 left-2 w-3/4 max-w-40 -translate-y-1/2 overflow-hidden rounded-lg bg-surface-200"
                      style={{ height: `min(80cqh, ${(nextPhoto.height / nextPhoto.width) * 38.4}rem, calc((100cqw - 6rem) * ${0.8 * nextPhoto.height / nextPhoto.width}))` }}>
-                     <img data-gallery-photo={nextPhoto.id} src={nextPhoto.src} srcSet={nextPhoto.srcSet} sizes={fullImageSizes} alt="" aria-hidden="true" draggable={false} className="h-full w-full object-cover opacity-50"
-                       style={{ viewTransitionName: photoTransitionName(nextPhoto.id) }} />
+                     <PhotoLayers photo={nextPhoto} thumbnailSizes={thumbnailSizes(nextPhoto, expandedAlbumIds.has(currentAlbum!.id))}
+                       sizes="(max-width: 864px) calc((100vw - 6rem) * 0.8), 614.4px" decorative />
                    </span>}
                 </button>
                 </div>
               </div>
               <div hidden={isZoomed || !showMetadata} className="shrink-0 px-4 py-3">
                 {showMetadata && (
-                  <PhotoDetails photo={currentPhoto} displayed={displayedImage} />
+                  <PhotoDetails photo={currentPhoto} />
                 )}
               </div>
             </FloatingOverlay>
