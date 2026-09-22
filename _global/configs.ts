@@ -20,6 +20,7 @@ const sigpwnyConfig : ISiteConfig = {
     { name: `Meetings`, url: `/meetings/` },
     { name: `Publications`, url: `/publications/`},
     // { name: `Events`, url: `/events/` },
+    { name: `Gallery`, url: `/gallery/` },
     { name: `Sponsors`, url: `/sponsors/` },
     { name: `Join`, url: `/join/` },
   ],
