@@ -18,6 +18,21 @@
     </style>
   </head>
     <body>
-      <script is:inline src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+      <script is:inline>window.CMS_MANUAL_INIT = true;</script>
+      <script is:inline src="https://cdn.jsdelivr.net/npm/@sveltia/cms@0.253.1/dist/sveltia-cms.js"></script>
+      <script
+        is:inline
+        src="https://api.sigpwny.com/widgets/recording.024973903063cccca49a.js"
+        integrity="sha384-dYqm8d0Om6mJQZRpAnM5jH2zEaMAhIuF+aRPf13oWZCCVuUtOzYk6uGfnVdI0ilN"
+        crossorigin="anonymous"
+      ></script>
+      <script is:inline>
+        // Keep URL editing available if the pinned upload extension cannot load.
+        if (!window.SIGPWNY_RECORDING_WIDGET_READY) {
+          const field = CMS.getFieldType('string');
+          CMS.registerFieldType('sigpwny-recording', field.control, field.preview);
+        }
+        CMS.init();
+      </script>
     </body>
 </html>
