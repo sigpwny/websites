@@ -8,6 +8,8 @@ backend:
   base_url: https://cms-auth.sigpwny.com
   auth_endpoint: auth
   skip_ci: false
+  # Track this site's build rather than another site's deployment in the monorepo.
+  preview_context: 'Deploy (sigpwny.com)'
 slug:
   encoding: 'ascii'
   clean_accents: true
@@ -82,6 +84,7 @@ collections:
     extension: 'mdx'
     format: 'frontmatter'
     identifier_field: 'title'
+    preview_path: "meetings/{{fields.type | default('general')}}/{{fields.time_start | date('YYYY-MM-DD')}}/"
     aliases_field: false
     summary: "{{fields.type}} / `{{fields.time_start | date('YYYY-MM-DD')}}` / {{fields.title}}"
     sortable_fields:
@@ -236,7 +239,8 @@ collections:
     extension: 'mdx'
     format: 'frontmatter'
     identifier_field: 'title'
-    preview_path: 'publications{{dirname}}'
+    # dirname is relative to the collection folder and has no leading slash.
+    preview_path: 'publications/{{dirname}}/'
     aliases_field: false
     summary: "`{{fields.date | date('YYYY-MM-DD')}}` / `{{fields.publication_type}}` / {{fields.title}}"
     sortable_fields:
